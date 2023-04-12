@@ -46,6 +46,14 @@
       "type": "build"
     },
     {
+      "name": "vitest",
+      "type": "build"
+    },
+    {
+      "name": "@vue/runtime-dom",
+      "type": "runtime"
+    },
+    {
       "name": "vue",
       "type": "runtime"
     }

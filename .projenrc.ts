@@ -32,6 +32,7 @@ new typescript.TypeScriptProject({
   packageManager: javascript.NodePackageManager.PNPM,
   pnpmVersion: "8",
   deps: ["vue"],
+  jest: false,
   tsconfig: {
     compilerOptions: {
       skipLibCheck: true,

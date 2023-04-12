@@ -10,9 +10,10 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "lib": [
-      "es2019"
+      "ESNext",
+      "DOM"
     ],
-    "module": "CommonJS",
+    "module": "ESNext",
     "noEmitOnError": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
@@ -25,7 +26,9 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": true,
-    "target": "ES2019"
+    "target": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "node"
   },
   "include": [
     "src/**/*.ts"

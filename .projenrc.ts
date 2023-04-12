@@ -1,5 +1,6 @@
 import { nx_monorepo } from "aws-prototyping-sdk";
 import { javascript, typescript } from "projen";
+import { TypeScriptModuleResolution } from "projen/lib/javascript";
 
 const monorepo = new nx_monorepo.NxMonorepoProject({
   authorEmail: "support@arroyodev.com",
@@ -30,7 +31,16 @@ new typescript.TypeScriptProject({
   packageName: "@arroyodev-llc/components.vue.ui.text",
   packageManager: javascript.NodePackageManager.PNPM,
   pnpmVersion: "8",
-  deps: ["vue"]
+  deps: ["vue"],
+  tsconfig: {
+    compilerOptions: {
+      skipLibCheck: true,
+      moduleResolution: TypeScriptModuleResolution.NODE,
+      module: "ESNext",
+      target: "ESNext",
+      lib: ["ESNext", "DOM"],
+    },
+  },
 });
 
 monorepo.synth();

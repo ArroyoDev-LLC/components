@@ -24,6 +24,10 @@
       "type": "build"
     },
     {
+      "name": "@vitejs/plugin-vue",
+      "type": "build"
+    },
+    {
       "name": "aws-prototyping-sdk",
       "type": "build"
     },
@@ -69,6 +73,10 @@
       "type": "build"
     },
     {
+      "name": "rollup-plugin-vue",
+      "type": "build"
+    },
+    {
       "name": "syncpack",
       "type": "build"
     },
@@ -82,6 +90,18 @@
     },
     {
       "name": "typescript",
+      "type": "build"
+    },
+    {
+      "name": "unbuild",
+      "type": "build"
+    },
+    {
+      "name": "vite",
+      "type": "build"
+    },
+    {
+      "name": "vitest",
       "type": "build"
     },
     {

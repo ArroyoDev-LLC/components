@@ -13,16 +13,24 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
   authorUrl: "https://arroyodev.com",
   defaultReleaseBranch: "main",
   devContainer: true,
-  devDeps: ["aws-prototyping-sdk"],
   docgen: true,
   name: "components",
   packageManager: javascript.NodePackageManager.PNPM,
   pnpmVersion: "8",
+  github: false,
+  projenCommand: "pnpm exec projen",
   prettier: true,
   projenrcTs: true,
   renovatebot: true,
-  gitignore: [".idea/**"],
-
+  gitignore: ["/.idea"],
+  devDeps: [
+    "aws-prototyping-sdk",
+    "vite",
+    "@vitejs/plugin-vue",
+    "unbuild",
+    "vitest",
+    "rollup-plugin-vue",
+  ],
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
   // packageName: undefined,  /* The "name" in package.json. */
@@ -60,15 +68,36 @@ class VueComponentProject extends typescript.TypeScriptProject {
       ...options,
     });
 
-    this.addDeps("vue", "@vue/runtime-dom");
+j    this.addDeps("vue", "@vue/runtime-dom");
+    this.addDevDeps("typescript", "vitest", "unbuild", "rollup-plugin-vue");
 
-    this.addDevDeps("typescript", "vitest");
+    this.tsconfig!.file.addOverride(
+      "compilerOptions.moduleResolution",
+      "bundler"
+    );
+    this.tsconfig!.file.addOverride(
+      "compilerOptions.allowImportingTsExtensions",
+      true
+    );
+    this.tsconfig!.file.addOverride(
+      "compilerOptions.allowArbitraryExtensions",
+      true
+    );
+    this.tsconfig!.file.addOverride(
+      "compilerOptions.verbatimModuleSyntax",
+      true
+    );
+
+    this.tsconfig!.addInclude("../../../../env.d.ts");
+    this.tsconfig!.addInclude("src/**/*.vue");
+    this.tasks.removeTask("build");
+    this.tasks.addTask("build", { exec: "unbuild" });
   }
 }
 
 new VueComponentProject({
   parent: monorepo,
-  name: "vue.ui.text",
+  name: "vue.ui.text"
 });
 
 monorepo.synth();

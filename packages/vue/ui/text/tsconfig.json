@@ -28,10 +28,15 @@
     "stripInternal": true,
     "target": "ESNext",
     "skipLibCheck": true,
-    "moduleResolution": "node"
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
+    "verbatimModuleSyntax": true
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "../../../../env.d.ts",
+    "src/**/*.vue"
   ],
   "exclude": []
 }

@@ -42,7 +42,15 @@
       "type": "build"
     },
     {
+      "name": "rollup-plugin-vue",
+      "type": "build"
+    },
+    {
       "name": "typescript",
+      "type": "build"
+    },
+    {
+      "name": "unbuild",
       "type": "build"
     },
     {

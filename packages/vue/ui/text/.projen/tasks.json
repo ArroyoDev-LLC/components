@@ -2,22 +2,9 @@
   "tasks": {
     "build": {
       "name": "build",
-      "description": "Full release build",
       "steps": [
         {
-          "spawn": "pre-compile"
-        },
-        {
-          "spawn": "compile"
-        },
-        {
-          "spawn": "post-compile"
-        },
-        {
-          "spawn": "test"
-        },
-        {
-          "spawn": "package"
+          "exec": "unbuild"
         }
       ]
     },

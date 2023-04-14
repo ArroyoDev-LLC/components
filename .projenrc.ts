@@ -119,6 +119,7 @@ class UnBuild extends Component {
     if (this.vue) {
       return `{
       ${config}
+    failOnWarn: false,
     hooks: {
       'rollup:options': (ctx, options) => {
         // @ts-expect-error ignore
@@ -165,14 +166,15 @@ class VueComponentProject extends typescript.TypeScriptProject {
   }
 }
 
-new VueComponentProject({
+const text = new VueComponentProject({
   parent: monorepo,
   name: "vue.ui.text",
 });
 
-new VueComponentProject({
+const button = new VueComponentProject({
   parent: monorepo,
   name: "vue.ui.button",
+  deps: ['primevue', text.package.packageName]
 });
 
 monorepo.synth();

@@ -62,7 +62,15 @@
       "type": "devenv"
     },
     {
+      "name": "@arroyodev-llc/components.vue.ui.text",
+      "type": "runtime"
+    },
+    {
       "name": "@vue/runtime-dom",
+      "type": "runtime"
+    },
+    {
+      "name": "primevue",
       "type": "runtime"
     },
     {

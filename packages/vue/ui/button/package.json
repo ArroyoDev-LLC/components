@@ -22,7 +22,7 @@
     "eslint-import-resolver-node": "^0.3.7",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-vue": "^0.1.0",
+    "eslint-plugin-vue": "^9.10.0",
     "npm-check-updates": "^16",
     "projen": "^0.71.7",
     "rollup-plugin-vue": "^6.0.0",
@@ -31,7 +31,9 @@
     "vitest": "^0.30.1"
   },
   "dependencies": {
+    "@arroyodev-llc/components.vue.ui.text": "^0.0.0",
     "@vue/runtime-dom": "^3.2.47",
+    "primevue": "^3.26.1",
     "vue": "^3.2.47"
   },
   "pnpm": {},

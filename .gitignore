@@ -45,5 +45,7 @@ jspm_packages/
 !/.nxignore
 !/.nx/plugins/nx-monorepo-plugin.js
 !/nx.json
+.idea
+.idea/**
 !/pnpm-workspace.yaml
 !/renovate.json5

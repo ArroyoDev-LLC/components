@@ -60,6 +60,7 @@ monorepo.tsconfigDev.file.addOverride("compilerOptions.rootDir", ".");
 monorepo.package.addField("type", "module");
 monorepo.package.file.addOverride("pnpm.patchedDependencies", {
   "projen@0.71.7": "patches/projen@0.71.7.patch",
+  "aws-prototyping-sdk@0.14.21": "patches/aws-prototyping-sdk@0.14.21.patch",
 });
 
 const vueTsConfig: TypescriptConfigOptions = {

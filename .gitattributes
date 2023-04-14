@@ -5,7 +5,7 @@
 /.gitattributes linguist-generated
 /.gitignore linguist-generated
 /.npmignore linguist-generated
-/.nx/plugins/nx-monorepo-plugin.js linguist-generated
+/.nx/plugins/nx-monorepo-plugin.cjs linguist-generated
 /.nxignore linguist-generated
 /.prettierignore linguist-generated
 /.prettierrc.json linguist-generated

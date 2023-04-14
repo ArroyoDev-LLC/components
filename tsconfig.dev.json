@@ -8,9 +8,9 @@
     "inlineSourceMap": true,
     "inlineSources": true,
     "lib": [
-      "es2019"
+      "ES2022"
     ],
-    "module": "CommonJS",
+    "module": "ESNext",
     "noEmitOnError": false,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
@@ -23,8 +23,10 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": true,
-    "target": "ES2019",
-    "rootDir": "."
+    "target": "ES2022",
+    "rootDir": ".",
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true
   },
   "include": [
     ".projenrc.js",

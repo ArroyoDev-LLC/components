@@ -26,7 +26,10 @@
     "stripInternal": true,
     "target": "ESNext",
     "skipLibCheck": true,
-    "moduleResolution": "node"
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "allowArbitraryExtensions": true,
+    "verbatimModuleSyntax": true
   },
   "include": [
     ".projenrc.js",

@@ -64,7 +64,8 @@
       "@types/babel__traverse": "7.18.2"
     },
     "patchedDependencies": {
-      "projen@0.71.7": "patches/projen@0.71.7.patch"
+      "projen@0.71.7": "patches/projen@0.71.7.patch",
+      "aws-prototyping-sdk@0.14.21": "patches/aws-prototyping-sdk@0.14.21.patch"
     }
   },
   "main": "lib/index.js",
@@ -75,6 +76,7 @@
   "type": "module",
   "workspaces": {
     "packages": [
+      "packages/vue/ui/button",
       "packages/vue/ui/text"
     ]
   },

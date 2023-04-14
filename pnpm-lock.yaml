@@ -4,6 +4,9 @@ overrides:
   '@types/babel__traverse': 7.18.2
 
 patchedDependencies:
+  aws-prototyping-sdk@0.14.21:
+    hash: gwev5jhkjevvw6tadwtf6bcgqy
+    path: patches/aws-prototyping-sdk@0.14.21.patch
   projen@0.71.7:
     hash: m5tlt3vhypez3vxws3dx3447cm
     path: patches/projen@0.71.7.patch
@@ -42,7 +45,7 @@ importers:
         version: 4.1.0(vite@4.2.1)(vue@3.2.47)
       aws-prototyping-sdk:
         specifier: ^0.14.21
-        version: 0.14.21(aws-cdk-lib@2.74.0)(cdk-nag@2.25.11)(constructs@10.1.310)(nx@15.9.2)(projen@0.71.7)
+        version: 0.14.21(patch_hash=gwev5jhkjevvw6tadwtf6bcgqy)(aws-cdk-lib@2.74.0)(cdk-nag@2.25.11)(constructs@10.1.310)(nx@15.9.2)(projen@0.71.7)
       eslint:
         specifier: ^8
         version: 8.38.0
@@ -97,6 +100,58 @@ importers:
       vite:
         specifier: ^4.2.1
         version: 4.2.1(@types/node@16.0.0)
+      vitest:
+        specifier: ^0.30.1
+        version: 0.30.1
+
+  packages/vue/ui/button:
+    dependencies:
+      '@vue/runtime-dom':
+        specifier: ^3.2.47
+        version: 3.2.47
+      vue:
+        specifier: ^3.2.47
+        version: 3.2.47
+    devDependencies:
+      '@types/node':
+        specifier: ^16
+        version: 16.0.0
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^5
+        version: 5.58.0(@typescript-eslint/parser@5.58.0)(eslint@8.38.0)(typescript@5.0.4)
+      '@typescript-eslint/parser':
+        specifier: ^5
+        version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
+      eslint:
+        specifier: ^8
+        version: 8.38.0
+      eslint-import-resolver-node:
+        specifier: ^0.3.7
+        version: 0.3.7
+      eslint-import-resolver-typescript:
+        specifier: ^3.5.5
+        version: 3.5.5(@typescript-eslint/parser@5.58.0)(eslint-import-resolver-node@0.3.7)(eslint-plugin-import@2.27.5)(eslint@8.38.0)
+      eslint-plugin-import:
+        specifier: ^2.27.5
+        version: 2.27.5(@typescript-eslint/parser@5.58.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.38.0)
+      eslint-plugin-vue:
+        specifier: ^0.1.0
+        version: 0.1.0(eslint@8.38.0)
+      npm-check-updates:
+        specifier: ^16
+        version: 16.10.8
+      projen:
+        specifier: ^0.71.7
+        version: 0.71.7(patch_hash=m5tlt3vhypez3vxws3dx3447cm)
+      rollup-plugin-vue:
+        specifier: ^6.0.0
+        version: 6.0.0(@vue/compiler-sfc@3.2.47)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
       vitest:
         specifier: ^0.30.1
         version: 0.30.1
@@ -1749,7 +1804,7 @@ packages:
       - table
       - yaml
 
-  /aws-prototyping-sdk@0.14.21(aws-cdk-lib@2.74.0)(cdk-nag@2.25.11)(constructs@10.1.310)(nx@15.9.2)(projen@0.71.7):
+  /aws-prototyping-sdk@0.14.21(patch_hash=gwev5jhkjevvw6tadwtf6bcgqy)(aws-cdk-lib@2.74.0)(cdk-nag@2.25.11)(constructs@10.1.310)(nx@15.9.2)(projen@0.71.7):
     resolution: {integrity: sha512-oQ3iucnh2EHYm36JCDE8p3KFN9JyPjVKaaKHFUf2/BYbQVYQTxXNFs4l6QnVtnIbdHBsRoqBRLQnyYBHQW5xtw==}
     peerDependencies:
       aws-cdk-lib: ^2.60.0
@@ -1767,6 +1822,7 @@ packages:
     dev: true
     bundledDependencies:
       - '@nrwl/devkit'
+    patched: true
 
   /axios@1.3.5:
     resolution: {integrity: sha512-glL/PvG/E+xCWwV8S6nCHcrfg1exGx7vxyUIivIA1iL7BIh6bePylCfVHwp6k13ao7SATxB6imau2kqY+I67kw==}

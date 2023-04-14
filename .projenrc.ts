@@ -170,4 +170,9 @@ new VueComponentProject({
   name: "vue.ui.text",
 });
 
+new VueComponentProject({
+  parent: monorepo,
+  name: "vue.ui.button",
+});
+
 monorepo.synth();

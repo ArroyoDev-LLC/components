@@ -1,5 +1,5 @@
 import { nx_monorepo } from "aws-prototyping-sdk";
-import { javascript, typescript } from "projen";
+import { DependencyType, javascript, typescript } from "projen";
 import {
   type TypescriptConfigOptions,
   TypeScriptModuleResolution,
@@ -22,7 +22,17 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
   prettier: true,
   projenrcTs: true,
   renovatebot: true,
-  gitignore: ["/.idea"],
+  gitignore: ["/.idea", ".idea"],
+  tsconfig: {
+    compilerOptions: {
+      rootDir: ".",
+      module: "ESNext",
+      target: "ES2022",
+      lib: ["ES2022"],
+      allowImportingTsExtensions: true,
+      allowArbitraryExtensions: true,
+    },
+  },
   devDeps: [
     "aws-prototyping-sdk",
     "vite",
@@ -30,16 +40,26 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
     "unbuild",
     "vitest",
     "rollup-plugin-vue",
+    "tsx",
   ],
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // packageName: undefined,  /* The "name" in package.json. */
+});
+monorepo.gitignore.exclude(".idea", ".idea/**")
+monorepo.defaultTask.reset("tsx .projenrc.ts");
+monorepo.tsconfig.addInclude("**/*.ts");
+monorepo.tsconfigDev.addInclude("**/*.ts");
+monorepo.tsconfigDev.file.addOverride("compilerOptions.rootDir", ".");
+monorepo.package.addField("type", "module");
+monorepo.package.file.addOverride("pnpm.patchedDependencies", {
+  "projen@0.71.7": "patches/projen@0.71.7.patch",
 });
 
 const vueTsConfig: TypescriptConfigOptions = {
   compilerOptions: {
     skipLibCheck: true,
-    moduleResolution: TypeScriptModuleResolution.NODE,
+    moduleResolution: TypeScriptModuleResolution.BUNDLER,
+    allowImportingTsExtensions: true,
+    allowArbitraryExtensions: true,
+    verbatimModuleSyntax: true,
     module: "ESNext",
     target: "ESNext",
     lib: ["ESNext", "DOM"],
@@ -68,25 +88,12 @@ class VueComponentProject extends typescript.TypeScriptProject {
       ...options,
     });
 
-j    this.addDeps("vue", "@vue/runtime-dom");
+    this.addDeps("vue", "@vue/runtime-dom");
     this.addDevDeps("typescript", "vitest", "unbuild", "rollup-plugin-vue");
 
-    this.tsconfig!.file.addOverride(
-      "compilerOptions.moduleResolution",
-      "bundler"
-    );
-    this.tsconfig!.file.addOverride(
-      "compilerOptions.allowImportingTsExtensions",
-      true
-    );
-    this.tsconfig!.file.addOverride(
-      "compilerOptions.allowArbitraryExtensions",
-      true
-    );
-    this.tsconfig!.file.addOverride(
-      "compilerOptions.verbatimModuleSyntax",
-      true
-    );
+    this.deps.addDependency("eslint-plugin-vue", DependencyType.DEVENV);
+    this.eslint!.addPlugins("eslint-plugin-vue");
+    this.eslint!.config.parserOptions.extraFileExtensions = [".vue"];
 
     this.tsconfig!.addInclude("../../../../env.d.ts");
     this.tsconfig!.addInclude("src/**/*.vue");
@@ -97,7 +104,7 @@ j    this.addDeps("vue", "@vue/runtime-dom");
 
 new VueComponentProject({
   parent: monorepo,
-  name: "vue.ui.text"
+  name: "vue.ui.text",
 });
 
 monorepo.synth();

@@ -113,7 +113,9 @@ class UnBuild extends Component {
   }
 
   get buildConfig(): string {
-    const config = this.options ? `...${JSON.stringify(this.options)}` : ``;
+    const config = Object.keys(this.options).length
+      ? `...${JSON.stringify(this.options)},`
+      : ``;
     if (this.vue) {
       return `{
       ${config}

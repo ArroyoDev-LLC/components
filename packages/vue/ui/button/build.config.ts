@@ -2,7 +2,7 @@
 import vue from "rollup-plugin-vue";
 import { defineBuildConfig } from "unbuild";
 export default defineBuildConfig({
-  ...{"name":"@arroyodev-llc/components.vue.ui.button"},
+  ...{"name":"@arroyodev-llc/components.vue.ui.button","declaration":true},
   hooks: {
     'rollup:options': (ctx, options) => {
       // @ts-expect-error ignore rollup

@@ -3,9 +3,9 @@
 /test/
 /tsconfig.dev.json
 /src/
-!/lib/
-!/lib/**/*.js
-!/lib/**/*.d.ts
+!/dist/
+!/dist/**/*.js
+!/dist/**/*.d.ts
 dist
 /tsconfig.json
 /.github/

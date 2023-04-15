@@ -173,10 +173,13 @@ class VueComponentProject extends typescript.TypeScriptProject {
       outdir: defaultOutDir,
       packageName: defaultPackageName,
       jest: false,
+      libdir: 'dist',
+      entrypoint: 'dist/index.mjs',
+      entrypointTypes: 'dist/index.d.ts',
       ...options,
     });
 
-    new UnBuild(this, { vue: true, options: { name: defaultPackageName } });
+    new UnBuild(this, { vue: true, options: { name: defaultPackageName, declaration: true  } });
     new TextFile(this, "env.d.ts", {
       readonly: true,
       marker: true,

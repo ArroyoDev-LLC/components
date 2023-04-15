@@ -1,8 +1,9 @@
-import { nx_monorepo } from "aws-prototyping-sdk";
+import * as nx_monorepo from "@aws-prototyping-sdk/nx-monorepo";
 import {
   Component,
   DependencyType,
   javascript,
+  LogLevel,
   Project,
   TextFile,
   typescript,
@@ -31,6 +32,13 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
   projenrcTs: true,
   renovatebot: true,
   gitignore: ["/.idea", ".idea"],
+  workspaceConfig: {
+    linkLocalWorkspaceBins: true,
+  },
+  logging: {
+    level: LogLevel.DEBUG,
+    usePrefix: true,
+  },
   tsconfig: {
     compilerOptions: {
       rootDir: ".",
@@ -43,6 +51,7 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
   },
   devDeps: [
     "aws-prototyping-sdk",
+    "@aws-prototyping-sdk/nx-monorepo",
     "vite",
     "@vitejs/plugin-vue",
     "unbuild",
@@ -60,7 +69,8 @@ monorepo.tsconfigDev.file.addOverride("compilerOptions.rootDir", ".");
 monorepo.package.addField("type", "module");
 monorepo.package.file.addOverride("pnpm.patchedDependencies", {
   "projen@0.71.7": "patches/projen@0.71.7.patch",
-  "aws-prototyping-sdk@0.14.21": "patches/aws-prototyping-sdk@0.14.21.patch",
+  "@aws-prototyping-sdk/nx-monorepo@0.14.21":
+    "patches/@aws-prototyping-sdk__nx-monorepo@0.14.21.patch",
 });
 
 const vueTsConfig: TypescriptConfigOptions = {

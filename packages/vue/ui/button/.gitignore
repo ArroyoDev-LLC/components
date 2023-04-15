@@ -38,3 +38,4 @@ jspm_packages/
 /dist/
 !/.eslintrc.json
 !/build.config.ts
+!/env.d.ts

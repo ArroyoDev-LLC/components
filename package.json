@@ -8,16 +8,19 @@
     "docgen": "pnpm exec projen docgen",
     "eject": "pnpm exec projen eject",
     "eslint": "pnpm exec projen eslint",
+    "graph": "pnpm exec projen graph",
     "package": "pnpm exec projen package",
     "post-compile": "pnpm exec projen post-compile",
     "post-upgrade": "pnpm exec projen post-upgrade",
     "pre-compile": "pnpm exec projen pre-compile",
+    "prepare": "pnpm exec projen prepare",
     "run-many": "pnpm exec projen run-many",
     "synth-workspace": "pnpm exec projen synth-workspace",
     "test": "pnpm exec projen test",
     "upgrade": "pnpm exec projen upgrade",
     "upgrade-deps": "pnpm exec projen upgrade-deps",
     "watch": "pnpm exec projen watch",
+    "workspace:bin:link": "pnpm exec projen workspace:bin:link",
     "projen": "pnpm exec projen"
   },
   "author": {
@@ -27,9 +30,12 @@
     "organization": true
   },
   "devDependencies": {
+    "@aws-prototyping-sdk/nx-monorepo": "^0.14.21",
     "@nrwl/cli": "^15.9.2",
     "@nrwl/workspace": "^15.9.2",
+    "@types/fs-extra": "^11.0.1",
     "@types/node": "^16",
+    "@types/prettier": "^2.7.2",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "@vitejs/plugin-vue": "^4.1.0",
@@ -40,6 +46,7 @@
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
+    "fs-extra": "^11.1.1",
     "npm-check-updates": "^16.10.8",
     "nx": "^15.9.2",
     "prettier": "^2.8.7",
@@ -56,8 +63,8 @@
   },
   "dependencies": {
     "aws-cdk-lib": "^2.74.0",
-    "cdk-nag": "^2.25.11",
-    "constructs": "^10.1.310"
+    "cdk-nag": "^2.25.12",
+    "constructs": "^10.1.311"
   },
   "pnpm": {
     "overrides": {
@@ -65,8 +72,12 @@
     },
     "patchedDependencies": {
       "projen@0.71.7": "patches/projen@0.71.7.patch",
-      "aws-prototyping-sdk@0.14.21": "patches/aws-prototyping-sdk@0.14.21.patch"
+      "@aws-prototyping-sdk/nx-monorepo@0.14.21": "patches/@aws-prototyping-sdk__nx-monorepo@0.14.21.patch"
     }
+  },
+  "engines": {
+    "node": ">=16",
+    "pnpm": ">=8"
   },
   "main": "lib/index.js",
   "license": "Apache-2.0",

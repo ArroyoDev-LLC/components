@@ -22,17 +22,17 @@
     "eslint-import-resolver-node": "^0.3.7",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-vue": "^0.1.0",
+    "eslint-plugin-vue": "^9.11.0",
     "npm-check-updates": "^16",
     "projen": "^0.71.7",
     "rollup-plugin-vue": "^6.0.0",
-    "typescript": "5",
+    "typescript": "^5.0.4",
     "unbuild": "*",
     "vitest": "^0.30.1"
   },
   "dependencies": {
     "@vue/runtime-dom": "^3.2.47",
-    "vue": "3"
+    "vue": "^3.2.47"
   },
   "pnpm": {},
   "main": "lib/index.js",

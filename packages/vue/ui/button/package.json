@@ -22,7 +22,7 @@
     "eslint-import-resolver-node": "^0.3.7",
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-vue": "^9.10.0",
+    "eslint-plugin-vue": "^9.11.0",
     "npm-check-updates": "^16",
     "projen": "^0.71.7",
     "rollup-plugin-vue": "^6.0.0",

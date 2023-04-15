@@ -1,8 +1,5 @@
 {
   "extends": "@nrwl/workspace/presets/npm.json",
-  "plugins": [
-    "./.nx/plugins/nx-monorepo-plugin.cjs"
-  ],
   "npmScope": "monorepo",
   "tasksRunnerOptions": {
     "default": {
@@ -21,7 +18,6 @@
       "{projectRoot}/**/*"
     ]
   },
-  "implicitDependencies": {},
   "targetDependencies": {
     "build": [
       {

@@ -4,11 +4,11 @@ overrides:
   '@types/babel__traverse': 7.18.2
 
 patchedDependencies:
-  aws-prototyping-sdk@0.14.21:
-    hash: gwev5jhkjevvw6tadwtf6bcgqy
-    path: patches/aws-prototyping-sdk@0.14.21.patch
+  '@aws-prototyping-sdk/nx-monorepo@0.14.21':
+    hash: aupmsjgq2enwpphp6wexuz5j34
+    path: patches/@aws-prototyping-sdk__nx-monorepo@0.14.21.patch
   projen@0.71.7:
-    hash: m5tlt3vhypez3vxws3dx3447cm
+    hash: x3fvdxieqmad4ty6fki23wty3u
     path: patches/projen@0.71.7.patch
 
 importers:
@@ -17,23 +17,32 @@ importers:
     dependencies:
       aws-cdk-lib:
         specifier: ^2.74.0
-        version: 2.74.0(constructs@10.1.310)
+        version: 2.74.0(constructs@10.1.311)
       cdk-nag:
-        specifier: ^2.25.11
-        version: 2.25.11(aws-cdk-lib@2.74.0)(constructs@10.1.310)
+        specifier: ^2.25.12
+        version: 2.25.12(aws-cdk-lib@2.74.0)(constructs@10.1.311)
       constructs:
-        specifier: ^10.1.310
-        version: 10.1.310
+        specifier: ^10.1.311
+        version: 10.1.311
     devDependencies:
+      '@aws-prototyping-sdk/nx-monorepo':
+        specifier: ^0.14.21
+        version: 0.14.21(patch_hash=aupmsjgq2enwpphp6wexuz5j34)(nx@15.9.2)(projen@0.71.7)
       '@nrwl/cli':
         specifier: ^15.9.2
         version: 15.9.2
       '@nrwl/workspace':
         specifier: ^15.9.2
         version: 15.9.2
+      '@types/fs-extra':
+        specifier: ^11.0.1
+        version: 11.0.1
       '@types/node':
         specifier: ^16
         version: 16.0.0
+      '@types/prettier':
+        specifier: ^2.7.2
+        version: 2.7.2
       '@typescript-eslint/eslint-plugin':
         specifier: ^5
         version: 5.58.0(@typescript-eslint/parser@5.58.0)(eslint@8.38.0)(typescript@5.0.4)
@@ -45,7 +54,7 @@ importers:
         version: 4.1.0(vite@4.2.1)(vue@3.2.47)
       aws-prototyping-sdk:
         specifier: ^0.14.21
-        version: 0.14.21(patch_hash=gwev5jhkjevvw6tadwtf6bcgqy)(aws-cdk-lib@2.74.0)(cdk-nag@2.25.11)(constructs@10.1.310)(nx@15.9.2)(projen@0.71.7)
+        version: 0.14.21(aws-cdk-lib@2.74.0)(cdk-nag@2.25.12)(constructs@10.1.311)(nx@15.9.2)(projen@0.71.7)
       eslint:
         specifier: ^8
         version: 8.38.0
@@ -64,6 +73,9 @@ importers:
       eslint-plugin-prettier:
         specifier: ^4.2.1
         version: 4.2.1(eslint-config-prettier@8.8.0)(eslint@8.38.0)(prettier@2.8.7)
+      fs-extra:
+        specifier: ^11.1.1
+        version: 11.1.1
       npm-check-updates:
         specifier: ^16.10.8
         version: 16.10.8
@@ -75,7 +87,7 @@ importers:
         version: 2.8.7
       projen:
         specifier: ^0.71.7
-        version: 0.71.7(patch_hash=m5tlt3vhypez3vxws3dx3447cm)
+        version: 0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u)
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -141,14 +153,14 @@ importers:
         specifier: ^2.27.5
         version: 2.27.5(@typescript-eslint/parser@5.58.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.38.0)
       eslint-plugin-vue:
-        specifier: ^9.10.0
-        version: 9.10.0(eslint@8.38.0)
+        specifier: ^9.11.0
+        version: 9.11.0(eslint@8.38.0)
       npm-check-updates:
         specifier: ^16
         version: 16.10.8
       projen:
         specifier: ^0.71.7
-        version: 0.71.7(patch_hash=m5tlt3vhypez3vxws3dx3447cm)
+        version: 0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u)
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -168,7 +180,7 @@ importers:
         specifier: ^3.2.47
         version: 3.2.47
       vue:
-        specifier: '3'
+        specifier: ^3.2.47
         version: 3.2.47
     devDependencies:
       '@types/node':
@@ -193,19 +205,19 @@ importers:
         specifier: ^2.27.5
         version: 2.27.5(@typescript-eslint/parser@5.58.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.38.0)
       eslint-plugin-vue:
-        specifier: ^0.1.0
-        version: 0.1.0(eslint@8.38.0)
+        specifier: ^9.11.0
+        version: 9.11.0(eslint@8.38.0)
       npm-check-updates:
         specifier: ^16
         version: 16.10.8
       projen:
         specifier: ^0.71.7
-        version: 0.71.7(patch_hash=m5tlt3vhypez3vxws3dx3447cm)
+        version: 0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u)
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
       typescript:
-        specifier: '5'
+        specifier: ^5.0.4
         version: 5.0.4
       unbuild:
         specifier: '*'
@@ -232,6 +244,21 @@ packages:
 
   /@aws-cdk/asset-node-proxy-agent-v5@2.0.115:
     resolution: {integrity: sha512-MJ5/tMBOo6m7Bazs5TqEijIZNo4DH9NOAuv6mXjFT9k1yNAdOAr0imzG9L3uk2JpSmKrGRDSPRkrJFOszNtSaw==}
+
+  /@aws-prototyping-sdk/nx-monorepo@0.14.21(patch_hash=aupmsjgq2enwpphp6wexuz5j34)(nx@15.9.2)(projen@0.71.7):
+    resolution: {integrity: sha512-vsQJyaoISy7BpeiLqjas9lKgCIVK10CBxWfqwh2WZ3+jXgmQmUqtkzlstfwLBl0b1XnxuCFVxhEq5eSS2LcJDw==}
+    hasBin: true
+    peerDependencies:
+      projen: ^0.67.3
+    dependencies:
+      '@nrwl/devkit': 15.9.2(nx@15.9.2)
+      projen: 0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u)
+    transitivePeerDependencies:
+      - nx
+    dev: true
+    bundledDependencies:
+      - '@nrwl/devkit'
+    patched: true
 
   /@babel/code-frame@7.21.4:
     resolution: {integrity: sha512-LYvhNKfwWSPpocw8GI7gpK2nq3HSDuEPC/uSYaALSJu9xjsalaaYFOq0Pwt5KmVqwEbZlDu81aLXwBOmD/Fv9g==}
@@ -1261,6 +1288,13 @@ packages:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
     dev: true
 
+  /@types/fs-extra@11.0.1:
+    resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
+    dependencies:
+      '@types/jsonfile': 6.1.1
+      '@types/node': 16.0.0
+    dev: true
+
   /@types/http-cache-semantics@4.0.1:
     resolution: {integrity: sha512-SZs7ekbP8CN0txVG2xVRH6EgKmEm31BOxA07vkFaETzZz1xh+cbt8BcI0slpymvwhx5dlFnQG2rTlPVQn+iRPQ==}
     dev: true
@@ -1273,12 +1307,18 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
+  /@types/jsonfile@6.1.1:
+    resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
+    dependencies:
+      '@types/node': 16.0.0
+    dev: true
+
   /@types/node@16.0.0:
     resolution: {integrity: sha512-TmCW5HoZ2o2/z2EYi109jLqIaPIi9y/lc2LmDCWzuCi35bcaQ+OtUh6nwBiFK7SOu25FAU5+YKdqFZUwtqGSdg==}
     dev: true
 
-  /@types/node@18.15.11:
-    resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
+  /@types/prettier@2.7.2:
+    resolution: {integrity: sha512-KufADq8uQqo1pYKVIYzfKbJfBAc0sOeXqGbFaSpv8MRmC/zXgowNZmFcbngndGk922QDmOASEXUZCaY48gs4cg==}
     dev: true
 
   /@types/resolve@1.20.2:
@@ -1782,7 +1822,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /aws-cdk-lib@2.74.0(constructs@10.1.310):
+  /aws-cdk-lib@2.74.0(constructs@10.1.311):
     resolution: {integrity: sha512-cPoYEVmJ06pi57q4uW2v/dwXvkr9JHDeSd4+ylBALccbYiRPlZw0OiNH+F2B+hrDVAiaYZWV3HE8hVDDON4+ZA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -1793,7 +1833,7 @@ packages:
       '@aws-cdk/asset-node-proxy-agent-v5': 2.0.115
       '@balena/dockerignore': 1.0.2
       case: 1.6.3
-      constructs: 10.1.310
+      constructs: 10.1.311
       fs-extra: 9.1.0
       ignore: 5.2.4
       jsonschema: 1.4.1
@@ -1814,7 +1854,7 @@ packages:
       - table
       - yaml
 
-  /aws-prototyping-sdk@0.14.21(patch_hash=gwev5jhkjevvw6tadwtf6bcgqy)(aws-cdk-lib@2.74.0)(cdk-nag@2.25.11)(constructs@10.1.310)(nx@15.9.2)(projen@0.71.7):
+  /aws-prototyping-sdk@0.14.21(aws-cdk-lib@2.74.0)(cdk-nag@2.25.12)(constructs@10.1.311)(nx@15.9.2)(projen@0.71.7):
     resolution: {integrity: sha512-oQ3iucnh2EHYm36JCDE8p3KFN9JyPjVKaaKHFUf2/BYbQVYQTxXNFs4l6QnVtnIbdHBsRoqBRLQnyYBHQW5xtw==}
     peerDependencies:
       aws-cdk-lib: ^2.60.0
@@ -1823,16 +1863,15 @@ packages:
       projen: ^0.67.3
     dependencies:
       '@nrwl/devkit': 15.9.2(nx@15.9.2)
-      aws-cdk-lib: 2.74.0(constructs@10.1.310)
-      cdk-nag: 2.25.11(aws-cdk-lib@2.74.0)(constructs@10.1.310)
-      constructs: 10.1.310
-      projen: 0.71.7(patch_hash=m5tlt3vhypez3vxws3dx3447cm)
+      aws-cdk-lib: 2.74.0(constructs@10.1.311)
+      cdk-nag: 2.25.12(aws-cdk-lib@2.74.0)(constructs@10.1.311)
+      constructs: 10.1.311
+      projen: 0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u)
     transitivePeerDependencies:
       - nx
     dev: true
     bundledDependencies:
       - '@nrwl/devkit'
-    patched: true
 
   /axios@1.3.5:
     resolution: {integrity: sha512-glL/PvG/E+xCWwV8S6nCHcrfg1exGx7vxyUIivIA1iL7BIh6bePylCfVHwp6k13ao7SATxB6imau2kqY+I67kw==}
@@ -2033,14 +2072,14 @@ packages:
     resolution: {integrity: sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==}
     engines: {node: '>= 0.8.0'}
 
-  /cdk-nag@2.25.11(aws-cdk-lib@2.74.0)(constructs@10.1.310):
-    resolution: {integrity: sha512-jBIVvXFUHxhPzZEpIoCeMQOcCzolWMpSU9/QSDMeYPS3KtWI8VHDxLkV0CoKvwo1OhdF6vs0uI962dAPR24wug==}
+  /cdk-nag@2.25.12(aws-cdk-lib@2.74.0)(constructs@10.1.311):
+    resolution: {integrity: sha512-hIMWn6pLnl++6wFQ3BjEDa+VYk7YFj2l50f7TQ9Ar2aULkvXS+zMKCnk6bJ2lQuNYwFqeESv1LPtKXbK7wv8FQ==}
     peerDependencies:
       aws-cdk-lib: ^2.45.0
       constructs: ^10.0.5
     dependencies:
-      aws-cdk-lib: 2.74.0(constructs@10.1.310)
-      constructs: 10.1.310
+      aws-cdk-lib: 2.74.0(constructs@10.1.311)
+      constructs: 10.1.311
 
   /chai@4.3.7:
     resolution: {integrity: sha512-HLnAzZ2iupm25PlN0xFreAlBA5zaBSv3og0DdeGA4Ar6h6rJ3A0rolRUKJhSF2V10GZKDgWF/VmAEsNWjCRB+A==}
@@ -2253,8 +2292,8 @@ packages:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: true
 
-  /constructs@10.1.310:
-    resolution: {integrity: sha512-hfw9zaXmdPItWbDyeL9MaCxjB77W0FSfPvN5N9uKXtXRLHJHk5EJx2NtGPNNf4po1YanrZTCpp6rxpkP3nQkGw==}
+  /constructs@10.1.311:
+    resolution: {integrity: sha512-/54vqCTAtbSAqi8WDWzj8CJqxxLo1UIprQb24reCH1c8Qe9eAjROJIEjBf/H2ul0NqYczNZvYwiRUFY+2/ZcNw==}
     engines: {node: '>= 14.17.0'}
 
   /conventional-changelog-config-spec@2.1.0:
@@ -2748,18 +2787,8 @@ packages:
       prettier-linter-helpers: 1.0.0
     dev: true
 
-  /eslint-plugin-vue@0.1.0(eslint@8.38.0):
-    resolution: {integrity: sha512-fOjefGjEv/2eNMDCpFo68bqE05YcrC+0T7N/JeF/k9m7uCGd/UlVebOyPLW9J7zOi2DrTicBnNzD/1GhEhoWkQ==}
-    engines: {node: '>=4.0.0'}
-    peerDependencies:
-      eslint: '>=2.0.0'
-    dependencies:
-      eslint: 8.38.0
-      parse5: 2.2.3
-    dev: true
-
-  /eslint-plugin-vue@9.10.0(eslint@8.38.0):
-    resolution: {integrity: sha512-2MgP31OBf8YilUvtakdVMc8xVbcMp7z7/iQj8LHVpXrSXHPXSJRUIGSPFI6b6pyCx/buKaFJ45ycqfHvQRiW2g==}
+  /eslint-plugin-vue@9.11.0(eslint@8.38.0):
+    resolution: {integrity: sha512-bBCJAZnkBV7ATH4Z1E7CvN3nmtS4H7QUU3UBxPdo8WohRU+yHjnQRALpTbxMVcz0e4Mx3IyxIdP5HYODMxK9cQ==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
@@ -4692,10 +4721,6 @@ packages:
       lines-and-columns: 1.2.4
     dev: true
 
-  /parse5@2.2.3:
-    resolution: {integrity: sha512-yJQdbcT+hCt6HD+BuuUvjHUdNwerQIKSJSm7tXjtp6oIH5Mxbzlt/VIIeWxblsgcDt1+E7kxPeilD5McWswStA==}
-    dev: true
-
   /path-exists@4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
     engines: {node: '>=8'}
@@ -4824,7 +4849,7 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /projen@0.71.7(patch_hash=m5tlt3vhypez3vxws3dx3447cm):
+  /projen@0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u):
     resolution: {integrity: sha512-pkOPyYWKA2X5lg7n2IXM36PMcHz9Vts1r9Z/rna7D4ep4mjg1xwbESIEGtbX1W03OMwkQrnPpvLZbc0JnTMC4g==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
@@ -5984,7 +6009,7 @@ packages:
       builtins: 5.0.1
     dev: true
 
-  /vite-node@0.30.1(@types/node@18.15.11):
+  /vite-node@0.30.1(@types/node@16.0.0):
     resolution: {integrity: sha512-vTikpU/J7e6LU/8iM3dzBo8ZhEiKZEKRznEMm+mJh95XhWaPrJQraT/QsT2NWmuEf+zgAoMe64PKT7hfZ1Njmg==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -5994,7 +6019,7 @@ packages:
       mlly: 1.2.0
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.2.1(@types/node@18.15.11)
+      vite: 4.2.1(@types/node@16.0.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -6039,40 +6064,6 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite@4.2.1(@types/node@18.15.11):
-    resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    hasBin: true
-    peerDependencies:
-      '@types/node': '>= 14'
-      less: '*'
-      sass: '*'
-      stylus: '*'
-      sugarss: '*'
-      terser: ^5.4.0
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-      less:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      terser:
-        optional: true
-    dependencies:
-      '@types/node': 18.15.11
-      esbuild: 0.17.16
-      postcss: 8.4.21
-      resolve: 1.22.2
-      rollup: 3.20.2
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /vitest@0.30.1:
     resolution: {integrity: sha512-y35WTrSTlTxfMLttgQk4rHcaDkbHQwDP++SNwPb+7H8yb13Q3cu2EixrtHzF27iZ8v0XCciSsLg00RkPAzB/aA==}
     engines: {node: '>=v14.18.0'}
@@ -6106,7 +6097,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.4
       '@types/chai-subset': 1.3.3
-      '@types/node': 18.15.11
+      '@types/node': 16.0.0
       '@vitest/expect': 0.30.1
       '@vitest/runner': 0.30.1
       '@vitest/snapshot': 0.30.1
@@ -6127,8 +6118,8 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.4.0
       tinypool: 0.4.0
-      vite: 4.2.1(@types/node@18.15.11)
-      vite-node: 0.30.1(@types/node@18.15.11)
+      vite: 4.2.1(@types/node@16.0.0)
+      vite-node: 0.30.1(@types/node@16.0.0)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less

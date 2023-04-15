@@ -42,7 +42,8 @@
     "*.d.ts",
     "node_modules/",
     "*.generated.ts",
-    "coverage"
+    "coverage",
+    "build.config.ts"
   ],
   "rules": {
     "indent": [

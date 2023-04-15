@@ -8,6 +8,7 @@
     ".projen/files.json",
     ".projen/tasks.json",
     "build.config.ts",
+    "env.d.ts",
     "LICENSE",
     "tsconfig.dev.json",
     "tsconfig.json"

@@ -5,7 +5,6 @@
     ".gitattributes",
     ".gitignore",
     ".npmignore",
-    ".nx/plugins/nx-monorepo-plugin.cjs",
     ".nxignore",
     ".prettierignore",
     ".prettierrc.json",

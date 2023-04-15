@@ -35,7 +35,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "../../../../env.d.ts",
+    "env.d.ts",
     "src/**/*.vue"
   ],
   "exclude": []

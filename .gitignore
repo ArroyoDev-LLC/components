@@ -43,7 +43,6 @@ jspm_packages/
 !/.eslintrc.json
 !/.syncpackrc.json
 !/.nxignore
-!/.nx/plugins/nx-monorepo-plugin.cjs
 !/nx.json
 .idea
 .idea/**

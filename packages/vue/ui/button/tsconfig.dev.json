@@ -35,9 +35,10 @@
     ".projenrc.js",
     "src/**/*.ts",
     "test/**/*.ts",
-    "build.config.ts"
+    "src/**/*.vue"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "build.config.ts"
   ]
 }

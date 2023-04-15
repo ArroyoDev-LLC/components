@@ -5,6 +5,7 @@ import {
   javascript,
   LogLevel,
   Project,
+  SourceCode,
   TextFile,
   typescript,
 } from "projen";
@@ -12,6 +13,7 @@ import {
   type TypescriptConfigOptions,
   TypeScriptModuleResolution,
 } from "projen/lib/javascript";
+import { ModuleImports } from "projen/lib/javascript/render-options";
 import { TypeScriptProjectOptions } from "projen/lib/typescript";
 import type { BuildConfig as UnBuildBuildConfig } from "unbuild";
 
@@ -59,6 +61,9 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
     "rollup-plugin-vue",
     "tsx",
     "unbuild",
+    "@types/prettier",
+    "fs-extra",
+    "@types/fs-extra",
   ],
 });
 monorepo.gitignore.exclude(".idea", ".idea/**");
@@ -104,41 +109,53 @@ class UnBuild extends Component {
 
   readonly vue: boolean;
   readonly options: UnBuildBuildConfig;
-  readonly file: TextFile;
+
+  file: SourceCode;
+  readonly imports: ModuleImports;
 
   constructor(project: Project, options: UnBuildOptions = {}) {
     super(project);
     this.vue = options.vue ?? false;
     this.options = options.options ?? {};
 
-    this.project.deps.addDependency("unbuild", DependencyType.BUILD);
-    this.project.deps.addDependency("rollup-plugin-vue", DependencyType.BUILD);
-    this.file = new TextFile(this.project, "build.config.ts", {
-      lines: [
-        `import { defineBuildConfig } from 'unbuild'`,
-        ...(this.vue && [`import vue from 'rollup-plugin-vue'`]),
-        `export default defineBuildConfig(${this.buildConfig}});`,
-      ],
+    this.file = new SourceCode(this.project, "build.config.ts", {
+      readonly: true,
     });
-  }
+    this.file.line(`// ${this.file.marker}`);
 
-  get buildConfig(): string {
-    const config = Object.keys(this.options).length
-      ? `...${JSON.stringify(this.options)},`
-      : ``;
+    this.project.deps.addDependency("unbuild", DependencyType.BUILD);
+    this.imports = new ModuleImports();
+    this.imports.add("unbuild", "defineBuildConfig");
+
     if (this.vue) {
-      return `{
-      ${config}
-    failOnWarn: false,
-    hooks: {
-      'rollup:options': (ctx, options) => {
-        // @ts-expect-error ignore
-        options.plugins.push(vue());
-      },
-    },
-      `;
+      this.project.deps.addDependency(
+        "rollup-plugin-vue",
+        DependencyType.BUILD
+      );
+      this.file.line(`import vue from "rollup-plugin-vue";`);
     }
-    return `{ ${JSON.stringify(this.options)} }`;
+
+    this.imports.asEsmImports().map((imp) => this.file.line(imp));
+    this.file.open(`export default defineBuildConfig({`);
+
+    const optionsSource = Object.keys(this.options).length
+      ? "..." + JSON.stringify(this.options) + ","
+      : "";
+    const hooksSource = this.options?.hooks
+      ? "..." + JSON.stringify(this.options.hooks) + ","
+      : "";
+
+    this.file.line(optionsSource);
+    this.file.open("hooks: {");
+    if (this.vue) {
+      this.file.open(`'rollup:options': (ctx, options) => {`);
+      this.file.line("// @ts-expect-error ignore rollup");
+      this.file.line("options.plugins.push(vue());");
+      this.file.close("},");
+    }
+    this.file.line(hooksSource);
+    this.file.close("}");
+    this.file.close("})");
   }
 }
 
@@ -159,7 +176,17 @@ class VueComponentProject extends typescript.TypeScriptProject {
       ...options,
     });
 
-    new UnBuild(this, { vue: true });
+    new UnBuild(this, { vue: true, options: { name: defaultPackageName } });
+    new TextFile(this, "env.d.ts", {
+      readonly: true,
+      marker: true,
+      lines: `declare module "*.vue" {
+  import { DefineComponent } from "vue";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
+  const component: DefineComponent<{}, {}, any>;
+  export default component;
+}`.split("\n"),
+    });
 
     this.addDeps("vue", "@vue/runtime-dom");
     this.addDevDeps("typescript", "vitest");
@@ -167,10 +194,12 @@ class VueComponentProject extends typescript.TypeScriptProject {
     this.deps.addDependency("eslint-plugin-vue", DependencyType.DEVENV);
     this.eslint!.addPlugins("eslint-plugin-vue");
     this.eslint!.config.parserOptions.extraFileExtensions = [".vue"];
+    this.eslint!.ignorePatterns.push("build.config.ts");
 
-    this.tsconfig!.addInclude("../../../../env.d.ts");
+    this.tsconfig!.addInclude("env.d.ts");
     this.tsconfig!.addInclude("src/**/*.vue");
-    this.tsconfigDev!.addInclude("build.config.ts");
+    this.tsconfigDev!.addExclude("build.config.ts");
+    this.tsconfigDev!.addInclude("src/**/*.vue");
     this.tasks.removeTask("build");
     this.tasks.addTask("build", { exec: "unbuild" });
   }
@@ -184,7 +213,7 @@ const text = new VueComponentProject({
 const button = new VueComponentProject({
   parent: monorepo,
   name: "vue.ui.button",
-  deps: ['primevue', text.package.packageName]
+  deps: ["primevue", text.package.packageName],
 });
 
 monorepo.synth();

@@ -24,7 +24,6 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-vue": "^9.11.0",
     "npm-check-updates": "^16",
-    "projen": "^0.71.7",
     "rollup-plugin-vue": "^6.0.0",
     "typescript": "^5.0.4",
     "unbuild": "*",

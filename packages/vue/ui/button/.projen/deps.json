@@ -38,10 +38,6 @@
       "type": "build"
     },
     {
-      "name": "projen",
-      "type": "build"
-    },
-    {
       "name": "rollup-plugin-vue",
       "type": "build"
     },

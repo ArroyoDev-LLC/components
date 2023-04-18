@@ -27,7 +27,10 @@
     "stripInternal": true,
     "target": "ES2022",
     "allowImportingTsExtensions": true,
-    "allowArbitraryExtensions": true
+    "allowArbitraryExtensions": true,
+    "emitDeclarationOnly": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*.ts",

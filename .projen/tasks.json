@@ -8,7 +8,7 @@
       },
       "steps": [
         {
-          "exec": "pnpx nx run-many --target=build --output-style=stream --nx-bail",
+          "exec": "pnpm exec nx run-many --target=build --output-style=stream --nx-bail",
           "receiveArgs": true
         }
       ]
@@ -53,7 +53,7 @@
       },
       "steps": [
         {
-          "exec": "pnpx nx run-many --target=compile --output-style=stream --nx-bail",
+          "exec": "pnpm exec nx run-many --target=compile --output-style=stream --nx-bail",
           "receiveArgs": true
         }
       ]
@@ -96,7 +96,8 @@
       },
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern . test build-tools projenrc .projenrc.ts"
+          "exec": "pnpm exec nx run-many --target=eslint --output-style=stream --nx-bail",
+          "receiveArgs": true
         }
       ]
     },
@@ -105,7 +106,7 @@
       "description": "Generate dependency graph for monorepo",
       "steps": [
         {
-          "exec": "pnpx nx graph",
+          "exec": "pnpm exec nx graph",
           "receiveArgs": true
         }
       ]
@@ -136,7 +137,7 @@
       },
       "steps": [
         {
-          "exec": "pnpx nx run-many --target=package --output-style=stream --nx-bail",
+          "exec": "pnpm exec nx run-many --target=package --output-style=stream --nx-bail",
           "receiveArgs": true
         }
       ]
@@ -149,7 +150,7 @@
       },
       "steps": [
         {
-          "exec": "pnpx nx run-many --target=post-compile --output-style=stream --nx-bail",
+          "exec": "pnpm exec nx run-many --target=post-compile --output-style=stream --nx-bail",
           "receiveArgs": true
         }
       ]
@@ -157,6 +158,14 @@
     "post-upgrade": {
       "name": "post-upgrade",
       "description": "Runs after upgrading dependencies"
+    },
+    "postinstall": {
+      "name": "postinstall",
+      "steps": [
+        {
+          "exec": "pnpm exec nx run-many --target install --projects  --parallel=1"
+        }
+      ]
     },
     "pre-compile": {
       "name": "pre-compile",
@@ -166,7 +175,7 @@
       },
       "steps": [
         {
-          "exec": "pnpx nx run-many --target=pre-compile --output-style=stream --nx-bail",
+          "exec": "pnpm exec nx run-many --target=pre-compile --output-style=stream --nx-bail",
           "receiveArgs": true
         }
       ]
@@ -187,7 +196,7 @@
       },
       "steps": [
         {
-          "exec": "pnpx nx run-many",
+          "exec": "pnpm exec nx run-many",
           "receiveArgs": true
         }
       ]
@@ -197,7 +206,7 @@
       "description": "Synthesize workspace",
       "steps": [
         {
-          "exec": "pnpx projen"
+          "exec": "pnpm exec projen"
         }
       ]
     },
@@ -209,7 +218,7 @@
       },
       "steps": [
         {
-          "exec": "pnpx nx run-many --target=test --output-style=stream --nx-bail",
+          "exec": "pnpm exec nx run-many --target=test --output-style=stream --nx-bail",
           "receiveArgs": true
         }
       ]
@@ -225,19 +234,19 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='projen'"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='projen'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='projen'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='projen'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='projen'"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
@@ -257,16 +266,16 @@
       "name": "upgrade-deps",
       "steps": [
         {
-          "exec": "pnpx npm-check-updates --deep --rejectVersion 0.0.0 -u"
+          "exec": "pnpm exec npm-check-updates --deep --rejectVersion 0.0.0 -u"
         },
         {
-          "exec": "pnpx syncpack fix-mismatches"
+          "exec": "pnpm exec syncpack fix-mismatches"
         },
         {
           "exec": "pnpm install"
         },
         {
-          "exec": "pnpx projen"
+          "exec": "pnpm exec projen"
         }
       ]
     },
@@ -278,7 +287,7 @@
       },
       "steps": [
         {
-          "exec": "pnpx nx run-many --target=watch --output-style=stream --skip-nx-cache --nx-ignore-cycles --nx-bail",
+          "exec": "pnpm exec nx run-many --target=watch --output-style=stream --skip-nx-cache --nx-ignore-cycles --nx-bail",
           "receiveArgs": true
         }
       ]

@@ -60,6 +60,7 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
       strictNullChecks: true,
     },
   },
+  projenVersion: "0.71.7",
   devDeps: [
     "aws-prototyping-sdk",
     "@aws-prototyping-sdk/nx-monorepo",

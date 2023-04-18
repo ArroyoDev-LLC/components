@@ -25,6 +25,7 @@
     "stripInternal": true,
     "target": "ES2022",
     "rootDir": ".",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "allowArbitraryExtensions": true,
     "emitDeclarationOnly": true,

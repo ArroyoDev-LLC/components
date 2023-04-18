@@ -72,6 +72,8 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
     "@types/prettier",
     "fs-extra",
     "@types/fs-extra",
+    "@mrgrain/jsii-struct-builder",
+    "ts-morph",
   ],
 });
 monorepo.gitignore.exclude(".idea", ".idea/**");
@@ -179,13 +181,17 @@ class VueComponentProject extends typescript.TypeScriptProject {
       outdir: defaultOutDir,
       packageName: defaultPackageName,
       jest: false,
-      libdir: 'dist',
-      entrypoint: 'dist/index.mjs',
-      entrypointTypes: 'dist/index.d.ts',
+      projenDevDependency: false,
+      libdir: "dist",
+      entrypoint: "dist/index.mjs",
+      entrypointTypes: "dist/index.d.ts",
       ...options,
     });
 
-    new UnBuild(this, { vue: true, options: { name: defaultPackageName, declaration: true  } });
+    new UnBuild(this, {
+      vue: true,
+      options: { name: defaultPackageName, declaration: true },
+    });
     new TextFile(this, "env.d.ts", {
       readonly: true,
       marker: true,

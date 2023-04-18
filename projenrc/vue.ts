@@ -20,13 +20,13 @@ const vueTsConfig: TypescriptConfigOptions = {
 	},
 }
 
-interface VueComponentProjectOptions
+interface VueComponentOptions
 	extends Omit<TypeScriptProjectOptions, 'defaultReleaseBranch'> {
 	defaultReleaseBranch?: string
 }
 
-export class VueComponentProject extends typescript.TypeScriptProject {
-	constructor(options: VueComponentProjectOptions) {
+export class VueComponent extends typescript.TypeScriptProject {
+	constructor(options: VueComponentOptions) {
 		const { name } = options
 		const namePath = name.split('.').join('/')
 		const defaultOutDir = `packages/${namePath}`

@@ -2,7 +2,7 @@ import * as nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
 import { javascript, LogLevel } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import LintConfig from './projenrc/lint-config'
-import { VueComponentProject } from './projenrc/vue.ts'
+import { VueComponent } from './projenrc/vue.ts'
 
 const monorepo = new nx_monorepo.NxMonorepoProject({
 	authorEmail: 'support@arroyodev.com',
@@ -78,7 +78,7 @@ monorepo.package.file.addOverride('pnpm.patchedDependencies', {
 	'projen@0.71.7': 'patches/projen@0.71.7.patch',
 })
 
-const text = new VueComponentProject({
+const text = new VueComponent({
 	parent: monorepo,
 	name: 'vue.ui.text',
 })
@@ -86,7 +86,7 @@ LintConfig.of(text)!.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
 })
 
-const button = new VueComponentProject({
+const button = new VueComponent({
 	parent: monorepo,
 	name: 'vue.ui.button',
 	deps: ['primevue', text.package.packageName],

@@ -87,10 +87,10 @@
       "error"
     ],
     "key-spacing": [
-      "error"
+      "off"
     ],
     "no-multiple-empty-lines": [
-      "error"
+      "off"
     ],
     "@typescript-eslint/no-floating-promises": [
       "error"
@@ -102,7 +102,7 @@
       "error"
     ],
     "no-trailing-spaces": [
-      "error"
+      "off"
     ],
     "dot-notation": [
       "error"

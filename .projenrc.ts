@@ -53,6 +53,11 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
       lib: ["ES2022"],
       allowImportingTsExtensions: true,
       allowArbitraryExtensions: true,
+      emitDeclarationOnly: true,
+      forceConsistentCasingInFileNames: true,
+      skipLibCheck: true,
+      strict: true,
+      strictNullChecks: true,
     },
   },
   devDeps: [

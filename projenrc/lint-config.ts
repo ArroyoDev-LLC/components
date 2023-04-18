@@ -1,4 +1,4 @@
-import { Component, ObjectFile } from 'projen'
+import { Component, ObjectFile, Project } from 'projen'
 import {
 	Eslint,
 	NodeProject,
@@ -15,6 +15,12 @@ export interface LintConfigOptions {
 }
 
 class LintConfig extends Component {
+	public static of(project: Project): LintConfig | undefined {
+		const isLintConfig = (o: Component): o is LintConfig =>
+			o instanceof LintConfig
+		return project.components.find(isLintConfig)
+	}
+
 	readonly eslint: Eslint
 	readonly eslintFile: ObjectFile
 	readonly prettier: Prettier

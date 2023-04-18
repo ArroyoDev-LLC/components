@@ -1,4 +1,5 @@
 import * as nx_monorepo from "@aws-prototyping-sdk/nx-monorepo";
+import { buildExecutableCommand } from "aws-prototyping-sdk/nx-monorepo";
 import {
   Component,
   DependencyType,
@@ -29,7 +30,10 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
   packageManager: javascript.NodePackageManager.PNPM,
   pnpmVersion: "8",
   github: false,
-  projenCommand: "pnpm exec projen",
+  projenCommand: buildExecutableCommand(
+    javascript.NodePackageManager.PNPM,
+    "projen"
+  ),
   prettier: true,
   projenrcTs: true,
   renovatebot: true,

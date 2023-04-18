@@ -76,17 +76,7 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 		'@mrgrain/jsii-struct-builder',
 		'ts-morph',
 	],
-	prettierOptions: {
-		settings: {
-			singleQuote: true,
-			semi: false,
-			useTabs: true,
-			tabWidth: 2,
-		},
-	},
-	eslint: true,
 })
-
 new LintConfig(monorepo)
 
 monorepo.gitignore.exclude('.idea', '.idea/**')

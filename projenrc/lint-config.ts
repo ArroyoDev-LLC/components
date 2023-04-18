@@ -1,5 +1,11 @@
 import { Component, ObjectFile } from 'projen'
-import { Eslint, NodeProject, Prettier } from 'projen/lib/javascript'
+import {
+	Eslint,
+	NodeProject,
+	Prettier,
+	PrettierOptions,
+} from 'projen/lib/javascript'
+import { applyOverrides } from './utils.ts'
 
 export interface LintConfigOptions {
 	/**
@@ -12,6 +18,7 @@ class LintConfig extends Component {
 	readonly eslint: Eslint
 	readonly eslintFile: ObjectFile
 	readonly prettier: Prettier
+	readonly prettierFile: ObjectFile
 
 	constructor(
 		project: NodeProject,
@@ -27,16 +34,21 @@ class LintConfig extends Component {
 				...(options.vue && { extensions: ['.ts', '.tsx', '.vue'] }),
 			})
 
+		const prettierConfig: PrettierOptions['settings'] = {
+			singleQuote: true,
+			semi: false,
+			useTabs: true,
+			tabWidth: 2,
+		}
+
 		this.prettier =
 			Prettier.of(project) ??
 			new Prettier(project, {
-				settings: {
-					singleQuote: true,
-					semi: false,
-					useTabs: true,
-					tabWidth: 2,
-				},
+				settings: prettierConfig,
 			})
+		this.prettierFile = project.tryFindObjectFile('.prettierrc.json')!
+
+		applyOverrides(this.prettierFile, prettierConfig)
 
 		this.eslint.addRules({
 			// let prettier handle:

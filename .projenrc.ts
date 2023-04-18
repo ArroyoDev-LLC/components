@@ -1,5 +1,5 @@
 import * as nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
-import { javascript, LogLevel } from 'projen'
+import { javascript, JsonFile, LogLevel } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import LintConfig from './projenrc/lint-config'
 import { VueComponent } from './projenrc/vue.ts'
@@ -27,6 +27,7 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 	workspaceConfig: {
 		linkLocalWorkspaceBins: true,
 	},
+
 	logging: {
 		level: LogLevel.DEBUG,
 		usePrefix: true,
@@ -76,6 +77,15 @@ monorepo.tsconfigDev.file.addOverride('compilerOptions.rootDir', '.')
 monorepo.package.addField('type', 'module')
 monorepo.package.file.addOverride('pnpm.patchedDependencies', {
 	'projen@0.71.7': 'patches/projen@0.71.7.patch',
+})
+// ensure projen is not updated until patch is merged.
+new JsonFile(monorepo, '.ncurc.json', {
+	readonly: true,
+	marker: false,
+	allowComments: false,
+	obj: {
+		reject: ['projen'],
+	},
 })
 
 const text = new VueComponent({

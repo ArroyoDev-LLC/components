@@ -4,6 +4,7 @@
 /.eslintrc.json linguist-generated
 /.gitattributes linguist-generated
 /.gitignore linguist-generated
+/.ncurc.json linguist-generated
 /.npmignore linguist-generated
 /.nxignore linguist-generated
 /.prettierignore linguist-generated

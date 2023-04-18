@@ -4,6 +4,7 @@
     ".eslintrc.json",
     ".gitattributes",
     ".gitignore",
+    ".ncurc.json",
     ".npmignore",
     ".nxignore",
     ".prettierignore",

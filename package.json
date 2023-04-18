@@ -31,7 +31,7 @@
     "organization": true
   },
   "devDependencies": {
-    "@aws-prototyping-sdk/nx-monorepo": "^0.15.3",
+    "@aws-prototyping-sdk/nx-monorepo": "^0.15.5",
     "@mrgrain/jsii-struct-builder": "^0.3.0",
     "@nrwl/cli": "^15.9.2",
     "@nrwl/workspace": "^15.9.2",
@@ -54,7 +54,7 @@
     "projen": "0.71.7",
     "rollup-plugin-vue": "^6.0.0",
     "syncpack": "^9.8.4",
-    "ts-morph": "^1.0.0",
+    "ts-morph": "^18.0.0",
     "ts-node": "^10.9.1",
     "tsx": "^3.12.6",
     "typedoc": "^0.24.4",

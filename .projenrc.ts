@@ -1,9 +1,18 @@
-import * as nx_monorepo from "@aws-prototyping-sdk/nx-monorepo";
-import { DependencyType, javascript, LogLevel, TextFile, typescript } from "projen";
-import { type TypescriptConfigOptions, TypeScriptModuleResolution } from "projen/lib/javascript";
-import { TypeScriptProjectOptions } from "projen/lib/typescript";
-import LintConfig from "./projenrc/lint-config";
-import { UnBuild } from "./projenrc/unbuild";
+import * as nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
+import {
+	DependencyType,
+	javascript,
+	LogLevel,
+	TextFile,
+	typescript,
+} from 'projen'
+import {
+	type TypescriptConfigOptions,
+	TypeScriptModuleResolution,
+} from 'projen/lib/javascript'
+import { TypeScriptProjectOptions } from 'projen/lib/typescript'
+import LintConfig from './projenrc/lint-config'
+import { UnBuild } from './projenrc/unbuild'
 
 const monorepo = new nx_monorepo.NxMonorepoProject({
 	authorEmail: 'support@arroyodev.com',
@@ -141,11 +150,8 @@ class VueComponentProject extends typescript.TypeScriptProject {
 		this.deps.addDependency('eslint-plugin-vue', DependencyType.DEVENV)
 		this.eslint!.addPlugins('eslint-plugin-vue')
 		this.eslint!.config.parserOptions.extraFileExtensions = ['.vue']
-		this.eslint!.ignorePatterns.push('build.config.ts')
-
 		this.tsconfig!.addInclude('env.d.ts')
 		this.tsconfig!.addInclude('src/**/*.vue')
-		this.tsconfigDev!.addExclude('build.config.ts')
 		this.tsconfigDev!.addInclude('src/**/*.vue')
 		this.tasks.removeTask('build')
 		this.tasks.addTask('build', { exec: 'unbuild' })

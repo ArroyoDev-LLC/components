@@ -47,8 +47,7 @@
     "*.d.ts",
     "node_modules/",
     "*.generated.ts",
-    "coverage",
-    "build.config.ts"
+    "coverage"
   ],
   "rules": {
     "indent": [
@@ -230,5 +229,16 @@
       "off"
     ]
   },
-  "overrides": []
+  "overrides": [
+    {
+      "files": [
+        "build.config.ts"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "off"
+        ]
+      }
+    }
+  ]
 }

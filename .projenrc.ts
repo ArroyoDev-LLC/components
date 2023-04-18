@@ -1,5 +1,4 @@
 import * as nx_monorepo from "@aws-prototyping-sdk/nx-monorepo";
-import { buildExecutableCommand } from "aws-prototyping-sdk/nx-monorepo";
 import {
   Component,
   DependencyType,
@@ -30,7 +29,7 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
   packageManager: javascript.NodePackageManager.PNPM,
   pnpmVersion: "8",
   github: false,
-  projenCommand: buildExecutableCommand(
+  projenCommand: nx_monorepo.buildExecutableCommand(
     javascript.NodePackageManager.PNPM,
     "projen"
   ),
@@ -62,7 +61,6 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
   },
   projenVersion: "0.71.7",
   devDeps: [
-    "aws-prototyping-sdk",
     "@aws-prototyping-sdk/nx-monorepo",
     "vite",
     "@vitejs/plugin-vue",
@@ -84,8 +82,6 @@ monorepo.tsconfigDev.file.addOverride("compilerOptions.rootDir", ".");
 monorepo.package.addField("type", "module");
 monorepo.package.file.addOverride("pnpm.patchedDependencies", {
   "projen@0.71.7": "patches/projen@0.71.7.patch",
-  "@aws-prototyping-sdk/nx-monorepo@0.14.21":
-    "patches/@aws-prototyping-sdk__nx-monorepo@0.14.21.patch",
 });
 
 const vueTsConfig: TypescriptConfigOptions = {

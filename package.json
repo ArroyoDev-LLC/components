@@ -30,7 +30,7 @@
     "organization": true
   },
   "devDependencies": {
-    "@aws-prototyping-sdk/nx-monorepo": "^0.14.21",
+    "@aws-prototyping-sdk/nx-monorepo": "^0.15.3",
     "@nrwl/cli": "^15.9.2",
     "@nrwl/workspace": "^15.9.2",
     "@types/fs-extra": "^11.0.1",

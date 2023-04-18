@@ -228,11 +228,17 @@ const text = new VueComponentProject({
 	parent: monorepo,
 	name: 'vue.ui.text',
 })
+LintConfig.of(text)!.eslint.addRules({
+	'vue/multi-word-component-names': ['off'],
+})
 
 const button = new VueComponentProject({
 	parent: monorepo,
 	name: 'vue.ui.button',
 	deps: ['primevue', text.package.packageName],
+})
+LintConfig.of(button)!.eslint.addRules({
+	'vue/multi-word-component-names': ['off'],
 })
 
 monorepo.synth()

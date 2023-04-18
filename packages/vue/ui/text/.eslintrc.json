@@ -225,6 +225,9 @@
           "method"
         ]
       }
+    ],
+    "vue/multi-word-component-names": [
+      "off"
     ]
   },
   "overrides": []

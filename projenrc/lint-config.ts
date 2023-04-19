@@ -7,13 +7,6 @@ import {
 } from 'projen/lib/javascript'
 import { applyOverrides } from './utils.ts'
 
-export interface LintConfigOptions {
-	/**
-	 * Include vue related config.
-	 */
-	vue?: boolean
-}
-
 class LintConfig extends Component {
 	public static of(project: Project): LintConfig | undefined {
 		const isLintConfig = (o: Component): o is LintConfig =>
@@ -26,10 +19,7 @@ class LintConfig extends Component {
 	readonly prettier: Prettier
 	readonly prettierFile: ObjectFile
 
-	constructor(
-		project: NodeProject,
-		options: LintConfigOptions = { vue: false }
-	) {
+	constructor(project: NodeProject) {
 		super(project)
 
 		this.eslint =
@@ -37,7 +27,6 @@ class LintConfig extends Component {
 			new Eslint(project, {
 				dirs: [project.outdir],
 				prettier: true,
-				...(options.vue && { extensions: ['.ts', '.tsx', '.vue'] }),
 			})
 
 		const prettierConfig: PrettierOptions['settings'] = {
@@ -64,22 +53,6 @@ class LintConfig extends Component {
 		})
 
 		this.eslintFile = project.tryFindObjectFile('.eslintrc.json')!
-
-		if (options.vue) {
-			this.eslintFile.addOverride('parser', 'vue-eslint-parser')
-			this.eslintFile.addOverride(
-				'parserOptions.parser',
-				'@typescript-eslint/parser'
-			)
-			this.eslintFile.addOverride('settings.import/parsers.vue-eslint-parser', [
-				'.vue',
-			])
-			project.addDevDeps('eslint-plugin-vue')
-			this.eslint.addExtends('plugin:vue/vue3-recommended')
-			this.eslint.eslintTask.reset(
-				this.eslint.eslintTask.steps[0]!.exec!.replace('.tsx', '.tsx,.vue')
-			)
-		}
 	}
 }
 

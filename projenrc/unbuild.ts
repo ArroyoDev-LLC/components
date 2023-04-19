@@ -6,6 +6,7 @@ import {
 	TypeScriptSourceFile,
 	TypeScriptSourceFileTransform,
 } from './typescript-source-file.ts'
+import { addPropertyAssignmentsFromObject } from './utils.ts'
 
 export interface UnBuildOptions {
 	options?: UnBuildBuildConfig
@@ -19,7 +20,7 @@ export class UnBuild extends Component {
 
 	readonly options: UnBuildBuildConfig
 
-	file: TypeScriptSourceFile
+	readonly file: TypeScriptSourceFile
 
 	constructor(
 		public readonly project: TypeScriptProject,
@@ -56,13 +57,7 @@ export class UnBuild extends Component {
 
 		// add build options
 		this.addConfigTransform((configExpr) => {
-			configExpr.addPropertyAssignments(
-				Object.entries(this.options).map(([key, value]) => ({
-					name: key,
-					initializer:
-						typeof value === 'string' ? `'${value}'` : value.toString(),
-				}))
-			)
+			addPropertyAssignmentsFromObject(configExpr, this.options)
 		})
 	}
 

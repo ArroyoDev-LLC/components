@@ -77,7 +77,10 @@
       "description": "Run tests",
       "steps": [
         {
-          "spawn": "eslint"
+          "exec": "vitest",
+          "args": [
+            "--run"
+          ]
         }
       ]
     },

@@ -55,19 +55,12 @@
     },
     {
       "name": "typescript",
+      "version": "^5",
       "type": "build"
     },
     {
       "name": "unbuild",
       "type": "build"
-    },
-    {
-      "name": "vitest",
-      "type": "build"
-    },
-    {
-      "name": "eslint-plugin-vue",
-      "type": "devenv"
     },
     {
       "name": "@vue/runtime-dom",

@@ -29,13 +29,16 @@
     "target": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
+    "emitDeclarationOnly": true,
     "allowImportingTsExtensions": true,
     "allowArbitraryExtensions": true,
     "verbatimModuleSyntax": true
   },
   "include": [
     "src/**/*.ts",
-    "env.d.ts",
+    "build.config.ts",
+    "*.d.ts",
+    "src/*.vue",
     "src/**/*.vue"
   ],
   "exclude": []

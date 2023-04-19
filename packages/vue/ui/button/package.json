@@ -27,9 +27,8 @@
     "prettier": "^2.8.7",
     "rollup": "*",
     "rollup-plugin-vue": "^6.0.0",
-    "typescript": "^5.0.4",
-    "unbuild": "*",
-    "vitest": "^0.30.1"
+    "typescript": "^5",
+    "unbuild": "*"
   },
   "dependencies": {
     "@arroyodev-llc/components.vue.ui.text": "0.0.0",

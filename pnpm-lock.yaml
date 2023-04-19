@@ -5,7 +5,7 @@ overrides:
 
 patchedDependencies:
   projen@0.71.7:
-    hash: x3fvdxieqmad4ty6fki23wty3u
+    hash: jzltoxhjc247xjs65hcn6sqe3m
     path: patches/projen@0.71.7.patch
 
 importers:
@@ -14,13 +14,13 @@ importers:
     dependencies:
       aws-cdk-lib:
         specifier: ^2.75.0
-        version: 2.75.0(constructs@10.1.314)
+        version: 2.75.0(constructs@10.2.0)
       cdk-nag:
         specifier: ^2.25.15
-        version: 2.25.15(aws-cdk-lib@2.75.0)(constructs@10.1.314)
+        version: 2.25.15(aws-cdk-lib@2.75.0)(constructs@10.2.0)
       constructs:
-        specifier: ^10.1.314
-        version: 10.1.314
+        specifier: ^10.2.0
+        version: 10.2.0
     devDependencies:
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.15.5
@@ -51,7 +51,7 @@ importers:
         version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
       '@vitejs/plugin-vue':
         specifier: ^4.1.0
-        version: 4.1.0(vite@4.2.1)(vue@3.2.47)
+        version: 4.1.0(vite@4.2.2)(vue@3.2.47)
       eslint:
         specifier: ^8
         version: 8.38.0
@@ -84,7 +84,7 @@ importers:
         version: 2.8.7
       projen:
         specifier: 0.71.7
-        version: 0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u)
+        version: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -110,8 +110,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       vite:
-        specifier: ^4.2.1
-        version: 4.2.1(@types/node@16.0.0)
+        specifier: ^4.2.2
+        version: 4.2.2(@types/node@16.0.0)
       vitest:
         specifier: ^0.30.1
         version: 0.30.1
@@ -168,14 +168,11 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
       typescript:
-        specifier: ^5.0.4
+        specifier: ^5
         version: 5.0.4
       unbuild:
         specifier: '*'
         version: 1.2.1
-      vitest:
-        specifier: ^0.30.1
-        version: 0.30.1
 
   packages/vue/ui/text:
     dependencies:
@@ -223,14 +220,11 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
       typescript:
-        specifier: ^5.0.4
+        specifier: ^5
         version: 5.0.4
       unbuild:
         specifier: '*'
         version: 1.2.1
-      vitest:
-        specifier: ^0.30.1
-        version: 0.30.1
 
 packages:
 
@@ -263,7 +257,7 @@ packages:
       '@nrwl/devkit': 15.9.2(nx@15.9.2)
       '@pnpm/reviewing.dependencies-hierarchy': 2.0.3(@pnpm/logger@5.0.0)
       fs-extra: 10.1.0
-      projen: 0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u)
+      projen: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
       semver: 4.3.6
     transitivePeerDependencies:
       - '@pnpm/logger'
@@ -838,7 +832,7 @@ packages:
     dependencies:
       '@jsii/spec': 1.80.0
       '@ungap/structured-clone': 1.0.2
-      projen: 0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u)
+      projen: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -1668,14 +1662,14 @@ packages:
     resolution: {integrity: sha512-06PHwE0K24Wi8FBmC8MuMi/+nQ3DTpcXYL3y/IaZz2ScY2GOJXOe8fyMykVXyLOKxpL2Y0frAnJZmm65OxzMLQ==}
     dev: true
 
-  /@vitejs/plugin-vue@4.1.0(vite@4.2.1)(vue@3.2.47):
+  /@vitejs/plugin-vue@4.1.0(vite@4.2.2)(vue@3.2.47):
     resolution: {integrity: sha512-++9JOAFdcXI3lyer9UKUV4rfoQ3T1RN8yDqoCLar86s0xQct5yblxAE+yWgRnU5/0FOlVCpTZpYSBV/bGWrSrQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.2.1(@types/node@16.0.0)
+      vite: 4.2.2(@types/node@16.0.0)
       vue: 3.2.47
     dev: true
 
@@ -2048,7 +2042,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /aws-cdk-lib@2.75.0(constructs@10.1.314):
+  /aws-cdk-lib@2.75.0(constructs@10.2.0):
     resolution: {integrity: sha512-lFMrRJPt5TDRm4PGllo0aFcSi8nHzs0mZbYUF/lnMc15ORroV8Iv38U1I0CHiZwWO/QtLuxIzEXWA5hSbgpKzw==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -2059,7 +2053,7 @@ packages:
       '@aws-cdk/asset-node-proxy-agent-v5': 2.0.115
       '@balena/dockerignore': 1.0.2
       case: 1.6.3
-      constructs: 10.1.314
+      constructs: 10.2.0
       fs-extra: 9.1.0
       ignore: 5.2.4
       jsonschema: 1.4.1
@@ -2287,14 +2281,14 @@ packages:
     resolution: {integrity: sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==}
     engines: {node: '>= 0.8.0'}
 
-  /cdk-nag@2.25.15(aws-cdk-lib@2.75.0)(constructs@10.1.314):
+  /cdk-nag@2.25.15(aws-cdk-lib@2.75.0)(constructs@10.2.0):
     resolution: {integrity: sha512-Dv2AIQLF2KreA4SId7Q0M7N3JjuM4INNZpPVuArN3gHnVAF/IyJXydc456t9LRy6ThgZDIJ07zcwUQpz4rgiRg==}
     peerDependencies:
       aws-cdk-lib: ^2.45.0
       constructs: ^10.0.5
     dependencies:
-      aws-cdk-lib: 2.75.0(constructs@10.1.314)
-      constructs: 10.1.314
+      aws-cdk-lib: 2.75.0(constructs@10.2.0)
+      constructs: 10.2.0
     dev: false
 
   /chai@4.3.7:
@@ -2483,7 +2477,7 @@ packages:
       js-string-escape: 1.0.1
       lodash: 4.17.21
       md5-hex: 3.0.1
-      semver: 7.4.0
+      semver: 7.5.0
       well-known-symbols: 2.0.0
     dev: true
 
@@ -2513,8 +2507,8 @@ packages:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: true
 
-  /constructs@10.1.314:
-    resolution: {integrity: sha512-wqQn0tuwYmj7tl/nSfnlw/1uaBcFDhjSe6UMVvxwGwXyAg/ZUqpiWFbrojxPqDOAQPCNEj8LjL7IH1SPioa6kg==}
+  /constructs@10.2.0:
+    resolution: {integrity: sha512-munA1Apb03wt9FVNCgDxKYLYPVJBSAKA7xyHcMq/lznZ4Jr53oDk0zFxPQWDksCoNiTz0hiFFhJPuGsBaZlgcg==}
     engines: {node: '>= 14.17.0'}
     dev: false
 
@@ -5218,7 +5212,7 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /projen@0.71.7(patch_hash=x3fvdxieqmad4ty6fki23wty3u):
+  /projen@0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m):
     resolution: {integrity: sha512-pkOPyYWKA2X5lg7n2IXM36PMcHz9Vts1r9Z/rna7D4ep4mjg1xwbESIEGtbX1W03OMwkQrnPpvLZbc0JnTMC4g==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
@@ -6428,7 +6422,7 @@ packages:
       mlly: 1.2.0
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.2.1(@types/node@16.0.0)
+      vite: 4.2.2(@types/node@16.0.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -6439,8 +6433,8 @@ packages:
       - terser
     dev: true
 
-  /vite@4.2.1(@types/node@16.0.0):
-    resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
+  /vite@4.2.2(@types/node@16.0.0):
+    resolution: {integrity: sha512-PcNtT5HeDxb3QaSqFYkEum8f5sCVe0R3WK20qxgIvNBZPXU/Obxs/+ubBMeE7nLWeCo2LDzv+8hRYSlcaSehig==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -6527,7 +6521,7 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.4.0
       tinypool: 0.4.0
-      vite: 4.2.1(@types/node@16.0.0)
+      vite: 4.2.2(@types/node@16.0.0)
       vite-node: 0.30.1(@types/node@16.0.0)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:

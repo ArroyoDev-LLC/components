@@ -15,10 +15,10 @@
     "ecmaVersion": 2018,
     "sourceType": "module",
     "project": "./tsconfig.dev.json",
+    "parser": "@typescript-eslint/parser",
     "extraFileExtensions": [
       ".vue"
-    ],
-    "parser": "@typescript-eslint/parser"
+    ]
   },
   "extends": [
     "plugin:import/typescript",

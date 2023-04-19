@@ -130,6 +130,17 @@
   "overrides": [
     {
       "files": [
+        "vitest.config.ts",
+        "test"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "off"
+        ]
+      }
+    },
+    {
+      "files": [
         ".projenrc.ts"
       ],
       "rules": {

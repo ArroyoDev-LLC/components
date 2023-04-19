@@ -39,5 +39,6 @@ jspm_packages/
 !/.prettierignore
 !/.prettierrc.json
 !/build.config.ts
+!/vitest.config.ts
 !/env.d.ts
 !/tsconfig.dev.json

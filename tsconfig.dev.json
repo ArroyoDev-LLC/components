@@ -37,6 +37,7 @@
     "src/**/*.ts",
     "test/**/*.ts",
     "**/*.ts",
+    "vitest.config.ts",
     ".projenrc.ts",
     "projenrc/**/*.ts"
   ],

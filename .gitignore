@@ -47,5 +47,7 @@ jspm_packages/
 .idea
 .idea/**
 !/.ncurc.json
+!/vitest.config.ts
+!/vitest.workspace.json
 !/pnpm-workspace.yaml
 !/renovate.json5

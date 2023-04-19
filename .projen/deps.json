@@ -17,6 +17,10 @@
       "type": "build"
     },
     {
+      "name": "@sindresorhus/is",
+      "type": "build"
+    },
+    {
       "name": "@types/fs-extra",
       "type": "build"
     },

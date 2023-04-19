@@ -2,6 +2,7 @@ import * as nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
 import { javascript, JsonFile, LogLevel } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import LintConfig from './projenrc/lint-config'
+import { Vitest, VitestConfigType } from './projenrc/vitest.ts'
 import { VueComponent } from './projenrc/vue'
 
 const monorepo = new nx_monorepo.NxMonorepoProject({
@@ -63,6 +64,7 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 		'@types/fs-extra',
 		'@mrgrain/jsii-struct-builder',
 		'ts-morph',
+		'@sindresorhus/is',
 	],
 })
 new LintConfig(monorepo)
@@ -85,6 +87,15 @@ new JsonFile(monorepo, '.ncurc.json', {
 	allowComments: false,
 	obj: {
 		reject: ['projen'],
+	},
+})
+
+new Vitest(monorepo, {
+	configType: VitestConfigType.WORKSPACE,
+	settings: {
+		test: {
+			threads: true,
+		},
 	},
 })
 

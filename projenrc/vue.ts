@@ -14,6 +14,7 @@ import LintConfig from './lint-config.ts'
 import { TypeScriptSourceFile } from './typescript-source-file.ts'
 import { UnBuild } from './unbuild.ts'
 import { applyOverrides } from './utils.ts'
+import { Vitest, VitestConfigType } from './vitest.ts'
 
 const vueTsConfig: TypescriptConfigOptions = {
 	compilerOptions: {
@@ -50,6 +51,7 @@ export class Vue extends Component {
 			.applyTsShims()
 			.applyTsConfig(this.project.tsconfig)
 			.applyUnBuild(UnBuild.of(this.project))
+			.applyVitest(Vitest.of(this.project))
 	}
 
 	applyPackage(): this {
@@ -156,6 +158,27 @@ export class Vue extends Component {
 		})
 		return this
 	}
+
+	applyVitest(component?: Vitest): this {
+		if (!component) return this
+		this.project.addDevDeps(
+			'@vitejs/plugin-vue',
+			'happy-dom',
+			'@vue/test-utils',
+			'faker'
+		)
+		component.configFile.addImport({
+			moduleSpecifier: '@vitejs/plugin-vue',
+			defaultImport: 'vue',
+		})
+		component.addConfigTransform((configExpr) => {
+			configExpr.addPropertyAssignment({
+				name: 'plugins',
+				initializer: '[vue()]',
+			})
+		})
+		return this
+	}
 }
 
 export class VueComponent extends typescript.TypeScriptProject {
@@ -181,6 +204,16 @@ export class VueComponent extends typescript.TypeScriptProject {
 		new LintConfig(this)
 		new UnBuild(this, {
 			options: { name: defaultPackageName, declaration: true },
+		})
+		new Vitest(this, {
+			configType: VitestConfigType.PROJECT,
+			settings: {
+				test: {
+					name: this.name,
+					environment: 'happy-dom',
+					include: [`${this.testdir}/\*\*/\*.spec.ts`],
+				},
+			},
 		})
 
 		this.tasks.removeTask('build')

@@ -17,6 +17,7 @@ export interface TypeScriptSourceFileOptions
 	source: string
 	format?: boolean
 	marker?: boolean
+	recreate?: boolean
 	transforms?: Array<TypeScriptSourceFileTransform>
 }
 
@@ -67,9 +68,18 @@ export class TypeScriptSourceFile extends FileBase {
 			skipAddingFilesFromTsConfig: true,
 		})
 
-		let sourceFile =
-			tsProject.addSourceFileAtPathIfExists(this.filePath) ??
-			tsProject.createSourceFile(this.filePath, this.options.source)
+		let sourceFile: SourceFile
+		if (this.options.recreate) {
+			sourceFile = tsProject.createSourceFile(
+				this.filePath,
+				this.options.source,
+				{ overwrite: true }
+			)
+		} else {
+			sourceFile =
+				tsProject.addSourceFileAtPathIfExists(this.filePath) ??
+				tsProject.createSourceFile(this.filePath, this.options.source)
+		}
 
 		if (this.transforms.length > 0) {
 			this.transforms.forEach((transform) => transform(sourceFile))

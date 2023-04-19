@@ -78,12 +78,22 @@ export class Vue extends Component {
 		tsconfig.addInclude(`${this.project.srcdir}/*.vue`)
 		tsconfig.addInclude(`${this.project.srcdir}/**/*.vue`)
 		applyOverrides(tsconfig.file, vueTsConfig)
+		const devFiles = {
+			include: this.project.tsconfigDev.include.slice(),
+			exclude: this.project.tsconfigDev.exclude.slice(),
+		}
 		this.project.tryRemoveFile('tsconfig.dev.json')
+		const uniqArray = (array: string[]) => Array.from(new Set(array))
 		this.tsconfigDev = new TypescriptConfig(this.project, {
 			fileName: 'tsconfig.dev.json',
 			extends: TypescriptConfigExtends.fromTypescriptConfigs([tsconfig]),
-			exclude: ['node_modules'],
-			include: [...tsconfig.include, 'build.config.json', 'test/*.ts'],
+			exclude: uniqArray([...devFiles.exclude, 'node_modules']),
+			include: uniqArray([
+				...tsconfig.include,
+				...devFiles.include,
+				'build.config.json',
+				'test/*.ts',
+			]),
 			compilerOptions: {},
 		})
 		return this
@@ -149,7 +159,6 @@ export class Vue extends Component {
 }
 
 export class VueComponent extends typescript.TypeScriptProject {
-	public readonly tsconfigDev: TypescriptConfig
 	constructor(options: VueComponentOptions) {
 		const { name } = options
 		const namePath = name.split('.').join('/')
@@ -178,7 +187,6 @@ export class VueComponent extends typescript.TypeScriptProject {
 		this.tasks.addTask('build', { exec: 'unbuild' })
 		this.tasks.tryFind('test')!.reset('vitest', { args: ['--run'] })
 
-		const vue = new Vue(this)
-		this.tsconfigDev = vue.tsconfigDev
+		new Vue(this)
 	}
 }

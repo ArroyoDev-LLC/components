@@ -1,14 +1,23 @@
 import { buildExecutableCommand } from '@aws-prototyping-sdk/nx-monorepo'
 import { FileBase, FileBaseOptions, typescript } from 'projen'
 import { execCapture } from 'projen/lib/util'
-import { Project, SourceFile } from 'ts-morph'
+import {
+	ImportDeclarationStructure,
+	OptionalKind,
+	Project,
+	SourceFile,
+} from 'ts-morph'
 
-interface TypeScriptSourceFileOptions
+export interface TypeScriptSourceFileTransform {
+	(sourceFile: SourceFile): void
+}
+
+export interface TypeScriptSourceFileOptions
 	extends Omit<FileBaseOptions, 'readonly'> {
 	source: string
-	transformer?: (sourcefile: SourceFile) => void
 	format?: boolean
 	marker?: boolean
+	transforms?: Array<TypeScriptSourceFileTransform>
 }
 
 /**
@@ -17,6 +26,7 @@ interface TypeScriptSourceFileOptions
  */
 export class TypeScriptSourceFile extends FileBase {
 	public readonly options: TypeScriptSourceFileOptions
+	#transforms: Array<TypeScriptSourceFileTransform>
 
 	constructor(
 		public readonly project: typescript.TypeScriptProject,
@@ -25,6 +35,8 @@ export class TypeScriptSourceFile extends FileBase {
 	) {
 		super(project, filePath, { ...options, readonly: false })
 
+		this.#transforms = options.transforms ?? []
+
 		this.options = {
 			format: true,
 			marker: true,
@@ -32,25 +44,36 @@ export class TypeScriptSourceFile extends FileBase {
 		}
 	}
 
+	get transforms(): Array<TypeScriptSourceFileTransform> {
+		return this.#transforms.slice()
+	}
+
+	addTransformer(transformer: TypeScriptSourceFileTransform): this {
+		this.#transforms.push(transformer)
+		return this
+	}
+
+	addImport(...imports: Array<OptionalKind<ImportDeclarationStructure>>): this {
+		const transform: TypeScriptSourceFileTransform = (sourceFile) => {
+			sourceFile.addImportDeclarations(imports.slice())
+		}
+		this.addTransformer(transform)
+		return this
+	}
+
 	protected synthesizeContent(): string {
 		const tsProject = new Project({
 			tsConfigFilePath: 'tsconfig.json',
 			skipAddingFilesFromTsConfig: true,
-			// addFilesFromTsConfig: false,
 		})
 
-		// const sourceFile = tsProject.createSourceFile(filePath, this.options.source)!
-		let sourceFile = tsProject.addSourceFileAtPathIfExists(this.filePath)
-		if (!sourceFile) {
-			sourceFile = tsProject.createSourceFile(
-				this.filePath,
-				this.options.source
-			)
-		}
-		// const sourceFile = tsProject.createSourceFile(, this.options.source)
+		let sourceFile =
+			tsProject.addSourceFileAtPathIfExists(this.filePath) ??
+			tsProject.createSourceFile(this.filePath, this.options.source)
 
-		if (this.options.transformer) {
-			this.options.transformer(sourceFile)
+		if (this.transforms.length > 0) {
+			this.transforms.forEach((transform) => transform(sourceFile))
+			sourceFile = sourceFile.fixMissingImports().organizeImports()
 		}
 
 		return [
@@ -72,7 +95,7 @@ export class TypeScriptSourceFile extends FileBase {
 			execCapture(cmd, {
 				cwd: outdir,
 			})
-		} catch(e) {
+		} catch (e) {
 			console.warn(e)
 		}
 	}

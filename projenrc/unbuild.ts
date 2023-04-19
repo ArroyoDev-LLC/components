@@ -1,12 +1,13 @@
 import { Component, DependencyType } from 'projen'
-import { ModuleImports } from 'projen/lib/javascript/render-options'
 import { TypeScriptProject } from 'projen/lib/typescript'
-import { SyntaxKind } from 'ts-morph'
+import { ObjectLiteralExpression, SourceFile, SyntaxKind } from 'ts-morph'
 import { BuildConfig as UnBuildBuildConfig } from 'unbuild'
-import { TypeScriptSourceFile } from './typescript-source-file.ts'
+import {
+	TypeScriptSourceFile,
+	TypeScriptSourceFileTransform,
+} from './typescript-source-file.ts'
 
 export interface UnBuildOptions {
-	vue?: boolean
 	options?: UnBuildBuildConfig
 }
 
@@ -16,7 +17,6 @@ export class UnBuild extends Component {
 		return project.components.find(isUnBuild)
 	}
 
-	readonly vue: boolean
 	readonly options: UnBuildBuildConfig
 
 	file: TypeScriptSourceFile
@@ -26,10 +26,9 @@ export class UnBuild extends Component {
 		options: UnBuildOptions = {}
 	) {
 		super(project)
-		this.vue = options.vue ?? false
 		this.options = options.options ?? {}
 		this.project.deps.addDependency('unbuild', DependencyType.BUILD)
-		this.project.tsconfigDev.addInclude('build.config.ts')
+		this.project.tsconfig!.addInclude('build.config.ts')
 		this.project.eslint!.addOverride({
 			files: ['build.config.ts'],
 			rules: {
@@ -37,57 +36,50 @@ export class UnBuild extends Component {
 			},
 		})
 
-		const unbuildImports = new ModuleImports()
-		unbuildImports.add('unbuild', 'defineBuildConfig')
-		unbuildImports.add('unbuild', 'type BuildConfig')
-		const imports = []
-		if (this.vue) {
-			unbuildImports.add('unbuild', 'type BuildContext')
-			unbuildImports.add('rollup', 'type RollupOptions')
-			imports.push(`import vue from 'rollup-plugin-vue'`)
-			this.project.deps.addDependency('rollup', DependencyType.BUILD)
-			this.project.deps.addDependency('rollup-plugin-vue', DependencyType.BUILD)
-		}
-		imports.unshift(unbuildImports.asEsmImports().join('\n'))
-
-		const source = `${imports.join('\n')}
-
-const config: BuildConfig = {}
-export default defineBuildConfig(config)`
+		const source = [
+			`const config: BuildConfig = {}`,
+			`export default defineBuildConfig(config)`,
+		].join('\n')
 
 		this.file = new TypeScriptSourceFile(project, 'build.config.ts', {
 			source,
-			transformer: (sourceFile) => {
-				const cfgNode = sourceFile.getVariableDeclarationOrThrow('config')
-				const configExpr = cfgNode.getInitializerIfKindOrThrow(
-					SyntaxKind.ObjectLiteralExpression
-				)
-				configExpr.addPropertyAssignments(
-					Object.entries(this.options).map(([key, value]) => ({
-						name: key,
-						initializer:
-							typeof value === 'string' ? `'${value}'` : value.toString(),
-					}))
-				)
-				if (this.vue) {
-					const hooksExpr = configExpr.addPropertyAssignment({
-						name: 'hooks',
-						initializer: '{}',
-					})
-					const hooksExprInit = hooksExpr.getInitializerIfKindOrThrow(
-						SyntaxKind.ObjectLiteralExpression
-					)
-					hooksExprInit.addPropertyAssignment({
-						name: `'rollup:options'`,
-						initializer: `(ctx: BuildContext, options: RollupOptions) => {
-							// @ts-expect-error ignore rollup.
-							options.plugins.push(vue())
-						}`,
-					})
-				}
-			},
 		})
 
+		this.file.addImport({
+			moduleSpecifier: 'unbuild',
+			namedImports: [
+				'defineBuildConfig',
+				{ name: 'BuildContext', isTypeOnly: true },
+				{ name: 'BuildConfig', isTypeOnly: true },
+			],
+		})
+
+		// add build options
+		this.addConfigTransform((configExpr) => {
+			configExpr.addPropertyAssignments(
+				Object.entries(this.options).map(([key, value]) => ({
+					name: key,
+					initializer:
+						typeof value === 'string' ? `'${value}'` : value.toString(),
+				}))
+			)
+		})
 	}
 
+	addConfigTransform(
+		transform: (
+			configObjectLiteral: ObjectLiteralExpression,
+			sourceFile: SourceFile
+		) => void
+	) {
+		const transformer: TypeScriptSourceFileTransform = (src: SourceFile) => {
+			const cfgNode = src.getVariableDeclarationOrThrow('config')
+			const configExpr = cfgNode.getInitializerIfKindOrThrow(
+				SyntaxKind.ObjectLiteralExpression
+			)
+			transform(configExpr, src)
+		}
+		this.file.addTransformer(transformer)
+		return this
+	}
 }

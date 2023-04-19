@@ -2,7 +2,7 @@ import * as nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
 import { javascript, JsonFile, LogLevel } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import LintConfig from './projenrc/lint-config'
-import { VueComponent } from './projenrc/vue.ts'
+import { VueComponent } from './projenrc/vue'
 
 const monorepo = new nx_monorepo.NxMonorepoProject({
 	authorEmail: 'support@arroyodev.com',

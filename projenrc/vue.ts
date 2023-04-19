@@ -1,16 +1,25 @@
-import { DependencyType, javascript, TextFile, typescript } from 'projen'
+import { Component, DependencyType, javascript, typescript } from 'projen'
 import {
+	TypescriptConfig,
+	TypescriptConfigExtends,
 	TypescriptConfigOptions,
 	TypeScriptModuleResolution,
 } from 'projen/lib/javascript'
-import { TypeScriptProjectOptions } from 'projen/lib/typescript'
+import {
+	TypeScriptProject,
+	TypeScriptProjectOptions,
+} from 'projen/lib/typescript'
+import { SyntaxKind } from 'ts-morph'
 import LintConfig from './lint-config.ts'
+import { TypeScriptSourceFile } from './typescript-source-file.ts'
 import { UnBuild } from './unbuild.ts'
+import { applyOverrides } from './utils.ts'
 
 const vueTsConfig: TypescriptConfigOptions = {
 	compilerOptions: {
 		skipLibCheck: true,
 		moduleResolution: TypeScriptModuleResolution.BUNDLER,
+		emitDeclarationOnly: true,
 		allowImportingTsExtensions: true,
 		allowArbitraryExtensions: true,
 		verbatimModuleSyntax: true,
@@ -25,7 +34,122 @@ interface VueComponentOptions
 	defaultReleaseBranch?: string
 }
 
+export class Vue extends Component {
+	public static of(project: TypeScriptProject): Vue | undefined {
+		const isVue = (o: Component): o is Vue => o instanceof Vue
+		return project.components.find(isVue)
+	}
+
+	tsconfigDev!: TypescriptConfig
+
+	constructor(public readonly project: TypeScriptProject) {
+		super(project)
+
+		this.applyPackage()
+			.applyLintConfig(LintConfig.of(this.project))
+			.applyTsShims()
+			.applyTsConfig(this.project.tsconfig)
+			.applyUnBuild(UnBuild.of(this.project))
+	}
+
+	applyPackage(): this {
+		this.project.addDeps('vue', '@vue/runtime-dom')
+		return this
+	}
+
+	applyTsShims(): this {
+		const source = [
+			`declare module "*.vue" {`,
+			`	import { DefineComponent } from "vue"`,
+			`	// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types`,
+			`	const component: DefineComponent<{}, {}, any>`,
+			`	export default component`,
+			`}`,
+		]
+		new TypeScriptSourceFile(this.project, 'env.d.ts', {
+			source: source.join('\n'),
+		})
+		return this
+	}
+
+	applyTsConfig(tsconfig?: TypescriptConfig): this {
+		if (!tsconfig) return this
+		tsconfig.addInclude('*.d.ts')
+		tsconfig.addInclude(`${this.project.srcdir}/*.vue`)
+		tsconfig.addInclude(`${this.project.srcdir}/**/*.vue`)
+		applyOverrides(tsconfig.file, vueTsConfig)
+		this.project.tryRemoveFile('tsconfig.dev.json')
+		this.tsconfigDev = new TypescriptConfig(this.project, {
+			fileName: 'tsconfig.dev.json',
+			extends: TypescriptConfigExtends.fromTypescriptConfigs([tsconfig]),
+			exclude: ['node_modules'],
+			include: [...tsconfig.include, 'build.config.json', 'test/*.ts'],
+			compilerOptions: {},
+		})
+		return this
+	}
+
+	applyLintConfig(component?: LintConfig): this {
+		if (!component) return this
+		this.project.addDevDeps('eslint-plugin-vue')
+		component.eslint.addPlugins('eslint-plugin-vue')
+		component.eslint.addExtends('plugin:vue/vue3-recommended')
+		applyOverrides(component.eslintFile, {
+			parser: 'vue-eslint-parser',
+			'parserOptions.parser': '@typescript-eslint/parser',
+			'parserOptions.extraFileExtensions': ['.vue'],
+			'settings.import/parsers.vue-eslint-parser': ['.vue'],
+		})
+		component.eslint.eslintTask.reset(
+			component.eslint.eslintTask.steps[0]!.exec!.replace('.tsx', '.tsx,.vue')
+		)
+		return this
+	}
+
+	applyUnBuild(component?: UnBuild): this {
+		if (!component) return this
+		this.tsconfigDev.addInclude(component.file.filePath)
+		this.project.deps.addDependency('rollup', DependencyType.BUILD)
+		this.project.deps.addDependency('rollup-plugin-vue', DependencyType.BUILD)
+		component.file.addImport({
+			moduleSpecifier: 'rollup-plugin-vue',
+			defaultImport: 'vue',
+		})
+		component.file.addImport({
+			moduleSpecifier: 'rollup',
+			namedImports: ['RollupOptions'],
+			isTypeOnly: true,
+		})
+		component.addConfigTransform((configExpr) => {
+			const existingHooks = configExpr
+				.getProperty('hooks')
+				?.asKind?.(SyntaxKind.PropertyAssignment)
+				?.getInitializer?.()
+			const hooksExpr = configExpr.addPropertyAssignment({
+				name: 'hooks',
+				initializer: existingHooks?.getText?.() ?? '{}',
+			})
+			const hooksInit = hooksExpr.getInitializerIfKindOrThrow(
+				SyntaxKind.ObjectLiteralExpression
+			)
+			hooksInit.addMethod({
+				name: "'rollup:options'",
+				parameters: [
+					{ name: '_', type: 'BuildContext' },
+					{ name: 'options', type: 'RollupOptions' },
+				],
+				statements: [
+					`// @ts-expect-error ignore rollup options.`,
+					`options.plugins.push(vue())`,
+				],
+			})
+		})
+		return this
+	}
+}
+
 export class VueComponent extends typescript.TypeScriptProject {
+	public readonly tsconfigDev: TypescriptConfig
 	constructor(options: VueComponentOptions) {
 		const { name } = options
 		const namePath = name.split('.').join('/')
@@ -33,7 +157,6 @@ export class VueComponent extends typescript.TypeScriptProject {
 		const defaultPackageName = `@arroyodev-llc/components.${name}`
 		super({
 			defaultReleaseBranch: 'main',
-			tsconfig: vueTsConfig,
 			packageManager: javascript.NodePackageManager.PNPM,
 			pnpmVersion: '8',
 			outdir: defaultOutDir,
@@ -43,36 +166,19 @@ export class VueComponent extends typescript.TypeScriptProject {
 			libdir: 'dist',
 			entrypoint: 'dist/index.mjs',
 			entrypointTypes: 'dist/index.d.ts',
+			typescriptVersion: '^5',
 			...options,
 		})
-
-		new LintConfig(this, { vue: true })
-
+		new LintConfig(this)
 		new UnBuild(this, {
-			vue: true,
 			options: { name: defaultPackageName, declaration: true },
 		})
-		new TextFile(this, 'env.d.ts', {
-			readonly: true,
-			marker: true,
-			lines: `declare module "*.vue" {
-  import { DefineComponent } from "vue";
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-types
-  const component: DefineComponent<{}, {}, any>;
-  export default component;
-}`.split('\n'),
-		})
 
-		this.addDeps('vue', '@vue/runtime-dom')
-		this.addDevDeps('typescript', 'vitest')
-
-		this.deps.addDependency('eslint-plugin-vue', DependencyType.DEVENV)
-		this.eslint!.addPlugins('eslint-plugin-vue')
-		this.eslint!.config.parserOptions.extraFileExtensions = ['.vue']
-		this.tsconfig!.addInclude('env.d.ts')
-		this.tsconfig!.addInclude('src/**/*.vue')
-		this.tsconfigDev!.addInclude('src/**/*.vue')
 		this.tasks.removeTask('build')
 		this.tasks.addTask('build', { exec: 'unbuild' })
+		this.tasks.tryFind('test')!.reset('vitest', { args: ['--run'] })
+
+		const vue = new Vue(this)
+		this.tsconfigDev = vue.tsconfigDev
 	}
 }

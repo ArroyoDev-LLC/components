@@ -75,26 +75,6 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 })
 new LintConfig(monorepo)
 
-const gh = github.GitHub.of(monorepo)
-const autoApprove = gh.tryFindWorkflow('auto-approve')!
-const approveJob = autoApprove.getJob('approve')! as github.workflows.Job
-
-autoApprove.updateJob('approve', {
-	name: approveJob.name!,
-	runsOn: approveJob.runsOn,
-	permissions: approveJob.permissions!,
-	if: approveJob.if!,
-	steps: [
-		...arroyoBot.setupSteps,
-		{
-			uses: 'hmarr/auto-approve-action@v2.2.1',
-			with: {
-				'github-token': arroyoBot.tokenRef,
-			},
-		},
-	],
-})
-
 monorepo.gitignore.exclude('.idea', '.idea/**')
 monorepo.defaultTask.reset('tsx .projenrc.ts')
 monorepo.tsconfig.addInclude('**/*.ts')

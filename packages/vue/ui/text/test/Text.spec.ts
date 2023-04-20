@@ -10,7 +10,7 @@ describe('Text', () => {
   });
 
   it.each([1, 2, 3, 4, 5, 6, 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'])('renders all variants as expected.', async (variant) => {
-    const mnt = mount(Text, { props: { variant }, slots: {default: 'Hi'}  });
+    const mnt = mount(Text, { props: { variant }, slots: { default: 'Hi' } });
     expect(mnt.element).toMatchSnapshot();
   });
 

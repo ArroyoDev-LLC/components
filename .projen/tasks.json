@@ -180,14 +180,6 @@
         }
       ]
     },
-    "prepare": {
-      "name": "prepare",
-      "steps": [
-        {
-          "spawn": "workspace:bin:link"
-        }
-      ]
-    },
     "run-many": {
       "name": "run-many",
       "description": "Run task against multiple workspace projects",
@@ -291,9 +283,6 @@
           "receiveArgs": true
         }
       ]
-    },
-    "workspace:bin:link": {
-      "name": "workspace:bin:link"
     }
   },
   "env": {

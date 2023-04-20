@@ -5,6 +5,11 @@ import LintConfig from './projenrc/lint-config'
 import { Vitest, VitestConfigType } from './projenrc/vitest'
 import { VueComponent } from './projenrc/vue'
 
+const arroyoBot = github.GithubCredentials.fromApp({
+	appIdSecret: 'AD_BOT_APP_ID',
+	privateKeySecret: 'AD_BOT_PRIVATE_KEY',
+})
+
 const monorepo = new nx_monorepo.NxMonorepoProject({
 	authorEmail: 'support@arroyodev.com',
 	authorName: 'arroyoDev',
@@ -20,23 +25,16 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 	githubOptions: {
 		mergify: true,
 		workflows: true,
-		projenCredentials: github.GithubCredentials.fromApp({
-			appIdSecret: 'AD_BOT_APP_ID',
-			privateKeySecret: 'AD_BOT_PRIVATE_KEY',
-		}),
+		projenCredentials: arroyoBot,
 	},
-	projenCommand: nx_monorepo.buildExecutableCommand(
-		javascript.NodePackageManager.PNPM,
-		'projen'
-	),
+	autoApproveUpgrades: true,
+	autoApproveOptions: {
+		allowedUsernames: ['github-actions[bot]', 'arroyobot[bot]'],
+	},
 	prettier: true,
 	projenrcTs: true,
 	renovatebot: true,
 	gitignore: ['/.idea', '.idea'],
-	workspaceConfig: {
-		linkLocalWorkspaceBins: true,
-	},
-
 	logging: {
 		level: LogLevel.DEBUG,
 		usePrefix: true,
@@ -76,6 +74,26 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 	],
 })
 new LintConfig(monorepo)
+
+const gh = github.GitHub.of(monorepo)
+const autoApprove = gh.tryFindWorkflow('auto-approve')!
+const approveJob = autoApprove.getJob('approve')! as github.workflows.Job
+
+autoApprove.updateJob('approve', {
+	name: approveJob.name!,
+	runsOn: approveJob.runsOn,
+	permissions: approveJob.permissions!,
+	if: approveJob.if!,
+	steps: [
+		...arroyoBot.setupSteps,
+		{
+			uses: 'hmarr/auto-approve-action@v2.2.1',
+			with: {
+				'github-token': arroyoBot.tokenRef,
+			},
+		},
+	],
+})
 
 monorepo.gitignore.exclude('.idea', '.idea/**')
 monorepo.defaultTask.reset('tsx .projenrc.ts')

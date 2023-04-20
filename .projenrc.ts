@@ -1,8 +1,8 @@
 import * as nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
-import { javascript, JsonFile, LogLevel } from 'projen'
+import { javascript, JsonFile, LogLevel, github } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import LintConfig from './projenrc/lint-config'
-import { Vitest, VitestConfigType } from './projenrc/vitest.ts'
+import { Vitest, VitestConfigType } from './projenrc/vitest'
 import { VueComponent } from './projenrc/vue'
 
 const monorepo = new nx_monorepo.NxMonorepoProject({
@@ -16,7 +16,15 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 	name: 'components',
 	packageManager: javascript.NodePackageManager.PNPM,
 	pnpmVersion: '8',
-	github: false,
+	github: true,
+	githubOptions: {
+		mergify: true,
+		workflows: true,
+		projenCredentials: github.GithubCredentials.fromApp({
+			appIdSecret: 'AD_BOT_APP_ID',
+			privateKeySecret: 'AD_BOT_PRIVATE_KEY',
+		}),
+	},
 	projenCommand: nx_monorepo.buildExecutableCommand(
 		javascript.NodePackageManager.PNPM,
 		'projen'

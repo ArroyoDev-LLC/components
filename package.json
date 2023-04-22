@@ -12,7 +12,6 @@
     "package": "pnpm exec projen package",
     "post-compile": "pnpm exec projen post-compile",
     "post-upgrade": "pnpm exec projen post-upgrade",
-    "postinstall": "pnpm exec projen postinstall",
     "pre-compile": "pnpm exec projen pre-compile",
     "run-many": "pnpm exec projen run-many",
     "synth-workspace": "pnpm exec projen synth-workspace",
@@ -29,7 +28,7 @@
     "organization": true
   },
   "devDependencies": {
-    "@aws-prototyping-sdk/nx-monorepo": "^0.16.0",
+    "@aws-prototyping-sdk/nx-monorepo": "^0.17.0",
     "@mrgrain/jsii-struct-builder": "^0.3.1",
     "@nrwl/cli": "^15.9.2",
     "@nrwl/workspace": "^15.9.2",
@@ -64,8 +63,8 @@
   },
   "dependencies": {
     "aws-cdk-lib": "^2.76.0",
-    "cdk-nag": "^2.26.0",
-    "constructs": "^10.2.2"
+    "cdk-nag": "^2.26.1",
+    "constructs": "^10.2.3"
   },
   "pnpm": {
     "overrides": {

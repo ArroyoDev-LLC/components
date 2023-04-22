@@ -24,12 +24,6 @@
         "target": "build",
         "projects": "dependencies"
       }
-    ],
-    "install": [
-      {
-        "target": "install",
-        "projects": "dependencies"
-      }
     ]
   },
   "affected": {

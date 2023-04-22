@@ -33,6 +33,7 @@ jspm_packages/
 .yarn-integrity
 .cache
 .nx/cache
+/.idea
 !/.projenrc.js
 !/.github/workflows/build.yml
 !/.mergify.yml

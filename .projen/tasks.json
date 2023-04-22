@@ -159,14 +159,6 @@
       "name": "post-upgrade",
       "description": "Runs after upgrading dependencies"
     },
-    "postinstall": {
-      "name": "postinstall",
-      "steps": [
-        {
-          "exec": "pnpm exec nx run-many --target install --projects  --parallel=1"
-        }
-      ]
-    },
     "pre-compile": {
       "name": "pre-compile",
       "description": "Prepare the project for compilation for all affected projects",

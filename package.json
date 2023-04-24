@@ -48,10 +48,10 @@
     "fs-extra": "^11.1.1",
     "npm-check-updates": "^16.10.9",
     "nx": "^15.9.2",
-    "prettier": "^2.8.7",
+    "prettier": "^2.8.8",
     "projen": "0.71.7",
     "rollup-plugin-vue": "^6.0.0",
-    "syncpack": "^9.8.4",
+    "syncpack": "^9.8.6",
     "ts-morph": "^18.0.0",
     "ts-node": "^10.9.1",
     "tsx": "^3.12.6",
@@ -63,8 +63,8 @@
   },
   "dependencies": {
     "aws-cdk-lib": "^2.76.0",
-    "cdk-nag": "^2.26.2",
-    "constructs": "^10.2.4"
+    "cdk-nag": "^2.26.3",
+    "constructs": "^10.2.5"
   },
   "pnpm": {
     "overrides": {

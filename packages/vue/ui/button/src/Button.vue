@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import PrimeButton from 'primevue/button';
-
 export interface ButtonProps {
   size: 'sm' | 'md' | 'lg';
   variant: 'primary' | 'outline' | 'text';

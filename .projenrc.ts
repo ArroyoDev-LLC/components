@@ -122,4 +122,19 @@ LintConfig.of(button)!.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
 })
 
+const inputField = new VueComponent({
+	parent: monorepo,
+	name: 'vue.ui.inputField',
+	deps: ['primevue', text.package.packageName],
+})
+LintConfig.of(inputField)!.eslint.addRules({
+	'vue/multi-word-component-names': ['off'],
+})
+const timer = new VueComponent({
+	parent: monorepo,
+	name: 'vue.ui.timer',
+})
+LintConfig.of(timer)!.eslint.addRules({
+	'vue/multi-word-component-names': ['off'],
+})
 monorepo.synth()

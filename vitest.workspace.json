@@ -1,4 +1,6 @@
 [
   "./packages/vue/ui/text/vitest.config.ts",
-  "./packages/vue/ui/button/vitest.config.ts"
+  "./packages/vue/ui/button/vitest.config.ts",
+  "./packages/vue/ui/inputField/vitest.config.ts",
+  "./packages/vue/ui/timer/vitest.config.ts"
 ]

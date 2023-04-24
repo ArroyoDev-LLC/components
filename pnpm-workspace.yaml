@@ -3,3 +3,5 @@
 packages:
   - packages/vue/ui/text
   - packages/vue/ui/button
+  - packages/vue/ui/inputField
+  - packages/vue/ui/timer

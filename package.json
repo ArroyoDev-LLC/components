@@ -28,7 +28,7 @@
     "organization": true
   },
   "devDependencies": {
-    "@aws-prototyping-sdk/nx-monorepo": "^0.17.1",
+    "@aws-prototyping-sdk/nx-monorepo": "^0.17.2",
     "@mrgrain/jsii-struct-builder": "^0.3.1",
     "@nrwl/cli": "^15.9.2",
     "@nrwl/workspace": "^15.9.2",
@@ -55,7 +55,7 @@
     "ts-morph": "^18.0.0",
     "ts-node": "^10.9.1",
     "tsx": "^3.12.6",
-    "typedoc": "^0.24.5",
+    "typedoc": "^0.24.6",
     "typescript": "^5.0.4",
     "unbuild": "^1.2.1",
     "vite": "^4.3.1",
@@ -63,7 +63,7 @@
   },
   "dependencies": {
     "aws-cdk-lib": "^2.76.0",
-    "cdk-nag": "^2.26.3",
+    "cdk-nag": "^2.26.4",
     "constructs": "^10.2.5"
   },
   "pnpm": {

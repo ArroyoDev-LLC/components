@@ -31,6 +31,7 @@
     "@aws-prototyping-sdk/nx-monorepo": "^0.17.2",
     "@mrgrain/jsii-struct-builder": "^0.3.1",
     "@nrwl/cli": "^15.9.2",
+    "@nrwl/nx-cloud": "^16.0.2",
     "@nrwl/workspace": "^15.9.2",
     "@sindresorhus/is": "^5.3.0",
     "@types/fs-extra": "^11.0.1",

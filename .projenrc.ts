@@ -39,6 +39,11 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 		level: LogLevel.DEBUG,
 		usePrefix: true,
 	},
+	nxConfig: {
+		// public readonly token, is not secret.
+		nxCloudReadOnlyAccessToken:
+			'NjQ1ODZiNzYtZjZhZC00ZGQxLTk1OWMtZWZlMDNiMGRjYmIzfHJlYWQtd3JpdGU=',
+	},
 	tsconfig: {
 		compilerOptions: {
 			rootDir: '.',

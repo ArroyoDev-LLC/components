@@ -13,6 +13,10 @@
       "type": "build"
     },
     {
+      "name": "@nrwl/nx-cloud",
+      "type": "build"
+    },
+    {
       "name": "@nrwl/workspace",
       "type": "build"
     },

@@ -42,7 +42,7 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 	nxConfig: {
 		// public readonly token, is not secret.
 		nxCloudReadOnlyAccessToken:
-			'NjQ1ODZiNzYtZjZhZC00ZGQxLTk1OWMtZWZlMDNiMGRjYmIzfHJlYWQtd3JpdGU=',
+			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ==',
 	},
 	tsconfig: {
 		compilerOptions: {
@@ -100,6 +100,21 @@ new JsonFile(monorepo, '.ncurc.json', {
 		reject: ['projen'],
 	},
 })
+
+const gh = monorepo.github!;
+const buildFlow = gh.tryFindWorkflow('build')!
+const buildJob = buildFlow.getJob('build')! as github.workflows.Job
+buildFlow.updateJob('build', {
+	...buildJob,
+	env: {
+		...buildJob.env,
+		NX_NON_NATIVE_HASHER: 'true',
+		NX_BRANCH: '${{ github.event.number }}',
+		NX_RUN_GROUP: '${{ github.run_id }}',
+		NX_CLOUD_ACCESS_TOKEN: '${{ secrets.NX_CLOUD_ACCESS_TOKEN }}',
+	},
+})
+
 
 new Vitest(monorepo, {
 	configType: VitestConfigType.WORKSPACE,

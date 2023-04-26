@@ -42,3 +42,5 @@ jspm_packages/
 !/vitest.config.ts
 !/env.d.ts
 !/tsconfig.dev.json
+/dist/changelog.md
+/dist/version.txt

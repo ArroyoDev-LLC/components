@@ -14,3 +14,5 @@ dist
 tsconfig.tsbuildinfo
 /.eslintrc.json
 /tsconfig.dev.json
+/dist/changelog.md
+/dist/version.txt

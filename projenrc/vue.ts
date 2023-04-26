@@ -216,9 +216,10 @@ export class VueComponent extends typescript.TypeScriptProject {
 			},
 		})
 
-		this.tasks.removeTask('build')
-		this.tasks.addTask('build', { exec: 'unbuild' })
-		this.tasks.tryFind('test')!.reset('vitest', { args: ['--run'] })
+		this.tasks.tryFind('compile')!.reset('unbuild')
+		this.tasks
+			.tryFind('test')!
+			.reset('vitest', { args: ['--run'], receiveArgs: true })
 
 		new Vue(this)
 	}

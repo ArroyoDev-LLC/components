@@ -2,6 +2,7 @@
   "name": "@arroyodev-llc/components.vue.ui.text",
   "scripts": {
     "build": "npx projen build",
+    "bump": "npx projen bump",
     "compile": "npx projen compile",
     "default": "npx projen default",
     "eslint": "npx projen eslint",
@@ -9,7 +10,9 @@
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
+    "release": "npx projen release",
     "test": "npx projen test",
+    "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch",
     "projen": "npx projen"
@@ -31,6 +34,7 @@
     "prettier": "^2.8.7",
     "rollup": "*",
     "rollup-plugin-vue": "^6.0.0",
+    "standard-version": "^9",
     "typescript": "^5",
     "unbuild": "*"
   },

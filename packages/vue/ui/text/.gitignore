@@ -30,6 +30,8 @@ jspm_packages/
 .yarn-integrity
 .cache
 !/.projenrc.js
+/dist/changelog.md
+/dist/version.txt
 !/test/
 !/tsconfig.json
 !/src/

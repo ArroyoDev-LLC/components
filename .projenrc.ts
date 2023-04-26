@@ -1,5 +1,5 @@
 import * as nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
-import { javascript, JsonFile, LogLevel, github } from 'projen'
+import { javascript, JsonFile, LogLevel, github, release } from "projen";
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import LintConfig from './projenrc/lint-config'
 import { Vitest, VitestConfigType } from './projenrc/vitest'
@@ -128,6 +128,8 @@ new Vitest(monorepo, {
 const text = new VueComponent({
 	parent: monorepo,
 	name: 'vue.ui.text',
+	release: true,
+	releaseToNpm: true,
 })
 LintConfig.of(text)!.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
@@ -140,6 +142,13 @@ const button = new VueComponent({
 })
 LintConfig.of(button)!.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
+})
+new release.Release(button, {
+	githubRelease: true,
+	task: button.tasks.tryFind('build')!,
+	branch: 'main',
+	versionFile: 'package.json',
+	artifactsDirectory: button.artifactsDirectory,
 })
 
 monorepo.synth()

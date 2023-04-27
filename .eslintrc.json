@@ -38,6 +38,8 @@
   },
   "ignorePatterns": [
     "packages/**/*.*",
+    "projenrc/projen-project-options.ts",
+    "projenrc/typescript-project-options.ts",
     "!.projenrc.ts",
     "!projenrc/**/*.ts"
   ],
@@ -124,6 +126,23 @@
           "constructor",
           "method"
         ]
+      }
+    ],
+    "@typescript-eslint/consistent-type-definitions": [
+      "error",
+      "interface"
+    ],
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "prefer": "type-imports",
+        "fixStyle": "inline-type-imports"
+      }
+    ],
+    "import/no-duplicates": [
+      "error",
+      {
+        "prefer-inline": true
       }
     ]
   },

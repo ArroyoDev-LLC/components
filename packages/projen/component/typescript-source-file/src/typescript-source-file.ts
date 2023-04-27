@@ -1,11 +1,11 @@
 import { buildExecutableCommand } from '@aws-prototyping-sdk/nx-monorepo'
-import { FileBase, FileBaseOptions, typescript } from 'projen'
+import { FileBase, type FileBaseOptions, type typescript } from 'projen'
 import { execCapture } from 'projen/lib/util'
 import {
-	ImportDeclarationStructure,
-	OptionalKind,
+	type ImportDeclarationStructure,
+	type OptionalKind,
 	Project,
-	SourceFile,
+	type SourceFile,
 } from 'ts-morph'
 
 export interface TypeScriptSourceFileTransform {
@@ -99,7 +99,7 @@ export class TypeScriptSourceFile extends FileBase {
 		const outdir = this.project.outdir
 		const cmd = buildExecutableCommand(
 			this.project.package.packageManager,
-			`eslint --no-ignore --ext .ts --fix ${this.absolutePath}`
+			`eslint_d --no-ignore --ext .ts --fix ${this.absolutePath}`
 		)
 		try {
 			execCapture(cmd, {

@@ -39,6 +39,6 @@ jspm_packages/
 /dist
 /dist/
 !/.eslintrc.json
-!/tsconfig.dev.json
 !/tsconfig.json
+!/tsconfig.dev.json
 !/build.config.ts

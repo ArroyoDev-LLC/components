@@ -1,12 +1,16 @@
-import { Component, DependencyType } from 'projen'
-import { TypeScriptProject } from 'projen/lib/typescript'
-import { ObjectLiteralExpression, SourceFile, SyntaxKind } from 'ts-morph'
-import { BuildConfig as UnBuildBuildConfig } from 'unbuild'
 import {
 	TypeScriptSourceFile,
-	TypeScriptSourceFileTransform,
-} from './typescript-source-file.ts'
-import { addPropertyAssignmentsFromObject } from './utils.ts'
+	type TypeScriptSourceFileTransform,
+} from '@arroyodev-llc/projen.component.typescript-source-file'
+import { addPropertyAssignmentsFromObject } from '@arroyodev-llc/utils.projen'
+import { Component, DependencyType } from 'projen'
+import { type TypeScriptProject } from 'projen/lib/typescript'
+import {
+	type ObjectLiteralExpression,
+	type SourceFile,
+	SyntaxKind,
+} from 'ts-morph'
+import { type BuildConfig as UnBuildBuildConfig } from 'unbuild'
 
 export interface UnBuildOptions {
 	options?: UnBuildBuildConfig

@@ -2,7 +2,7 @@ import type { ObjectFile, Project } from 'projen'
 import { Component } from 'projen'
 import type { NodeProject, PrettierOptions } from 'projen/lib/javascript'
 import { Eslint, Prettier } from 'projen/lib/javascript'
-import { applyOverrides } from './utils.ts'
+import { applyOverrides } from '@arroyodev-llc/utils.projen'
 
 class LintConfig extends Component {
 	public static of(project: Project): LintConfig | undefined {

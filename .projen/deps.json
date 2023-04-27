@@ -52,6 +52,10 @@
       "type": "build"
     },
     {
+      "name": "eslint_d",
+      "type": "build"
+    },
+    {
       "name": "eslint-config-prettier",
       "type": "build"
     },
@@ -86,6 +90,10 @@
     },
     {
       "name": "nx",
+      "type": "build"
+    },
+    {
+      "name": "pathe",
       "type": "build"
     },
     {
@@ -141,6 +149,21 @@
       "name": "@types/babel__traverse",
       "version": "7.18.2",
       "type": "override"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.typescript-source-file",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.unbuild",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
+      "name": "@arroyodev-llc/utils.projen",
+      "version": "workspace:*",
+      "type": "runtime"
     },
     {
       "name": "aws-cdk-lib",

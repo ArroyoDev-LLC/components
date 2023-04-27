@@ -51,6 +51,7 @@ jspm_packages/
 !/.syncpackrc.json
 !/.nxignore
 !/nx.json
+!/tsconfig.esm.json
 .idea
 .idea/**
 !/.ncurc.json
@@ -58,3 +59,5 @@ jspm_packages/
 !/vitest.workspace.json
 !/pnpm-workspace.yaml
 !/renovate.json5
+!/projenrc/projen-project-options.ts
+!/projenrc/typescript-project-options.ts

@@ -28,6 +28,9 @@
     "@typescript-eslint/parser",
     "eslint",
     "projen",
-    "@types/babel__traverse"
+    "@types/babel__traverse",
+    "@arroyodev-llc/projen.component.typescript-source-file",
+    "@arroyodev-llc/projen.component.unbuild",
+    "@arroyodev-llc/utils.projen"
   ]
 }

@@ -185,21 +185,6 @@ const utilsProjen = new TypescriptProject({
 	parent: monorepo,
 	deps: ['ts-morph'],
 })
-utilsProjen.tryRemoveFile('tsconfig.json')
-const utilsTsconfig = new javascript.TypescriptConfig(utilsProjen, {
-	fileName: 'tsconfig.json',
-	extends: javascript.TypescriptConfigExtends.fromTypescriptConfigs([
-		tsconfigEsm,
-	]),
-	include: ['src/**/*.ts', '**/*.ts'],
-	exclude: ['node_modules'],
-	compilerOptions: {
-		rootDir: '.',
-		outDir: 'dist',
-	},
-})
-new UnBuild(utilsProjen)
-utilsProjen.compileTask.reset('unbuild')
 
 const tsSourceComponent = new TypescriptProject({
 	name: 'projen.component.typescript-source-file',
@@ -211,8 +196,6 @@ const tsSourceComponent = new TypescriptProject({
 		'@aws-prototyping-sdk/nx-monorepo',
 	],
 })
-new UnBuild(tsSourceComponent)
-tsSourceComponent.compileTask.reset('unbuild')
 
 const unbuildComponent = new TypescriptProject({
 	name: 'projen.component.unbuild',
@@ -226,8 +209,6 @@ const unbuildComponent = new TypescriptProject({
 		'@aws-prototyping-sdk/nx-monorepo',
 	],
 })
-new UnBuild(unbuildComponent)
-unbuildComponent.compileTask.reset('unbuild')
 
 new ProjenProjectOptionsBuilder(monorepo)
 new TypeScriptProjectOptionsBuilder(monorepo)

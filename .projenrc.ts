@@ -1,7 +1,13 @@
+import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
 import * as nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
-import { javascript, JsonFile, LogLevel, github, release } from "projen";
+import { github, javascript, JsonFile, LogLevel, release } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import LintConfig from './projenrc/lint-config'
+import {
+	ProjenProjectOptionsBuilder,
+	TypeScriptProjectOptionsBuilder,
+} from './projenrc/option-builders'
+import { TypescriptProject } from './projenrc/project'
 import { Vitest, VitestConfigType } from './projenrc/vitest'
 import { VueComponent } from './projenrc/vue'
 
@@ -76,8 +82,25 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 		'@mrgrain/jsii-struct-builder',
 		'ts-morph',
 		'@sindresorhus/is',
+		'eslint_d',
+		'pathe',
 	],
 })
+const tsconfigEsm = new javascript.TypescriptConfig(monorepo, {
+	fileName: 'tsconfig.esm.json',
+	compilerOptions: {
+		module: 'ESNext',
+		target: 'ES2022',
+		lib: ['ES2022'],
+		moduleResolution: TypeScriptModuleResolution.NODE,
+		forceConsistentCasingInFileNames: true,
+		verbatimModuleSyntax: true,
+		skipLibCheck: true,
+		strict: true,
+		strictNullChecks: true,
+	},
+})
+
 new LintConfig(monorepo)
 
 monorepo.gitignore.exclude('.idea', '.idea/**')
@@ -86,6 +109,13 @@ monorepo.tsconfig.addInclude('**/*.ts')
 monorepo.tsconfig.addInclude('projenrc/**.ts')
 monorepo.tsconfigDev.addInclude('**/*.ts')
 monorepo.tsconfigDev.file.addOverride('compilerOptions.rootDir', '.')
+
+// workaround for:
+// https://github.com/aws/aws-prototyping-sdk/issues/365
+monorepo.package.addBin({
+	'pdk@pnpm-link-bundled-transitive-deps':
+		'./node_modules/@aws-prototyping-sdk/nx-monorepo/scripts/pnpm/link-bundled-transitive-deps.ts',
+})
 
 monorepo.package.addField('type', 'module')
 monorepo.package.file.addOverride('pnpm.patchedDependencies', {
@@ -101,7 +131,7 @@ new JsonFile(monorepo, '.ncurc.json', {
 	},
 })
 
-const gh = monorepo.github!;
+const gh = monorepo.github!
 const buildFlow = gh.tryFindWorkflow('build')!
 const buildJob = buildFlow.getJob('build')! as github.workflows.Job
 buildFlow.updateJob('build', {
@@ -114,7 +144,6 @@ buildFlow.updateJob('build', {
 		NX_CLOUD_ACCESS_TOKEN: '${{ secrets.NX_CLOUD_ACCESS_TOKEN }}',
 	},
 })
-
 
 new Vitest(monorepo, {
 	configType: VitestConfigType.WORKSPACE,
@@ -150,5 +179,60 @@ new release.Release(button, {
 	versionFile: 'package.json',
 	artifactsDirectory: button.artifactsDirectory,
 })
+
+const utilsProjen = new TypescriptProject({
+	name: 'utils.projen',
+	parent: monorepo,
+	deps: ['ts-morph'],
+})
+utilsProjen.tryRemoveFile('tsconfig.json')
+const utilsTsconfig = new javascript.TypescriptConfig(utilsProjen, {
+	fileName: 'tsconfig.json',
+	extends: javascript.TypescriptConfigExtends.fromTypescriptConfigs([
+		tsconfigEsm,
+	]),
+	include: ['src/**/*.ts', '**/*.ts'],
+	exclude: ['node_modules'],
+	compilerOptions: {
+		rootDir: '.',
+		outDir: 'dist',
+	},
+})
+new UnBuild(utilsProjen)
+utilsProjen.compileTask.reset('unbuild')
+
+const tsSourceComponent = new TypescriptProject({
+	name: 'projen.component.typescript-source-file',
+	parent: monorepo,
+	deps: [
+		`${utilsProjen.package.packageName}@workspace:*`,
+		'projen',
+		'ts-morph',
+		'@aws-prototyping-sdk/nx-monorepo',
+	],
+})
+new UnBuild(tsSourceComponent)
+tsSourceComponent.compileTask.reset('unbuild')
+
+const unbuildComponent = new TypescriptProject({
+	name: 'projen.component.unbuild',
+	parent: monorepo,
+	deps: [
+		`${utilsProjen.package.packageName}@workspace:*`,
+		`${tsSourceComponent.package.packageName}@workspace:*`,
+		'unbuild',
+		'projen',
+		'ts-morph',
+		'@aws-prototyping-sdk/nx-monorepo',
+	],
+})
+new UnBuild(unbuildComponent)
+unbuildComponent.compileTask.reset('unbuild')
+
+new ProjenProjectOptionsBuilder(monorepo)
+new TypeScriptProjectOptionsBuilder(monorepo)
+
+monorepo.addDeps(`${unbuildComponent.package.packageName}@workspace:*`)
+monorepo.addDeps(`${utilsProjen.package.packageName}@workspace:*`)
 
 monorepo.synth()

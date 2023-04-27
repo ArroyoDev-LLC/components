@@ -6,10 +6,9 @@
     "outDir": "dist"
   },
   "include": [
+    "src/*.ts",
     "src/**/*.ts",
-    "**/*.ts"
+    "build.config.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": []
 }

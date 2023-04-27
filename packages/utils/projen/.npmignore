@@ -12,5 +12,5 @@ dist
 /.projenrc.js
 tsconfig.tsbuildinfo
 /.eslintrc.json
-/tsconfig.dev.json
 /tsconfig.json
+/tsconfig.dev.json

@@ -29,9 +29,9 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-vue": "^9.11.0",
     "faker": "^6.6.6",
-    "happy-dom": "^9.8.2",
+    "happy-dom": "^9.9.2",
     "npm-check-updates": "^16",
-    "prettier": "^2.8.7",
+    "prettier": "^2.8.8",
     "rollup": "*",
     "rollup-plugin-vue": "^6.0.0",
     "typescript": "^5",
@@ -40,7 +40,7 @@
   "dependencies": {
     "@arroyodev-llc/components.vue.ui.text": "0.0.0",
     "@vue/runtime-dom": "^3.2.47",
-    "primevue": "^3.26.1",
+    "primevue": "^3.27.0",
     "vue": "^3.2.47"
   },
   "pnpm": {},

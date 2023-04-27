@@ -6,8 +6,11 @@ exports[`Button > renders as expected. 1`] = `
   type="button"
 >
   
+  
+  
+  
   <!---->
-  <!---->
+  
   <span
     class="p-button-label"
   >

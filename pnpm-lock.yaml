@@ -13,14 +13,14 @@ importers:
   .:
     dependencies:
       aws-cdk-lib:
-        specifier: ^2.76.0
-        version: 2.76.0(constructs@10.2.7)
+        specifier: ^2.77.0
+        version: 2.77.0(constructs@10.2.8)
       cdk-nag:
-        specifier: ^2.26.5
-        version: 2.26.5(aws-cdk-lib@2.76.0)(constructs@10.2.7)
+        specifier: ^2.26.6
+        version: 2.26.6(aws-cdk-lib@2.77.0)(constructs@10.2.8)
       constructs:
-        specifier: ^10.2.7
-        version: 10.2.7
+        specifier: ^10.2.8
+        version: 10.2.8
     devDependencies:
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.17.2
@@ -56,8 +56,8 @@ importers:
         specifier: ^5
         version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
       '@vitejs/plugin-vue':
-        specifier: ^4.2.0
-        version: 4.2.0(vite@4.3.2)(vue@3.2.47)
+        specifier: ^4.2.1
+        version: 4.2.1(vite@4.3.3)(vue@3.2.47)
       eslint:
         specifier: ^8
         version: 8.38.0
@@ -116,8 +116,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       vite:
-        specifier: ^4.3.2
-        version: 4.3.2(@types/node@16.0.0)
+        specifier: ^4.3.3
+        version: 4.3.3(@types/node@16.0.0)
       vitest:
         specifier: ^0.30.1
         version: 0.30.1
@@ -148,7 +148,7 @@ importers:
         version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
       '@vitejs/plugin-vue':
         specifier: '*'
-        version: 4.1.0(vite@4.3.2)(vue@3.2.47)
+        version: 4.1.0(vite@4.3.3)(vue@3.2.47)
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -212,7 +212,7 @@ importers:
         version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
       '@vitejs/plugin-vue':
         specifier: '*'
-        version: 4.1.0(vite@4.3.2)(vue@3.2.47)
+        version: 4.1.0(vite@4.3.3)(vue@3.2.47)
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -269,16 +269,16 @@ packages:
       '@jridgewell/trace-mapping': 0.3.18
     dev: true
 
-  /@aws-cdk/asset-awscli-v1@2.2.151:
-    resolution: {integrity: sha512-/+sjJeSgUjL+ZSbGP84I0fqreQxQnPC2mXemBd+ZADZW87reIIXG1u1ZICeBhaY12fg4iFbshGfRVAkOo3QgYw==}
+  /@aws-cdk/asset-awscli-v1@2.2.152:
+    resolution: {integrity: sha512-zjQptupJIshYDg+XfkFS6J/CKNsEMqYcr21U3BStrBGhjK3uXp6TeHY14g+lJItUxGROtHzlp4/FNphDpVaWjw==}
     dev: false
 
   /@aws-cdk/asset-kubectl-v20@2.1.1:
     resolution: {integrity: sha512-U1ntiX8XiMRRRH5J1IdC+1t5CE89015cwyt5U63Cpk0GnMlN5+h9WsWMlKlPXZR4rdq/m806JRlBMRpBUB2Dhw==}
     dev: false
 
-  /@aws-cdk/asset-node-proxy-agent-v5@2.0.126:
-    resolution: {integrity: sha512-NzMIFA6VdX0JDnTU3UPZhwYC/tQqSn5yEeDNfACxoiZ4Ey+z8pIkQ3DBldqdAw8+YMKxblmyaA6pBy2xzqLLOg==}
+  /@aws-cdk/asset-node-proxy-agent-v5@2.0.127:
+    resolution: {integrity: sha512-w9WPfSTJDDeI4RfXVQVOK3qH49TefMKqbapKY0g2GkXQe9Na8WAe6o0JTNLc97JAsiymc7ohBFqhkg8kJr87IA==}
     dev: false
 
   /@aws-prototyping-sdk/nx-monorepo@0.17.2(@pnpm/logger@5.0.0)(nx@15.9.2)(projen@0.71.7):
@@ -1230,7 +1230,7 @@ packages:
       semver: 7.5.0
       sort-keys: 4.2.0
       strip-bom: 4.0.0
-      write-file-atomic: 5.0.0
+      write-file-atomic: 5.0.1
     dev: true
 
   /@pnpm/lockfile-types@5.0.0:
@@ -1715,25 +1715,25 @@ packages:
     resolution: {integrity: sha512-06PHwE0K24Wi8FBmC8MuMi/+nQ3DTpcXYL3y/IaZz2ScY2GOJXOe8fyMykVXyLOKxpL2Y0frAnJZmm65OxzMLQ==}
     dev: true
 
-  /@vitejs/plugin-vue@4.1.0(vite@4.3.2)(vue@3.2.47):
+  /@vitejs/plugin-vue@4.1.0(vite@4.3.3)(vue@3.2.47):
     resolution: {integrity: sha512-++9JOAFdcXI3lyer9UKUV4rfoQ3T1RN8yDqoCLar86s0xQct5yblxAE+yWgRnU5/0FOlVCpTZpYSBV/bGWrSrQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.3.2(@types/node@16.0.0)
+      vite: 4.3.3(@types/node@16.0.0)
       vue: 3.2.47
     dev: true
 
-  /@vitejs/plugin-vue@4.2.0(vite@4.3.2)(vue@3.2.47):
-    resolution: {integrity: sha512-hYaXFvEKEwyTmwHq2ft7GGeLBvyYLwTM3E5R1jpvzxg9gO4m5PQcTVvj1wEPKoPL8PAt+KAlxo3gyJWnmwzaWQ==}
+  /@vitejs/plugin-vue@4.2.1(vite@4.3.3)(vue@3.2.47):
+    resolution: {integrity: sha512-ZTZjzo7bmxTRTkb8GSTwkPOYDIP7pwuyV+RV53c9PYUouwcbkIZIvWvNWlX2b1dYZqtOv7D6iUAnJLVNGcLrSw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.3.2(@types/node@16.0.0)
+      vite: 4.3.3(@types/node@16.0.0)
       vue: 3.2.47
     dev: true
 
@@ -2144,18 +2144,18 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /aws-cdk-lib@2.76.0(constructs@10.2.7):
-    resolution: {integrity: sha512-EYWdHh/qJA7v+jD6SeW+BOEChI7oe6IYPHHap+SoJMUrKBVSDKnIGJ8wTP5eV6F27aYaUQiA7rWTKcCWoda8ag==}
+  /aws-cdk-lib@2.77.0(constructs@10.2.8):
+    resolution: {integrity: sha512-T0GUFHBY1B+LkyGk1Df5E1PXwHa7BqvafD4pGvpwWqu8Mu9s/i0kp8YJu6xY//hEC5R8O7V6bfyQJ0S9pUqwQg==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       constructs: ^10.0.0
     dependencies:
-      '@aws-cdk/asset-awscli-v1': 2.2.151
+      '@aws-cdk/asset-awscli-v1': 2.2.152
       '@aws-cdk/asset-kubectl-v20': 2.1.1
-      '@aws-cdk/asset-node-proxy-agent-v5': 2.0.126
+      '@aws-cdk/asset-node-proxy-agent-v5': 2.0.127
       '@balena/dockerignore': 1.0.2
       case: 1.6.3
-      constructs: 10.2.7
+      constructs: 10.2.8
       fs-extra: 9.1.0
       ignore: 5.2.4
       jsonschema: 1.4.1
@@ -2261,7 +2261,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001481
-      electron-to-chromium: 1.4.372
+      electron-to-chromium: 1.4.374
       node-releases: 2.0.10
       update-browserslist-db: 1.0.11(browserslist@4.21.5)
     dev: true
@@ -2324,7 +2324,7 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       '@npmcli/fs': 3.1.0
-      fs-minipass: 3.0.1
+      fs-minipass: 3.0.2
       glob: 9.3.5
       lru-cache: 7.18.3
       minipass: 4.2.8
@@ -2333,7 +2333,7 @@ packages:
       minipass-pipeline: 1.2.4
       p-map: 4.0.0
       promise-inflight: 1.0.1
-      ssri: 10.0.3
+      ssri: 10.0.4
       tar: 6.1.13
       unique-filename: 3.0.0
     transitivePeerDependencies:
@@ -2411,14 +2411,14 @@ packages:
     resolution: {integrity: sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==}
     engines: {node: '>= 0.8.0'}
 
-  /cdk-nag@2.26.5(aws-cdk-lib@2.76.0)(constructs@10.2.7):
-    resolution: {integrity: sha512-s0MKhHMlFd+4O6O6Itq1XI6DiAaakbUDN4QVPkkJtKKnm9sZg1RkbULM9i+aGMjqCRviv9pmn2iDgzOJNaOgkA==}
+  /cdk-nag@2.26.6(aws-cdk-lib@2.77.0)(constructs@10.2.8):
+    resolution: {integrity: sha512-6BrUVGRysXO6sL7xz7CT88+wc9iLmDesUGTG4G0GO4LirGn/Lpu6Hs2VHeAq1e5KPnP1WfxmJHJJumK9BCMKAg==}
     peerDependencies:
       aws-cdk-lib: ^2.45.0
       constructs: ^10.0.5
     dependencies:
-      aws-cdk-lib: 2.76.0(constructs@10.2.7)
-      constructs: 10.2.7
+      aws-cdk-lib: 2.77.0(constructs@10.2.8)
+      constructs: 10.2.8
     dev: false
 
   /chai@4.3.7:
@@ -2666,8 +2666,8 @@ packages:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: true
 
-  /constructs@10.2.7:
-    resolution: {integrity: sha512-Cn8bZkZMK/jdeyoobnR/M48/+SSgCHe6nNTJXtbzu/dLaK+HiE6JSSjhtb9OO2jO/ZysZ1dPVUrzKs7HGZ7PUw==}
+  /constructs@10.2.8:
+    resolution: {integrity: sha512-3Dr4htAd64LRn6+ts5cDm1ZijE/2rDJnaPRD9FQi3CGTfZIm0nA9ZzJDOEwBRFfU8A6wmQvZ3B56p4XLM6B4hg==}
     engines: {node: '>= 14.17.0'}
     dev: false
 
@@ -3106,8 +3106,8 @@ packages:
       jake: 10.8.5
     dev: true
 
-  /electron-to-chromium@1.4.372:
-    resolution: {integrity: sha512-MrlFq/j+TYHOjeWsWGYfzevc25HNeJdsF6qaLFrqBTRWZQtWkb1myq/Q2veLWezVaa5OcSZ99CFwTT4aF4Mung==}
+  /electron-to-chromium@1.4.374:
+    resolution: {integrity: sha512-dNP9tQNTrjgVlSXMqGaj0BdrCS+9pcUvy5/emB6x8kh0YwCoDZ0Z4ce1+7aod+KhybHUd5o5LgKrc5al4kVmzQ==}
     dev: true
 
   /emoji-regex@8.0.0:
@@ -3773,11 +3773,11 @@ packages:
       minipass: 3.3.6
     dev: true
 
-  /fs-minipass@3.0.1:
-    resolution: {integrity: sha512-MhaJDcFRTuLidHrIttu0RDGyyXs/IYHVmlcxfLAEFIWjc1vdLAkdwT7Ace2u7DbitWC0toKMl5eJZRYNVreIMw==}
+  /fs-minipass@3.0.2:
+    resolution: {integrity: sha512-2GAfyfoaCDRrM6jaOS3UsBts8yJ55VioXdWcOL7dK9zdAuKT71+WBA4ifnNYqVjYv+4SsPxjK0JT4yIIn4cA/g==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      minipass: 4.2.8
+      minipass: 5.0.0
     dev: true
 
   /fs.realpath@1.0.0:
@@ -4259,11 +4259,11 @@ packages:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
     dev: true
 
-  /ignore-walk@6.0.2:
-    resolution: {integrity: sha512-ezmQ1Dg2b3jVZh2Dh+ar6Eu2MqNSTkyb32HU2MAQQQX9tKM3q/UQ/9lf03lQ5hW+fOeoMnwxwkleZ0xcNp0/qg==}
+  /ignore-walk@6.0.3:
+    resolution: {integrity: sha512-C7FfFoTA+bI10qfeydT8aZbvr91vAEU+2W5BZUlzPec47oNb07SsOfwYrtxuvOYdUApPP/Qlh4DtAO51Ekk2QA==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      minimatch: 7.4.6
+      minimatch: 9.0.0
     dev: true
 
   /ignore@5.2.4:
@@ -4974,13 +4974,13 @@ packages:
       is-lambda: 1.0.1
       lru-cache: 7.18.3
       minipass: 4.2.8
-      minipass-fetch: 3.0.2
+      minipass-fetch: 3.0.3
       minipass-flush: 1.0.5
       minipass-pipeline: 1.2.4
       negotiator: 0.6.3
       promise-retry: 2.0.1
       socks-proxy-agent: 7.0.0
-      ssri: 10.0.3
+      ssri: 10.0.4
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -5217,11 +5217,11 @@ packages:
       encoding: 0.1.13
     dev: true
 
-  /minipass-fetch@3.0.2:
-    resolution: {integrity: sha512-/ZpF1CQaWYqjbhfFgKNt3azxztEpc/JUPuMkqOgrnMQqcU8CbE409AUdJYTIWryl3PP5CBaTJZT71N49MXP/YA==}
+  /minipass-fetch@3.0.3:
+    resolution: {integrity: sha512-n5ITsTkDqYkYJZjcRWzZt9qnZKCT7nKCosJhHoj7S7zD+BP4jVbWs+odsniw5TA3E0sLomhTKOKjF86wf11PuQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      minipass: 4.2.8
+      minipass: 5.0.0
       minipass-sized: 1.0.3
       minizlib: 2.1.2
     optionalDependencies:
@@ -5578,7 +5578,7 @@ packages:
     resolution: {integrity: sha512-d6RGEuRrNS5/N84iglPivjaJPxhDbZmlbTwTDX2IbcRHG5bZCdtysYMhwiPvcF4GisXHGn7xsxv+GQ7T/02M5Q==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      ignore-walk: 6.0.2
+      ignore-walk: 6.0.3
     dev: true
 
   /npm-pick-manifest@8.0.1:
@@ -5597,7 +5597,7 @@ packages:
     dependencies:
       make-fetch-happen: 11.1.0
       minipass: 4.2.8
-      minipass-fetch: 3.0.2
+      minipass-fetch: 3.0.3
       minipass-json-stream: 1.0.1
       minizlib: 2.1.2
       npm-package-arg: 10.1.0
@@ -5885,7 +5885,7 @@ packages:
       '@npmcli/promise-spawn': 6.0.2
       '@npmcli/run-script': 6.0.0
       cacache: 17.0.5
-      fs-minipass: 3.0.1
+      fs-minipass: 3.0.2
       minipass: 4.2.8
       npm-package-arg: 10.1.0
       npm-packlist: 7.0.4
@@ -5896,7 +5896,7 @@ packages:
       read-package-json: 6.0.1
       read-package-json-fast: 3.0.2
       sigstore: 1.4.0
-      ssri: 10.0.3
+      ssri: 10.0.4
       tar: 6.1.13
     transitivePeerDependencies:
       - bluebird
@@ -6675,6 +6675,11 @@ packages:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: true
 
+  /signal-exit@4.0.1:
+    resolution: {integrity: sha512-uUWsN4aOxJAS8KOuf3QMyFtgm1pkb6I+KRZbRF/ghdf5T7sM+B1lLLzPDxswUjkmHyxQAVzEgG35E3NzDM9GVw==}
+    engines: {node: '>=14'}
+    dev: true
+
   /sigstore@1.4.0:
     resolution: {integrity: sha512-N7TRpSbFjY/TrFDg6yGAQSYBrQ5s6qmPiq4pD6fkv1LoyfMsLG0NwZWG2s5q+uttLHgyVyTa0Rogx2P78rN8kQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
@@ -6812,11 +6817,11 @@ packages:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
     dev: true
 
-  /ssri@10.0.3:
-    resolution: {integrity: sha512-lJtX/BFPI/VEtxZmLfeh7pzisIs6micwZ3eruD3+ds9aPsXKlYpwDS2Q7omD6WC42WO9+bnUSzlMmfv8uK8meg==}
+  /ssri@10.0.4:
+    resolution: {integrity: sha512-12+IR2CB2C28MMAw0Ncqwj5QbTcs0nGIhgJzYWzDkb21vWmfNI83KS4f3Ci6GI98WreIfG7o9UXp3C0qbpA8nQ==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
-      minipass: 4.2.8
+      minipass: 5.0.0
     dev: true
 
   /ssri@9.0.1:
@@ -7534,7 +7539,7 @@ packages:
       mlly: 1.2.0
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.3.2(@types/node@16.18.25)
+      vite: 4.3.3(@types/node@16.18.25)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -7545,8 +7550,8 @@ packages:
       - terser
     dev: true
 
-  /vite@4.3.2(@types/node@16.0.0):
-    resolution: {integrity: sha512-9R53Mf+TBoXCYejcL+qFbZde+eZveQLDYd9XgULILLC1a5ZwPaqgmdVpL8/uvw2BM/1TzetWjglwm+3RO+xTyw==}
+  /vite@4.3.3(@types/node@16.0.0):
+    resolution: {integrity: sha512-MwFlLBO4udZXd+VBcezo3u8mC77YQk+ik+fbc0GZWGgzfbPP+8Kf0fldhARqvSYmtIWoAJ5BXPClUbMTlqFxrA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -7578,8 +7583,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite@4.3.2(@types/node@16.18.25):
-    resolution: {integrity: sha512-9R53Mf+TBoXCYejcL+qFbZde+eZveQLDYd9XgULILLC1a5ZwPaqgmdVpL8/uvw2BM/1TzetWjglwm+3RO+xTyw==}
+  /vite@4.3.3(@types/node@16.18.25):
+    resolution: {integrity: sha512-MwFlLBO4udZXd+VBcezo3u8mC77YQk+ik+fbc0GZWGgzfbPP+8Kf0fldhARqvSYmtIWoAJ5BXPClUbMTlqFxrA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -7665,7 +7670,7 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.4.0
       tinypool: 0.4.0
-      vite: 4.3.2(@types/node@16.18.25)
+      vite: 4.3.3(@types/node@16.18.25)
       vite-node: 0.30.1(@types/node@16.18.25)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
@@ -7847,12 +7852,12 @@ packages:
       typedarray-to-buffer: 3.1.5
     dev: true
 
-  /write-file-atomic@5.0.0:
-    resolution: {integrity: sha512-R7NYMnHSlV42K54lwY9lvW6MnSm1HSJqZL3xiSgi9E7//FYaI74r2G0rd+/X6VAMkHEdzxQaU5HUOXWUz5kA/w==}
+  /write-file-atomic@5.0.1:
+    resolution: {integrity: sha512-+QU2zd6OTD8XWIJCbffaiQeH9U73qIqafo1x6V1snCWYGJf6cVE0cDR4D8xRzcEnfI21IFrUPzPGtcPf8AC+Rw==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dependencies:
       imurmurhash: 0.1.4
-      signal-exit: 3.0.7
+      signal-exit: 4.0.1
     dev: true
 
   /write-yaml-file@4.2.0:

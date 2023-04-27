@@ -2,6 +2,8 @@ import { cdk, javascript, typescript } from 'projen'
 import LintConfig from './lint-config'
 import type { ProjenProjectOptions } from './projen-project-options'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
+import {UnBuild} from "@arroyodev-llc/projen.component.unbuild";
+import { config } from "rxjs";
 
 export class ProjectName {
 	constructor(readonly name: string) {}
@@ -120,18 +122,20 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		})
 
 		new LintConfig(this)
+		new UnBuild(this)
+		this.compileTask.reset('unbuild')
 	}
 
 	protected copyTsConfigPaths(
-		config?: javascript.TypescriptConfig,
+		typescriptConfig?: javascript.TypescriptConfig,
 		paths?: { include?: string[]; exclude?: string[] }
 	) {
 		const uniq = <T>(arr: T[]): T[] => Array.from(new Set(arr))
 		const uniqMerge = <T>(arrA: T[], arrB: T[]): T[] =>
 			uniq([...arrA.slice(), ...arrB.slice()])
 		return {
-			include: uniqMerge((config?.include ?? []).slice(), paths?.include ?? []),
-			exclude: uniqMerge((config?.exclude ?? []).slice(), paths?.exclude ?? []),
+			include: uniqMerge((typescriptConfig?.include ?? []).slice(), paths?.include ?? []),
+			exclude: uniqMerge((typescriptConfig?.exclude ?? []).slice(), paths?.exclude ?? []),
 		}
 	}
 }

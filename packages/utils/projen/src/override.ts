@@ -1,4 +1,4 @@
-import { ObjectLiteralExpression, PropertyAssignment } from 'ts-morph'
+import type { ObjectLiteralExpression, PropertyAssignment } from 'ts-morph'
 
 interface SupportsOverrides {
 	addOverride(key: string, value: any): void

@@ -1,10 +1,7 @@
-import { Component, ObjectFile, Project } from 'projen'
-import {
-	Eslint,
-	NodeProject,
-	Prettier,
-	PrettierOptions,
-} from 'projen/lib/javascript'
+import type { ObjectFile, Project } from 'projen'
+import { Component } from 'projen'
+import type { NodeProject, PrettierOptions } from 'projen/lib/javascript'
+import { Eslint, Prettier } from 'projen/lib/javascript'
 import { applyOverrides } from './utils.ts'
 
 class LintConfig extends Component {
@@ -50,6 +47,13 @@ class LintConfig extends Component {
 			'key-spacing': ['off'],
 			'no-multiple-empty-lines': ['off'],
 			'no-trailing-spaces': ['off'],
+			// typescript
+			'@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
+			'@typescript-eslint/consistent-type-imports': [
+				'error',
+				{ prefer: 'type-imports', fixStyle: 'inline-type-imports' },
+			],
+			'import/no-duplicates': ['error', { 'prefer-inline': true }],
 		})
 
 		this.eslintFile = project.tryFindObjectFile('.eslintrc.json')!

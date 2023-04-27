@@ -22,8 +22,11 @@
     "LICENSE",
     "nx.json",
     "pnpm-workspace.yaml",
+    "projenrc/projen-project-options.ts",
+    "projenrc/typescript-project-options.ts",
     "renovate.json5",
     "tsconfig.dev.json",
+    "tsconfig.esm.json",
     "tsconfig.json",
     "vitest.workspace.json"
   ],

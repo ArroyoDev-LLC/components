@@ -2,18 +2,18 @@ import { Component, DependencyType, javascript, typescript } from 'projen'
 import {
 	TypescriptConfig,
 	TypescriptConfigExtends,
-	TypescriptConfigOptions,
+	type TypescriptConfigOptions,
 	TypeScriptModuleResolution,
 } from 'projen/lib/javascript'
 import {
-	TypeScriptProject,
-	TypeScriptProjectOptions,
+	type TypeScriptProject,
+	type TypeScriptProjectOptions,
 } from 'projen/lib/typescript'
 import { SyntaxKind } from 'ts-morph'
 import LintConfig from './lint-config.ts'
-import { TypeScriptSourceFile } from './typescript-source-file.ts'
-import { UnBuild } from './unbuild.ts'
-import { applyOverrides } from './utils.ts'
+import { TypeScriptSourceFile } from '@arroyodev-llc/projen.component.typescript-source-file'
+import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
+import { applyOverrides } from '@arroyodev-llc/utils.projen'
 import { Vitest, VitestConfigType } from './vitest.ts'
 
 const vueTsConfig: TypescriptConfigOptions = {

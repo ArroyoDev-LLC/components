@@ -234,5 +234,6 @@ new TypeScriptProjectOptionsBuilder(monorepo)
 
 monorepo.addDeps(`${unbuildComponent.package.packageName}@workspace:*`)
 monorepo.addDeps(`${utilsProjen.package.packageName}@workspace:*`)
+monorepo.addDeps(`${tsSourceComponent.package.packageName}@workspace:*`)
 
 monorepo.synth()

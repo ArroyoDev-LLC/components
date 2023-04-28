@@ -1,9 +1,9 @@
+import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { github, LogLevel, release } from 'projen'
 import {
 	TypescriptConfigExtends,
 	TypeScriptModuleResolution,
 } from 'projen/lib/javascript'
-import {LintConfig} from '@arroyodev-llc/projen.component.linting'
 import {
 	NxMonorepoProjectOptionsBuilder,
 	ProjenProjectOptionsBuilder,
@@ -173,7 +173,7 @@ monorepo.addWorkspaceDeps(
 	unbuildComponent,
 	tsSourceComponent,
 	vitestComponent,
-	pnpmWorkspaceComponent,
+	pnpmWorkspaceComponent
 )
 
 monorepo.synth()

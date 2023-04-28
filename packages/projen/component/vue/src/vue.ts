@@ -1,12 +1,13 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { TypeScriptSourceFile } from '@arroyodev-llc/projen.component.typescript-source-file'
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
-import { Vitest } from '@arroyodev-llc/projen.component.vitest'
+import {
+	Vitest,
+	VitestConfigType,
+} from '@arroyodev-llc/projen.component.vitest'
 import { applyOverrides } from '@arroyodev-llc/utils.projen'
 import { Component, DependencyType } from 'projen'
-import {
-	type TypescriptConfig,
-} from 'projen/lib/javascript'
+import { type TypescriptConfig } from 'projen/lib/javascript'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import { SyntaxKind } from 'ts-morph'
 
@@ -16,21 +17,21 @@ export class Vue extends Component {
 		return project.components.find(isVue)
 	}
 
-	tsconfigDev!: TypescriptConfig
-
 	constructor(public readonly project: TypeScriptProject) {
 		super(project)
 
 		this.applyPackage()
 			.applyLintConfig(LintConfig.of(this.project))
 			.applyTsShims()
-			.applyTsConfig(this.project.tsconfig)
+			.applyTsConfig()
 			.applyUnBuild(UnBuild.of(this.project))
-			.applyVitest(Vitest.of(this.project))
+			.applyVitest(Vitest.of(this.project) ?? this.buildVitest())
 	}
 
 	applyPackage(): this {
 		this.project.addDeps('vue', '@vue/runtime-dom')
+		this.project.addDevDeps('vue-tsc')
+		this.project.compileTask.reset('vue-tsc', { args: ['--build'] })
 		return this
 	}
 
@@ -49,30 +50,19 @@ export class Vue extends Component {
 		return this
 	}
 
-	applyTsConfig(tsconfig?: TypescriptConfig): this {
-		if (!tsconfig) return this
-		tsconfig.addInclude('*.d.ts')
-		tsconfig.addInclude(`${this.project.srcdir}/*.vue`)
-		tsconfig.addInclude(`${this.project.srcdir}/**/*.vue`)
-		// applyOverrides(tsconfig.file, vueTsConfig)
-		// const devFiles = {
-		// 	include: this.project.tsconfigDev.include.slice(),
-		// 	exclude: this.project.tsconfigDev.exclude.slice(),
-		// }
-		// this.project.tryRemoveFile('tsconfig.dev.json')
-		// const uniqArray = (array: string[]) => Array.from(new Set(array))
-		// this.tsconfigDev = new TypescriptConfig(this.project, {
-		// 	fileName: 'tsconfig.dev.json',
-		// 	extends: TypescriptConfigExtends.fromTypescriptConfigs([tsconfig]),
-		// 	exclude: uniqArray([...devFiles.exclude, 'node_modules']),
-		// 	include: uniqArray([
-		// 		...tsconfig.include,
-		// 		...devFiles.include,
-		// 		'build.config.json',
-		// 		'test/*.ts',
-		// 	]),
-		// 	compilerOptions: {},
-		// })
+	applyTsConfig(): this {
+		const tsconfig = this.project.tryFindObjectFile('tsconfig.json')!
+		const tsconfigDev = this.project.tryFindObjectFile('tsconfig.dev.json')
+		const includes = [
+			'include',
+			'*.d.ts',
+			`${this.project.srcdir}/*.tsx`,
+			`${this.project.srcdir}/**/*.tsx`,
+			`${this.project.srcdir}/*.vue`,
+			`${this.project.srcdir}/**/*.vue`,
+		]
+		tsconfig.addToArray('include', ...includes)
+		tsconfigDev?.addToArray?.('include', ...includes)
 		return this
 	}
 
@@ -81,6 +71,12 @@ export class Vue extends Component {
 		this.project.addDevDeps('eslint-plugin-vue')
 		component.eslint.addPlugins('eslint-plugin-vue')
 		component.eslint.addExtends('plugin:vue/vue3-recommended')
+		component.eslint.addOverride({
+			files: ['*.vue', '**/*.vue'],
+			rules: {
+				'vue/html-indent': ['off'],
+			},
+		})
 		applyOverrides(component.eslintFile, {
 			parser: 'vue-eslint-parser',
 			'parserOptions.parser': '@typescript-eslint/parser',
@@ -95,7 +91,7 @@ export class Vue extends Component {
 
 	applyUnBuild(component?: UnBuild): this {
 		if (!component) return this
-		// this.tsconfigDev.addInclude(component.file.filePath)
+		this.project.compileTask.exec('unbuild')
 		this.project.deps.addDependency('rollup', DependencyType.BUILD)
 		this.project.deps.addDependency('rollup-plugin-vue', DependencyType.BUILD)
 		component.file.addImport({
@@ -134,6 +130,19 @@ export class Vue extends Component {
 		return this
 	}
 
+	buildVitest(): Vitest {
+		return new Vitest(this.project, {
+			configType: VitestConfigType.PROJECT,
+			settings: {
+				test: {
+					name: this.project.name,
+					environment: 'happy-dom',
+					include: [`${this.project.testdir}/\*\*/\*.spec.ts`],
+				},
+			},
+		})
+	}
+
 	applyVitest(component?: Vitest): this {
 		if (!component) return this
 		this.project.addDevDeps(
@@ -152,6 +161,9 @@ export class Vue extends Component {
 				initializer: '[vue()]',
 			})
 		})
+		this.project.tasks
+			.tryFind('test')
+			?.reset?.('vitest', { args: ['--run'], receiveArgs: true })
 		return this
 	}
 }

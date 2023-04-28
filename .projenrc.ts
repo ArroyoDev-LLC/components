@@ -1,14 +1,19 @@
-import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
+import path from 'node:path'
+import {
+	Vitest,
+	VitestConfigType,
+} from '@arroyodev-llc/projen.component.vitest'
+import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
 import * as nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
 import { github, javascript, JsonFile, LogLevel, release } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import LintConfig from './projenrc/lint-config'
 import {
+	NxMonorepoProjectOptionsBuilder,
 	ProjenProjectOptionsBuilder,
 	TypeScriptProjectOptionsBuilder,
 } from './projenrc/option-builders'
-import { TypescriptProject } from './projenrc/project'
-import { Vitest, VitestConfigType } from './projenrc/vitest'
+import { ProjenComponentProject, TypescriptProject } from './projenrc/project'
 import { VueComponent } from './projenrc/vue'
 
 const arroyoBot = github.GithubCredentials.fromApp({
@@ -51,6 +56,7 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ==',
 	},
 	tsconfig: {
+		exclude: ['packages'],
 		compilerOptions: {
 			rootDir: '.',
 			module: 'ESNext',
@@ -80,26 +86,65 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 		'fs-extra',
 		'@types/fs-extra',
 		'@mrgrain/jsii-struct-builder',
+		'@jsii/spec',
 		'ts-morph',
 		'@sindresorhus/is',
 		'eslint_d',
 		'pathe',
 	],
 })
+const npmConfig = new javascript.NpmConfig(monorepo)
+// default '*' to highest resolution.
+npmConfig.addConfig('resolution-mode', 'highest')
+const tsconfigBase = new javascript.TypescriptConfig(monorepo, {
+	fileName: 'tsconfig.base.json',
+	compilerOptions: {
+		skipLibCheck: true,
+		strict: true,
+		strictNullChecks: true,
+		noUnusedLocals: true,
+		noUnusedParameters: true,
+		noFallthroughCasesInSwitch: true,
+		forceConsistentCasingInFileNames: true,
+	},
+})
+tsconfigBase.file.addOverride('compilerOptions.useDefineForClassFields', true)
+tsconfigBase.file.addDeletionOverride('include')
+tsconfigBase.file.addDeletionOverride('exclude')
 const tsconfigEsm = new javascript.TypescriptConfig(monorepo, {
 	fileName: 'tsconfig.esm.json',
 	compilerOptions: {
 		module: 'ESNext',
 		target: 'ES2022',
 		lib: ['ES2022'],
-		moduleResolution: TypeScriptModuleResolution.NODE,
-		forceConsistentCasingInFileNames: true,
-		verbatimModuleSyntax: true,
-		skipLibCheck: true,
-		strict: true,
-		strictNullChecks: true,
+		allowSyntheticDefaultImports: true,
+		esModuleInterop: true,
 	},
 })
+tsconfigEsm.file.addDeletionOverride('include')
+tsconfigEsm.file.addDeletionOverride('exclude')
+const tsconfigBundler = new javascript.TypescriptConfig(monorepo, {
+	fileName: 'tsconfig.bundler.json',
+	compilerOptions: {
+		moduleResolution: TypeScriptModuleResolution.BUNDLER,
+		allowImportingTsExtensions: true,
+		allowArbitraryExtensions: true,
+		resolveJsonModule: true,
+		isolatedModules: true,
+		verbatimModuleSyntax: true,
+		noEmit: true,
+		jsx: javascript.TypeScriptJsxMode.PRESERVE,
+	},
+})
+tsconfigBundler.file.addDeletionOverride('include')
+tsconfigBundler.file.addDeletionOverride('exclude')
+
+const tsconfigBundledEsmExtends =
+	javascript.TypescriptConfigExtends.fromTypescriptConfigs([
+		tsconfigBase,
+		tsconfigEsm,
+		tsconfigBundler,
+	])
 
 new LintConfig(monorepo)
 
@@ -109,13 +154,6 @@ monorepo.tsconfig.addInclude('**/*.ts')
 monorepo.tsconfig.addInclude('projenrc/**.ts')
 monorepo.tsconfigDev.addInclude('**/*.ts')
 monorepo.tsconfigDev.file.addOverride('compilerOptions.rootDir', '.')
-
-// workaround for:
-// https://github.com/aws/aws-prototyping-sdk/issues/365
-monorepo.package.addBin({
-	'pdk@pnpm-link-bundled-transitive-deps':
-		'./node_modules/@aws-prototyping-sdk/nx-monorepo/scripts/pnpm/link-bundled-transitive-deps.ts',
-})
 
 monorepo.package.addField('type', 'module')
 monorepo.package.file.addOverride('pnpm.patchedDependencies', {
@@ -183,38 +221,53 @@ new release.Release(button, {
 const utilsProjen = new TypescriptProject({
 	name: 'utils.projen',
 	parent: monorepo,
+	tsconfigBase: tsconfigBundledEsmExtends,
 	deps: ['ts-morph'],
 })
 
-const tsSourceComponent = new TypescriptProject({
+const tsSourceComponent = new ProjenComponentProject({
 	name: 'projen.component.typescript-source-file',
 	parent: monorepo,
-	deps: [
-		`${utilsProjen.package.packageName}@workspace:*`,
-		'projen',
-		'ts-morph',
-		'@aws-prototyping-sdk/nx-monorepo',
-	],
+	tsconfigBase: tsconfigBundledEsmExtends,
+	workspaceDeps: [utilsProjen],
+	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo'],
 })
 
-const unbuildComponent = new TypescriptProject({
+const unbuildComponent = new ProjenComponentProject({
 	name: 'projen.component.unbuild',
 	parent: monorepo,
-	deps: [
-		`${utilsProjen.package.packageName}@workspace:*`,
-		`${tsSourceComponent.package.packageName}@workspace:*`,
-		'unbuild',
-		'projen',
-		'ts-morph',
-		'@aws-prototyping-sdk/nx-monorepo',
-	],
+	tsconfigBase: tsconfigBundledEsmExtends,
+	workspaceDeps: [utilsProjen, tsSourceComponent],
+	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo', 'unbuild'],
+})
+
+const vitestComponent = new ProjenComponentProject({
+	name: 'projen.component.vitest',
+	parent: monorepo,
+	tsconfigBase: tsconfigBundledEsmExtends,
+	workspaceDeps: [utilsProjen, tsSourceComponent],
+	deps: ['ts-morph', 'vitest'],
 })
 
 new ProjenProjectOptionsBuilder(monorepo)
 new TypeScriptProjectOptionsBuilder(monorepo)
+new NxMonorepoProjectOptionsBuilder(monorepo)
 
 monorepo.addDeps(`${unbuildComponent.package.packageName}@workspace:*`)
 monorepo.addDeps(`${utilsProjen.package.packageName}@workspace:*`)
 monorepo.addDeps(`${tsSourceComponent.package.packageName}@workspace:*`)
+monorepo.addDeps(`${vitestComponent.package.packageName}@workspace:*`)
+
+monorepo.subProjects.forEach((project) => {
+	if (!(project instanceof TypescriptProject)) return
+	const relPath = cwdRelativePath(
+		monorepo.outdir,
+		path.join(project.outdir, project.srcdir, 'index')
+	)
+	const projName = project.package.packageName.replaceAll('.', '\\.')
+	monorepo.tsconfig!.file.addOverride(`compilerOptions.paths.${projName}`, [
+		relPath,
+	])
+})
 
 monorepo.synth()

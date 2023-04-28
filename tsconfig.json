@@ -53,6 +53,9 @@
       "@arroyodev-llc/projen.component.vitest": [
         "./packages/projen/component/vitest/src/index"
       ],
+      "@arroyodev-llc/projen.component.vue": [
+        "./packages/projen/component/vue/src/index"
+      ],
       "@arroyodev-llc/projen.component.pnpm-workspace": [
         "./packages/projen/component/pnpm-workspace/src/index"
       ]

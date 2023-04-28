@@ -181,6 +181,11 @@
       "type": "runtime"
     },
     {
+      "name": "@arroyodev-llc/projen.component.vue",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@arroyodev-llc/utils.projen",
       "version": "workspace:*",
       "type": "runtime"

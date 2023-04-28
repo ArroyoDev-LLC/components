@@ -1,5 +1,6 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
-import { github, LogLevel, release } from 'projen'
+import { Vue } from '@arroyodev-llc/projen.component.vue'
+import { github, LogLevel } from 'projen'
 import {
 	TypescriptConfigExtends,
 	TypeScriptModuleResolution,
@@ -14,7 +15,6 @@ import {
 	ProjenComponentProject,
 	TypescriptProject,
 } from './projenrc/project'
-import { VueComponent } from './projenrc/vue'
 
 const arroyoBot = github.GithubCredentials.fromApp({
 	appIdSecret: 'AD_BOT_APP_ID',
@@ -92,32 +92,6 @@ const monorepo = new MonorepoProject({
 	],
 })
 
-const text = new VueComponent({
-	parent: monorepo,
-	name: 'vue.ui.text',
-	release: true,
-	releaseToNpm: true,
-})
-LintConfig.of(text)!.eslint.addRules({
-	'vue/multi-word-component-names': ['off'],
-})
-
-const button = new VueComponent({
-	parent: monorepo,
-	name: 'vue.ui.button',
-	deps: ['primevue', text.package.packageName],
-})
-LintConfig.of(button)!.eslint.addRules({
-	'vue/multi-word-component-names': ['off'],
-})
-new release.Release(button, {
-	githubRelease: true,
-	task: button.tasks.tryFind('build')!,
-	branch: 'main',
-	versionFile: 'package.json',
-	artifactsDirectory: button.artifactsDirectory,
-})
-
 const utilsProjen = new TypescriptProject({
 	name: 'utils.projen',
 	parent: monorepo,
@@ -187,7 +161,33 @@ monorepo.addWorkspaceDeps(
 	unbuildComponent,
 	tsSourceComponent,
 	vitestComponent,
+	vueComponent,
 	pnpmWorkspaceComponent
 )
+
+// Vue Components
+
+const text = new TypescriptProject({
+	name: 'vue.ui.text',
+	parent: monorepo,
+	tsconfigBase: monorepo.esmBundledTsconfigExtends,
+	release: true,
+})
+new Vue(text)
+LintConfig.of(text)!.eslint.addRules({
+	'vue/multi-word-component-names': ['off'],
+})
+
+const button = new TypescriptProject({
+	name: 'vue.ui.button',
+	parent: monorepo,
+	tsconfigBase: monorepo.esmBundledTsconfigExtends,
+	workspaceDeps: [text],
+	deps: ['primevue'],
+})
+new Vue(button)
+LintConfig.of(button)!.eslint.addRules({
+	'vue/multi-word-component-names': ['off'],
+})
 
 monorepo.synth()

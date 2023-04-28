@@ -35,6 +35,7 @@
     "@arroyodev-llc/projen.component.typescript-source-file",
     "@arroyodev-llc/projen.component.unbuild",
     "@arroyodev-llc/projen.component.vitest",
+    "@arroyodev-llc/projen.component.vue",
     "@arroyodev-llc/utils.projen"
   ]
 }

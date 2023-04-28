@@ -2,12 +2,12 @@
 import PrimeButton from 'primevue/button'
 
 export interface ButtonProps {
-	size: 'sm' | 'md' | 'lg'
+	size?: 'small' | 'large'
 	variant: 'primary' | 'outline' | 'text'
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-	size: 'md',
+	size: 'small',
 	variant: 'primary',
 })
 </script>

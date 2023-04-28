@@ -13,5 +13,5 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 </script>
 
 <template>
-	<PrimeButton v-bind="$attrs" />
+	<PrimeButton v-bind="($attrs, props)" />
 </template>

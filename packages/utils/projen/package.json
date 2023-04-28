@@ -20,6 +20,8 @@
   },
   "author": {
     "name": "arroyoDev-LLC",
+    "email": "support@arroyodev.com",
+    "url": "https://arroyodev.com",
     "organization": true
   },
   "devDependencies": {

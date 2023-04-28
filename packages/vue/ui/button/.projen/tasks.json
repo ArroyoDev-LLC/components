@@ -130,9 +130,7 @@
       "name": "stub",
       "steps": [
         {
-          "args": [
-            "--stub"
-          ]
+          "exec": "unbuild --stub"
         }
       ]
     },

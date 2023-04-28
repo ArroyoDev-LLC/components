@@ -163,6 +163,20 @@ const lintingComponent = new ProjenComponentProject({
 	workspaceDeps: [utilsProjen],
 })
 
+const vueComponent = new ProjenComponentProject({
+	name: 'projen.component.vue',
+	parent: monorepo,
+	tsconfigBase: monorepo.esmBundledTsconfigExtends,
+	workspaceDeps: [
+		utilsProjen,
+		lintingComponent,
+		unbuildComponent,
+		vitestComponent,
+		tsSourceComponent,
+	],
+	deps: ['ts-morph'],
+})
+
 new ProjenProjectOptionsBuilder(monorepo)
 new TypeScriptProjectOptionsBuilder(monorepo)
 new NxMonorepoProjectOptionsBuilder(monorepo)

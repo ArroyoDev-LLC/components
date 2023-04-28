@@ -243,6 +243,13 @@ const tsSourceComponent = new ProjenComponentProject({
 	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo'],
 })
 
+const pnpmWorkspaceComponent = new ProjenComponentProject({
+	name: 'projen.component.pnpm-workspace',
+	parent: monorepo,
+	tsconfigBase: tsconfigBundledEsmExtends,
+	workspaceDeps: [utilsProjen],
+})
+
 const unbuildComponent = new ProjenComponentProject({
 	name: 'projen.component.unbuild',
 	parent: monorepo,
@@ -267,6 +274,7 @@ monorepo.addDeps(`${unbuildComponent.package.packageName}@workspace:*`)
 monorepo.addDeps(`${utilsProjen.package.packageName}@workspace:*`)
 monorepo.addDeps(`${tsSourceComponent.package.packageName}@workspace:*`)
 monorepo.addDeps(`${vitestComponent.package.packageName}@workspace:*`)
+monorepo.addDeps(`${pnpmWorkspaceComponent.package.packageName}@workspace:*`)
 
 monorepo.subProjects.forEach((project) => {
 	if (!(project instanceof TypescriptProject)) return

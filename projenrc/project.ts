@@ -7,7 +7,7 @@ import {
 import nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
 import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
-import LintConfig from './lint-config'
+import {LintConfig} from '@arroyodev-llc/projen.component.linting'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 import type { ProjenProjectOptions } from './projen-project-options'
 import type { TypeScriptProjectOptions } from './typescript-project-options'

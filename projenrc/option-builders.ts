@@ -3,7 +3,7 @@ import { CollectionKind, PrimitiveType } from '@jsii/spec'
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder'
 import path from 'pathe'
 import { type cdk, Component, type typescript } from 'projen'
-import LintConfig from './lint-config.ts'
+import {LintConfig} from '@arroyodev-llc/projen.component.linting'
 
 const typescriptStructMixin = Struct.empty()
 	.add({

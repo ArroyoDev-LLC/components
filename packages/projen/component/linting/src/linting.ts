@@ -1,10 +1,13 @@
 import { applyOverrides } from '@arroyodev-llc/utils.projen'
-import type { ObjectFile, Project } from 'projen'
-import { Component } from 'projen'
-import type { NodeProject, PrettierOptions } from 'projen/lib/javascript'
-import { Eslint, Prettier } from 'projen/lib/javascript'
+import { Component, type ObjectFile, type Project } from 'projen'
+import {
+	type NodeProject,
+	type PrettierOptions,
+	Eslint,
+	Prettier,
+} from 'projen/lib/javascript'
 
-class LintConfig extends Component {
+export class LintConfig extends Component {
 	public static of(project: Project): LintConfig | undefined {
 		const isLintConfig = (o: Component): o is LintConfig =>
 			o instanceof LintConfig
@@ -59,5 +62,3 @@ class LintConfig extends Component {
 		this.eslintFile = project.tryFindObjectFile('.eslintrc.json')!
 	}
 }
-
-export default LintConfig

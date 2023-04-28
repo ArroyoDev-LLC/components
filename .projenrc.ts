@@ -3,7 +3,7 @@ import {
 	TypescriptConfigExtends,
 	TypeScriptModuleResolution,
 } from 'projen/lib/javascript'
-import LintConfig from './projenrc/lint-config'
+import {LintConfig} from '@arroyodev-llc/projen.component.linting'
 import {
 	NxMonorepoProjectOptionsBuilder,
 	ProjenProjectOptionsBuilder,
@@ -169,10 +169,11 @@ new NxMonorepoProjectOptionsBuilder(monorepo)
 
 monorepo.addWorkspaceDeps(
 	utilsProjen,
+	lintingComponent,
 	unbuildComponent,
 	tsSourceComponent,
 	vitestComponent,
-	pnpmWorkspaceComponent
+	pnpmWorkspaceComponent,
 )
 
 monorepo.synth()

@@ -1,8 +1,14 @@
-import path from 'node:path'
+import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
-import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
-import { cdk, javascript, typescript } from 'projen'
+import {
+	Vitest,
+	VitestConfigType,
+} from '@arroyodev-llc/projen.component.vitest'
+import nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
+import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
+import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import LintConfig from './lint-config'
+import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 import type { ProjenProjectOptions } from './projen-project-options'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
 
@@ -37,11 +43,158 @@ const projectDefaults = {
 	libdir: 'dist',
 	typescriptVersion: '^5',
 	authorAddress: 'support@arroyodev.com',
+	authorEmail: 'support@arroyodev.com',
+	authorUrl: 'https://arroyodev.com',
 	author: 'arroyoDev-LLC',
 	authorOrganization: true,
 	repositoryUrl: 'https://github.com/arroyodev-llc/components',
 	projenrcTs: true,
 } satisfies ProjenProjectOptions
+
+export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
+	public readonly esmBundledTsconfigExtends: javascript.TypescriptConfigExtends
+
+	constructor(options: NxMonorepoProjectOptions) {
+		const { workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
+		super({
+			...projectDefaults,
+			releaseToNpm: false,
+			projenDevDependency: true,
+			tsconfig,
+			...rest,
+		})
+		const pnpmWorkspace = new PnpmWorkspace(this)
+		pnpmWorkspace.addWorkspaceDeps(...(workspaceDeps ?? []))
+		new LintConfig(this)
+		this.gitignore.exclude('.idea', '.idea/**')
+		this.addDevDeps('tsx')
+		this.defaultTask!.reset('tsx .projenrc.ts')
+		new JsonFile(this, '.ncurc.json', {
+			readonly: true,
+			marker: false,
+			allowComments: false,
+			obj: {
+				reject: [],
+			},
+		})
+		new Vitest(this, {
+			configType: VitestConfigType.WORKSPACE,
+			settings: {
+				test: {
+					threads: true,
+				},
+			},
+		})
+		this.esmBundledTsconfigExtends = this.buildEsmBundledTsConfig()
+		this.buildNpmConfig().applyGithub(this.github!).applyPackage(this.package)
+		this.tsconfigDev!.addExtends(this.tsconfig!)
+	}
+
+	protected applyGithub(gh: github.GitHub): this {
+		const build = gh.tryFindWorkflow('build')!
+		return this.applyGithubBuildFlow(build)
+	}
+
+	protected applyGithubBuildFlow(workflow: github.GithubWorkflow): this {
+		const buildJob = workflow.getJob('build')! as github.workflows.Job
+		workflow.updateJob('build', {
+			...buildJob,
+			env: {
+				...buildJob.env,
+				NX_NON_NATIVE_HASHER: 'true',
+				NX_BRANCH: '${{ github.event.number }}',
+				NX_RUN_GROUP: '${{ github.run_id }}',
+				NX_CLOUD_ACCESS_TOKEN: '${{ secrets.NX_CLOUD_ACCESS_TOKEN }}',
+			},
+		})
+		return this
+	}
+
+	protected applyPackage(nodePackage: javascript.NodePackage): this {
+		nodePackage.addField('type', 'module')
+		PnpmWorkspace.of(this)!.addPatch(
+			'projen@0.71.7',
+			'patches/projen@0.71.7.patch'
+		)
+		this.addNxRunManyTask('stub', {
+			skipCache: true,
+			target: 'stub',
+		})
+		this.addScripts({
+			postinstall: 'projen stub',
+		})
+		return this
+	}
+
+	protected buildNpmConfig(): this {
+		const npmConfig = new javascript.NpmConfig(this)
+		// default '*' to highest resolution.
+		npmConfig.addConfig('resolution-mode', 'highest')
+		return this
+	}
+
+	protected buildEsmBundledTsConfig() {
+		const base = this.buildExtendableTypeScriptConfig('tsconfig.base.json', {
+			skipLibCheck: true,
+			strict: true,
+			strictNullChecks: true,
+			resolveJsonModule: true,
+			noImplicitThis: true,
+			noUnusedLocals: true,
+			noUnusedParameters: true,
+			noFallthroughCasesInSwitch: true,
+			forceConsistentCasingInFileNames: true,
+		})
+		base.file.addOverride('compilerOptions.useDefineForClassFields', true)
+		const esm = this.buildExtendableTypeScriptConfig('tsconfig.esm.json', {
+			module: 'ESNext',
+			target: 'ES2022',
+			lib: ['ES2022'],
+			allowSyntheticDefaultImports: true,
+			esModuleInterop: true,
+		})
+		const bundler = this.buildExtendableTypeScriptConfig(
+			'tsconfig.bundler.json',
+			{
+				moduleResolution: TypeScriptModuleResolution.BUNDLER,
+				allowImportingTsExtensions: true,
+				allowArbitraryExtensions: true,
+				resolveJsonModule: true,
+				isolatedModules: true,
+				verbatimModuleSyntax: true,
+				noEmit: true,
+				jsx: javascript.TypeScriptJsxMode.PRESERVE,
+			}
+		)
+		return javascript.TypescriptConfigExtends.fromTypescriptConfigs([
+			base,
+			esm,
+			bundler,
+		])
+	}
+
+	/**
+	 * Build tsconfig primed for extending.
+	 * @param fileName File name of tsconfig.
+	 * @param options Compiler options.
+	 */
+	buildExtendableTypeScriptConfig(
+		fileName: string,
+		options: javascript.TypeScriptCompilerOptions
+	): javascript.TypescriptConfig {
+		const config = new javascript.TypescriptConfig(this, {
+			fileName,
+			compilerOptions: options,
+		})
+		config.file.addDeletionOverride('include')
+		config.file.addDeletionOverride('exclude')
+		return config
+	}
+
+	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
+		return PnpmWorkspace.of(this)!.addWorkspaceDeps(...dependency)
+	}
+}
 
 export class ProjenProject extends cdk.JsiiProject {
 	public readonly projectName: ProjectName
@@ -83,6 +236,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			...rest,
 		})
 		this.projectName = projectName
+		new PnpmWorkspace(this)
 
 		const tsconfigPaths = this.copyTsConfigFiles(super.tsconfig, {
 			include: ['src/*.ts', 'src/**/*.ts'],
@@ -143,20 +297,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 	}
 
 	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
-		dependency.forEach((dep) => {
-			const depName = typeof dep === 'string' ? dep : dep.package.packageName
-			this.addDeps(`${depName}@workspace:*`)
-			if (dep instanceof TypescriptProject) {
-				const tsPath = cwdRelativePath(
-					this.outdir,
-					path.join(path.join(dep.outdir, dep.srcdir), 'index')
-				)
-				const depNamePath = depName.replaceAll('.', '\\.')
-				this.tsconfig.file.addOverride(`compilerOptions.paths.${depNamePath}`, [
-					tsPath,
-				])
-			}
-		})
+		return PnpmWorkspace.of(this)!.addWorkspaceDeps(...dependency)
 	}
 }
 

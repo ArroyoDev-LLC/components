@@ -30,12 +30,16 @@
     "allowArbitraryExtensions": true,
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     ".projenrc.js",
     "src/**/*.ts",
     "test/**/*.ts",
+    ".projenrc.ts",
+    "projenrc",
+    "./*.ts",
     "**/*.ts",
     "vitest.config.ts",
     ".projenrc.ts",

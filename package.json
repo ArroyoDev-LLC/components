@@ -14,12 +14,14 @@
     "post-upgrade": "pnpm exec projen post-upgrade",
     "pre-compile": "pnpm exec projen pre-compile",
     "run-many": "pnpm exec projen run-many",
+    "stub": "pnpm exec projen stub",
     "synth-workspace": "pnpm exec projen synth-workspace",
     "test": "pnpm exec projen test",
     "upgrade": "pnpm exec projen upgrade",
     "upgrade-deps": "pnpm exec projen upgrade-deps",
     "watch": "pnpm exec projen watch",
-    "projen": "pnpm exec projen"
+    "projen": "pnpm exec projen",
+    "postinstall": "projen stub"
   },
   "author": {
     "name": "arroyoDev",
@@ -66,6 +68,7 @@
     "vitest": "^0.30.1"
   },
   "dependencies": {
+    "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/projen.component.unbuild": "workspace:*",
     "@arroyodev-llc/projen.component.vitest": "workspace:*",
@@ -98,6 +101,7 @@
       "packages/vue/ui/button",
       "packages/utils/projen",
       "packages/projen/component/typescript-source-file",
+      "packages/projen/component/pnpm-workspace",
       "packages/projen/component/unbuild",
       "packages/projen/component/vitest"
     ]

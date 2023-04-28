@@ -32,7 +32,11 @@
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
+      "@arroyodev-llc/projen.component.pnpm-workspace": [
+        "./packages/projen/component/pnpm-workspace/src/index"
+      ],
       "@arroyodev-llc/projen.component.typescript-source-file": [
         "./packages/projen/component/typescript-source-file/src/index"
       ],
@@ -49,6 +53,9 @@
   },
   "include": [
     "src/**/*.ts",
+    ".projenrc.ts",
+    "projenrc",
+    "./*.ts",
     "**/*.ts",
     "projenrc/**.ts"
   ],

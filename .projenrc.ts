@@ -156,6 +156,13 @@ const vitestComponent = new ProjenComponentProject({
 	deps: ['ts-morph', 'vitest'],
 })
 
+const lintingComponent = new ProjenComponentProject({
+	name: 'projen.component.linting',
+	parent: monorepo,
+	tsconfigBase: monorepo.esmBundledTsconfigExtends,
+	workspaceDeps: [utilsProjen],
+})
+
 new ProjenProjectOptionsBuilder(monorepo)
 new TypeScriptProjectOptionsBuilder(monorepo)
 new NxMonorepoProjectOptionsBuilder(monorepo)

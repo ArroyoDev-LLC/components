@@ -8,3 +8,4 @@ packages:
   - packages/projen/component/pnpm-workspace
   - packages/projen/component/unbuild
   - packages/projen/component/vitest
+  - packages/projen/component/linting

@@ -68,6 +68,7 @@
     "vitest": "^0.30.1"
   },
   "dependencies": {
+    "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/projen.component.unbuild": "workspace:*",

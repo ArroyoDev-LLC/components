@@ -41,6 +41,9 @@
       "@arroyodev-llc/utils.projen": [
         "./packages/utils/projen/src/index"
       ],
+      "@arroyodev-llc/projen.component.linting": [
+        "./packages/projen/component/linting/src/index"
+      ],
       "@arroyodev-llc/projen.component.unbuild": [
         "./packages/projen/component/unbuild/src/index"
       ],

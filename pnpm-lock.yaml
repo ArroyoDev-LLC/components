@@ -146,6 +146,58 @@ importers:
         specifier: ^0.30.1
         version: 0.30.1
 
+  packages/projen/component/linting:
+    dependencies:
+      '@arroyodev-llc/utils.projen':
+        specifier: workspace:*
+        version: link:../../../utils/projen
+    devDependencies:
+      '@types/node':
+        specifier: ^16
+        version: 16.18.25
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^5
+        version: 5.58.0(@typescript-eslint/parser@5.58.0)(eslint@8.38.0)(typescript@5.0.4)
+      '@typescript-eslint/parser':
+        specifier: ^5
+        version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
+      eslint:
+        specifier: ^8
+        version: 8.38.0
+      eslint-config-prettier:
+        specifier: ^8.8.0
+        version: 8.8.0(eslint@8.38.0)
+      eslint-import-resolver-node:
+        specifier: ^0.3.7
+        version: 0.3.7
+      eslint-import-resolver-typescript:
+        specifier: ^3.5.5
+        version: 3.5.5(@typescript-eslint/parser@5.58.0)(eslint-import-resolver-node@0.3.7)(eslint-plugin-import@2.27.5)(eslint@8.38.0)
+      eslint-plugin-import:
+        specifier: ^2.27.5
+        version: 2.27.5(@typescript-eslint/parser@5.58.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.38.0)
+      eslint-plugin-prettier:
+        specifier: ^4.2.1
+        version: 4.2.1(eslint-config-prettier@8.8.0)(eslint@8.38.0)(prettier@2.8.8)
+      npm-check-updates:
+        specifier: ^16
+        version: 16.10.9
+      prettier:
+        specifier: ^2.8.8
+        version: 2.8.8
+      projen:
+        specifier: 0.71.7
+        version: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+      standard-version:
+        specifier: ^9
+        version: 9.0.0
+      typescript:
+        specifier: ^5
+        version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
+
   packages/projen/component/pnpm-workspace:
     dependencies:
       '@arroyodev-llc/utils.projen':

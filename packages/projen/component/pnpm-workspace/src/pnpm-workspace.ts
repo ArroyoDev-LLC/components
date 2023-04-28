@@ -25,7 +25,7 @@ export class PnpmWorkspace extends Component {
 		dependencyName: string,
 		constraint: string = '*'
 	): string {
-		return [dependencyName, '@', 'workspace:', constraint].join()
+		return [dependencyName, '@', 'workspace:', constraint].join('')
 	}
 
 	/**
@@ -57,5 +57,21 @@ export class PnpmWorkspace extends Component {
 				this.addTsConfigPath(dep)
 			}
 		})
+	}
+
+	/**
+	 * Define pnpm patch.
+	 * @param dependency Dependency name with version constraint.
+	 * @param patchPath Path to patch file.
+	 */
+	addPatch(dependency: string, patchPath: string): this {
+		this.project.package.file.addOverride('pnpm.patchedDependencies', {
+			[dependency]: patchPath,
+		})
+		const ncuFile = this.project.tryFindObjectFile('.ncurc.json')
+		if (ncuFile) {
+			ncuFile.addToArray('reject', dependency.split('@')[0])
+		}
+		return this
 	}
 }

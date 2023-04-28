@@ -1,3 +1,4 @@
+import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { TypeScriptSourceFile } from '@arroyodev-llc/projen.component.typescript-source-file'
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
 import {
@@ -17,7 +18,6 @@ import {
 	type TypeScriptProjectOptions,
 } from 'projen/lib/typescript'
 import { SyntaxKind } from 'ts-morph'
-import {LintConfig} from '@arroyodev-llc/projen.component.linting'
 
 const vueTsConfig: TypescriptConfigOptions = {
 	compilerOptions: {

@@ -9,3 +9,4 @@ packages:
   - packages/projen/component/unbuild
   - packages/projen/component/vitest
   - packages/projen/component/linting
+  - packages/projen/component/vue

@@ -47,7 +47,7 @@ export class UnBuild extends Component {
 		})
 
 		const stubTask = this.project.addTask('stub')
-		stubTask.spawn('unbuild', { args: ['--stub'] })
+		stubTask.exec('unbuild --stub')
 
 		const exportInfo = this.buildExportInfo()
 		this.project.package.addField('module', exportInfo.import)

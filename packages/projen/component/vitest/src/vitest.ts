@@ -1,4 +1,9 @@
 import path from 'node:path'
+import {
+	TypeScriptSourceFile,
+	type TypeScriptSourceFileTransform,
+} from '@arroyodev-llc/projen.component.typescript-source-file'
+import { addPropertyAssignmentsFromObject } from '@arroyodev-llc/utils.projen'
 import { Component, JsonFile, type Project } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import {
@@ -7,11 +12,6 @@ import {
 	SyntaxKind,
 } from 'ts-morph'
 import { type UserWorkspaceConfig } from 'vitest/config'
-import {
-	TypeScriptSourceFile,
-	type TypeScriptSourceFileTransform,
-} from '@arroyodev-llc/projen.component.typescript-source-file'
-import { addPropertyAssignmentsFromObject } from '@arroyodev-llc/utils.projen'
 
 export enum VitestConfigType {
 	WORKSPACE = 'Workspace',

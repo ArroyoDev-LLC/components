@@ -2,5 +2,8 @@
 
 import { defineBuildConfig, type BuildConfig } from 'unbuild'
 
-const config: BuildConfig = {}
+const config: BuildConfig = {
+	name: '@arroyodev-llc/projen.component.typescript-source-file',
+	declaration: true,
+}
 export default defineBuildConfig(config)

@@ -7,7 +7,6 @@ import {
 } from '@arroyodev-llc/projen.component.vitest'
 import { applyOverrides } from '@arroyodev-llc/utils.projen'
 import { Component, DependencyType } from 'projen'
-import { type TypescriptConfig } from 'projen/lib/javascript'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import { SyntaxKind } from 'ts-morph'
 

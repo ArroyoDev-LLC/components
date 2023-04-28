@@ -43,6 +43,12 @@
       "description": "Only compile",
       "steps": [
         {
+          "exec": "vue-tsc",
+          "args": [
+            "--build"
+          ]
+        },
+        {
           "exec": "unbuild"
         }
       ]
@@ -174,19 +180,19 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@arroyodev-llc/vue.ui.text'"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@arroyodev-llc/vue.ui.text'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@arroyodev-llc/vue.ui.text'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@arroyodev-llc/vue.ui.text'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@arroyodev-llc/vue.ui.text'"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"

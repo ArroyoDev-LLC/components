@@ -43,6 +43,12 @@
       "description": "Only compile",
       "steps": [
         {
+          "exec": "vue-tsc",
+          "args": [
+            "--build"
+          ]
+        },
+        {
           "exec": "unbuild"
         }
       ]

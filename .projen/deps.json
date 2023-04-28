@@ -155,6 +155,11 @@
       "type": "override"
     },
     {
+      "name": "@arroyodev-llc/projen.component.pnpm-workspace",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@arroyodev-llc/projen.component.typescript-source-file",
       "version": "workspace:*",
       "type": "runtime"

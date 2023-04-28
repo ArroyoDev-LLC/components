@@ -129,6 +129,16 @@
         }
       ]
     },
+    "stub": {
+      "name": "stub",
+      "steps": [
+        {
+          "args": [
+            "--stub"
+          ]
+        }
+      ]
+    },
     "test": {
       "name": "test",
       "description": "Run tests",

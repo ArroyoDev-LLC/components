@@ -185,6 +185,18 @@
         }
       ]
     },
+    "stub": {
+      "name": "stub",
+      "env": {
+        "NX_NON_NATIVE_HASHER": "true"
+      },
+      "steps": [
+        {
+          "exec": "pnpm exec nx run-many --target=stub --output-style=stream --skip-nx-cache --nx-bail",
+          "receiveArgs": true
+        }
+      ]
+    },
     "synth-workspace": {
       "name": "synth-workspace",
       "description": "Synthesize workspace",
@@ -218,19 +230,19 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='projen,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"

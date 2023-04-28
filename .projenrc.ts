@@ -96,6 +96,13 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 		'pathe',
 	],
 })
+monorepo.addNxRunManyTask('stub', {
+	skipCache: true,
+	target: 'stub',
+})
+monorepo.addScripts({
+	postinstall: 'projen stub',
+})
 const npmConfig = new javascript.NpmConfig(monorepo)
 // default '*' to highest resolution.
 npmConfig.addConfig('resolution-mode', 'highest')

@@ -273,7 +273,9 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		this.package.addField('type', 'module')
 		this.package.addField('sideEffects', false)
 		new LintConfig(this)
-		new UnBuild(this)
+		new UnBuild(this, {
+			options: { name: this.projectName.packageName, declaration: true },
+		})
 		this.compileTask.exec('unbuild')
 	}
 

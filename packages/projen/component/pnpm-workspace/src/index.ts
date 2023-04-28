@@ -1,1 +1,1 @@
-export * from './pnpm-workspace.ts'
+export * from './pnpm-workspace'

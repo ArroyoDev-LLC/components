@@ -31,12 +31,28 @@
     "allowArbitraryExtensions": true,
     "emitDeclarationOnly": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@arroyodev-llc/projen.component.typescript-source-file": [
+        "./packages/projen/component/typescript-source-file/src/index"
+      ],
+      "@arroyodev-llc/projen.component.unbuild": [
+        "./packages/projen/component/unbuild/src/index"
+      ],
+      "@arroyodev-llc/projen.component.vitest": [
+        "./packages/projen/component/vitest/src/index"
+      ],
+      "@arroyodev-llc/utils.projen": [
+        "./packages/utils/projen/src/index"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts",
     "**/*.ts",
     "projenrc/**.ts"
   ],
-  "exclude": []
+  "exclude": [
+    "packages"
+  ]
 }

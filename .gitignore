@@ -51,7 +51,10 @@ jspm_packages/
 !/.syncpackrc.json
 !/.nxignore
 !/nx.json
+!/.npmrc
+!/tsconfig.base.json
 !/tsconfig.esm.json
+!/tsconfig.bundler.json
 .idea
 .idea/**
 !/.ncurc.json
@@ -61,3 +64,4 @@ jspm_packages/
 !/renovate.json5
 !/projenrc/projen-project-options.ts
 !/projenrc/typescript-project-options.ts
+!/projenrc/nx-monorepo-project-options.ts

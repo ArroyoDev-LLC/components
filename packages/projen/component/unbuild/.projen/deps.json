@@ -50,6 +50,10 @@
       "type": "build"
     },
     {
+      "name": "projen",
+      "type": "build"
+    },
+    {
       "name": "standard-version",
       "version": "^9",
       "type": "build"
@@ -64,6 +68,10 @@
       "type": "build"
     },
     {
+      "name": "projen",
+      "type": "peer"
+    },
+    {
       "name": "@arroyodev-llc/projen.component.typescript-source-file",
       "version": "workspace:*",
       "type": "runtime"
@@ -75,10 +83,6 @@
     },
     {
       "name": "@aws-prototyping-sdk/nx-monorepo",
-      "type": "runtime"
-    },
-    {
-      "name": "projen",
       "type": "runtime"
     },
     {

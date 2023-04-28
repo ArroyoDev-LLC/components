@@ -156,6 +156,11 @@
       "type": "override"
     },
     {
+      "name": "@arroyodev-llc/projen.component.linting",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@arroyodev-llc/projen.component.pnpm-workspace",
       "version": "workspace:*",
       "type": "runtime"

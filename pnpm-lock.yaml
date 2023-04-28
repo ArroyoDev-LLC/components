@@ -12,6 +12,9 @@ importers:
 
   .:
     dependencies:
+      '@arroyodev-llc/projen.component.linting':
+        specifier: workspace:*
+        version: link:packages/projen/component/linting
       '@arroyodev-llc/projen.component.pnpm-workspace':
         specifier: workspace:*
         version: link:packages/projen/component/pnpm-workspace

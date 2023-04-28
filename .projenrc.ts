@@ -168,22 +168,4 @@ monorepo.addWorkspaceDeps(
 	pnpmWorkspaceComponent
 )
 
-// monorepo.addDeps(`${unbuildComponent.package.packageName}@workspace:*`)
-// monorepo.addDeps(`${utilsProjen.package.packageName}@workspace:*`)
-// monorepo.addDeps(`${tsSourceComponent.package.packageName}@workspace:*`)
-// monorepo.addDeps(`${vitestComponent.package.packageName}@workspace:*`)
-// monorepo.addDeps(`${pnpmWorkspaceComponent.package.packageName}@workspace:*`)
-
-// monorepo.subProjects.forEach((project) => {
-// 	if (!(project instanceof TypescriptProject)) return
-// 	const relPath = cwdRelativePath(
-// 		monorepo.outdir,
-// 		path.join(project.outdir, project.srcdir, 'index')
-// 	)
-// 	const projName = project.package.packageName.replaceAll('.', '\\.')
-// 	monorepo.tsconfig!.file.addOverride(`compilerOptions.paths.${projName}`, [
-// 		relPath,
-// 	])
-// })
-
 monorepo.synth()

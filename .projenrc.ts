@@ -57,6 +57,7 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 	},
 	tsconfig: {
 		exclude: ['packages'],
+		include: ['.projenrc.ts', 'projenrc', './*.ts'],
 		compilerOptions: {
 			rootDir: '.',
 			module: 'ESNext',
@@ -70,6 +71,8 @@ const monorepo = new nx_monorepo.NxMonorepoProject({
 			skipLibCheck: true,
 			strict: true,
 			strictNullChecks: true,
+			allowSyntheticDefaultImports: true,
+			esModuleInterop: true,
 		},
 	},
 	projenVersion: '0.71.7',

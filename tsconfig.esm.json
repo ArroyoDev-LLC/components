@@ -6,17 +6,7 @@
     "lib": [
       "ES2022"
     ],
-    "moduleResolution": "node",
-    "forceConsistentCasingInFileNames": true,
-    "verbatimModuleSyntax": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "strictNullChecks": true
-  },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
 }

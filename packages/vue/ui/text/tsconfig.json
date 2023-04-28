@@ -36,7 +36,6 @@
   },
   "include": [
     "src/**/*.ts",
-    "build.config.ts",
     "*.d.ts",
     "src/*.vue",
     "src/**/*.vue"

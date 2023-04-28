@@ -4,12 +4,12 @@
   "compilerOptions": {},
   "include": [
     "src/**/*.ts",
-    "build.config.ts",
     "*.d.ts",
     "src/*.vue",
     "src/**/*.vue",
     ".projenrc.js",
     "test/**/*.ts",
+    "build.config.ts",
     "vitest.config.ts",
     "build.config.json",
     "test/*.ts",

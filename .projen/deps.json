@@ -5,6 +5,10 @@
       "type": "build"
     },
     {
+      "name": "@jsii/spec",
+      "type": "build"
+    },
+    {
       "name": "@mrgrain/jsii-struct-builder",
       "type": "build"
     },
@@ -157,6 +161,11 @@
     },
     {
       "name": "@arroyodev-llc/projen.component.unbuild",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.vitest",
       "version": "workspace:*",
       "type": "runtime"
     },

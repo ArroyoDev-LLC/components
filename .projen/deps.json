@@ -135,6 +135,7 @@
     },
     {
       "name": "typescript",
+      "version": "^5",
       "type": "build"
     },
     {

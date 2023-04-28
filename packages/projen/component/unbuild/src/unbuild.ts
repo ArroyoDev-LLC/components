@@ -1,8 +1,12 @@
+import path from 'node:path'
 import {
 	TypeScriptSourceFile,
 	type TypeScriptSourceFileTransform,
 } from '@arroyodev-llc/projen.component.typescript-source-file'
-import { addPropertyAssignmentsFromObject } from '@arroyodev-llc/utils.projen'
+import {
+	addPropertyAssignmentsFromObject,
+	cwdRelativePath,
+} from '@arroyodev-llc/utils.projen'
 import { Component, DependencyType } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import {
@@ -13,6 +17,7 @@ import {
 import { type BuildConfig as UnBuildBuildConfig } from 'unbuild'
 
 export interface UnBuildOptions {
+	cjs?: boolean
 	options?: UnBuildBuildConfig
 }
 
@@ -22,22 +27,36 @@ export class UnBuild extends Component {
 		return project.components.find(isUnBuild)
 	}
 
-	readonly options: UnBuildBuildConfig
+	readonly unbuildOptions: UnBuildBuildConfig
 
 	readonly file: TypeScriptSourceFile
 
 	constructor(
 		public readonly project: TypeScriptProject,
-		options: UnBuildOptions = {}
+		public readonly options: UnBuildOptions = { cjs: true }
 	) {
 		super(project)
-		this.options = options.options ?? {}
+		this.unbuildOptions = options.options ?? {}
 		this.project.deps.addDependency('unbuild', DependencyType.BUILD)
-		this.project.tsconfig!.addInclude('build.config.ts')
-		this.project.eslint!.addOverride({
+		this.project.tsconfigDev?.addInclude?.('build.config.ts')
+		this.project.eslint?.addOverride?.({
 			files: ['build.config.ts'],
 			rules: {
 				'import/no-extraneous-dependencies': ['off'],
+			},
+		})
+
+		const exportInfo = this.buildExportInfo()
+		this.project.package.addField('module', exportInfo.import)
+		if (this.options.cjs) {
+			this.project.package.addField('main', exportInfo.require)
+		}
+		this.project.package.addField('types', exportInfo.types)
+		this.project.package.addField('exports', {
+			'.': {
+				import: exportInfo.import,
+				types: exportInfo.types,
+				...(this.options.cjs && { require: exportInfo.require }),
 			},
 		})
 
@@ -61,8 +80,19 @@ export class UnBuild extends Component {
 
 		// add build options
 		this.addConfigTransform((configExpr) => {
-			addPropertyAssignmentsFromObject(configExpr, this.options)
+			addPropertyAssignmentsFromObject(configExpr, this.unbuildOptions)
 		})
+	}
+
+	buildExportInfo() {
+		const makePath = (distFile: string) =>
+			cwdRelativePath('.', path.join(this.project.libdir, distFile))
+		const defaultExports = {
+			import: makePath('index.mjs'),
+			types: makePath('index.d.ts'),
+			require: makePath('index.cjs'),
+		}
+		return defaultExports
 	}
 
 	addConfigTransform(

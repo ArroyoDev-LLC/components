@@ -1,9 +1,10 @@
+import path from 'node:path'
+import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
+import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
 import { cdk, javascript, typescript } from 'projen'
 import LintConfig from './lint-config'
 import type { ProjenProjectOptions } from './projen-project-options'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
-import {UnBuild} from "@arroyodev-llc/projen.component.unbuild";
-import { config } from "rxjs";
 
 export class ProjectName {
 	constructor(readonly name: string) {}
@@ -69,7 +70,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 	public readonly tsconfigDev: javascript.TypescriptConfig
 
 	constructor(options: TypeScriptProjectOptions) {
-		const { name, ...rest } = options
+		const { name, workspaceDeps, tsconfigBase, ...rest } = options
 		const projectName = new ProjectName(name)
 		super({
 			...projectDefaults,
@@ -83,14 +84,10 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		})
 		this.projectName = projectName
 
-		const parent = this.parent!
-		const parentEsmTsconfig =
-			parent.tryFindFile('tsconfig.esm.json')!.absolutePath
-
-		const tsconfigPaths = this.copyTsConfigPaths(super.tsconfig, {
+		const tsconfigPaths = this.copyTsConfigFiles(super.tsconfig, {
 			include: ['src/*.ts', 'src/**/*.ts'],
 		})
-		const devTsconfigPaths = this.copyTsConfigPaths(super.tsconfigDev, {
+		const devTsconfigPaths = this.copyTsConfigFiles(super.tsconfigDev, {
 			include: [...tsconfigPaths.include, '*.ts', '**/*.ts'],
 			exclude: ['node_modules'],
 		})
@@ -100,12 +97,9 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			fileName: 'tsconfig.json',
 			...tsconfigPaths,
 			compilerOptions: {
-				rootDir: '.',
 				outDir: 'dist',
 			},
-			extends: javascript.TypescriptConfigExtends.fromPaths([
-				parentEsmTsconfig,
-			]),
+			extends: tsconfigBase,
 		})
 
 		this.tryRemoveFile('tsconfig.dev.json')
@@ -113,7 +107,6 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			fileName: 'tsconfig.dev.json',
 			...devTsconfigPaths,
 			compilerOptions: {
-				rootDir: '.',
 				outDir: 'dist',
 			},
 			extends: javascript.TypescriptConfigExtends.fromTypescriptConfigs([
@@ -121,12 +114,16 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			]),
 		})
 
+		this.addWorkspaceDeps(...(workspaceDeps ?? []))
+
+		this.package.addField('type', 'module')
+		this.package.addField('sideEffects', false)
 		new LintConfig(this)
 		new UnBuild(this)
-		this.compileTask.reset('unbuild')
+		this.compileTask.exec('unbuild')
 	}
 
-	protected copyTsConfigPaths(
+	protected copyTsConfigFiles(
 		typescriptConfig?: javascript.TypescriptConfig,
 		paths?: { include?: string[]; exclude?: string[] }
 	) {
@@ -134,8 +131,38 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		const uniqMerge = <T>(arrA: T[], arrB: T[]): T[] =>
 			uniq([...arrA.slice(), ...arrB.slice()])
 		return {
-			include: uniqMerge((typescriptConfig?.include ?? []).slice(), paths?.include ?? []),
-			exclude: uniqMerge((typescriptConfig?.exclude ?? []).slice(), paths?.exclude ?? []),
+			include: uniqMerge(
+				(typescriptConfig?.include ?? []).slice(),
+				paths?.include ?? []
+			),
+			exclude: uniqMerge(
+				(typescriptConfig?.exclude ?? []).slice(),
+				paths?.exclude ?? []
+			),
 		}
+	}
+
+	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
+		dependency.forEach((dep) => {
+			const depName = typeof dep === 'string' ? dep : dep.package.packageName
+			this.addDeps(`${depName}@workspace:*`)
+			if (dep instanceof TypescriptProject) {
+				const tsPath = cwdRelativePath(
+					this.outdir,
+					path.join(path.join(dep.outdir, dep.srcdir), 'index')
+				)
+				const depNamePath = depName.replaceAll('.', '\\.')
+				this.tsconfig.file.addOverride(`compilerOptions.paths.${depNamePath}`, [
+					tsPath,
+				])
+			}
+		})
+	}
+}
+
+export class ProjenComponentProject extends TypescriptProject {
+	constructor(options: TypeScriptProjectOptions) {
+		super(options)
+		this.addPeerDeps('projen')
 	}
 }

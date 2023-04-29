@@ -95,6 +95,7 @@ const utilsProjen = new TypescriptProject({
 	name: 'utils.projen',
 	parent: monorepo,
 	tsconfigBase: monorepo.esmBundledTsconfigExtends,
+	peerDeps: ['projen'],
 	deps: ['ts-morph', '@sindresorhus/is', 'type-fest'],
 })
 

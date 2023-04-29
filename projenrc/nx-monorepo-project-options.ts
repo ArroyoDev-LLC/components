@@ -876,7 +876,6 @@ export interface NxMonorepoProjectOptions {
   readonly commitGenerated?: boolean;
   /**
    * This is the name of your project.
-   * @default $BASEDIR
    * @stability experimental
    * @featured true
    */

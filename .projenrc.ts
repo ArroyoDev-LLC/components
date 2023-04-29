@@ -1,5 +1,4 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
-import { Vue } from '@arroyodev-llc/projen.component.vue'
 import { github, LogLevel } from 'projen'
 import {
 	TypescriptConfigExtends,
@@ -14,6 +13,7 @@ import {
 	MonorepoProject,
 	ProjenComponentProject,
 	TypescriptProject,
+	VueComponentProject,
 } from './projenrc/project'
 
 const arroyoBot = github.GithubCredentials.fromApp({
@@ -91,14 +91,12 @@ const monorepo = new MonorepoProject({
 	],
 })
 
-const utilsProjen = new TypescriptProject({
+const utilsProjen = TypescriptProject.fromParent(monorepo, {
 	name: 'utils.projen',
-	parent: monorepo,
-	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	deps: ['ts-morph', '@sindresorhus/is', 'type-fest', 'projen'],
 })
 
-const tsSourceComponent = new ProjenComponentProject({
+const tsSourceComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.typescript-source-file',
 	parent: monorepo,
 	tsconfigBase: monorepo.esmBundledTsconfigExtends,
@@ -106,40 +104,32 @@ const tsSourceComponent = new ProjenComponentProject({
 	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo'],
 })
 
-const pnpmWorkspaceComponent = new ProjenComponentProject({
+const pnpmWorkspaceComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.pnpm-workspace',
 	parent: monorepo,
 	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	workspaceDeps: [utilsProjen],
 })
 
-const unbuildComponent = new ProjenComponentProject({
+const unbuildComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.unbuild',
-	parent: monorepo,
-	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	workspaceDeps: [utilsProjen, tsSourceComponent],
 	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo', 'unbuild'],
 })
 
-const vitestComponent = new ProjenComponentProject({
+const vitestComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vitest',
-	parent: monorepo,
-	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	workspaceDeps: [utilsProjen, tsSourceComponent],
 	deps: ['ts-morph', 'vitest'],
 })
 
-const lintingComponent = new ProjenComponentProject({
+const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.linting',
-	parent: monorepo,
-	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	workspaceDeps: [utilsProjen],
 })
 
-const vueComponent = new ProjenComponentProject({
+const vueComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vue',
-	parent: monorepo,
-	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	workspaceDeps: [
 		utilsProjen,
 		lintingComponent,
@@ -166,25 +156,19 @@ monorepo.addWorkspaceDeps(
 
 // Vue Components
 
-const text = new TypescriptProject({
+const text = VueComponentProject.fromParent(monorepo, {
 	name: 'vue.ui.text',
-	parent: monorepo,
-	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	release: true,
 })
-new Vue(text)
 LintConfig.of(text)!.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
 })
 
-const button = new TypescriptProject({
+const button = VueComponentProject.fromParent(monorepo, {
 	name: 'vue.ui.button',
-	parent: monorepo,
-	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	workspaceDeps: [text],
 	deps: ['primevue'],
 })
-new Vue(button)
 LintConfig.of(button)!.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
 })

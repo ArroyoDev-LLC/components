@@ -45,6 +45,7 @@ const monorepo = new MonorepoProject({
 		usePrefix: true,
 	},
 	nxConfig: {
+		affectedBranch: 'main',
 		// public readonly token, is not secret.
 		nxCloudReadOnlyAccessToken:
 			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ==',

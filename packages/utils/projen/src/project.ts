@@ -1,4 +1,6 @@
 import path from 'node:path'
+import { type Component } from 'projen'
+import { type Class } from 'type-fest'
 
 /**
  * Ensures a relative path is prefixed from cwd.
@@ -16,3 +18,13 @@ export const cwdRelativePath = (from: string, to: string): string => {
 		dir: parentDir,
 	})
 }
+
+/**
+ * Component type guard.
+ * @param ctor Component class.
+ * @param component Component instance to guard/test.
+ */
+export const isComponent = <T extends typeof Component>(
+	ctor: Class<T>,
+	component: any
+): component is T => component instanceof ctor

@@ -41,6 +41,7 @@ jspm_packages/
 !/.github/pull_request_template.md
 !/.prettierignore
 !/.prettierrc.json
+!/.npmrc
 !/test/
 !/tsconfig.json
 !/tsconfig.dev.json
@@ -59,7 +60,6 @@ jspm_packages/
 !/tsconfig.base.json
 !/tsconfig.esm.json
 !/tsconfig.bundler.json
-!/.npmrc
 !/pnpm-workspace.yaml
 !/renovate.json5
 !/projenrc/projen-project-options.ts

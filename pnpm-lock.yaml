@@ -3,11 +3,6 @@ lockfileVersion: '6.0'
 overrides:
   '@types/babel__traverse': 7.18.2
 
-patchedDependencies:
-  projen@0.71.7:
-    hash: jzltoxhjc247xjs65hcn6sqe3m
-    path: patches/projen@0.71.7.patch
-
 importers:
 
   .:
@@ -120,7 +115,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.7
-        version: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+        version: 0.71.7
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -193,7 +188,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.7
-        version: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+        version: 0.71.7
       standard-version:
         specifier: ^9
         version: 9.0.0
@@ -245,7 +240,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.7
-        version: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+        version: 0.71.7
       standard-version:
         specifier: ^9
         version: 9.0.0
@@ -303,7 +298,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.7
-        version: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+        version: 0.71.7
       standard-version:
         specifier: ^9
         version: 9.0.0
@@ -367,7 +362,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.7
-        version: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+        version: 0.71.7
       standard-version:
         specifier: ^9
         version: 9.0.0
@@ -425,7 +420,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.7
-        version: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+        version: 0.71.7
       standard-version:
         specifier: ^9
         version: 9.0.0
@@ -492,7 +487,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.7
-        version: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+        version: 0.71.7
       standard-version:
         specifier: ^9
         version: 9.0.0
@@ -740,7 +735,7 @@ packages:
       '@nrwl/devkit': 15.9.3(nx@16.0.1)
       '@pnpm/reviewing.dependencies-hierarchy': 2.0.3(@pnpm/logger@5.0.0)
       fs-extra: 10.1.0
-      projen: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+      projen: 0.71.7
       semver: 4.3.6
     transitivePeerDependencies:
       - '@pnpm/logger'
@@ -1282,7 +1277,7 @@ packages:
     dependencies:
       '@jsii/spec': 1.80.0
       '@ungap/structured-clone': 1.0.2
-      projen: 0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m)
+      projen: 0.71.7
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -6809,7 +6804,7 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /projen@0.71.7(patch_hash=jzltoxhjc247xjs65hcn6sqe3m):
+  /projen@0.71.7:
     resolution: {integrity: sha512-pkOPyYWKA2X5lg7n2IXM36PMcHz9Vts1r9Z/rna7D4ep4mjg1xwbESIEGtbX1W03OMwkQrnPpvLZbc0JnTMC4g==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
@@ -6843,7 +6838,6 @@ packages:
       - yaml
       - yargs
       - zlib
-    patched: true
 
   /promise-inflight@1.0.1:
     resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}

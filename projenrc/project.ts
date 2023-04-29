@@ -14,6 +14,7 @@ import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 import type { ProjenProjectOptions } from './projen-project-options'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
+import { Vue } from "@arroyodev-llc/projen.component.vue";
 
 export class ProjectName {
 	constructor(readonly name: string) {}
@@ -326,5 +327,15 @@ export class ProjenComponentProject extends TypescriptProject {
 	constructor(options: TypeScriptProjectOptions) {
 		super(options)
 		this.addPeerDeps('projen')
+	}
+}
+
+export class VueComponentProject extends TypescriptProject {
+	constructor(options: TypeScriptProjectOptions) {
+		super({
+			release: true,
+			...options,
+		})
+		new Vue(this)
 	}
 }

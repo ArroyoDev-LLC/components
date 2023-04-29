@@ -36,13 +36,12 @@
     "eslint-plugin-prettier": "^4.2.1",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "projen": "^0.71.7",
+    "projen": "^0.71.32",
     "standard-version": "^9",
-    "typescript": "^5",
-    "unbuild": "*"
+    "typescript": "^5"
   },
   "peerDependencies": {
-    "projen": "^0.71.7"
+    "projen": "^0.71.32"
   },
   "dependencies": {
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",

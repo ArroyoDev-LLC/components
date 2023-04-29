@@ -1,6 +1,5 @@
 import path from 'node:path'
 import { type Component, type Project } from 'projen'
-import { type Class } from 'type-fest'
 
 /**
  * Ensures a relative path is prefixed from cwd.

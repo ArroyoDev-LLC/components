@@ -852,7 +852,6 @@ export interface TypeScriptProjectOptions {
   readonly commitGenerated?: boolean;
   /**
    * This is the name of your project.
-   * @default $BASEDIR
    * @stability experimental
    * @featured true
    */

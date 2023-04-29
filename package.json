@@ -32,10 +32,10 @@
   "devDependencies": {
     "@aws-prototyping-sdk/nx-monorepo": "^0.17.4",
     "@jsii/spec": "^1.80.0",
-    "@mrgrain/jsii-struct-builder": "^0.3.1",
+    "@mrgrain/jsii-struct-builder": "^0.4.1",
     "@nrwl/cli": "^15.9.3",
     "@nrwl/nx-cloud": "^16.0.5",
-    "@nrwl/workspace": "^16.0.0",
+    "@nrwl/workspace": "^16.0.1",
     "@sindresorhus/is": "^5.3.0",
     "@types/fs-extra": "^11.0.1",
     "@types/node": "^16",
@@ -52,8 +52,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "fs-extra": "^11.1.1",
     "npm-check-updates": "^16.10.9",
-    "nx": "^16.0.0",
-    "pathe": "*",
+    "nx": "^16.0.1",
+    "pathe": "^1.1.0",
     "prettier": "^2.8.8",
     "projen": "0.71.7",
     "rollup-plugin-vue": "^6.0.0",
@@ -77,7 +77,7 @@
     "@arroyodev-llc/utils.projen": "workspace:*",
     "aws-cdk-lib": "^2.77.0",
     "cdk-nag": "^2.26.8",
-    "constructs": "^10.2.9"
+    "constructs": "^10.2.10"
   },
   "pnpm": {
     "overrides": {

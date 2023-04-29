@@ -112,10 +112,6 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 
 	protected applyPackage(nodePackage: javascript.NodePackage): this {
 		nodePackage.addField('type', 'module')
-		PnpmWorkspace.of(this)!.addPatch(
-			'projen@0.71.7',
-			'patches/projen@0.71.7.patch'
-		)
 		this.addNxRunManyTask('stub', {
 			skipCache: true,
 			target: 'stub',

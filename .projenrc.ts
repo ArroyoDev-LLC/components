@@ -70,7 +70,6 @@ const monorepo = new MonorepoProject({
 			forceConsistentCasingInFileNames: true,
 		},
 	},
-	projenVersion: '0.71.7',
 	devDeps: [
 		'@aws-prototyping-sdk/nx-monorepo',
 		'vite',

@@ -27,7 +27,6 @@
     "@typescript-eslint/eslint-plugin",
     "@typescript-eslint/parser",
     "eslint",
-    "projen",
     "typescript",
     "@types/babel__traverse",
     "@arroyodev-llc/projen.component.linting",
@@ -36,6 +35,7 @@
     "@arroyodev-llc/projen.component.unbuild",
     "@arroyodev-llc/projen.component.vitest",
     "@arroyodev-llc/projen.component.vue",
-    "@arroyodev-llc/utils.projen"
+    "@arroyodev-llc/utils.projen",
+    "projen"
   ]
 }

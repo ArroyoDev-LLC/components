@@ -6,6 +6,7 @@ import {
 	VitestConfigType,
 } from '@arroyodev-llc/projen.component.vitest'
 import nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
+import { findComponent } from '@arroyodev-llc/utils.projen'
 import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
@@ -86,7 +87,12 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 			},
 		})
 		this.esmBundledTsconfigExtends = this.buildEsmBundledTsConfig()
-		this.buildNpmConfig().applyGithub(this.github!).applyPackage(this.package)
+		this.applyNpmConfig(
+			findComponent(this, javascript.NpmConfig) ??
+				new javascript.NpmConfig(this)
+		)
+			.applyGithub(this.github!)
+			.applyPackage(this.package)
 		this.tsconfigDev!.addExtends(this.tsconfig!)
 	}
 
@@ -122,8 +128,7 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 		return this
 	}
 
-	protected buildNpmConfig(): this {
-		const npmConfig = new javascript.NpmConfig(this)
+	protected applyNpmConfig(npmConfig: javascript.NpmConfig): this {
 		// default '*' to highest resolution.
 		npmConfig.addConfig('resolution-mode', 'highest')
 		return this

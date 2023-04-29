@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { type Component } from 'projen'
+import { type Component, type Project } from 'projen'
 import { type Class } from 'type-fest'
 
 /**
@@ -25,6 +25,20 @@ export const cwdRelativePath = (from: string, to: string): string => {
  * @param component Component instance to guard/test.
  */
 export const isComponent = <T extends typeof Component>(
-	ctor: Class<T>,
+	ctor: T,
 	component: any
-): component is T => component instanceof ctor
+): component is InstanceType<T> => component instanceof ctor
+
+/**
+ * Find component of type in a project.
+ * @param project Project to search through.
+ * @param component Component type to look for.
+ */
+export const findComponent = <T extends typeof Component>(
+	project: Project,
+	component: T
+): InstanceType<T> | undefined => {
+	return project.components.find((c) => isComponent(component, c)) as
+		| InstanceType<T>
+		| undefined
+}

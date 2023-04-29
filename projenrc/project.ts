@@ -5,8 +5,10 @@ import {
 	Vitest,
 	VitestConfigType,
 } from '@arroyodev-llc/projen.component.vitest'
-import nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
 import { findComponent } from '@arroyodev-llc/utils.projen'
+import nx_monorepo, {
+	buildExecutableCommand,
+} from '@aws-prototyping-sdk/nx-monorepo'
 import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
@@ -234,6 +236,10 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			release: true,
 			authorName: 'arroyoDev-LLC',
 			prettier: true,
+			projenCommand: buildExecutableCommand(
+				javascript.NodePackageManager.PNPM,
+				'projen'
+			),
 			...rest,
 		})
 		this.projectName = projectName

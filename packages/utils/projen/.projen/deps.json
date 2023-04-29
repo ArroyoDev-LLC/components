@@ -64,7 +64,15 @@
       "type": "build"
     },
     {
+      "name": "@sindresorhus/is",
+      "type": "runtime"
+    },
+    {
       "name": "ts-morph",
+      "type": "runtime"
+    },
+    {
+      "name": "type-fest",
       "type": "runtime"
     }
   ],

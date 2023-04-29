@@ -32,21 +32,21 @@ importers:
         specifier: ^2.77.0
         version: 2.77.0(constructs@10.2.10)
       cdk-nag:
-        specifier: ^2.26.8
-        version: 2.26.8(aws-cdk-lib@2.77.0)(constructs@10.2.10)
+        specifier: ^2.26.9
+        version: 2.26.9(aws-cdk-lib@2.77.0)(constructs@10.2.10)
       constructs:
         specifier: ^10.2.10
         version: 10.2.10
     devDependencies:
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.17.4
-        version: 0.17.4(@pnpm/logger@5.0.0)(nx@16.0.1)(projen@0.71.7)
+        version: 0.17.4(@pnpm/logger@5.0.0)(nx@16.0.1)(projen@0.71.32)
       '@jsii/spec':
         specifier: ^1.80.0
         version: 1.80.0
       '@mrgrain/jsii-struct-builder':
         specifier: ^0.4.1
-        version: 0.4.1(projen@0.71.7)
+        version: 0.4.1(projen@0.71.32)
       '@nrwl/cli':
         specifier: ^15.9.3
         version: 15.9.3
@@ -114,8 +114,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: 0.71.7
-        version: 0.71.7
+        specifier: ^0.71.32
+        version: 0.71.32
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -187,17 +187,14 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: 0.71.7
-        version: 0.71.7
+        specifier: ^0.71.32
+        version: 0.71.32
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
-      unbuild:
-        specifier: '*'
-        version: 1.2.1
 
   packages/projen/component/pnpm-workspace:
     dependencies:
@@ -239,17 +236,14 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.7
-        version: 0.71.7
+        specifier: ^0.71.32
+        version: 0.71.32
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
-      unbuild:
-        specifier: '*'
-        version: 1.2.1
 
   packages/projen/component/typescript-source-file:
     dependencies:
@@ -258,7 +252,7 @@ importers:
         version: link:../../../utils/projen
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.17.4
-        version: 0.17.4(@pnpm/logger@5.0.0)(nx@16.0.1)(projen@0.71.7)
+        version: 0.17.4(@pnpm/logger@5.0.0)(nx@16.0.1)(projen@0.71.32)
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
@@ -297,17 +291,14 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.7
-        version: 0.71.7
+        specifier: ^0.71.32
+        version: 0.71.32
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
-      unbuild:
-        specifier: '*'
-        version: 1.2.1
 
   packages/projen/component/unbuild:
     dependencies:
@@ -319,7 +310,7 @@ importers:
         version: link:../../../utils/projen
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.17.4
-        version: 0.17.4(@pnpm/logger@5.0.0)(nx@16.0.1)(projen@0.71.7)
+        version: 0.17.4(@pnpm/logger@5.0.0)(nx@16.0.1)(projen@0.71.32)
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
@@ -361,8 +352,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.7
-        version: 0.71.7
+        specifier: ^0.71.32
+        version: 0.71.32
       standard-version:
         specifier: ^9
         version: 9.0.0
@@ -419,17 +410,14 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.7
-        version: 0.71.7
+        specifier: ^0.71.32
+        version: 0.71.32
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
-      unbuild:
-        specifier: '*'
-        version: 1.2.1
 
   packages/projen/component/vue:
     dependencies:
@@ -486,23 +474,23 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: 0.71.7
-        version: 0.71.7
+        specifier: ^0.71.32
+        version: 0.71.32
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
-      unbuild:
-        specifier: '*'
-        version: 1.2.1
 
   packages/utils/projen:
     dependencies:
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
+      type-fest:
+        specifier: ^0.20.2
+        version: 0.20.2
     devDependencies:
       '@types/node':
         specifier: ^16
@@ -543,9 +531,6 @@ importers:
       typescript:
         specifier: ^5
         version: 5.0.4
-      unbuild:
-        specifier: '*'
-        version: 1.2.1
 
   packages/vue/ui/button:
     dependencies:
@@ -571,9 +556,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^5
         version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
-      '@vitejs/plugin-vue':
-        specifier: '*'
-        version: 4.1.0(vite@4.3.3)(vue@3.2.47)
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -602,17 +584,14 @@ importers:
         specifier: ^6.6.6
         version: 6.6.6
       happy-dom:
-        specifier: ^9.9.2
-        version: 9.9.2
+        specifier: ^9.10.0
+        version: 9.10.0
       npm-check-updates:
         specifier: ^16
         version: 16.10.9
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
-      rollup:
-        specifier: '*'
-        version: 3.20.2
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -622,9 +601,6 @@ importers:
       typescript:
         specifier: ^5
         version: 5.0.4
-      unbuild:
-        specifier: '*'
-        version: 1.2.1
       vue-tsc:
         specifier: ^1.6.1
         version: 1.6.1(typescript@5.0.4)
@@ -647,9 +623,6 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^5
         version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
-      '@vitejs/plugin-vue':
-        specifier: '*'
-        version: 4.1.0(vite@4.3.3)(vue@3.2.47)
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -678,17 +651,14 @@ importers:
         specifier: ^6.6.6
         version: 6.6.6
       happy-dom:
-        specifier: ^9.9.2
-        version: 9.9.2
+        specifier: ^9.10.0
+        version: 9.10.0
       npm-check-updates:
         specifier: ^16
         version: 16.10.9
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
-      rollup:
-        specifier: '*'
-        version: 3.20.2
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -698,9 +668,6 @@ importers:
       typescript:
         specifier: ^5
         version: 5.0.4
-      unbuild:
-        specifier: '*'
-        version: 1.2.1
       vue-tsc:
         specifier: ^1.6.1
         version: 1.6.1(typescript@5.0.4)
@@ -726,7 +693,7 @@ packages:
     resolution: {integrity: sha512-CVoB2u0wI0cK2JyWWiKLIYBMF+RUG1o5mHidF/lXtVSzvHFYPxAFjZVz9XYg2tZSMaV6QVNijy4Z6ljp9/tRhg==}
     dev: false
 
-  /@aws-prototyping-sdk/nx-monorepo@0.17.4(@pnpm/logger@5.0.0)(nx@16.0.1)(projen@0.71.7):
+  /@aws-prototyping-sdk/nx-monorepo@0.17.4(@pnpm/logger@5.0.0)(nx@16.0.1)(projen@0.71.32):
     resolution: {integrity: sha512-9IhVf102CFedWUAhjU40C+dgmY/FwdYx2iobrKdunrLF/+rnf66nXwsfRavv1AHKTXLNgLZsRLNmdVChP1sGMg==}
     hasBin: true
     peerDependencies:
@@ -735,7 +702,7 @@ packages:
       '@nrwl/devkit': 15.9.3(nx@16.0.1)
       '@pnpm/reviewing.dependencies-hierarchy': 2.0.3(@pnpm/logger@5.0.0)
       fs-extra: 10.1.0
-      projen: 0.71.7
+      projen: 0.71.32
       semver: 4.3.6
     transitivePeerDependencies:
       - '@pnpm/logger'
@@ -1270,14 +1237,14 @@ packages:
       ajv: 8.12.0
     dev: true
 
-  /@mrgrain/jsii-struct-builder@0.4.1(projen@0.71.7):
+  /@mrgrain/jsii-struct-builder@0.4.1(projen@0.71.32):
     resolution: {integrity: sha512-C4vKaYQkk4374VGOBJhz/XhDDcUa6FyRTUcnA0i8TdBzz0ajGpxCd3znuTmsxDCg6Mwc1mJ/IbcKfhODPqfLKQ==}
     peerDependencies:
       projen: x.x.x
     dependencies:
       '@jsii/spec': 1.80.0
       '@ungap/structured-clone': 1.0.2
-      projen: 0.71.7
+      projen: 0.71.32
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -2334,17 +2301,6 @@ packages:
     resolution: {integrity: sha512-06PHwE0K24Wi8FBmC8MuMi/+nQ3DTpcXYL3y/IaZz2ScY2GOJXOe8fyMykVXyLOKxpL2Y0frAnJZmm65OxzMLQ==}
     dev: true
 
-  /@vitejs/plugin-vue@4.1.0(vite@4.3.3)(vue@3.2.47):
-    resolution: {integrity: sha512-++9JOAFdcXI3lyer9UKUV4rfoQ3T1RN8yDqoCLar86s0xQct5yblxAE+yWgRnU5/0FOlVCpTZpYSBV/bGWrSrQ==}
-    engines: {node: ^14.18.0 || >=16.0.0}
-    peerDependencies:
-      vite: ^4.0.0
-      vue: ^3.2.25
-    dependencies:
-      vite: 4.3.3(@types/node@16.18.25)
-      vue: 3.2.47
-    dev: true
-
   /@vitejs/plugin-vue@4.2.1(vite@4.3.3)(vue@3.2.47):
     resolution: {integrity: sha512-ZTZjzo7bmxTRTkb8GSTwkPOYDIP7pwuyV+RV53c9PYUouwcbkIZIvWvNWlX2b1dYZqtOv7D6iUAnJLVNGcLrSw==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -3052,8 +3008,8 @@ packages:
     resolution: {integrity: sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==}
     engines: {node: '>= 0.8.0'}
 
-  /cdk-nag@2.26.8(aws-cdk-lib@2.77.0)(constructs@10.2.10):
-    resolution: {integrity: sha512-SJXCfintXRkFEFmtcevX/GucnmobeS2Ur+II06/bKdV21GLqu0kdFwynleJ4bzf4lZYCMaGpGFv3yPzruzHGtQ==}
+  /cdk-nag@2.26.9(aws-cdk-lib@2.77.0)(constructs@10.2.10):
+    resolution: {integrity: sha512-4Uut7t/8dzxVz9XGF6Vow7NB4MSyr0QTzJa9PQzMD/k8w+DJ6hTUMfgRmaQ/Gh0y+RO3mHSNyRkA3H5oivsQqw==}
     peerDependencies:
       aws-cdk-lib: ^2.45.0
       constructs: ^10.0.5
@@ -4864,8 +4820,8 @@ packages:
       uglify-js: 3.17.4
     dev: true
 
-  /happy-dom@9.9.2:
-    resolution: {integrity: sha512-E+FouJ18tckCe04ky6mMtNEGGoXZrY+UFqHICNarQB+fCb4RtZeRbp2IOmoIYaQRjb5Iu3ChLNsLBnB8aA3vjA==}
+  /happy-dom@9.10.0:
+    resolution: {integrity: sha512-A2NGV4Z2goQEoFUed1jODPcG7WYHF04Ashv804qzIZU0I8kF5wQoJM6SVGC77nxZZAk7PypWzXKenfskgcpdMw==}
     dependencies:
       css.escape: 1.5.1
       he: 1.2.0
@@ -6804,8 +6760,8 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /projen@0.71.7:
-    resolution: {integrity: sha512-pkOPyYWKA2X5lg7n2IXM36PMcHz9Vts1r9Z/rna7D4ep4mjg1xwbESIEGtbX1W03OMwkQrnPpvLZbc0JnTMC4g==}
+  /projen@0.71.32:
+    resolution: {integrity: sha512-MnCoVz6oxGzG04w7WILwfL0fvxd9145Lq72DsCVCWZ73W1rF5nHoqBiDAMwreAHQFMfarajEg4+7HhOHZwaapA==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
     dependencies:
@@ -6817,12 +6773,11 @@ packages:
       fast-json-patch: 3.1.1
       glob: 8.1.0
       ini: 2.0.0
-      semver: 7.4.0
+      semver: 7.5.0
       shx: 0.3.4
       xmlbuilder2: 2.4.1
-      yaml: 2.0.0
+      yaml: 2.2.2
       yargs: 16.2.0
-      zlib: 1.0.5
     bundledDependencies:
       - '@iarna/toml'
       - case
@@ -6837,7 +6792,6 @@ packages:
       - xmlbuilder2
       - yaml
       - yargs
-      - zlib
 
   /promise-inflight@1.0.1:
     resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}
@@ -7184,14 +7138,6 @@ packages:
       estree-walker: 0.6.1
     dev: true
 
-  /rollup@3.20.2:
-    resolution: {integrity: sha512-3zwkBQl7Ai7MFYQE0y1MeQ15+9jsi7XxfrqwTb/9EK8D9C9+//EBR4M+CuA1KODRaNbFez/lWxA5vhEGZp4MUg==}
-    engines: {node: '>=14.18.0', npm: '>=8.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    dev: true
-
   /rollup@3.21.0:
     resolution: {integrity: sha512-ANPhVcyeHvYdQMUyCbczy33nbLzI7RzrBje4uvNiTDJGIMtlKoOStmympwr9OtS1LZxiDmE2wvxHyVhoLtf1KQ==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
@@ -7278,6 +7224,7 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
+    dev: true
 
   /semver@7.5.0:
     resolution: {integrity: sha512-+XC0AD/R7Q2mPSRuy2Id0+CGTZ98+8f+KvwirxOKIEyid+XSx6HbC63p+O4IndTHuX5Z+JxQ0TghCkO5Cg/2HA==}
@@ -7936,7 +7883,6 @@ packages:
   /type-fest@0.20.2:
     resolution: {integrity: sha512-Ne+eE4r0/iWnpAxD852z3A+N0Bt5RN//NjJwRd2VFHEmrywxf5vsZlh4R6lixl6B+wz/8d+maTSAkN1FIkI3LQ==}
     engines: {node: '>=10'}
-    dev: true
 
   /type-fest@0.6.0:
     resolution: {integrity: sha512-q+MB8nYR1KDLrgr4G5yemftpMC7/QLqVndBmEEdqzmNj5dcFOO4Oo8qlwZE3ULT3+Zim1F8Kq4cBnikNhlCMlg==}
@@ -8524,8 +8470,8 @@ packages:
     engines: {node: '>= 6'}
     dev: false
 
-  /yaml@2.0.0:
-    resolution: {integrity: sha512-JbfdlHKGP2Ik9IHylzWlGd4pPK++EU46/IxMykphS2ZKw7a7h+dHNmcXObLgpRDriBY+rpWslldikckX8oruWQ==}
+  /yaml@2.2.2:
+    resolution: {integrity: sha512-CBKFWExMn46Foo4cldiChEzn7S7SRV+wqiluAb6xmueD/fGyRHIhX8m14vVGgeFWjN540nKCNVj6P21eQjgTuA==}
     engines: {node: '>= 14'}
 
   /yargs-parser@18.1.3:
@@ -8598,10 +8544,6 @@ packages:
   /yocto-queue@1.0.0:
     resolution: {integrity: sha512-9bnSc/HEW2uRy67wc+T8UwauLuPJVn28jb+GtJY16iiKWyvmYJRXVT4UamsAEGQfPohgr2q4Tq0sQbQlxTfi1g==}
     engines: {node: '>=12.20'}
-
-  /zlib@1.0.5:
-    resolution: {integrity: sha512-40fpE2II+Cd3k8HWTWONfeKE2jL+P42iWJ1zzps5W51qcTsOUKM5Q5m2PFb0CLxlmFAaUuUdJGc3OfZy947v0w==}
-    engines: {node: '>=0.2.0'}
 
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}

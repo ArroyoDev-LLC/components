@@ -55,7 +55,7 @@
     "nx": "^16.0.1",
     "pathe": "^1.1.0",
     "prettier": "^2.8.8",
-    "projen": "0.71.7",
+    "projen": "^0.71.32",
     "rollup-plugin-vue": "^6.0.0",
     "syncpack": "^9.8.6",
     "ts-morph": "^18.0.0",
@@ -76,7 +76,7 @@
     "@arroyodev-llc/projen.component.vue": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "aws-cdk-lib": "^2.77.0",
-    "cdk-nag": "^2.26.8",
+    "cdk-nag": "^2.26.9",
     "constructs": "^10.2.10"
   },
   "pnpm": {

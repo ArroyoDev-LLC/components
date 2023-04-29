@@ -221,6 +221,18 @@ export class ProjenProject extends cdk.JsiiProject {
 }
 
 export class TypescriptProject extends typescript.TypeScriptProject {
+	static fromParent(
+		monorepo: MonorepoProject,
+		options: TypeScriptProjectOptions
+	) {
+		const { tsconfigBase, ...rest } = options
+		return new this({
+			parent: monorepo,
+			tsconfigBase: tsconfigBase ?? monorepo.esmBundledTsconfigExtends,
+			...rest,
+		})
+	}
+
 	public readonly projectName: ProjectName
 	public readonly tsconfig: javascript.TypescriptConfig
 	public readonly tsconfigDev: javascript.TypescriptConfig

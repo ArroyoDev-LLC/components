@@ -76,8 +76,8 @@
     "@arroyodev-llc/projen.component.vue": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "aws-cdk-lib": "^2.77.0",
-    "cdk-nag": "^2.26.9",
-    "constructs": "^10.2.10"
+    "cdk-nag": "^2.26.10",
+    "constructs": "^10.2.11"
   },
   "pnpm": {
     "overrides": {

@@ -26,6 +26,7 @@
     "projenrc/nx-monorepo-project-options.ts",
     "projenrc/projen-project-options.ts",
     "projenrc/typescript-project-options.ts",
+    "release-please-config.json",
     "renovate.json5",
     "tsconfig.base.json",
     "tsconfig.bundler.json",

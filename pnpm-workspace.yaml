@@ -8,5 +8,6 @@ packages:
   - packages/projen/component/vitest
   - packages/projen/component/linting
   - packages/projen/component/vue
+  - packages/projen/component/release-please
   - packages/vue/ui/text
   - packages/vue/ui/button

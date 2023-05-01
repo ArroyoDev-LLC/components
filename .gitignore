@@ -60,6 +60,8 @@ jspm_packages/
 !/tsconfig.base.json
 !/tsconfig.esm.json
 !/tsconfig.bundler.json
+!/release-please-config.json
+!/.release-please-manifest.json
 !/pnpm-workspace.yaml
 !/renovate.json5
 !/projenrc/projen-project-options.ts

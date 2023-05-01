@@ -31,6 +31,7 @@
     "@types/babel__traverse",
     "@arroyodev-llc/projen.component.linting",
     "@arroyodev-llc/projen.component.pnpm-workspace",
+    "@arroyodev-llc/projen.component.release-please",
     "@arroyodev-llc/projen.component.typescript-source-file",
     "@arroyodev-llc/projen.component.unbuild",
     "@arroyodev-llc/projen.component.vitest",

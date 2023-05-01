@@ -1,0 +1,99 @@
+{
+  "include-v-in-tag": true,
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "packages": {
+    "packages/utils/projen": {
+      "release-type": "node"
+    },
+    "packages/projen/component/typescript-source-file": {
+      "release-type": "node"
+    },
+    "packages/projen/component/pnpm-workspace": {
+      "release-type": "node"
+    },
+    "packages/projen/component/unbuild": {
+      "release-type": "node"
+    },
+    "packages/projen/component/vitest": {
+      "release-type": "node"
+    },
+    "packages/projen/component/linting": {
+      "release-type": "node"
+    },
+    "packages/projen/component/vue": {
+      "release-type": "node"
+    },
+    "packages/projen/component/release-please": {
+      "release-type": "node"
+    },
+    "packages/vue/ui/text": {
+      "release-type": "node"
+    },
+    "packages/vue/ui/button": {
+      "release-type": "node"
+    }
+  },
+  "changelog-sections": [
+    {
+      "type": "feat",
+      "section": "Features"
+    },
+    {
+      "type": "feature",
+      "section": "Features"
+    },
+    {
+      "type": "fix",
+      "section": "Bug Fixes"
+    },
+    {
+      "type": "perf",
+      "section": "Performance Improvements"
+    },
+    {
+      "type": "revert",
+      "section": "Reverts"
+    },
+    {
+      "type": "docs",
+      "section": "Documentation",
+      "hidden": false
+    },
+    {
+      "type": "style",
+      "section": "Styles",
+      "hidden": true
+    },
+    {
+      "type": "chore",
+      "section": "Miscellaneous Chores",
+      "hidden": true
+    },
+    {
+      "type": "refactor",
+      "section": "Code Refactoring",
+      "hidden": false
+    },
+    {
+      "type": "test",
+      "section": "Tests",
+      "hidden": false
+    },
+    {
+      "type": "build",
+      "section": "Build System",
+      "hidden": false
+    },
+    {
+      "type": "ci",
+      "section": "Continuous Integration",
+      "hidden": false
+    }
+  ],
+  "plugins": [
+    {
+      "type": "sentence-case"
+    }
+  ]
+}

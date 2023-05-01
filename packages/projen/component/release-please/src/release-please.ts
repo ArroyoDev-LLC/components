@@ -158,6 +158,7 @@ export class ReleasePleaseWorkflow extends Component {
 			{
 				name: 'Setup Node',
 				if: this.releasesCreatedRef,
+				uses: 'actions/setup-node@v3',
 				with: {
 					'node-version': '16',
 					cache: 'pnpm',

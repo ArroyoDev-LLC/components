@@ -1,7 +1,7 @@
 import path from 'node:path'
 import { findComponent } from '@arroyodev-llc/utils.projen'
-import { Component, JsonFile, type Project } from 'projen'
-import { Release } from 'projen/lib/release'
+import { Component, JsonFile, type Project, github } from 'projen'
+import { secretToString } from 'projen/lib/github/util'
 import { kebabCaseKeys } from 'projen/lib/util'
 
 export const enum ReleaseType {
@@ -48,7 +48,11 @@ export interface ReleasePleaseManifest {
 	/**
 	 * Packages to release.
 	 */
-	readonly packages: Record<string, ReleasePleasePackage>
+	packages: Record<string, ReleasePleasePackage>
+}
+
+export interface ReleasePleaseWorkflowOptions {
+	workflow?: github.GithubWorkflow
 }
 
 /**
@@ -125,15 +129,98 @@ const configDefaults: ReleasePleaseManifest = {
 	plugins: [{ type: 'sentence-case' }],
 }
 
+export class ReleasePleaseWorkflow extends Component {
+	readonly workflow: github.GithubWorkflow
+
+	constructor(
+		project: Project,
+		public readonly options: ReleasePleaseWorkflowOptions
+	) {
+		super(project)
+
+		this.workflow =
+			options.workflow ??
+			new github.GithubWorkflow(github.GitHub.of(this.project)!, 'Release')
+
+		this.workflow.on({
+			push: { branches: ['main'] },
+		})
+
+		const steps: github.workflows.JobStep[] = [
+			{
+				uses: 'actions/checkout@v2',
+				with: {
+					'persist-credentials': false,
+				},
+			},
+			...this.workflow.projenCredentials.setupSteps,
+			this.releasePleaseStep,
+			{
+				name: 'Setup Node',
+				if: this.releasesCreatedRef,
+				with: {
+					'node-version': '16',
+					cache: 'pnpm',
+				},
+			},
+			{
+				name: 'Setup pnpm',
+				if: this.releasesCreatedRef,
+				run: 'npm install -g pnpm',
+			},
+			{
+				name: 'Install Dependencies',
+				if: this.releasesCreatedRef,
+				run: 'pnpm install',
+			},
+			{
+				name: 'Publish',
+				if: this.releasesCreatedRef,
+				env: {
+					NODE_AUTH_TOKEN: secretToString('NPM_AUTH_TOKEN'),
+				},
+				run: 'pnpm build && pnpm publish --access=public --no-git-checks -r',
+			},
+		]
+
+		this.workflow.addJob('release-please', {
+			name: 'Release Please',
+			runsOn: ['ubuntu-latest'],
+			permissions: {
+				contents: github.workflows.JobPermission.WRITE,
+				pullRequests: github.workflows.JobPermission.WRITE,
+			},
+			steps,
+		})
+	}
+
+	get releasePleaseStep(): github.workflows.JobStep {
+		return {
+			name: 'Release Please',
+			id: 'release-please',
+			uses: 'google-github-actions/release-please-action@v3',
+			with: {
+				token: this.workflow.projenCredentials.tokenRef,
+				command: 'manifest',
+			},
+		}
+	}
+
+	get releasesCreatedRef(): string {
+		return '${{ steps.release-please.outputs.releases_created }}'
+	}
+}
+
 export class ReleasePlease extends Component {
 	static of(project: Project): ReleasePlease | undefined {
 		return findComponent(project, ReleasePlease)
 	}
 
+	readonly releaseWorkflow: ReleasePleaseWorkflow
 	readonly configFile: JsonFile
 	readonly manifestFile: JsonFile
 
-	private readonly _manifestConfig: ReleasePleaseManifest
+	readonly #manifestConfig: ReleasePleaseManifest
 
 	constructor(
 		project: Project,
@@ -141,7 +228,7 @@ export class ReleasePlease extends Component {
 	) {
 		super(project)
 
-		this._manifestConfig = {
+		this.#manifestConfig = {
 			...configDefaults,
 			...(options?.manifestConfig ?? {}),
 		}
@@ -152,7 +239,7 @@ export class ReleasePlease extends Component {
 			marker: false,
 			allowComments: false,
 			omitEmpty: true,
-			obj: () => kebabCaseKeys(this._manifestConfig),
+			obj: () => kebabCaseKeys(this.#manifestConfig),
 		})
 
 		this.manifestFile = new JsonFile(
@@ -166,11 +253,13 @@ export class ReleasePlease extends Component {
 				obj: {},
 			}
 		)
+
+		this.releaseWorkflow = new ReleasePleaseWorkflow(this.project, {})
 	}
 
 	addPackage(packagePath: string, spec: ReleasePleasePackage): this {
-		this._manifestConfig.packages = {
-			...this._manifestConfig.packages,
+		this.#manifestConfig.packages = {
+			...this.#manifestConfig.packages,
 			[packagePath]: spec,
 		}
 		return this

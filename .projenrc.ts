@@ -141,6 +141,11 @@ const vueComponent = ProjenComponentProject.fromParent(monorepo, {
 	deps: ['ts-morph'],
 })
 
+const releasePleaseComponent = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.component.release-please',
+	workspaceDeps: [utilsProjen],
+})
+
 new ProjenProjectOptionsBuilder(monorepo)
 new TypeScriptProjectOptionsBuilder(monorepo)
 new NxMonorepoProjectOptionsBuilder(monorepo)
@@ -152,7 +157,8 @@ monorepo.addWorkspaceDeps(
 	tsSourceComponent,
 	vitestComponent,
 	vueComponent,
-	pnpmWorkspaceComponent
+	pnpmWorkspaceComponent,
+	releasePleaseComponent
 )
 
 // Vue Components

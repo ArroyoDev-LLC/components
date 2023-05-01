@@ -1,5 +1,9 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
+import {
+	ReleasePlease,
+	ReleaseType,
+} from '@arroyodev-llc/projen.component.release-please'
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
 import {
 	Vitest,
@@ -15,10 +19,6 @@ import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 import type { ProjenProjectOptions } from './projen-project-options'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
-import {
-	ReleasePlease,
-	ReleaseType,
-} from '@arroyodev-llc/projen.component.release-please'
 
 export class ProjectName {
 	constructor(readonly name: string) {}
@@ -338,6 +338,8 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		let releasePlease =
 			ReleasePlease.of(this.parent ?? this) ?? new ReleasePlease(this)
 		releasePlease.addProject(this, { releaseType: ReleaseType.NODE })
+		const version = releasePlease.packages.get(this.name)!
+		this.package.addVersion(version)
 		return this
 	}
 }

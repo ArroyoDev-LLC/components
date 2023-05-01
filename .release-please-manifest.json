@@ -1,1 +1,1 @@
-{}
+{"packages/utils/projen":"1.0.0","packages/projen/component/typescript-source-file":"1.0.0","packages/projen/component/pnpm-workspace":"1.0.0","packages/projen/component/unbuild":"1.0.0","packages/projen/component/vitest":"1.0.0","packages/projen/component/linting":"1.0.0","packages/projen/component/vue":"1.0.0","packages/projen/component/release-please":"1.0.0","packages/vue/ui/text":"1.0.0","packages/vue/ui/button":"1.0.0"}

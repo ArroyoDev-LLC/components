@@ -37,9 +37,11 @@
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
     "standard-version": "^9",
-    "typescript": "^5"
+    "typescript": "^5",
+    "unbuild": "^1.2.1"
   },
   "dependencies": {
+    "@sindresorhus/is": "^5.3.0",
     "projen": "^0.71.32",
     "ts-morph": "^18.0.0",
     "type-fest": "^3.9.0"

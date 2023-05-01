@@ -62,6 +62,7 @@ jspm_packages/
 !/tsconfig.bundler.json
 !/release-please-config.json
 !/.release-please-manifest.json
+!/.github/workflows/release.yml
 !/pnpm-workspace.yaml
 !/renovate.json5
 !/projenrc/projen-project-options.ts

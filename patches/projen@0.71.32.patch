@@ -1,0 +1,171 @@
+diff --git a/lib/javascript/node-package.js b/lib/javascript/node-package.js
+index 51835bf509c58a2cbea6d4989842dc8852336c53..f256491f672b07c8e1d7af6751d6e03fd16569a0 100644
+--- a/lib/javascript/node-package.js
++++ b/lib/javascript/node-package.js
+@@ -678,13 +678,15 @@ class NodePackage extends component_1.Component {
+                     // we already know we don't have the version in project `deps`,
+                     // so skip straight to checking manifest.
+                     const resolvedVersion = (0, util_1.tryResolveDependencyVersion)(name, {
+-                        paths: [this.project.outdir],
++                        paths: [outdir],
+                     });
+-                    if (!resolvedVersion) {
++                    if(resolvedVersion) {
++                        desiredVersion = `^${resolvedVersion}`;
++                    }
++                    if (!desiredVersion) {
+                         this.project.logger.warn(`unable to resolve version for ${name} from installed modules`);
+                         continue;
+                     }
+-                    desiredVersion = `^${resolvedVersion}`;
+                 }
+                 if (currentDefinition !== desiredVersion) {
+                     this.project.logger.verbose(`${name}: ${currentDefinition} => ${desiredVersion}`);
+diff --git a/lib/javascript/util.d.ts b/lib/javascript/util.d.ts
+index b26e31ff815905d5fd2c604f1fc2b3fae31c41da..285b024fae285367a3b5553c46bbf1abdb068a91 100644
+--- a/lib/javascript/util.d.ts
++++ b/lib/javascript/util.d.ts
+@@ -17,6 +17,39 @@ export declare function extractCodeArtifactDetails(registryUrl: string): {
+     registry: string;
+ };
+ export declare function minVersion(version: string): string | undefined;
++/**
++ * Attempt to resolve location of the given `moduleId`.
++ * @param moduleId Module ID to lookup.
++ * @param options Passed through to `require.resolve`.
++ */
++export declare function tryResolveModule(moduleId: string, options?: {
++    paths: string[];
++}): string | undefined;
++/**
++ * Attempt to resolve a module's manifest (package.json) path via `require.resolve` lookup.
++ *
++ * @remarks
++ * If the target package has `exports` that differ from the default
++ * (i.e, it defines the `exports` field in its manifest) and does not
++ * explicitly include an entry for `package.json`, this strategy will fail.
++ * See {@link tryResolveManifestPathFromDefaultExport} as an alternative.
++ *
++ * @param moduleId Module ID to lookup.
++ * @param options Passed through to `require.resolve`.
++ */
++export declare function tryResolveModuleManifestPath(moduleId: string, options?: {
++    paths: string[];
++}): string | undefined;
++/**
++ * Attempt to resolve a module's manifest (package.json) path by looking for the nearest
++ * `package.json` file that is an ancestor to the module's default export location.
++ *
++ * @param moduleId Module ID to lookup.
++ * @param options Passed through to `require.resolve`.
++ */
++export declare function tryResolveManifestPathFromDefaultExport(moduleId: string, options?: {
++    paths: string[];
++}): string | undefined;
+ /**
+  * Attempt to resolve the installed version of a given dependency.
+  * @param dependencyName Name of dependency.
+diff --git a/lib/javascript/util.js b/lib/javascript/util.js
+index 7b77fdd23893c92e598fe655df90e78aac3706d7..f8f58285c0efaf6c4c133e7585111dc9d9bef711 100644
+--- a/lib/javascript/util.js
++++ b/lib/javascript/util.js
+@@ -1,9 +1,10 @@
+ "use strict";
+ Object.defineProperty(exports, "__esModule", { value: true });
+-exports.tryResolveDependencyVersion = exports.minVersion = exports.extractCodeArtifactDetails = exports.codeArtifactRegex = exports.renderBundleName = void 0;
++exports.tryResolveDependencyVersion = exports.tryResolveManifestPathFromDefaultExport = exports.tryResolveModuleManifestPath = exports.tryResolveModule = exports.minVersion = exports.extractCodeArtifactDetails = exports.codeArtifactRegex = exports.renderBundleName = void 0;
+ const fs_1 = require("fs");
+ const path_1 = require("path");
+ const semver = require("semver");
++const util_1 = require("../util");
+ function renderBundleName(entrypoint) {
+     const parts = (0, path_1.join)(entrypoint).split(path_1.sep);
+     if (parts[0] === "src") {
+@@ -43,23 +44,79 @@ function minVersion(version) {
+     }
+ }
+ exports.minVersion = minVersion;
++/**
++ * Attempt to resolve location of the given `moduleId`.
++ * @param moduleId Module ID to lookup.
++ * @param options Passed through to `require.resolve`.
++ */
++function tryResolveModule(moduleId, options) {
++    try {
++        return require.resolve(moduleId, options);
++    }
++    catch {
++        return undefined;
++    }
++}
++exports.tryResolveModule = tryResolveModule;
++/**
++ * Attempt to resolve a module's manifest (package.json) path via `require.resolve` lookup.
++ *
++ * @remarks
++ * If the target package has `exports` that differ from the default
++ * (i.e, it defines the `exports` field in its manifest) and does not
++ * explicitly include an entry for `package.json`, this strategy will fail.
++ * See {@link tryResolveManifestPathFromDefaultExport} as an alternative.
++ *
++ * @param moduleId Module ID to lookup.
++ * @param options Passed through to `require.resolve`.
++ */
++function tryResolveModuleManifestPath(moduleId, options) {
++    // cannot just `require('dependency/package.json')` here because
++    // `options.paths` may not overlap with this node proc's resolution paths.
++    const manifestId = `${moduleId}/package.json`;
++    return tryResolveModule(manifestId, options);
++}
++exports.tryResolveModuleManifestPath = tryResolveModuleManifestPath;
++/**
++ * Attempt to resolve a module's manifest (package.json) path by looking for the nearest
++ * `package.json` file that is an ancestor to the module's default export location.
++ *
++ * @param moduleId Module ID to lookup.
++ * @param options Passed through to `require.resolve`.
++ */
++function tryResolveManifestPathFromDefaultExport(moduleId, options) {
++    const defaultExportPath = tryResolveModule(moduleId, options);
++    if (!defaultExportPath) {
++        return undefined;
++    }
++    const moduleDir = (0, util_1.findUp)("package.json", defaultExportPath);
++    if (!moduleDir) {
++        return undefined;
++    }
++    return (0, path_1.join)(moduleDir, "package.json");
++}
++exports.tryResolveManifestPathFromDefaultExport = tryResolveManifestPathFromDefaultExport;
+ /**
+  * Attempt to resolve the installed version of a given dependency.
+  * @param dependencyName Name of dependency.
+  * @param options Optional options passed through to `require.resolve`.
+  */
+ function tryResolveDependencyVersion(dependencyName, options) {
+-    const manifestId = `${dependencyName}/package.json`;
++    const manifestPath = tryResolveModuleManifestPath(dependencyName, options) ??
++        tryResolveManifestPathFromDefaultExport(dependencyName, options);
++    if (!manifestPath) {
++        return undefined;
++    }
+     try {
+-        const manifestPath = require.resolve(manifestId, options);
+-        // cannot just `require('dependency/package.json')` here because
+-        // `options.paths` may not overlap with this node proc's resolution paths.
+         const manifest = JSON.parse((0, fs_1.readFileSync)(manifestPath, "utf-8").toString());
+-        return manifest.version;
++        if (manifest?.name !== dependencyName) {
++            return undefined;
++        }
++        return manifest?.version;
+     }
+-    catch (e) {
++    catch {
+         return undefined;
+     }
+ }
+ exports.tryResolveDependencyVersion = tryResolveDependencyVersion;
+-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXRpbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9qYXZhc2NyaXB0L3V0aWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsMkJBQWtDO0FBQ2xDLCtCQUE2RDtBQUM3RCxpQ0FBaUM7QUFFakMsU0FBZ0IsZ0JBQWdCLENBQUMsVUFBa0I7SUFDakQsTUFBTSxLQUFLLEdBQUcsSUFBQSxXQUFJLEVBQUMsVUFBVSxDQUFDLENBQUMsS0FBSyxDQUFDLFVBQUcsQ0FBQyxDQUFDO0lBQzFDLElBQUksS0FBSyxDQUFDLENBQUMsQ0FBQyxLQUFLLEtBQUssRUFBRTtRQUN0QixLQUFLLENBQUMsS0FBSyxFQUFFLENBQUMsQ0FBQyw0REFBNEQ7S0FDNUU7SUFFRCxNQUFNLENBQUMsR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLFVBQUcsQ0FBQyxDQUFDO0lBQzFCLE1BQU0sR0FBRyxHQUFHLElBQUEsY0FBTyxFQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3ZCLE1BQU0sSUFBSSxHQUFHLElBQUEsZUFBUSxFQUFDLENBQUMsRUFBRSxJQUFBLGNBQU8sRUFBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3JDLE9BQU8sSUFBQSxXQUFJLEVBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxDQUFDO0FBQ3pCLENBQUM7QUFWRCw0Q0FVQztBQUVEOztHQUVHO0FBQ1UsUUFBQSxpQkFBaUIsR0FDNUIsZ0pBQWdKLENBQUM7QUFFbko7Ozs7O0dBS0c7QUFDSCxTQUFnQiwwQkFBMEIsQ0FBQyxXQUFtQjtJQUM1RCxNQUFNLEtBQUssR0FBRyxXQUFXLENBQUMsS0FBSyxDQUFDLHlCQUFpQixDQUFDLENBQUM7SUFDbkQsSUFBSSxLQUFLLEVBQUUsTUFBTSxFQUFFO1FBQ2pCLE1BQU0sRUFBRSxNQUFNLEVBQUUsU0FBUyxFQUFFLE1BQU0sRUFBRSxVQUFVLEVBQUUsUUFBUSxFQUFFLEdBQUcsS0FBSyxDQUFDLE1BQU0sQ0FBQztRQUN6RSxPQUFPLEVBQUUsTUFBTSxFQUFFLFNBQVMsRUFBRSxNQUFNLEVBQUUsVUFBVSxFQUFFLFFBQVEsRUFBRSxDQUFDO0tBQzVEO0lBQ0QsTUFBTSxJQUFJLEtBQUssQ0FBQyxzREFBc0QsQ0FBQyxDQUFDO0FBQzFFLENBQUM7QUFQRCxnRUFPQztBQUVELFNBQWdCLFVBQVUsQ0FBQyxPQUFlO0lBQ3hDLElBQUksTUFBTSxDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUMsRUFBRTtRQUM5QixPQUFPLE1BQU0sQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDLEVBQUUsT0FBTyxDQUFDO0tBQzVDO1NBQU07UUFDTCxPQUFPLE9BQU8sQ0FBQztLQUNoQjtBQUNILENBQUM7QUFORCxnQ0FNQztBQUVEOzs7O0dBSUc7QUFDSCxTQUFnQiwyQkFBMkIsQ0FDekMsY0FBc0IsRUFDdEIsT0FBNkI7SUFFN0IsTUFBTSxVQUFVLEdBQUcsR0FBRyxjQUFjLGVBQWUsQ0FBQztJQUNwRCxJQUFJO1FBQ0YsTUFBTSxZQUFZLEdBQUcsT0FBTyxDQUFDLE9BQU8sQ0FBQyxVQUFVLEVBQUUsT0FBTyxDQUFDLENBQUM7UUFDMUQsZ0VBQWdFO1FBQ2hFLDBFQUEwRTtRQUMxRSxNQUFNLFFBQVEsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUN6QixJQUFBLGlCQUFZLEVBQUMsWUFBWSxFQUFFLE9BQU8sQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUcvQyxDQUFDO1FBQ0YsT0FBTyxRQUFRLENBQUMsT0FBTyxDQUFDO0tBQ3pCO0lBQUMsT0FBTyxDQUFDLEVBQUU7UUFDVixPQUFPLFNBQVMsQ0FBQztLQUNsQjtBQUNILENBQUM7QUFsQkQsa0VBa0JDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgcmVhZEZpbGVTeW5jIH0gZnJvbSBcImZzXCI7XG5pbXBvcnQgeyBiYXNlbmFtZSwgZGlybmFtZSwgZXh0bmFtZSwgam9pbiwgc2VwIH0gZnJvbSBcInBhdGhcIjtcbmltcG9ydCAqIGFzIHNlbXZlciBmcm9tIFwic2VtdmVyXCI7XG5cbmV4cG9ydCBmdW5jdGlvbiByZW5kZXJCdW5kbGVOYW1lKGVudHJ5cG9pbnQ6IHN0cmluZykge1xuICBjb25zdCBwYXJ0cyA9IGpvaW4oZW50cnlwb2ludCkuc3BsaXQoc2VwKTtcbiAgaWYgKHBhcnRzWzBdID09PSBcInNyY1wiKSB7XG4gICAgcGFydHMuc2hpZnQoKTsgLy8ganVzdCByZW1vdmUgJ3NyYycgaWYgaXRzIHRoZSBmaXJzdCBlbGVtZW50IGZvciBlcmdvbm9taWNzXG4gIH1cblxuICBjb25zdCBwID0gcGFydHMuam9pbihzZXApO1xuICBjb25zdCBkaXIgPSBkaXJuYW1lKHApO1xuICBjb25zdCBiYXNlID0gYmFzZW5hbWUocCwgZXh0bmFtZShwKSk7XG4gIHJldHVybiBqb2luKGRpciwgYmFzZSk7XG59XG5cbi8qKlxuICogUmVnZXggZm9yIEFXUyBDb2RlQXJ0aWZhY3QgcmVnaXN0cnlcbiAqL1xuZXhwb3J0IGNvbnN0IGNvZGVBcnRpZmFjdFJlZ2V4ID1cbiAgL15odHRwczpcXC9cXC8oPzxyZWdpc3RyeT4oPzxkb21haW4+W15cXC5dKyktKD88YWNjb3VudElkPlxcZHsxMn0pXFwuZFxcLmNvZGVhcnRpZmFjdFxcLig/PHJlZ2lvbj5bXlxcLl0rKS4qXFwuYW1hem9uYXdzXFwuY29tXFwvLipcXC8oPzxyZXBvc2l0b3J5PlxcdyspXFwvKS87XG5cbi8qKlxuICogZ2V0cyBBV1MgZGV0YWlscyBmcm9tIHRoZSBDb2RlIEFydGlmYWN0IHJlZ2lzdHJ5IFVSTFxuICogdGhyb3dzIGV4Y2VwdGlvbiBpZiBub3QgbWF0Y2hpbmcgZXhwZWN0ZWQgcGF0dGVyblxuICogQHBhcmFtIHJlZ2lzdHJ5VXJsIENvZGUgQXJ0aWZhY3QgcmVnaXN0cnkgVVJMXG4gKiBAcmV0dXJucyBvYmplY3QgY29udGFpbmluZyB0aGUgKGRvbWFpbiwgYWNjb3VudElkLCByZWdpb24sIHJlcG9zaXRvcnkpXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiBleHRyYWN0Q29kZUFydGlmYWN0RGV0YWlscyhyZWdpc3RyeVVybDogc3RyaW5nKSB7XG4gIGNvbnN0IG1hdGNoID0gcmVnaXN0cnlVcmwubWF0Y2goY29kZUFydGlmYWN0UmVnZXgpO1xuICBpZiAobWF0Y2g/Lmdyb3Vwcykge1xuICAgIGNvbnN0IHsgZG9tYWluLCBhY2NvdW50SWQsIHJlZ2lvbiwgcmVwb3NpdG9yeSwgcmVnaXN0cnkgfSA9IG1hdGNoLmdyb3VwcztcbiAgICByZXR1cm4geyBkb21haW4sIGFjY291bnRJZCwgcmVnaW9uLCByZXBvc2l0b3J5LCByZWdpc3RyeSB9O1xuICB9XG4gIHRocm93IG5ldyBFcnJvcihcIkNvdWxkIG5vdCBnZXQgQ29kZUFydGlmYWN0IGRldGFpbHMgZnJvbSBucG0gUmVnaXN0cnlcIik7XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBtaW5WZXJzaW9uKHZlcnNpb246IHN0cmluZyk6IHN0cmluZyB8IHVuZGVmaW5lZCB7XG4gIGlmIChzZW12ZXIudmFsaWRSYW5nZSh2ZXJzaW9uKSkge1xuICAgIHJldHVybiBzZW12ZXIubWluVmVyc2lvbih2ZXJzaW9uKT8udmVyc2lvbjtcbiAgfSBlbHNlIHtcbiAgICByZXR1cm4gdmVyc2lvbjtcbiAgfVxufVxuXG4vKipcbiAqIEF0dGVtcHQgdG8gcmVzb2x2ZSB0aGUgaW5zdGFsbGVkIHZlcnNpb24gb2YgYSBnaXZlbiBkZXBlbmRlbmN5LlxuICogQHBhcmFtIGRlcGVuZGVuY3lOYW1lIE5hbWUgb2YgZGVwZW5kZW5jeS5cbiAqIEBwYXJhbSBvcHRpb25zIE9wdGlvbmFsIG9wdGlvbnMgcGFzc2VkIHRocm91Z2ggdG8gYHJlcXVpcmUucmVzb2x2ZWAuXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiB0cnlSZXNvbHZlRGVwZW5kZW5jeVZlcnNpb24oXG4gIGRlcGVuZGVuY3lOYW1lOiBzdHJpbmcsXG4gIG9wdGlvbnM/OiB7IHBhdGhzOiBzdHJpbmdbXSB9XG4pOiBzdHJpbmcgfCB1bmRlZmluZWQge1xuICBjb25zdCBtYW5pZmVzdElkID0gYCR7ZGVwZW5kZW5jeU5hbWV9L3BhY2thZ2UuanNvbmA7XG4gIHRyeSB7XG4gICAgY29uc3QgbWFuaWZlc3RQYXRoID0gcmVxdWlyZS5yZXNvbHZlKG1hbmlmZXN0SWQsIG9wdGlvbnMpO1xuICAgIC8vIGNhbm5vdCBqdXN0IGByZXF1aXJlKCdkZXBlbmRlbmN5L3BhY2thZ2UuanNvbicpYCBoZXJlIGJlY2F1c2VcbiAgICAvLyBgb3B0aW9ucy5wYXRoc2AgbWF5IG5vdCBvdmVybGFwIHdpdGggdGhpcyBub2RlIHByb2MncyByZXNvbHV0aW9uIHBhdGhzLlxuICAgIGNvbnN0IG1hbmlmZXN0ID0gSlNPTi5wYXJzZShcbiAgICAgIHJlYWRGaWxlU3luYyhtYW5pZmVzdFBhdGgsIFwidXRmLThcIikudG9TdHJpbmcoKVxuICAgICkgYXMge1xuICAgICAgdmVyc2lvbjogc3RyaW5nO1xuICAgIH07XG4gICAgcmV0dXJuIG1hbmlmZXN0LnZlcnNpb247XG4gIH0gY2F0Y2ggKGUpIHtcbiAgICByZXR1cm4gdW5kZWZpbmVkO1xuICB9XG59XG4iXX0=
+\ No newline at end of file
++//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidXRpbC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9qYXZhc2NyaXB0L3V0aWwudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBQUEsMkJBQWtDO0FBQ2xDLCtCQUE2RDtBQUM3RCxpQ0FBaUM7QUFDakMsa0NBQWlDO0FBRWpDLFNBQWdCLGdCQUFnQixDQUFDLFVBQWtCO0lBQ2pELE1BQU0sS0FBSyxHQUFHLElBQUEsV0FBSSxFQUFDLFVBQVUsQ0FBQyxDQUFDLEtBQUssQ0FBQyxVQUFHLENBQUMsQ0FBQztJQUMxQyxJQUFJLEtBQUssQ0FBQyxDQUFDLENBQUMsS0FBSyxLQUFLLEVBQUU7UUFDdEIsS0FBSyxDQUFDLEtBQUssRUFBRSxDQUFDLENBQUMsNERBQTREO0tBQzVFO0lBRUQsTUFBTSxDQUFDLEdBQUcsS0FBSyxDQUFDLElBQUksQ0FBQyxVQUFHLENBQUMsQ0FBQztJQUMxQixNQUFNLEdBQUcsR0FBRyxJQUFBLGNBQU8sRUFBQyxDQUFDLENBQUMsQ0FBQztJQUN2QixNQUFNLElBQUksR0FBRyxJQUFBLGVBQVEsRUFBQyxDQUFDLEVBQUUsSUFBQSxjQUFPLEVBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztJQUNyQyxPQUFPLElBQUEsV0FBSSxFQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsQ0FBQztBQUN6QixDQUFDO0FBVkQsNENBVUM7QUFFRDs7R0FFRztBQUNVLFFBQUEsaUJBQWlCLEdBQzVCLGdKQUFnSixDQUFDO0FBRW5KOzs7OztHQUtHO0FBQ0gsU0FBZ0IsMEJBQTBCLENBQUMsV0FBbUI7SUFDNUQsTUFBTSxLQUFLLEdBQUcsV0FBVyxDQUFDLEtBQUssQ0FBQyx5QkFBaUIsQ0FBQyxDQUFDO0lBQ25ELElBQUksS0FBSyxFQUFFLE1BQU0sRUFBRTtRQUNqQixNQUFNLEVBQUUsTUFBTSxFQUFFLFNBQVMsRUFBRSxNQUFNLEVBQUUsVUFBVSxFQUFFLFFBQVEsRUFBRSxHQUFHLEtBQUssQ0FBQyxNQUFNLENBQUM7UUFDekUsT0FBTyxFQUFFLE1BQU0sRUFBRSxTQUFTLEVBQUUsTUFBTSxFQUFFLFVBQVUsRUFBRSxRQUFRLEVBQUUsQ0FBQztLQUM1RDtJQUNELE1BQU0sSUFBSSxLQUFLLENBQUMsc0RBQXNELENBQUMsQ0FBQztBQUMxRSxDQUFDO0FBUEQsZ0VBT0M7QUFFRCxTQUFnQixVQUFVLENBQUMsT0FBZTtJQUN4QyxJQUFJLE1BQU0sQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDLEVBQUU7UUFDOUIsT0FBTyxNQUFNLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxFQUFFLE9BQU8sQ0FBQztLQUM1QztTQUFNO1FBQ0wsT0FBTyxPQUFPLENBQUM7S0FDaEI7QUFDSCxDQUFDO0FBTkQsZ0NBTUM7QUFFRDs7OztHQUlHO0FBQ0gsU0FBZ0IsZ0JBQWdCLENBQzlCLFFBQWdCLEVBQ2hCLE9BQTZCO0lBRTdCLElBQUk7UUFDRixPQUFPLE9BQU8sQ0FBQyxPQUFPLENBQUMsUUFBUSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0tBQzNDO0lBQUMsTUFBTTtRQUNOLE9BQU8sU0FBUyxDQUFDO0tBQ2xCO0FBQ0gsQ0FBQztBQVRELDRDQVNDO0FBRUQ7Ozs7Ozs7Ozs7O0dBV0c7QUFDSCxTQUFnQiw0QkFBNEIsQ0FDMUMsUUFBZ0IsRUFDaEIsT0FBNkI7SUFFN0IsZ0VBQWdFO0lBQ2hFLDBFQUEwRTtJQUMxRSxNQUFNLFVBQVUsR0FBRyxHQUFHLFFBQVEsZUFBZSxDQUFDO0lBQzlDLE9BQU8sZ0JBQWdCLENBQUMsVUFBVSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0FBQy9DLENBQUM7QUFSRCxvRUFRQztBQUVEOzs7Ozs7R0FNRztBQUNILFNBQWdCLHVDQUF1QyxDQUNyRCxRQUFnQixFQUNoQixPQUE2QjtJQUU3QixNQUFNLGlCQUFpQixHQUFHLGdCQUFnQixDQUFDLFFBQVEsRUFBRSxPQUFPLENBQUMsQ0FBQztJQUM5RCxJQUFJLENBQUMsaUJBQWlCLEVBQUU7UUFDdEIsT0FBTyxTQUFTLENBQUM7S0FDbEI7SUFDRCxNQUFNLFNBQVMsR0FBRyxJQUFBLGFBQU0sRUFBQyxjQUFjLEVBQUUsaUJBQWlCLENBQUMsQ0FBQztJQUM1RCxJQUFJLENBQUMsU0FBUyxFQUFFO1FBQ2QsT0FBTyxTQUFTLENBQUM7S0FDbEI7SUFDRCxPQUFPLElBQUEsV0FBSSxFQUFDLFNBQVMsRUFBRSxjQUFjLENBQUMsQ0FBQztBQUN6QyxDQUFDO0FBYkQsMEZBYUM7QUFFRDs7OztHQUlHO0FBQ0gsU0FBZ0IsMkJBQTJCLENBQ3pDLGNBQXNCLEVBQ3RCLE9BQTZCO0lBRTdCLE1BQU0sWUFBWSxHQUNoQiw0QkFBNEIsQ0FBQyxjQUFjLEVBQUUsT0FBTyxDQUFDO1FBQ3JELHVDQUF1QyxDQUFDLGNBQWMsRUFBRSxPQUFPLENBQUMsQ0FBQztJQUNuRSxJQUFJLENBQUMsWUFBWSxFQUFFO1FBQ2pCLE9BQU8sU0FBUyxDQUFDO0tBQ2xCO0lBQ0QsSUFBSTtRQUNGLE1BQU0sUUFBUSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQ3pCLElBQUEsaUJBQVksRUFBQyxZQUFZLEVBQUUsT0FBTyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQ1IsQ0FBQztRQUN6QyxJQUFJLFFBQVEsRUFBRSxJQUFJLEtBQUssY0FBYyxFQUFFO1lBQ3JDLE9BQU8sU0FBUyxDQUFDO1NBQ2xCO1FBQ0QsT0FBTyxRQUFRLEVBQUUsT0FBTyxDQUFDO0tBQzFCO0lBQUMsTUFBTTtRQUNOLE9BQU8sU0FBUyxDQUFDO0tBQ2xCO0FBQ0gsQ0FBQztBQXJCRCxrRUFxQkMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyByZWFkRmlsZVN5bmMgfSBmcm9tIFwiZnNcIjtcbmltcG9ydCB7IGJhc2VuYW1lLCBkaXJuYW1lLCBleHRuYW1lLCBqb2luLCBzZXAgfSBmcm9tIFwicGF0aFwiO1xuaW1wb3J0ICogYXMgc2VtdmVyIGZyb20gXCJzZW12ZXJcIjtcbmltcG9ydCB7IGZpbmRVcCB9IGZyb20gXCIuLi91dGlsXCI7XG5cbmV4cG9ydCBmdW5jdGlvbiByZW5kZXJCdW5kbGVOYW1lKGVudHJ5cG9pbnQ6IHN0cmluZykge1xuICBjb25zdCBwYXJ0cyA9IGpvaW4oZW50cnlwb2ludCkuc3BsaXQoc2VwKTtcbiAgaWYgKHBhcnRzWzBdID09PSBcInNyY1wiKSB7XG4gICAgcGFydHMuc2hpZnQoKTsgLy8ganVzdCByZW1vdmUgJ3NyYycgaWYgaXRzIHRoZSBmaXJzdCBlbGVtZW50IGZvciBlcmdvbm9taWNzXG4gIH1cblxuICBjb25zdCBwID0gcGFydHMuam9pbihzZXApO1xuICBjb25zdCBkaXIgPSBkaXJuYW1lKHApO1xuICBjb25zdCBiYXNlID0gYmFzZW5hbWUocCwgZXh0bmFtZShwKSk7XG4gIHJldHVybiBqb2luKGRpciwgYmFzZSk7XG59XG5cbi8qKlxuICogUmVnZXggZm9yIEFXUyBDb2RlQXJ0aWZhY3QgcmVnaXN0cnlcbiAqL1xuZXhwb3J0IGNvbnN0IGNvZGVBcnRpZmFjdFJlZ2V4ID1cbiAgL15odHRwczpcXC9cXC8oPzxyZWdpc3RyeT4oPzxkb21haW4+W15cXC5dKyktKD88YWNjb3VudElkPlxcZHsxMn0pXFwuZFxcLmNvZGVhcnRpZmFjdFxcLig/PHJlZ2lvbj5bXlxcLl0rKS4qXFwuYW1hem9uYXdzXFwuY29tXFwvLipcXC8oPzxyZXBvc2l0b3J5PlxcdyspXFwvKS87XG5cbi8qKlxuICogZ2V0cyBBV1MgZGV0YWlscyBmcm9tIHRoZSBDb2RlIEFydGlmYWN0IHJlZ2lzdHJ5IFVSTFxuICogdGhyb3dzIGV4Y2VwdGlvbiBpZiBub3QgbWF0Y2hpbmcgZXhwZWN0ZWQgcGF0dGVyblxuICogQHBhcmFtIHJlZ2lzdHJ5VXJsIENvZGUgQXJ0aWZhY3QgcmVnaXN0cnkgVVJMXG4gKiBAcmV0dXJucyBvYmplY3QgY29udGFpbmluZyB0aGUgKGRvbWFpbiwgYWNjb3VudElkLCByZWdpb24sIHJlcG9zaXRvcnkpXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiBleHRyYWN0Q29kZUFydGlmYWN0RGV0YWlscyhyZWdpc3RyeVVybDogc3RyaW5nKSB7XG4gIGNvbnN0IG1hdGNoID0gcmVnaXN0cnlVcmwubWF0Y2goY29kZUFydGlmYWN0UmVnZXgpO1xuICBpZiAobWF0Y2g/Lmdyb3Vwcykge1xuICAgIGNvbnN0IHsgZG9tYWluLCBhY2NvdW50SWQsIHJlZ2lvbiwgcmVwb3NpdG9yeSwgcmVnaXN0cnkgfSA9IG1hdGNoLmdyb3VwcztcbiAgICByZXR1cm4geyBkb21haW4sIGFjY291bnRJZCwgcmVnaW9uLCByZXBvc2l0b3J5LCByZWdpc3RyeSB9O1xuICB9XG4gIHRocm93IG5ldyBFcnJvcihcIkNvdWxkIG5vdCBnZXQgQ29kZUFydGlmYWN0IGRldGFpbHMgZnJvbSBucG0gUmVnaXN0cnlcIik7XG59XG5cbmV4cG9ydCBmdW5jdGlvbiBtaW5WZXJzaW9uKHZlcnNpb246IHN0cmluZyk6IHN0cmluZyB8IHVuZGVmaW5lZCB7XG4gIGlmIChzZW12ZXIudmFsaWRSYW5nZSh2ZXJzaW9uKSkge1xuICAgIHJldHVybiBzZW12ZXIubWluVmVyc2lvbih2ZXJzaW9uKT8udmVyc2lvbjtcbiAgfSBlbHNlIHtcbiAgICByZXR1cm4gdmVyc2lvbjtcbiAgfVxufVxuXG4vKipcbiAqIEF0dGVtcHQgdG8gcmVzb2x2ZSBsb2NhdGlvbiBvZiB0aGUgZ2l2ZW4gYG1vZHVsZUlkYC5cbiAqIEBwYXJhbSBtb2R1bGVJZCBNb2R1bGUgSUQgdG8gbG9va3VwLlxuICogQHBhcmFtIG9wdGlvbnMgUGFzc2VkIHRocm91Z2ggdG8gYHJlcXVpcmUucmVzb2x2ZWAuXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiB0cnlSZXNvbHZlTW9kdWxlKFxuICBtb2R1bGVJZDogc3RyaW5nLFxuICBvcHRpb25zPzogeyBwYXRoczogc3RyaW5nW10gfVxuKTogc3RyaW5nIHwgdW5kZWZpbmVkIHtcbiAgdHJ5IHtcbiAgICByZXR1cm4gcmVxdWlyZS5yZXNvbHZlKG1vZHVsZUlkLCBvcHRpb25zKTtcbiAgfSBjYXRjaCB7XG4gICAgcmV0dXJuIHVuZGVmaW5lZDtcbiAgfVxufVxuXG4vKipcbiAqIEF0dGVtcHQgdG8gcmVzb2x2ZSBhIG1vZHVsZSdzIG1hbmlmZXN0IChwYWNrYWdlLmpzb24pIHBhdGggdmlhIGByZXF1aXJlLnJlc29sdmVgIGxvb2t1cC5cbiAqXG4gKiBAcmVtYXJrc1xuICogSWYgdGhlIHRhcmdldCBwYWNrYWdlIGhhcyBgZXhwb3J0c2AgdGhhdCBkaWZmZXIgZnJvbSB0aGUgZGVmYXVsdFxuICogKGkuZSwgaXQgZGVmaW5lcyB0aGUgYGV4cG9ydHNgIGZpZWxkIGluIGl0cyBtYW5pZmVzdCkgYW5kIGRvZXMgbm90XG4gKiBleHBsaWNpdGx5IGluY2x1ZGUgYW4gZW50cnkgZm9yIGBwYWNrYWdlLmpzb25gLCB0aGlzIHN0cmF0ZWd5IHdpbGwgZmFpbC5cbiAqIFNlZSB7QGxpbmsgdHJ5UmVzb2x2ZU1hbmlmZXN0UGF0aEZyb21EZWZhdWx0RXhwb3J0fSBhcyBhbiBhbHRlcm5hdGl2ZS5cbiAqXG4gKiBAcGFyYW0gbW9kdWxlSWQgTW9kdWxlIElEIHRvIGxvb2t1cC5cbiAqIEBwYXJhbSBvcHRpb25zIFBhc3NlZCB0aHJvdWdoIHRvIGByZXF1aXJlLnJlc29sdmVgLlxuICovXG5leHBvcnQgZnVuY3Rpb24gdHJ5UmVzb2x2ZU1vZHVsZU1hbmlmZXN0UGF0aChcbiAgbW9kdWxlSWQ6IHN0cmluZyxcbiAgb3B0aW9ucz86IHsgcGF0aHM6IHN0cmluZ1tdIH1cbik6IHN0cmluZyB8IHVuZGVmaW5lZCB7XG4gIC8vIGNhbm5vdCBqdXN0IGByZXF1aXJlKCdkZXBlbmRlbmN5L3BhY2thZ2UuanNvbicpYCBoZXJlIGJlY2F1c2VcbiAgLy8gYG9wdGlvbnMucGF0aHNgIG1heSBub3Qgb3ZlcmxhcCB3aXRoIHRoaXMgbm9kZSBwcm9jJ3MgcmVzb2x1dGlvbiBwYXRocy5cbiAgY29uc3QgbWFuaWZlc3RJZCA9IGAke21vZHVsZUlkfS9wYWNrYWdlLmpzb25gO1xuICByZXR1cm4gdHJ5UmVzb2x2ZU1vZHVsZShtYW5pZmVzdElkLCBvcHRpb25zKTtcbn1cblxuLyoqXG4gKiBBdHRlbXB0IHRvIHJlc29sdmUgYSBtb2R1bGUncyBtYW5pZmVzdCAocGFja2FnZS5qc29uKSBwYXRoIGJ5IGxvb2tpbmcgZm9yIHRoZSBuZWFyZXN0XG4gKiBgcGFja2FnZS5qc29uYCBmaWxlIHRoYXQgaXMgYW4gYW5jZXN0b3IgdG8gdGhlIG1vZHVsZSdzIGRlZmF1bHQgZXhwb3J0IGxvY2F0aW9uLlxuICpcbiAqIEBwYXJhbSBtb2R1bGVJZCBNb2R1bGUgSUQgdG8gbG9va3VwLlxuICogQHBhcmFtIG9wdGlvbnMgUGFzc2VkIHRocm91Z2ggdG8gYHJlcXVpcmUucmVzb2x2ZWAuXG4gKi9cbmV4cG9ydCBmdW5jdGlvbiB0cnlSZXNvbHZlTWFuaWZlc3RQYXRoRnJvbURlZmF1bHRFeHBvcnQoXG4gIG1vZHVsZUlkOiBzdHJpbmcsXG4gIG9wdGlvbnM/OiB7IHBhdGhzOiBzdHJpbmdbXSB9XG4pOiBzdHJpbmcgfCB1bmRlZmluZWQge1xuICBjb25zdCBkZWZhdWx0RXhwb3J0UGF0aCA9IHRyeVJlc29sdmVNb2R1bGUobW9kdWxlSWQsIG9wdGlvbnMpO1xuICBpZiAoIWRlZmF1bHRFeHBvcnRQYXRoKSB7XG4gICAgcmV0dXJuIHVuZGVmaW5lZDtcbiAgfVxuICBjb25zdCBtb2R1bGVEaXIgPSBmaW5kVXAoXCJwYWNrYWdlLmpzb25cIiwgZGVmYXVsdEV4cG9ydFBhdGgpO1xuICBpZiAoIW1vZHVsZURpcikge1xuICAgIHJldHVybiB1bmRlZmluZWQ7XG4gIH1cbiAgcmV0dXJuIGpvaW4obW9kdWxlRGlyLCBcInBhY2thZ2UuanNvblwiKTtcbn1cblxuLyoqXG4gKiBBdHRlbXB0IHRvIHJlc29sdmUgdGhlIGluc3RhbGxlZCB2ZXJzaW9uIG9mIGEgZ2l2ZW4gZGVwZW5kZW5jeS5cbiAqIEBwYXJhbSBkZXBlbmRlbmN5TmFtZSBOYW1lIG9mIGRlcGVuZGVuY3kuXG4gKiBAcGFyYW0gb3B0aW9ucyBPcHRpb25hbCBvcHRpb25zIHBhc3NlZCB0aHJvdWdoIHRvIGByZXF1aXJlLnJlc29sdmVgLlxuICovXG5leHBvcnQgZnVuY3Rpb24gdHJ5UmVzb2x2ZURlcGVuZGVuY3lWZXJzaW9uKFxuICBkZXBlbmRlbmN5TmFtZTogc3RyaW5nLFxuICBvcHRpb25zPzogeyBwYXRoczogc3RyaW5nW10gfVxuKTogc3RyaW5nIHwgdW5kZWZpbmVkIHtcbiAgY29uc3QgbWFuaWZlc3RQYXRoID1cbiAgICB0cnlSZXNvbHZlTW9kdWxlTWFuaWZlc3RQYXRoKGRlcGVuZGVuY3lOYW1lLCBvcHRpb25zKSA/P1xuICAgIHRyeVJlc29sdmVNYW5pZmVzdFBhdGhGcm9tRGVmYXVsdEV4cG9ydChkZXBlbmRlbmN5TmFtZSwgb3B0aW9ucyk7XG4gIGlmICghbWFuaWZlc3RQYXRoKSB7XG4gICAgcmV0dXJuIHVuZGVmaW5lZDtcbiAgfVxuICB0cnkge1xuICAgIGNvbnN0IG1hbmlmZXN0ID0gSlNPTi5wYXJzZShcbiAgICAgIHJlYWRGaWxlU3luYyhtYW5pZmVzdFBhdGgsIFwidXRmLThcIikudG9TdHJpbmcoKVxuICAgICkgYXMgeyBuYW1lPzogc3RyaW5nOyB2ZXJzaW9uPzogc3RyaW5nIH07XG4gICAgaWYgKG1hbmlmZXN0Py5uYW1lICE9PSBkZXBlbmRlbmN5TmFtZSkge1xuICAgICAgcmV0dXJuIHVuZGVmaW5lZDtcbiAgICB9XG4gICAgcmV0dXJuIG1hbmlmZXN0Py52ZXJzaW9uO1xuICB9IGNhdGNoIHtcbiAgICByZXR1cm4gdW5kZWZpbmVkO1xuICB9XG59XG4iXX0=

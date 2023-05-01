@@ -82,6 +82,9 @@
   "pnpm": {
     "overrides": {
       "@types/babel__traverse": "7.18.2"
+    },
+    "patchedDependencies": {
+      "projen@0.71.32": "patches/projen@0.71.32.patch"
     }
   },
   "engines": {

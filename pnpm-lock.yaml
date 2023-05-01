@@ -3,6 +3,11 @@ lockfileVersion: '6.0'
 overrides:
   '@types/babel__traverse': 7.18.2
 
+patchedDependencies:
+  projen@0.71.32:
+    hash: fv7d5l24vd76vcnd3yycozu5ue
+    path: patches/projen@0.71.32.patch
+
 importers:
 
   .:
@@ -115,7 +120,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.32
-        version: 0.71.32
+        version: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -188,13 +193,16 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.32
-        version: 0.71.32
+        version: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
 
   packages/projen/component/pnpm-workspace:
     dependencies:
@@ -237,13 +245,16 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.32
-        version: 0.71.32
+        version: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
 
   packages/projen/component/typescript-source-file:
     dependencies:
@@ -292,13 +303,16 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.32
-        version: 0.71.32
+        version: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
 
   packages/projen/component/unbuild:
     dependencies:
@@ -353,7 +367,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.32
-        version: 0.71.32
+        version: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
       standard-version:
         specifier: ^9
         version: 9.0.0
@@ -411,13 +425,16 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.32
-        version: 0.71.32
+        version: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
 
   packages/projen/component/vue:
     dependencies:
@@ -475,19 +492,25 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.32
-        version: 0.71.32
+        version: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
       standard-version:
         specifier: ^9
         version: 9.0.0
       typescript:
         specifier: ^5
         version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
 
   packages/utils/projen:
     dependencies:
+      '@sindresorhus/is':
+        specifier: '*'
+        version: 5.3.0
       projen:
         specifier: ^0.71.32
-        version: 0.71.32
+        version: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
@@ -534,6 +557,9 @@ importers:
       typescript:
         specifier: ^5
         version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
 
   packages/vue/ui/button:
     dependencies:
@@ -559,6 +585,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^5
         version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
+      '@vitejs/plugin-vue':
+        specifier: '*'
+        version: 4.2.1(vite@4.3.3)(vue@3.2.47)
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -595,6 +624,9 @@ importers:
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
+      rollup:
+        specifier: '*'
+        version: 3.21.1
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -604,6 +636,9 @@ importers:
       typescript:
         specifier: ^5
         version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
       vue-tsc:
         specifier: ^1.6.1
         version: 1.6.1(typescript@5.0.4)
@@ -626,6 +661,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^5
         version: 5.58.0(eslint@8.38.0)(typescript@5.0.4)
+      '@vitejs/plugin-vue':
+        specifier: '*'
+        version: 4.2.1(vite@4.3.3)(vue@3.2.47)
       '@vue/test-utils':
         specifier: ^2.3.2
         version: 2.3.2(vue@3.2.47)
@@ -662,6 +700,9 @@ importers:
       prettier:
         specifier: ^2.8.8
         version: 2.8.8
+      rollup:
+        specifier: '*'
+        version: 3.21.1
       rollup-plugin-vue:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.2.47)
@@ -671,6 +712,9 @@ importers:
       typescript:
         specifier: ^5
         version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
       vue-tsc:
         specifier: ^1.6.1
         version: 1.6.1(typescript@5.0.4)
@@ -705,7 +749,7 @@ packages:
       '@nrwl/devkit': 15.9.3(nx@16.0.1)
       '@pnpm/reviewing.dependencies-hierarchy': 2.0.3(@pnpm/logger@5.0.0)
       fs-extra: 10.1.0
-      projen: 0.71.32
+      projen: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
       semver: 4.3.6
     transitivePeerDependencies:
       - '@pnpm/logger'
@@ -1247,7 +1291,7 @@ packages:
     dependencies:
       '@jsii/spec': 1.80.0
       '@ungap/structured-clone': 1.1.0
-      projen: 0.71.32
+      projen: 0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue)
     dev: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -1931,7 +1975,6 @@ packages:
   /@sindresorhus/is@5.3.0:
     resolution: {integrity: sha512-CX6t4SYQ37lzxicAqsBtxA3OseeoVrh9cSJ5PFYam0GksYlupRfy1A+Q4aYD3zvcfECLc0zO2u+ZnR2UYKvCrw==}
     engines: {node: '>=14.16'}
-    dev: true
 
   /@szmarczak/http-timer@5.0.1:
     resolution: {integrity: sha512-+PmQX0PiAYPMeVYe237LJAYvOMYW1j2rH5YROyS3b4CTVJum34HfRvKvAzozHAQG0TnHNdUfY9nCeUyRAs//cw==}
@@ -6763,7 +6806,7 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /projen@0.71.32:
+  /projen@0.71.32(patch_hash=fv7d5l24vd76vcnd3yycozu5ue):
     resolution: {integrity: sha512-MnCoVz6oxGzG04w7WILwfL0fvxd9145Lq72DsCVCWZ73W1rF5nHoqBiDAMwreAHQFMfarajEg4+7HhOHZwaapA==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
@@ -6795,6 +6838,7 @@ packages:
       - xmlbuilder2
       - yaml
       - yargs
+    patched: true
 
   /promise-inflight@1.0.1:
     resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}

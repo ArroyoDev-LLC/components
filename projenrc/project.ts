@@ -15,6 +15,10 @@ import { TypeScriptModuleResolution } from 'projen/lib/javascript'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 import type { ProjenProjectOptions } from './projen-project-options'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
+import {
+	ReleasePlease,
+	ReleaseType,
+} from '@arroyodev-llc/projen.component.release-please'
 
 export class ProjectName {
 	constructor(readonly name: string) {}
@@ -100,6 +104,7 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 	}
 
 	protected applyGithub(gh: github.GitHub): this {
+		new ReleasePlease(this)
 		const build = gh.tryFindWorkflow('build')!
 		return this.applyGithubBuildFlow(build)
 	}
@@ -130,7 +135,7 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 		})
 		PnpmWorkspace.of(this)!.addPatch(
 			'projen@0.71.32',
-			'patches/projen@0.71.32.patch',
+			'patches/projen@0.71.32.patch'
 		)
 		return this
 	}
@@ -210,8 +215,9 @@ export class ProjenProject extends cdk.JsiiProject {
 	constructor(options: ProjenProjectOptions) {
 		const { name, ...rest } = options
 		const projectName = new ProjectName(name)
+		const { authorUrl, ...defaults } = projectDefaults
 		super({
-			...projectDefaults,
+			...defaults,
 			name: projectName.name,
 			outdir: projectName.outDir,
 			packageName: projectName.packageName,
@@ -222,6 +228,7 @@ export class ProjenProject extends cdk.JsiiProject {
 		})
 		this.projectName = projectName
 		new LintConfig(this)
+		new PnpmWorkspace(this)
 	}
 }
 
@@ -301,6 +308,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			options: { name: this.projectName.packageName, declaration: true },
 		})
 		this.compileTask.exec('unbuild')
+		this.applyGithub()
 	}
 
 	protected copyTsConfigFiles(
@@ -324,6 +332,13 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 
 	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
 		return PnpmWorkspace.of(this)!.addWorkspaceDeps(...dependency)
+	}
+
+	applyGithub(): this {
+		let releasePlease =
+			ReleasePlease.of(this.parent ?? this) ?? new ReleasePlease(this)
+		releasePlease.addProject(this, { releaseType: ReleaseType.NODE })
+		return this
 	}
 }
 

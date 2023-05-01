@@ -58,6 +58,9 @@
       ],
       "@arroyodev-llc/projen.component.pnpm-workspace": [
         "./packages/projen/component/pnpm-workspace/src/index"
+      ],
+      "@arroyodev-llc/projen.component.release-please": [
+        "./packages/projen/component/release-please/src/index"
       ]
     }
   },

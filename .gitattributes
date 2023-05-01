@@ -20,6 +20,7 @@
 /.projen/deps.json linguist-generated
 /.projen/files.json linguist-generated
 /.projen/tasks.json linguist-generated
+/.release-please-manifest.json linguist-generated
 /.syncpackrc.json linguist-generated
 /LICENSE linguist-generated
 /nx.json linguist-generated
@@ -29,6 +30,7 @@
 /projenrc/nx-monorepo-project-options.ts linguist-generated
 /projenrc/projen-project-options.ts linguist-generated
 /projenrc/typescript-project-options.ts linguist-generated
+/release-please-config.json linguist-generated
 /renovate.json5 linguist-generated
 /tsconfig.base.json linguist-generated
 /tsconfig.bundler.json linguist-generated

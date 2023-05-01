@@ -70,6 +70,7 @@
   "dependencies": {
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
+    "@arroyodev-llc/projen.component.release-please": "workspace:*",
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/projen.component.unbuild": "workspace:*",
     "@arroyodev-llc/projen.component.vitest": "workspace:*",
@@ -106,6 +107,7 @@
       "packages/projen/component/vitest",
       "packages/projen/component/linting",
       "packages/projen/component/vue",
+      "packages/projen/component/release-please",
       "packages/vue/ui/text",
       "packages/vue/ui/button"
     ]

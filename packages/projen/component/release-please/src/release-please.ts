@@ -1,6 +1,7 @@
+import { existsSync, readFileSync } from 'fs'
 import path from 'node:path'
 import { findComponent } from '@arroyodev-llc/utils.projen'
-import { Component, JsonFile, type Project, github } from 'projen'
+import { Component, github, JsonFile, type Project } from 'projen'
 import { secretToString } from 'projen/lib/github/util'
 import { kebabCaseKeys } from 'projen/lib/util'
 
@@ -221,6 +222,8 @@ export class ReleasePlease extends Component {
 	readonly manifestFile: JsonFile
 
 	readonly #manifestConfig: ReleasePleaseManifest
+	readonly #packagePaths: Map<string, string> = new Map()
+	readonly #packages: Map<string, string> = new Map()
 
 	constructor(
 		project: Project,
@@ -242,33 +245,70 @@ export class ReleasePlease extends Component {
 			obj: () => kebabCaseKeys(this.#manifestConfig),
 		})
 
-		this.manifestFile = new JsonFile(
-			this.project,
-			'.release-please-manifest.json',
-			{
-				readonly: false,
-				marker: false,
-				omitEmpty: false,
-				allowComments: false,
-				obj: {},
-			}
-		)
+		this.manifestFile = this.buildManifest()
 
 		this.releaseWorkflow = new ReleasePleaseWorkflow(this.project, {})
 	}
 
-	addPackage(packagePath: string, spec: ReleasePleasePackage): this {
+	protected buildManifest() {
+		const manifestFile = path.join(
+			this.project.outdir,
+			'.release-please-manifest.json'
+		)
+		if (existsSync(manifestFile)) {
+			const data = JSON.parse(readFileSync(manifestFile, 'utf-8')) as Record<
+				string,
+				string
+			>
+			for (const [key, value] of Object.entries(data)) {
+				this.#packages.set(key, value)
+			}
+		}
+		return new JsonFile(this.project, '.release-please-manifest.json', {
+			readonly: false,
+			marker: false,
+			omitEmpty: false,
+			allowComments: false,
+			obj: () => Object.fromEntries(this.#packages.entries()),
+		})
+	}
+
+	/**
+	 * Mapping of package project names to manifest versions.
+	 */
+	get packages(): Map<string, string> {
+		const pkgs = new Map<string, string>()
+		for (const [key, value] of this.#packages.entries()) {
+			const pkgName = this.#packagePaths.get(key) ?? key
+			pkgs.set(pkgName, value)
+		}
+		return pkgs
+	}
+
+	addPackage(
+		packagePath: string,
+		spec: ReleasePleasePackage,
+		version?: string
+	): this {
 		this.#manifestConfig.packages = {
 			...this.#manifestConfig.packages,
 			[packagePath]: spec,
 		}
+		if (version) {
+			this.#packages.set(packagePath, version)
+		}
 		return this
 	}
 
-	addProject(project: Project, options?: ReleasePleasePackage): this {
+	addProject(
+		project: Project,
+		options?: ReleasePleasePackage,
+		version?: string
+	): this {
 		let relPath = project.parent
 			? path.relative(project.parent.outdir, project.outdir)
 			: '.'
-		return this.addPackage(relPath, options ?? {})
+		this.#packagePaths.set(relPath, project.name)
+		return this.addPackage(relPath, options ?? {}, version)
 	}
 }

@@ -33,7 +33,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-          cache: pnpm
       - name: Setup pnpm
         if: ${{ steps.release-please.outputs.releases_created }}
         run: npm install -g pnpm

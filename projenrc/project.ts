@@ -128,6 +128,10 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 		this.addScripts({
 			postinstall: 'projen stub',
 		})
+		PnpmWorkspace.of(this)!.addPatch(
+			'projen@0.71.32',
+			'patches/projen@0.71.32.patch',
+		)
 		return this
 	}
 

@@ -31,6 +31,23 @@ const monorepo = new MonorepoProject({
 		mergify: true,
 		workflows: true,
 		projenCredentials: arroyoBot,
+		pullRequestLintOptions: {
+			semanticTitleOptions: {
+				types: [
+					'feat',
+					'fix',
+					'perf',
+					'revert',
+					'docs',
+					'style',
+					'chore',
+					'refactor',
+					'test',
+					'build',
+					'ci',
+				],
+			},
+		},
 	},
 	autoApproveUpgrades: true,
 	autoApproveOptions: {

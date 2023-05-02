@@ -104,23 +104,33 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 	}
 
 	protected applyGithub(gh: github.GitHub): this {
-		new ReleasePlease(this)
+		const releasePlease = new ReleasePlease(this)
+		this.applyGithubJobNxEnv(
+			releasePlease.releaseWorkflow.workflow,
+			'release-please'
+		)
 		const build = gh.tryFindWorkflow('build')!
 		return this.applyGithubBuildFlow(build)
 	}
 
-	protected applyGithubBuildFlow(workflow: github.GithubWorkflow): this {
-		const buildJob = workflow.getJob('build')! as github.workflows.Job
-		workflow.updateJob('build', {
-			...buildJob,
+	applyGithubJobNxEnv(workflow: github.GithubWorkflow, jobId: string): this {
+		const job = workflow.getJob(jobId) as github.workflows.Job
+		workflow.updateJob(jobId, {
+			...job,
 			env: {
-				...buildJob.env,
+				...job.env,
 				NX_NON_NATIVE_HASHER: 'true',
 				NX_BRANCH: '${{ github.event.number }}',
 				NX_RUN_GROUP: '${{ github.run_id }}',
 				NX_CLOUD_ACCESS_TOKEN: '${{ secrets.NX_CLOUD_ACCESS_TOKEN }}',
+				CI: 'true',
 			},
 		})
+		return this
+	}
+
+	protected applyGithubBuildFlow(workflow: github.GithubWorkflow): this {
+		this.applyGithubJobNxEnv(workflow, 'build')
 		return this
 	}
 
@@ -129,6 +139,8 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 		this.addNxRunManyTask('stub', {
 			skipCache: true,
 			target: 'stub',
+			parallel: 5,
+			noBail: true,
 		})
 		this.addScripts({
 			postinstall: 'projen stub',
@@ -304,11 +316,24 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		this.package.addField('type', 'module')
 		this.package.addField('sideEffects', false)
 		new LintConfig(this)
+
+		this.applyBundler().applyGithub()
+	}
+
+	protected applyBundler(): this {
 		new UnBuild(this, {
-			options: { name: this.projectName.packageName, declaration: true },
+			cjs: true,
+			options: {
+				name: this.projectName.packageName,
+				declaration: true,
+				clean: true,
+				entries: ['./src/index'],
+				rollup: {
+					emitCJS: true,
+				},
+			},
 		})
-		this.compileTask.exec('unbuild')
-		this.applyGithub()
+		return this
 	}
 
 	protected copyTsConfigFiles(
@@ -338,8 +363,12 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		let releasePlease =
 			ReleasePlease.of(this.parent ?? this) ?? new ReleasePlease(this)
 		releasePlease.addProject(this, { releaseType: ReleaseType.NODE })
-		const version = releasePlease.packages.get(this.name)!
-		this.package.addVersion(version)
+		const version = releasePlease.packages.get(this.name)
+		if (version) {
+			this.package.addVersion(version)
+		} else {
+			releasePlease.addProject(this, { releaseType: ReleaseType.NODE }, '0.0.0')
+		}
 		return this
 	}
 }
@@ -357,6 +386,7 @@ export class VueComponentProject extends TypescriptProject {
 			release: true,
 			...options,
 		})
+		this.package.addField('sideEffects', true)
 		new Vue(this)
 	}
 }

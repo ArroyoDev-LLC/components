@@ -317,7 +317,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		this.package.addField('sideEffects', false)
 		new LintConfig(this)
 
-		this.applyBundler().applyGithub()
+		this.applyLintConfig().applyBundler().applyGithub()
 	}
 
 	protected applyBundler(): this {
@@ -355,11 +355,12 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		}
 	}
 
-	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
-		return PnpmWorkspace.of(this)!.addWorkspaceDeps(...dependency)
+	protected applyLintConfig(): this {
+		LintConfig.of(this)!.setEslintExec('eslint --cache')
+		return this
 	}
 
-	applyGithub(): this {
+	protected applyGithub(): this {
 		let releasePlease =
 			ReleasePlease.of(this.parent ?? this) ?? new ReleasePlease(this)
 		releasePlease.addProject(this, { releaseType: ReleaseType.NODE })
@@ -370,6 +371,10 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			releasePlease.addProject(this, { releaseType: ReleaseType.NODE }, '0.0.0')
 		}
 		return this
+	}
+
+	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
+		return PnpmWorkspace.of(this)!.addWorkspaceDeps(...dependency)
 	}
 }
 

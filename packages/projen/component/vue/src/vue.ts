@@ -1,6 +1,7 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { TypeScriptSourceFile } from '@arroyodev-llc/projen.component.typescript-source-file'
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
+import { Vite } from '@arroyodev-llc/projen.component.vite'
 import {
 	Vitest,
 	VitestConfigType,
@@ -24,6 +25,7 @@ export class Vue extends Component {
 			.applyTsShims()
 			.applyTsConfig()
 			.applyUnBuild(UnBuild.of(this.project))
+			.applyVite(Vite.of(this.project))
 			.applyVitest(Vitest.of(this.project) ?? this.buildVitest())
 	}
 
@@ -125,6 +127,54 @@ export class Vue extends Component {
 					`options.plugins.push(vue())`,
 				],
 			})
+		})
+		return this
+	}
+
+	applyVite(component?: Vite): this {
+		if (!component) return this
+		this.project.deps.addDependency('@vitejs/plugin-vue', DependencyType.BUILD)
+		this.project.deps.addDependency(
+			'@vitejs/plugin-vue-jsx',
+			DependencyType.BUILD
+		)
+		this.project.deps.addDependency('unplugin-vue-macros', DependencyType.BUILD)
+		component.file.addImport(
+			{ moduleSpecifier: '@vitejs/plugin-vue', defaultImport: 'vue' },
+			{ moduleSpecifier: '@vitejs/plugin-vue-jsx', defaultImport: 'vueJsx' },
+			{
+				moduleSpecifier: 'unplugin-vue-macros/vite',
+				defaultImport: 'VueMacros',
+			}
+		)
+		component.addBuildConfig({
+			resolve: {
+				dedupe: ['vue'],
+			},
+		})
+		component.addConfigTransform((configExpr) => {
+			const existsPlugins = configExpr
+				.getProperty('plugins')
+				?.asKind?.(SyntaxKind.PropertyAssignment)
+				?.getInitializer?.()
+			const pluginsExpr = configExpr.addPropertyAssignment({
+				name: 'plugins',
+				initializer: existsPlugins?.getText?.() ?? '[]',
+			})
+			pluginsExpr
+				.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression)
+				.addElements([
+					(writer) =>
+						writer
+							.write('VueMacros(')
+							.block(() =>
+								writer
+									.write('plugins: ')
+									.block(() => writer.write('vue: vue()'))
+							)
+							.write(')'),
+					'vueJsx()',
+				])
 		})
 		return this
 	}

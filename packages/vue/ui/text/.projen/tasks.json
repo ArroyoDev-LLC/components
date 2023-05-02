@@ -62,7 +62,7 @@
       "description": "Runs eslint against the codebase",
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx,.vue --fix --no-error-on-unmatched-pattern src test build-tools"
+          "exec": "eslint --cache --ext .ts,.tsx,.vue --fix --no-error-on-unmatched-pattern src test build-tools"
         }
       ]
     },

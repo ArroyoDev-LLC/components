@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.1](https://github.com/ArroyoDev-LLC/components/compare/projen.component.vue-v0.1.0...projen.component.vue-v0.1.1) (2023-05-02)
+
+
+### Features
+
+* **projen.components.vue:** Integrate with vite if found. ([09d1a50](https://github.com/ArroyoDev-LLC/components/commit/09d1a5041d18703963dee0fe953d253ea495bc10))
+* **projen.components.vue:** Utilize `LintConfig.setEslintExec` to add vue ext ([7a7f5b4](https://github.com/ArroyoDev-LLC/components/commit/7a7f5b400b5c08e71978015ac3bbb04350d6e07c))
+
 ## 0.1.0 (2023-05-01)
 
 

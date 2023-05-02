@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/ArroyoDev-LLC/components/compare/projen.component.linting-v0.1.0...projen.component.linting-v0.1.1) (2023-05-02)
+
+
+### Features
+
+* **projen.components.linting:** Define `updateEslintTask`, `setEslintExec` public methods. ([ada151e](https://github.com/ArroyoDev-LLC/components/commit/ada151e930e3080e7274c971950f81b3495b0bd0))
+
 ## 0.1.0 (2023-05-01)
 
 

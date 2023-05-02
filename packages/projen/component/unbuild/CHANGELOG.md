@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/ArroyoDev-LLC/components/compare/projen.component.unbuild-v0.1.0...projen.component.unbuild-v0.1.1) (2023-05-02)
+
+
+### Features
+
+* **projen.components.unbuild:** Define files field, add ci conditional on stub ([2ea1c0d](https://github.com/ArroyoDev-LLC/components/commit/2ea1c0d458a9032ac491c78e6e0a4f79ddd5ec80))
+
 ## 0.1.0 (2023-05-01)
 
 

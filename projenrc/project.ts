@@ -389,4 +389,22 @@ export class VueComponentProject extends TypescriptProject {
 		this.package.addField('sideEffects', true)
 		new Vue(this)
 	}
+
+	// protected applyBundler(): this {
+	// 	new Vite(this, {
+	// 		build: {
+	// 			optimizeDeps: {
+	// 				include: ['vue'],
+	// 			},
+	// 			build: {
+	// 				emptyOutDir: true,
+	// 				lib: {
+	// 					entry: './src/index.ts',
+	// 					name: this.package.packageName
+	// 				},
+	// 			},
+	// 		},
+	// 	})
+	// 	return this
+	// }
 }

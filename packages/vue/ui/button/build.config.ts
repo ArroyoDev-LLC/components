@@ -7,6 +7,9 @@ import { defineBuildConfig, type BuildConfig, type BuildContext } from 'unbuild'
 const config: BuildConfig = {
 	name: '@arroyodev-llc/vue.ui.button',
 	declaration: true,
+	clean: true,
+	entries: ['./src/index'],
+	rollup: { emitCJS: true },
 	hooks: {
 		'rollup:options'(_: BuildContext, options: RollupOptions) {
 			// @ts-expect-error ignore rollup options.

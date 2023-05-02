@@ -17,6 +17,9 @@
       "@arroyodev-llc/projen.component.unbuild": [
         "../unbuild/src/index"
       ],
+      "@arroyodev-llc/projen.component.vite": [
+        "../vite/src/index"
+      ],
       "@arroyodev-llc/projen.component.vitest": [
         "../vitest/src/index"
       ],

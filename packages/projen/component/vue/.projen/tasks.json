@@ -44,9 +44,6 @@
       "steps": [
         {
           "exec": "tsc --build"
-        },
-        {
-          "exec": "unbuild"
         }
       ]
     },
@@ -135,7 +132,8 @@
         {
           "exec": "unbuild --stub"
         }
-      ]
+      ],
+      "condition": "test -z \"$CI\""
     },
     "test": {
       "name": "test",
@@ -173,19 +171,19 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/utils.projen'"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"

@@ -3,6 +3,7 @@ import path from 'node:path'
 import { findComponent } from '@arroyodev-llc/utils.projen'
 import { Component, github, JsonFile, type Project } from 'projen'
 import { secretToString } from 'projen/lib/github/util'
+import { NodeProject } from 'projen/lib/javascript'
 import { kebabCaseKeys } from 'projen/lib/util'
 
 export const enum ReleaseType {
@@ -11,6 +12,7 @@ export const enum ReleaseType {
 }
 
 export interface ReleasePleasePackage {
+	readonly component?: string
 	readonly releaseType?: ReleaseType
 	readonly releaseAs?: string
 	readonly packageName?: string
@@ -319,6 +321,17 @@ export class ReleasePlease extends Component {
 			? path.relative(project.parent.outdir, project.outdir)
 			: '.'
 		this.#packagePaths.set(relPath, project.name)
-		return this.addPackage(relPath, options ?? {}, version)
+		let componentName = project.name
+		if (project instanceof NodeProject) {
+			componentName = project.package.packageName
+		}
+		return this.addPackage(
+			relPath,
+			{
+				component: project.name,
+				...(options ?? {}),
+			},
+			version
+		)
 	}
 }

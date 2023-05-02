@@ -1,3 +1,11 @@
+import nx_monorepo, {
+	buildExecutableCommand,
+} from '@aws-prototyping-sdk/nx-monorepo'
+import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
+import { TypeScriptModuleResolution } from 'projen/lib/javascript'
+import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
+import type { ProjenProjectOptions } from './projen-project-options'
+import type { TypeScriptProjectOptions } from './typescript-project-options'
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
 import {
@@ -11,14 +19,6 @@ import {
 } from '@arroyodev-llc/projen.component.vitest'
 import { Vue } from '@arroyodev-llc/projen.component.vue'
 import { findComponent } from '@arroyodev-llc/utils.projen'
-import nx_monorepo, {
-	buildExecutableCommand,
-} from '@aws-prototyping-sdk/nx-monorepo'
-import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
-import { TypeScriptModuleResolution } from 'projen/lib/javascript'
-import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
-import type { ProjenProjectOptions } from './projen-project-options'
-import type { TypeScriptProjectOptions } from './typescript-project-options'
 
 export class ProjectName {
 	constructor(readonly name: string) {}

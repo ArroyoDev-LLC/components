@@ -1,4 +1,3 @@
-import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { github, LogLevel } from 'projen'
 import {
 	TypescriptConfigExtends,
@@ -15,6 +14,7 @@ import {
 	TypescriptProject,
 	VueComponentProject,
 } from './projenrc/project'
+import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 
 const arroyoBot = github.GithubCredentials.fromApp({
 	appIdSecret: 'AD_BOT_APP_ID',

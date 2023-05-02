@@ -1,5 +1,5 @@
 import path from 'node:path'
-import { type Component, type Project } from 'projen'
+import { type Component, type Project, type TaskStep } from 'projen'
 
 /**
  * Ensures a relative path is prefixed from cwd.
@@ -40,4 +40,38 @@ export const findComponent = <T extends typeof Component>(
 	return project.components.find((c) => isComponent(component, c)) as
 		| InstanceType<T>
 		| undefined
+}
+
+/**
+ * Merge a list of steps into an existing task.
+ * @param project Owner of task.
+ * @param taskId Id of target task.
+ * @param steps Array of task steps to merge.
+ */
+export const replaceTask = (
+	project: Project,
+	taskId: string,
+	steps: TaskStep[]
+) => {
+	const task = project.tasks.tryFind(taskId)
+	if (!task) {
+		throw new Error(`Could not find task ${taskId}`)
+	}
+	const spec = task._renderSpec()
+	// @ts-expect-error workaround dependant tasks.
+	delete project.tasks._tasks[taskId]
+	const numSteps = Math.max(steps.length, spec.steps?.length ?? 0)
+	const newSteps = Array.from(
+		{ length: numSteps },
+		(_, i) => i + 1
+	).map<TaskStep>((idx) => ({
+		...(spec.steps?.[idx - 1] ?? {}),
+		...(steps[idx - 1] ?? {}),
+	})) as TaskStep[]
+	const newTask = project.tasks.addTask(taskId, {
+		...spec,
+		steps: newSteps,
+	})
+	newTask.lock()
+	return newTask
 }

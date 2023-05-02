@@ -135,6 +135,12 @@ const unbuildComponent = ProjenComponentProject.fromParent(monorepo, {
 	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo', 'unbuild'],
 })
 
+const viteComponent = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.component.vite',
+	workspaceDeps: [utilsProjen, tsSourceComponent],
+	deps: ['ts-morph', 'vite', '@vitejs/plugin-vue', '@vitejs/plugin-vue-jsx'],
+})
+
 const vitestComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vitest',
 	workspaceDeps: [utilsProjen, tsSourceComponent],
@@ -152,6 +158,7 @@ const vueComponent = ProjenComponentProject.fromParent(monorepo, {
 		utilsProjen,
 		lintingComponent,
 		unbuildComponent,
+		viteComponent,
 		vitestComponent,
 		tsSourceComponent,
 	],
@@ -172,6 +179,7 @@ monorepo.addWorkspaceDeps(
 	lintingComponent,
 	unbuildComponent,
 	tsSourceComponent,
+	viteComponent,
 	vitestComponent,
 	vueComponent,
 	pnpmWorkspaceComponent,

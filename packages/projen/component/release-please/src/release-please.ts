@@ -179,12 +179,18 @@ export class ReleasePleaseWorkflow extends Component {
 				run: 'pnpm install --no-frozen-lockfile',
 			},
 			{
+				name: 'Build',
+				if: this.releasesCreatedRef,
+				run: 'pnpm build',
+			},
+			{
 				name: 'Publish',
 				if: this.releasesCreatedRef,
 				env: {
 					NODE_AUTH_TOKEN: secretToString('NPM_AUTH_TOKEN'),
+					NPM_TOKEN: secretToString('NPM_AUTH_TOKEN'),
 				},
-				run: 'pnpm build && pnpm publish --access=public --no-git-checks -r',
+				run: `pnpm --parallel -r exec bash -c '([[ -d "dist/js" ]] && pnpm --package=publib@latest dlx publib-npm) || echo "No dist found: $(pwd)"'`,
 			},
 		]
 

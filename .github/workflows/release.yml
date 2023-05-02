@@ -48,8 +48,12 @@ jobs:
       - name: Install Dependencies
         if: ${{ steps.release-please.outputs.releases_created }}
         run: pnpm install --no-frozen-lockfile
+      - name: Build
+        if: ${{ steps.release-please.outputs.releases_created }}
+        run: pnpm build
       - name: Publish
         if: ${{ steps.release-please.outputs.releases_created }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-        run: pnpm build && pnpm publish --access=public --no-git-checks -r
+          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: "pnpm --parallel -r exec bash -c '([[ -d \"dist/js\" ]] && pnpm --package=publib@latest dlx publib-npm) || echo \"No dist found: $(pwd)\"'"

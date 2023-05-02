@@ -84,9 +84,7 @@ export class Vue extends Component {
 			'parserOptions.extraFileExtensions': ['.vue'],
 			'settings.import/parsers.vue-eslint-parser': ['.vue'],
 		})
-		component.eslint.eslintTask.reset(
-			component.eslint.eslintTask.steps[0]!.exec!.replace('.tsx', '.tsx,.vue')
-		)
+		component.setEslintExec('.tsx,.vue', '.tsx')
 		return this
 	}
 

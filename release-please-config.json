@@ -4,36 +4,47 @@
   "bump-patch-for-minor-pre-major": true,
   "packages": {
     "packages/utils/projen": {
+      "component": "utils.projen",
       "release-type": "node"
     },
     "packages/projen/component/typescript-source-file": {
+      "component": "projen.component.typescript-source-file",
       "release-type": "node"
     },
     "packages/projen/component/pnpm-workspace": {
+      "component": "projen.component.pnpm-workspace",
       "release-type": "node"
     },
     "packages/projen/component/unbuild": {
+      "component": "projen.component.unbuild",
       "release-type": "node"
     },
     "packages/projen/component/vite": {
+      "component": "projen.component.vite",
       "release-type": "node"
     },
     "packages/projen/component/vitest": {
+      "component": "projen.component.vitest",
       "release-type": "node"
     },
     "packages/projen/component/linting": {
+      "component": "projen.component.linting",
       "release-type": "node"
     },
     "packages/projen/component/vue": {
+      "component": "projen.component.vue",
       "release-type": "node"
     },
     "packages/projen/component/release-please": {
+      "component": "projen.component.release-please",
       "release-type": "node"
     },
     "packages/vue/ui/text": {
+      "component": "vue.ui.text",
       "release-type": "node"
     },
     "packages/vue/ui/button": {
+      "component": "vue.ui.button",
       "release-type": "node"
     }
   },

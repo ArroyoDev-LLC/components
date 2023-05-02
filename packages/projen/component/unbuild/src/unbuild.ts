@@ -46,7 +46,9 @@ export class UnBuild extends Component {
 			},
 		})
 
-		const stubTask = this.project.addTask('stub')
+		const stubTask = this.project.addTask('stub', {
+			condition: 'test -z "$CI"',
+		})
 		stubTask.exec('unbuild --stub')
 
 		const exportInfo = this.buildExportInfo()
@@ -59,9 +61,10 @@ export class UnBuild extends Component {
 			'.': {
 				import: exportInfo.import,
 				types: exportInfo.types,
-				...(this.options.cjs && { require: exportInfo.require }),
+				...(this.options.cjs ? { require: exportInfo.require } : {}),
 			},
 		})
+		this.project.package.addField('files', [this.project.libdir])
 
 		const source = [
 			`const config: BuildConfig = {}`,

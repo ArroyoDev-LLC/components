@@ -12,8 +12,14 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    env:
+      NX_NON_NATIVE_HASHER: "true"
+      NX_BRANCH: ${{ github.event.number }}
+      NX_RUN_GROUP: ${{ github.run_id }}
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+      CI: "true"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           persist-credentials: false
       - name: Generate token
@@ -28,17 +34,20 @@ jobs:
         with:
           token: ${{ steps.generate_token.outputs.token }}
           command: manifest
+      - name: Setup PNPM
+        if: ${{ steps.release-please.outputs.releases_created }}
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: "8"
       - name: Setup Node
         if: ${{ steps.release-please.outputs.releases_created }}
         uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - name: Setup pnpm
-        if: ${{ steps.release-please.outputs.releases_created }}
-        run: npm install -g pnpm
+          cache: pnpm
       - name: Install Dependencies
         if: ${{ steps.release-please.outputs.releases_created }}
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
       - name: Publish
         if: ${{ steps.release-please.outputs.releases_created }}
         env:

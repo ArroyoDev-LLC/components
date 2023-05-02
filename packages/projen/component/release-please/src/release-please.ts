@@ -149,7 +149,7 @@ export class ReleasePleaseWorkflow extends Component {
 
 		const steps: github.workflows.JobStep[] = [
 			{
-				uses: 'actions/checkout@v2',
+				uses: 'actions/checkout@v3',
 				with: {
 					'persist-credentials': false,
 				},
@@ -157,22 +157,26 @@ export class ReleasePleaseWorkflow extends Component {
 			...this.workflow.projenCredentials.setupSteps,
 			this.releasePleaseStep,
 			{
+				name: 'Setup PNPM',
+				if: this.releasesCreatedRef,
+				uses: 'pnpm/action-setup@v2.2.4',
+				with: {
+					version: '8',
+				},
+			},
+			{
 				name: 'Setup Node',
 				if: this.releasesCreatedRef,
 				uses: 'actions/setup-node@v3',
 				with: {
 					'node-version': '16',
+					cache: 'pnpm',
 				},
-			},
-			{
-				name: 'Setup pnpm',
-				if: this.releasesCreatedRef,
-				run: 'npm install -g pnpm',
 			},
 			{
 				name: 'Install Dependencies',
 				if: this.releasesCreatedRef,
-				run: 'pnpm install',
+				run: 'pnpm install --no-frozen-lockfile',
 			},
 			{
 				name: 'Publish',

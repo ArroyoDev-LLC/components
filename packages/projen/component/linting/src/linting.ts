@@ -1,5 +1,5 @@
-import { applyOverrides } from '@arroyodev-llc/utils.projen'
-import { Component, type ObjectFile, type Project } from 'projen'
+import { applyOverrides, replaceTask } from '@arroyodev-llc/utils.projen'
+import { Component, type ObjectFile, type Project, type TaskStep } from 'projen'
 import {
 	type NodeProject,
 	type PrettierOptions,
@@ -60,5 +60,27 @@ export class LintConfig extends Component {
 		})
 
 		this.eslintFile = project.tryFindObjectFile('.eslintrc.json')!
+	}
+
+	/**
+	 * Merge task step into eslint task.
+	 * @param step Task step to merge.
+	 */
+	updateEslintTask(step: TaskStep): this {
+		replaceTask(this.project, 'eslint', [step])
+		return this
+	}
+
+	/**
+	 * Replace eslint executable command.
+	 * @param exec Replacement value.
+	 * @param replace Existing value to replace. Defaults to 'eslint'.
+	 */
+	setEslintExec(exec: string, replace: string = 'eslint'): this {
+		const eslintTask = this.project.tasks.tryFind('eslint')!
+		const eslintCmd = eslintTask.steps[0].exec!.replace(replace, exec)
+		return this.updateEslintTask({
+			exec: eslintCmd,
+		})
 	}
 }

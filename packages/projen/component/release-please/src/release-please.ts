@@ -328,7 +328,7 @@ export class ReleasePlease extends Component {
 		return this.addPackage(
 			relPath,
 			{
-				component: project.name,
+				component: componentName,
 				...(options ?? {}),
 			},
 			version

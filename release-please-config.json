@@ -4,47 +4,47 @@
   "bump-patch-for-minor-pre-major": true,
   "packages": {
     "packages/utils/projen": {
-      "component": "utils.projen",
+      "component": "@arroyodev-llc/utils.projen",
       "release-type": "node"
     },
     "packages/projen/component/typescript-source-file": {
-      "component": "projen.component.typescript-source-file",
+      "component": "@arroyodev-llc/projen.component.typescript-source-file",
       "release-type": "node"
     },
     "packages/projen/component/pnpm-workspace": {
-      "component": "projen.component.pnpm-workspace",
+      "component": "@arroyodev-llc/projen.component.pnpm-workspace",
       "release-type": "node"
     },
     "packages/projen/component/unbuild": {
-      "component": "projen.component.unbuild",
+      "component": "@arroyodev-llc/projen.component.unbuild",
       "release-type": "node"
     },
     "packages/projen/component/vite": {
-      "component": "projen.component.vite",
+      "component": "@arroyodev-llc/projen.component.vite",
       "release-type": "node"
     },
     "packages/projen/component/vitest": {
-      "component": "projen.component.vitest",
+      "component": "@arroyodev-llc/projen.component.vitest",
       "release-type": "node"
     },
     "packages/projen/component/linting": {
-      "component": "projen.component.linting",
+      "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"
     },
     "packages/projen/component/vue": {
-      "component": "projen.component.vue",
+      "component": "@arroyodev-llc/projen.component.vue",
       "release-type": "node"
     },
     "packages/projen/component/release-please": {
-      "component": "projen.component.release-please",
+      "component": "@arroyodev-llc/projen.component.release-please",
       "release-type": "node"
     },
     "packages/vue/ui/text": {
-      "component": "vue.ui.text",
+      "component": "@arroyodev-llc/vue.ui.text",
       "release-type": "node"
     },
     "packages/vue/ui/button": {
-      "component": "vue.ui.button",
+      "component": "@arroyodev-llc/vue.ui.button",
       "release-type": "node"
     }
   },

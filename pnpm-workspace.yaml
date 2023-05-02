@@ -5,6 +5,7 @@ packages:
   - packages/projen/component/typescript-source-file
   - packages/projen/component/pnpm-workspace
   - packages/projen/component/unbuild
+  - packages/projen/component/vite
   - packages/projen/component/vitest
   - packages/projen/component/linting
   - packages/projen/component/vue

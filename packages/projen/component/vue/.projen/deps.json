@@ -87,6 +87,11 @@
       "type": "runtime"
     },
     {
+      "name": "@arroyodev-llc/projen.component.vite",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@arroyodev-llc/projen.component.vitest",
       "version": "workspace:*",
       "type": "runtime"

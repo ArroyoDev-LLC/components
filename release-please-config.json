@@ -15,6 +15,9 @@
     "packages/projen/component/unbuild": {
       "release-type": "node"
     },
+    "packages/projen/component/vite": {
+      "release-type": "node"
+    },
     "packages/projen/component/vitest": {
       "release-type": "node"
     },

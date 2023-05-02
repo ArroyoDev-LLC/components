@@ -138,7 +138,8 @@
         {
           "exec": "unbuild --stub"
         }
-      ]
+      ],
+      "condition": "test -z \"$CI\""
     },
     "test": {
       "name": "test",

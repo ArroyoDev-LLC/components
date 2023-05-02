@@ -32,7 +32,7 @@
   "devDependencies": {
     "@aws-prototyping-sdk/nx-monorepo": "^0.17.4",
     "@jsii/spec": "^1.80.0",
-    "@mrgrain/jsii-struct-builder": "^0.4.1",
+    "@mrgrain/jsii-struct-builder": "^0.4.3",
     "@nrwl/cli": "^15.9.3",
     "@nrwl/nx-cloud": "^16.0.5",
     "@nrwl/workspace": "^16.0.1",
@@ -60,7 +60,7 @@
     "syncpack": "^9.8.6",
     "ts-morph": "^18.0.0",
     "ts-node": "^10.9.1",
-    "tsx": "^3.12.6",
+    "tsx": "^3.12.7",
     "typedoc": "^0.24.6",
     "typescript": "^5",
     "unbuild": "^1.2.1",
@@ -73,12 +73,13 @@
     "@arroyodev-llc/projen.component.release-please": "workspace:*",
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/projen.component.unbuild": "workspace:*",
+    "@arroyodev-llc/projen.component.vite": "workspace:*",
     "@arroyodev-llc/projen.component.vitest": "workspace:*",
     "@arroyodev-llc/projen.component.vue": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "aws-cdk-lib": "^2.77.0",
-    "cdk-nag": "^2.26.10",
-    "constructs": "^10.2.11"
+    "cdk-nag": "^2.26.11",
+    "constructs": "^10.2.12"
   },
   "pnpm": {
     "overrides": {
@@ -104,6 +105,7 @@
       "packages/projen/component/typescript-source-file",
       "packages/projen/component/pnpm-workspace",
       "packages/projen/component/unbuild",
+      "packages/projen/component/vite",
       "packages/projen/component/vitest",
       "packages/projen/component/linting",
       "packages/projen/component/vue",

@@ -5,5 +5,8 @@ import { defineBuildConfig, type BuildConfig } from 'unbuild'
 const config: BuildConfig = {
 	name: '@arroyodev-llc/utils.projen',
 	declaration: true,
+	clean: true,
+	entries: ['./src/index'],
+	rollup: { emitCJS: true },
 }
 export default defineBuildConfig(config)

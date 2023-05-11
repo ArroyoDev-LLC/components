@@ -1,5 +1,5 @@
 import nx_monorepo, {
-	buildExecutableCommand,
+	NodePackageUtils,
 } from '@aws-prototyping-sdk/nx-monorepo'
 import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
 import { TypeScriptModuleResolution } from 'projen/lib/javascript'
@@ -272,7 +272,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			release: true,
 			authorName: 'arroyoDev-LLC',
 			prettier: true,
-			projenCommand: buildExecutableCommand(
+			projenCommand: NodePackageUtils.command.exec(
 				javascript.NodePackageManager.PNPM,
 				'projen'
 			),

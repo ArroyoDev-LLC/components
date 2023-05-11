@@ -1,9 +1,9 @@
 {
-  "extends": "@nrwl/workspace/presets/npm.json",
+  "extends": "nx/presets/npm.json",
   "npmScope": "monorepo",
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/nx-cloud",
+      "runner": "nx-cloud",
       "options": {
         "useDaemonProcess": false,
         "cacheableOperations": [
@@ -19,13 +19,12 @@
       "{projectRoot}/**/*"
     ]
   },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
+  "targetDefaults": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ]
+    }
   },
   "affected": {
     "defaultBase": "main"

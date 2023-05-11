@@ -15,8 +15,7 @@
     "test": "pnpm exec projen test",
     "unbump": "pnpm exec projen unbump",
     "upgrade": "pnpm exec projen upgrade",
-    "watch": "pnpm exec projen watch",
-    "projen": "pnpm exec projen"
+    "watch": "pnpm exec projen watch"
   },
   "author": {
     "name": "arroyoDev-LLC",
@@ -47,7 +46,7 @@
   "dependencies": {
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
-    "@aws-prototyping-sdk/nx-monorepo": "^0.17.4",
+    "@aws-prototyping-sdk/nx-monorepo": "^0.18.6",
     "ts-morph": "^18.0.0",
     "unbuild": "^1.2.1"
   },

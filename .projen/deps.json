@@ -13,18 +13,6 @@
       "type": "build"
     },
     {
-      "name": "@nrwl/cli",
-      "type": "build"
-    },
-    {
-      "name": "@nrwl/nx-cloud",
-      "type": "build"
-    },
-    {
-      "name": "@nrwl/workspace",
-      "type": "build"
-    },
-    {
       "name": "@sindresorhus/is",
       "type": "build"
     },
@@ -93,7 +81,12 @@
       "type": "build"
     },
     {
+      "name": "nx-cloud",
+      "type": "build"
+    },
+    {
       "name": "nx",
+      "version": "16.0.0",
       "type": "build"
     },
     {
@@ -153,6 +146,21 @@
       "name": "@types/babel__traverse",
       "version": "7.18.2",
       "type": "override"
+    },
+    {
+      "name": "@zkochan/js-yaml",
+      "version": "npm:js-yaml@4.1.0",
+      "type": "override"
+    },
+    {
+      "name": "wrap-ansi",
+      "version": "^7.0.0",
+      "type": "override"
+    },
+    {
+      "name": "nx",
+      "version": "^16",
+      "type": "peer"
     },
     {
       "name": "@arroyodev-llc/projen.component.linting",

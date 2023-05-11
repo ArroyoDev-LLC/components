@@ -15,8 +15,7 @@
     "test": "pnpm exec projen test",
     "unbump": "pnpm exec projen unbump",
     "upgrade": "pnpm exec projen upgrade",
-    "watch": "pnpm exec projen watch",
-    "projen": "pnpm exec projen"
+    "watch": "pnpm exec projen watch"
   },
   "author": {
     "name": "arroyoDev-LLC",
@@ -48,7 +47,7 @@
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "ts-morph": "^18.0.0",
-    "vitest": "^0.30.1"
+    "vitest": "^0.31.0"
   },
   "pnpm": {},
   "main": "./dist/index.cjs",

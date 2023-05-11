@@ -15,8 +15,7 @@
     "test": "pnpm exec projen test",
     "unbump": "pnpm exec projen unbump",
     "upgrade": "pnpm exec projen upgrade",
-    "watch": "pnpm exec projen watch",
-    "projen": "pnpm exec projen"
+    "watch": "pnpm exec projen watch"
   },
   "author": {
     "name": "arroyoDev-LLC",
@@ -44,7 +43,7 @@
     "@sindresorhus/is": "^5.3.0",
     "projen": "^0.71.32",
     "ts-morph": "^18.0.0",
-    "type-fest": "^3.9.0"
+    "type-fest": "^3.10.0"
   },
   "pnpm": {},
   "main": "./dist/index.cjs",

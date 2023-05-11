@@ -1,23 +1,16 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Button > renders as expected. 1`] = `
-<button
-  class="p-button p-component p-button-sm"
-  type="button"
+<button-stub
+  iconpos="left"
+  link="false"
+  loading="false"
+  outlined="false"
+  plain="false"
+  raised="false"
+  rounded="false"
+  size="small"
+  text="false"
   variant="primary"
->
-  
-  
-  
-  
-  <!---->
-  
-  <span
-    class="p-button-label"
-  >
-     
-  </span>
-  <!---->
-  
-</button>
+/>
 `;

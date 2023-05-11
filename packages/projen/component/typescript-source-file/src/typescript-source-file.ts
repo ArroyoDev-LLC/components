@@ -1,4 +1,4 @@
-import { buildExecutableCommand } from '@aws-prototyping-sdk/nx-monorepo'
+import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
 import { FileBase, type FileBaseOptions, type typescript } from 'projen'
 import { execCapture } from 'projen/lib/util'
 import {
@@ -97,7 +97,7 @@ export class TypeScriptSourceFile extends FileBase {
 		super.postSynthesize()
 
 		const outdir = this.project.outdir
-		const cmd = buildExecutableCommand(
+		const cmd = NodePackageUtils.command.exec(
 			this.project.package.packageManager,
 			`eslint_d --no-ignore --ext .ts --fix ${this.absolutePath}`
 		)

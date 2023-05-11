@@ -15,8 +15,7 @@
     "test": "pnpm exec projen test",
     "unbump": "pnpm exec projen unbump",
     "upgrade": "pnpm exec projen upgrade",
-    "watch": "pnpm exec projen watch",
-    "projen": "pnpm exec projen"
+    "watch": "pnpm exec projen watch"
   },
   "author": {
     "name": "arroyoDev-LLC",
@@ -50,7 +49,7 @@
     "@vitejs/plugin-vue": "^4.2.1",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "ts-morph": "^18.0.0",
-    "vite": "^4.3.3"
+    "vite": "^4.3.5"
   },
   "pnpm": {},
   "main": "./dist/index.cjs",

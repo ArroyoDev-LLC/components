@@ -15,8 +15,7 @@
     "test": "pnpm exec projen test",
     "unbump": "pnpm exec projen unbump",
     "upgrade": "pnpm exec projen upgrade",
-    "watch": "pnpm exec projen watch",
-    "projen": "pnpm exec projen"
+    "watch": "pnpm exec projen watch"
   },
   "author": {
     "name": "arroyoDev-LLC",

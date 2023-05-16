@@ -1,11 +1,3 @@
-import nx_monorepo, {
-	NodePackageUtils,
-} from '@aws-prototyping-sdk/nx-monorepo'
-import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
-import { TypeScriptModuleResolution } from 'projen/lib/javascript'
-import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
-import type { ProjenProjectOptions } from './projen-project-options'
-import type { TypeScriptProjectOptions } from './typescript-project-options'
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
 import {
@@ -19,6 +11,15 @@ import {
 } from '@arroyodev-llc/projen.component.vitest'
 import { Vue } from '@arroyodev-llc/projen.component.vue'
 import { findComponent } from '@arroyodev-llc/utils.projen'
+import nx_monorepo, {
+	NodePackageUtils,
+	NxWorkspace,
+} from '@aws-prototyping-sdk/nx-monorepo'
+import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
+import { TypeScriptModuleResolution } from 'projen/lib/javascript'
+import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
+import type { ProjenProjectOptions } from './projen-project-options'
+import type { TypeScriptProjectOptions } from './typescript-project-options'
 
 export class ProjectName {
 	constructor(readonly name: string) {}
@@ -101,6 +102,10 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 			.applyGithub(this.github!)
 			.applyPackage(this.package)
 		this.tsconfigDev!.addExtends(this.tsconfig!)
+		// readonly access token (safe to be public)
+		NxWorkspace.of(this)!.useNxCloud(
+			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
+		)
 	}
 
 	protected applyGithub(gh: github.GitHub): this {

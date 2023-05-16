@@ -32,6 +32,7 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
+.tmp
 .nx/cache
 /.idea
 !/.projenrc.js
@@ -50,8 +51,8 @@ jspm_packages/
 /dist/
 !/.eslintrc.json
 !/.syncpackrc.json
-!/.nxignore
 !/nx.json
+!/.nxignore
 .idea
 .idea/**
 !/.ncurc.json

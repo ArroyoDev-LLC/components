@@ -3,9 +3,6 @@
     "build": {
       "name": "build",
       "description": "Full release build for all affected projects",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=build --output-style=stream --nx-bail",
@@ -48,9 +45,6 @@
     "compile": {
       "name": "compile",
       "description": "Only compile for all affected projects",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=compile --output-style=stream --nx-bail",
@@ -91,9 +85,6 @@
     "eslint": {
       "name": "eslint",
       "description": "Runs eslint against the codebase for all affected projects",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=eslint --output-style=stream --nx-bail",
@@ -132,9 +123,6 @@
     "package": {
       "name": "package",
       "description": "Creates the distribution package for all affected projects",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=package --output-style=stream --nx-bail",
@@ -145,9 +133,6 @@
     "post-compile": {
       "name": "post-compile",
       "description": "Runs after successful compilation for all affected projects",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=post-compile --output-style=stream --nx-bail",
@@ -162,9 +147,6 @@
     "pre-compile": {
       "name": "pre-compile",
       "description": "Prepare the project for compilation for all affected projects",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=pre-compile --output-style=stream --nx-bail",
@@ -175,9 +157,6 @@
     "run-many": {
       "name": "run-many",
       "description": "Run task against multiple workspace projects",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many",
@@ -187,9 +166,6 @@
     },
     "stub": {
       "name": "stub",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=stub --output-style=stream --parallel=5 --skip-nx-cache",
@@ -200,9 +176,6 @@
     "test": {
       "name": "test",
       "description": "Run tests for all affected projects",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=test --output-style=stream --nx-bail",
@@ -221,19 +194,19 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='nx,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='nx,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='nx,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='nx,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='nx,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/utils.projen'"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
@@ -259,7 +232,7 @@
           "exec": "pnpm exec syncpack fix-mismatches"
         },
         {
-          "exec": "pnpm install"
+          "exec": "pnpm exec install"
         },
         {
           "exec": "pnpm exec projen"
@@ -269,9 +242,6 @@
     "watch": {
       "name": "watch",
       "description": "Watch & compile in the background for all affected projects",
-      "env": {
-        "NX_NON_NATIVE_HASHER": "true"
-      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=watch --output-style=stream --skip-nx-cache --nx-ignore-cycles --nx-bail",
@@ -281,7 +251,7 @@
     }
   },
   "env": {
-    "PATH": "$(npx -c \"node -e \\\"console.log(process.env.PATH)\\\"\")"
+    "PATH": "$(pnpm -c exec \"node -e \\\"console.log(process.env.PATH)\\\"\")"
   },
   "//": "~~ Generated by projen. To modify, edit .projenrc.ts and run \"npx projen\"."
 }

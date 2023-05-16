@@ -45,3 +45,4 @@ jspm_packages/
 !/build.config.ts
 !/env.d.ts
 !/vitest.config.ts
+!/project.json

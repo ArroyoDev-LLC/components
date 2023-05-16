@@ -43,3 +43,4 @@ jspm_packages/
 !/tsconfig.json
 !/tsconfig.dev.json
 !/build.config.ts
+!/project.json

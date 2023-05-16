@@ -81,12 +81,11 @@
       "type": "build"
     },
     {
-      "name": "nx-cloud",
+      "name": "nx",
       "type": "build"
     },
     {
-      "name": "nx",
-      "version": "16.0.0",
+      "name": "nx-cloud",
       "type": "build"
     },
     {
@@ -159,7 +158,6 @@
     },
     {
       "name": "nx",
-      "version": "^16",
       "type": "peer"
     },
     {

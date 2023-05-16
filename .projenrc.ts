@@ -61,12 +61,6 @@ const monorepo = new MonorepoProject({
 		level: LogLevel.DEBUG,
 		usePrefix: true,
 	},
-	nxConfig: {
-		affectedBranch: 'main',
-		// public readonly token, is not secret.
-		nxCloudReadOnlyAccessToken:
-			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ==',
-	},
 	tsconfig: {
 		exclude: ['packages'],
 		include: ['.projenrc.ts', 'projenrc', './*.ts'],

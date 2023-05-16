@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/arroyodev-llc/components">
-    <img src=".github/assets/logo.svg" alt="Logo" width="80" height="80">
+    <img src=".github/images/logo.svg" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Components</h3>
@@ -88,7 +88,7 @@ _Note: You can also use [`asdf`](https://github.com/asdf-vm/asdf) if you already
   rtx install
   ```
 
-- You should now have all the tools required (defined in `.tool-versions`) to run this project.
+- You should now have all the tools required (defined in [.tool-versions](.tool-versions)) to run this project.
 
 ### Installation
 

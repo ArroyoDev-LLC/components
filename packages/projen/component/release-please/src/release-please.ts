@@ -192,7 +192,7 @@ export class ReleasePleaseWorkflow extends Component {
 					NODE_AUTH_TOKEN: secretToString('NPM_AUTH_TOKEN'),
 					NPM_TOKEN: secretToString('NPM_AUTH_TOKEN'),
 				},
-				run: `pnpm --parallel -r exec bash -c '([[ -d "dist/js" ]] && cd dist/js ; pnpm --package=publib@latest dlx publib-npm) || echo "No dist found: $(pwd)"'`,
+				run: `pnpm --parallel -r exec bash -c '([[ -d "dist/js" ]] && cd dist/js ; pnpm publish --no-git-checks --access=public $(find . -name *.tgz)) || echo "No dist found: $(pwd)"'`,
 			},
 		]
 

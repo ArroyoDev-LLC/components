@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.2...@arroyodev-llc/projen.component.typescript-source-file-v0.1.3) (2023-05-16)
+
+
+### Bug Fixes
+
+* **nx-monorepo:** Utilize new `NodePackageUtils` namespace. ([406c31a](https://github.com/ArroyoDev-LLC/components/commit/406c31a0eb77c5de44b36d34453602b388c33227))
+
+
+### Tests
+
+* **vue.ui.button:** Utilize shallow mount for primevue button ([af65df7](https://github.com/ArroyoDev-LLC/components/commit/af65df7ce7c9ea6d0d12f7ac284a59f7aaf90c40))
+
 ## [0.1.2](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.0...@arroyodev-llc/projen.component.typescript-source-file-v0.1.2) (2023-05-02)
 
 

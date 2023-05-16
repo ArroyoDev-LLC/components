@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.pnpm-workspace-v0.1.2...@arroyodev-llc/projen.component.pnpm-workspace-v0.1.3) (2023-05-16)
+
+
+### Tests
+
+* **vue.ui.button:** Utilize shallow mount for primevue button ([af65df7](https://github.com/ArroyoDev-LLC/components/commit/af65df7ce7c9ea6d0d12f7ac284a59f7aaf90c40))
+
 ## [0.1.2](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.pnpm-workspace-v0.1.0...@arroyodev-llc/projen.component.pnpm-workspace-v0.1.2) (2023-05-02)
 
 

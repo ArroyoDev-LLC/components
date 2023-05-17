@@ -1,3 +1,16 @@
+import nx_monorepo, { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
+import {
+	cdk,
+	type github,
+	javascript,
+	JsonFile,
+	type Project,
+	typescript,
+} from 'projen'
+import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
+import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
+import type { ProjenProjectOptions } from './projen-project-options'
+import type { TypeScriptProjectOptions } from './typescript-project-options'
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
 import {
@@ -11,15 +24,6 @@ import {
 } from '@arroyodev-llc/projen.component.vitest'
 import { Vue } from '@arroyodev-llc/projen.component.vue'
 import { findComponent } from '@arroyodev-llc/utils.projen'
-import nx_monorepo, {
-	NodePackageUtils,
-	NxWorkspace,
-} from '@aws-prototyping-sdk/nx-monorepo'
-import { cdk, type github, javascript, JsonFile, typescript } from 'projen'
-import { TypeScriptModuleResolution } from 'projen/lib/javascript'
-import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
-import type { ProjenProjectOptions } from './projen-project-options'
-import type { TypeScriptProjectOptions } from './typescript-project-options'
 
 export class ProjectName {
 	constructor(readonly name: string) {}
@@ -103,9 +107,37 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 			.applyPackage(this.package)
 		this.tsconfigDev!.addExtends(this.tsconfig!)
 		// readonly access token (safe to be public)
-		NxWorkspace.of(this)!.useNxCloud(
+		this.nx.useNxCloud(
 			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
 		)
+		this.nx.autoInferProjectTargets = true
+	}
+
+	protected applyCleanTask(): this {
+		this.addDevDeps('rimraf')
+		const cleanAllTask =
+			this.tasks.tryFind('clean') ?? this.tasks.addTask('clean')
+		cleanAllTask.exec('pnpm -r --parallel run clean')
+		return this.applyRecursive((project) => {
+			const nodePackage = findComponent(project, NodePackage)
+			if (nodePackage) {
+				nodePackage.setScript(
+					'clean',
+					NodePackageUtils.command.projen(nodePackage.packageManager, 'clean')
+				)
+			}
+			const cleanTask =
+				project.tasks.tryFind('clean') ?? project.tasks.addTask('clean')
+			cleanTask.exec(
+				NodePackageUtils.command.exec(
+					this.package.packageManager,
+					'rimraf dist'
+				)
+			)
+			cleanTask.exec(
+				NodePackageUtils.command.exec(this.package.packageManager, 'rimraf lib')
+			)
+		})
 	}
 
 	protected applyGithub(gh: github.GitHub): this {
@@ -116,6 +148,15 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 		)
 		const build = gh.tryFindWorkflow('build')!
 		return this.applyGithubBuildFlow(build)
+	}
+
+	applyRecursive(
+		cb: (project: Project, monorepo: this) => void,
+		includeSelf: boolean = false
+	): this {
+		if (includeSelf) cb(this, this)
+		this.sortedSubProjects.forEach((proj) => cb(proj, this))
+		return this
 	}
 
 	applyGithubJobNxEnv(workflow: github.GithubWorkflow, jobId: string): this {
@@ -146,9 +187,19 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 			target: 'stub',
 			parallel: 5,
 			noBail: true,
+			ignoreCycles: true,
+			outputStyle: 'stream',
 		})
+		const postInstall =
+			this.tasks.tryFind('post-install') ?? this.tasks.addTask('post-install')
+		postInstall.exec(
+			NodePackageUtils.command.projen(this.package.packageManager, 'stub')
+		)
 		this.addScripts({
-			postinstall: 'projen stub',
+			postinstall: NodePackageUtils.command.projen(
+				this.package.packageManager,
+				'post-install'
+			),
 		})
 		return this
 	}
@@ -220,22 +271,36 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
 		return PnpmWorkspace.of(this)!.addWorkspaceDeps(...dependency)
 	}
+
+	preSynthesize() {
+		super.preSynthesize()
+		this.applyCleanTask()
+	}
 }
 
 export class ProjenProject extends cdk.JsiiProject {
 	public readonly projectName: ProjectName
 
 	constructor(options: ProjenProjectOptions) {
+		// TODO: jsii does not approve of <scope>/a.b.c type names
 		const { name, ...rest } = options
 		const projectName = new ProjectName(name)
-		const { authorUrl, ...defaults } = projectDefaults
+		const {
+			authorUrl,
+			projenDevDependency,
+			entrypoint,
+			entrypointTypes,
+			libdir,
+			...defaults
+		} = projectDefaults
 		super({
 			...defaults,
 			name: projectName.name,
 			outdir: projectName.outDir,
 			packageName: projectName.packageName,
 			jsiiVersion: '^5',
-			projenDevDependency: true,
+			deps: ['projen'],
+			peerDeps: ['projen'],
 			prettier: true,
 			...rest,
 		})

@@ -64,6 +64,7 @@ jspm_packages/
 !/release-please-config.json
 !/.release-please-manifest.json
 !/.github/workflows/release.yml
+!/.tool-versions
 !/pnpm-workspace.yaml
 !/renovate.json5
 !/projenrc/projen-project-options.ts

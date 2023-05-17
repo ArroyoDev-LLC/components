@@ -23,6 +23,7 @@
 /.projen/tasks.json linguist-generated
 /.release-please-manifest.json linguist-generated
 /.syncpackrc.json linguist-generated
+/.tool-versions linguist-generated
 /LICENSE linguist-generated
 /nx.json linguist-generated
 /package.json linguist-generated

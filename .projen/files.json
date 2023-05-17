@@ -21,6 +21,7 @@
     ".projen/files.json",
     ".projen/tasks.json",
     ".syncpackrc.json",
+    ".tool-versions",
     "LICENSE",
     "nx.json",
     "pnpm-workspace.yaml",

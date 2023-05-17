@@ -3,6 +3,7 @@
   "scripts": {
     "build": "pnpm exec projen build",
     "bump": "pnpm exec projen bump",
+    "clean": "pnpm exec projen clean",
     "compile": "pnpm exec projen compile",
     "default": "pnpm exec projen default",
     "eslint": "pnpm exec projen eslint",

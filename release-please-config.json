@@ -31,6 +31,10 @@
       "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"
     },
+    "packages/projen/component/tool-versions": {
+      "component": "@arroyodev-llc/projen.component.tool-versions",
+      "release-type": "node"
+    },
     "packages/projen/component/vue": {
       "component": "@arroyodev-llc/projen.component.vue",
       "release-type": "node"

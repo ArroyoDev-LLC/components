@@ -2,6 +2,7 @@
   "name": "components",
   "scripts": {
     "build": "pnpm exec projen build",
+    "clean": "pnpm exec projen clean",
     "clobber": "pnpm exec projen clobber",
     "compile": "pnpm exec projen compile",
     "default": "pnpm exec projen default",
@@ -11,6 +12,7 @@
     "graph": "pnpm exec projen graph",
     "package": "pnpm exec projen package",
     "post-compile": "pnpm exec projen post-compile",
+    "post-install": "pnpm exec projen post-install",
     "post-upgrade": "pnpm exec projen post-upgrade",
     "pre-compile": "pnpm exec projen pre-compile",
     "run-many": "pnpm exec projen run-many",
@@ -20,7 +22,7 @@
     "upgrade-deps": "pnpm exec projen upgrade-deps",
     "watch": "pnpm exec projen watch",
     "synth-workspace": "pnpm exec projen",
-    "postinstall": "projen stub"
+    "postinstall": "pnpm exec projen post-install"
   },
   "author": {
     "name": "arroyoDev",
@@ -53,6 +55,7 @@
     "pathe": "^1.1.0",
     "prettier": "^2.8.8",
     "projen": "^0.71.57",
+    "rimraf": "^5.0.0",
     "rollup-plugin-vue": "^6.0.0",
     "syncpack": "^9.8.6",
     "ts-morph": "^18.0.0",
@@ -71,6 +74,7 @@
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
     "@arroyodev-llc/projen.component.release-please": "workspace:*",
+    "@arroyodev-llc/projen.component.tool-versions": "workspace:*",
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/projen.component.unbuild": "workspace:*",
     "@arroyodev-llc/projen.component.vite": "workspace:*",
@@ -103,6 +107,7 @@
       "packages/projen/component/linting",
       "packages/projen/component/pnpm-workspace",
       "packages/projen/component/release-please",
+      "packages/projen/component/tool-versions",
       "packages/projen/component/typescript-source-file",
       "packages/projen/component/unbuild",
       "packages/projen/component/vite",

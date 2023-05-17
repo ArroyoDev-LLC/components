@@ -38,6 +38,17 @@
       ],
       "condition": "! git log --oneline -1 | grep -q \"chore(release):\""
     },
+    "clean": {
+      "name": "clean",
+      "steps": [
+        {
+          "exec": "pnpm exec rimraf dist"
+        },
+        {
+          "exec": "pnpm exec rimraf lib"
+        }
+      ]
+    },
     "compile": {
       "name": "compile",
       "description": "Only compile",

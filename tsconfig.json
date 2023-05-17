@@ -64,6 +64,9 @@
       ],
       "@arroyodev-llc/projen.component.release-please": [
         "./packages/projen/component/release-please/src/index"
+      ],
+      "@arroyodev-llc/projen.component.tool-versions": [
+        "./packages/projen/component/tool-versions/src/index"
       ]
     }
   },

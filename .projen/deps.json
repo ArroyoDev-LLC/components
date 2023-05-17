@@ -101,6 +101,10 @@
       "type": "build"
     },
     {
+      "name": "rimraf",
+      "type": "build"
+    },
+    {
       "name": "rollup-plugin-vue",
       "type": "build"
     },
@@ -172,6 +176,11 @@
     },
     {
       "name": "@arroyodev-llc/projen.component.release-please",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.tool-versions",
       "version": "workspace:*",
       "type": "runtime"
     },

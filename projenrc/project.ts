@@ -1,3 +1,17 @@
+import { LintConfig } from '@arroyodev-llc/projen.component.linting'
+import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
+import {
+	ReleasePlease,
+	ReleaseType,
+} from '@arroyodev-llc/projen.component.release-please'
+import { ToolVersions } from '@arroyodev-llc/projen.component.tool-versions'
+import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
+import {
+	Vitest,
+	VitestConfigType,
+} from '@arroyodev-llc/projen.component.vitest'
+import { Vue } from '@arroyodev-llc/projen.component.vue'
+import { findComponent } from '@arroyodev-llc/utils.projen'
 import nx_monorepo, { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
 import {
 	cdk,
@@ -11,19 +25,6 @@ import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 import type { ProjenProjectOptions } from './projen-project-options'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
-import { LintConfig } from '@arroyodev-llc/projen.component.linting'
-import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
-import {
-	ReleasePlease,
-	ReleaseType,
-} from '@arroyodev-llc/projen.component.release-please'
-import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
-import {
-	Vitest,
-	VitestConfigType,
-} from '@arroyodev-llc/projen.component.vitest'
-import { Vue } from '@arroyodev-llc/projen.component.vue'
-import { findComponent } from '@arroyodev-llc/utils.projen'
 
 export class ProjectName {
 	constructor(readonly name: string) {}
@@ -111,6 +112,12 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
 		)
 		this.nx.autoInferProjectTargets = true
+		new ToolVersions(this, {
+			tools: {
+				nodejs: ['18.15.0', 'lts'],
+				pnpm: ['8.5.1'],
+			},
+		})
 	}
 
 	protected applyCleanTask(): this {

@@ -1,3 +1,4 @@
+import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { github, LogLevel } from 'projen'
 import {
 	TypescriptConfigExtends,
@@ -14,7 +15,6 @@ import {
 	TypescriptProject,
 	VueComponentProject,
 } from './projenrc/project'
-import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 
 const arroyoBot = github.GithubCredentials.fromApp({
 	appIdSecret: 'AD_BOT_APP_ID',
@@ -146,6 +146,10 @@ const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 	workspaceDeps: [utilsProjen],
 })
 
+const toolVersionsComponent = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.component.tool-versions',
+})
+
 const vueComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vue',
 	workspaceDeps: [
@@ -177,7 +181,8 @@ monorepo.addWorkspaceDeps(
 	vitestComponent,
 	vueComponent,
 	pnpmWorkspaceComponent,
-	releasePleaseComponent
+	releasePleaseComponent,
+	toolVersionsComponent
 )
 
 // Vue Components

@@ -47,7 +47,7 @@ export interface ReleasePleaseManifest {
 	readonly bumpPatchForMinorPreMajor?: boolean
 	readonly changelogType?: string
 	readonly changelogSections?: ReleasePleaseChangelogSection[]
-	readonly plugins?: ReleasePleasePlugin[]
+	plugins?: ReleasePleasePlugin[]
 	/**
 	 * Packages to release.
 	 */
@@ -295,6 +295,14 @@ export class ReleasePlease extends Component {
 			pkgs.set(pkgName, value)
 		}
 		return pkgs
+	}
+
+	addPlugin(spec: ReleasePleasePlugin): this {
+		this.#manifestConfig.plugins = [
+			...(this.#manifestConfig.plugins ?? []),
+			spec,
+		]
+		return this
 	}
 
 	addPackage(

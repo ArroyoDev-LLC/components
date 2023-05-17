@@ -6,9 +6,9 @@
   "packages/projen/component/vitest": "0.1.3",
   "packages/projen/component/linting": "0.1.3",
   "packages/projen/component/vue": "0.1.3",
-  "packages/projen/component/release-please": "0.1.3",
+  "packages/projen/component/release-please": "0.1.4",
   "packages/vue/ui/text": "0.1.3",
   "packages/vue/ui/button": "0.1.3",
   "packages/projen/component/vite": "0.1.3",
-  "packages/projen/component/tool-versions": "0.0.0"
+  "packages/projen/component/tool-versions": "0.1.2"
 }

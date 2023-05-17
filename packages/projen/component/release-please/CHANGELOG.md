@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.3...@arroyodev-llc/projen.component.release-please-v0.1.4) (2023-05-17)
+
+
+### Features
+
+* **projen.components.release-please:** Implement `addPlugin` method. ([8429d7e](https://github.com/ArroyoDev-LLC/components/commit/8429d7e074571558bc750c4951670135b88917c2))
+
+
+### Bug Fixes
+
+* **projen.component.release-please:** Use pnpm to publish archives ([974adad](https://github.com/ArroyoDev-LLC/components/commit/974adad3a4496052529116b3ee21ff10fed19b84))
+
+
+### Continuous Integration
+
+* **release:** Update projen managed workflow. ([a148496](https://github.com/ArroyoDev-LLC/components/commit/a1484961dc63eb682cb2aefed863dd55f62d2ed6))
+
 ## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.2...@arroyodev-llc/projen.component.release-please-v0.1.3) (2023-05-16)
 
 

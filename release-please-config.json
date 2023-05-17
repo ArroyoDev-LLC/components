@@ -112,6 +112,9 @@
   "plugins": [
     {
       "type": "sentence-case"
+    },
+    {
+      "type": "node-workspace"
     }
   ]
 }

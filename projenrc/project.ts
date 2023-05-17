@@ -148,7 +148,7 @@ export class MonorepoProject extends nx_monorepo.NxMonorepoProject {
 	}
 
 	protected applyGithub(gh: github.GitHub): this {
-		const releasePlease = new ReleasePlease(this)
+		const releasePlease = new ReleasePlease(this).addPlugin({type: 'node-workspace'})
 		this.applyGithubJobNxEnv(
 			releasePlease.releaseWorkflow.workflow,
 			'release-please'

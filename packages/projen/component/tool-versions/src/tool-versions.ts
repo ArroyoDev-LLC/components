@@ -79,6 +79,7 @@ export class ToolVersions extends Component {
 	preSynthesize() {
 		super.preSynthesize()
 		const entries = Array.from(this.#tools.entries())
+		this.file.addLine(`# ${this.file.marker}`)
 		for (const [toolName, versions] of entries) {
 			const line = `${toolName} ${versions.join(' ')}`
 			this.file.addLine(line)

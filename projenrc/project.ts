@@ -1,7 +1,9 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
-import { Vue } from '@arroyodev-llc/projen.component.vue'
-import { TypescriptProject, type TypeScriptProjectOptions } from '@arroyodev-llc/projen.project.typescript'
+import {
+	TypescriptProject,
+	type TypeScriptProjectOptions,
+} from '@arroyodev-llc/projen.project.typescript'
 import { ProjectName } from '@arroyodev-llc/utils.projen'
 import { cdk, javascript } from 'projen'
 import type { ProjenProjectOptions } from './projen-project-options'
@@ -66,33 +68,4 @@ export class ProjenComponentProject extends TypescriptProject {
 		super(options)
 		this.addPeerDeps('projen')
 	}
-}
-
-export class VueComponentProject extends TypescriptProject {
-	constructor(options: TypeScriptProjectOptions) {
-		super({
-			release: true,
-			...options,
-		})
-		this.package.addField('sideEffects', true)
-		new Vue(this)
-	}
-
-	// protected applyBundler(): this {
-	// 	new Vite(this, {
-	// 		build: {
-	// 			optimizeDeps: {
-	// 				include: ['vue'],
-	// 			},
-	// 			build: {
-	// 				emptyOutDir: true,
-	// 				lib: {
-	// 					entry: './src/index.ts',
-	// 					name: this.package.packageName
-	// 				},
-	// 			},
-	// 		},
-	// 	})
-	// 	return this
-	// }
 }

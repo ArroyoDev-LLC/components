@@ -10,7 +10,7 @@ import {
 	type NxMonorepoProjectOptions,
 } from '@arroyodev-llc/projen.project.nx-monorepo'
 import { type GitHub } from 'projen/lib/github'
-import { NpmConfig } from "projen/lib/javascript";
+import { type NpmConfig } from 'projen/lib/javascript'
 
 export class ComponentsMonorepo extends MonorepoProject {
 	public readonly lintConfig: LintConfig
@@ -55,5 +55,4 @@ export class ComponentsMonorepo extends MonorepoProject {
 		npmConfig.addConfig('//registry.npmjs.org/:_authToken', '${NPM_TOKEN}')
 		return this
 	}
-
 }

@@ -1,0 +1,13 @@
+diff --git a/lib/renderer/typescript.js b/lib/renderer/typescript.js
+index b4cc692cfed30d9ede97af6fa14765a55bda796f..f30e8fe0a84cdde7c42a4fd0d1d2de238202313e 100644
+--- a/lib/renderer/typescript.js
++++ b/lib/renderer/typescript.js
+@@ -47,7 +47,7 @@ class TypeScriptRenderer {
+             .forEach((mod) => {
+             var _a;
+             const imports = Array.from(((_a = modules.get(mod)) === null || _a === void 0 ? void 0 : _a.values()) || []);
+-            this.buffer.line(`import { ${imports
++            this.buffer.line(`import type { ${imports
+                 .sort(private_1.compareLowerCase)
+                 .join(', ')} } from '${mod}';`);
+         });

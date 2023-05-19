@@ -110,6 +110,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			.applyPackage()
 			.applyBundler()
 			.applyReleasePlease(ReleasePlease.of(this.parent ?? this))
+			.applyPackageTask()
 	}
 
 	protected applyPackage(): this {
@@ -132,6 +133,11 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			},
 		})
 		this.tasks.tryFind('post-compile')!.exec('unbuild', { name: 'Unbuild' })
+		return this
+	}
+
+	protected applyPackageTask(): this {
+		this.tasks.tryFind('package')?.reset?.()
 		return this
 	}
 

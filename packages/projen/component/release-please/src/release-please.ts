@@ -148,6 +148,10 @@ export class ReleasePleaseWorkflow extends Component {
 		this.workflow.on({
 			push: { branches: ['main'] },
 		})
+		this.workflow.file!.addOverride(
+			'env.NPM_TOKEN',
+			secretToString('NPM_AUTH_TOKEN')
+		)
 
 		const steps: github.workflows.JobStep[] = [
 			{

@@ -57,3 +57,5 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
         run: "pnpm --parallel -r exec bash -c '([[ -d \"dist/\" ]] && pnpm publish --no-git-checks --publish-branch=main --access=public) || echo \"No dist found: $(pwd)\"'"
+env:
+  NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

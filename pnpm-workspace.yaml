@@ -11,6 +11,7 @@ packages:
   - packages/projen/component/vitest
   - packages/projen/component/vue
   - packages/projen/project/nx-monorepo
+  - packages/projen/project/typescript
   - packages/utils/projen
   - packages/vue/ui/button
   - packages/vue/ui/text

@@ -68,5 +68,4 @@ jspm_packages/
 !/pnpm-workspace.yaml
 !/renovate.json5
 !/projenrc/projen-project-options.ts
-!/projenrc/typescript-project-options.ts
 !/packages/projen/project/nx-monorepo/src/nx-monorepo-project-options.ts

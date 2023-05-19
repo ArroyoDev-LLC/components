@@ -44,6 +44,9 @@ importers:
       '@arroyodev-llc/projen.project.nx-monorepo':
         specifier: workspace:*
         version: link:packages/projen/project/nx-monorepo
+      '@arroyodev-llc/projen.project.typescript':
+        specifier: workspace:*
+        version: link:packages/projen/project/typescript
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:packages/utils/projen
@@ -701,6 +704,76 @@ importers:
       '@mrgrain/jsii-struct-builder':
         specifier: '*'
         version: 0.4.3(patch_hash=5n7l7qiehk4lghp47ostr53ckq)(projen@0.71.60)
+    devDependencies:
+      '@types/node':
+        specifier: ^16
+        version: 16.18.31
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^5
+        version: 5.59.6(@typescript-eslint/parser@5.59.6)(eslint@8.40.0)(typescript@5.0.4)
+      '@typescript-eslint/parser':
+        specifier: ^5
+        version: 5.59.6(eslint@8.40.0)(typescript@5.0.4)
+      eslint:
+        specifier: ^8
+        version: 8.40.0
+      eslint-config-prettier:
+        specifier: '*'
+        version: 8.8.0(eslint@8.40.0)
+      eslint-import-resolver-node:
+        specifier: '*'
+        version: 0.3.7
+      eslint-import-resolver-typescript:
+        specifier: '*'
+        version: 3.5.5(@typescript-eslint/parser@5.59.6)(eslint-import-resolver-node@0.3.7)(eslint-plugin-import@2.27.5)(eslint@8.40.0)
+      eslint-plugin-import:
+        specifier: '*'
+        version: 2.27.5(@typescript-eslint/parser@5.59.6)(eslint-import-resolver-typescript@3.5.5)(eslint@8.40.0)
+      eslint-plugin-prettier:
+        specifier: '*'
+        version: 4.2.1(eslint-config-prettier@8.8.0)(eslint@8.40.0)(prettier@2.8.8)
+      npm-check-updates:
+        specifier: ^16
+        version: 16.10.12
+      prettier:
+        specifier: '*'
+        version: 2.8.8
+      projen:
+        specifier: '*'
+        version: 0.71.60
+      standard-version:
+        specifier: ^9
+        version: 9.5.0
+      typescript:
+        specifier: ^5
+        version: 5.0.4
+      unbuild:
+        specifier: '*'
+        version: 1.2.1
+
+  packages/projen/project/typescript:
+    dependencies:
+      '@arroyodev-llc/projen.component.linting':
+        specifier: workspace:*
+        version: link:../../component/linting
+      '@arroyodev-llc/projen.component.pnpm-workspace':
+        specifier: workspace:*
+        version: link:../../component/pnpm-workspace
+      '@arroyodev-llc/projen.component.release-please':
+        specifier: workspace:*
+        version: link:../../component/release-please
+      '@arroyodev-llc/projen.component.unbuild':
+        specifier: workspace:*
+        version: link:../../component/unbuild
+      '@arroyodev-llc/projen.project.nx-monorepo':
+        specifier: workspace:*
+        version: link:../nx-monorepo
+      '@arroyodev-llc/utils.projen':
+        specifier: workspace:*
+        version: link:../../../utils/projen
+      '@aws-prototyping-sdk/nx-monorepo':
+        specifier: '*'
+        version: 0.18.12(@pnpm/logger@5.0.0)(projen@0.71.60)
     devDependencies:
       '@types/node':
         specifier: ^16

@@ -215,6 +215,11 @@
       "type": "runtime"
     },
     {
+      "name": "@arroyodev-llc/projen.project.typescript",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@arroyodev-llc/utils.projen",
       "version": "workspace:*",
       "type": "runtime"

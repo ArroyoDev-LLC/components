@@ -27,9 +27,9 @@
 /LICENSE linguist-generated
 /nx.json linguist-generated
 /package.json linguist-generated
+/packages/projen/project/nx-monorepo/src/nx-monorepo-project-options.ts linguist-generated
 /pnpm-lock.yaml linguist-generated
 /pnpm-workspace.yaml linguist-generated
-/projenrc/nx-monorepo-project-options.ts linguist-generated
 /projenrc/projen-project-options.ts linguist-generated
 /projenrc/typescript-project-options.ts linguist-generated
 /release-please-config.json linguist-generated

@@ -41,7 +41,7 @@
     "happy-dom": "^9.18.3",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "rollup": "^3.21.8",
+    "rollup": "^3.22.0",
     "rollup-plugin-vue": "^6.0.0",
     "standard-version": "^9",
     "typescript": "^5",

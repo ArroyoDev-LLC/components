@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@sindresorhus/is": "^5.3.0",
-    "projen": "^0.71.57",
+    "projen": "^0.71.60",
     "ts-morph": "^18.0.0",
     "type-fest": "^3.10.0"
   },

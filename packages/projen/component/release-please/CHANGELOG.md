@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.4...@arroyodev-llc/projen.component.release-please-v0.1.5) (2023-05-19)
+
+
+### Bug Fixes
+
+* **projen.component.release-please:** Use normal enum. ([68df841](https://github.com/ArroyoDev-LLC/components/commit/68df8417ba75fd51524cd901ab66d627f22a9e45))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.4
+
 ## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.3...@arroyodev-llc/projen.component.release-please-v0.1.4) (2023-05-17)
 
 

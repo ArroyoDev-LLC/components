@@ -41,8 +41,7 @@
     "*.d.ts",
     "node_modules/",
     "*.generated.ts",
-    "coverage",
-    "src/typescript-project-options.ts"
+    "coverage"
   ],
   "rules": {
     "prettier/prettier": [

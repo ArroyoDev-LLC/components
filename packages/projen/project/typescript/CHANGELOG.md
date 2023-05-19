@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.2...@arroyodev-llc/projen.project.typescript-v0.1.3) (2023-05-19)
+
+
+### Bug Fixes
+
+* **projen.component.release-please:** Publish packages from root ([110d400](https://github.com/ArroyoDev-LLC/components/commit/110d4002e681d351f3127aeb04798eb25bb7e1b9))
+* **projen.project.typescript:** Reset packaging test in typescript projects. ([e659009](https://github.com/ArroyoDev-LLC/components/commit/e6590093dd503cc5c180a4c669a9a4e781749580))
+* **projen:** Update all packaging tasks. ([6ca80e0](https://github.com/ArroyoDev-LLC/components/commit/6ca80e05c2f38b262be0edc718240f6a055b9c0a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.5
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.5
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.6
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.5
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.3
+    * @arroyodev-llc/utils.projen bumped to 0.1.5
+
 ## 0.1.2 (2023-05-19)
 
 

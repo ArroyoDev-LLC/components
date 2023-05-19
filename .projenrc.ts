@@ -168,6 +168,16 @@ const releasePleaseComponent = ProjenComponentProject.fromParent(monorepo, {
 	workspaceDeps: [utilsProjen],
 })
 
+const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.project.nx-monorepo',
+	workspaceDeps: [utilsProjen, lintingComponent, pnpmWorkspaceComponent],
+	deps: ['@mrgrain/jsii-struct-builder', '@aws-prototyping-sdk/nx-monorepo'],
+	peerDeps: ['projen'],
+})
+LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
+	'src/nx-monorepo-project-options.ts'
+)
+
 new ProjenProjectOptionsBuilder(monorepo)
 new TypeScriptProjectOptionsBuilder(monorepo)
 new NxMonorepoProjectOptionsBuilder(monorepo)
@@ -182,7 +192,8 @@ monorepo.addWorkspaceDeps(
 	vueComponent,
 	pnpmWorkspaceComponent,
 	releasePleaseComponent,
-	toolVersionsComponent
+	toolVersionsComponent,
+	nxMonorepoProject
 )
 
 // Vue Components

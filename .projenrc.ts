@@ -4,13 +4,13 @@ import {
 	TypescriptConfigExtends,
 	TypeScriptModuleResolution,
 } from 'projen/lib/javascript'
+import { ComponentsMonorepo } from './projenrc/monorepo'
 import {
 	NxMonorepoProjectOptionsBuilder,
 	ProjenProjectOptionsBuilder,
 	TypeScriptProjectOptionsBuilder,
 } from './projenrc/option-builders'
 import {
-	MonorepoProject,
 	ProjenComponentProject,
 	TypescriptProject,
 	VueComponentProject,
@@ -21,7 +21,7 @@ const arroyoBot = github.GithubCredentials.fromApp({
 	privateKeySecret: 'AD_BOT_PRIVATE_KEY',
 })
 
-const monorepo = new MonorepoProject({
+const monorepo = new ComponentsMonorepo({
 	name: 'components',
 	authorName: 'arroyoDev',
 	devContainer: true,
@@ -62,7 +62,7 @@ const monorepo = new MonorepoProject({
 		usePrefix: true,
 	},
 	tsconfig: {
-		exclude: ['packages'],
+		exclude: ['packages/**/*'],
 		include: ['.projenrc.ts', 'projenrc', './*.ts'],
 		extends: TypescriptConfigExtends.fromPaths([
 			'./tsconfig.base.json',

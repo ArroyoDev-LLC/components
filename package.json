@@ -81,6 +81,7 @@
     "@arroyodev-llc/projen.component.vitest": "workspace:*",
     "@arroyodev-llc/projen.component.vue": "workspace:*",
     "@arroyodev-llc/projen.project.nx-monorepo": "workspace:*",
+    "@arroyodev-llc/projen.project.typescript": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "aws-cdk-lib": "^2.79.1",
     "cdk-nag": "^2.27.11",
@@ -118,6 +119,7 @@
       "packages/projen/component/vitest",
       "packages/projen/component/vue",
       "packages/projen/project/nx-monorepo",
+      "packages/projen/project/typescript",
       "packages/utils/projen",
       "packages/vue/ui/button",
       "packages/vue/ui/text"

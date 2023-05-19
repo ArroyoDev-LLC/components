@@ -70,6 +70,9 @@
       ],
       "@arroyodev-llc/projen.project.nx-monorepo": [
         "./packages/projen/project/nx-monorepo/src/index"
+      ],
+      "@arroyodev-llc/projen.project.typescript": [
+        "./packages/projen/project/typescript/src/index"
       ]
     }
   },

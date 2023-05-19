@@ -27,7 +27,6 @@
     "packages/projen/project/nx-monorepo/src/nx-monorepo-project-options.ts",
     "pnpm-workspace.yaml",
     "projenrc/projen-project-options.ts",
-    "projenrc/typescript-project-options.ts",
     "release-please-config.json",
     "renovate.json5",
     "tsconfig.base.json",

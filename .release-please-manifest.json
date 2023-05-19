@@ -11,5 +11,6 @@
   "packages/vue/ui/button": "0.1.3",
   "packages/projen/component/vite": "0.1.3",
   "packages/projen/component/tool-versions": "0.1.2",
-  "packages/projen/project/nx-monorepo": "0.0.0"
+  "packages/projen/project/nx-monorepo": "0.0.0",
+  "packages/projen/project/typescript": "0.0.0"
 }

@@ -187,6 +187,9 @@ const typescriptProject = ProjenComponentProject.fromParent(monorepo, {
 		nxMonorepoProject,
 	],
 })
+LintConfig.of(typescriptProject)!.eslint.addIgnorePattern(
+	'src/typescript-project-options.ts'
+)
 
 new ProjenProjectOptionsBuilder(monorepo)
 new TypeScriptProjectOptionsBuilder(monorepo)

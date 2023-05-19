@@ -98,7 +98,7 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 	constructor(project: typescript.TypeScriptProject) {
 		super(project)
 
-		const filePath = path.join('projenrc', 'typescript-project-options.ts')
+		const filePath = path.join(project.srcdir, 'typescript-project-options.ts')
 		const struct = new ProjenStruct(project, {
 			name: 'TypeScriptProjectOptions',
 			filePath,

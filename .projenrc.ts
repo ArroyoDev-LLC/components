@@ -178,8 +178,21 @@ LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
 	'src/nx-monorepo-project-options.ts'
 )
 
+const typescriptProject = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.project.typescript',
+	deps: ['@aws-prototyping-sdk/nx-monorepo'],
+	workspaceDeps: [
+		utilsProjen,
+		lintingComponent,
+		unbuildComponent,
+		pnpmWorkspaceComponent,
+		releasePleaseComponent,
+		nxMonorepoProject,
+	],
+})
+
 new ProjenProjectOptionsBuilder(monorepo)
-new TypeScriptProjectOptionsBuilder(monorepo)
+new TypeScriptProjectOptionsBuilder(typescriptProject)
 new NxMonorepoProjectOptionsBuilder(monorepo)
 
 monorepo.addWorkspaceDeps(
@@ -193,7 +206,8 @@ monorepo.addWorkspaceDeps(
 	pnpmWorkspaceComponent,
 	releasePleaseComponent,
 	toolVersionsComponent,
-	nxMonorepoProject
+	nxMonorepoProject,
+	typescriptProject
 )
 
 // Vue Components

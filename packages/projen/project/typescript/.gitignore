@@ -44,4 +44,3 @@ jspm_packages/
 !/tsconfig.dev.json
 !/build.config.ts
 !/project.json
-!/src/typescript-project-options.ts

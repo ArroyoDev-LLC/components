@@ -39,6 +39,7 @@
   "ignorePatterns": [
     "packages/**/*.*",
     "projenrc/projen-project-options.ts",
+    "packages/projen/project/typescript/src/typescript-project-options.ts",
     "!.projenrc.ts",
     "!projenrc/**/*.ts"
   ],

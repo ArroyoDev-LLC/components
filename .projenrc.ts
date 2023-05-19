@@ -189,7 +189,7 @@ const typescriptProject = ProjenComponentProject.fromParent(monorepo, {
 })
 
 new ProjenProjectOptionsBuilder(monorepo)
-new TypeScriptProjectOptionsBuilder(typescriptProject)
+new TypeScriptProjectOptionsBuilder(monorepo)
 new NxMonorepoProjectOptionsBuilder(monorepo)
 
 monorepo.addWorkspaceDeps(

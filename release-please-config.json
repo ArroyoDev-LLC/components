@@ -51,6 +51,10 @@
       "component": "@arroyodev-llc/projen.project.typescript",
       "release-type": "node"
     },
+    "packages/projen/project/vue-component": {
+      "component": "@arroyodev-llc/projen.project.vue-component",
+      "release-type": "node"
+    },
     "packages/vue/ui/text": {
       "component": "@arroyodev-llc/vue.ui.text",
       "release-type": "node"

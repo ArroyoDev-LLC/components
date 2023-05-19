@@ -73,6 +73,9 @@
       ],
       "@arroyodev-llc/projen.project.typescript": [
         "./packages/projen/project/typescript/src/index"
+      ],
+      "@arroyodev-llc/projen.project.vue-component": [
+        "./packages/projen/project/vue-component/src/index"
       ]
     }
   },

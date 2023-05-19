@@ -42,6 +42,7 @@
     "@arroyodev-llc/projen.component.vue",
     "@arroyodev-llc/projen.project.nx-monorepo",
     "@arroyodev-llc/projen.project.typescript",
+    "@arroyodev-llc/projen.project.vue-component",
     "@arroyodev-llc/utils.projen",
     "projen"
   ]

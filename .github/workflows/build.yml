@@ -85,3 +85,5 @@ jobs:
           git add .
           git commit -s -m "chore: self mutation"
           git push origin HEAD:$PULL_REQUEST_REF
+env:
+  NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

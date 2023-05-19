@@ -1,5 +1,16 @@
 # Changelog
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.4
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.4
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.4
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.4
+    * @arroyodev-llc/projen.component.vitest bumped to 0.1.4
+    * @arroyodev-llc/utils.projen bumped to 0.1.4
+
 ## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.2...@arroyodev-llc/projen.component.vue-v0.1.3) (2023-05-16)
 
 

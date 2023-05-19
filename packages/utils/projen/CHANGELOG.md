@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.3...@arroyodev-llc/utils.projen-v0.1.4) (2023-05-19)
+
+
+### Features
+
+* **utils.projen:** Move `ProjectName` util to utils.projen ([3634b94](https://github.com/ArroyoDev-LLC/components/commit/3634b9433a2a613a315b437a3b9f448951a0c4fb))
+
 ## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.2...@arroyodev-llc/utils.projen-v0.1.3) (2023-05-16)
 
 

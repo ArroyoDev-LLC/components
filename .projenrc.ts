@@ -1,4 +1,5 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
+import { TypescriptProject } from '@arroyodev-llc/projen.project.typescript'
 import { github, LogLevel } from 'projen'
 import {
 	TypescriptConfigExtends,
@@ -10,11 +11,7 @@ import {
 	ProjenProjectOptionsBuilder,
 	TypeScriptProjectOptionsBuilder,
 } from './projenrc/option-builders'
-import {
-	ProjenComponentProject,
-	TypescriptProject,
-	VueComponentProject,
-} from './projenrc/project'
+import { ProjenComponentProject, VueComponentProject } from './projenrc/project'
 
 const arroyoBot = github.GithubCredentials.fromApp({
 	appIdSecret: 'AD_BOT_APP_ID',

@@ -75,3 +75,19 @@ export const replaceTask = (
 	newTask.lock()
 	return newTask
 }
+
+export class ProjectName {
+	constructor(readonly name: string) {}
+
+	get path(): string {
+		return this.name.split('.').join('/')
+	}
+
+	get outDir(): string {
+		return `packages/${this.path}`
+	}
+
+	get packageName(): string {
+		return `@arroyodev-llc/${this.name}`
+	}
+}

@@ -26,22 +26,6 @@ import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 import type { ProjenProjectOptions } from './projen-project-options'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
 
-export class ProjectName {
-	constructor(readonly name: string) {}
-
-	get path(): string {
-		return this.name.split('.').join('/')
-	}
-
-	get outDir(): string {
-		return `packages/${this.path}`
-	}
-
-	get packageName(): string {
-		return `@arroyodev-llc/${this.name}`
-	}
-}
-
 const projectDefaults = {
 	name: '',
 	defaultReleaseBranch: 'main',

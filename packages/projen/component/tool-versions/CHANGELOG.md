@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.2...@arroyodev-llc/projen.component.tool-versions-v0.1.3) (2023-05-19)
+
+
+### Bug Fixes
+
+* **projen.component.release-please:** Publish packages from root ([110d400](https://github.com/ArroyoDev-LLC/components/commit/110d4002e681d351f3127aeb04798eb25bb7e1b9))
+* **projen:** Update all packaging tasks. ([6ca80e0](https://github.com/ArroyoDev-LLC/components/commit/6ca80e05c2f38b262be0edc718240f6a055b9c0a))
+
 ## 0.1.2 (2023-05-17)
 
 

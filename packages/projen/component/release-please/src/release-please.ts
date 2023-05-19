@@ -6,7 +6,7 @@ import { secretToString } from 'projen/lib/github/util'
 import { NodeProject } from 'projen/lib/javascript'
 import { kebabCaseKeys } from 'projen/lib/util'
 
-export const enum ReleaseType {
+export enum ReleaseType {
 	NODE = 'node',
 	PYTHON = 'python',
 }

@@ -5,6 +5,7 @@ import {
 	NxMonorepoProject,
 } from '@aws-prototyping-sdk/nx-monorepo'
 import { type github, javascript, JsonFile, type Project } from 'projen'
+import { secretToString } from 'projen/lib/github/util'
 import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 
@@ -115,6 +116,10 @@ export class MonorepoProject extends NxMonorepoProject {
 	}
 
 	applyGithubJobNxEnv(workflow: github.GithubWorkflow, jobId: string): this {
+		workflow.file!.addOverride(
+			'env.NPM_TOKEN',
+			secretToString('NPM_AUTH_TOKEN')
+		)
 		const job = workflow.getJob(jobId) as github.workflows.Job
 		workflow.updateJob(jobId, {
 			...job,

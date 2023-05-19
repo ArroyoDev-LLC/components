@@ -191,6 +191,11 @@ LintConfig.of(typescriptProject)!.eslint.addIgnorePattern(
 	'src/typescript-project-options.ts'
 )
 
+const vueComponentProject = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.project.vue-component',
+	workspaceDeps: [typescriptProject, vueComponent],
+})
+
 new ProjenProjectOptionsBuilder(monorepo)
 new TypeScriptProjectOptionsBuilder(monorepo)
 new NxMonorepoProjectOptionsBuilder(monorepo)
@@ -207,7 +212,8 @@ monorepo.addWorkspaceDeps(
 	releasePleaseComponent,
 	toolVersionsComponent,
 	nxMonorepoProject,
-	typescriptProject
+	typescriptProject,
+	vueComponentProject
 )
 
 // Vue Components

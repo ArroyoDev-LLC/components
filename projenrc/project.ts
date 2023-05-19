@@ -159,6 +159,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 				},
 			},
 		})
+		this.tasks.tryFind('post-compile')!.exec('unbuild', { name: 'Unbuild' })
 		return this
 	}
 

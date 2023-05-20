@@ -23,12 +23,10 @@ const projectDefaults = {
 	entrypointTypes: 'dist/index.d.ts',
 	libdir: 'dist',
 	typescriptVersion: '^5',
-	// authorAddress: 'support@arroyodev.com',
 	authorEmail: 'support@arroyodev.com',
 	authorUrl: 'https://arroyodev.com',
-	// author: 'arroyoDev-LLC',
+	authorName: 'arroyoDev-LLC',
 	authorOrganization: true,
-	// repositoryUrl: 'https://github.com/arroyodev-llc/components',
 	projenrcTs: true,
 } satisfies NxMonorepoProjectOptions
 
@@ -48,9 +46,7 @@ export class MonorepoProject extends NxMonorepoProject {
 		})
 		this.pnpm = new PnpmWorkspace(this)
 		this.pnpm.addWorkspaceDeps(...(workspaceDeps ?? []))
-		this.gitignore.exclude('.idea', '.idea/**')
-		this.addDevDeps('tsx')
-		this.defaultTask!.reset('tsx .projenrc.ts')
+		this.gitignore.addPatterns('.idea', '.idea/**')
 		new JsonFile(this, '.ncurc.json', {
 			readonly: true,
 			marker: false,
@@ -66,12 +62,20 @@ export class MonorepoProject extends NxMonorepoProject {
 		)
 			.applyGithub(this.github!)
 			.applyPackage(this.package)
+			.applyDefaultTask()
+			.applyNx()
 		this.tsconfigDev!.addExtends(this.tsconfig!)
-		// readonly access token (safe to be public)
-		this.nx.useNxCloud(
-			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
-		)
+	}
+
+	protected applyNx(): this {
 		this.nx.autoInferProjectTargets = true
+		return this
+	}
+
+	protected applyDefaultTask(): this {
+		this.addDevDeps('tsx')
+		this.defaultTask!.reset('tsx .projenrc.ts')
+		return this
 	}
 
 	protected applyCleanTask(): this {
@@ -105,35 +109,6 @@ export class MonorepoProject extends NxMonorepoProject {
 		if (!gh) return this
 		const build = gh.tryFindWorkflow('build')!
 		return this.applyGithubBuildFlow(build)
-	}
-
-	applyRecursive(
-		cb: (project: Project, monorepo: this) => void,
-		includeSelf: boolean = false
-	): this {
-		if (includeSelf) cb(this, this)
-		this.sortedSubProjects.forEach((proj) => cb(proj, this))
-		return this
-	}
-
-	applyGithubJobNxEnv(workflow: github.GithubWorkflow, jobId: string): this {
-		workflow.file!.addOverride(
-			'env.NPM_TOKEN',
-			secretToString('NPM_AUTH_TOKEN')
-		)
-		const job = workflow.getJob(jobId) as github.workflows.Job
-		workflow.updateJob(jobId, {
-			...job,
-			env: {
-				...job.env,
-				NX_NON_NATIVE_HASHER: 'true',
-				NX_BRANCH: '${{ github.event.number }}',
-				NX_RUN_GROUP: '${{ github.run_id }}',
-				NX_CLOUD_ACCESS_TOKEN: '${{ secrets.NX_CLOUD_ACCESS_TOKEN }}',
-				CI: 'true',
-			},
-		})
-		return this
 	}
 
 	protected applyGithubBuildFlow(workflow: github.GithubWorkflow): this {
@@ -210,6 +185,41 @@ export class MonorepoProject extends NxMonorepoProject {
 			esm,
 			bundler,
 		])
+	}
+
+
+	/**
+	 * Apply callback to all child projects.
+	 * @param cb Function to execute on all subprojects.
+	 * @param includeSelf Also execute on monorepo root if true.
+	 */
+	applyRecursive(
+		cb: (project: Project, monorepo: this) => void,
+		includeSelf: boolean = false
+	): this {
+		if (includeSelf) cb(this, this)
+		this.sortedSubProjects.forEach((proj) => cb(proj, this))
+		return this
+	}
+
+	applyGithubJobNxEnv(workflow: github.GithubWorkflow, jobId: string): this {
+		workflow.file!.addOverride(
+			'env.NPM_TOKEN',
+			secretToString('NPM_AUTH_TOKEN')
+		)
+		const job = workflow.getJob(jobId) as github.workflows.Job
+		workflow.updateJob(jobId, {
+			...job,
+			env: {
+				...job.env,
+				NX_NON_NATIVE_HASHER: 'true',
+				NX_BRANCH: '${{ github.event.number }}',
+				NX_RUN_GROUP: '${{ github.run_id }}',
+				NX_CLOUD_ACCESS_TOKEN: '${{ secrets.NX_CLOUD_ACCESS_TOKEN }}',
+				CI: 'true',
+			},
+		})
+		return this
 	}
 
 	/**

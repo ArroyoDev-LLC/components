@@ -47,6 +47,8 @@ export class MonorepoProject extends NxMonorepoProject {
 	public readonly esmBundledTsconfigExtends: javascript.TypescriptConfigExtends
 	public readonly pnpm: PnpmWorkspace
 	public readonly tsconfigContainer: TypescriptConfigContainer
+	public readonly tsconfig: javascript.TypescriptConfig
+	public readonly tsconfigDev: javascript.TypescriptConfig
 
 	constructor(options: NxMonorepoProjectOptions) {
 		const { workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
@@ -55,7 +57,6 @@ export class MonorepoProject extends NxMonorepoProject {
 			...projectDefaults,
 			releaseToNpm: false,
 			projenDevDependency: true,
-			tsconfig,
 			...rest,
 		})
 		this.pnpm = new PnpmWorkspace(this)
@@ -75,6 +76,34 @@ export class MonorepoProject extends NxMonorepoProject {
 			TSConfig.ESM,
 			TSConfig.BUNDLER
 		)
+		const tsconfigExtends = this.tsconfigContainer.buildExtends(
+			TSConfig.BASE,
+			TSConfig.ESM
+		)
+		this.tryRemoveFile('tsconfig.json')
+		this.tsconfig = new javascript.TypescriptConfig(this, {
+			fileName: 'tsconfig.json',
+			extends: tsconfigExtends,
+			exclude: tsconfig?.exclude ?? ['packages/**/*'],
+			include: tsconfig?.include ?? [
+				'.projenrc.ts',
+				'**/*.ts',
+				'projenrc/*.ts',
+			],
+			compilerOptions: {
+				rootDir: '.',
+				outDir: 'dist',
+				...(tsconfig?.compilerOptions ?? {}),
+			},
+		})
+		this.tryRemoveFile('tsconfig.dev.json')
+		this.tsconfigDev = new javascript.TypescriptConfig(this, {
+			fileName: 'tsconfig.dev.json',
+			exclude: ['node_modules', 'packages/**/*'],
+			include: ['.projenrc.ts', '**/*.ts', 'projenrc/*.ts'],
+			compilerOptions: {},
+		})
+		this.tsconfigDev.addExtends(this.tsconfig!)
 		this.applyNpmConfig(
 			findComponent(this, javascript.NpmConfig) ??
 				new javascript.NpmConfig(this)
@@ -84,7 +113,6 @@ export class MonorepoProject extends NxMonorepoProject {
 			.applyDefaultTask()
 			.applyNx()
 			.applyUpgradeTask(this.tasks.tryFind('upgrade-deps'))
-		this.tsconfigDev!.addExtends(this.tsconfig!)
 	}
 
 	protected buildTsconfigContainer(): TypescriptConfigContainer {
@@ -95,13 +123,16 @@ export class MonorepoProject extends NxMonorepoProject {
 				skipLibCheck: true,
 				strict: true,
 				strictNullChecks: true,
+				strictPropertyInitialization: true,
 				resolveJsonModule: true,
 				isolatedModules: true,
 				noImplicitThis: true,
+				noImplicitAny: true,
 				noUnusedLocals: true,
 				noUnusedParameters: true,
 				noFallthroughCasesInSwitch: true,
 				forceConsistentCasingInFileNames: true,
+				moduleResolution: TypeScriptModuleResolution.NODE,
 			})
 			.defineConfig(TSConfig.ESM, {
 				module: 'ESNext',

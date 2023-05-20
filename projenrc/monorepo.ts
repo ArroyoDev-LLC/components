@@ -39,6 +39,14 @@ export class ComponentsMonorepo extends MonorepoProject {
 		)
 	}
 
+	protected applyNx(): this {
+		super.applyNx()
+		// readonly access token (safe to be public)
+		this.nx.useNxCloud(
+			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
+		)
+	}
+
 	protected applyGithub(gh: GitHub): this {
 		this.releasePlease = new ReleasePlease(this).addPlugin({
 			type: 'node-workspace',

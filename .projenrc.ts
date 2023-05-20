@@ -167,12 +167,17 @@ const releasePleaseComponent = ProjenComponentProject.fromParent(monorepo, {
 })
 
 const tsconfigContainerComponent = ProjenComponentProject.fromParent(monorepo, {
-	name: 'projen.component.tsconfig-container'
+	name: 'projen.component.tsconfig-container',
 })
 
 const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.project.nx-monorepo',
-	workspaceDeps: [utilsProjen, lintingComponent, pnpmWorkspaceComponent],
+	workspaceDeps: [
+		utilsProjen,
+		lintingComponent,
+		pnpmWorkspaceComponent,
+		tsconfigContainerComponent,
+	],
 	deps: ['@mrgrain/jsii-struct-builder', '@aws-prototyping-sdk/nx-monorepo'],
 	peerDeps: ['projen'],
 })

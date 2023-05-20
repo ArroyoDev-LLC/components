@@ -16,6 +16,9 @@
       ],
       "@arroyodev-llc/projen.component.pnpm-workspace": [
         "../../component/pnpm-workspace/src/index"
+      ],
+      "@arroyodev-llc/projen.component.tsconfig-container": [
+        "../../component/tsconfig-container/src/index"
       ]
     }
   },

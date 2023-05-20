@@ -5,6 +5,7 @@ packages:
   - packages/projen/component/pnpm-workspace
   - packages/projen/component/release-please
   - packages/projen/component/tool-versions
+  - packages/projen/component/tsconfig-container
   - packages/projen/component/typescript-source-file
   - packages/projen/component/unbuild
   - packages/projen/component/vite

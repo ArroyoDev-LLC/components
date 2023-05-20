@@ -8,7 +8,7 @@ import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
 import { type MonorepoProject } from '@arroyodev-llc/projen.project.nx-monorepo'
 import { ProjectName } from '@arroyodev-llc/utils.projen'
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
-import { javascript, typescript } from 'projen'
+import { javascript, LogLevel, typescript } from 'projen'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
 
 const projectDefaults = {
@@ -62,6 +62,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			authorName: 'arroyoDev-LLC',
 			prettier: true,
 			tsconfig,
+			logging: { usePrefix: true, level: LogLevel.DEBUG },
 			projenCommand: NodePackageUtils.command.exec(
 				javascript.NodePackageManager.PNPM,
 				'projen'

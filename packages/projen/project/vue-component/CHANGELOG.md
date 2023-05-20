@@ -1,5 +1,11 @@
 # Changelog
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.4
+
 ## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.2...@arroyodev-llc/projen.project.vue-component-v0.1.3) (2023-05-19)
 
 

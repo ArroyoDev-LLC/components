@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.4...@arroyodev-llc/vue.ui.text-v0.1.5) (2023-05-20)
+
+
+### Features
+
+* **projen:** Synth all tsconfigs. ([1fcb9d7](https://github.com/ArroyoDev-LLC/components/commit/1fcb9d7e7c4840ff7d463453cff44201b03e996a))
+
 ## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.3...@arroyodev-llc/vue.ui.text-v0.1.4) (2023-05-19)
 
 

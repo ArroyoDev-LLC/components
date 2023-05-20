@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.5...@arroyodev-llc/projen.project.typescript-v0.1.6) (2023-05-20)
+
+
+### Features
+
+* **projen:** Synth all tsconfigs. ([1fcb9d7](https://github.com/ArroyoDev-LLC/components/commit/1fcb9d7e7c4840ff7d463453cff44201b03e996a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.6
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.6
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.8
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.6
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.6
+    * @arroyodev-llc/utils.projen bumped to 0.1.6
+
 ## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.4...@arroyodev-llc/projen.project.typescript-v0.1.5) (2023-05-20)
 
 

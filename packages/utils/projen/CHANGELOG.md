@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.5...@arroyodev-llc/utils.projen-v0.1.6) (2023-05-20)
+
+
+### Features
+
+* **projen:** Synth all tsconfigs. ([1fcb9d7](https://github.com/ArroyoDev-LLC/components/commit/1fcb9d7e7c4840ff7d463453cff44201b03e996a))
+
 ## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.4...@arroyodev-llc/utils.projen-v0.1.5) (2023-05-19)
 
 

@@ -45,6 +45,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 		this.nx.useNxCloud(
 			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
 		)
+		return this
 	}
 
 	protected applyGithub(gh: GitHub): this {

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.6...@arroyodev-llc/projen.project.nx-monorepo-v0.1.7) (2023-05-20)
+
+
+### Features
+
+* **projen.project.nx-monorepo:** Move organization common defaults to nx-monorepo project. ([f92e1a6](https://github.com/ArroyoDev-LLC/components/commit/f92e1a69c1a784d5da196ad30cd27f944563e95d))
+* **projen.project.nx-monorepo:** Override tsconfig/dev configs to use extends ([8b7a446](https://github.com/ArroyoDev-LLC/components/commit/8b7a44620c753261bababb485cb36beffd46448b))
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.5...@arroyodev-llc/projen.project.nx-monorepo-v0.1.6) (2023-05-20)
 
 

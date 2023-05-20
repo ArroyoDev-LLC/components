@@ -11,9 +11,9 @@
   "packages/vue/ui/button": "0.1.5",
   "packages/projen/component/vite": "0.1.6",
   "packages/projen/component/tool-versions": "0.1.4",
-  "packages/projen/project/nx-monorepo": "0.1.6",
-  "packages/projen/project/typescript": "0.1.6",
+  "packages/projen/project/nx-monorepo": "0.1.7",
+  "packages/projen/project/typescript": "0.1.7",
   "packages/projen/project/vue": "0.0.0",
-  "packages/projen/project/vue-component": "0.1.6",
+  "packages/projen/project/vue-component": "0.1.7",
   "packages/projen/component/tsconfig-container": "0.1.2"
 }

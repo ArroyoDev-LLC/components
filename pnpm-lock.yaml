@@ -746,6 +746,9 @@ importers:
       '@arroyodev-llc/projen.component.pnpm-workspace':
         specifier: workspace:*
         version: link:../../component/pnpm-workspace
+      '@arroyodev-llc/projen.component.tsconfig-container':
+        specifier: workspace:*
+        version: link:../../component/tsconfig-container
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen

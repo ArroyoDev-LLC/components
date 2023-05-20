@@ -47,6 +47,7 @@
   "dependencies": {
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
+    "@arroyodev-llc/projen.component.tsconfig-container": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@aws-prototyping-sdk/nx-monorepo": "^0.18.12",
     "@mrgrain/jsii-struct-builder": "*"

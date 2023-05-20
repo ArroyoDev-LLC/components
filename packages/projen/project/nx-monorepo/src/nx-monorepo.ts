@@ -1,4 +1,5 @@
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
+import { TypescriptConfigContainer } from '@arroyodev-llc/projen.component.tsconfig-container'
 import { findComponent, replaceTask } from '@arroyodev-llc/utils.projen'
 import {
 	NodePackageUtils,
@@ -18,7 +19,6 @@ import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 
 const projectDefaults = {
 	name: '',
-	// defaultReleaseBranch: 'main',
 	packageManager: javascript.NodePackageManager.PNPM,
 	pnpmVersion: '8',
 	npmAccess: javascript.NpmAccess.PUBLIC,
@@ -37,9 +37,16 @@ const projectDefaults = {
 	projenrcTs: true,
 } satisfies NxMonorepoProjectOptions
 
+export enum TSConfig {
+	BASE = 'base',
+	ESM = 'esm',
+	BUNDLER = 'bundler',
+}
+
 export class MonorepoProject extends NxMonorepoProject {
 	public readonly esmBundledTsconfigExtends: javascript.TypescriptConfigExtends
 	public readonly pnpm: PnpmWorkspace
+	public readonly tsconfigContainer: TypescriptConfigContainer
 
 	constructor(options: NxMonorepoProjectOptions) {
 		const { workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
@@ -62,7 +69,12 @@ export class MonorepoProject extends NxMonorepoProject {
 				reject: [],
 			},
 		})
-		this.esmBundledTsconfigExtends = this.buildEsmBundledTsConfig()
+		this.tsconfigContainer = this.buildTsconfigContainer()
+		this.esmBundledTsconfigExtends = this.tsconfigContainer.buildExtends(
+			TSConfig.BASE,
+			TSConfig.ESM,
+			TSConfig.BUNDLER
+		)
 		this.applyNpmConfig(
 			findComponent(this, javascript.NpmConfig) ??
 				new javascript.NpmConfig(this)
@@ -73,6 +85,41 @@ export class MonorepoProject extends NxMonorepoProject {
 			.applyNx()
 			.applyUpgradeTask(this.tasks.tryFind('upgrade-deps'))
 		this.tsconfigDev!.addExtends(this.tsconfig!)
+	}
+
+	protected buildTsconfigContainer(): TypescriptConfigContainer {
+		return new TypescriptConfigContainer(this, {
+			configsDirectory: './tsconfig',
+		})
+			.defineConfig(TSConfig.BASE, {
+				skipLibCheck: true,
+				strict: true,
+				strictNullChecks: true,
+				resolveJsonModule: true,
+				isolatedModules: true,
+				noImplicitThis: true,
+				noUnusedLocals: true,
+				noUnusedParameters: true,
+				noFallthroughCasesInSwitch: true,
+				forceConsistentCasingInFileNames: true,
+			})
+			.defineConfig(TSConfig.ESM, {
+				module: 'ESNext',
+				target: 'ES2022',
+				lib: ['ES2022'],
+				allowSyntheticDefaultImports: true,
+				esModuleInterop: true,
+			})
+			.defineConfig(TSConfig.BUNDLER, {
+				moduleResolution: TypeScriptModuleResolution.BUNDLER,
+				allowImportingTsExtensions: true,
+				allowArbitraryExtensions: true,
+				resolveJsonModule: true,
+				isolatedModules: true,
+				verbatimModuleSyntax: true,
+				noEmit: true,
+				jsx: javascript.TypeScriptJsxMode.PRESERVE,
+			})
 	}
 
 	protected applyUpgradeTask(task?: Task): this {
@@ -164,47 +211,6 @@ export class MonorepoProject extends NxMonorepoProject {
 		return this
 	}
 
-	protected buildEsmBundledTsConfig() {
-		const base = this.buildExtendableTypeScriptConfig('tsconfig.base.json', {
-			skipLibCheck: true,
-			strict: true,
-			strictNullChecks: true,
-			resolveJsonModule: true,
-			isolatedModules: true,
-			noImplicitThis: true,
-			noUnusedLocals: true,
-			noUnusedParameters: true,
-			noFallthroughCasesInSwitch: true,
-			forceConsistentCasingInFileNames: true,
-		})
-		base.file.addOverride('compilerOptions.useDefineForClassFields', true)
-		const esm = this.buildExtendableTypeScriptConfig('tsconfig.esm.json', {
-			module: 'ESNext',
-			target: 'ES2022',
-			lib: ['ES2022'],
-			allowSyntheticDefaultImports: true,
-			esModuleInterop: true,
-		})
-		const bundler = this.buildExtendableTypeScriptConfig(
-			'tsconfig.bundler.json',
-			{
-				moduleResolution: TypeScriptModuleResolution.BUNDLER,
-				allowImportingTsExtensions: true,
-				allowArbitraryExtensions: true,
-				resolveJsonModule: true,
-				isolatedModules: true,
-				verbatimModuleSyntax: true,
-				noEmit: true,
-				jsx: javascript.TypeScriptJsxMode.PRESERVE,
-			}
-		)
-		return javascript.TypescriptConfigExtends.fromTypescriptConfigs([
-			base,
-			esm,
-			bundler,
-		])
-	}
-
 	/**
 	 * Apply callback to all child projects.
 	 * @param cb Function to execute on all subprojects.
@@ -237,24 +243,6 @@ export class MonorepoProject extends NxMonorepoProject {
 			},
 		})
 		return this
-	}
-
-	/**
-	 * Build tsconfig primed for extending.
-	 * @param fileName File name of tsconfig.
-	 * @param options Compiler options.
-	 */
-	buildExtendableTypeScriptConfig(
-		fileName: string,
-		options: javascript.TypeScriptCompilerOptions
-	): javascript.TypescriptConfig {
-		const config = new javascript.TypescriptConfig(this, {
-			fileName,
-			compilerOptions: options,
-		})
-		config.file.addDeletionOverride('include')
-		config.file.addDeletionOverride('exclude')
-		return config
 	}
 
 	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {

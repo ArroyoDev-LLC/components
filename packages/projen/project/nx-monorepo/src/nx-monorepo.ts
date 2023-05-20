@@ -6,7 +6,7 @@ import {
 	NxMonorepoProject,
 } from '@aws-prototyping-sdk/nx-monorepo'
 import {
-	type github,
+	github,
 	javascript,
 	JsonFile,
 	type Project,
@@ -16,6 +16,11 @@ import {
 import { secretToString } from 'projen/lib/github/util'
 import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
+
+const arroyoBot = github.GithubCredentials.fromApp({
+	appIdSecret: 'AD_BOT_APP_ID',
+	privateKeySecret: 'AD_BOT_PRIVATE_KEY',
+})
 
 const projectDefaults = {
 	name: '',
@@ -35,6 +40,34 @@ const projectDefaults = {
 	authorName: 'arroyoDev-LLC',
 	authorOrganization: true,
 	projenrcTs: true,
+	github: true,
+	githubOptions: {
+		mergify: true,
+		workflows: true,
+		projenCredentials: arroyoBot,
+		pullRequestLintOptions: {
+			semanticTitleOptions: {
+				types: [
+					'feat',
+					'fix',
+					'perf',
+					'revert',
+					'docs',
+					'style',
+					'chore',
+					'refactor',
+					'test',
+					'build',
+					'ci',
+				],
+			},
+		},
+	},
+	autoApproveUpgrades: true,
+	autoApproveOptions: {
+		allowedUsernames: ['github-actions[bot]', 'arroyobot[bot]'],
+	},
+	prettier: true,
 } satisfies NxMonorepoProjectOptions
 
 export enum TSConfig {

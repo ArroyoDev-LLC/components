@@ -1,7 +1,7 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { TypescriptProject } from '@arroyodev-llc/projen.project.typescript'
 import { VueComponentProject } from '@arroyodev-llc/projen.project.vue-component'
-import { github, LogLevel } from 'projen'
+import { LogLevel } from 'projen'
 import { ComponentsMonorepo } from './projenrc/monorepo'
 import {
 	NxMonorepoProjectOptionsBuilder,
@@ -10,45 +10,10 @@ import {
 } from './projenrc/option-builders'
 import { ProjenComponentProject } from './projenrc/project'
 
-const arroyoBot = github.GithubCredentials.fromApp({
-	appIdSecret: 'AD_BOT_APP_ID',
-	privateKeySecret: 'AD_BOT_PRIVATE_KEY',
-})
-
 const monorepo = new ComponentsMonorepo({
 	name: 'components',
-	authorName: 'arroyoDev',
 	devContainer: true,
 	docgen: true,
-	github: true,
-	githubOptions: {
-		mergify: true,
-		workflows: true,
-		projenCredentials: arroyoBot,
-		pullRequestLintOptions: {
-			semanticTitleOptions: {
-				types: [
-					'feat',
-					'fix',
-					'perf',
-					'revert',
-					'docs',
-					'style',
-					'chore',
-					'refactor',
-					'test',
-					'build',
-					'ci',
-				],
-			},
-		},
-	},
-	autoApproveUpgrades: true,
-	autoApproveOptions: {
-		allowedUsernames: ['github-actions[bot]', 'arroyobot[bot]'],
-	},
-	prettier: true,
-	projenrcTs: true,
 	renovatebot: true,
 	gitignore: ['/.idea', '.idea'],
 	logging: {

@@ -350,6 +350,12 @@ export interface NxMonorepoProjectOptions {
    */
   readonly artifactsDirectory?: string;
   /**
+   * The name of the main release branch.
+   * @default "main"
+   * @stability experimental
+   */
+  readonly defaultReleaseBranch?: string;
+  /**
    * Github Runner selection labels.
    * @default ["ubuntu-latest"]
    * @stability experimental

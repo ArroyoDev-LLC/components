@@ -187,7 +187,6 @@ export class MonorepoProject extends NxMonorepoProject {
 		])
 	}
 
-
 	/**
 	 * Apply callback to all child projects.
 	 * @param cb Function to execute on all subprojects.

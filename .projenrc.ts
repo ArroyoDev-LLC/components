@@ -2,10 +2,6 @@ import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { TypescriptProject } from '@arroyodev-llc/projen.project.typescript'
 import { VueComponentProject } from '@arroyodev-llc/projen.project.vue-component'
 import { github, LogLevel } from 'projen'
-import {
-	TypescriptConfigExtends,
-	TypeScriptModuleResolution,
-} from 'projen/lib/javascript'
 import { ComponentsMonorepo } from './projenrc/monorepo'
 import {
 	NxMonorepoProjectOptionsBuilder,
@@ -58,27 +54,6 @@ const monorepo = new ComponentsMonorepo({
 	logging: {
 		level: LogLevel.DEBUG,
 		usePrefix: true,
-	},
-	tsconfig: {
-		exclude: ['packages/**/*'],
-		include: ['.projenrc.ts', 'projenrc', './*.ts'],
-		extends: TypescriptConfigExtends.fromPaths([
-			'./tsconfig.base.json',
-			'./tsconfig.esm.json',
-		]),
-		compilerOptions: {
-			rootDir: '.',
-			moduleResolution: TypeScriptModuleResolution.NODE,
-			lib: ['ES2022'],
-			module: 'ESNext',
-			target: 'ES2022',
-			allowSyntheticDefaultImports: true,
-			allowArbitraryExtensions: true,
-			allowImportingTsExtensions: true,
-			skipLibCheck: true,
-			emitDeclarationOnly: true,
-			forceConsistentCasingInFileNames: true,
-		},
 	},
 	devDeps: [
 		'@aws-prototyping-sdk/nx-monorepo',

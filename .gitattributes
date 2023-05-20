@@ -34,10 +34,10 @@
 /projenrc/projen-project-options.ts linguist-generated
 /release-please-config.json linguist-generated
 /renovate.json5 linguist-generated
-/tsconfig.base.json linguist-generated
-/tsconfig.bundler.json linguist-generated
 /tsconfig.dev.json linguist-generated
-/tsconfig.esm.json linguist-generated
 /tsconfig.json linguist-generated
+/tsconfig/tsconfig.base.json linguist-generated
+/tsconfig/tsconfig.bundler.json linguist-generated
+/tsconfig/tsconfig.esm.json linguist-generated
 /vitest.config.ts linguist-generated
 /vitest.workspace.json linguist-generated

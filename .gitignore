@@ -56,9 +56,9 @@ jspm_packages/
 .idea
 .idea/**
 !/.ncurc.json
-!/tsconfig.base.json
-!/tsconfig.esm.json
-!/tsconfig.bundler.json
+!/tsconfig/tsconfig.base.json
+!/tsconfig/tsconfig.esm.json
+!/tsconfig/tsconfig.bundler.json
 !/release-please-config.json
 !/.release-please-manifest.json
 !/.github/workflows/release.yml

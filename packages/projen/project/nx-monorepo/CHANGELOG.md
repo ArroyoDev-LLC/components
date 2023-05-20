@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.4...@arroyodev-llc/projen.project.nx-monorepo-v0.1.5) (2023-05-20)
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Fix upgrade-deps pnpm install invalid step ([7170039](https://github.com/ArroyoDev-LLC/components/commit/7170039024734e56a23fd53ecf45935c719f94af))
+* **projenrc:** Set `defaultReleaseBranch` to optional instead of omitting ([ee3dc30](https://github.com/ArroyoDev-LLC/components/commit/ee3dc309ca826cb2e3a382a63b9aaebd9ff9aca3))
+
+
+### Code Refactoring
+
+* **projen.project.nx-monorepo:** Cleanup default options, remove nx token, default task other ([7d1b180](https://github.com/ArroyoDev-LLC/components/commit/7d1b180bc4ca8fdb8884f0dad17e1e0ad40deee4))
+
 ## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.3...@arroyodev-llc/projen.project.nx-monorepo-v0.1.4) (2023-05-20)
 
 

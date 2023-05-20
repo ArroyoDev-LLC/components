@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.3...@arroyodev-llc/projen.project.typescript-v0.1.4) (2023-05-20)
+
+
+### Features
+
+* **projen.project.typescript:** Enable debug log by default. ([538c228](https://github.com/ArroyoDev-LLC/components/commit/538c2288923d03507140df51c9486cedb097bb0b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.7
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.4
+
 ## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.2...@arroyodev-llc/projen.project.typescript-v0.1.3) (2023-05-19)
 
 

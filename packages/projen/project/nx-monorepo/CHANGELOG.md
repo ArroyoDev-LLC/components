@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.3...@arroyodev-llc/projen.project.nx-monorepo-v0.1.4) (2023-05-20)
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Properly handle missing github component. ([f6d4621](https://github.com/ArroyoDev-LLC/components/commit/f6d46211ac6f0d1c27b429ddf2991f7fd70db13f))
+* **projen.project.nx-monorepo:** Set npm auth token env global in build workflow ([1636ee6](https://github.com/ArroyoDev-LLC/components/commit/1636ee6c726ae314535b5d2667f2a203c901253b))
+
 ## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.2...@arroyodev-llc/projen.project.nx-monorepo-v0.1.3) (2023-05-19)
 
 

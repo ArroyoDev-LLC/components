@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.6...@arroyodev-llc/projen.component.release-please-v0.1.7) (2023-05-20)
+
+
+### Bug Fixes
+
+* **projen.component.release-please:** Set global env npm token in release flow ([e133dd7](https://github.com/ArroyoDev-LLC/components/commit/e133dd7557c68caf1f418f57d2e2a8815542756b))
+* **projen.project.nx-monorepo:** Set npm auth token env global in build workflow ([1636ee6](https://github.com/ArroyoDev-LLC/components/commit/1636ee6c726ae314535b5d2667f2a203c901253b))
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.5...@arroyodev-llc/projen.component.release-please-v0.1.6) (2023-05-19)
 
 

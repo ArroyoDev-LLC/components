@@ -248,7 +248,7 @@
           "exec": "pnpm exec syncpack fix-mismatches"
         },
         {
-          "exec": "pnpm exec install"
+          "exec": "pnpm install"
         },
         {
           "exec": "pnpm exec projen"

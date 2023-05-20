@@ -1,10 +1,17 @@
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
-import { findComponent } from '@arroyodev-llc/utils.projen'
+import { findComponent, replaceTask } from '@arroyodev-llc/utils.projen'
 import {
 	NodePackageUtils,
 	NxMonorepoProject,
 } from '@aws-prototyping-sdk/nx-monorepo'
-import { type github, javascript, JsonFile, type Project } from 'projen'
+import {
+	type github,
+	javascript,
+	JsonFile,
+	type Project,
+	type Task,
+	type TaskStep,
+} from 'projen'
 import { secretToString } from 'projen/lib/github/util'
 import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
@@ -64,7 +71,18 @@ export class MonorepoProject extends NxMonorepoProject {
 			.applyPackage(this.package)
 			.applyDefaultTask()
 			.applyNx()
+			.applyUpgradeTask(this.tasks.tryFind('upgrade-deps'))
 		this.tsconfigDev!.addExtends(this.tsconfig!)
+	}
+
+	protected applyUpgradeTask(task?: Task): this {
+		if (!task) return this
+		// fix invalid install step.
+		const mergeUpdate = task.steps.map((step) =>
+			step.exec === 'pnpm exec install' ? { exec: 'pnpm install' } : undefined
+		) as TaskStep[]
+		replaceTask(this, task.name, mergeUpdate)
+		return this
 	}
 
 	protected applyNx(): this {

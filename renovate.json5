@@ -27,6 +27,7 @@
     "@typescript-eslint/eslint-plugin",
     "@typescript-eslint/parser",
     "eslint",
+    "nx",
     "typescript",
     "@types/babel__traverse",
     "@zkochan/js-yaml",

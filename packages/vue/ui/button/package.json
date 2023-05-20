@@ -38,7 +38,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.13.0",
     "faker": "^6.6.6",
-    "happy-dom": "^9.18.3",
+    "happy-dom": "^9.19.2",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
     "rollup": "^3.22.0",

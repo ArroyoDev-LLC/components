@@ -101,7 +101,8 @@ export class MonorepoProject extends NxMonorepoProject {
 		})
 	}
 
-	protected applyGithub(gh: github.GitHub): this {
+	protected applyGithub(gh?: github.GitHub): this {
+		if (!gh) return this
 		const build = gh.tryFindWorkflow('build')!
 		return this.applyGithubBuildFlow(build)
 	}

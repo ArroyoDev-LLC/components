@@ -166,6 +166,10 @@ const releasePleaseComponent = ProjenComponentProject.fromParent(monorepo, {
 	workspaceDeps: [utilsProjen],
 })
 
+const tsconfigContainerComponent = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.component.tsconfig-container'
+})
+
 const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.project.nx-monorepo',
 	workspaceDeps: [utilsProjen, lintingComponent, pnpmWorkspaceComponent],

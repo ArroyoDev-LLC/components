@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.5...@arroyodev-llc/projen.project.nx-monorepo-v0.1.6) (2023-05-20)
+
+
+### Features
+
+* **projen.project.nx-monorepo:** Utilize `TypescriptConfigContainer` in nx monorepo. ([38eef03](https://github.com/ArroyoDev-LLC/components/commit/38eef037e7bc2054c43af656941ec7b482eb80b4))
+* **projen:** Synth all tsconfigs. ([1fcb9d7](https://github.com/ArroyoDev-LLC/components/commit/1fcb9d7e7c4840ff7d463453cff44201b03e996a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.6
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.6
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.2
+    * @arroyodev-llc/utils.projen bumped to 0.1.6
+
 ## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.4...@arroyodev-llc/projen.project.nx-monorepo-v0.1.5) (2023-05-20)
 
 

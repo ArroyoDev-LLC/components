@@ -11,6 +11,25 @@
     * @arroyodev-llc/projen.component.vitest bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.5...@arroyodev-llc/projen.component.vue-v0.1.6) (2023-05-20)
+
+
+### Features
+
+* **projen:** Synth all tsconfigs. ([1fcb9d7](https://github.com/ArroyoDev-LLC/components/commit/1fcb9d7e7c4840ff7d463453cff44201b03e996a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.6
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.6
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.6
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.6
+    * @arroyodev-llc/projen.component.vitest bumped to 0.1.6
+    * @arroyodev-llc/utils.projen bumped to 0.1.6
+
 ## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.4...@arroyodev-llc/projen.component.vue-v0.1.5) (2023-05-19)
 
 

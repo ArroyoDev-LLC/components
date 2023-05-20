@@ -44,8 +44,6 @@ jspm_packages/
 !/.prettierrc.json
 !/.npmrc
 !/test/
-!/tsconfig.json
-!/tsconfig.dev.json
 !/src/
 /dist
 /dist/
@@ -59,6 +57,8 @@ jspm_packages/
 !/tsconfig/tsconfig.base.json
 !/tsconfig/tsconfig.esm.json
 !/tsconfig/tsconfig.bundler.json
+!/tsconfig.json
+!/tsconfig.dev.json
 !/release-please-config.json
 !/.release-please-manifest.json
 !/.github/workflows/release.yml

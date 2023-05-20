@@ -62,7 +62,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			authorName: 'arroyoDev-LLC',
 			prettier: true,
 			tsconfig,
-			logging: { usePrefix: true, level: LogLevel.DEBUG },
+			logging: { usePrefix: true, level: LogLevel.INFO },
 			projenCommand: NodePackageUtils.command.exec(
 				javascript.NodePackageManager.PNPM,
 				'projen'

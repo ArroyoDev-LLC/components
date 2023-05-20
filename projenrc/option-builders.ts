@@ -57,7 +57,7 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 				'@aws-prototyping-sdk/nx-monorepo.NxMonorepoProjectOptions'
 			)
 				.withoutDeprecated()
-				.omit('defaultReleaseBranch'),
+				.update('defaultReleaseBranch', { optional: true }),
 			typescriptStructMixin
 		)
 	}
@@ -114,7 +114,7 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 		struct.mixin(
 			Struct.fromFqn('projen.typescript.TypeScriptProjectOptions')
 				.withoutDeprecated()
-				.omit('defaultReleaseBranch'),
+				.update('defaultReleaseBranch', { optional: true }),
 			typescriptStructMixin
 		)
 

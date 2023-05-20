@@ -1,1 +1,1 @@
-export * from './tsconfig-container.ts'
+export * from './tsconfig-container'

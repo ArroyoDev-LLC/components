@@ -25,7 +25,7 @@
     "postinstall": "pnpm exec projen post-install"
   },
   "author": {
-    "name": "arroyoDev",
+    "name": "arroyoDev-LLC",
     "email": "support@arroyodev.com",
     "url": "https://arroyodev.com",
     "organization": true

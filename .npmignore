@@ -16,6 +16,6 @@ dist
 /.projenrc.js
 tsconfig.tsbuildinfo
 /.eslintrc.json
-/tsconfig.base.json
-/tsconfig.esm.json
-/tsconfig.bundler.json
+/tsconfig/tsconfig.base.json
+/tsconfig/tsconfig.esm.json
+/tsconfig/tsconfig.bundler.json

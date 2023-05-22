@@ -58,9 +58,6 @@
           "args": [
             "--build"
           ]
-        },
-        {
-          "exec": "unbuild"
         }
       ]
     },

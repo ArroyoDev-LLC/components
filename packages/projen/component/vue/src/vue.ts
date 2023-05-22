@@ -90,7 +90,6 @@ export class Vue extends Component {
 
 	applyUnBuild(component?: UnBuild): this {
 		if (!component) return this
-		this.project.compileTask.exec('unbuild')
 		this.project.deps.addDependency('rollup', DependencyType.BUILD)
 		this.project.deps.addDependency('rollup-plugin-vue', DependencyType.BUILD)
 		component.file.addImport({

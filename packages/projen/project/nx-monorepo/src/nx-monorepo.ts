@@ -15,6 +15,7 @@ import {
 } from 'projen'
 import { secretToString } from 'projen/lib/github/util'
 import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
+import { deepMerge } from 'projen/lib/util'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 
 const arroyoBot = github.GithubCredentials.fromApp({
@@ -22,8 +23,9 @@ const arroyoBot = github.GithubCredentials.fromApp({
 	privateKeySecret: 'AD_BOT_PRIVATE_KEY',
 })
 
-const projectDefaults = {
+export const CONFIG_DEFAULTS = {
 	name: '',
+	defaultReleaseBranch: 'main',
 	packageManager: javascript.NodePackageManager.PNPM,
 	pnpmVersion: '8',
 	npmAccess: javascript.NpmAccess.PUBLIC,
@@ -85,12 +87,15 @@ export class MonorepoProject extends NxMonorepoProject {
 
 	constructor(options: NxMonorepoProjectOptions) {
 		const { workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
+		const mergedOptions = deepMerge(
+			[Object.assign({}, CONFIG_DEFAULTS), rest],
+			true
+		) as NxMonorepoProjectOptions
 		super({
 			defaultReleaseBranch: 'main',
-			...projectDefaults,
+			...mergedOptions,
 			releaseToNpm: false,
 			projenDevDependency: true,
-			...rest,
 		})
 		this.pnpm = new PnpmWorkspace(this)
 		this.pnpm.addWorkspaceDeps(...(workspaceDeps ?? []))

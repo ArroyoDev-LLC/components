@@ -114,7 +114,13 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 		struct.mixin(
 			Struct.fromFqn('projen.typescript.TypeScriptProjectOptions')
 				.withoutDeprecated()
-				.update('defaultReleaseBranch', { optional: true }),
+				.update('defaultReleaseBranch', { optional: true })
+				.add({
+					name: 'unbuild',
+					type: { primitive: PrimitiveType.Boolean },
+					optional: true,
+					docs: { summary: 'Use unbuild for bundling/transpiling.' },
+				}),
 			typescriptStructMixin
 		)
 

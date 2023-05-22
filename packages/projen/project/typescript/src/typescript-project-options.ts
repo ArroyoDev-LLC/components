@@ -14,6 +14,10 @@ export interface TypeScriptProjectOptions {
    */
   readonly workspaceDeps?: Array<javascript.NodeProject | string>;
   /**
+   * Use unbuild for bundling/transpiling.
+   */
+  readonly unbuild?: boolean;
+  /**
    * TypeScript version to use.
    * NOTE: Typescript is not semantically versioned and should remain on the
    * same minor, so we recommend using a `~` dependency (e.g. `~1.2.3`).

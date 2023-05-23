@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.8...@arroyodev-llc/vue.ui.text-v0.1.9) (2023-05-23)
+
+
+### Features
+
+* **vue:** Update tsconfigs ([fcfc885](https://github.com/ArroyoDev-LLC/components/commit/fcfc88599114c0b10555994273c164955904d750))
+
+
+### Bug Fixes
+
+* **vue.ui.text:** Update tsconfigs and deps ([e8ac64f](https://github.com/ArroyoDev-LLC/components/commit/e8ac64fadec3ebc2ff60f5963dde0fcf99094a7d))
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.7...@arroyodev-llc/vue.ui.text-v0.1.8) (2023-05-23)
 
 

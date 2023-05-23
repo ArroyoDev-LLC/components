@@ -7,6 +7,15 @@
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.6...@arroyodev-llc/projen.component.vitest-v0.1.7) (2023-05-23)
+
+
+### Bug Fixes
+
+* **projen.component.vitest:** Ensure vitest is added as dependency ([f498dee](https://github.com/ArroyoDev-LLC/components/commit/f498deeb099ce76bd7c4be8d1c718ef10ddeda3a))
+* **projen.component.vitest:** Use `defineName` not `configType` for named import. ([8015905](https://github.com/ArroyoDev-LLC/components/commit/8015905118f4532bb419575f78d324326a97a96d))
+* **vue.ui.text:** Update tsconfigs and deps ([e8ac64f](https://github.com/ArroyoDev-LLC/components/commit/e8ac64fadec3ebc2ff60f5963dde0fcf99094a7d))
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.5...@arroyodev-llc/projen.component.vitest-v0.1.6) (2023-05-20)
 
 

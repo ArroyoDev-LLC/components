@@ -38,6 +38,12 @@
   * dependencies
     * @arroyodev-llc/projen.component.vue bumped to 0.1.10
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.11
+
 ## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.8...@arroyodev-llc/projen.project.vue-component-v0.1.9) (2023-05-23)
 
 

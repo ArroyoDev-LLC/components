@@ -18,6 +18,7 @@ import {
 	type WriterFunction,
 } from 'ts-morph'
 import type { UserConfigExport } from 'vite'
+import { LintConfig } from "@arroyodev-llc/projen.component.linting";
 
 export interface ViteOptionsPlugin {
 	/**
@@ -83,6 +84,12 @@ export class Vite extends Component {
 		file.addImport({
 			moduleSpecifier: 'vite',
 			namedImports: ['defineConfig'],
+		})
+		LintConfig.of(this.project)?.eslint?.addOverride?.({
+			files: ['vite.config.ts'],
+			rules: {
+				'import/no-extraneous-dependencies': 'off',
+			},
 		})
 		return file
 	}

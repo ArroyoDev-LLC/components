@@ -75,7 +75,19 @@ export class Vue extends Component {
 		component.eslint.addOverride({
 			files: ['*.vue', '**/*.vue'],
 			rules: {
+				// disable rules that conflict with prettier.
 				'vue/html-indent': ['off'],
+				'vue/multiline-html-element-content-newline': ['off'],
+				'vue/html-closing-bracket-newline': ['off'],
+				'vue/html-closing-bracket-spacing': ['off'],
+				'vue/html-end-tags': ['off'],
+				'vue/html-quotes': ['off'],
+				'vue/max-attributes-per-line': ['off'],
+				'vue/mustache-interpolation-spacing': ['off'],
+				'vue/no-multi-spaces': ['off'],
+				'vue/no-spaces-around-equal-signs-in-attribute': ['off'],
+				'vue/singleline-html-element-content-newline': ['off'],
+				'vue/html-self-closing': ['off'],
 			},
 		})
 		applyOverrides(component.eslintFile, {

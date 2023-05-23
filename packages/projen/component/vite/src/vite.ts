@@ -10,14 +10,39 @@ import { Component, DependencyType, type Project } from 'projen'
 import { type NodePackage } from 'projen/lib/javascript'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import {
-	SyntaxKind,
+	type ImportDeclarationStructure,
 	type ObjectLiteralExpression,
+	type OptionalKind,
 	type SourceFile,
+	SyntaxKind,
+	type WriterFunction,
 } from 'ts-morph'
 import type { UserConfigExport } from 'vite'
 
+export interface ViteOptionsPlugin {
+	/**
+	 * Name of plugin.
+	 * This should match the import name from `moduleImport`.
+	 */
+	name: string
+	/**
+	 * Module import specification.
+	 */
+	moduleImport: OptionalKind<ImportDeclarationStructure>
+	/**
+	 * Plugin definition specification.
+	 * Defaults to `<name>(<options>)`.
+	 */
+	spec?: WriterFunction | readonly (string | WriterFunction)[]
+	/**
+	 * Options object for plugin.
+	 */
+	options?: any
+}
+
 export interface ViteOptions {
 	build: UserConfigExport
+	plugins?: ViteOptionsPlugin[]
 }
 
 export class Vite extends Component {
@@ -37,6 +62,9 @@ export class Vite extends Component {
 		this.applyPackage(this.project.package)
 		this.file = this.buildFile()
 		this.addBuildConfig(this.options.build)
+		this.project.tasks
+			.tryFind('post-compile')
+			?.exec?.('vite', { args: ['build'] })
 	}
 
 	protected applyPackage(nodePackage: NodePackage): this {
@@ -56,6 +84,43 @@ export class Vite extends Component {
 		return file
 	}
 
+	/**
+	 * Add Vite plugin to config.
+	 * @param plugin Plugin specification.
+	 */
+	addPlugin(plugin: ViteOptionsPlugin): this {
+		const { spec, name, moduleImport, options } = plugin
+		const pluginSpec =
+			spec ??
+			((writer) =>
+				writer.write(`${name}(${options ? JSON.stringify(options) : ''})`))
+
+		this.project.deps.addDependency(
+			moduleImport.moduleSpecifier.split('/')[0],
+			DependencyType.BUILD
+		)
+		this.file.addImport(moduleImport)
+		this.addConfigTransform((configExpr) => {
+			const existsPlugins = configExpr
+				.getProperty('plugins')
+				?.asKind?.(SyntaxKind.PropertyAssignment)
+			const pluginsExpr =
+				existsPlugins?.asKindOrThrow(SyntaxKind.PropertyAssignment) ??
+				configExpr.addPropertyAssignment({
+					name: 'plugins',
+					initializer: '[]',
+				})
+			pluginsExpr
+				.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression)
+				.addElements(pluginSpec)
+		})
+		return this
+	}
+
+	/**
+	 * Add build config. Will be merged into existing.
+	 * @param config Config to merge.
+	 */
 	addBuildConfig(config: UserConfigExport): this {
 		this.addConfigTransform((configExpr) => {
 			addPropertyAssignmentsFromObject(configExpr, config)
@@ -63,6 +128,10 @@ export class Vite extends Component {
 		return this
 	}
 
+	/**
+	 * Add `ts-morph` transformation on config node.
+	 * @param transform Transformation to add.
+	 */
 	addConfigTransform(
 		transform: (
 			configObjectLiteral: ObjectLiteralExpression,

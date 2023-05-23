@@ -93,13 +93,6 @@
         "cwd": "packages/vue/ui/text"
       }
     },
-    "stub": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen stub",
-        "cwd": "packages/vue/ui/text"
-      }
-    },
     "eslint": {
       "executor": "nx:run-commands",
       "options": {

@@ -42,7 +42,7 @@ jspm_packages/
 !/.eslintrc.json
 !/tsconfig.json
 !/tsconfig.dev.json
-!/build.config.ts
+!/vite.config.ts
 !/env.d.ts
 !/vitest.config.ts
 !/project.json

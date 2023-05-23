@@ -13,6 +13,9 @@
       ],
       "@arroyodev-llc/projen.component.vue": [
         "../../component/vue/src/index"
+      ],
+      "@arroyodev-llc/projen.component.vite": [
+        "../../component/vite/src/index"
       ]
     }
   },

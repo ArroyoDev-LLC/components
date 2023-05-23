@@ -159,16 +159,6 @@
   "overrides": [
     {
       "files": [
-        "build.config.ts"
-      ],
-      "rules": {
-        "import/no-extraneous-dependencies": [
-          "off"
-        ]
-      }
-    },
-    {
-      "files": [
         "*.vue",
         "**/*.vue"
       ],

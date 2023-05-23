@@ -93,17 +93,17 @@
         "cwd": "packages/projen/component/vitest"
       }
     },
-    "stub": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen stub",
-        "cwd": "packages/projen/component/vitest"
-      }
-    },
     "eslint": {
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm exec projen eslint",
+        "cwd": "packages/projen/component/vitest"
+      }
+    },
+    "stub": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen stub",
         "cwd": "packages/projen/component/vitest"
       }
     },

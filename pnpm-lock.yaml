@@ -542,6 +542,9 @@ importers:
 
   packages/projen/component/vite:
     dependencies:
+      '@arroyodev-llc/projen.component.linting':
+        specifier: workspace:*
+        version: link:../linting
       '@arroyodev-llc/projen.component.typescript-source-file':
         specifier: workspace:*
         version: link:../typescript-source-file

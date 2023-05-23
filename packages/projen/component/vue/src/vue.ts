@@ -55,7 +55,6 @@ export class Vue extends Component {
 		const tsconfig = this.project.tryFindObjectFile('tsconfig.json')!
 		const tsconfigDev = this.project.tryFindObjectFile('tsconfig.dev.json')
 		const includes = [
-			'include',
 			'*.d.ts',
 			`${this.project.srcdir}/*.tsx`,
 			`${this.project.srcdir}/**/*.tsx`,

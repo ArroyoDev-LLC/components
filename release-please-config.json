@@ -19,16 +19,16 @@
       "component": "@arroyodev-llc/projen.component.unbuild",
       "release-type": "node"
     },
+    "packages/projen/component/linting": {
+      "component": "@arroyodev-llc/projen.component.linting",
+      "release-type": "node"
+    },
     "packages/projen/component/vite": {
       "component": "@arroyodev-llc/projen.component.vite",
       "release-type": "node"
     },
     "packages/projen/component/vitest": {
       "component": "@arroyodev-llc/projen.component.vitest",
-      "release-type": "node"
-    },
-    "packages/projen/component/linting": {
-      "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"
     },
     "packages/projen/component/tool-versions": {

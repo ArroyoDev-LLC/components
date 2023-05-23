@@ -180,19 +180,19 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen'"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"

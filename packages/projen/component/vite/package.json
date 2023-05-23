@@ -45,6 +45,7 @@
     "projen": "^0.71.57"
   },
   "dependencies": {
+    "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@vitejs/plugin-vue": "^4.2.3",

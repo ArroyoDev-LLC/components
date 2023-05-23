@@ -47,6 +47,7 @@
     "vite": "*",
     "vite-plugin-dts": "*",
     "vite-tsconfig-paths": "*",
+    "vitest": "*",
     "vue-tsc": "^1.6.5"
   },
   "dependencies": {

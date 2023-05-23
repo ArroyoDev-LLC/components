@@ -11,7 +11,10 @@
       "@arroyodev-llc/vue.ui.text": [
         "../text/src/index"
       ]
-    }
+    },
+    "types": [
+      "unplugin-vue-macros/macros-global"
+    ]
   },
   "include": [
     "src/*.ts",

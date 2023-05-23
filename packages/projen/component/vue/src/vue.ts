@@ -7,7 +7,7 @@ import {
 	VitestConfigType,
 } from '@arroyodev-llc/projen.component.vitest'
 import { applyOverrides } from '@arroyodev-llc/utils.projen'
-import { Component, DependencyType } from 'projen'
+import { Component, DependencyType, JsonPatch } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import { SyntaxKind } from 'ts-morph'
 
@@ -143,9 +143,11 @@ export class Vue extends Component {
 		if (!component) return this
 		this.project
 			.tryFindObjectFile('tsconfig.json')
-			?.addToArray?.(
-				'compilerOptions.types',
-				'unplugin-vue-macros/macros-global'
+			?.patch?.(
+				JsonPatch.add(
+					'/compilerOptions/types/-',
+					'unplugin-vue-macros/macros-global'
+				)
 			)
 		this.project.deps.addDependency('@vitejs/plugin-vue', DependencyType.BUILD)
 		this.project.deps.addDependency(

@@ -11,6 +11,27 @@
     * @arroyodev-llc/projen.component.vitest bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.10...@arroyodev-llc/projen.component.vue-v0.1.11) (2023-05-23)
+
+
+### Features
+
+* **vue:** Update tsconfigs ([fcfc885](https://github.com/ArroyoDev-LLC/components/commit/fcfc88599114c0b10555994273c164955904d750))
+
+
+### Bug Fixes
+
+* **projen.component.vue:** Do not replace existing types in tsconfig during vue vite apply ([41478c1](https://github.com/ArroyoDev-LLC/components/commit/41478c1beb87a89db50426ff937b1226f66b1748))
+* **projen.component.vue:** Remove `include` from tsconfig includes ([1c43a5d](https://github.com/ArroyoDev-LLC/components/commit/1c43a5d8491fb61360131c3ce3047edf041fa231))
+* **vue.ui.text:** Update tsconfigs and deps ([e8ac64f](https://github.com/ArroyoDev-LLC/components/commit/e8ac64fadec3ebc2ff60f5963dde0fcf99094a7d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vitest bumped to 0.1.7
+
 ## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.9...@arroyodev-llc/projen.component.vue-v0.1.10) (2023-05-23)
 
 

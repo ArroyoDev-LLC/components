@@ -6,6 +6,26 @@
   * dependencies
     * @arroyodev-llc/vue.ui.text bumped to 0.1.7
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.8...@arroyodev-llc/vue.ui.button-v0.1.9) (2023-05-23)
+
+
+### Features
+
+* **vue:** Update tsconfigs ([fcfc885](https://github.com/ArroyoDev-LLC/components/commit/fcfc88599114c0b10555994273c164955904d750))
+
+
+### Bug Fixes
+
+* **vue.ui.button:** Update tsconfig and deps ([761cf84](https://github.com/ArroyoDev-LLC/components/commit/761cf84e636a3bf7dfa9d1ee9dac8b3f4c4bbc79))
+* **vue.ui.text:** Update tsconfigs and deps ([e8ac64f](https://github.com/ArroyoDev-LLC/components/commit/e8ac64fadec3ebc2ff60f5963dde0fcf99094a7d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/vue.ui.text bumped to 0.1.9
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.7...@arroyodev-llc/vue.ui.button-v0.1.8) (2023-05-23)
 
 

@@ -180,11 +180,11 @@ export class MonorepoProject extends NxMonorepoProject {
 				esModuleInterop: true,
 			})
 			.defineConfig(TSConfig.BUNDLER, {
+				isolatedModules: false,
 				moduleResolution: TypeScriptModuleResolution.BUNDLER,
 				allowImportingTsExtensions: true,
 				allowArbitraryExtensions: true,
 				resolveJsonModule: true,
-				isolatedModules: true,
 				verbatimModuleSyntax: true,
 				noEmit: true,
 				jsx: javascript.TypeScriptJsxMode.PRESERVE,

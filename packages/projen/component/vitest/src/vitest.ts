@@ -44,6 +44,7 @@ export class Vitest extends Component {
 		}
 	) {
 		super(project)
+		this.project.addDevDeps('vitest')
 		this.configType = this.options.configType ?? VitestConfigType.PROJECT
 		const configFilePath = this.options.configFilePath ?? 'vitest.config.ts'
 

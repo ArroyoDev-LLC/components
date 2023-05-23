@@ -7,6 +7,14 @@
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.7...@arroyodev-llc/projen.component.vite-v0.1.8) (2023-05-23)
+
+
+### Features
+
+* **projen.component.vite:** Add vite client to tsconfig types. ([a0409a4](https://github.com/ArroyoDev-LLC/components/commit/a0409a471cd1c9fd0e1b21dcf54ed44a3240e854))
+* **projen.component.vite:** Disable extraneous deps in vite eslint config ([5d59ed1](https://github.com/ArroyoDev-LLC/components/commit/5d59ed1d04985b7ad8a96ed071893642c4c16521))
+
 ## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.6...@arroyodev-llc/projen.component.vite-v0.1.7) (2023-05-23)
 
 

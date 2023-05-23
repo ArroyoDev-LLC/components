@@ -11,6 +11,20 @@
     * @arroyodev-llc/projen.component.vitest bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.8...@arroyodev-llc/projen.component.vue-v0.1.9) (2023-05-23)
+
+
+### Features
+
+* **projen.component.vue:** Add unplugin-vue-macros globals to tsconfig types. ([1b292fb](https://github.com/ArroyoDev-LLC/components/commit/1b292fbcd958a5aec1f333dbe0b92c07c9327288))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.8
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.7...@arroyodev-llc/projen.component.vue-v0.1.8) (2023-05-23)
 
 

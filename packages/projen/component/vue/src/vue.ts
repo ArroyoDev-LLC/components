@@ -130,6 +130,12 @@ export class Vue extends Component {
 
 	applyVite(component?: Vite): this {
 		if (!component) return this
+		this.project
+			.tryFindObjectFile('tsconfig.json')
+			?.addToArray?.(
+				'compilerOptions.types',
+				'unplugin-vue-macros/macros-global'
+			)
 		this.project.deps.addDependency('@vitejs/plugin-vue', DependencyType.BUILD)
 		this.project.deps.addDependency(
 			'@vitejs/plugin-vue-jsx',

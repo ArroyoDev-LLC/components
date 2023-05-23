@@ -8,15 +8,15 @@ import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
 import { type MonorepoProject } from '@arroyodev-llc/projen.project.nx-monorepo'
 import { ProjectName } from '@arroyodev-llc/utils.projen'
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
-import { javascript, LogLevel, typescript } from 'projen'
+import { type Component, javascript, LogLevel, typescript } from 'projen'
+import { deepMerge } from 'projen/lib/util'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
 
-const projectDefaults = {
-	name: '',
+export const CONFIG_DEFAULTS = {
 	packageManager: javascript.NodePackageManager.PNPM,
 	pnpmVersion: '8',
 	npmAccess: javascript.NpmAccess.PUBLIC,
-	release: false,
+	release: true,
 	releaseToNpm: true,
 	jest: false,
 	projenDevDependency: false,
@@ -26,9 +26,17 @@ const projectDefaults = {
 	typescriptVersion: '^5',
 	authorEmail: 'support@arroyodev.com',
 	authorUrl: 'https://arroyodev.com',
+	authorName: 'arroyoDev-LLC',
 	authorOrganization: true,
+	logging: { usePrefix: true, level: LogLevel.INFO },
+	projenCommand: NodePackageUtils.command.exec(
+		javascript.NodePackageManager.PNPM,
+		'projen'
+	),
 	projenrcTs: true,
-} satisfies TypeScriptProjectOptions
+	prettier: true,
+	unbuild: true,
+} satisfies Omit<TypeScriptProjectOptions, 'name'>
 
 export class TypescriptProject extends typescript.TypeScriptProject {
 	static fromParent(
@@ -52,22 +60,17 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 	constructor(options: TypeScriptProjectOptions) {
 		const { name, workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
 		const projectName = new ProjectName(name)
+		const mergedOptions = deepMerge(
+			[Object.assign({}, CONFIG_DEFAULTS), rest],
+			true
+		) as Omit<TypeScriptProjectOptions, 'name'>
 		super({
-			...projectDefaults,
 			defaultReleaseBranch: 'main',
 			name: projectName.name,
 			outdir: projectName.outDir,
 			packageName: projectName.packageName,
-			release: true,
-			authorName: 'arroyoDev-LLC',
-			prettier: true,
+			...mergedOptions,
 			tsconfig,
-			logging: { usePrefix: true, level: LogLevel.INFO },
-			projenCommand: NodePackageUtils.command.exec(
-				javascript.NodePackageManager.PNPM,
-				'projen'
-			),
-			...rest,
 		})
 		this.projectName = projectName
 		this.pnpm = new PnpmWorkspace(this)
@@ -107,9 +110,12 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 
 		this.lintConfig = new LintConfig(this)
 
+		if (mergedOptions.unbuild) {
+			this.applyBundler()
+		}
+
 		this.applyLintConfig()
 			.applyPackage()
-			.applyBundler()
 			.applyReleasePlease(ReleasePlease.of(this.parent ?? this))
 			.applyPackageTask()
 	}
@@ -120,8 +126,9 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		return this
 	}
 
-	protected applyBundler(): this {
-		new UnBuild(this, {
+	protected buildBundler(): Component {
+		this.tasks.tryFind('post-compile')!.exec('unbuild', { name: 'Unbuild' })
+		return new UnBuild(this, {
 			cjs: true,
 			options: {
 				name: this.projectName.packageName,
@@ -133,7 +140,11 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 				},
 			},
 		})
-		this.tasks.tryFind('post-compile')!.exec('unbuild', { name: 'Unbuild' })
+	}
+
+	protected applyBundler(): this {
+		// TODO: improve handling of bundlers.
+		this.buildBundler()
 		return this
 	}
 
@@ -149,8 +160,6 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 
 	protected applyReleasePlease(releasePlease?: ReleasePlease): this {
 		if (!releasePlease) return this
-		// let releasePlease =
-
 		releasePlease.addProject(this, { releaseType: ReleaseType.NODE })
 		const version = releasePlease.packages.get(this.name)
 		if (version) {

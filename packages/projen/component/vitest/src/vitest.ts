@@ -66,7 +66,7 @@ export class Vitest extends Component {
 
 		this.configFile.addImport({
 			moduleSpecifier: 'vitest/config',
-			namedImports: [this.configType],
+			namedImports: [this.defineName],
 		})
 
 		if (this.configType === VitestConfigType.PROJECT) {

@@ -2,23 +2,22 @@
 import { computed } from 'vue'
 import type { TextVariant } from './types.ts'
 
-export interface TextProps {
+interface TextProps {
 	variant?: TextVariant
 }
 
-const props = withDefaults(defineProps<TextProps>(), { variant: 'body' })
+const props = defineProps<TextProps>()
 
-const anchor = computed(() =>
-	props.variant === 'body'
-		? 'p'
-		: typeof props.variant === 'number'
-		? `h${props.variant}`
-		: props.variant
-)
+const variant = computed(() => {
+	const el = props.variant ?? 'body'
+	if (el === 'body') return 'p'
+	if (typeof props.variant === 'number') return `h${props.variant}`
+	return props.variant as string
+})
 </script>
 
 <template>
-	<component :is="anchor">
+	<component :is="variant">
 		<slot />
 	</component>
 </template>

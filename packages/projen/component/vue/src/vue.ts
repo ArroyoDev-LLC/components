@@ -138,40 +138,28 @@ export class Vue extends Component {
 		this.project.deps.addDependency('unplugin-vue-macros', DependencyType.BUILD)
 		component.file.addImport(
 			{ moduleSpecifier: '@vitejs/plugin-vue', defaultImport: 'vue' },
-			{ moduleSpecifier: '@vitejs/plugin-vue-jsx', defaultImport: 'vueJsx' },
-			{
-				moduleSpecifier: 'unplugin-vue-macros/vite',
-				defaultImport: 'VueMacros',
-			}
+			{ moduleSpecifier: '@vitejs/plugin-vue-jsx', defaultImport: 'vueJsx' }
 		)
 		component.addBuildConfig({
 			resolve: {
 				dedupe: ['vue'],
 			},
 		})
-		component.addConfigTransform((configExpr) => {
-			const existsPlugins = configExpr
-				.getProperty('plugins')
-				?.asKind?.(SyntaxKind.PropertyAssignment)
-				?.getInitializer?.()
-			const pluginsExpr = configExpr.addPropertyAssignment({
-				name: 'plugins',
-				initializer: existsPlugins?.getText?.() ?? '[]',
-			})
-			pluginsExpr
-				.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression)
-				.addElements([
-					(writer) =>
-						writer
-							.write('VueMacros(')
-							.block(() =>
-								writer
-									.write('plugins: ')
-									.block(() => writer.write('vue: vue()'))
-							)
-							.write(')'),
-					'vueJsx()',
-				])
+		component.addPlugin({
+			name: 'VueMacros',
+			moduleImport: {
+				moduleSpecifier: 'unplugin-vue-macros/vite',
+				defaultImport: 'VueMacros',
+			},
+			spec: (writer) => [
+				writer
+					.write('VueMacros(')
+					.block(() =>
+						writer.write('plugins: ').block(() => writer.write('vue: vue()'))
+					)
+					.write(')'),
+				'vueJsx()',
+			],
 		})
 		return this
 	}

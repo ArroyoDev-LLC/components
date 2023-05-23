@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.8...@arroyodev-llc/projen.project.nx-monorepo-v0.1.9) (2023-05-23)
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Disable redundant `isolatedModules` w/ `verbatimModuleSyntax` ([d8a9238](https://github.com/ArroyoDev-LLC/components/commit/d8a923809365ac5d3fdbdeceaad06017d1c2aa6e))
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.7...@arroyodev-llc/projen.project.nx-monorepo-v0.1.8) (2023-05-23)
 
 

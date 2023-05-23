@@ -11,6 +11,20 @@
     * @arroyodev-llc/projen.component.vitest bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.7...@arroyodev-llc/projen.component.vue-v0.1.8) (2023-05-23)
+
+
+### Features
+
+* **projen.component.vue:** Utilize vite `addPlugin` method for `VueMacros` ([2551f0a](https://github.com/ArroyoDev-LLC/components/commit/2551f0a4ffe1dad57a5f596a0c070e1e39123781))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.7
+
 ## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.6...@arroyodev-llc/projen.component.vue-v0.1.7) (2023-05-23)
 
 

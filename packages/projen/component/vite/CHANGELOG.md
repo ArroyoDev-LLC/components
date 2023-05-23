@@ -7,6 +7,13 @@
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.6...@arroyodev-llc/projen.component.vite-v0.1.7) (2023-05-23)
+
+
+### Features
+
+* **projen.component.vite:** Implement `addPlugin` public method + options. ([a289e43](https://github.com/ArroyoDev-LLC/components/commit/a289e43376131006e8514c85d8df57a879dbac44))
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.5...@arroyodev-llc/projen.component.vite-v0.1.6) (2023-05-20)
 
 

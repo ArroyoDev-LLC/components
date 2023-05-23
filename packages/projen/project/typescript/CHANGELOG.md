@@ -6,6 +6,20 @@
   * dependencies
     * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.7
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.8...@arroyodev-llc/projen.project.typescript-v0.1.9) (2023-05-23)
+
+
+### Features
+
+* **projen.project.typescript:** Setup unbuild during bundler apply ([7ad4175](https://github.com/ArroyoDev-LLC/components/commit/7ad41753f1bdbee1543c5c477cc14c7e1b6ea8e0))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.9
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.7...@arroyodev-llc/projen.project.typescript-v0.1.8) (2023-05-23)
 
 

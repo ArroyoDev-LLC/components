@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.6...@arroyodev-llc/vue.ui.text-v0.1.7) (2023-05-23)
+
+
+### Features
+
+* **vue.ui.text:** Simplify root component variant logic. ([8d04d96](https://github.com/ArroyoDev-LLC/components/commit/8d04d9629a37a3b0a41991d259149e20366553fc))
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.5...@arroyodev-llc/vue.ui.text-v0.1.6) (2023-05-23)
 
 

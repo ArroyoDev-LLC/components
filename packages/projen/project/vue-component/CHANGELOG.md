@@ -25,6 +25,22 @@
     * @arroyodev-llc/projen.component.vue bumped to 0.1.7
     * @arroyodev-llc/projen.project.typescript bumped to 0.1.8
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.8...@arroyodev-llc/projen.project.vue-component-v0.1.9) (2023-05-23)
+
+
+### Features
+
+* **projen.project.vue-component:** Utilize vite to bundle vue component projects. ([7e9168c](https://github.com/ArroyoDev-LLC/components/commit/7e9168c707babc29c9ccb736d04facfe9bdf9500))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.7
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.8
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.9
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.5...@arroyodev-llc/projen.project.vue-component-v0.1.6) (2023-05-20)
 
 

@@ -65,6 +65,9 @@ export class Vite extends Component {
 		this.project.tasks
 			.tryFind('post-compile')
 			?.exec?.('vite', { args: ['build'] })
+		this.project
+			.tryFindObjectFile('tsconfig.json')
+			?.addToArray?.('compilerOptions.types', 'vite/client')
 	}
 
 	protected applyPackage(nodePackage: NodePackage): this {

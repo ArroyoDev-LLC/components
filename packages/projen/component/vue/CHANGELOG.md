@@ -11,6 +11,13 @@
     * @arroyodev-llc/projen.component.vitest bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.9...@arroyodev-llc/projen.component.vue-v0.1.10) (2023-05-23)
+
+
+### Bug Fixes
+
+* **projen.component.vue:** Disable vue eslint rules that conflict with prettier. ([225c470](https://github.com/ArroyoDev-LLC/components/commit/225c470013d5890d95ee5941caf2c3f2a70e31ca))
+
 ## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.8...@arroyodev-llc/projen.component.vue-v0.1.9) (2023-05-23)
 
 

@@ -143,7 +143,7 @@ LintConfig.of(typescriptProject)!.eslint.addIgnorePattern(
 
 const vueComponentProject = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.project.vue-component',
-	workspaceDeps: [typescriptProject, vueComponent],
+	workspaceDeps: [typescriptProject, vueComponent, viteComponent],
 })
 
 new ProjenProjectOptionsBuilder(monorepo)

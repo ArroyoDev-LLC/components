@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.7...@arroyodev-llc/projen.project.nx-monorepo-v0.1.8) (2023-05-23)
+
+
+### Features
+
+* **projen.project.nx-monorepo:** Export defaults, deep merge options. ([f35b30e](https://github.com/ArroyoDev-LLC/components/commit/f35b30ea20f214c7a03dcd17ec9af25052483672))
+
+
+### Bug Fixes
+
+* **projen.component.vue:** Remove duplicative unbuild step ([b481e17](https://github.com/ArroyoDev-LLC/components/commit/b481e172898cf1f986b0777af0c6bf0c854facf9))
+
 ## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.6...@arroyodev-llc/projen.project.nx-monorepo-v0.1.7) (2023-05-20)
 
 

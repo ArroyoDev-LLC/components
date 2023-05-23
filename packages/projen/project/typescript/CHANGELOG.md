@@ -6,6 +6,21 @@
   * dependencies
     * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.7
 
+## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.7...@arroyodev-llc/projen.project.typescript-v0.1.8) (2023-05-23)
+
+
+### Features
+
+* **projen.project.typescript:** Add unbuild project option. ([d0e4d81](https://github.com/ArroyoDev-LLC/components/commit/d0e4d81ebc905822c3f6b6d5f5924eac8ce7ee0a))
+* **projen.project.typescript:** Deep merge options, check unbuild option ([5a16305](https://github.com/ArroyoDev-LLC/components/commit/5a16305766063d857e2f183e7bbb5262d3fb824f))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.8
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.5...@arroyodev-llc/projen.project.typescript-v0.1.6) (2023-05-20)
 
 

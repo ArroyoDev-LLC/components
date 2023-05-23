@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.5...@arroyodev-llc/vue.ui.text-v0.1.6) (2023-05-23)
+
+
+### Bug Fixes
+
+* **projen.component.vue:** Remove duplicative unbuild step ([b481e17](https://github.com/ArroyoDev-LLC/components/commit/b481e172898cf1f986b0777af0c6bf0c854facf9))
+
 ## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.4...@arroyodev-llc/vue.ui.text-v0.1.5) (2023-05-20)
 
 

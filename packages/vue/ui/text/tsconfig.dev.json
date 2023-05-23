@@ -9,7 +9,6 @@
     "src/**/*.ts",
     "*.ts",
     "**/*.ts",
-    "build.config.ts",
     "vitest.config.ts",
     "include",
     "*.d.ts",

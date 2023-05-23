@@ -1,3 +1,4 @@
+import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import {
 	TypeScriptSourceFile,
 	type TypeScriptSourceFileTransform,
@@ -18,7 +19,6 @@ import {
 	type WriterFunction,
 } from 'ts-morph'
 import type { UserConfigExport } from 'vite'
-import { LintConfig } from "@arroyodev-llc/projen.component.linting";
 
 export interface ViteOptionsPlugin {
 	/**

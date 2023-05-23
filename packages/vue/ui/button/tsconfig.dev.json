@@ -10,7 +10,6 @@
     "*.ts",
     "**/*.ts",
     "vitest.config.ts",
-    "include",
     "*.d.ts",
     "src/*.tsx",
     "src/**/*.tsx",

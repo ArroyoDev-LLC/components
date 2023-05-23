@@ -6,7 +6,10 @@
     "../../../../tsconfig/tsconfig.bundler.json"
   ],
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "types": [
+      "unplugin-vue-macros/macros-global"
+    ]
   },
   "include": [
     "src/*.ts",

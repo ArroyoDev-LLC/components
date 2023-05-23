@@ -8,6 +8,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "types": [
+      "vite/client",
       "unplugin-vue-macros/macros-global"
     ]
   },

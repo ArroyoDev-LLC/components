@@ -56,6 +56,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 	public readonly tsconfigDev: javascript.TypescriptConfig
 	public readonly lintConfig: LintConfig
 	public readonly pnpm: PnpmWorkspace
+	public readonly options: TypeScriptProjectOptions
 
 	constructor(options: TypeScriptProjectOptions) {
 		const { name, workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
@@ -72,6 +73,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			...mergedOptions,
 			tsconfig,
 		})
+		this.options = mergedOptions as TypeScriptProjectOptions
 		this.projectName = projectName
 		this.pnpm = new PnpmWorkspace(this)
 
@@ -110,13 +112,10 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 
 		this.lintConfig = new LintConfig(this)
 
-		if (mergedOptions.unbuild) {
-			this.applyBundler()
-		}
-
 		this.applyLintConfig()
 			.applyPackage()
 			.applyReleasePlease(ReleasePlease.of(this.parent ?? this))
+			.applyBundler()
 			.applyPackageTask()
 	}
 
@@ -126,8 +125,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		return this
 	}
 
-	protected buildBundler(): Component {
-		this.tasks.tryFind('post-compile')!.exec('unbuild', { name: 'Unbuild' })
+	protected buildUnbuild(): Component {
 		return new UnBuild(this, {
 			cjs: true,
 			options: {
@@ -143,8 +141,10 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 	}
 
 	protected applyBundler(): this {
-		// TODO: improve handling of bundlers.
-		this.buildBundler()
+		if (this.options.unbuild) {
+			this.tasks.tryFind('post-compile')!.exec('unbuild', { name: 'Unbuild' })
+			this.buildUnbuild()
+		}
 		return this
 	}
 

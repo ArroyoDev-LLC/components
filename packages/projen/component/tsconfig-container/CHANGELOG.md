@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tsconfig-container-v0.1.2...@arroyodev-llc/projen.component.tsconfig-container-v0.1.3) (2023-05-24)
+
+
+### Features
+
+* Update all managed linting configurations. ([726f359](https://github.com/ArroyoDev-LLC/components/commit/726f359127b6d45cc24549653d78b3ea129a15e4))
+
 ## 0.1.2 (2023-05-20)
 
 

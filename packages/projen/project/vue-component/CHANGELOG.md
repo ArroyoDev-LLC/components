@@ -44,6 +44,22 @@
   * dependencies
     * @arroyodev-llc/projen.component.vue bumped to 0.1.11
 
+## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.12...@arroyodev-llc/projen.project.vue-component-v0.1.13) (2023-05-24)
+
+
+### Features
+
+* Update all managed linting configurations. ([726f359](https://github.com/ArroyoDev-LLC/components/commit/726f359127b6d45cc24549653d78b3ea129a15e4))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.9
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.12
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.10
+
 ## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.8...@arroyodev-llc/projen.project.vue-component-v0.1.9) (2023-05-23)
 
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.6...@arroyodev-llc/utils.projen-v0.1.7) (2023-05-24)
+
+
+### Features
+
+* **projen.component.utils:** Implement `findRootProject` util. ([4fb1b57](https://github.com/ArroyoDev-LLC/components/commit/4fb1b57407a0a9dc444a9cd5eeaf5a7f5f275d4e))
+* Update all managed linting configurations. ([726f359](https://github.com/ArroyoDev-LLC/components/commit/726f359127b6d45cc24549653d78b3ea129a15e4))
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.5...@arroyodev-llc/utils.projen-v0.1.6) (2023-05-20)
 
 

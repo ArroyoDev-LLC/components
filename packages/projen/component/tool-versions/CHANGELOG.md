@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.4...@arroyodev-llc/projen.component.tool-versions-v0.1.5) (2023-05-24)
+
+
+### Features
+
+* Update all managed linting configurations. ([726f359](https://github.com/ArroyoDev-LLC/components/commit/726f359127b6d45cc24549653d78b3ea129a15e4))
+
+
+### Bug Fixes
+
+* **projen.component.tool-versions:** New typing lint errors. ([7b848c6](https://github.com/ArroyoDev-LLC/components/commit/7b848c6286fa365c0e58ceb6f4041780290b9422))
+
 ## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.3...@arroyodev-llc/projen.component.tool-versions-v0.1.4) (2023-05-20)
 
 

@@ -71,6 +71,7 @@
     "nx": "^16"
   },
   "dependencies": {
+    "@arroyodev-llc/projen.component.dir-env": "workspace:*",
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
     "@arroyodev-llc/projen.component.release-please": "workspace:*",
@@ -111,6 +112,7 @@
   "type": "module",
   "workspaces": {
     "packages": [
+      "packages/projen/component/dir-env",
       "packages/projen/component/linting",
       "packages/projen/component/pnpm-workspace",
       "packages/projen/component/postcss",

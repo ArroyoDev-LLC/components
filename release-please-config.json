@@ -39,6 +39,10 @@
       "component": "@arroyodev-llc/projen.component.tool-versions",
       "release-type": "node"
     },
+    "packages/projen/component/dir-env": {
+      "component": "@arroyodev-llc/projen.component.dir-env",
+      "release-type": "node"
+    },
     "packages/projen/component/vue": {
       "component": "@arroyodev-llc/projen.component.vue",
       "release-type": "node"

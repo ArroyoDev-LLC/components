@@ -38,6 +38,9 @@
       "@arroyodev-llc/projen.component.tool-versions": [
         "./packages/projen/component/tool-versions/src/index"
       ],
+      "@arroyodev-llc/projen.component.dir-env": [
+        "./packages/projen/component/dir-env/src/index"
+      ],
       "@arroyodev-llc/projen.project.nx-monorepo": [
         "./packages/projen/project/nx-monorepo/src/index"
       ],

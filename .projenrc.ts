@@ -110,6 +110,12 @@ const tsconfigContainerComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.tsconfig-container',
 })
 
+const tailwindComponent = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.component.tailwind',
+	deps: ['ts-morph'],
+	workspaceDeps: [utilsProjen, tsSourceComponent],
+})
+
 const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.project.nx-monorepo',
 	workspaceDeps: [

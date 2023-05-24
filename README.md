@@ -81,7 +81,7 @@ _Note: You can also use [`asdf`](https://github.com/asdf-vm/asdf) if you already
 - After installing `rtx`, add all the plugins found in the [.tool-versions](.tool-versions) file.
 
   ```bash
-  # Add all the plugins to asdf.
+  # Add all the plugins.
   cat .tool-versions | awk '{print $1}' | xargs -I _ rtx plugin add _
 
   # Install all according to .tool-versions.

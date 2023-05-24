@@ -47,6 +47,7 @@
   "dependencies": {
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
+    "tailwindcss": "*",
     "ts-morph": "*"
   },
   "pnpm": {},

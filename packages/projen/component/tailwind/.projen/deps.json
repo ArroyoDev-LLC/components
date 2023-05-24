@@ -82,6 +82,10 @@
       "type": "runtime"
     },
     {
+      "name": "tailwindcss",
+      "type": "runtime"
+    },
+    {
       "name": "ts-morph",
       "type": "runtime"
     }

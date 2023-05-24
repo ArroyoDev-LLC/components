@@ -1,5 +1,10 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
-import { FileBase, type FileBaseOptions, type typescript } from 'projen'
+import {
+	FileBase,
+	type FileBaseOptions,
+	type ObjectFile,
+	type typescript,
+} from 'projen'
 import {
 	type ImportDeclarationStructure,
 	type OptionalKind,
@@ -18,6 +23,7 @@ export interface TypeScriptSourceFileOptions
 	marker?: boolean
 	recreate?: boolean
 	transforms?: Array<TypeScriptSourceFileTransform>
+	tsconfig?: ObjectFile
 }
 
 /**
@@ -26,6 +32,7 @@ export interface TypeScriptSourceFileOptions
  */
 export class TypeScriptSourceFile extends FileBase {
 	public readonly options: TypeScriptSourceFileOptions
+	public readonly tsconfigFile: ObjectFile
 	#transforms: Array<TypeScriptSourceFileTransform>
 
 	constructor(
@@ -36,6 +43,10 @@ export class TypeScriptSourceFile extends FileBase {
 		super(project, filePath, { ...options, readonly: false })
 
 		this.#transforms = options.transforms ?? []
+		this.tsconfigFile =
+			options.tsconfig ??
+			this.project.tryFindObjectFile('tsconfig.dev.json') ??
+			this.project.tryFindObjectFile('tsconfig.json')!
 
 		this.options = {
 			format: true,
@@ -63,8 +74,9 @@ export class TypeScriptSourceFile extends FileBase {
 
 	protected synthesizeContent(): string {
 		const tsProject = new Project({
-			tsConfigFilePath: 'tsconfig.json',
+			tsConfigFilePath: this.tsconfigFile.path,
 			skipAddingFilesFromTsConfig: true,
+			compilerOptions: { allowJs: true },
 		})
 
 		let sourceFile: SourceFile
@@ -98,6 +110,6 @@ export class TypeScriptSourceFile extends FileBase {
 	preSynthesize() {
 		super.preSynthesize()
 		// enqueue generated files for linting.
-		LintConfig.of(this.project)?.formatFile(this.absolutePath)
+		LintConfig.of(this.project)?.formatFile?.(this.absolutePath)
 	}
 }

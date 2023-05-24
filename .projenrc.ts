@@ -112,6 +112,10 @@ const toolVersionsComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.tool-versions',
 })
 
+const dirEnvComponent = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.component.dir-env',
+})
+
 const vueComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vue',
 	workspaceDeps: [
@@ -205,6 +209,7 @@ monorepo.addWorkspaceDeps(
 	pnpmWorkspaceComponent,
 	releasePleaseComponent,
 	toolVersionsComponent,
+	dirEnvComponent,
 	nxMonorepoProject,
 	typescriptProject,
 	vueComponentProject

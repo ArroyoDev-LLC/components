@@ -1,5 +1,16 @@
-import { applyOverrides, replaceTask } from '@arroyodev-llc/utils.projen'
-import { Component, type ObjectFile, type Project, type TaskStep } from 'projen'
+import child_process from 'node:child_process'
+import {
+	applyOverrides,
+	replaceTask,
+	findRootProject,
+} from '@arroyodev-llc/utils.projen'
+import {
+	Component,
+	type ObjectFile,
+	type Project,
+	type TaskStep,
+	typescript,
+} from 'projen'
 import {
 	type NodeProject,
 	type PrettierOptions,
@@ -14,6 +25,11 @@ export interface LintConfigOptions {
 	readonly useTypeInformation?: boolean
 }
 
+interface FormatRequest {
+	filePath: string
+	workingDirectory: string
+}
+
 export class LintConfig extends Component {
 	public static of(project: Project): LintConfig | undefined {
 		const isLintConfig = (o: Component): o is LintConfig =>
@@ -25,6 +41,8 @@ export class LintConfig extends Component {
 	readonly eslintFile: ObjectFile
 	readonly prettier: Prettier
 	readonly prettierFile: ObjectFile
+
+	#formatRequests: Array<FormatRequest> = []
 
 	constructor(
 		project: NodeProject,
@@ -96,6 +114,42 @@ export class LintConfig extends Component {
 	}
 
 	/**
+	 * Resolve and process queued file format request.
+	 * Requests are processed in parallel for speed.
+	 * @protected
+	 */
+	protected resolveFormatRequests() {
+		if (!this.#formatRequests.length) return
+		const formatPromises = this.#formatRequests.map((request) => {
+			const cmd = `eslint --cache --no-ignore --fix ${request.filePath}`
+			this.project.logger.verbose(
+				`formatting typescript source file: ${request.filePath} (from: ${request.workingDirectory})`
+			)
+			return new Promise<void>((resolve) =>
+				child_process.exec(
+					cmd,
+					{
+						cwd: request.workingDirectory,
+					},
+					(err) => {
+						if (err) {
+							this.project.logger.warn(err)
+						}
+						resolve()
+					}
+				)
+			)
+		})
+		const fileCount = this.#formatRequests.length
+		this.project.logger.info(
+			`Waiting for ${fileCount} files to be formatted...`
+		)
+		void Promise.all(formatPromises).then(() => {
+			this.project.logger.info(`Formatted ${fileCount} files.`)
+		})
+	}
+
+	/**
 	 * Merge task step into eslint task.
 	 * @param step Task step to merge.
 	 */
@@ -115,5 +169,34 @@ export class LintConfig extends Component {
 		return this.updateEslintTask({
 			exec: eslintCmd,
 		})
+	}
+
+	/**
+	 * Enqueue file format request to later be formatted in parallel post synth.
+	 * @param request format request.
+	 */
+	enqueueFormatRequest(request: FormatRequest): this {
+		this.#formatRequests.push(request)
+		return this
+	}
+
+	/**
+	 * Schedule a file to be formatted post-synthesis.
+	 * @param filePath Path to file.
+	 */
+	formatFile(filePath: string) {
+		const root = findRootProject(this.project)
+		return LintConfig.of(root)!.enqueueFormatRequest({
+			filePath,
+			workingDirectory: this.project.outdir,
+		})
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	postSynthesize() {
+		super.postSynthesize()
+		this.resolveFormatRequests()
 	}
 }

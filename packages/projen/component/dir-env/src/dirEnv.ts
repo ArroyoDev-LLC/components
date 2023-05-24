@@ -60,12 +60,18 @@ export class DirEnv extends Component {
 		return project.components.find(isDirenv)
 	}
 
+	readonly #fileContents: string[] = []
 	public readonly file: TextFile
 
 	constructor(project: Project, public readonly options: DirEnvOptions = {}) {
 		super(project)
-		const { fileName = '.envrc', contents = [] } = options
+		const { fileName = '.envrc' } = options
 		this.#validateFileName(fileName)
+		if (options.contents) {
+			this.#fileContents = options.contents
+		} else {
+			this.build().buildDefaultEnvRc()
+		}
 		this.file = new TextFile(project, fileName, {
 			readonly: true,
 			executable: true,
@@ -80,12 +86,32 @@ export class DirEnv extends Component {
 	}
 
 	/**
+	 * Append line to fileContents.
+	 * @param line
+	 * @param indent
+	 */
+	addLine(line: string, indent = 0) {
+		this.#fileContents.push(`${' '.repeat(indent)}${line}`)
+		return this
+	}
+
+	/**
+	 * Append lines to fileContents.
+	 * @param lines
+	 * @param indent
+	 */
+	addLines(lines: string[], indent = 0) {
+		lines.forEach((line) => this.addLine(line, indent))
+		return this
+	}
+
+	/**
 	 * Add an environment variable.
 	 * @param key
 	 * @param value
 	 */
 	addEnvVar(key: string, value: string) {
-		this.file.addLine(`export ${key}=${value}`)
+		this.addLine(`export ${key}=${value}`)
 		return this
 	}
 
@@ -96,7 +122,7 @@ export class DirEnv extends Component {
 	 * @param value
 	 */
 	addEnvVarWithDefault(key: string, value = '') {
-		this.file.addLine(`export ${key}="\${${key}:-${value}}"`)
+		this.addLine(`export ${key}="\${${key}:-${value}}"`)
 		return this
 	}
 
@@ -104,7 +130,7 @@ export class DirEnv extends Component {
 	 * Add a comment.
 	 */
 	addComment(comment: string) {
-		this.file.addLine(`# ${comment}`)
+		this.addLine(`# ${comment}`)
 		return this
 	}
 
@@ -112,7 +138,7 @@ export class DirEnv extends Component {
 	 * Add a command.
 	 */
 	addCommand(command: string, indent = 0) {
-		this.file.addLine(`${' '.repeat(indent)}${command}`)
+		this.addLine(`${' '.repeat(indent)}${command}`)
 		return this
 	}
 
@@ -120,7 +146,7 @@ export class DirEnv extends Component {
 	 * Add a blank line.
 	 */
 	addBlankLine() {
-		this.file.addLine('')
+		this.addLine('')
 		return this
 	}
 
@@ -128,7 +154,7 @@ export class DirEnv extends Component {
 	 * Add a shebang.
 	 */
 	addSheBang() {
-		this.file.addLine('#!/usr/bin/env bash')
+		this.addLine('#!/usr/bin/env bash')
 		return this
 	}
 
@@ -138,7 +164,7 @@ export class DirEnv extends Component {
 	 * @param args
 	 */
 	addStdLibCommand(command: DirEnvStdLibCommand, ...args: string[]) {
-		this.file.addLine(`${command} ${args.join(' ')}`)
+		this.addLine(`${command} ${args.join(' ')}`)
 		return this
 	}
 
@@ -189,14 +215,12 @@ export class DirEnv extends Component {
 	 */
 	addDirEnvVersion(version: string) {
 		this.addComment(`forces "at least"`)
-		this.file.addLine(`direnv_version ${version}`)
+		this.addLine(`direnv_version ${version}`)
 		return this
 	}
 
 	buildDefaultEnvRc() {
-		this.addSheBang()
-			.addBlankLine()
-			.addComment('Team Shared direnv.')
+		this.addComment('Team Shared direnv.')
 			.addComment('See: https://github.com/direnv/direnv')
 			.addBlankLine()
 			.addComment('Enforces `set -euo pipefail` despite user local config.')
@@ -215,16 +239,10 @@ export class DirEnv extends Component {
 			)
 			.addCommand('use asdf', 2)
 			.addCommand('else')
-			.addStdLibCommand(
-				DirEnvStdLibCommand.LOG_ERROR,
-				'Neither rtx nor asdf are installed.'
-			)
-			.addStdLibCommand(
-				DirEnvStdLibCommand.LOG_ERROR,
-				'For asdf: https://asdf-vm.com/'
-			)
-			.addStdLibCommand(
-				DirEnvStdLibCommand.LOG_ERROR,
+			.addLog('error', 'Neither rtx nor asdf are installed.')
+			.addLog('error', 'For asdf: https://asdf-vm.com/')
+			.addLog(
+				'error',
 				'For rtx (asdf rust clone): https://github.com/jdxcode/rtx'
 			)
 			.addCommand('fi')
@@ -237,10 +255,24 @@ export class DirEnv extends Component {
 			.addBlankLine()
 			.addComment('Misc')
 			.addEnvVarWithDefault('DEBUG_COLORS', '1')
+
+		return this
+	}
+
+	build() {
+		this.addSheBang().addBlankLine()
+		return this
+	}
+
+	commit() {
+		const lines = this.#fileContents
+		for (const line of lines) {
+			this.file.addLine(line)
+		}
 	}
 
 	preSynthesize() {
 		super.preSynthesize()
-		this.buildDefaultEnvRc()
+		this.commit()
 	}
 }

@@ -47,6 +47,10 @@
       "component": "@arroyodev-llc/projen.component.tsconfig-container",
       "release-type": "node"
     },
+    "packages/projen/component/tailwind": {
+      "component": "@arroyodev-llc/projen.component.tailwind",
+      "release-type": "node"
+    },
     "packages/projen/project/nx-monorepo": {
       "component": "@arroyodev-llc/projen.project.nx-monorepo",
       "release-type": "node"

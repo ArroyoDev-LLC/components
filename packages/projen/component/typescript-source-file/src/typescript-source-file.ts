@@ -91,6 +91,37 @@ export class TypeScriptSourceFile extends FileBase {
 		return defaultExportNode!.getExpressionIfKindOrThrow(expressionKind)
 	}
 
+	/**
+	 * Get or create property assignment initializer on object literal.
+	 * @param objectLiteral Source {@link ObjectLiteralExpression}
+	 * @param name Property assignment name.
+	 * @param initializerKind {@link SyntaxKind} of initializer.
+	 * @param defaultInitializer Specify initializer to use if creation is warranted. Default depends on `initializerKind`.
+	 */
+	getOrCreatePropertyAssignmentInitializer<T extends SyntaxKind>(
+		objectLiteral: ObjectLiteralExpression,
+		name: string,
+		initializerKind: T,
+		defaultInitializer?: string | WriterFunction
+	) {
+		const initDefaults: Partial<Record<SyntaxKind, string>> = {
+			[SyntaxKind.ObjectLiteralExpression]: '{}',
+			[SyntaxKind.ArrayLiteralExpression]: '[]',
+			[SyntaxKind.StringLiteral]: '""',
+			[SyntaxKind.NumericLiteral]: '0',
+		}
+		defaultInitializer ??= initDefaults[initializerKind] ?? '{}'
+		const existsProperty =
+			objectLiteral
+				.getProperty(name)
+				?.asKind?.(SyntaxKind.PropertyAssignment) ??
+			objectLiteral.addPropertyAssignment({
+				name,
+				initializer: defaultInitializer,
+			})
+		return existsProperty.getInitializerIfKindOrThrow(initializerKind)
+	}
+
 	protected synthesizeContent(): string {
 		const tsProject = new Project({
 			tsConfigFilePath: this.tsconfigFile.path,

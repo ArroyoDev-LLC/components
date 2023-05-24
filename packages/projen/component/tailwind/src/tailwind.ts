@@ -9,9 +9,11 @@ import {
 import {
 	Component,
 	DependencyType,
+	JsonPatch,
 	type Project,
 	type typescript,
 } from 'projen'
+import { deepMerge } from 'projen/lib/util'
 import type { Config } from 'tailwindcss/types'
 import {
 	type ImportDeclarationStructure,
@@ -33,6 +35,14 @@ export interface TailwindOptionsPlugin {
 }
 
 export interface TailwindOptions {
+	/**
+	 * Tailwind config file path.
+	 * @default 'tailwind.js'
+	 */
+	filePath?: string
+	/**
+	 * Tailwind config.
+	 */
 	config?: Config
 }
 
@@ -42,21 +52,37 @@ export class Tailwind extends Component {
 	}
 
 	readonly file: TypeScriptSourceFile
+	readonly options: Required<TailwindOptions>
 
 	constructor(
 		project: typescript.TypeScriptProject,
 		options?: TailwindOptions
 	) {
 		super(project)
+
+		this.options = deepMerge([
+			{
+				filePath: 'tailwind.js',
+				config: {
+					content: ['./index.html', './src/**/*.{vue,ts,tsx}'],
+					theme: {
+						extend: {},
+					},
+				},
+			} as TailwindOptions,
+			options,
+		]) as Required<TailwindOptions>
+
 		this.project.deps.addDependency('tailwindcss', DependencyType.RUNTIME)
 
-		this.file = new TypeScriptSourceFile(project, 'tailwind.ts', {
+		this.file = new TypeScriptSourceFile(project, this.options.filePath, {
 			source: [
 				`/** @type {import('tailwindcss').Config} */`,
 				'export default {}',
 			].join('\n'),
 			recreate: true,
 		})
+		this.file.tsconfigFile.patch(JsonPatch.add('/include/-', 'tailwind.js'))
 
 		if (options?.config) {
 			this.addConfig(options.config)
@@ -72,18 +98,12 @@ export class Tailwind extends Component {
 		)
 		this.file.addImport(moduleImport)
 		this.addConfigTransform((configExpr) => {
-			const existsPlugins =
-				configExpr
-					.getProperty('plugins')
-					?.asKind?.(SyntaxKind.PropertyAssignment) ??
-				configExpr.addPropertyAssignment({
-					name: 'plugins',
-					initializer: '[]',
-				})
-
-			existsPlugins
-				.getInitializerIfKindOrThrow(SyntaxKind.ArrayLiteralExpression)
-				.addElements(pluginSpec)
+			const existsPlugins = this.file.getOrCreatePropertyAssignmentInitializer(
+				configExpr,
+				'plugins',
+				SyntaxKind.ArrayLiteralExpression
+			)
+			existsPlugins.addElements(pluginSpec)
 		})
 		return this
 	}
@@ -102,9 +122,10 @@ export class Tailwind extends Component {
 		) => void
 	) {
 		const transformer: TypeScriptSourceFileTransform = (src: SourceFile) => {
-			const configExport = src
-				.getExportAssignments()[0]!
-				.getExpressionIfKindOrThrow(SyntaxKind.ObjectLiteralExpression)
+			const configExport = this.file.getDefaultExport(
+				src,
+				SyntaxKind.ObjectLiteralExpression
+			)
 			transform(configExport, src)
 		}
 		this.file.addTransformer(transformer)

@@ -20,7 +20,7 @@ import {
 } from 'ts-morph'
 import type { UserConfigExport } from 'vite'
 
-export interface ViteOptionsPlugin {
+export interface ViteOptionsPlugin<OptionsT = Record<string, any>> {
 	/**
 	 * Name of plugin.
 	 * This should match the import name from `moduleImport`.
@@ -38,7 +38,7 @@ export interface ViteOptionsPlugin {
 	/**
 	 * Options object for plugin.
 	 */
-	options?: any
+	options?: OptionsT
 }
 
 export interface ViteOptions {

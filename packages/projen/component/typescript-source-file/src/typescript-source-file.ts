@@ -1,6 +1,5 @@
-import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
+import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { FileBase, type FileBaseOptions, type typescript } from 'projen'
-import { execCapture } from 'projen/lib/util'
 import {
 	type ImportDeclarationStructure,
 	type OptionalKind,
@@ -87,26 +86,18 @@ export class TypeScriptSourceFile extends FileBase {
 		}
 
 		return [
-			...(this.options.marker ? [`// ${this.marker}`] : []),
+			...(this.options.marker ? [`// ${this.marker as string}`] : []),
 			'',
 			sourceFile.getFullText(),
 		].join('\n')
 	}
 
-	public postSynthesize() {
-		super.postSynthesize()
-
-		const outdir = this.project.outdir
-		const cmd = NodePackageUtils.command.exec(
-			this.project.package.packageManager,
-			`eslint_d --no-ignore --ext .ts --fix ${this.absolutePath}`
-		)
-		try {
-			execCapture(cmd, {
-				cwd: outdir,
-			})
-		} catch (e) {
-			console.warn(e)
-		}
+	/**
+	 * @inheritDoc
+	 */
+	preSynthesize() {
+		super.preSynthesize()
+		// enqueue generated files for linting.
+		LintConfig.of(this.project)?.formatFile(this.absolutePath)
 	}
 }

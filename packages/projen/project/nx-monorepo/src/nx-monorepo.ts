@@ -141,12 +141,12 @@ export class MonorepoProject extends NxMonorepoProject {
 			include: ['.projenrc.ts', '**/*.ts', 'projenrc/*.ts'],
 			compilerOptions: {},
 		})
-		this.tsconfigDev.addExtends(this.tsconfig!)
+		this.tsconfigDev.addExtends(this.tsconfig)
 		this.applyNpmConfig(
 			findComponent(this, javascript.NpmConfig) ??
 				new javascript.NpmConfig(this)
 		)
-			.applyGithub(this.github!)
+			.applyGithub(this.github)
 			.applyPackage(this.package)
 			.applyDefaultTask()
 			.applyNx()

@@ -46,11 +46,16 @@ const utilsProjen = TypescriptProject.fromParent(monorepo, {
 	deps: ['ts-morph', '@sindresorhus/is', 'type-fest', 'projen'],
 })
 
+const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.component.linting',
+	workspaceDeps: [utilsProjen],
+})
+
 const tsSourceComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.typescript-source-file',
 	parent: monorepo,
 	tsconfigBase: monorepo.esmBundledTsconfigExtends,
-	workspaceDeps: [utilsProjen],
+	workspaceDeps: [utilsProjen, lintingComponent],
 	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo'],
 })
 
@@ -65,12 +70,6 @@ const unbuildComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.unbuild',
 	workspaceDeps: [utilsProjen, tsSourceComponent],
 	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo', 'unbuild'],
-})
-
-
-const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
-	name: 'projen.component.linting',
-	workspaceDeps: [utilsProjen],
 })
 
 const viteComponent = ProjenComponentProject.fromParent(monorepo, {

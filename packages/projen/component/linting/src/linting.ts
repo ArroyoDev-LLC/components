@@ -7,6 +7,13 @@ import {
 	Prettier,
 } from 'projen/lib/javascript'
 
+export interface LintConfigOptions {
+	/**
+	 * Enable type-enriched linting in eslint.
+	 */
+	readonly useTypeInformation?: boolean
+}
+
 export class LintConfig extends Component {
 	public static of(project: Project): LintConfig | undefined {
 		const isLintConfig = (o: Component): o is LintConfig =>
@@ -19,7 +26,10 @@ export class LintConfig extends Component {
 	readonly prettier: Prettier
 	readonly prettierFile: ObjectFile
 
-	constructor(project: NodeProject) {
+	constructor(
+		project: NodeProject,
+		options: LintConfigOptions = { useTypeInformation: true }
+	) {
 		super(project)
 
 		this.eslint =
@@ -58,8 +68,31 @@ export class LintConfig extends Component {
 			],
 			'import/no-duplicates': ['error', { 'prefer-inline': true }],
 		})
+		if (this.project instanceof typescript.TypeScriptProject) {
+			this.eslint.addOverride({
+				files: [`${this.project.testdir}/**`],
+				rules: {
+					'@typescript-eslint/require-await': ['warn'],
+				},
+			})
+		}
 
 		this.eslintFile = project.tryFindObjectFile('.eslintrc.json')!
+
+		if (options.useTypeInformation) {
+			this.enableEslintTypeInformation()
+		}
+	}
+
+	/**
+	 * Enable type enriched linting.
+	 * @protected
+	 */
+	protected enableEslintTypeInformation() {
+		this.eslint.addExtends(
+			'plugin:@typescript-eslint/recommended-requiring-type-checking'
+		)
+		this.eslintFile.addOverride('parserOptions.tsconfigRootDir', '.')
 	}
 
 	/**

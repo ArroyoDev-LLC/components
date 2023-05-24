@@ -329,7 +329,7 @@ export class ReleasePlease extends Component {
 		options?: ReleasePleasePackage,
 		version?: string
 	): this {
-		let relPath = project.parent
+		const relPath = project.parent
 			? path.relative(project.parent.outdir, project.outdir)
 			: '.'
 		this.#packagePaths.set(relPath, project.name)

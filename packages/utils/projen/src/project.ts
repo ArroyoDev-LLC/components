@@ -59,6 +59,7 @@ export const replaceTask = (
 	}
 	const spec = task._renderSpec()
 	// @ts-expect-error workaround dependant tasks.
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 	delete project.tasks._tasks[taskId]
 	const numSteps = Math.max(steps.length, spec.steps?.length ?? 0)
 	const newSteps = Array.from(
@@ -67,7 +68,7 @@ export const replaceTask = (
 	).map<TaskStep>((idx) => ({
 		...(spec.steps?.[idx - 1] ?? {}),
 		...(steps[idx - 1] ?? {}),
-	})) as TaskStep[]
+	}))
 	const newTask = project.tasks.addTask(taskId, {
 		...spec,
 		steps: newSteps,
@@ -76,6 +77,18 @@ export const replaceTask = (
 	return newTask
 }
 
+/**
+ * Find absolute root project.
+ * @param project source project.
+ */
+export const findRootProject = (project: Project): Project => {
+	if (project.parent) return findRootProject(project.parent)
+	return project
+}
+
+/**
+ * Project name utility.
+ */
 export class ProjectName {
 	constructor(readonly name: string) {}
 

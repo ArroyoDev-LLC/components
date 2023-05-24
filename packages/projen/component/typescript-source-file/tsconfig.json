@@ -10,6 +10,9 @@
     "paths": {
       "@arroyodev-llc/utils.projen": [
         "../../../utils/projen/src/index"
+      ],
+      "@arroyodev-llc/projen.component.linting": [
+        "../linting/src/index"
       ]
     }
   },

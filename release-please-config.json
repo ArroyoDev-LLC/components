@@ -7,6 +7,10 @@
       "component": "@arroyodev-llc/utils.projen",
       "release-type": "node"
     },
+    "packages/projen/component/linting": {
+      "component": "@arroyodev-llc/projen.component.linting",
+      "release-type": "node"
+    },
     "packages/projen/component/typescript-source-file": {
       "component": "@arroyodev-llc/projen.component.typescript-source-file",
       "release-type": "node"
@@ -17,10 +21,6 @@
     },
     "packages/projen/component/unbuild": {
       "component": "@arroyodev-llc/projen.component.unbuild",
-      "release-type": "node"
-    },
-    "packages/projen/component/linting": {
-      "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"
     },
     "packages/projen/component/vite": {

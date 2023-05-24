@@ -14,12 +14,14 @@
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
-    "project": "./tsconfig.dev.json"
+    "project": "./tsconfig.dev.json",
+    "tsconfigRootDir": "."
   },
   "extends": [
     "plugin:import/typescript",
     "prettier",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
   "settings": {
     "import/parsers": {
@@ -147,6 +149,16 @@
     ]
   },
   "overrides": [
+    {
+      "files": [
+        "test/**"
+      ],
+      "rules": {
+        "@typescript-eslint/require-await": [
+          "warn"
+        ]
+      }
+    },
     {
       "files": [
         "vitest.config.ts",

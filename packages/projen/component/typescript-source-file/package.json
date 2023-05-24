@@ -45,6 +45,7 @@
     "projen": "^0.71.57"
   },
   "dependencies": {
+    "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@aws-prototyping-sdk/nx-monorepo": "^0.18.12",
     "ts-morph": "^18.0.0"

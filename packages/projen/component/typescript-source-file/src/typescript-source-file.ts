@@ -10,6 +10,10 @@ import {
 	type OptionalKind,
 	Project,
 	type SourceFile,
+	SyntaxKind,
+	type KindToExpressionMappings,
+	type ObjectLiteralExpression,
+	type WriterFunction,
 } from 'ts-morph'
 
 export interface TypeScriptSourceFileTransform {
@@ -70,6 +74,21 @@ export class TypeScriptSourceFile extends FileBase {
 		}
 		this.addTransformer(transform)
 		return this
+	}
+
+	/**
+	 * Find default export expression of {@link SyntaxKind} type.
+	 * @param source {@link SourceFile} to look at.
+	 * @param expressionKind {@link SyntaxKind} of export expression.
+	 */
+	getDefaultExport<T extends SyntaxKind>(
+		source: SourceFile,
+		expressionKind: T
+	): KindToExpressionMappings[T] {
+		const defaultExportNode = source
+			.getExportAssignments()
+			.find((exportNode) => !exportNode.isExportEquals())
+		return defaultExportNode!.getExpressionIfKindOrThrow(expressionKind)
 	}
 
 	protected synthesizeContent(): string {

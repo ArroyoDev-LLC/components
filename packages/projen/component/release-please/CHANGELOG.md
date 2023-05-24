@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.8...@arroyodev-llc/projen.component.release-please-v0.1.9) (2023-05-24)
+
+
+### Features
+
+* Update all managed linting configurations. ([726f359](https://github.com/ArroyoDev-LLC/components/commit/726f359127b6d45cc24549653d78b3ea129a15e4))
+
+
+### Bug Fixes
+
+* **projen.component.release-please:** New type lint errors ([f315c73](https://github.com/ArroyoDev-LLC/components/commit/f315c73a6d460c2ca89d415f44bacf6dd00aa581))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.7
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.7...@arroyodev-llc/projen.component.release-please-v0.1.8) (2023-05-20)
 
 

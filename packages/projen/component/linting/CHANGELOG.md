@@ -6,6 +6,22 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.6...@arroyodev-llc/projen.component.linting-v0.1.7) (2023-05-24)
+
+
+### Features
+
+* **projen.component.linting:** Implement formatting of files post-synth in parallel ([2311b39](https://github.com/ArroyoDev-LLC/components/commit/2311b39e27aaed276922e96c04076542a94985fe))
+* **projen.component.linting:** Implement support for eslint type-enriched linting ([c174b2e](https://github.com/ArroyoDev-LLC/components/commit/c174b2ea43d2dd777b336409984d6f3a375a95e0))
+* Update all managed linting configurations. ([726f359](https://github.com/ArroyoDev-LLC/components/commit/726f359127b6d45cc24549653d78b3ea129a15e4))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.7
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.5...@arroyodev-llc/projen.component.linting-v0.1.6) (2023-05-20)
 
 

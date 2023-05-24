@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.9...@arroyodev-llc/projen.project.nx-monorepo-v0.1.10) (2023-05-24)
+
+
+### Features
+
+* Update all managed linting configurations. ([726f359](https://github.com/ArroyoDev-LLC/components/commit/726f359127b6d45cc24549653d78b3ea129a15e4))
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Fix new type linting errors. ([b7c4de2](https://github.com/ArroyoDev-LLC/components/commit/b7c4de25a31913c7954ab15367dfa480a937591d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.7
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.7
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.3
+    * @arroyodev-llc/utils.projen bumped to 0.1.7
+
 ## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.8...@arroyodev-llc/projen.project.nx-monorepo-v0.1.9) (2023-05-23)
 
 

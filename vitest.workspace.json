@@ -1,5 +1,6 @@
 [
   "./packages/projen/component/tailwind/vitest.config.ts",
+  "./packages/projen/component/postcss/vitest.config.ts",
   "./packages/vue/ui/text/vitest.config.ts",
   "./packages/vue/ui/button/vitest.config.ts"
 ]

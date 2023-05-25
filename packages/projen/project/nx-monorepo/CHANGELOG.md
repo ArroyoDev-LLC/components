@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.10...@arroyodev-llc/projen.project.nx-monorepo-v0.1.11) (2023-05-25)
+
+
+### Features
+
+* **projen.component.tailwind:** Update all managed files ([79976df](https://github.com/ArroyoDev-LLC/components/commit/79976df8843afd5248a3f3e24a44258bcf070f3e))
+
+
+### Bug Fixes
+
+* **projen.component.nx-monorepo:** Lint monorepo root after projects ([4117ed8](https://github.com/ArroyoDev-LLC/components/commit/4117ed898ad5df9060741fe43c9afa6b5f72498b))
+* **projen.project.component:** Correct `upgrade-deps` install step to run projen install task ([953cb56](https://github.com/ArroyoDev-LLC/components/commit/953cb56ec18e887f9b796d681dd35d79717d5af0))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.8
+
 ## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.9...@arroyodev-llc/projen.project.nx-monorepo-v0.1.10) (2023-05-24)
 
 

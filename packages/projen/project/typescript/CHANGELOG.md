@@ -6,6 +6,14 @@
   * dependencies
     * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.7
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.8
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.8
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.11
+
 ## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.9...@arroyodev-llc/projen.project.typescript-v0.1.10) (2023-05-24)
 
 

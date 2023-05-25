@@ -65,9 +65,11 @@ export class PnpmWorkspace extends Component {
 	 * @param patchPath Path to patch file.
 	 */
 	addPatch(dependency: string, patchPath: string): this {
-		this.project.package.file.addOverride('pnpm.patchedDependencies', {
-			[dependency]: patchPath,
-		})
+		const escapedName = dependency.replaceAll('.', '\\.')
+		this.project.package.file.addOverride(
+			`pnpm.patchedDependencies.${escapedName}`,
+			patchPath
+		)
 		const ncuFile = this.project.tryFindObjectFile('.ncurc.json')
 		if (ncuFile) {
 			ncuFile.addToArray('reject', dependency.split('@')[0])

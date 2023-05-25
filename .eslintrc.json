@@ -162,7 +162,7 @@
     {
       "files": [
         "vitest.config.ts",
-        "test"
+        "test/**/*.spec.ts"
       ],
       "rules": {
         "import/no-extraneous-dependencies": [

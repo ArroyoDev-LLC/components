@@ -6,8 +6,8 @@ import { defineProject } from 'vitest/config'
 export default defineProject({
 	test: {
 		name: 'vue.ui.button',
-		environment: 'happy-dom',
 		include: ['test/**/*.spec.ts'],
+		environment: 'happy-dom',
 	},
 	plugins: [vue()],
 })

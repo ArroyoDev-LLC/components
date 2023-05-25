@@ -1,4 +1,8 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
+import {
+	Vitest,
+	VitestConfigType,
+} from '@arroyodev-llc/projen.component.vitest'
 import { TypescriptProject } from '@arroyodev-llc/projen.project.typescript'
 import { VueComponentProject } from '@arroyodev-llc/projen.project.vue-component'
 import { LogLevel } from 'projen'
@@ -110,11 +114,19 @@ const tsconfigContainerComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.tsconfig-container',
 })
 
-// @ts-ignore
 const tailwindComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.tailwind',
 	deps: ['ts-morph', 'tailwindcss'],
 	workspaceDeps: [utilsProjen, tsSourceComponent],
+})
+new Vitest(tailwindComponent, {
+	configType: VitestConfigType.PROJECT,
+	settings: {
+		test: {
+			name: tailwindComponent.projectName.name,
+			include: [`${tailwindComponent.testdir}/\*\*/\*.spec.ts`],
+		},
+	},
 })
 
 const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {

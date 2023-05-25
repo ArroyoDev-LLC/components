@@ -6,6 +6,7 @@ import {
 import { addPropertyAssignmentsFromObject } from '@arroyodev-llc/utils.projen'
 import { Component, JsonFile, type Project } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
+import { deepMerge } from 'projen/lib/util'
 import {
 	type ObjectLiteralExpression,
 	type SourceFile,
@@ -20,8 +21,17 @@ export enum VitestConfigType {
 }
 
 export interface VitestOptions {
+	/**
+	 * Vitest config path.
+	 */
 	configFilePath?: string
+	/**
+	 * Configuration type.
+	 */
 	configType?: VitestConfigType
+	/**
+	 * Vitest settings.
+	 */
 	settings?: UserWorkspaceConfig
 }
 
@@ -33,17 +43,29 @@ export class Vitest extends Component {
 
 	readonly configType: VitestConfigType
 	readonly configFile: TypeScriptSourceFile
+	readonly options: Required<VitestOptions>
 	readonly #workspaceProjects: Map<string, Vitest> = new Map<string, Vitest>()
 
 	constructor(
 		public readonly project: TypeScriptProject,
-		public readonly options: VitestOptions = {
+		options: VitestOptions = {
 			configFilePath: 'vitest.config.ts',
 			configType: VitestConfigType.PROJECT,
 			settings: {},
 		}
 	) {
 		super(project)
+		this.options = deepMerge([
+			{
+				settings: {
+					test: {
+						name: project.name,
+						include: [`${project.testdir}/\*\*/\*.spec.ts`],
+					},
+				},
+			} as VitestOptions,
+			options,
+		]) as Required<VitestOptions>
 		this.project.addDevDeps('vitest')
 		this.configType = this.options.configType ?? VitestConfigType.PROJECT
 		const configFilePath = this.options.configFilePath ?? 'vitest.config.ts'

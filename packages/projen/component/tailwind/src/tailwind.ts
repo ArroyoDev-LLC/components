@@ -62,7 +62,7 @@ export class Tailwind extends Component {
 
 		this.options = deepMerge([
 			{
-				filePath: 'tailwind.js',
+				filePath: 'tailwind.config.mjs',
 				config: {
 					content: ['./index.html', './src/**/*.{vue,ts,tsx}'],
 					theme: {
@@ -82,7 +82,9 @@ export class Tailwind extends Component {
 			].join('\n'),
 			recreate: true,
 		})
-		this.file.tsconfigFile.patch(JsonPatch.add('/include/-', 'tailwind.js'))
+		this.file.tsconfigFile.patch(
+			JsonPatch.add('/include/-', this.options.filePath)
+		)
 
 		if (options?.config) {
 			this.addConfig(options.config)

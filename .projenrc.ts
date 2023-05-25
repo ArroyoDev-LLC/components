@@ -116,6 +116,12 @@ const tailwindComponent = ProjenComponentProject.fromParent(monorepo, {
 })
 new Vitest(tailwindComponent)
 
+const postcssComponent = ProjenComponentProject.fromParent(monorepo, {
+	name: 'projen.component.postcss',
+	deps: ['ts-morph', 'postcss-load-config'],
+	workspaceDeps: [utilsProjen, tsSourceComponent],
+})
+
 const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.project.nx-monorepo',
 	workspaceDeps: [

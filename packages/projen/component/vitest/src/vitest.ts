@@ -48,6 +48,13 @@ export class Vitest extends Component {
 		this.configType = this.options.configType ?? VitestConfigType.PROJECT
 		const configFilePath = this.options.configFilePath ?? 'vitest.config.ts'
 
+		if (this.configType !== VitestConfigType.WORKSPACE) {
+			this.project.testTask.exec('vitest', {
+				args: ['--run'],
+				receiveArgs: true,
+			})
+		}
+
 		this.project.tsconfigDev?.addInclude?.(configFilePath)
 		this.project?.eslint?.addOverride?.({
 			files: [

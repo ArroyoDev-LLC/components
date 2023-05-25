@@ -97,6 +97,18 @@
         {
           "exec": "pnpm exec nx run-many --target=eslint --output-style=stream --nx-bail",
           "receiveArgs": true
+        },
+        {
+          "exec": "eslint",
+          "name": "Lint Root",
+          "cwd": "/home/bradenmars/projects/work/arroyodev/goodprep/components",
+          "args": [
+            "--cache",
+            "--ext=.ts",
+            "--fix",
+            ".projenrc.ts",
+            "projenrc"
+          ]
         }
       ]
     },

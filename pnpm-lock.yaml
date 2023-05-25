@@ -385,6 +385,9 @@ importers:
       unbuild:
         specifier: '*'
         version: 1.2.1
+      vitest:
+        specifier: '*'
+        version: 0.31.1(happy-dom@9.19.2)
 
   packages/projen/component/tool-versions:
     devDependencies:

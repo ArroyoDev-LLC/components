@@ -39,7 +39,8 @@
     "projen": "*",
     "standard-version": "^9",
     "typescript": "^5",
-    "unbuild": "*"
+    "unbuild": "*",
+    "vitest": "*"
   },
   "peerDependencies": {
     "projen": "*"

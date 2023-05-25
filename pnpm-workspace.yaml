@@ -3,6 +3,7 @@
 packages:
   - packages/projen/component/linting
   - packages/projen/component/pnpm-workspace
+  - packages/projen/component/postcss
   - packages/projen/component/release-please
   - packages/projen/component/tailwind
   - packages/projen/component/tool-versions

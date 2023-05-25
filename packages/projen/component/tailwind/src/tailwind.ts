@@ -12,21 +12,6 @@ import {
 } from 'projen'
 import { deepMerge } from 'projen/lib/util'
 import type { Config } from 'tailwindcss/types'
-import {
-	type ImportDeclarationStructure,
-	type OptionalKind,
-	type WriterFunction,
-} from 'ts-morph'
-
-export interface TailwindOptionsPlugin {
-	name: string
-	moduleImport: OptionalKind<ImportDeclarationStructure>
-	/**
-	 * Plugin definition specification.
-	 * Defaults to `<name>(<options>)`.
-	 */
-	spec?: WriterFunction | readonly (string | WriterFunction)[]
-}
 
 export interface TailwindOptions {
 	/**

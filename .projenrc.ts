@@ -119,15 +119,7 @@ const tailwindComponent = ProjenComponentProject.fromParent(monorepo, {
 	deps: ['ts-morph', 'tailwindcss'],
 	workspaceDeps: [utilsProjen, tsSourceComponent],
 })
-new Vitest(tailwindComponent, {
-	configType: VitestConfigType.PROJECT,
-	settings: {
-		test: {
-			name: tailwindComponent.projectName.name,
-			include: [`${tailwindComponent.testdir}/\*\*/\*.spec.ts`],
-		},
-	},
-})
+new Vitest(tailwindComponent)
 
 const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.project.nx-monorepo',

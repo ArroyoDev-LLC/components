@@ -64,13 +64,14 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 }
 
 export class ProjenProjectOptionsBuilder extends Component {
+	readonly filePath: string
 	constructor(project: typescript.TypeScriptProject) {
 		super(project)
 
-		const filePath = path.join('projenrc', 'projen-project-options.ts')
+		this.filePath = path.join('projenrc', 'projen-project-options.ts')
 		const struct = new ProjenStruct(project, {
 			name: 'ProjenProjectOptions',
-			filePath,
+			filePath: this.filePath,
 		})
 
 		const optional: Array<keyof cdk.JsiiProjectOptions> = [
@@ -89,8 +90,12 @@ export class ProjenProjectOptionsBuilder extends Component {
 				optional: true,
 			})
 		})
+	}
 
-		LintConfig.of(project)?.eslint?.addIgnorePattern?.(filePath)
+	preSynthesize() {
+		super.preSynthesize()
+		// ensure ignore is added towards bottom of patterns.
+		LintConfig.of(this.project)?.eslint?.addIgnorePattern?.(this.filePath)
 	}
 }
 

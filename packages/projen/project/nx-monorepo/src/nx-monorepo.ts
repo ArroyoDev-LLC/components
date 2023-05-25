@@ -209,6 +209,11 @@ export class MonorepoProject extends NxMonorepoProject {
 	protected applyDefaultTask(): this {
 		this.addDevDeps('tsx')
 		this.defaultTask!.reset('tsx .projenrc.ts')
+		this.tasks.tryFind('eslint')?.exec?.('eslint', {
+			name: 'Lint Root',
+			cwd: this.outdir,
+			args: ['--cache', '--ext=.ts', '--fix', '.projenrc.ts', 'projenrc'],
+		})
 		return this
 	}
 

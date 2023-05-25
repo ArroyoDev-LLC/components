@@ -7,7 +7,13 @@ import type { Config } from 'postcss-load-config'
 import { Component, type Project, type typescript } from 'projen'
 
 export interface PostCSSOptions {
+	/**
+	 * Config file path.
+	 */
 	readonly filePath?: string
+	/**
+	 * Postcss Config.
+	 */
 	readonly config?: Config
 }
 
@@ -33,6 +39,10 @@ export class PostCSS extends Component {
 		)
 	}
 
+	/**
+	 * Add postcss plugin.
+	 * @param plugin Plugin spec.
+	 */
 	addPlugin(plugin: TypeScriptSourceConfigPlugin): this {
 		const spec = {
 			...(!plugin.options
@@ -46,6 +56,10 @@ export class PostCSS extends Component {
 		return this
 	}
 
+	/**
+	 * Merge postcss config.
+	 * @param config Config to merge.
+	 */
 	addConfig(config: Config) {
 		this.file.addConfig(config)
 		return this

@@ -68,6 +68,10 @@
       "type": "build"
     },
     {
+      "name": "vitest",
+      "type": "build"
+    },
+    {
       "name": "projen",
       "type": "peer"
     },

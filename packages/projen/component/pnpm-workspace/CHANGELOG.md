@@ -6,6 +6,13 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.pnpm-workspace-v0.1.7...@arroyodev-llc/projen.component.pnpm-workspace-v0.1.8) (2023-05-25)
+
+
+### Bug Fixes
+
+* **projen.component.pnpm-workspace:** Multiple patches overwrite each other ([ed32456](https://github.com/ArroyoDev-LLC/components/commit/ed32456961d41b6439e64adaba83bc65107a9397))
+
 ## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.pnpm-workspace-v0.1.6...@arroyodev-llc/projen.component.pnpm-workspace-v0.1.7) (2023-05-24)
 
 

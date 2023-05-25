@@ -7,6 +7,26 @@
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.8...@arroyodev-llc/projen.component.vitest-v0.1.9) (2023-05-25)
+
+
+### Features
+
+* **projen.component.tailwind:** Update all managed files ([79976df](https://github.com/ArroyoDev-LLC/components/commit/79976df8843afd5248a3f3e24a44258bcf070f3e))
+* **projen.component.vitest:** Add sensible vitest defaults ([b5c3770](https://github.com/ArroyoDev-LLC/components/commit/b5c3770549ad1e72c8d011f22f31e7982db8794b))
+
+
+### Bug Fixes
+
+* **projen.component.vitest:** Add vitest to test task. ([ad00108](https://github.com/ArroyoDev-LLC/components/commit/ad001080687f75389b3c44db2db8cc356a34ed4c))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.8
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.7...@arroyodev-llc/projen.component.vitest-v0.1.8) (2023-05-24)
 
 

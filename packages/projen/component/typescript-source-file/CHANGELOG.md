@@ -6,6 +6,22 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.7...@arroyodev-llc/projen.component.typescript-source-file-v0.1.8) (2023-05-25)
+
+
+### Features
+
+* **projen.component.tailwind:** Update all managed files ([79976df](https://github.com/ArroyoDev-LLC/components/commit/79976df8843afd5248a3f3e24a44258bcf070f3e))
+* **projen.component.ts-source:** `tsconfig` option and parameter. ([bc5564f](https://github.com/ArroyoDev-LLC/components/commit/bc5564f88f090487562c71246d405e4fd53714e3))
+* **projen.component.ts-source:** Implement `getDefaultExport` utility method. ([43645c1](https://github.com/ArroyoDev-LLC/components/commit/43645c1e4e6194c8aa9c2440d553d8c045ebd999))
+* **projen.component.ts-source:** Implement `getOrCreatePropertyAssignmentInitializer` utility method. ([ca4c4eb](https://github.com/ArroyoDev-LLC/components/commit/ca4c4ebcd1cd6e8a115dd64b5b45965c129d38eb))
+* **projen.component.ts-source:** Implement `TypeScriptSourceConfig` component. ([6052418](https://github.com/ArroyoDev-LLC/components/commit/6052418779036aedae2ed4ac27a3a24a8d59f4e3))
+
+
+### Tests
+
+* **projen.component.tailwind:** Update snapshots ([5b8582c](https://github.com/ArroyoDev-LLC/components/commit/5b8582c9858d8af90327f78f8a2efef680b3c2f5))
+
 ## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.6...@arroyodev-llc/projen.component.typescript-source-file-v0.1.7) (2023-05-24)
 
 

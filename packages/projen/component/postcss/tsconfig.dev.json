@@ -9,7 +9,8 @@
     "src/**/*.ts",
     "*.ts",
     "**/*.ts",
-    "build.config.ts"
+    "build.config.ts",
+    "vitest.config.ts"
   ],
   "exclude": [
     "node_modules"

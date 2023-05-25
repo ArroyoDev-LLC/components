@@ -166,6 +166,17 @@
           "off"
         ]
       }
+    },
+    {
+      "files": [
+        "vitest.config.ts",
+        "test/**/*.spec.ts"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "off"
+        ]
+      }
     }
   ]
 }

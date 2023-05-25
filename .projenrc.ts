@@ -121,6 +121,7 @@ const postcssComponent = ProjenComponentProject.fromParent(monorepo, {
 	deps: ['ts-morph', 'postcss-load-config'],
 	workspaceDeps: [utilsProjen, tsSourceComponent],
 })
+new Vitest(postcssComponent)
 
 const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.project.nx-monorepo',

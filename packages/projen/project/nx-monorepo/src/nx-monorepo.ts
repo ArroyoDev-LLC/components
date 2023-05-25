@@ -195,7 +195,9 @@ export class MonorepoProject extends NxMonorepoProject {
 		if (!task) return this
 		// fix invalid install step.
 		const mergeUpdate = task.steps.map((step) =>
-			step.exec === 'pnpm exec install' ? { exec: 'pnpm install' } : undefined
+			step.exec === 'pnpm exec install'
+				? { exec: 'pnpm exec projen install' }
+				: undefined
 		) as TaskStep[]
 		replaceTask(this, task.name, mergeUpdate)
 		return this

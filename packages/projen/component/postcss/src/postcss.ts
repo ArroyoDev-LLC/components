@@ -35,7 +35,7 @@ export class PostCSS extends Component {
 
 	addPlugin(plugin: TypeScriptSourceConfigPlugin): this {
 		const spec = {
-			...(plugin.options
+			...(!plugin.options
 				? {
 						spec: (writer) => writer.write(plugin.name),
 				  }

@@ -1,0 +1,66 @@
+diff --git a/lib/nx-monorepo.js b/lib/nx-monorepo.js
+index dd11ef99484f63534d91c9472602920cd2ccaaf5..8741cf4d756059fe8b2a5635c61c8f9431eea01b 100644
+--- a/lib/nx-monorepo.js
++++ b/lib/nx-monorepo.js
+@@ -370,33 +370,48 @@ class NxMonorepoProject extends typescript_1.TypeScriptProject {
+         // Prevent sub NodeProject packages from `postSynthesis` which will cause individual/extraneous installs.
+         // The workspace package install will handle all the sub NodeProject packages automatically.
+         const subProjectPackages = [];
++        this.subProjectResolves = [];
+         this.subprojects.forEach((subProject) => {
+             if (isNodeProject(subProject)) {
+                 const subNodeProject = subProject;
+-                subProjectPackages.push(subNodeProject.package);
++                subProjectPackages.push([subNodeProject.package, subNodeProject.package.resolveDepsAndWritePackageJson]);
++                const subNodeProjectResolver = subNodeProject.package.resolveDepsAndWritePackageJson
+                 // @ts-ignore - `installDependencies` is private
+-                subNodeProject.package.installDependencies = () => { };
++                subNodeProject.package.installDependencies = () => {
++                    this.logger.info(`${subNodeProject.name}: requested resolve/install`)
++                    this.subProjectResolves.push(() => {
++                        this.logger.info(`${subNodeProject.name}: resolve`)
++                        return subNodeProjectResolver.apply(subNodeProject.package)
++                    })
++                };
+                 // @ts-ignore - `resolveDepsAndWritePackageJson` is private
+                 subNodeProject.package.resolveDepsAndWritePackageJson = () => { };
+             }
+         });
+         super.synth();
+-        // Force workspace install deps if any node subproject package has changed, unless the workspace changed
+-        if (
+-        // @ts-ignore - `file` is private
+-        this.package.file.changed !== true &&
+-            // @ts-ignore - `file` is private
+-            subProjectPackages.find((pkg) => pkg.file.changed === true)) {
+-            try {
+-                // @ts-ignore - `installDependencies` is private
++    }
++
++    resolveSubProjects() {
++        if(this.subProjectResolves.length) {
++            if(!this.package.file.changed) {
++                this.logger.info('root installing deps due to no change')
+                 this.package.installDependencies();
+             }
+-            finally {
+-                // @ts-ignore - `resolveDepsAndWritePackageJson` is private
+-                this.package.resolveDepsAndWritePackageJson();
++            this.logger.info('resolving children:', this.subProjectResolves.length)
++            const completedResolves = this.subProjectResolves.map((resolve) => resolve())
++            this.logger.info('children resolve results:', completedResolves)
++            if(completedResolves.some(Boolean)) {
++                this.package.installDependencies()
+             }
++            this.subProjectResolves = [];
+         }
+     }
++
++    postSynthesize() {
++        super.postSynthesize();
++        this.resolveSubProjects();
++    }
++    
+     /**
+      * Ensures subprojects don't have a default task and that all packages use the same package manager.
+      */

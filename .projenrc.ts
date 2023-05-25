@@ -1,8 +1,5 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
-import {
-	Vitest,
-	VitestConfigType,
-} from '@arroyodev-llc/projen.component.vitest'
+import { Vitest } from '@arroyodev-llc/projen.component.vitest'
 import { TypescriptProject } from '@arroyodev-llc/projen.project.typescript'
 import { VueComponentProject } from '@arroyodev-llc/projen.project.vue-component'
 import { LogLevel } from 'projen'
@@ -32,7 +29,6 @@ const monorepo = new ComponentsMonorepo({
 		'vitest',
 		'rollup-plugin-vue',
 		'tsx',
-		'unbuild',
 		'@types/prettier',
 		'fs-extra',
 		'@types/fs-extra',
@@ -40,7 +36,6 @@ const monorepo = new ComponentsMonorepo({
 		'@jsii/spec',
 		'ts-morph',
 		'@sindresorhus/is',
-		'eslint_d',
 		'pathe',
 	],
 })

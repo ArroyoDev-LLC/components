@@ -44,10 +44,6 @@
       "type": "build"
     },
     {
-      "name": "eslint_d",
-      "type": "build"
-    },
-    {
       "name": "eslint-config-prettier",
       "type": "build"
     },

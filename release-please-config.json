@@ -51,6 +51,10 @@
       "component": "@arroyodev-llc/projen.component.tailwind",
       "release-type": "node"
     },
+    "packages/projen/component/postcss": {
+      "component": "@arroyodev-llc/projen.component.postcss",
+      "release-type": "node"
+    },
     "packages/projen/project/nx-monorepo": {
       "component": "@arroyodev-llc/projen.project.nx-monorepo",
       "release-type": "node"

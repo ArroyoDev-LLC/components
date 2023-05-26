@@ -24,6 +24,19 @@ test<TestContext>('renders as expected', async (ctx) => {
 	expect(synth['postcss.config.ts']).toMatchSnapshot()
 })
 
+test<TestContext>('renders as expected with merged config', async (ctx) => {
+	const postcss = new PostCSS(ctx.project)
+	postcss.addConfig({
+		to: 'something',
+	})
+	postcss.addConfig({
+		from: (writer) => writer.write('resolveFrom()'),
+	})
+	const synth = Testing.synth(ctx.project)
+	expect(synth['postcss.config.ts']).toBeDefined()
+	expect(synth['postcss.config.ts']).toMatchSnapshot()
+})
+
 test<TestContext>('renders with plugins as expected', async (ctx) => {
 	const postcss = new PostCSS(ctx.project)
 	postcss

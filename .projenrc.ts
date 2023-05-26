@@ -46,6 +46,13 @@ const utilsProjen = TypescriptProject.fromParent(monorepo, {
 })
 new Vitest(utilsProjen)
 
+const utilsFs = TypescriptProject.fromParent(monorepo, {
+	name: 'utils.fs',
+	deps: ['fs-extra'],
+	devDeps: ['@types/fs-extra'],
+})
+new Vitest(utilsFs)
+
 const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.linting',
 	workspaceDeps: [utilsProjen],

@@ -96,7 +96,7 @@ export class TypeScriptSourceConfig<
 	 * @param plugin Plugin spec to add.
 	 */
 	addPlugin<PluginT>(plugin: TypeScriptSourceConfigPlugin<PluginT>): this {
-		const { spec, name, moduleImport, options } = plugin
+		const { spec, name, moduleImport, options, dependencyType } = plugin
 		const pluginSpec =
 			spec ??
 			((writer) =>
@@ -109,7 +109,10 @@ export class TypeScriptSourceConfig<
 				: // package[/export] -> package
 				  moduleSpecParts.slice(0, 1)
 		).join('/')
-		this.project.deps.addDependency(depName, DependencyType.BUILD)
+		this.project.deps.addDependency(
+			depName,
+			dependencyType ?? DependencyType.BUILD
+		)
 		this.addImport(moduleImport)
 		this.addConfigTransform((configExpr) => {
 			const existsPlugins = this.getOrCreatePropertyAssignmentInitializer(

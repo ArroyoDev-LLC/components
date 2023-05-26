@@ -125,6 +125,7 @@
       "packages/projen/project/nx-monorepo",
       "packages/projen/project/typescript",
       "packages/projen/project/vue-component",
+      "packages/utils/fs",
       "packages/utils/projen",
       "packages/vue/ui/button",
       "packages/vue/ui/text"

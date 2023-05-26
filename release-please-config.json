@@ -7,6 +7,10 @@
       "component": "@arroyodev-llc/utils.projen",
       "release-type": "node"
     },
+    "packages/utils/fs": {
+      "component": "@arroyodev-llc/utils.fs",
+      "release-type": "node"
+    },
     "packages/projen/component/linting": {
       "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"

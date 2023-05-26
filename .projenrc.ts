@@ -77,6 +77,7 @@ const viteComponent = ProjenComponentProject.fromParent(monorepo, {
 	workspaceDeps: [utilsProjen, tsSourceComponent, lintingComponent],
 	deps: ['ts-morph', 'vite', '@vitejs/plugin-vue', '@vitejs/plugin-vue-jsx'],
 })
+new Vitest(viteComponent)
 
 const vitestComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vitest',

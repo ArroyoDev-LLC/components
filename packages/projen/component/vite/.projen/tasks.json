@@ -150,6 +150,13 @@
       "steps": [
         {
           "spawn": "eslint"
+        },
+        {
+          "exec": "vitest",
+          "args": [
+            "--run"
+          ],
+          "receiveArgs": true
         }
       ]
     },

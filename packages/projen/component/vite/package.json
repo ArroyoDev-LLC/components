@@ -39,7 +39,8 @@
     "projen": "^0.71.65",
     "standard-version": "^9",
     "typescript": "^5",
-    "unbuild": "^1.2.1"
+    "unbuild": "^1.2.1",
+    "vitest": "^0.31.1"
   },
   "peerDependencies": {
     "projen": "^0.71.57"

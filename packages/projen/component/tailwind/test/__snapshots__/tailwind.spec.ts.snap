@@ -5,7 +5,8 @@ exports[`renders as expected. 1`] = `
 
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [\\"./index.html\\",\\"./src/**/*.{vue,ts,tsx}\\"]
+    content: [\\"./index.html\\",\\"./src/**/*.{vue,ts,tsx}\\"],
+    theme: {\\"extend\\":{}}
 }"
 `;
 

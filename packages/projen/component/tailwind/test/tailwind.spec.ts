@@ -1,6 +1,6 @@
 import os from 'node:os'
 import path from 'node:path'
-import { typescript } from 'projen'
+import { DependencyType, typescript } from 'projen'
 import { Testing } from 'projen/lib/testing'
 import { beforeEach, expect, test } from 'vitest'
 import { Tailwind } from '../src'
@@ -34,6 +34,7 @@ test<TestContext>('renders with plugins as expected.', async (ctx) => {
 			moduleSpecifier: '@tailwindcss/forms',
 			defaultImport: 'forms',
 		},
+		dependencyType: DependencyType.RUNTIME,
 	})
 	const synth = Testing.synth(ctx.project)
 	expect(synth['tailwind.config.js']).toMatchSnapshot()

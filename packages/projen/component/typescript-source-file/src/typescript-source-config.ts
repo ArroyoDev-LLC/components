@@ -2,6 +2,7 @@ import {
 	mergeObjectLiteral,
 	type ObjectLiteralMergeSchema,
 } from '@arroyodev-llc/utils.projen'
+
 import { DependencyType } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import {

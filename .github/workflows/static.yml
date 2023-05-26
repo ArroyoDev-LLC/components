@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch: {}
 concurrency: pages
 jobs:
   deploy:
@@ -31,6 +32,8 @@ jobs:
           cache: pnpm
       - name: Install Dependencies
         run: pnpm install --no-frozen-lockfile
+      - name: Build
+        run: pnpm build
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Generate Docs
@@ -42,3 +45,5 @@ jobs:
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v2
+env:
+  NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

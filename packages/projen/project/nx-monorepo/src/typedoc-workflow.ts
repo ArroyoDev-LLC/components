@@ -69,7 +69,7 @@ export class TypeDocGithubPages extends Component {
 			push: { branches: ['main'] },
 			workflowDispatch: {},
 		})
-		this.workflow.file!.addOverride(
+		workflow.file!.addOverride(
 			'env.NPM_TOKEN',
 			secretToString('NPM_AUTH_TOKEN')
 		)

@@ -47,7 +47,6 @@ export interface TypeScriptSourceConfigPlugin<OptionsT = Record<string, any>> {
 export class TypeScriptSourceConfig<
 	T extends Record<string, any>
 > extends TypeScriptSourceFile {
-
 	constructor(
 		project: TypeScriptProject,
 		filePath: string,

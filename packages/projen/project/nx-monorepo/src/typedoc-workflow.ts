@@ -1,4 +1,5 @@
 import { Component, github, type Project } from 'projen'
+import { secretToString } from 'projen/lib/github/util'
 
 export interface TypeDocGithubPagesOptions {
 	readonly workflowName: string
@@ -66,7 +67,12 @@ export class TypeDocGithubPages extends Component {
 		)
 		workflow.on({
 			push: { branches: ['main'] },
+			workflowDispatch: {},
 		})
+		this.workflow.file!.addOverride(
+			'env.NPM_TOKEN',
+			secretToString('NPM_AUTH_TOKEN')
+		)
 		return workflow
 	}
 
@@ -99,6 +105,10 @@ export class TypeDocGithubPages extends Component {
 			{
 				name: 'Install Dependencies',
 				run: 'pnpm install --no-frozen-lockfile',
+			},
+			{
+				name: 'Build',
+				run: 'pnpm build',
 			},
 			{
 				name: 'Setup Pages',

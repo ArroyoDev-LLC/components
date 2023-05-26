@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.postcss-v0.1.2...@arroyodev-llc/projen.component.postcss-v0.1.3) (2023-05-26)
+
+
+### Features
+
+* **projen.component.postcss:** Update `addConfig` typings. ([ce84377](https://github.com/ArroyoDev-LLC/components/commit/ce84377229e5031c3eed17914d4f564a00c4924e))
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+
+
+### Tests
+
+* **projen.component.postcss:** Add unit test for postcss config merge ([d8da244](https://github.com/ArroyoDev-LLC/components/commit/d8da2440b258d3849f848abe96b16f5fc2ebab88))
+* **projen.component.postcss:** Update snapshots ([8147374](https://github.com/ArroyoDev-LLC/components/commit/814737436fae521d91fa6f475359b2094056891e))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.9
+    * @arroyodev-llc/utils.projen bumped to 0.1.8
+
 ## 0.1.2 (2023-05-25)
 
 

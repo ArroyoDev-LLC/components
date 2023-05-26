@@ -6,6 +6,36 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.8...@arroyodev-llc/projen.component.typescript-source-file-v0.1.9) (2023-05-26)
+
+
+### Features
+
+* **projen.component.ts-source:** `configResolver` option support. ([cc1f861](https://github.com/ArroyoDev-LLC/components/commit/cc1f86172f0a34338c8c252a3b12618fbdc8a204))
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+
+
+### Bug Fixes
+
+* **projen.component.ts-source:** Ensure proper plugin dependency name, allow type override ([6962a9e](https://github.com/ArroyoDev-LLC/components/commit/6962a9e51e2334cc2e6173d70c3f5bddec52a76e))
+* **projen.component.ts-source:** Use `dependencyType` in `addPlugin` ([a5551c6](https://github.com/ArroyoDev-LLC/components/commit/a5551c609788b92853dc64bf8b887ed769c1b240))
+* **projen.component.ts-source:** Utilize `mergeObjectLiteral` for configs. ([22eb3c2](https://github.com/ArroyoDev-LLC/components/commit/22eb3c258961827ba144a5c8bf37f5b36de9104a))
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+
+
+### Tests
+
+* **projen.component.postcss:** Update snapshots ([8147374](https://github.com/ArroyoDev-LLC/components/commit/814737436fae521d91fa6f475359b2094056891e))
+* **projen.component.vite:** Skip vite config merge for now ([8b2cd61](https://github.com/ArroyoDev-LLC/components/commit/8b2cd615796a0af2ed3eaec838d7c9fcd5922fc6))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.8
+    * @arroyodev-llc/utils.projen bumped to 0.1.8
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.7...@arroyodev-llc/projen.component.typescript-source-file-v0.1.8) (2023-05-25)
 
 

@@ -52,6 +52,28 @@
     * @arroyodev-llc/projen.component.vue bumped to 0.1.13
     * @arroyodev-llc/projen.project.typescript bumped to 0.1.11
 
+## [0.1.15](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.14...@arroyodev-llc/projen.project.vue-component-v0.1.15) (2023-05-26)
+
+
+### Features
+
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+* Update all deps ([52fda07](https://github.com/ArroyoDev-LLC/components/commit/52fda07b7be66ec81ffff301d111b52bc46fc068))
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.11
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.14
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.12
+
 ## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.12...@arroyodev-llc/projen.project.vue-component-v0.1.13) (2023-05-24)
 
 

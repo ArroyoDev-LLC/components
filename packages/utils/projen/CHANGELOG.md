@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.7...@arroyodev-llc/utils.projen-v0.1.8) (2023-05-26)
+
+
+### Features
+
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+* **utils.projen:** `mergeArray/ObjectLiteral` and related deep merge utilities. ([bafa934](https://github.com/ArroyoDev-LLC/components/commit/bafa9341019c04d86a267c5b6c1efe8e86a157f8))
+* **utils.projen:** Add `Vitest` to utils projen ([d629f8f](https://github.com/ArroyoDev-LLC/components/commit/d629f8fd5a9ab93d8894a9b7f21ba6cb6e537cb2))
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+
+
+### Tests
+
+* **projen.component.postcss:** Update snapshots ([8147374](https://github.com/ArroyoDev-LLC/components/commit/814737436fae521d91fa6f475359b2094056891e))
+* **utils.projen:** Unit tests for object literal deep merge. ([3b960d3](https://github.com/ArroyoDev-LLC/components/commit/3b960d396a027aaa669855749f41e436220a504a))
+
 ## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.6...@arroyodev-llc/utils.projen-v0.1.7) (2023-05-24)
 
 

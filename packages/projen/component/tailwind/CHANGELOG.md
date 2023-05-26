@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tailwind-v0.1.2...@arroyodev-llc/projen.component.tailwind-v0.1.3) (2023-05-26)
+
+
+### Features
+
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+
+
+### Bug Fixes
+
+* **projen.component.tailwind:** Update `addConfig` typings, defaults ([37d2b9d](https://github.com/ArroyoDev-LLC/components/commit/37d2b9d932a821e0906eb6056aeb2f62c581b096))
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+
+
+### Tests
+
+* **projen.component.postcss:** Update snapshots ([8147374](https://github.com/ArroyoDev-LLC/components/commit/814737436fae521d91fa6f475359b2094056891e))
+* **projen.component.tailwind:** Update snapshots ([bea3728](https://github.com/ArroyoDev-LLC/components/commit/bea372882edd9f4fb4f9aa0573240ce67f07a373))
+* **projen.component.tailwind:** Update unit test ([d6aeed7](https://github.com/ArroyoDev-LLC/components/commit/d6aeed741200eb9df688b780f511c07372fdd570))
+* **projen.component.vite:** Skip vite config merge for now ([8b2cd61](https://github.com/ArroyoDev-LLC/components/commit/8b2cd615796a0af2ed3eaec838d7c9fcd5922fc6))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.9
+    * @arroyodev-llc/utils.projen bumped to 0.1.8
+
 ## 0.1.2 (2023-05-25)
 
 

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.5...@arroyodev-llc/projen.component.tool-versions-v0.1.6) (2023-05-26)
+
+
+### Features
+
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+* Update all deps ([52fda07](https://github.com/ArroyoDev-LLC/components/commit/52fda07b7be66ec81ffff301d111b52bc46fc068))
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+
 ## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.4...@arroyodev-llc/projen.component.tool-versions-v0.1.5) (2023-05-24)
 
 

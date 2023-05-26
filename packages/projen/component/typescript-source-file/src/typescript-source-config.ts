@@ -56,10 +56,15 @@ export interface TypeScriptSourceConfigPlugin<OptionsT = Record<string, any>> {
 	 * Plugin options.
 	 */
 	options?: OptionsT
+	/**
+	 * Dependency type to add for plugin.
+	 * @default {@link DependencyType.BUILD}
+	 */
+	dependencyType?: DependencyType
 }
 
 export class TypeScriptSourceConfig<
-	T extends Record<string, any>
+	T extends Record<string, any> = Record<string, any>
 > extends TypeScriptSourceFile {
 	constructor(
 		project: TypeScriptProject,
@@ -77,7 +82,9 @@ export class TypeScriptSourceConfig<
 	 * Merge configuration.
 	 * @param config
 	 */
-	addConfig(config: ObjectLiteralMergeSchema<T>): this {
+	addConfig<ConfigT extends ObjectLiteralMergeSchema<T>>(
+		config: ConfigT
+	): this {
 		this.addConfigTransform((configExpr) => {
 			mergeObjectLiteral(configExpr, config)
 		})
@@ -88,17 +95,21 @@ export class TypeScriptSourceConfig<
 	 * Add plugin to config.
 	 * @param plugin Plugin spec to add.
 	 */
-	addPlugin(plugin: TypeScriptSourceConfigPlugin): this {
+	addPlugin<PluginT>(plugin: TypeScriptSourceConfigPlugin<PluginT>): this {
 		const { spec, name, moduleImport, options } = plugin
 		const pluginSpec =
 			spec ??
 			((writer) =>
 				writer.write(`${name}(${options ? JSON.stringify(options) : ''})`))
-
-		this.project.deps.addDependency(
-			moduleImport.moduleSpecifier,
-			DependencyType.RUNTIME
-		)
+		const moduleSpecParts = moduleImport.moduleSpecifier.split('/')
+		const depName = (
+			moduleImport.moduleSpecifier.startsWith('@')
+				? // @scope/package[/export] -> @scope/package
+				  moduleSpecParts.slice(0, 2)
+				: // package[/export] -> package
+				  moduleSpecParts.slice(0, 1)
+		).join('/')
+		this.project.deps.addDependency(depName, DependencyType.BUILD)
 		this.addImport(moduleImport)
 		this.addConfigTransform((configExpr) => {
 			const existsPlugins = this.getOrCreatePropertyAssignmentInitializer(

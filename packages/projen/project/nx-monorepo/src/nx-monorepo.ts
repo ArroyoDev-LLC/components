@@ -180,6 +180,50 @@ export class MonorepoProject extends NxMonorepoProject {
 			.applyNx()
 			.applyUpgradeTask(this.tasks.tryFind('upgrade-deps'))
 			.applyCleanTask()
+			.applyTypeDoc(this.github)
+	}
+
+	/**
+	 * Apply docgen configuration.
+	 * @param gh Github component. Applies pages workflow if defined.
+	 * @protected
+	 */
+	protected applyTypeDoc(gh?: github.GitHub): this {
+		if (!this.docgen) return this
+		if (gh) {
+			new TypeDocGithubPages(this)
+		}
+		this.tasks
+			.tryFind('docgen')!
+			.reset(
+				NodePackageUtils.command.exec(this.package.packageManager, 'typedoc')
+			)
+		this.applyPreSynth(() => {
+			this.tsconfig.file.addOverride('typedocOptions', {
+				entryPoints: this.sortedSubProjects.map((subproj) =>
+					cwdRelativePath(this.outdir, subproj.outdir)
+				),
+				entryPointStrategy: 'packages',
+				out: 'docs',
+				includeVersion: true,
+				json: 'docs/docs.json',
+				useTsLinkResolution: true,
+				...(this.options.docgenOptions as Record<string, any>),
+			})
+		})
+		this.applyRecursive(
+			(project) =>
+				project instanceof typescript.TypeScriptProject &&
+				project
+					.tryFindObjectFile('tsconfig.json')
+					?.addOverride?.('typedocOptions', {
+						entryPoints: [path.join(project.srcdir, 'index.ts')],
+						useTsLinkResolution: true,
+						...(this.options.docgenOptions as Record<string, any>),
+					}),
+			{ immediate: false, includeSelf: false }
+		)
+		return this
 	}
 
 	protected buildTsconfigContainer(): TypescriptConfigContainer {

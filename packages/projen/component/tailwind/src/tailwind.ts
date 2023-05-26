@@ -2,7 +2,10 @@ import {
 	TypeScriptSourceConfig,
 	type TypeScriptSourceConfigPlugin,
 } from '@arroyodev-llc/projen.component.typescript-source-file'
-import { findComponent } from '@arroyodev-llc/utils.projen'
+import {
+	findComponent,
+	type ObjectLiteralMergeSchema,
+} from '@arroyodev-llc/utils.projen'
 import {
 	Component,
 	DependencyType,
@@ -44,6 +47,9 @@ export class Tailwind extends Component {
 				filePath: 'tailwind.config.mjs',
 				config: {
 					content: ['./index.html', './src/**/*.{vue,ts,tsx}'],
+					theme: {
+						extend: {},
+					},
 				},
 			} as TailwindOptions,
 			options,
@@ -79,7 +85,7 @@ export class Tailwind extends Component {
 		return this
 	}
 
-	addConfig(config: Config): this {
+	addConfig(config: ObjectLiteralMergeSchema<Config>): this {
 		this.file.addConfig(config)
 		return this
 	}

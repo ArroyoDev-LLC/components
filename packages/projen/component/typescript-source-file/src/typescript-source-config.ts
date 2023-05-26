@@ -20,8 +20,22 @@ import {
 
 export interface TypeScriptSourceConfigOptions<ConfigT = Record<string, any>>
 	extends TypeScriptSourceFileOptions {
+	/**
+	 * Config spec for current component.
+	 */
 	config?: ConfigT
+	/**
+	 * Generic plugins property name.
+	 */
 	pluginsProperty?: string
+	/**
+	 * Resolver for config object expression.
+	 * @param source Current {@link ts-morph#SourceFile}
+	 */
+	configResolver?: (
+		tsConfig: TypeScriptSourceConfig,
+		source: SourceFile
+	) => ObjectLiteralExpression
 }
 
 export interface TypeScriptSourceConfigPlugin<OptionsT = Record<string, any>> {
@@ -107,12 +121,14 @@ export class TypeScriptSourceConfig<
 			sourceFile: SourceFile
 		) => void
 	) {
+		const configResolver =
+			this.options.configResolver ??
+			((_, src: SourceFile) => {
+				return this.getDefaultExport(src, SyntaxKind.ObjectLiteralExpression)
+			})
+
 		const transformer: TypeScriptSourceFileTransform = (src: SourceFile) => {
-			const configExport = this.getDefaultExport(
-				src,
-				SyntaxKind.ObjectLiteralExpression
-			)
-			transform(configExport, src)
+			transform(configResolver(this, src), src)
 		}
 		this.addTransformer(transformer)
 		return this

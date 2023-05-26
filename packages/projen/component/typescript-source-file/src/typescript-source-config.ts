@@ -1,4 +1,7 @@
-import { addPropertyAssignmentsFromObject } from '@arroyodev-llc/utils.projen'
+import {
+	mergeObjectLiteral,
+	type ObjectLiteralMergeSchema,
+} from '@arroyodev-llc/utils.projen'
 import { DependencyType } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import {
@@ -42,8 +45,9 @@ export interface TypeScriptSourceConfigPlugin<OptionsT = Record<string, any>> {
 }
 
 export class TypeScriptSourceConfig<
-	T extends object
+	T extends Record<string, any>
 > extends TypeScriptSourceFile {
+
 	constructor(
 		project: TypeScriptProject,
 		filePath: string,
@@ -60,9 +64,9 @@ export class TypeScriptSourceConfig<
 	 * Merge configuration.
 	 * @param config
 	 */
-	addConfig(config: T): this {
+	addConfig(config: ObjectLiteralMergeSchema<T>): this {
 		this.addConfigTransform((configExpr) => {
-			addPropertyAssignmentsFromObject(configExpr, config)
+			mergeObjectLiteral(configExpr, config)
 		})
 		return this
 	}

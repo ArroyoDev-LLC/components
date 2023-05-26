@@ -1,6 +1,11 @@
+import path from 'node:path'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
 import { TypescriptConfigContainer } from '@arroyodev-llc/projen.component.tsconfig-container'
-import { findComponent, replaceTask } from '@arroyodev-llc/utils.projen'
+import {
+	cwdRelativePath,
+	findComponent,
+	replaceTask,
+} from '@arroyodev-llc/utils.projen'
 import {
 	NodePackageUtils,
 	NxMonorepoProject,
@@ -12,11 +17,13 @@ import {
 	type Project,
 	type Task,
 	type TaskStep,
+	typescript,
 } from 'projen'
 import { secretToString } from 'projen/lib/github/util'
 import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
 import { deepMerge } from 'projen/lib/util'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
+import { TypeDocGithubPages } from './typedoc-workflow.ts'
 
 const arroyoBot = github.GithubCredentials.fromApp({
 	appIdSecret: 'AD_BOT_APP_ID',
@@ -78,12 +85,32 @@ export enum TSConfig {
 	BUNDLER = 'bundler',
 }
 
+export interface ApplyRecursiveOptions {
+	/**
+	 * Invoke callback on monorepo as well as all children.
+	 * @default false
+	 */
+	readonly includeSelf?: boolean
+	/**
+	 * Execute callback immediately.
+	 * Will queue callback for execution during pre-synth if false.
+	 * @default true
+	 */
+	readonly immediate?: boolean
+}
+
 export class MonorepoProject extends NxMonorepoProject {
+	/**
+	 * @deprecated Use `tsconfigContainer`
+	 */
 	public readonly esmBundledTsconfigExtends: javascript.TypescriptConfigExtends
 	public readonly pnpm: PnpmWorkspace
 	public readonly tsconfigContainer: TypescriptConfigContainer
 	public readonly tsconfig: javascript.TypescriptConfig
 	public readonly tsconfigDev: javascript.TypescriptConfig
+	public readonly options: NxMonorepoProjectOptions
+
+	#presynthCallbacks: Array<() => void> = []
 
 	constructor(options: NxMonorepoProjectOptions) {
 		const { workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
@@ -97,6 +124,7 @@ export class MonorepoProject extends NxMonorepoProject {
 			releaseToNpm: false,
 			projenDevDependency: true,
 		})
+		this.options = mergedOptions
 		this.pnpm = new PnpmWorkspace(this)
 		this.pnpm.addWorkspaceDeps(...(workspaceDeps ?? []))
 		this.gitignore.addPatterns('.idea', '.idea/**')
@@ -151,6 +179,7 @@ export class MonorepoProject extends NxMonorepoProject {
 			.applyDefaultTask()
 			.applyNx()
 			.applyUpgradeTask(this.tasks.tryFind('upgrade-deps'))
+			.applyCleanTask()
 	}
 
 	protected buildTsconfigContainer(): TypescriptConfigContainer {
@@ -224,26 +253,32 @@ export class MonorepoProject extends NxMonorepoProject {
 		const cleanAllTask =
 			this.tasks.tryFind('clean') ?? this.tasks.addTask('clean')
 		cleanAllTask.exec('pnpm -r --parallel run clean')
-		return this.applyRecursive((project) => {
-			const nodePackage = findComponent(project, NodePackage)
-			if (nodePackage) {
-				nodePackage.setScript(
-					'clean',
-					NodePackageUtils.command.projen(nodePackage.packageManager, 'clean')
+		return this.applyRecursive(
+			(project) => {
+				const nodePackage = findComponent(project, NodePackage)
+				if (nodePackage) {
+					nodePackage.setScript(
+						'clean',
+						NodePackageUtils.command.projen(nodePackage.packageManager, 'clean')
+					)
+				}
+				const cleanTask =
+					project.tasks.tryFind('clean') ?? project.tasks.addTask('clean')
+				cleanTask.exec(
+					NodePackageUtils.command.exec(
+						this.package.packageManager,
+						'rimraf dist'
+					)
 				)
-			}
-			const cleanTask =
-				project.tasks.tryFind('clean') ?? project.tasks.addTask('clean')
-			cleanTask.exec(
-				NodePackageUtils.command.exec(
-					this.package.packageManager,
-					'rimraf dist'
+				cleanTask.exec(
+					NodePackageUtils.command.exec(
+						this.package.packageManager,
+						'rimraf lib'
+					)
 				)
-			)
-			cleanTask.exec(
-				NodePackageUtils.command.exec(this.package.packageManager, 'rimraf lib')
-			)
-		})
+			},
+			{ immediate: false, includeSelf: false }
+		)
 	}
 
 	protected applyGithub(gh?: github.GitHub): this {
@@ -288,16 +323,32 @@ export class MonorepoProject extends NxMonorepoProject {
 	}
 
 	/**
+	 * Apply callback during pre-synth.
+	 * @param cb Callback to apply.
+	 */
+	applyPreSynth(cb: () => void): this {
+		this.#presynthCallbacks.push(cb)
+		return this
+	}
+
+	/**
 	 * Apply callback to all child projects.
 	 * @param cb Function to execute on all subprojects.
-	 * @param includeSelf Also execute on monorepo root if true.
+	 * @param options Execution options.
 	 */
 	applyRecursive(
 		cb: (project: Project, monorepo: this) => void,
-		includeSelf: boolean = false
+		options?: ApplyRecursiveOptions
 	): this {
-		if (includeSelf) cb(this, this)
-		this.sortedSubProjects.forEach((proj) => cb(proj, this))
+		const executor = () => {
+			if (options?.includeSelf ?? false) cb(this, this)
+			this.sortedSubProjects.forEach((proj) => cb(proj, this))
+		}
+		if (options?.immediate ?? true) {
+			executor()
+		} else {
+			this.applyPreSynth(executor)
+		}
 		return this
 	}
 
@@ -327,6 +378,8 @@ export class MonorepoProject extends NxMonorepoProject {
 
 	preSynthesize() {
 		super.preSynthesize()
-		this.applyCleanTask()
+		while (this.#presynthCallbacks.length) {
+			this.#presynthCallbacks.pop()!.apply(this)
+		}
 	}
 }

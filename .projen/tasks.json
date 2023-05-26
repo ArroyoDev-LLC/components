@@ -101,7 +101,6 @@
         {
           "exec": "eslint",
           "name": "Lint Root",
-          "cwd": "/home/bradenmars/projects/work/arroyodev/goodprep/components",
           "args": [
             "--cache",
             "--ext=.ts",

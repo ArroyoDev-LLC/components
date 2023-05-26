@@ -56,5 +56,32 @@
   ],
   "exclude": [
     "packages/**/*"
-  ]
+  ],
+  "typedocOptions": {
+    "entryPoints": [
+      "./packages/projen/component/linting",
+      "./packages/projen/component/pnpm-workspace",
+      "./packages/projen/component/postcss",
+      "./packages/projen/component/release-please",
+      "./packages/projen/component/tailwind",
+      "./packages/projen/component/tool-versions",
+      "./packages/projen/component/tsconfig-container",
+      "./packages/projen/component/typescript-source-file",
+      "./packages/projen/component/unbuild",
+      "./packages/projen/component/vite",
+      "./packages/projen/component/vitest",
+      "./packages/projen/component/vue",
+      "./packages/projen/project/nx-monorepo",
+      "./packages/projen/project/typescript",
+      "./packages/projen/project/vue-component",
+      "./packages/utils/projen",
+      "./packages/vue/ui/button",
+      "./packages/vue/ui/text"
+    ],
+    "entryPointStrategy": "packages",
+    "out": "docs",
+    "includeVersion": true,
+    "json": "docs/docs.json",
+    "useTsLinkResolution": true
+  }
 }

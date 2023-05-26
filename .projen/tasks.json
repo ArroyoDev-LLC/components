@@ -74,7 +74,7 @@
       "description": "Generate TypeScript API reference docs/",
       "steps": [
         {
-          "exec": "typedoc src --disableSources --out docs/"
+          "exec": "pnpm exec typedoc"
         }
       ]
     },

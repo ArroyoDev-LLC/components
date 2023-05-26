@@ -45,7 +45,7 @@ export const addPropertyAssignmentsFromObject = <T extends object>(
 	)
 }
 
-type Enumerable<T> = T | Array<T>
+export type Enumerable<T> = T | Array<T>
 
 /**
  * Merge object acceptable key values.
@@ -112,7 +112,7 @@ export const isExpressionEqual = (
  * @param arrayLiteral {@link ArrayLiteralExpression} to merge into.
  * @param value Values to merge in array literal.
  */
-function mergeArrayLiteral(
+export function mergeArrayLiteral(
 	arrayLiteral: ArrayLiteralExpression,
 	value: Array<Primitive | WriterFunction | ObjectLiteralMergeObjectValue>
 ) {

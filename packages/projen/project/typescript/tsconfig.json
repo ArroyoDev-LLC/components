@@ -32,5 +32,11 @@
     "src/*.ts",
     "src/**/*.ts"
   ],
-  "exclude": []
+  "exclude": [],
+  "typedocOptions": {
+    "entryPoints": [
+      "src/index.ts"
+    ],
+    "useTsLinkResolution": true
+  }
 }

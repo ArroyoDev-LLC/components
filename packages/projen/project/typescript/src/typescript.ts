@@ -36,6 +36,7 @@ export const CONFIG_DEFAULTS = {
 	projenrcTs: true,
 	prettier: true,
 	unbuild: true,
+	docgen: true
 } satisfies Omit<TypeScriptProjectOptions, 'name'>
 
 export class TypescriptProject extends typescript.TypeScriptProject {

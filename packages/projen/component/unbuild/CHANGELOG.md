@@ -13,6 +13,26 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.8
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.8...@arroyodev-llc/projen.component.unbuild-v0.1.9) (2023-05-26)
+
+
+### Features
+
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.9
+    * @arroyodev-llc/utils.projen bumped to 0.1.8
+
 ## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.6...@arroyodev-llc/projen.component.unbuild-v0.1.7) (2023-05-24)
 
 

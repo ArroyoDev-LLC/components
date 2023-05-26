@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.11...@arroyodev-llc/projen.project.nx-monorepo-v0.1.12) (2023-05-26)
+
+
+### Features
+
+* **projen.project.nx-monorepo:** `applyPreSynth` and `immediate` option for `applyRecursive` ([be71b8a](https://github.com/ArroyoDev-LLC/components/commit/be71b8ad5317847a1f22b86644857d3eb1d199ca))
+* **projen.project.nx-monorepo:** `TypeDocGithubPages` component ([8299751](https://github.com/ArroyoDev-LLC/components/commit/8299751fd979f9c17880cff209f5fdae680bca94))
+* **projen.project.nx-monorepo:** Integrate `tsdoc` monorepo setup. ([3cfc7c4](https://github.com/ArroyoDev-LLC/components/commit/3cfc7c437475f647fdb8ffcb49ce025dc6683d37))
+* **projenrc:** Add `docgenOptions` to `nx-monorepo` options. ([8080b40](https://github.com/ArroyoDev-LLC/components/commit/8080b40bf1fe013e6f820a057fdb9e69ce02203a))
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+* Update all deps ([52fda07](https://github.com/ArroyoDev-LLC/components/commit/52fda07b7be66ec81ffff301d111b52bc46fc068))
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+* **projen.project.nx-monorepo:** Tsdoc github pages workflow build ([3cc72da](https://github.com/ArroyoDev-LLC/components/commit/3cc72da112360e69fb2e7048b8d239134b015817))
+* **projen.projen.nx-monorepo:** Invalid workflow reference, update workflows ([0ce69c7](https://github.com/ArroyoDev-LLC/components/commit/0ce69c74a8e85c8de545ef824e5bbba0cc796ae6))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.8
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.9
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.4
+    * @arroyodev-llc/utils.projen bumped to 0.1.8
+
 ## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.10...@arroyodev-llc/projen.project.nx-monorepo-v0.1.11) (2023-05-25)
 
 

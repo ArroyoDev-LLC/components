@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.10...@arroyodev-llc/vue.ui.text-v0.1.11) (2023-05-26)
+
+
+### Features
+
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+* Update all deps ([52fda07](https://github.com/ArroyoDev-LLC/components/commit/52fda07b7be66ec81ffff301d111b52bc46fc068))
+
+
+### Bug Fixes
+
+* **projen.component.vue:** `vueJsx` plugin spec ([b6d25c5](https://github.com/ArroyoDev-LLC/components/commit/b6d25c53320c9ffed15aba6a601960d00f93f1dd))
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+
+
+### Tests
+
+* **projen.component.vite:** Skip vite config merge for now ([8b2cd61](https://github.com/ArroyoDev-LLC/components/commit/8b2cd615796a0af2ed3eaec838d7c9fcd5922fc6))
+
 ## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.9...@arroyodev-llc/vue.ui.text-v0.1.10) (2023-05-24)
 
 

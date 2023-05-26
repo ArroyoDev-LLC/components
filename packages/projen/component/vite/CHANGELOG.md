@@ -13,6 +13,39 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.8
 
+## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.10...@arroyodev-llc/projen.component.vite-v0.1.11) (2023-05-26)
+
+
+### Features
+
+* **projen.component.vite:** Add vitest component ([15cd32f](https://github.com/ArroyoDev-LLC/components/commit/15cd32f888e522bc18b4e5a69f20f83fac5f896c))
+* **projenrc:** Update tsdoc related managed files ([f47c7a8](https://github.com/ArroyoDev-LLC/components/commit/f47c7a850310aad5e43769919c3055bb4faec60a))
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Remove absolute path from root lint task ([039d711](https://github.com/ArroyoDev-LLC/components/commit/039d7112eaa5eaa8472b1ab564fa5a48ae92f57a))
+
+
+### Code Refactoring
+
+* **projen.component.vite:** Utilize `TypeScriptSourceConfig` ([3a916c0](https://github.com/ArroyoDev-LLC/components/commit/3a916c099e4842d637925e802374ba9895d299e9))
+
+
+### Tests
+
+* **projen.component.vite:** Add unit tests ([9dac9ae](https://github.com/ArroyoDev-LLC/components/commit/9dac9aeecf14a88fb4cba7193cff9b1365b59fe7))
+* **projen.component.vite:** Skip vite config merge for now ([8b2cd61](https://github.com/ArroyoDev-LLC/components/commit/8b2cd615796a0af2ed3eaec838d7c9fcd5922fc6))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.8
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.9
+    * @arroyodev-llc/utils.projen bumped to 0.1.8
+
 ## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.8...@arroyodev-llc/projen.component.vite-v0.1.9) (2023-05-24)
 
 

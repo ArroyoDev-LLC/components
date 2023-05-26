@@ -2,7 +2,10 @@ import {
 	TypeScriptSourceConfig,
 	type TypeScriptSourceConfigPlugin,
 } from '@arroyodev-llc/projen.component.typescript-source-file'
-import { findComponent } from '@arroyodev-llc/utils.projen'
+import {
+	findComponent,
+	type ObjectLiteralMergeSchema,
+} from '@arroyodev-llc/utils.projen'
 import type { Config } from 'postcss-load-config'
 import { Component, type Project, type typescript } from 'projen'
 
@@ -60,7 +63,7 @@ export class PostCSS extends Component {
 	 * Merge postcss config.
 	 * @param config Config to merge.
 	 */
-	addConfig(config: Config) {
+	addConfig(config: ObjectLiteralMergeSchema<Config>) {
 		this.file.addConfig(config)
 		return this
 	}

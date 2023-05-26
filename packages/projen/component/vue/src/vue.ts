@@ -176,8 +176,8 @@ export class Vue extends Component {
 					.block(() =>
 						writer.write('plugins: ').block(() => writer.write('vue: vue()'))
 					)
-					.write(')'),
-				'vueJsx()',
+					.write('),')
+					.writeLine('vueJsx()'),
 			],
 		})
 		return this

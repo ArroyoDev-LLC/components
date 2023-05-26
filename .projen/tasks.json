@@ -103,6 +103,7 @@
           "name": "Lint Root",
           "args": [
             "--cache",
+            "--no-error-on-unmatched-pattern",
             "--ext=.ts",
             "--fix",
             ".projenrc.ts",

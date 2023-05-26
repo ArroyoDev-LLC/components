@@ -6,11 +6,12 @@ import {
 } from '@arroyodev-llc/projen.component.release-please'
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
 import { type MonorepoProject } from '@arroyodev-llc/projen.project.nx-monorepo'
-import { ProjectName } from '@arroyodev-llc/utils.projen'
+import { findComponent, ProjectName } from "@arroyodev-llc/utils.projen";
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
 import { type Component, javascript, LogLevel, typescript } from 'projen'
 import { deepMerge } from 'projen/lib/util'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
+import { TypedocDocgen } from "projen/lib/typescript";
 
 export const CONFIG_DEFAULTS = {
 	packageManager: javascript.NodePackageManager.PNPM,
@@ -36,8 +37,9 @@ export const CONFIG_DEFAULTS = {
 	projenrcTs: true,
 	prettier: true,
 	unbuild: true,
-	docgen: true
 } satisfies Omit<TypeScriptProjectOptions, 'name'>
+
+
 
 export class TypescriptProject extends typescript.TypeScriptProject {
 	static fromParent(

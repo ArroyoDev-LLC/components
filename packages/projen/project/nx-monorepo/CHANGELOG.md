@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.12...@arroyodev-llc/projen.project.nx-monorepo-v0.1.13) (2023-05-26)
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Add `no-error-on-unmatched-pattern` for root lint ([5c6b2e5](https://github.com/ArroyoDev-LLC/components/commit/5c6b2e55c8d1214a5f1e4f9843c6436487dee2eb))
+
 ## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.11...@arroyodev-llc/projen.project.nx-monorepo-v0.1.12) (2023-05-26)
 
 

@@ -64,6 +64,10 @@
       "type": "build"
     },
     {
+      "name": "vitest",
+      "type": "build"
+    },
+    {
       "name": "@sindresorhus/is",
       "type": "runtime"
     },

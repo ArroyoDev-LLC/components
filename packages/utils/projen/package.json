@@ -38,7 +38,8 @@
     "prettier": "^2.8.8",
     "standard-version": "^9",
     "typescript": "^5",
-    "unbuild": "^1.2.1"
+    "unbuild": "^1.2.1",
+    "vitest": "^0.31.1"
   },
   "dependencies": {
     "@sindresorhus/is": "^5.3.0",

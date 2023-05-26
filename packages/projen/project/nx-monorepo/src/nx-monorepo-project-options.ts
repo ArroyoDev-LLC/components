@@ -15,6 +15,10 @@ export interface NxMonorepoProjectOptions {
    */
   readonly workspaceDeps?: Array<javascript.NodeProject | string>;
   /**
+   * TSDoc configuration options. Requires `docgen` to be true.
+   */
+  readonly docgenOptions?: any;
+  /**
    * Configuration for workspace.
    * @stability stable
    */

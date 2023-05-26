@@ -1,5 +1,4 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
-import type nx_monorepo from '@aws-prototyping-sdk/nx-monorepo'
 import { CollectionKind, PrimitiveType } from '@jsii/spec'
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder'
 import path from 'pathe'
@@ -36,7 +35,7 @@ const typescriptStructMixin = Struct.empty()
 	})
 
 export class NxMonorepoProjectOptionsBuilder extends Component {
-	constructor(project: nx_monorepo.NxMonorepoProject) {
+	constructor(project: typescript.TypeScriptProject) {
 		super(project)
 
 		const filePath = path.join(
@@ -57,7 +56,18 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 				'@aws-prototyping-sdk/nx-monorepo.NxMonorepoProjectOptions'
 			)
 				.withoutDeprecated()
-				.update('defaultReleaseBranch', { optional: true }),
+				.update('defaultReleaseBranch', { optional: true })
+				.add({
+					name: 'docgenOptions',
+					optional: true,
+					docs: {
+						summary:
+							'TSDoc configuration options. Requires `docgen` to be true.',
+					},
+					type: {
+						primitive: PrimitiveType.Any,
+					},
+				}),
 			typescriptStructMixin
 		)
 	}

@@ -44,6 +44,7 @@ const utilsProjen = TypescriptProject.fromParent(monorepo, {
 	name: 'utils.projen',
 	deps: ['ts-morph', '@sindresorhus/is', 'type-fest', 'projen'],
 })
+new Vitest(utilsProjen)
 
 const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.linting',

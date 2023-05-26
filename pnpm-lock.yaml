@@ -1124,6 +1124,9 @@ importers:
       unbuild:
         specifier: ^1.2.1
         version: 1.2.1
+      vitest:
+        specifier: ^0.31.1
+        version: 0.31.1(happy-dom@9.19.2)
 
   packages/vue/ui/button:
     dependencies:

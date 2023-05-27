@@ -1,9 +1,11 @@
 import child_process from 'node:child_process'
+import * as os from 'os'
 import {
 	applyOverrides,
-	replaceTask,
 	findRootProject,
+	replaceTask,
 } from '@arroyodev-llc/utils.projen'
+import PQueue from 'p-queue'
 import {
 	Component,
 	type ObjectFile,
@@ -12,10 +14,10 @@ import {
 	typescript,
 } from 'projen'
 import {
-	type NodeProject,
-	type PrettierOptions,
 	Eslint,
+	type NodeProject,
 	Prettier,
+	type PrettierOptions,
 } from 'projen/lib/javascript'
 
 export interface LintConfigOptions {
@@ -23,10 +25,21 @@ export interface LintConfigOptions {
 	 * Enable type-enriched linting in eslint.
 	 */
 	readonly useTypeInformation?: boolean
+	/**
+	 * Number in seconds to timeout formatting requests.
+	 * @default 30
+	 */
+	readonly formatTimeout?: number
 }
 
-interface FormatRequest {
+export interface FormatRequest {
+	/**
+	 * Target file path.
+	 */
 	filePath: string
+	/**
+	 * Working directory to spawn eslint from.
+	 */
 	workingDirectory: string
 }
 
@@ -42,13 +55,14 @@ export class LintConfig extends Component {
 	readonly prettier: Prettier
 	readonly prettierFile: ObjectFile
 
-	#formatRequests: Array<FormatRequest> = []
+	#formatQueue: PQueue
 
 	constructor(
 		project: NodeProject,
-		options: LintConfigOptions = { useTypeInformation: true }
+		options: LintConfigOptions = { useTypeInformation: true, formatTimeout: 30 }
 	) {
 		super(project)
+		this.#formatQueue = this.buildFormatQueue(options.formatTimeout)
 
 		this.eslint =
 			Eslint.of(project) ??
@@ -103,6 +117,32 @@ export class LintConfig extends Component {
 	}
 
 	/**
+	 * Build format queue.
+	 * @param timeout Queue timeout.
+	 * @protected
+	 */
+	protected buildFormatQueue(timeout?: number): PQueue {
+		const queue = new PQueue({
+			throwOnTimeout: true,
+			timeout: (timeout ?? 30) * 1000,
+			autoStart: false,
+			concurrency: Math.round(os.cpus().length * 0.7),
+			carryoverConcurrencyCount: true,
+		})
+		let hasReportedTotal = false
+		queue.on('active', () => {
+			if (!hasReportedTotal && this.#formatQueue.size) {
+				this.project.logger.info(`Formatting ${this.#formatQueue.size} files`)
+				hasReportedTotal = true
+			}
+			if (this.#formatQueue.size === 0) {
+				this.project.logger.info('Formatted all generated files.')
+			}
+		})
+		return queue
+	}
+
+	/**
 	 * Enable type enriched linting.
 	 * @protected
 	 */
@@ -119,34 +159,7 @@ export class LintConfig extends Component {
 	 * @protected
 	 */
 	protected resolveFormatRequests() {
-		if (!this.#formatRequests.length) return
-		const formatPromises = this.#formatRequests.map((request) => {
-			const cmd = `eslint --cache --no-ignore --fix ${request.filePath}`
-			this.project.logger.verbose(
-				`formatting typescript source file: ${request.filePath} (from: ${request.workingDirectory})`
-			)
-			return new Promise<void>((resolve) =>
-				child_process.exec(
-					cmd,
-					{
-						cwd: request.workingDirectory,
-					},
-					(err) => {
-						if (err) {
-							this.project.logger.warn(err)
-						}
-						resolve()
-					}
-				)
-			)
-		})
-		const fileCount = this.#formatRequests.length
-		this.project.logger.info(
-			`Waiting for ${fileCount} files to be formatted...`
-		)
-		void Promise.all(formatPromises).then(() => {
-			this.project.logger.info(`Formatted ${fileCount} files.`)
-		})
+		this.#formatQueue.start()
 	}
 
 	/**
@@ -176,7 +189,26 @@ export class LintConfig extends Component {
 	 * @param request format request.
 	 */
 	enqueueFormatRequest(request: FormatRequest): this {
-		this.#formatRequests.push(request)
+		void this.#formatQueue.add(async () => {
+			const cmd = `eslint --cache --no-ignore --fix ${request.filePath}`
+			this.project.logger.verbose(
+				`formatting typescript source file: ${request.filePath} (from: ${request.workingDirectory})`
+			)
+			return new Promise<void>((resolve) =>
+				child_process.exec(
+					cmd,
+					{
+						cwd: request.workingDirectory,
+					},
+					(err) => {
+						if (err) {
+							this.project.logger.warn(err)
+						}
+						resolve()
+					}
+				)
+			)
+		})
 		return this
 	}
 

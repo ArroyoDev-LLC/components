@@ -21,6 +21,14 @@ export interface StripOptions {
 	 * @default true
 	 */
 	doubleQuotes?: boolean
+	/**
+	 * Strip all commas (,).
+	 */
+	commas?: boolean
+	/**
+	 * Strip all semicolons (;).
+	 */
+	semicolons?: boolean
 }
 
 /**
@@ -64,6 +72,8 @@ export function stripFormatting(
 		spaces = true,
 		singleQuotes = true,
 		doubleQuotes = true,
+		commas = true,
+		semicolons = true,
 	} = options ?? {}
 	let base = content.replaceAll('\\', '').replaceAll(/\n/g, '')
 	if (singleQuotes) {
@@ -74,6 +84,12 @@ export function stripFormatting(
 	}
 	if (spaces) {
 		base = base.replaceAll(/\s/g, '')
+	}
+	if (commas) {
+		base = base.replaceAll(',', '')
+	}
+	if (semicolons) {
+		base = base.replaceAll(';', '')
 	}
 	return base
 }

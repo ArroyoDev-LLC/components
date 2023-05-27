@@ -10,7 +10,6 @@ import {
 import { Component, DependencyType, type Project } from 'projen'
 import { type NodePackage } from 'projen/lib/javascript'
 import { type TypeScriptProject } from 'projen/lib/typescript'
-import { SyntaxKind } from 'ts-morph'
 import type { UserConfigExport } from 'vite'
 
 export interface ViteOptions {
@@ -49,21 +48,17 @@ export class Vite extends Component {
 	}
 
 	protected buildFile(): TypeScriptSourceConfig<UserConfigExport> {
-		const file = new TypeScriptSourceConfig<UserConfigExport>(
-			this.project,
-			'vite.config.ts',
-			{
-				source: `export default defineConfig({})`,
-				recreate: true,
-				marker: true,
-				pluginsProperty: 'plugins',
-				configResolver: (cfg, src) =>
-					cfg
-						.getDefaultExport(src, SyntaxKind.CallExpression)
-						.getArguments()[0]!
-						.asKindOrThrow(SyntaxKind.ObjectLiteralExpression),
-			}
-		)
+		const file =
+			TypeScriptSourceConfig.withCallExpressionConfig<UserConfigExport>(
+				this.project,
+				'vite.config.ts',
+				{
+					source: `export default defineConfig({})`,
+					recreate: true,
+					marker: true,
+					pluginsProperty: 'plugins',
+				}
+			)
 		file.addImport({
 			moduleSpecifier: 'vite',
 			namedImports: ['defineConfig'],

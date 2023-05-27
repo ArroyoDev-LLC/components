@@ -128,7 +128,7 @@ export function computeChecksum(
  * @param filePath Path of target file.
  * @param options Checksum options.
  */
-export async function createFileChecksum(
+export async function computeFileChecksum(
 	filePath: string,
 	options?: ChecksumOptions
 ): Promise<string> {

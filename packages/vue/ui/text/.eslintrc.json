@@ -42,16 +42,15 @@
     "import/resolver": {
       "node": {
         "extensions": [
-          [
-            ".js",
-            ".jsx",
-            ".mjs",
-            ".cjs",
-            ".ts",
-            ".tsx",
-            ".mts",
-            ".cts"
-          ]
+          ".js",
+          ".jsx",
+          ".mjs",
+          ".cjs",
+          ".ts",
+          ".tsx",
+          ".mts",
+          ".cts",
+          ".vue"
         ]
       },
       "typescript": {
@@ -60,16 +59,15 @@
       }
     },
     "import/extensions": [
-      [
-        ".js",
-        ".jsx",
-        ".mjs",
-        ".cjs",
-        ".ts",
-        ".tsx",
-        ".mts",
-        ".cts"
-      ]
+      ".js",
+      ".jsx",
+      ".mjs",
+      ".cjs",
+      ".ts",
+      ".tsx",
+      ".mts",
+      ".cts",
+      ".vue"
     ]
   },
   "ignorePatterns": [

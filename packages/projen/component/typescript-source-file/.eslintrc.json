@@ -166,6 +166,16 @@
           "off"
         ]
       }
+    },
+    {
+      "files": [
+        "build.config.ts"
+      ],
+      "rules": {
+        "import/order": [
+          "off"
+        ]
+      }
     }
   ]
 }

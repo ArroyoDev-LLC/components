@@ -48,7 +48,7 @@ new Vitest(utilsProjen)
 
 const utilsFs = TypescriptProject.fromParent(monorepo, {
 	name: 'utils.fs',
-	deps: ['fs-extra'],
+	deps: ['fs-extra', 'pathe'],
 	devDeps: ['@types/fs-extra'],
 })
 new Vitest(utilsFs)

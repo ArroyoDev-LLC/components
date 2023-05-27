@@ -1,3 +1,4 @@
+import { existsSync, readFileSync } from 'fs'
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import {
 	FileBase,
@@ -7,14 +8,15 @@ import {
 } from 'projen'
 import {
 	type ImportDeclarationStructure,
-	type OptionalKind,
-	Project,
-	type SourceFile,
-	SyntaxKind,
 	type KindToExpressionMappings,
 	type ObjectLiteralExpression,
+	type OptionalKind,
+	Project as TSProject,
+	type SourceFile,
+	SyntaxKind,
 	type WriterFunction,
 } from 'ts-morph'
+import { TypeScriptSourceFileCache } from './type-script-source-file-cache'
 
 export interface TypeScriptSourceFileTransform {
 	(sourceFile: SourceFile): void
@@ -122,8 +124,11 @@ export class TypeScriptSourceFile extends FileBase {
 		return existsProperty.getInitializerIfKindOrThrow(initializerKind)
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	protected synthesizeContent(): string {
-		const tsProject = new Project({
+		const tsProject = new TSProject({
 			tsConfigFilePath: this.tsconfigFile.path,
 			skipAddingFilesFromTsConfig: true,
 			compilerOptions: { allowJs: true },
@@ -147,19 +152,26 @@ export class TypeScriptSourceFile extends FileBase {
 			sourceFile = sourceFile.fixMissingImports().organizeImports()
 		}
 
-		return [
+		const newContent = [
 			...(this.options.marker ? [`// ${this.marker as string}`] : []),
 			'',
 			sourceFile.getFullText(),
 		].join('\n')
-	}
 
-	/**
-	 * @inheritDoc
-	 */
-	preSynthesize() {
-		super.preSynthesize()
-		// enqueue generated files for linting.
-		LintConfig.of(this.project)?.formatFile?.(this.absolutePath)
+		const cache = TypeScriptSourceFileCache.ensure(this.project)
+		const didChange = cache.upsertFile(this.absolutePath, newContent)
+		const fileExists = existsSync(this.absolutePath)
+		this.project.logger.verbose(
+			`TSSource(${
+				this.filePath
+			}, exists=${fileExists.toString()}, didChange=${didChange.toString()})`
+		)
+		if (fileExists && didChange) {
+			// enqueue generated files for linting.
+			LintConfig.of(this.project)?.formatFile?.(this.absolutePath)
+			return newContent
+		} else {
+			return readFileSync(this.absolutePath, 'utf8')
+		}
 	}
 }

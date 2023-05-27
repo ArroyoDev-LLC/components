@@ -8,6 +8,7 @@ import {
 import PQueue from 'p-queue'
 import {
 	Component,
+	JsonPatch,
 	type ObjectFile,
 	type Project,
 	type TaskStep,
@@ -19,6 +20,7 @@ import {
 	Prettier,
 	type PrettierOptions,
 } from 'projen/lib/javascript'
+import { tryReadFileSync } from 'projen/lib/util'
 
 export interface LintConfigOptions {
 	/**
@@ -56,6 +58,16 @@ export class LintConfig extends Component {
 	readonly prettierFile: ObjectFile
 
 	#formatQueue: PQueue
+	#extensions: Set<string> = new Set([
+		'.js',
+		'.jsx',
+		'.mjs',
+		'.cjs',
+		'.ts',
+		'.tsx',
+		'.mts',
+		'.cts',
+	])
 
 	constructor(
 		project: NodeProject,
@@ -111,18 +123,6 @@ export class LintConfig extends Component {
 
 		this.eslintFile = project.tryFindObjectFile('.eslintrc.json')!
 
-		const extensions = [
-			'.js',
-			'.jsx',
-			'.mjs',
-			'.cjs',
-			'.ts',
-			'.tsx',
-			'.mts',
-			'.cts',
-		]
-		this.addResolvableExtensions(...extensions)
-
 		if (options.useTypeInformation) {
 			this.enableEslintTypeInformation()
 		}
@@ -174,16 +174,27 @@ export class LintConfig extends Component {
 		this.#formatQueue.start()
 	}
 
+	/**
+	 * Apply eslint extensions.
+	 * @protected
+	 */
+	protected applyResolvableExtensions(): void {
+		const extensions = Array.from(this.#extensions)
+		this.eslintFile.addOverride(
+			'settings.import/resolver.node.extensions',
+			extensions
+		)
+		this.eslintFile.addOverride('settings.import/extensions', extensions)
+	}
+
 	/*
 	 * Add extensions to eslint resolvable settings.
 	 * @param extensions Extensions to add.
 	 */
 	addResolvableExtensions(...extensions: string[]): this {
-		this.eslintFile.addToArray(
-			'settings.import/resolver.node.extensions',
-			extensions
-		)
-		this.eslintFile.addToArray('settings.import/extensions', extensions)
+		// projen runs all patch calls as a single patch for some reason
+		// and just lets test ops throw, so only add once presynth.
+		extensions.forEach((ext) => this.#extensions.add(ext))
 		return this
 	}
 
@@ -247,6 +258,14 @@ export class LintConfig extends Component {
 			filePath,
 			workingDirectory: this.project.outdir,
 		})
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	preSynthesize() {
+		this.applyResolvableExtensions()
+		super.preSynthesize()
 	}
 
 	/**

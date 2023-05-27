@@ -33,16 +33,14 @@
     "import/resolver": {
       "node": {
         "extensions": [
-          [
-            ".js",
-            ".jsx",
-            ".mjs",
-            ".cjs",
-            ".ts",
-            ".tsx",
-            ".mts",
-            ".cts"
-          ]
+          ".js",
+          ".jsx",
+          ".mjs",
+          ".cjs",
+          ".ts",
+          ".tsx",
+          ".mts",
+          ".cts"
         ]
       },
       "typescript": {
@@ -51,16 +49,14 @@
       }
     },
     "import/extensions": [
-      [
-        ".js",
-        ".jsx",
-        ".mjs",
-        ".cjs",
-        ".ts",
-        ".tsx",
-        ".mts",
-        ".cts"
-      ]
+      ".js",
+      ".jsx",
+      ".mjs",
+      ".cjs",
+      ".ts",
+      ".tsx",
+      ".mts",
+      ".cts"
     ]
   },
   "ignorePatterns": [

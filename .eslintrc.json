@@ -31,12 +31,37 @@
       ]
     },
     "import/resolver": {
-      "node": {},
+      "node": {
+        "extensions": [
+          [
+            ".js",
+            ".jsx",
+            ".mjs",
+            ".cjs",
+            ".ts",
+            ".tsx",
+            ".mts",
+            ".cts"
+          ]
+        ]
+      },
       "typescript": {
         "project": "./tsconfig.dev.json",
         "alwaysTryTypes": true
       }
-    }
+    },
+    "import/extensions": [
+      [
+        ".js",
+        ".jsx",
+        ".mjs",
+        ".cjs",
+        ".ts",
+        ".tsx",
+        ".mts",
+        ".cts"
+      ]
+    ]
   },
   "ignorePatterns": [
     "packages/**/*.*",

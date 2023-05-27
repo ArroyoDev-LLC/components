@@ -3,10 +3,7 @@ import os from 'node:os'
 import fse from 'fs-extra'
 import pathe from 'pathe'
 import { test, expect, beforeAll, afterAll, describe } from 'vitest'
-import {
-	simpleNodeModulesCacheStore,
-	type NodeModulesCacheStoreOptions,
-} from '../src/cache'
+import { simpleNodeModulesCacheStore } from '../src/cache'
 
 describe('simpleNodeModulesCacheStore', () => {
 	const packageDir = pathe.join(os.tmpdir(), crypto.randomUUID())

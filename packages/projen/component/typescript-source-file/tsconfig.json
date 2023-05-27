@@ -13,6 +13,9 @@
       ],
       "@arroyodev-llc/projen.component.linting": [
         "../linting/src/index"
+      ],
+      "@arroyodev-llc/utils.fs": [
+        "../../../utils/fs/src/index"
       ]
     }
   },

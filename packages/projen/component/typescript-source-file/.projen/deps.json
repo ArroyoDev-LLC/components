@@ -77,6 +77,11 @@
       "type": "runtime"
     },
     {
+      "name": "@arroyodev-llc/utils.fs",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@arroyodev-llc/utils.projen",
       "version": "workspace:*",
       "type": "runtime"

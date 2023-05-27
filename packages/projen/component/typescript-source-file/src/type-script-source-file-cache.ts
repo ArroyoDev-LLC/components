@@ -5,6 +5,7 @@ import {
 } from '@arroyodev-llc/utils.fs'
 import { findComponent, findRootProject } from '@arroyodev-llc/utils.projen'
 import { Component, type Project } from 'projen'
+import { tryReadFileSync } from 'projen/lib/util'
 
 /**
  * A cache for TypeScript source files.
@@ -53,6 +54,18 @@ export class TypeScriptSourceFileCache extends Component {
 	}
 
 	/**
+	 * Updates the hash for the given file path.
+	 * @param filePath The file path to update the hash for.
+	 * @param hash The new hash.
+	 * @protected
+	 */
+	protected updateHash(filePath: string, hash: string) {
+		this.fileHashes.set(filePath, hash)
+		this.#cacheStore.save({ contentHashes: [...this.fileHashes.entries()] })
+		return true
+	}
+
+	/**
 	 * Upsert hash of file content for given file path.
 	 *
 	 * @remarks
@@ -64,11 +77,18 @@ export class TypeScriptSourceFileCache extends Component {
 	upsertFile(filePath: string, content: string): boolean {
 		const hash = computeChecksum(content, { stripContent: true })
 		const current = this.fileHashes.get(filePath)
-		if (current !== hash) {
-			this.fileHashes.set(filePath, hash)
-			this.#cacheStore.save({ contentHashes: [...this.fileHashes.entries()] })
-			return true
+		if (current !== hash && current) {
+			// synthesized contents changed, update.
+			return this.updateHash(filePath, hash)
 		}
-		return false
+		const fileContents = tryReadFileSync(filePath)
+		// check if formatted file has been modified.
+		const fileHash = fileContents
+			? computeChecksum(fileContents, { stripContent: true })
+			: undefined
+		if (!current) {
+			this.updateHash(filePath, hash)
+		}
+		return fileHash !== hash
 	}
 }

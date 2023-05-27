@@ -205,16 +205,15 @@ export class Vue extends Component {
 			'@vue/test-utils',
 			'faker'
 		)
-		component.configFile.addImport({
-			moduleSpecifier: '@vitejs/plugin-vue',
-			defaultImport: 'vue',
-		})
-		component.addConfigTransform((configExpr) => {
-			configExpr.addPropertyAssignment({
-				name: 'plugins',
-				initializer: '[vue()]',
+		if (!component.vite) {
+			component.configFile.addImport({
+				moduleSpecifier: '@vitejs/plugin-vue',
+				defaultImport: 'vue',
 			})
-		})
+			component.addConfig({
+				plugins: (writer) => writer.write('[vue()]'),
+			})
+		}
 		this.project.tasks
 			.tryFind('test')
 			?.reset?.('vitest', { args: ['--run'], receiveArgs: true })

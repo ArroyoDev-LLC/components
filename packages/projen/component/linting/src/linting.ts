@@ -8,7 +8,6 @@ import {
 import PQueue from 'p-queue'
 import {
 	Component,
-	JsonPatch,
 	type ObjectFile,
 	type Project,
 	type TaskStep,
@@ -20,7 +19,6 @@ import {
 	Prettier,
 	type PrettierOptions,
 } from 'projen/lib/javascript'
-import { tryReadFileSync } from 'projen/lib/util'
 
 export interface LintConfigOptions {
 	/**

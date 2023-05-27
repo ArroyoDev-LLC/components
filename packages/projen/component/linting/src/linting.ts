@@ -121,11 +121,7 @@ export class LintConfig extends Component {
 			'.mts',
 			'.cts',
 		]
-		this.eslintFile.addToArray(
-			'settings.import/resolver.node.extensions',
-			extensions
-		)
-		this.eslintFile.addToArray('settings.import/extensions', extensions)
+		this.addResolvableExtensions(...extensions)
 
 		if (options.useTypeInformation) {
 			this.enableEslintTypeInformation()
@@ -176,6 +172,19 @@ export class LintConfig extends Component {
 	 */
 	protected resolveFormatRequests() {
 		this.#formatQueue.start()
+	}
+
+	/*
+	 * Add extensions to eslint resolvable settings.
+	 * @param extensions Extensions to add.
+	 */
+	addResolvableExtensions(...extensions: string[]): this {
+		this.eslintFile.addToArray(
+			'settings.import/resolver.node.extensions',
+			extensions
+		)
+		this.eslintFile.addToArray('settings.import/extensions', extensions)
+		return this
 	}
 
 	/**

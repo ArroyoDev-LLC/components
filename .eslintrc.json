@@ -172,6 +172,16 @@
     },
     {
       "files": [
+        "vitest.config.ts"
+      ],
+      "rules": {
+        "import/order": [
+          "off"
+        ]
+      }
+    },
+    {
+      "files": [
         ".projenrc.ts"
       ],
       "rules": {

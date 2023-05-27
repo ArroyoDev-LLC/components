@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'fs'
+import { readFileSync } from 'fs'
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import {
 	FileBase,
@@ -6,6 +6,7 @@ import {
 	type ObjectFile,
 	type typescript,
 } from 'projen'
+import { Eslint } from 'projen/lib/javascript'
 import {
 	type ImportDeclarationStructure,
 	type KindToExpressionMappings,
@@ -59,6 +60,12 @@ export class TypeScriptSourceFile extends FileBase {
 			marker: true,
 			...options,
 		}
+		Eslint.of(this.project)?.addOverride?.({
+			files: [this.filePath],
+			rules: {
+				'import/order': ['off'],
+			},
+		})
 	}
 
 	get transforms(): Array<TypeScriptSourceFileTransform> {
@@ -124,9 +131,6 @@ export class TypeScriptSourceFile extends FileBase {
 		return existsProperty.getInitializerIfKindOrThrow(initializerKind)
 	}
 
-	/**
-	 * @inheritDoc
-	 */
 	protected synthesizeContent(): string {
 		const tsProject = new TSProject({
 			tsConfigFilePath: this.tsconfigFile.path,
@@ -160,13 +164,7 @@ export class TypeScriptSourceFile extends FileBase {
 
 		const cache = TypeScriptSourceFileCache.ensure(this.project)
 		const didChange = cache.upsertFile(this.absolutePath, newContent)
-		const fileExists = existsSync(this.absolutePath)
-		this.project.logger.verbose(
-			`TSSource(${
-				this.filePath
-			}, exists=${fileExists.toString()}, didChange=${didChange.toString()})`
-		)
-		if (fileExists && didChange) {
+		if (didChange) {
 			// enqueue generated files for linting.
 			LintConfig.of(this.project)?.formatFile?.(this.absolutePath)
 			return newContent

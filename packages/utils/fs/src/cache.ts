@@ -63,7 +63,7 @@ export const simpleNodeModulesCacheStore = <T>(
 		cwd,
 		'node_modules',
 		'.cache',
-		module.id,
+		name.split('.json')[0],
 		sourceName
 	)
 	fse.ensureDirSync(pathe.dirname(sourcePath))
@@ -72,7 +72,7 @@ export const simpleNodeModulesCacheStore = <T>(
 		| undefined
 	return {
 		filePath: sourcePath,
-		data: initData ? Object.freeze(initData) : initData,
+		data: initData ? Object.freeze(initData) : undefined,
 		save(data: T): Readonly<T> {
 			fse.writeJsonSync(sourcePath, data)
 			this.data = Object.freeze(data)

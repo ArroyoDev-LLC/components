@@ -1,17 +1,10 @@
 import path from 'node:path'
-import {
-	TypeScriptSourceFile,
-	type TypeScriptSourceFileTransform,
-} from '@arroyodev-llc/projen.component.typescript-source-file'
-import { addPropertyAssignmentsFromObject } from '@arroyodev-llc/utils.projen'
+import { TypeScriptSourceConfig } from '@arroyodev-llc/projen.component.typescript-source-file'
+import { Vite } from '@arroyodev-llc/projen.component.vite'
+import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
 import { Component, JsonFile, type Project } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import { deepMerge } from 'projen/lib/util'
-import {
-	type ObjectLiteralExpression,
-	type SourceFile,
-	SyntaxKind,
-} from 'ts-morph'
 import { type UserWorkspaceConfig } from 'vitest/config'
 
 export enum VitestConfigType {
@@ -42,9 +35,10 @@ export class Vitest extends Component {
 	}
 
 	readonly configType: VitestConfigType
-	readonly configFile: TypeScriptSourceFile
+	readonly configFile: TypeScriptSourceConfig<UserWorkspaceConfig>
 	readonly options: Required<VitestOptions>
 	readonly #workspaceProjects: Map<string, Vitest> = new Map<string, Vitest>()
+	readonly vite?: Vite
 
 	constructor(
 		public readonly project: TypeScriptProject,
@@ -55,6 +49,7 @@ export class Vitest extends Component {
 		}
 	) {
 		super(project)
+		this.vite = Vite.of(this.project)
 		this.options = deepMerge([
 			{
 				settings: {
@@ -88,10 +83,17 @@ export class Vitest extends Component {
 			},
 		})
 
-		this.configFile = new TypeScriptSourceFile(this.project, configFilePath, {
-			source: `export default ${this.defineName}({})`,
-			recreate: true,
-		})
+		this.configFile =
+			TypeScriptSourceConfig.withCallExpressionConfig<UserWorkspaceConfig>(
+				this.project,
+				configFilePath,
+				{
+					source: `export default ${this.defineName}({})`,
+					recreate: true,
+					marker: true,
+					config: this.options.settings,
+				}
+			)
 
 		this.configFile.addImport({
 			moduleSpecifier: 'vitest/config',
@@ -109,20 +111,50 @@ export class Vitest extends Component {
 				obj: () => Array.from(this.#workspaceProjects.keys()),
 			})
 		}
-
-		this.addConfigTransform((configExpr) => {
-			const { test = { include: ['test/**.spec.ts'] }, ...rest } =
-				this.options.settings ?? {}
-			addPropertyAssignmentsFromObject(configExpr, { test, ...rest })
-		})
 	}
 
+	/**
+	 * Get the define function name.
+	 * @protected
+	 */
 	protected get defineName(): string {
 		return this.configType === VitestConfigType.PROJECT
 			? 'defineProject'
 			: 'defineConfig'
 	}
 
+	/**
+	 * Merge vite config if applicable.
+	 * @protected
+	 */
+	protected mergeVite(): void {
+		if (!this.vite) return
+		this.configFile.addImport({
+			moduleSpecifier: 'vitest/config',
+			namedImports: ['mergeConfig'],
+		})
+		this.configFile.addImport({
+			moduleSpecifier: cwdRelativePath(
+				this.project.outdir,
+				this.vite.file.absolutePath.split('.').slice(0, -1).join('.')
+			),
+			defaultImport: 'viteConfig',
+		})
+		this.configFile.addConfigTransform((cfg, src) => {
+			src.addExportAssignment({
+				expression: (writer) =>
+					writer.write(
+						`mergeConfig(viteConfig, ${this.defineName}(${cfg.getFullText()}))`
+					),
+				isExportEquals: false,
+			})
+			src.removeDefaultExport()
+		})
+	}
+
+	/**
+	 * Try to find the workspace {@link Vitest} component.
+	 */
 	tryFindWorkspace(): Vitest | undefined {
 		if (this.configType === VitestConfigType.WORKSPACE) return this
 		if (this.project.parent) {
@@ -131,6 +163,10 @@ export class Vitest extends Component {
 		return
 	}
 
+	/**
+	 * Add {@link Vitest} component to this workspace.
+	 * @param component Target component.
+	 */
 	addProjectConfig(component: Vitest): this {
 		if (this.configType !== VitestConfigType.WORKSPACE)
 			throw new Error('No vitest workspace found. Cannot add project config!')
@@ -145,24 +181,29 @@ export class Vitest extends Component {
 		return this
 	}
 
-	addConfigTransform(
-		transform: (
-			configObjectLiteral: ObjectLiteralExpression,
-			sourceFile: SourceFile
-		) => void
-	) {
-		const transformer: TypeScriptSourceFileTransform = (src: SourceFile) => {
-			const configExport = src
-				.getExportAssignmentOrThrow((exp) =>
-					Boolean(exp.getExpressionIfKind(SyntaxKind.CallExpression))
-				)
-				.getExpressionIfKindOrThrow(SyntaxKind.CallExpression)
-			const configExpr = configExport
-				.getArguments()[0]!
-				.asKindOrThrow(SyntaxKind.ObjectLiteralExpression)
-			transform(configExpr, src)
-		}
-		this.configFile.addTransformer(transformer)
+	/**
+	 * Add config to merge.
+	 * @param config Config part.
+	 */
+	addConfig(config: this['configFile']['__mergeSchema']): this {
+		this.configFile.addConfig(config)
 		return this
+	}
+
+	/**
+	 * Add plugin to merge.
+	 * @param plugin Plugin part.
+	 */
+	addPlugin(plugin: this['configFile']['__pluginSchema']) {
+		this.configFile.addPlugin(plugin)
+		return this
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	preSynthesize() {
+		super.preSynthesize()
+		this.mergeVite()
 	}
 }

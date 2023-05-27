@@ -6,6 +6,38 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.9...@arroyodev-llc/projen.component.typescript-source-file-v0.1.10) (2023-05-27)
+
+
+### Features
+
+* **projen.component.ts-source:** Add `utils.fs` as dependency ([79110b4](https://github.com/ArroyoDev-LLC/components/commit/79110b4b8b015720116e39d6031be317ce5566f9))
+* **projen.component.ts-source:** Add `withCallExpressionConfig` static helper ([7a5077a](https://github.com/ArroyoDev-LLC/components/commit/7a5077a633714d95899fee5c1ed10b4faefa38a8))
+* **projen.component.ts-source:** Compare source file on no cache/no synth change ([6f1a8a0](https://github.com/ArroyoDev-LLC/components/commit/6f1a8a0a983999378baeb96178085d0ad0fc6567))
+* **projen.component.ts-source:** Disable import/order on generated ts files, update synth check ([d4bcfe6](https://github.com/ArroyoDev-LLC/components/commit/d4bcfe65ed9782b78ef6896f88271325a87682e5))
+* **projen.component.ts-source:** Implement `TypeScriptSourceFileCache` component ([52a9d33](https://github.com/ArroyoDev-LLC/components/commit/52a9d33777a7d5f7c3fdf4e6c42ed40322375fa9))
+* **projen.component.ts-source:** Skip resynthesis of ts source files unless changed or missing ([bfeaf32](https://github.com/ArroyoDev-LLC/components/commit/bfeaf324112a208313cf551d5b0196e5dc9ac068))
+* **vue:** Update vitest configs ([9b5042b](https://github.com/ArroyoDev-LLC/components/commit/9b5042b36033ed67cd32a53b1e2d207ffd0782ca))
+
+
+### Bug Fixes
+
+* **projen.component.linting:** Add `{c,m}.{ts,js}` to eslint import resolvers configs ([3c92f9a](https://github.com/ArroyoDev-LLC/components/commit/3c92f9aa63b40b75356e4c5cde44de9825d7afc0))
+
+
+### Tests
+
+* Update snaps ([618761e](https://github.com/ArroyoDev-LLC/components/commit/618761e2e9a782305d6a0f096678e35647a71abb))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.9
+    * @arroyodev-llc/utils.fs bumped to 0.1.2
+    * @arroyodev-llc/utils.projen bumped to 0.1.9
+
 ## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.8...@arroyodev-llc/projen.component.typescript-source-file-v0.1.9) (2023-05-26)
 
 

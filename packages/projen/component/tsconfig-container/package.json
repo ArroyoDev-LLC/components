@@ -50,7 +50,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.1.4",
+  "version": "0.1.5",
   "types": "./dist/index.d.ts",
   "type": "module",
   "sideEffects": false,

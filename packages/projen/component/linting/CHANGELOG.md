@@ -6,6 +6,34 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.8...@arroyodev-llc/projen.component.linting-v0.1.9) (2023-05-27)
+
+
+### Features
+
+* **projen.component.linting:** Add `p-queue` dependency ([2fbf37d](https://github.com/ArroyoDev-LLC/components/commit/2fbf37dd842a22230565a7c25526ddc00c42288a))
+* **projen.component.linting:** Apply resolvable extensions once during pre-synth ([fa70e67](https://github.com/ArroyoDev-LLC/components/commit/fa70e67f7ffa47b75cc0a4386e3015b788ee92f9))
+* **projen.component.linting:** Implement linting queue to limit concurrency of generating file linting ([9eb3848](https://github.com/ArroyoDev-LLC/components/commit/9eb38486af6ede2ad316201a9ed718838dfccdc9))
+* **projen.component.linting:** Implement public `addResolvableExtensions` method ([d4ab9c6](https://github.com/ArroyoDev-LLC/components/commit/d4ab9c6b9a79325f6fa9b65a7044b1072e46525f))
+* **projen.component.ts-source:** Disable import/order on generated ts files, update synth check ([d4bcfe6](https://github.com/ArroyoDev-LLC/components/commit/d4bcfe65ed9782b78ef6896f88271325a87682e5))
+
+
+### Bug Fixes
+
+* **projen.component.linting:** Add `{c,m}.{ts,js}` to eslint import resolvers configs ([3c92f9a](https://github.com/ArroyoDev-LLC/components/commit/3c92f9aa63b40b75356e4c5cde44de9825d7afc0))
+
+
+### Tests
+
+* Update snaps ([618761e](https://github.com/ArroyoDev-LLC/components/commit/618761e2e9a782305d6a0f096678e35647a71abb))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.9
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.7...@arroyodev-llc/projen.component.linting-v0.1.8) (2023-05-26)
 
 

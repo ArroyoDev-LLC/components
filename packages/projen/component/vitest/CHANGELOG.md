@@ -7,6 +7,35 @@
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.10...@arroyodev-llc/projen.component.vitest-v0.1.11) (2023-05-27)
+
+
+### Features
+
+* **projen.component.ts-source:** Disable import/order on generated ts files, update synth check ([d4bcfe6](https://github.com/ArroyoDev-LLC/components/commit/d4bcfe65ed9782b78ef6896f88271325a87682e5))
+* **projen.component.vitest:** Add vite component as dep ([a2ff962](https://github.com/ArroyoDev-LLC/components/commit/a2ff962aed547bcc7f1a2bf79b6c8e3aa0331035))
+* **projen.component.vitest:** Use source config, merge with existing vite if applicable ([e348f02](https://github.com/ArroyoDev-LLC/components/commit/e348f02e9b3e4d44b1cc4bec3dbbcee34c1c227b))
+* **vue:** Update vitest configs ([9b5042b](https://github.com/ArroyoDev-LLC/components/commit/9b5042b36033ed67cd32a53b1e2d207ffd0782ca))
+
+
+### Bug Fixes
+
+* **projen.component.linting:** Add `{c,m}.{ts,js}` to eslint import resolvers configs ([3c92f9a](https://github.com/ArroyoDev-LLC/components/commit/3c92f9aa63b40b75356e4c5cde44de9825d7afc0))
+
+
+### Tests
+
+* Update snaps ([618761e](https://github.com/ArroyoDev-LLC/components/commit/618761e2e9a782305d6a0f096678e35647a71abb))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.10
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.12
+    * @arroyodev-llc/utils.projen bumped to 0.1.9
+
 ## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.9...@arroyodev-llc/projen.component.vitest-v0.1.10) (2023-05-26)
 
 

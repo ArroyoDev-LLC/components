@@ -13,16 +13,17 @@ import {
 } from '../src/checksum'
 
 const stripFormatCases: [string, undefined | StripOptions, string][] = [
-	[`"Hello, World!"`, undefined, `Hello,World!`],
-	[`'Hello, World!'`, { singleQuotes: false }, `'Hello,World!'`],
-	[`"Hello, World!"`, { doubleQuotes: false }, `"Hello,World!"`],
+	[`"Hello, World!"`, undefined, `HelloWorld!`],
+	[`"Hello;, World;!\n'L'"`, undefined, `HelloWorld!L`],
+	[`'Hello, World!'`, { singleQuotes: false }, `'HelloWorld!'`],
+	[`"Hello, World!"`, { doubleQuotes: false }, `"HelloWorld!"`],
 	[
 		`"Hello,\\ 'World!'"`,
-		{ doubleQuotes: false, singleQuotes: false, spaces: false },
+		{ doubleQuotes: false, singleQuotes: false, spaces: false, commas: false },
 		`"Hello, 'World!'"`,
 	],
-	[`"Hello,\\ 'World!'"\nSecond 'Line'`, undefined, `Hello,World!SecondLine`],
-	[`"Hello, World!"`, { spaces: false }, `Hello, World!`],
+	[`"Hello,\\ 'World!'"\nSecond 'Line'`, undefined, `HelloWorld!SecondLine`],
+	[`"Hello, World!"`, { spaces: false }, `Hello World!`],
 	['', undefined, ''],
 ]
 
@@ -47,12 +48,12 @@ const checksumGeneratorCases: [
 	[
 		worldParts,
 		{ stripContent: true },
-		'16ad856b462e68f965f6e93f66282a7ae891fdbc',
+		'd735871a64133ee062400659cf91b8234d1c1930',
 	],
 	[
 		worldParts,
 		{ stripContent: true, stripOptions: { spaces: false } },
-		'0a0a9f2a6772942557ab5355d76af442f8f65e01',
+		'2ef7bde608ce5404e97d5f042f95f89f1c232871',
 	],
 	[[''], undefined, 'da39a3ee5e6b4b0d3255bfef95601890afd80709'],
 ]

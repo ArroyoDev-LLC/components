@@ -755,6 +755,9 @@ importers:
       '@arroyodev-llc/projen.component.typescript-source-file':
         specifier: workspace:*
         version: link:../typescript-source-file
+      '@arroyodev-llc/projen.component.vite':
+        specifier: workspace:*
+        version: link:../vite
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen

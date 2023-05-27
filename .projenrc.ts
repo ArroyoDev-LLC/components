@@ -89,7 +89,7 @@ new Vitest(viteComponent)
 
 const vitestComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vitest',
-	workspaceDeps: [utilsProjen, tsSourceComponent],
+	workspaceDeps: [utilsProjen, tsSourceComponent, viteComponent],
 	deps: ['ts-morph', 'vitest'],
 })
 

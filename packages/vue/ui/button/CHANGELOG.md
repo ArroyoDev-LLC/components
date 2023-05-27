@@ -6,6 +6,32 @@
   * dependencies
     * @arroyodev-llc/vue.ui.text bumped to 0.1.7
 
+## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.11...@arroyodev-llc/vue.ui.button-v0.1.12) (2023-05-27)
+
+
+### Features
+
+* **projen.component.ts-source:** Disable import/order on generated ts files, update synth check ([d4bcfe6](https://github.com/ArroyoDev-LLC/components/commit/d4bcfe65ed9782b78ef6896f88271325a87682e5))
+* **vue:** Update vitest configs ([9b5042b](https://github.com/ArroyoDev-LLC/components/commit/9b5042b36033ed67cd32a53b1e2d207ffd0782ca))
+
+
+### Bug Fixes
+
+* **projen.component.linting:** Add `{c,m}.{ts,js}` to eslint import resolvers configs ([3c92f9a](https://github.com/ArroyoDev-LLC/components/commit/3c92f9aa63b40b75356e4c5cde44de9825d7afc0))
+* **projen.component.vue:** Specify explicit type import in vue shim ([911c5f0](https://github.com/ArroyoDev-LLC/components/commit/911c5f04d03c9a3c1c0defc931585c9c623292dc))
+
+
+### Tests
+
+* Update snaps ([618761e](https://github.com/ArroyoDev-LLC/components/commit/618761e2e9a782305d6a0f096678e35647a71abb))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/vue.ui.text bumped to 0.1.12
+
 ## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.10...@arroyodev-llc/vue.ui.button-v0.1.11) (2023-05-26)
 
 

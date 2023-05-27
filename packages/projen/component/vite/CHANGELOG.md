@@ -13,6 +13,34 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.8
 
+## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.11...@arroyodev-llc/projen.component.vite-v0.1.12) (2023-05-27)
+
+
+### Features
+
+* **projen.component.ts-source:** Disable import/order on generated ts files, update synth check ([d4bcfe6](https://github.com/ArroyoDev-LLC/components/commit/d4bcfe65ed9782b78ef6896f88271325a87682e5))
+* **projen.component.vite:** Use `withCallExpressionConfig` helper ([12f1102](https://github.com/ArroyoDev-LLC/components/commit/12f1102f56d24fce8cb4eda6f7c0f7cbf4506e5b))
+* **vue:** Update vitest configs ([9b5042b](https://github.com/ArroyoDev-LLC/components/commit/9b5042b36033ed67cd32a53b1e2d207ffd0782ca))
+
+
+### Bug Fixes
+
+* **projen.component.linting:** Add `{c,m}.{ts,js}` to eslint import resolvers configs ([3c92f9a](https://github.com/ArroyoDev-LLC/components/commit/3c92f9aa63b40b75356e4c5cde44de9825d7afc0))
+
+
+### Tests
+
+* Update snaps ([618761e](https://github.com/ArroyoDev-LLC/components/commit/618761e2e9a782305d6a0f096678e35647a71abb))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.9
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.10
+    * @arroyodev-llc/utils.projen bumped to 0.1.9
+
 ## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.10...@arroyodev-llc/projen.component.vite-v0.1.11) (2023-05-26)
 
 

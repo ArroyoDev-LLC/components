@@ -58,6 +58,32 @@
   * dependencies
     * @arroyodev-llc/projen.project.typescript bumped to 0.1.13
 
+## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.16...@arroyodev-llc/projen.project.vue-component-v0.1.17) (2023-05-27)
+
+
+### Features
+
+* **projen.component.ts-source:** Disable import/order on generated ts files, update synth check ([d4bcfe6](https://github.com/ArroyoDev-LLC/components/commit/d4bcfe65ed9782b78ef6896f88271325a87682e5))
+
+
+### Bug Fixes
+
+* **projen.component.linting:** Add `{c,m}.{ts,js}` to eslint import resolvers configs ([3c92f9a](https://github.com/ArroyoDev-LLC/components/commit/3c92f9aa63b40b75356e4c5cde44de9825d7afc0))
+
+
+### Tests
+
+* Update snaps ([618761e](https://github.com/ArroyoDev-LLC/components/commit/618761e2e9a782305d6a0f096678e35647a71abb))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.12
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.15
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.14
+
 ## [0.1.15](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.14...@arroyodev-llc/projen.project.vue-component-v0.1.15) (2023-05-26)
 
 

@@ -55,6 +55,7 @@ new Vitest(utilsFs)
 
 const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.linting',
+	deps: ['p-queue'],
 	workspaceDeps: [utilsProjen],
 })
 

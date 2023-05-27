@@ -111,6 +111,22 @@ export class LintConfig extends Component {
 
 		this.eslintFile = project.tryFindObjectFile('.eslintrc.json')!
 
+		const extensions = [
+			'.js',
+			'.jsx',
+			'.mjs',
+			'.cjs',
+			'.ts',
+			'.tsx',
+			'.mts',
+			'.cts',
+		]
+		this.eslintFile.addToArray(
+			'settings.import/resolver.node.extensions',
+			extensions
+		)
+		this.eslintFile.addToArray('settings.import/extensions', extensions)
+
 		if (options.useTypeInformation) {
 			this.enableEslintTypeInformation()
 		}

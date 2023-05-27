@@ -67,6 +67,32 @@ export interface TypeScriptSourceConfigPlugin<OptionsT = Record<string, any>> {
 export class TypeScriptSourceConfig<
 	T extends Record<string, any> = Record<string, any>
 > extends TypeScriptSourceFile {
+	/**
+	 * Create config with call expression config resolver.
+	 * @param project Project to add config to.
+	 * @param filePath Path to config file.
+	 * @param options Config options.
+	 */
+	static withCallExpressionConfig<
+		ET extends Record<string, any> = Record<string, any>
+	>(
+		project: TypeScriptProject,
+		filePath: string,
+		options: TypeScriptSourceConfigOptions<ET>
+	): TypeScriptSourceConfig<ET> {
+		return new TypeScriptSourceConfig<ET>(project, filePath, {
+			...options,
+			configResolver: (cfg, src) =>
+				cfg
+					.getDefaultExport(src, SyntaxKind.CallExpression)
+					.getArguments()[0]!
+					.asKindOrThrow(SyntaxKind.ObjectLiteralExpression),
+		})
+	}
+
+	declare __mergeSchema: ObjectLiteralMergeSchema<T>
+	declare __pluginSchema: TypeScriptSourceConfigPlugin<T>
+
 	constructor(
 		project: TypeScriptProject,
 		filePath: string,

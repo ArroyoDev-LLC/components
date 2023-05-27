@@ -96,6 +96,7 @@ export class Vue extends Component {
 			'settings.import/parsers.vue-eslint-parser': ['.vue'],
 		})
 		component.setEslintExec('.tsx,.vue', '.tsx')
+		component.addResolvableExtensions('.vue')
 		return this
 	}
 

@@ -554,6 +554,9 @@ importers:
       '@arroyodev-llc/projen.component.linting':
         specifier: workspace:*
         version: link:../linting
+      '@arroyodev-llc/utils.fs':
+        specifier: workspace:*
+        version: link:../../../utils/fs
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen

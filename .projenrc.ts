@@ -62,7 +62,7 @@ const tsSourceComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.typescript-source-file',
 	parent: monorepo,
 	tsconfigBase: monorepo.esmBundledTsconfigExtends,
-	workspaceDeps: [utilsProjen, lintingComponent],
+	workspaceDeps: [utilsProjen, lintingComponent, utilsFs],
 	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo'],
 })
 

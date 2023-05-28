@@ -1,4 +1,4 @@
-import { Component, FileBase, type Project, SourceCode } from 'projen'
+import { Component, type Project, SourceCode } from 'projen'
 
 export enum DirEnvLayout {
 	/**
@@ -171,7 +171,7 @@ export class DirEnv extends Component {
 	 * Add a layout command.
 	 * @param layout
 	 */
-	addLayout(layout: DirEnvLayout) {
+	addLayout(layout: DirEnvLayout | string) {
 		this.addCommand(DirEnvStdLibCommand.LAYOUT, layout)
 		return this
 	}

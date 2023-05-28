@@ -67,7 +67,9 @@ export class DirEnv extends Component {
 		super(project)
 		const { fileName = '.envrc' } = options
 		this.#validateFileName(fileName)
-		this.file = new SourceCode(project, fileName, {})
+		this.file = new SourceCode(project, fileName, {
+			readonly: true,
+		})
 	}
 
 	#validateFileName(fileName: string) {
@@ -78,7 +80,7 @@ export class DirEnv extends Component {
 	}
 
 	#addMarker() {
-		this.addComment(FileBase.PROJEN_MARKER)
+		this.addComment(this.file.marker as string)
 		return this
 	}
 

@@ -67,6 +67,7 @@ docs/**
 !/vitest.config.ts
 !/vitest.workspace.json
 !/.tool-versions
+!/.envrc
 !/pnpm-workspace.yaml
 !/renovate.json5
 !/projenrc/projen-project-options.ts

@@ -12,6 +12,9 @@ patchedDependencies:
   '@mrgrain/jsii-struct-builder@0.4.3':
     hash: 5n7l7qiehk4lghp47ostr53ckq
     path: patches/@mrgrain__jsii-struct-builder@0.4.3.patch
+  projen@0.71.65:
+    hash: wag725tmommz222djszlxpxwjm
+    path: patches/projen@0.71.65.patch
 
 importers:
 
@@ -134,7 +137,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       rimraf:
         specifier: ^5.0.1
         version: 5.0.1
@@ -213,7 +216,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -265,7 +268,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -326,7 +329,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -381,7 +384,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -442,7 +445,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -493,7 +496,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -541,7 +544,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -605,7 +608,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -669,7 +672,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -736,7 +739,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -803,7 +806,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -873,7 +876,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -940,7 +943,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: 0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1010,7 +1013,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1068,7 +1071,7 @@ importers:
         version: 2.8.8
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1144,7 +1147,7 @@ importers:
         version: 5.3.0
       projen:
         specifier: ^0.71.65
-        version: 0.71.65
+        version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
@@ -1412,7 +1415,7 @@ packages:
     dependencies:
       '@pnpm/reviewing.dependencies-hierarchy': 2.0.5(@pnpm/logger@5.0.0)
       fs-extra: 11.1.1
-      projen: 0.71.65
+      projen: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
       semver: 7.5.1
     transitivePeerDependencies:
       - '@pnpm/logger'
@@ -2081,7 +2084,7 @@ packages:
     dependencies:
       '@jsii/spec': 1.81.0
       '@ungap/structured-clone': 1.0.2
-      projen: 0.71.65
+      projen: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
     patched: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -7504,7 +7507,7 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /projen@0.71.65:
+  /projen@0.71.65(patch_hash=wag725tmommz222djszlxpxwjm):
     resolution: {integrity: sha512-u0+UM7bcwqqAOx6CU6V51mkN4mNaH3Sb5akWL/SsLBvS7VyOvDmEJ0um+0P6uoKXxAtl+yHgHjDctzWV1U4hoA==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
@@ -7536,6 +7539,7 @@ packages:
       - xmlbuilder2
       - yaml
       - yargs
+    patched: true
 
   /promise-inflight@1.0.1:
     resolution: {integrity: sha512-6zWPyEOFaQBJYcGMHBKTKJ3u6TBsnMFOIZSa6ce1e/ZrrsOlnHRHbabMjLiBYKp+n44X9eUI6VUPaukCXHuG4g==}

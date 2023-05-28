@@ -41,6 +41,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 			'@aws-prototyping-sdk/nx-monorepo@0.18.16',
 			'patches/@aws-prototyping-sdk__nx-monorepo@0.18.16.patch'
 		)
+		this.pnpm.addPatch('projen@0.71.65', 'patches/projen@0.71.65.patch')
 	}
 
 	protected applyNx(): this {

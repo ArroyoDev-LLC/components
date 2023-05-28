@@ -79,7 +79,7 @@ export class DirEnv extends Component {
 	}
 
 	#validateFileName(fileName: string) {
-		const regex = new RegExp(/^\.envrc.*$/)
+		const regex = new RegExp(/^\.(env|(envrc|envrc\..*))$/)
 		if (!regex.test(fileName)) {
 			throw new Error(`Invalid file name. Does not match ${regex.toString()}`)
 		}

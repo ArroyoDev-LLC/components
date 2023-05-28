@@ -166,9 +166,6 @@ export class ReleasePleaseWorkflow extends Component {
 				name: 'Setup PNPM',
 				if: this.releasesCreatedRef,
 				uses: 'pnpm/action-setup@v2.2.4',
-				with: {
-					version: '8',
-				},
 			},
 			{
 				name: 'Setup Node',

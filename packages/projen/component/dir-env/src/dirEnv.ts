@@ -43,7 +43,7 @@ export enum DirEnvStdLibCommand {
 	ENV_VARS_REQUIRED = 'env_vars_required',
 }
 
-enum DirEnvLogType {
+export enum DirEnvLogType {
 	INFO = DirEnvStdLibCommand.LOG_STATUS,
 	ERROR = DirEnvStdLibCommand.LOG_ERROR,
 }

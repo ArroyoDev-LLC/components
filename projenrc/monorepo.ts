@@ -28,9 +28,10 @@ export class ComponentsMonorepo extends MonorepoProject {
 			},
 		})
 		this.toolVersions = new ToolVersions(this, {
+			// TODO: resolve from project.
 			tools: {
 				nodejs: ['18.15.0', 'lts'],
-				pnpm: ['8.5.1'],
+				pnpm: ['8.6.0'],
 			},
 		})
 		this.pnpm.addPatch(

@@ -37,8 +37,6 @@ jobs:
       - name: Setup PNPM
         if: ${{ steps.release-please.outputs.releases_created }}
         uses: pnpm/action-setup@v2.2.4
-        with:
-          version: "8"
       - name: Setup Node
         if: ${{ steps.release-please.outputs.releases_created }}
         uses: actions/setup-node@v3

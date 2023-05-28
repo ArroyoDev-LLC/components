@@ -344,6 +344,18 @@ export class MonorepoProject extends NxMonorepoProject {
 
 	protected applyPackage(nodePackage: javascript.NodePackage): this {
 		nodePackage.addField('type', 'module')
+		const pnpmVersion = nodePackage.pnpmVersion
+		if (pnpmVersion) {
+			this.applyRecursive(
+				(project) => {
+					const projectPackage = findComponent(project, NodePackage)
+					if (projectPackage) {
+						projectPackage.addField('packageManager', `pnpm@${pnpmVersion}`)
+					}
+				},
+				{ immediate: false, includeSelf: true }
+			)
+		}
 		this.addNxRunManyTask('stub', {
 			skipCache: true,
 			target: 'stub',

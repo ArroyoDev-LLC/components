@@ -98,6 +98,9 @@ test<TestContext>('renders default envrc template', (ctx) => {
 		# Enforces \`set -euo pipefail\` despite user local config.
 		strict_env
 
+		# forces \\"at least\\"
+		direnv_version 2.32.1
+
 		# User local additions.
 		source_env_if_exists .envrc.local
 

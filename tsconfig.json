@@ -62,6 +62,7 @@
   ],
   "typedocOptions": {
     "entryPoints": [
+      "./packages/projen/component/dir-env",
       "./packages/projen/component/linting",
       "./packages/projen/component/pnpm-workspace",
       "./packages/projen/component/postcss",

@@ -40,18 +40,32 @@ const monorepo = new ComponentsMonorepo({
 	],
 })
 
-const utilsProjen = TypescriptProject.fromParent(monorepo, {
-	name: 'utils.projen',
-	deps: ['ts-morph', '@sindresorhus/is', 'type-fest', 'projen'],
-})
-new Vitest(utilsProjen)
-
 const utilsFs = TypescriptProject.fromParent(monorepo, {
 	name: 'utils.fs',
 	deps: ['fs-extra', 'pathe'],
 	devDeps: ['@types/fs-extra'],
 })
 new Vitest(utilsFs)
+
+const utilsProjen = TypescriptProject.fromParent(monorepo, {
+	name: 'utils.projen',
+	deps: [
+		'ts-morph',
+		'@sindresorhus/is',
+		'type-fest',
+		'projen',
+		'reflect-metadata',
+	],
+	workspaceDeps: [utilsFs],
+	tsconfig: {
+		compilerOptions: {
+			types: ['reflect-metadata'],
+			experimentalDecorators: true,
+			emitDecoratorMetadata: true,
+		},
+	},
+})
+new Vitest(utilsProjen)
 
 const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.linting',

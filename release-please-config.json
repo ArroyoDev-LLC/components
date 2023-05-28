@@ -3,12 +3,12 @@
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
   "packages": {
-    "packages/utils/projen": {
-      "component": "@arroyodev-llc/utils.projen",
-      "release-type": "node"
-    },
     "packages/utils/fs": {
       "component": "@arroyodev-llc/utils.fs",
+      "release-type": "node"
+    },
+    "packages/utils/projen": {
+      "component": "@arroyodev-llc/utils.projen",
       "release-type": "node"
     },
     "packages/projen/component/linting": {

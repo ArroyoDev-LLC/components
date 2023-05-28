@@ -155,11 +155,15 @@ export class DirEnv extends Component {
 	 */
 	addCommand(
 		command: DirEnvStdLibCommand | string,
-		args: string | string[],
+		args?: string | string[],
 		block?: () => this | void
 	) {
-		const content = Array.isArray(args) ? args.join(' ') : args
-		this.#addLine(`${command} ${content}`)
+		if (!args) {
+			this.#addLine(`${command}`)
+		} else {
+			const content = Array.isArray(args) ? args.join(' ') : args
+			this.#addLine(`${command} ${content}`)
+		}
 		if (block) {
 			this.open()
 			block()

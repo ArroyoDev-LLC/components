@@ -6,6 +6,12 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.10
+
 ## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.8...@arroyodev-llc/projen.component.linting-v0.1.9) (2023-05-27)
 
 

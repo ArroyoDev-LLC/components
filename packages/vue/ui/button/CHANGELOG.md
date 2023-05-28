@@ -6,6 +6,25 @@
   * dependencies
     * @arroyodev-llc/vue.ui.text bumped to 0.1.7
 
+## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.12...@arroyodev-llc/vue.ui.button-v0.1.13) (2023-05-28)
+
+
+### Features
+
+* **projen.component.vitest:** Add `test:watch` command ([bc6b813](https://github.com/ArroyoDev-LLC/components/commit/bc6b8138d23ea50cb8e9d30f80f9fc311d179c22))
+
+
+### Tests
+
+* **config:** Update all vitest configs ([1adf407](https://github.com/ArroyoDev-LLC/components/commit/1adf407d8975ccbc1b132342065b3665d63679e2))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/vue.ui.text bumped to 0.1.13
+
 ## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.11...@arroyodev-llc/vue.ui.button-v0.1.12) (2023-05-27)
 
 

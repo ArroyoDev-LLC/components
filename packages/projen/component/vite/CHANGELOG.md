@@ -13,6 +13,29 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.8
 
+## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.12...@arroyodev-llc/projen.component.vite-v0.1.13) (2023-05-28)
+
+
+### Features
+
+* **projen.component.vitest:** Add `test:watch` command ([bc6b813](https://github.com/ArroyoDev-LLC/components/commit/bc6b8138d23ea50cb8e9d30f80f9fc311d179c22))
+
+
+### Tests
+
+* **config:** Update all vitest configs ([1adf407](https://github.com/ArroyoDev-LLC/components/commit/1adf407d8975ccbc1b132342065b3665d63679e2))
+* **projen.component.vite:** Enable vite merged config with writer test ([59552c1](https://github.com/ArroyoDev-LLC/components/commit/59552c1a7cd0648e6272910a5223dff4b58415c5))
+* **projen.component.vite:** Update snapshots ([bc2ebee](https://github.com/ArroyoDev-LLC/components/commit/bc2ebee2d6bc847fe64019766cdd3166911258d9))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.10
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.11
+    * @arroyodev-llc/utils.projen bumped to 0.1.10
+
 ## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.11...@arroyodev-llc/projen.component.vite-v0.1.12) (2023-05-27)
 
 

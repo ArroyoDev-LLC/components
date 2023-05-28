@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.9...@arroyodev-llc/utils.projen-v0.1.10) (2023-05-28)
+
+
+### Features
+
+* **projen.component.vitest:** Add `test:watch` command ([bc6b813](https://github.com/ArroyoDev-LLC/components/commit/bc6b8138d23ea50cb8e9d30f80f9fc311d179c22))
+* **utils.projen:** Add `utils.fs`, `reflect-metadata` as dependencies ([75ae351](https://github.com/ArroyoDev-LLC/components/commit/75ae3511a592ded02ed53677a1a6aceacca2cedc))
+* **utils.projen:** Setup `reflect-metadata` ([621b1bd](https://github.com/ArroyoDev-LLC/components/commit/621b1bd505c6a92968032e95aaa936dfd29fe6e3))
+* **utils.projen:** Utilize `stripFormatting` in `isExpressionEqual` ([83d34a9](https://github.com/ArroyoDev-LLC/components/commit/83d34a9d6ff59abb6e9f03c180d56d80f69b9819))
+
+
+### Bug Fixes
+
+* **utils.projen:** Continue merge after creating intermediary objects, array merge strategies, array writer function support ([051263f](https://github.com/ArroyoDev-LLC/components/commit/051263fbcf693273015f67e5371ea5184ff5f34d))
+
+
+### Tests
+
+* **config:** Update all vitest configs ([1adf407](https://github.com/ArroyoDev-LLC/components/commit/1adf407d8975ccbc1b132342065b3665d63679e2))
+* **utils.projen:** Add unit tests for intermediary/nested writer functions ([9ed274d](https://github.com/ArroyoDev-LLC/components/commit/9ed274d63a39c9720e59c4af9b73fd7100fbfe38))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.fs bumped to 0.1.3
+
 ## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.8...@arroyodev-llc/utils.projen-v0.1.9) (2023-05-27)
 
 

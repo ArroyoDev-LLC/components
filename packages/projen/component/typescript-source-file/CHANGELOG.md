@@ -6,6 +6,14 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.10
+    * @arroyodev-llc/utils.fs bumped to 0.1.3
+    * @arroyodev-llc/utils.projen bumped to 0.1.10
+
 ## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.9...@arroyodev-llc/projen.component.typescript-source-file-v0.1.10) (2023-05-27)
 
 

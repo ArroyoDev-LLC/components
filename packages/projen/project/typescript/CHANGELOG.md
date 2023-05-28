@@ -20,6 +20,31 @@
   * dependencies
     * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.13
 
+## [0.1.15](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.14...@arroyodev-llc/projen.project.typescript-v0.1.15) (2023-05-28)
+
+
+### Features
+
+* **projenrc:** Add `tsconfig` and related structs, add `types` field ([bfc1b68](https://github.com/ArroyoDev-LLC/components/commit/bfc1b6872f2f08fbbbf204cdb4e3700ec8ddf4f3))
+* **projenrc:** Update typescript project ignores ([139f9a5](https://github.com/ArroyoDev-LLC/components/commit/139f9a51ea8cce6e09984c02d7c9a52e512d2a4c))
+
+
+### Bug Fixes
+
+* **projenrc:** Patch bad `TypeScriptCompilerOptions.emitDeclarationOnly` type ([1758fca](https://github.com/ArroyoDev-LLC/components/commit/1758fcae61856ec309255a675015fdcbdf65e2ed))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.10
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.11
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.12
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.11
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.15
+    * @arroyodev-llc/utils.projen bumped to 0.1.10
+
 ## [0.1.14](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.13...@arroyodev-llc/projen.project.typescript-v0.1.14) (2023-05-27)
 
 

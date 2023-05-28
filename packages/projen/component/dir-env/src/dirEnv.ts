@@ -190,17 +190,21 @@ export class DirEnv extends Component {
 	 * Note: This method already calls `startBuild`
 	 * You may extend this by calling chaining methods on this function.
 	 *
-	 * @param localEnvRc
+	 * @param options
 	 * @example
 	 *
 	 * ```ts
 	 * const envrc = new DirEnv(this, { fileName: '.envrc' })
-	 *	 .buildDefaultEnvRc()
-	 *	 .addComment('Required Env Vars for this project')
-	 *	 .addEnvVar('NPM_TOKEN', '', { defaultValue: '' })
+	 *   .buildDefaultEnvRc()
+	 *   .addComment('Required Env Vars for this project')
+	 *   .addEnvVar('NPM_TOKEN', '', { defaultValue: '' })
 	 * ```
 	 */
-	buildDefaultEnvRc(localEnvRc = '.envrc.local') {
+	buildDefaultEnvRc(options: {
+		localEnvRc?: string
+		minDirEnvVersion?: string
+	}) {
+		const { localEnvRc = '.envrc.local', minDirEnvVersion = '2.32.1' } = options
 		this.startBuild()
 			.addComment('Team Shared direnv.')
 			.addComment('See: https://github.com/direnv/direnv')
@@ -209,7 +213,7 @@ export class DirEnv extends Component {
 			.addCommand(DirEnvStdLibCommand.STRICT_ENV)
 			.addBlankLine()
 			.addComment('forces "at least"')
-			.addCommand(DirEnvStdLibCommand.DIRENV_VERSION, '2.32.1')
+			.addCommand(DirEnvStdLibCommand.DIRENV_VERSION, minDirEnvVersion)
 			.addBlankLine()
 			.addComment('User local additions.')
 			.addSourceEnvIfExists(localEnvRc)

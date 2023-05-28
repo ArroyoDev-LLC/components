@@ -114,8 +114,8 @@ const toolVersionsComponent = ProjenComponentProject.fromParent(monorepo, {
 
 const dirEnvComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.dir-env',
-	deps: ['vitest'],
 })
+new Vitest(dirEnvComponent)
 
 const vueComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vue',

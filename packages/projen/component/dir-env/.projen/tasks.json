@@ -150,6 +150,23 @@
       "steps": [
         {
           "spawn": "eslint"
+        },
+        {
+          "exec": "vitest",
+          "args": [
+            "--run"
+          ],
+          "receiveArgs": true
+        }
+      ]
+    },
+    "test:watch": {
+      "name": "test:watch",
+      "description": "Run tests on changes.",
+      "steps": [
+        {
+          "exec": "vitest",
+          "receiveArgs": true
         }
       ]
     },

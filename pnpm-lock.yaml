@@ -177,10 +177,6 @@ importers:
         version: 0.31.1(happy-dom@9.20.3)
 
   packages/projen/component/dir-env:
-    dependencies:
-      vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
     devDependencies:
       '@types/node':
         specifier: ^16
@@ -227,6 +223,9 @@ importers:
       unbuild:
         specifier: ^1.2.1
         version: 1.2.1
+      vitest:
+        specifier: ^0.31.1
+        version: 0.31.1(happy-dom@9.20.3)
 
   packages/projen/component/linting:
     dependencies:
@@ -7281,6 +7280,20 @@ packages:
     resolution: {integrity: sha512-u0+UM7bcwqqAOx6CU6V51mkN4mNaH3Sb5akWL/SsLBvS7VyOvDmEJ0um+0P6uoKXxAtl+yHgHjDctzWV1U4hoA==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
+    dependencies:
+      '@iarna/toml': 2.2.5
+      case: 1.6.3
+      chalk: 4.1.2
+      comment-json: 4.2.2
+      conventional-changelog-config-spec: 2.1.0
+      fast-json-patch: 3.1.1
+      glob: 8.1.0
+      ini: 2.0.0
+      semver: 7.5.1
+      shx: 0.3.4
+      xmlbuilder2: 3.1.1
+      yaml: 2.2.2
+      yargs: 17.7.2
     dev: true
     bundledDependencies:
       - '@iarna/toml'

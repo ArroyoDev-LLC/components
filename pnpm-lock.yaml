@@ -1142,12 +1142,18 @@ importers:
 
   packages/utils/projen:
     dependencies:
+      '@arroyodev-llc/utils.fs':
+        specifier: workspace:*
+        version: link:../fs
       '@sindresorhus/is':
         specifier: ^5.3.0
         version: 5.3.0
       projen:
         specifier: ^0.71.65
         version: 0.71.65(patch_hash=wag725tmommz222djszlxpxwjm)
+      reflect-metadata:
+        specifier: ^0.1.13
+        version: 0.1.13
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
@@ -7741,6 +7747,10 @@ packages:
       indent-string: 4.0.0
       strip-indent: 3.0.0
     dev: true
+
+  /reflect-metadata@0.1.13:
+    resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
+    dev: false
 
   /regexp.prototype.flags@1.5.0:
     resolution: {integrity: sha512-0SutC3pNudRKgquxGoRGIz946MZVHqbNfPjBdxeOhBrdgDKlRoXmYLQN9xRbrR09ZXWeGAdPuif7egofn6v5LA==}

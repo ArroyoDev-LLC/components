@@ -68,11 +68,20 @@
       "type": "build"
     },
     {
+      "name": "@arroyodev-llc/utils.fs",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@sindresorhus/is",
       "type": "runtime"
     },
     {
       "name": "projen",
+      "type": "runtime"
+    },
+    {
+      "name": "reflect-metadata",
       "type": "runtime"
     },
     {

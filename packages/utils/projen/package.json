@@ -43,8 +43,10 @@
     "vitest": "^0.31.1"
   },
   "dependencies": {
+    "@arroyodev-llc/utils.fs": "workspace:*",
     "@sindresorhus/is": "^5.3.0",
     "projen": "^0.71.65",
+    "reflect-metadata": "^0.1.13",
     "ts-morph": "^18.0.0",
     "type-fest": "^3.10.0"
   },

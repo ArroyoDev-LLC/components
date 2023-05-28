@@ -161,7 +161,7 @@ export class DirEnv extends Component {
 	 * @param message
 	 */
 	addLog(type: DirEnvLogType, message: string) {
-		this.addCommand(type, message)
+		this.addCommand(type, `"${message}"`)
 		return this
 	}
 

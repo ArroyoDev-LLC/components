@@ -3,5 +3,9 @@
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-	test: { name: 'components', include: ['test/**/*.spec.ts'], threads: true },
+	test: {
+		name: 'components',
+		include: ['test/**/*.spec.ts'],
+		threads: true,
+	},
 })

@@ -3,5 +3,8 @@
 import { defineProject } from 'vitest/config'
 
 export default defineProject({
-	test: { name: 'projen.component.vite', include: ['test/**/*.spec.ts'] },
+	test: {
+		name: 'projen.component.vite',
+		include: ['test/**/*.spec.ts'],
+	},
 })

@@ -90,9 +90,6 @@ export class TypeDocGithubPages extends Component {
 			{
 				name: 'Setup PNPM',
 				uses: this.gh.actions.get('pnpm/action-setup'),
-				with: {
-					version: '8',
-				},
 			},
 			{
 				name: 'Setup Node',

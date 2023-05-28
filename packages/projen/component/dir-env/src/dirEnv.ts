@@ -197,6 +197,7 @@ export class DirEnv extends Component {
 	 */
 	addSourceEnvIfExists(fileName: string) {
 		this.addCommand(DirEnvStdLibCommand.SOURCE_ENV_IF_EXISTS, fileName)
+		this.project.addGitIgnore(fileName)
 		return this
 	}
 

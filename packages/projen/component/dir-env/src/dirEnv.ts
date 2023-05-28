@@ -270,11 +270,4 @@ export class DirEnv extends Component {
 		this.addSheBang().#addMarker().addBlankLine()
 		return this
 	}
-
-	/**
-	 * @inheritDoc
-	 */
-	preSynthesize() {
-		super.preSynthesize()
-	}
 }

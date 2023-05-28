@@ -37,7 +37,10 @@ export class ComponentsMonorepo extends MonorepoProject {
 			},
 		})
 		this.envrc = new DirEnv(this, { fileName: '.envrc' })
-			.buildDefaultEnvRc()
+			.buildDefaultEnvRc({
+				localEnvRc: '.envrc.local',
+				minDirEnvVersion: '2.32.1',
+			})
 			.addComment('Required Env Vars for this project')
 			.addEnvVar('NPM_TOKEN', '', { defaultValue: '' })
 		this.pnpm.addPatch(

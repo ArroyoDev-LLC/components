@@ -36,20 +36,20 @@
     "eslint-plugin-prettier": "^4.2.1",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "projen": "0.71.65",
+    "projen": "^0.71.74",
     "standard-version": "^9",
     "typescript": "^5",
     "unbuild": "^1.2.1"
   },
   "peerDependencies": {
-    "projen": "^0.71.65"
+    "projen": "^0.71.74"
   },
   "dependencies": {
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
     "@arroyodev-llc/projen.component.tsconfig-container": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
-    "@aws-prototyping-sdk/nx-monorepo": "^0.18.12",
+    "@aws-prototyping-sdk/nx-monorepo": "^0.18.16",
     "@mrgrain/jsii-struct-builder": "^0.4.3"
   },
   "pnpm": {},

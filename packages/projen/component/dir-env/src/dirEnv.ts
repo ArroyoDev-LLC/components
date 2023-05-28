@@ -234,24 +234,21 @@ export class DirEnv extends Component {
 			.addSourceEnvIfExists(localEnvRc)
 			.addBlankLine()
 			.addComment('Load rtx or asdf')
-			.addCommand('if has rtx; then')
-			.open()
-			.addCommand('use rtx')
-			.close()
-			.addCommand('elif has asdf; then')
-			.open()
-			.addLog(DirEnvLogType.INFO, 'rtx not found. Falling back to asdf.')
-			.addCommand('use asdf')
-			.close()
-			.addCommand('else')
-			.open()
-			.addLog(DirEnvLogType.ERROR, 'Neither rtx nor asdf are installed.')
-			.addLog(DirEnvLogType.ERROR, 'For asdf: https://asdf-vm.com/')
-			.addLog(
-				DirEnvLogType.ERROR,
-				'For rtx (asdf clone in rust): https://github.com/jdxcode/rtx'
+			.addCommand('if has rtx; then', '', () => this.addCommand('use rtx'))
+			.addCommand('elif has asdf; then', '', () =>
+				this.addLog(
+					DirEnvLogType.INFO,
+					'rtx not found. Falling back to asdf.'
+				).addCommand('use asdf')
 			)
-			.close()
+			.addCommand('else', '', () =>
+				this.addLog(DirEnvLogType.ERROR, 'Neither rtx nor asdf are installed.')
+					.addLog(DirEnvLogType.ERROR, 'For asdf: https://asdf-vm.com/')
+					.addLog(
+						DirEnvLogType.ERROR,
+						'For rtx (asdf clone in rust): https://github.com/jdxcode/rtx'
+					)
+			)
 			.addCommand('fi')
 			.addBlankLine()
 			.addLayout(DirEnvLayout.NODE)

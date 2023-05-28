@@ -114,7 +114,7 @@ export class DirEnv extends Component {
 	 */
 	addEnvVar(key: string, value: string, options?: { defaultValue: string }) {
 		let line = `export ${key}=${value}`
-		if (options?.defaultValue) {
+		if (typeof options?.defaultValue === 'string') {
 			line = `export ${key}="\${${key}:-${options.defaultValue}}"`
 		}
 		this.#addLine(line)

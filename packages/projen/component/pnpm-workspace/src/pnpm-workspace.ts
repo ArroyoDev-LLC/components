@@ -1,6 +1,12 @@
 import path from 'node:path'
 import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
-import { Component, type javascript, type Project, typescript } from 'projen'
+import {
+	Component,
+	type javascript,
+	JsonPatch,
+	type Project,
+	typescript,
+} from 'projen'
 
 /**
  * PNPM Workspace Helper component.
@@ -72,7 +78,12 @@ export class PnpmWorkspace extends Component {
 		)
 		const ncuFile = this.project.tryFindObjectFile('.ncurc.json')
 		if (ncuFile) {
-			ncuFile.addToArray('reject', dependency.split('@')[0])
+			ncuFile.patch(
+				JsonPatch.add(
+					'/reject/-',
+					dependency.slice(0, dependency.lastIndexOf('@'))
+				)
+			)
 		}
 		return this
 	}

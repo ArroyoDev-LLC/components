@@ -21,7 +21,7 @@ const monorepo = new ComponentsMonorepo({
 		level: LogLevel.DEBUG,
 		usePrefix: true,
 	},
-	pnpmVersion: '>=8.6.0,<9',
+	pnpmVersion: '^8.6.0',
 	devDeps: [
 		'@aws-prototyping-sdk/nx-monorepo',
 		'vite',

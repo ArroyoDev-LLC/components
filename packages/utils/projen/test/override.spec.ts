@@ -4,14 +4,30 @@ import {
 	type SourceFile,
 	SyntaxKind,
 } from 'ts-morph'
-import { test, expect, describe, beforeEach } from 'vitest'
-import { mergeObjectLiteral } from '../src'
+import { beforeEach, describe, expect, test } from 'vitest'
+import {
+	ArrayLiteralMergeStrategy,
+	ArrayLiteralMergeStrategyType,
+	getMergeStrategy,
+	mergeObjectLiteral,
+	setMergeStrategy,
+} from '../src'
 
 describe('mergeObjectLiteral', () => {
 	interface MergeObjectLiteralContext {
 		project: Project
 		sourceFile: SourceFile
 		testObj: ObjectLiteralExpression
+	}
+
+	interface TestObj {
+		[key: string | symbol | number]: any
+		scalar?: number
+		topLevelArray?: number[]
+		secondLevel?: {
+			secondLevelArray?: [{ nestedKey?: string }]
+			secondLevelScalar?: number
+		}
 	}
 
 	beforeEach<MergeObjectLiteralContext>((ctx) => {
@@ -44,11 +60,16 @@ describe('mergeObjectLiteral', () => {
 				},
 			},
 		})
+		console.log(ctx.sourceFile.getFullText())
 		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
-			"const testObj = { scalar: 1, topLevelArray: [1, 2, 3], secondLevel: { secondLevelArray: [{nestedKey: '1'}, {\\"nestedKey\\":\\"2\\"}], secondLevelScalar: \\"override\\",
+			"const testObj = { scalar: 1, topLevelArray: [1, 2,  3], secondLevel: { secondLevelArray: [{nestedKey: '1'},  {
+			            nestedKey: \\"2\\"
+			        }], secondLevelScalar: \\"override\\",
 			    secondLevelWriter: anotherCallable(),
 			    secondLevelNew: \\"newValue\\",
-			    thirdLevel: {\\"thirdLevelArray\\":[\\"a\\"]}
+			    thirdLevel: {
+			        thirdLevelArray: [\\"a\\"]
+			    }
 			},
 			    newScalar: \\"value\\",
 			    topLevelWriter: aCallable()
@@ -56,12 +77,71 @@ describe('mergeObjectLiteral', () => {
 		`)
 	})
 
+	testx('should create missing intermediary objects', async (ctx) => {
+		mergeObjectLiteral<TestObj>(ctx.testObj, {
+			newLevel: {
+				key: 'value',
+				arrayKey: ['a', 'b'],
+				nested: {
+					nestedArrayObj: ['a', 'b', { key: 'c' }],
+				},
+			},
+		})
+		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
+			"const testObj = { scalar: 1, topLevelArray: [1,2], secondLevel: { secondLevelArray: [{nestedKey: '1'}], secondLevelScalar: 1 },
+			    newLevel: {
+			        key: \\"value\\",
+			        arrayKey: [\\"a\\",  \\"b\\"],
+			        nested: {
+			            nestedArrayObj: [\\"a\\",  \\"b\\",  {
+			                                key: \\"c\\"
+			                            }]
+			        }
+			    }
+			};"
+		`)
+	})
+
+	testx(
+		'should create missing intermediary objects with writer functions.',
+		async (ctx) => {
+			mergeObjectLiteral(ctx.testObj, {
+				newLevel: {
+					key: 'value',
+					writerKey: (writer) => writer.write(`"writerValue"`),
+					arrayKey: ['a', (writer) => writer.write(`"b"`)],
+					nested: {
+						nestedArrayObj: [
+							'a',
+							'b',
+							{ key: (writer) => writer.write('callable()') },
+						],
+					},
+				},
+			})
+			expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
+				"const testObj = { scalar: 1, topLevelArray: [1,2], secondLevel: { secondLevelArray: [{nestedKey: '1'}], secondLevelScalar: 1 },
+				    newLevel: {
+				        key: \\"value\\",
+				        writerKey: \\"writerValue\\",
+				        arrayKey: [\\"a\\",  \\"b\\"],
+				        nested: {
+				            nestedArrayObj: [\\"a\\",  \\"b\\",  {
+				                                key: callable()
+				                            }]
+				        }
+				    }
+				};"
+			`)
+		}
+	)
+
 	testx('should concat unique arrays', async (ctx) => {
 		mergeObjectLiteral(ctx.testObj, {
 			topLevelArray: [1, 2, 3, 4],
 		})
 		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(
-			'"const testObj = { scalar: 1, topLevelArray: [1, 2, 3, 4], secondLevel: { secondLevelArray: [{nestedKey: \'1\'}], secondLevelScalar: 1 } };"'
+			'"const testObj = { scalar: 1, topLevelArray: [1, 2,  3,  4], secondLevel: { secondLevelArray: [{nestedKey: \'1\'}], secondLevelScalar: 1 } };"'
 		)
 	})
 
@@ -75,8 +155,56 @@ describe('mergeObjectLiteral', () => {
 			tabSize: 2,
 		})
 		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
-			"const testObj = { scalar: 1, topLevelArray: [1, 2], secondLevel: { secondLevelArray: [{ nestedKey: '1' }, { \\"nestedKey\\": \\"2\\" }], secondLevelScalar: 1 } };
+			"const testObj = {
+			    scalar: 1, topLevelArray: [1, 2], secondLevel: {
+			        secondLevelArray: [{ nestedKey: '1' }, {
+			            nestedKey: \\"2\\"
+			        }], secondLevelScalar: 1
+			    }
+			};
 			"
+		`)
+	})
+
+	testx('should apply overwrite array merge strategies', async (ctx) => {
+		const obj = setMergeStrategy(
+			{ nestedKey: '-1' },
+			ArrayLiteralMergeStrategyType.OVERWRITE
+		)
+		mergeObjectLiteral<TestObj>(ctx.testObj, {
+			secondLevel: {
+				secondLevelArray: [obj, { nestedKey: 'new' }],
+			},
+		})
+		expect(getMergeStrategy(obj)).toBe(ArrayLiteralMergeStrategyType.OVERWRITE)
+		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
+			"const testObj = { scalar: 1, topLevelArray: [1,2], secondLevel: { secondLevelArray: [{
+			            nestedKey: \\"-1\\"
+			        }, 
+			            {
+			                nestedKey: \\"new\\"
+			            }], secondLevelScalar: 1 } };"
+		`)
+	})
+
+	testx('should apply merge array merge strategies', async (ctx) => {
+		const obj = setMergeStrategy(
+			{ newKey: 'newValueOn1' },
+			ArrayLiteralMergeStrategyType.MERGE
+		)
+		mergeObjectLiteral<TestObj>(ctx.testObj, {
+			secondLevel: {
+				secondLevelArray: [obj, { nestedKey: 'new' }],
+			},
+		})
+		expect(getMergeStrategy(obj)).toBe(ArrayLiteralMergeStrategyType.MERGE)
+		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
+			"const testObj = { scalar: 1, topLevelArray: [1,2], secondLevel: { secondLevelArray: [{nestedKey: '1',
+			            newKey: \\"newValueOn1\\"
+			        }, 
+			            {
+			                nestedKey: \\"new\\"
+			            }], secondLevelScalar: 1 } };"
 		`)
 	})
 })

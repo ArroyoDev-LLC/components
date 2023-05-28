@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tailwind-v0.1.4...@arroyodev-llc/projen.component.tailwind-v0.1.5) (2023-05-28)
+
+
+### Features
+
+* **projen.component.vitest:** Add `test:watch` command ([bc6b813](https://github.com/ArroyoDev-LLC/components/commit/bc6b8138d23ea50cb8e9d30f80f9fc311d179c22))
+
+
+### Tests
+
+* **config:** Update all vitest configs ([1adf407](https://github.com/ArroyoDev-LLC/components/commit/1adf407d8975ccbc1b132342065b3665d63679e2))
+* **projen.component.tailwind:** Update snapshots ([2669bc8](https://github.com/ArroyoDev-LLC/components/commit/2669bc8055f291378c5fef92925dc95fca75949b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.11
+    * @arroyodev-llc/utils.projen bumped to 0.1.10
+
 ## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tailwind-v0.1.3...@arroyodev-llc/projen.component.tailwind-v0.1.4) (2023-05-27)
 
 

@@ -6,6 +6,12 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.10
+
 ## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.pnpm-workspace-v0.1.9...@arroyodev-llc/projen.component.pnpm-workspace-v0.1.10) (2023-05-27)
 
 

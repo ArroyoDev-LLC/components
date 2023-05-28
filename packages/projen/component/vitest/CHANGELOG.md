@@ -7,6 +7,22 @@
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.11...@arroyodev-llc/projen.component.vitest-v0.1.12) (2023-05-28)
+
+
+### Features
+
+* **projen.component.vitest:** Add `test:watch` command ([bc6b813](https://github.com/ArroyoDev-LLC/components/commit/bc6b8138d23ea50cb8e9d30f80f9fc311d179c22))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.11
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.13
+    * @arroyodev-llc/utils.projen bumped to 0.1.10
+
 ## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.10...@arroyodev-llc/projen.component.vitest-v0.1.11) (2023-05-27)
 
 

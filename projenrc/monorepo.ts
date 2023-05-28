@@ -1,3 +1,4 @@
+import { DirEnv } from '@arroyodev-llc/projen.component.dir-env'
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { ReleasePlease } from '@arroyodev-llc/projen.component.release-please'
 import { ToolVersions } from '@arroyodev-llc/projen.component.tool-versions'
@@ -17,6 +18,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 	public readonly vitest: Vitest
 	public releasePlease!: ReleasePlease
 	public readonly toolVersions: ToolVersions
+	public envrc: DirEnv
 
 	constructor(options: NxMonorepoProjectOptions) {
 		super(options)
@@ -34,6 +36,10 @@ export class ComponentsMonorepo extends MonorepoProject {
 				pnpm: ['8.6.0'],
 			},
 		})
+		this.envrc = new DirEnv(this, { fileName: '.envrc' })
+			.buildDefaultEnvRc()
+			.addComment('Required Env Vars for this project')
+			.addEnvVar('NPM_TOKEN', '', { defaultValue: '' })
 		this.pnpm.addPatch(
 			'@mrgrain/jsii-struct-builder@0.4.3',
 			'patches/@mrgrain__jsii-struct-builder@0.4.3.patch'

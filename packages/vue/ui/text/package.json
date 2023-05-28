@@ -13,6 +13,7 @@
     "pre-compile": "pnpm exec projen pre-compile",
     "release": "pnpm exec projen release",
     "test": "pnpm exec projen test",
+    "test:watch": "pnpm exec projen test:watch",
     "unbump": "pnpm exec projen unbump",
     "upgrade": "pnpm exec projen upgrade",
     "watch": "pnpm exec projen watch"

@@ -107,6 +107,13 @@
         "cwd": "packages/projen/component/tailwind"
       }
     },
+    "test:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen test:watch",
+        "cwd": "packages/projen/component/tailwind"
+      }
+    },
     "clean": {
       "executor": "nx:run-commands",
       "options": {

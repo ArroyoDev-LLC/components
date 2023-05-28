@@ -160,6 +160,16 @@
         }
       ]
     },
+    "test:watch": {
+      "name": "test:watch",
+      "description": "Run tests on changes.",
+      "steps": [
+        {
+          "exec": "vitest",
+          "receiveArgs": true
+        }
+      ]
+    },
     "unbump": {
       "name": "unbump",
       "description": "Restores version to 0.0.0",

@@ -100,6 +100,13 @@
         "cwd": "packages/vue/ui/button"
       }
     },
+    "test:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen test:watch",
+        "cwd": "packages/vue/ui/button"
+      }
+    },
     "clean": {
       "executor": "nx:run-commands",
       "options": {

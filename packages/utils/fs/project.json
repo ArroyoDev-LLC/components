@@ -107,6 +107,13 @@
         "cwd": "packages/utils/fs"
       }
     },
+    "test:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen test:watch",
+        "cwd": "packages/utils/fs"
+      }
+    },
     "clean": {
       "executor": "nx:run-commands",
       "options": {

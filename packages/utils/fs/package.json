@@ -14,6 +14,7 @@
     "release": "pnpm exec projen release",
     "stub": "pnpm exec projen stub",
     "test": "pnpm exec projen test",
+    "test:watch": "pnpm exec projen test:watch",
     "unbump": "pnpm exec projen unbump",
     "upgrade": "pnpm exec projen upgrade",
     "watch": "pnpm exec projen watch"

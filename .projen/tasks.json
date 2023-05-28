@@ -211,6 +211,16 @@
         }
       ]
     },
+    "test:watch": {
+      "name": "test:watch",
+      "description": "Run tests on changes.",
+      "steps": [
+        {
+          "exec": "vitest",
+          "receiveArgs": true
+        }
+      ]
+    },
     "upgrade": {
       "name": "upgrade",
       "description": "upgrade dependencies",

@@ -100,6 +100,13 @@
         "cwd": "packages/vue/ui/text"
       }
     },
+    "test:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen test:watch",
+        "cwd": "packages/vue/ui/text"
+      }
+    },
     "clean": {
       "executor": "nx:run-commands",
       "options": {

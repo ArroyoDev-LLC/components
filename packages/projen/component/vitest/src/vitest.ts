@@ -2,7 +2,7 @@ import path from 'node:path'
 import { TypeScriptSourceConfig } from '@arroyodev-llc/projen.component.typescript-source-file'
 import { Vite } from '@arroyodev-llc/projen.component.vite'
 import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
-import { Component, JsonFile, type Project } from 'projen'
+import { Component, JsonFile, type Project, type Task } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import { deepMerge } from 'projen/lib/util'
 import { type UserWorkspaceConfig } from 'vitest/config'
@@ -37,8 +37,9 @@ export class Vitest extends Component {
 	readonly configType: VitestConfigType
 	readonly configFile: TypeScriptSourceConfig<UserWorkspaceConfig>
 	readonly options: Required<VitestOptions>
-	readonly #workspaceProjects: Map<string, Vitest> = new Map<string, Vitest>()
 	readonly vite?: Vite
+	readonly testWatchTask: Task
+	readonly #workspaceProjects: Map<string, Vitest> = new Map<string, Vitest>()
 
 	constructor(
 		public readonly project: TypeScriptProject,
@@ -71,6 +72,13 @@ export class Vitest extends Component {
 				receiveArgs: true,
 			})
 		}
+		this.testWatchTask =
+			this.project.tasks.tryFind('test:watch') ??
+			this.project.addTask('test:watch', {
+				receiveArgs: true,
+				exec: 'vitest',
+				description: 'Run tests on changes.',
+			})
 
 		this.project.tsconfigDev?.addInclude?.(configFilePath)
 		this.project?.eslint?.addOverride?.({

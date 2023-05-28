@@ -232,7 +232,7 @@ export class DirEnv extends Component {
 			.addBlankLine()
 			.addLayout(DirEnvLayout.NODE)
 			.addBlankLine()
-			.addCommand('Docker')
+			.addComment('Docker')
 			.addEnvVar('COMPOSE_DOCKER_CLI_BUILD', '1')
 			.addEnvVar('DOCKER_BUILDKIT', '1')
 			.addBlankLine()

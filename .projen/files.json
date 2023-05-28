@@ -26,6 +26,8 @@
     "LICENSE",
     "nx.json",
     "packages/projen/project/nx-monorepo/src/nx-monorepo-project-options.ts",
+    "packages/projen/project/typescript/src/typescript-compiler-options.ts",
+    "packages/projen/project/typescript/src/typescript-config-options.ts",
     "packages/projen/project/typescript/src/typescript-project-options.ts",
     "pnpm-workspace.yaml",
     "projenrc/projen-project-options.ts",

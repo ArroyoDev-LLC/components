@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@aws-prototyping-sdk/nx-monorepo": "^0.18.16",
-    "@jsii/spec": "^1.81.0",
+    "@jsii/spec": "^1.82.0",
     "@mrgrain/jsii-struct-builder": "^0.4.3",
     "@sindresorhus/is": "^5.3.0",
     "@types/fs-extra": "^11.0.1",
@@ -54,17 +54,17 @@
     "nx-cloud": "^16.0.5",
     "pathe": "^1.1.0",
     "prettier": "^2.8.8",
-    "projen": "^0.71.65",
+    "projen": "^0.71.74",
     "rimraf": "^5.0.1",
     "rollup-plugin-vue": "^6.0.0",
-    "syncpack": "^9.8.6",
+    "syncpack": "^10.0.0",
     "ts-morph": "^18.0.0",
     "ts-node": "^10.9.1",
     "tsx": "^3.12.7",
     "typedoc": "^0.24.7",
     "typescript": "^5",
     "unbuild": "^1.2.1",
-    "vite": "^4.3.8",
+    "vite": "^4.3.9",
     "vitest": "^0.31.1"
   },
   "peerDependencies": {
@@ -84,9 +84,9 @@
     "@arroyodev-llc/projen.project.typescript": "workspace:*",
     "@arroyodev-llc/projen.project.vue-component": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
-    "aws-cdk-lib": "^2.79.1",
-    "cdk-nag": "^2.27.14",
-    "constructs": "^10.2.29"
+    "aws-cdk-lib": "^2.81.0",
+    "cdk-nag": "^2.27.20",
+    "constructs": "^10.2.35"
   },
   "pnpm": {
     "overrides": {

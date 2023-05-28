@@ -1,4 +1,4 @@
-import { Component, type Project, TextFile } from 'projen'
+import { Component, FileBase, type Project, SourceCode } from 'projen'
 
 export enum DirEnvLayout {
 	/**
@@ -43,39 +43,31 @@ export enum DirEnvStdLibCommand {
 	ENV_VARS_REQUIRED = 'env_vars_required',
 }
 
+enum DirEnvLogType {
+	INFO = DirEnvStdLibCommand.LOG_STATUS,
+	ERROR = DirEnvStdLibCommand.LOG_ERROR,
+}
+
 export interface DirEnvOptions {
 	/**
 	 * File name.
 	 */
 	readonly fileName?: string
-	/**
-	 * File contents.
-	 */
-	readonly contents?: string[]
 }
 
 export class DirEnv extends Component {
 	public static of(project: Project): DirEnv | undefined {
-		const isDirenv = (c: Component): c is DirEnv => c instanceof DirEnv
-		return project.components.find(isDirenv)
+		const isDirEnv = (c: Component): c is DirEnv => c instanceof DirEnv
+		return project.components.find(isDirEnv)
 	}
 
-	readonly #fileContents: string[] = []
-	public readonly file: TextFile
+	public readonly file: SourceCode
 
 	constructor(project: Project, public readonly options: DirEnvOptions = {}) {
 		super(project)
 		const { fileName = '.envrc' } = options
 		this.#validateFileName(fileName)
-		if (options.contents) {
-			this.#fileContents = options.contents
-		} else {
-			this.build().buildDefaultEnvRc()
-		}
-		this.file = new TextFile(project, fileName, {
-			readonly: true,
-			executable: true,
-		})
+		this.file = new SourceCode(project, fileName, {})
 	}
 
 	#validateFileName(fileName: string) {
@@ -85,44 +77,47 @@ export class DirEnv extends Component {
 		}
 	}
 
+	#addMarker() {
+		this.addComment(FileBase.PROJEN_MARKER)
+		return this
+	}
+
+	#addLine(line: string) {
+		this.file.line(line)
+	}
+
 	/**
-	 * Append line to fileContents.
+	 * Open indentation
 	 * @param line
-	 * @param indent
 	 */
-	addLine(line: string, indent = 0) {
-		this.#fileContents.push(`${' '.repeat(indent)}${line}`)
+	open(line?: string) {
+		this.file.open(line)
 		return this
 	}
 
 	/**
-	 * Append lines to fileContents.
-	 * @param lines
-	 * @param indent
+	 * Close indentation
+	 * @param line
 	 */
-	addLines(lines: string[], indent = 0) {
-		lines.forEach((line) => this.addLine(line, indent))
+	close(line?: string) {
+		this.file.close(line)
 		return this
 	}
 
 	/**
 	 * Add an environment variable.
-	 * @param key
-	 * @param value
-	 */
-	addEnvVar(key: string, value: string) {
-		this.addLine(`export ${key}=${value}`)
-		return this
-	}
-
-	/**
-	 * Add an environment variable with a default value.
+	 * Optionally add a default value with options.
 	 * Useful for adding sample environment variables.
 	 * @param key
 	 * @param value
+	 * @param options
 	 */
-	addEnvVarWithDefault(key: string, value = '') {
-		this.addLine(`export ${key}="\${${key}:-${value}}"`)
+	addEnvVar(key: string, value: string, options?: { defaultValue: string }) {
+		let line = `export ${key}=${value}`
+		if (options?.defaultValue) {
+			line = `export ${key}="\${${key}:-${options.defaultValue}}"`
+		}
+		this.#addLine(line)
 		return this
 	}
 
@@ -130,15 +125,7 @@ export class DirEnv extends Component {
 	 * Add a comment.
 	 */
 	addComment(comment: string) {
-		this.addLine(`# ${comment}`)
-		return this
-	}
-
-	/**
-	 * Add a command.
-	 */
-	addCommand(command: string, indent = 0) {
-		this.addLine(`${' '.repeat(indent)}${command}`)
+		this.#addLine(`# ${comment}`)
 		return this
 	}
 
@@ -146,7 +133,7 @@ export class DirEnv extends Component {
 	 * Add a blank line.
 	 */
 	addBlankLine() {
-		this.addLine('')
+		this.#addLine('\n')
 		return this
 	}
 
@@ -154,17 +141,17 @@ export class DirEnv extends Component {
 	 * Add a shebang.
 	 */
 	addSheBang() {
-		this.addLine('#!/usr/bin/env bash')
+		this.#addLine('#!/usr/bin/env bash')
 		return this
 	}
 
 	/**
-	 * Add a direnv stdlib command.
+	 * Add a command.
 	 * @param command
 	 * @param args
 	 */
-	addStdLibCommand(command: DirEnvStdLibCommand, ...args: string[]) {
-		this.addLine(`${command} ${args.join(' ')}`)
+	addCommand(command: DirEnvStdLibCommand | string, ...args: string[]) {
+		this.#addLine(`${command} ${args.join(' ')}`)
 		return this
 	}
 
@@ -173,21 +160,8 @@ export class DirEnv extends Component {
 	 * @param type
 	 * @param message
 	 */
-	addLog(type: 'status' | 'error', message: string) {
-		const cmd =
-			type === 'status'
-				? DirEnvStdLibCommand.LOG_STATUS
-				: DirEnvStdLibCommand.LOG_ERROR
-		this.addStdLibCommand(cmd, message)
-		return this
-	}
-
-	/**
-	 * Add a use command.
-	 * @param use
-	 */
-	addUse(use: DirEnvUse) {
-		this.addStdLibCommand(DirEnvStdLibCommand.USE, use)
+	addLog(type: DirEnvLogType, message: string) {
+		this.addCommand(type, message)
 		return this
 	}
 
@@ -196,7 +170,7 @@ export class DirEnv extends Component {
 	 * @param layout
 	 */
 	addLayout(layout: DirEnvLayout) {
-		this.addStdLibCommand(DirEnvStdLibCommand.LAYOUT, layout)
+		this.addCommand(DirEnvStdLibCommand.LAYOUT, layout)
 		return this
 	}
 
@@ -205,74 +179,78 @@ export class DirEnv extends Component {
 	 * @param fileName
 	 */
 	addSourceEnvIfExists(fileName: string) {
-		this.addStdLibCommand(DirEnvStdLibCommand.SOURCE_ENV_IF_EXISTS, fileName)
+		this.addCommand(DirEnvStdLibCommand.SOURCE_ENV_IF_EXISTS, fileName)
 		return this
 	}
 
 	/**
-	 * Add a direnv_version command to force a minimum version.
-	 * @param version
+	 * Default envrc template.
+	 * Note: This method already calls `startBuild`
+	 * You may extend this by calling chaining methods on this function.
+	 *
+	 * @param localEnvRc
+	 * @example
+	 *
+	 * ```ts
+	 * const envrc = new DirEnv(this, { fileName: '.envrc' })
+	 *	 .buildDefaultEnvRc()
+	 *	 .addComment('Required Env Vars for this project')
+	 *	 .addEnvVar('NPM_TOKEN', '', { defaultValue: '' })
+	 * ```
 	 */
-	addDirEnvVersion(version: string) {
-		this.addComment(`forces "at least"`)
-		this.addLine(`direnv_version ${version}`)
-		return this
-	}
-
-	buildDefaultEnvRc() {
-		this.addComment('Team Shared direnv.')
+	buildDefaultEnvRc(localEnvRc = '.envrc.local') {
+		this.startBuild()
+			.addComment('Team Shared direnv.')
 			.addComment('See: https://github.com/direnv/direnv')
 			.addBlankLine()
 			.addComment('Enforces `set -euo pipefail` despite user local config.')
-			.addStdLibCommand(DirEnvStdLibCommand.STRICT_ENV)
+			.addCommand(DirEnvStdLibCommand.STRICT_ENV)
 			.addBlankLine()
 			.addComment('User local additions.')
-			.addSourceEnvIfExists('.envrc.local')
+			.addSourceEnvIfExists(localEnvRc)
 			.addBlankLine()
 			.addComment('Load rtx or asdf')
 			.addCommand('if has rtx; then')
-			.addCommand('use rtx', 2)
+			.open()
+			.addCommand('use rtx')
+			.close()
 			.addCommand('elif has asdf; then')
-			.addStdLibCommand(
-				DirEnvStdLibCommand.LOG_STATUS,
-				'rtx not found. Falling back to asdf.'
-			)
-			.addCommand('use asdf', 2)
+			.open()
+			.addLog(DirEnvLogType.INFO, 'rtx not found. Falling back to asdf.')
+			.addCommand('use asdf')
+			.close()
 			.addCommand('else')
-			.addLog('error', 'Neither rtx nor asdf are installed.')
-			.addLog('error', 'For asdf: https://asdf-vm.com/')
+			.open()
+			.addLog(DirEnvLogType.ERROR, 'Neither rtx nor asdf are installed.')
+			.addLog(DirEnvLogType.ERROR, 'For asdf: https://asdf-vm.com/')
 			.addLog(
-				'error',
-				'For rtx (asdf rust clone): https://github.com/jdxcode/rtx'
+				DirEnvLogType.ERROR,
+				'For rtx (asdf clone in rust): https://github.com/jdxcode/rtx'
 			)
+			.close()
 			.addCommand('fi')
 			.addBlankLine()
 			.addLayout(DirEnvLayout.NODE)
 			.addBlankLine()
-			.addComment('Docker')
+			.addCommand('Docker')
 			.addEnvVar('COMPOSE_DOCKER_CLI_BUILD', '1')
 			.addEnvVar('DOCKER_BUILDKIT', '1')
 			.addBlankLine()
-			.addComment('Misc')
-			.addEnvVarWithDefault('DEBUG_COLORS', '1')
-
 		return this
 	}
 
-	build() {
-		this.addSheBang().addBlankLine()
+	/**
+	 * Start method chaining with this function.
+	 */
+	startBuild() {
+		this.addSheBang().#addMarker().addBlankLine()
 		return this
 	}
 
-	commit() {
-		const lines = this.#fileContents
-		for (const line of lines) {
-			this.file.addLine(line)
-		}
-	}
-
+	/**
+	 * @inheritDoc
+	 */
 	preSynthesize() {
 		super.preSynthesize()
-		this.commit()
 	}
 }

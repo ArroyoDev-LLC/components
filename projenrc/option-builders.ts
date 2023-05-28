@@ -113,17 +113,62 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 	constructor(project: typescript.TypeScriptProject) {
 		super(project)
 
-		const filePath = path.join(
+		// TODO: resolve some issues that occur if you try to add this
+		// to the actual child project.
+
+		const basePath = path.join(
 			'packages',
 			'projen',
 			'project',
 			'typescript',
-			'src',
-			'typescript-project-options.ts'
+			'src'
 		)
+		const filePath = path.join(basePath, 'typescript-project-options.ts')
+		const tsconfigPath = path.join(basePath, 'typescript-config-options.ts')
+		const tsconfigCompilerStruct = new ProjenStruct(project, {
+			name: 'TypeScriptCompilerOptions',
+			filePath: path.join(basePath, 'typescript-compiler-options.ts'),
+			fqn: '@arroyodev-llc/projen-project-typescript.TypeScriptCompilerOptions',
+		})
+		tsconfigCompilerStruct.mixin(
+			Struct.fromFqn('projen.javascript.TypeScriptCompilerOptions').add({
+				name: 'types',
+				optional: true,
+				docs: {
+					summary: 'Types to include in compilation.',
+				},
+				type: {
+					collection: {
+						kind: CollectionKind.Array,
+						elementtype: { primitive: PrimitiveType.String },
+					},
+				},
+			})
+		)
+
+		const tsconfigStruct = new ProjenStruct(project, {
+			name: 'TypeScriptConfigOptions',
+			filePath: tsconfigPath,
+			fqn: '@arroyodev-llc/projen-project-typescript.TypeScriptConfigOptions',
+			importLocations: {
+				'@arroyodev-llc/projen-project-typescript': './',
+			},
+		})
+		tsconfigStruct.mixin(
+			Struct.fromFqn('projen.javascript.TypescriptConfigOptions').update(
+				'compilerOptions',
+				{
+					type: tsconfigCompilerStruct,
+				}
+			)
+		)
+
 		const struct = new ProjenStruct(project, {
 			name: 'TypeScriptProjectOptions',
 			filePath,
+			importLocations: {
+				'@arroyodev-llc/projen-project-typescript': './',
+			},
 		})
 
 		struct.mixin(
@@ -135,7 +180,9 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 					type: { primitive: PrimitiveType.Boolean },
 					optional: true,
 					docs: { summary: 'Use unbuild for bundling/transpiling.' },
-				}),
+				})
+				.update('tsconfig', { type: tsconfigStruct })
+				.update('tsconfigDev', { type: tsconfigStruct }),
 			typescriptStructMixin
 		)
 

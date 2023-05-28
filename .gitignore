@@ -70,5 +70,7 @@ docs/**
 !/pnpm-workspace.yaml
 !/renovate.json5
 !/projenrc/projen-project-options.ts
+!/packages/projen/project/typescript/src/typescript-compiler-options.ts
+!/packages/projen/project/typescript/src/typescript-config-options.ts
 !/packages/projen/project/typescript/src/typescript-project-options.ts
 !/packages/projen/project/nx-monorepo/src/nx-monorepo-project-options.ts

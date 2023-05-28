@@ -29,6 +29,8 @@
 /nx.json linguist-generated
 /package.json linguist-generated
 /packages/projen/project/nx-monorepo/src/nx-monorepo-project-options.ts linguist-generated
+/packages/projen/project/typescript/src/typescript-compiler-options.ts linguist-generated
+/packages/projen/project/typescript/src/typescript-config-options.ts linguist-generated
 /packages/projen/project/typescript/src/typescript-project-options.ts linguist-generated
 /pnpm-lock.yaml linguist-generated
 /pnpm-workspace.yaml linguist-generated

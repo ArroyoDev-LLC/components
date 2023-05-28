@@ -160,8 +160,14 @@ const typescriptProject = ProjenComponentProject.fromParent(monorepo, {
 		nxMonorepoProject,
 	],
 })
-LintConfig.of(typescriptProject)!.eslint.addIgnorePattern(
+typescriptProject.lintConfig.eslint.addIgnorePattern(
 	'src/typescript-project-options.ts'
+)
+typescriptProject.lintConfig.eslint.addIgnorePattern(
+	'src/typescript-config-options.ts'
+)
+typescriptProject.lintConfig.eslint.addIgnorePattern(
+	'src/typescript-compiler-options.ts'
 )
 
 const vueComponentProject = ProjenComponentProject.fromParent(monorepo, {

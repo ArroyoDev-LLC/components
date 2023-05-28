@@ -3,5 +3,8 @@
 import { defineProject } from 'vitest/config'
 
 export default defineProject({
-	test: { name: 'utils.fs', include: ['test/**/*.spec.ts'] },
+	test: {
+		name: 'utils.fs',
+		include: ['test/**/*.spec.ts'],
+	},
 })

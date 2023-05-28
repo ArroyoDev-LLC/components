@@ -25,7 +25,11 @@ export default defineConfig({
 			name: '@arroyodev-llc/vue.ui.text',
 			formats: ['es', 'cjs'],
 		},
-		rollupOptions: { external: ['vue', '@vue/runtime-dom'] },
+		rollupOptions: {
+			external: ['vue', '@vue/runtime-dom'],
+		},
 	},
-	resolve: { dedupe: ['vue'] },
+	resolve: {
+		dedupe: ['vue'],
+	},
 })

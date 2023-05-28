@@ -1,3 +1,4 @@
+import { stripFormatting } from '@arroyodev-llc/utils.fs'
 import is from '@sindresorhus/is'
 import {
 	type ArrayLiteralExpression,
@@ -86,12 +87,7 @@ export const isExpressionEqual = (
 	a: Expression | string,
 	b: Expression | string
 ): boolean => {
-	const prepareValue = (value: string) =>
-		value
-			.replaceAll(' ', '')
-			.replaceAll('"', '')
-			.replaceAll(`'`, '')
-			.replaceAll(`\\`, '')
+	const prepareValue = (value: string) => stripFormatting(value)
 	const toText = (value: Expression | string) =>
 		typeof value === 'string'
 			? value

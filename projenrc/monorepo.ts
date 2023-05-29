@@ -14,6 +14,9 @@ import { type GitHub } from 'projen/lib/github'
 import { type NpmConfig } from 'projen/lib/javascript'
 
 export class ComponentsMonorepo extends MonorepoProject {
+	static readonly nxPublicReadonlyToken: string =
+		'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
+
 	public readonly lintConfig: LintConfig
 	public readonly vitest: Vitest
 	public releasePlease!: ReleasePlease
@@ -43,6 +46,10 @@ export class ComponentsMonorepo extends MonorepoProject {
 			})
 			.addComment('Required Env Vars for this project')
 			.addEnvVar('NPM_TOKEN', '', { defaultValue: '' })
+			.addComment('NX Access Token (can override with write-enabled token)')
+			.addEnvVar('NX_CLOUD_ACCESS_TOKEN', '', {
+				defaultValue: ComponentsMonorepo.nxPublicReadonlyToken,
+			})
 		this.pnpm.addPatch(
 			'@mrgrain/jsii-struct-builder@0.4.3',
 			'patches/@mrgrain__jsii-struct-builder@0.4.3.patch'
@@ -56,12 +63,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 	protected applyNx(): this {
 		super.applyNx()
 		// readonly access token (safe to be public)
-		const projectToken =
-			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
-		this.nx.useNxCloud(projectToken)
-		this.envrc
-			.addComment('NX Access Token (can override with write-enabled token)')
-			.addEnvVar('NX_CLOUD_ACCESS_TOKEN', '', { defaultValue: projectToken })
+		this.nx.useNxCloud(ComponentsMonorepo.nxPublicReadonlyToken)
 		return this
 	}
 

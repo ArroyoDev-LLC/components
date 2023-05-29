@@ -235,15 +235,20 @@ export class DirEnv extends Component {
 			.addSourceEnvIfExists(localEnvRc)
 			.addBlankLine()
 			.addComment('Load rtx or asdf')
-			.addCommand('if has rtx; then', '', () => this.addCommand('use rtx'))
-			.addCommand('elif has asdf; then', '', () =>
+			.addCommand('if has rtx && has use_rtx; then', '', () =>
+				this.addCommand('use rtx')
+			)
+			.addCommand('elif has asdf && has use_asdf; then', '', () =>
 				this.addLog(
 					DirEnvLogType.INFO,
 					'rtx not found. Falling back to asdf.'
 				).addCommand('use asdf')
 			)
 			.addCommand('else', '', () =>
-				this.addLog(DirEnvLogType.ERROR, 'Neither rtx nor asdf are installed.')
+				this.addLog(
+					DirEnvLogType.ERROR,
+					'Neither rtx nor asdf are installed or integrated with direnv.'
+				)
 					.addLog(DirEnvLogType.ERROR, 'For asdf: https://asdf-vm.com/')
 					.addLog(
 						DirEnvLogType.ERROR,

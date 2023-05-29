@@ -18,7 +18,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 	public readonly vitest: Vitest
 	public releasePlease!: ReleasePlease
 	public readonly toolVersions: ToolVersions
-	public envrc: DirEnv
+	public readonly envrc: DirEnv
 
 	constructor(options: NxMonorepoProjectOptions) {
 		super(options)
@@ -56,9 +56,12 @@ export class ComponentsMonorepo extends MonorepoProject {
 	protected applyNx(): this {
 		super.applyNx()
 		// readonly access token (safe to be public)
-		this.nx.useNxCloud(
+		const projectToken =
 			'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
-		)
+		this.nx.useNxCloud(projectToken)
+		this.envrc
+			.addComment('NX Access Token (can override with write-enabled token)')
+			.addEnvVar('NX_CLOUD_ACCESS_TOKEN', '', { defaultValue: projectToken })
 		return this
 	}
 

@@ -461,6 +461,9 @@ importers:
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen
+      '@arroyodev-llc/utils.ts-ast':
+        specifier: workspace:*
+        version: link:../../../utils/ts-ast
       tailwindcss:
         specifier: ^3.3.2
         version: 3.3.2(ts-node@10.9.1)

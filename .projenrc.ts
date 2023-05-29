@@ -41,12 +41,35 @@ const monorepo = new ComponentsMonorepo({
 	],
 })
 
+/**
+ * Utility Projects
+ */
 const utilsFs = TypescriptProject.fromParent(monorepo, {
 	name: 'utils.fs',
 	deps: ['fs-extra', 'pathe'],
 	devDeps: ['@types/fs-extra'],
 })
 new Vitest(utilsFs)
+
+const utilsTsAst = TypescriptProject.fromParent(monorepo, {
+	name: 'utils.ts-ast',
+	deps: [
+		'ts-morph',
+		'@sindresorhus/is',
+		'type-fest',
+		'reflect-metadata',
+		'projen',
+	],
+	workspaceDeps: [utilsFs],
+	tsconfig: {
+		compilerOptions: {
+			types: ['reflect-metadata'],
+			experimentalDecorators: true,
+			emitDecoratorMetadata: true,
+		},
+	},
+})
+new Vitest(utilsTsAst)
 
 const utilsProjen = TypescriptProject.fromParent(monorepo, {
 	name: 'utils.projen',
@@ -58,16 +81,12 @@ const utilsProjen = TypescriptProject.fromParent(monorepo, {
 		'reflect-metadata',
 	],
 	workspaceDeps: [utilsFs],
-	tsconfig: {
-		compilerOptions: {
-			types: ['reflect-metadata'],
-			experimentalDecorators: true,
-			emitDecoratorMetadata: true,
-		},
-	},
 })
 new Vitest(utilsProjen)
 
+/**
+ * Projen Components
+ */
 const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.linting',
 	deps: ['p-queue'],
@@ -153,6 +172,9 @@ const postcssComponent = ProjenComponentProject.fromParent(monorepo, {
 })
 new Vitest(postcssComponent)
 
+/**
+ * Projen Projects
+ */
 const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.project.nx-monorepo',
 	workspaceDeps: [
@@ -195,10 +217,16 @@ const vueComponentProject = ProjenComponentProject.fromParent(monorepo, {
 	workspaceDeps: [typescriptProject, vueComponent, viteComponent],
 })
 
+/**
+ * JSII Structs
+ */
 new ProjenProjectOptionsBuilder(monorepo)
 new TypeScriptProjectOptionsBuilder(monorepo)
 new NxMonorepoProjectOptionsBuilder(monorepo)
 
+/**
+ * Monorepo dependencies.
+ */
 monorepo.addWorkspaceDeps(
 	utilsProjen,
 	lintingComponent,

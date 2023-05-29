@@ -2,7 +2,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { typescript } from 'projen'
 import { Testing } from 'projen/lib/testing'
-import { beforeEach, expect, test } from 'vitest'
+import { beforeEach, expect, test, describe } from 'vitest'
 import { DirEnv, DirEnvLogType, DirEnvStdLibCommand } from '../src'
 
 interface TestContext {
@@ -24,23 +24,21 @@ test<TestContext>('initializes correctly', (ctx) => {
 	expect(synth['.envrc']).toMatchInlineSnapshot('""')
 })
 
-test.todo<TestContext>('validates fileName', (ctx) => {
-	const validFileNames = [
-		'.envrc',
-		'.envrc.local',
-		'.envrc.prod',
-		'.env',
-		'.envrc.dev',
-	]
-	const invalidFileNames = ['envrc', '.envrcabc', '.envrclol']
-	for (const vF of validFileNames) {
-		const d = new DirEnv(ctx.project, { fileName: vF })
-		expect(d).not.toThrowError()
-	}
-	for (const iF of invalidFileNames) {
-		const d = new DirEnv(ctx.project, { fileName: iF })
-		expect(d).toThrowError()
-	}
+describe.each([
+	['.envrc', false],
+	['.envrc.local', false],
+	['.envrc.prod', false],
+	['.envrc.dev', false],
+	['.env', false],
+	['envrc', true],
+	['.envrcabc', true],
+	['.envrclol', true],
+])('validate fileName (%s)', (fileName, doesThrow) => {
+	test<TestContext>(`-> throws: ${doesThrow.toString()}`, (ctx) => {
+		const exp = expect(() => new DirEnv(ctx.project, { fileName }))
+		const assertion = doesThrow ? exp : exp.not
+		assertion.toThrowError()
+	})
 })
 
 // Fix projen marker not rendering

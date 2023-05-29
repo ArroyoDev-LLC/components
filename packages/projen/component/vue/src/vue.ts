@@ -113,7 +113,7 @@ export class Vue extends Component {
 			namedImports: ['RollupOptions'],
 			isTypeOnly: true,
 		})
-		component.addConfigTransform((configExpr) => {
+		component.file.addConfigTransform((configExpr) => {
 			const existingHooks = configExpr
 				.getProperty('hooks')
 				?.asKind?.(SyntaxKind.PropertyAssignment)

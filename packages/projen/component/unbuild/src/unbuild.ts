@@ -1,17 +1,9 @@
 import path from 'node:path'
-import {
-	TypeScriptSourceFile,
-	type TypeScriptSourceFileTransform,
-} from '@arroyodev-llc/projen.component.typescript-source-file'
+import { TypeScriptSourceConfig } from '@arroyodev-llc/projen.component.typescript-source-file'
 import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
-import { addPropertyAssignmentsFromObject } from '@arroyodev-llc/utils.ts-ast'
+import { type ObjectLiteralMergeSchema } from '@arroyodev-llc/utils.ts-ast'
 import { Component, DependencyType } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
-import {
-	type ObjectLiteralExpression,
-	type SourceFile,
-	SyntaxKind,
-} from 'ts-morph'
 import { type BuildConfig as UnBuildBuildConfig } from 'unbuild'
 
 export interface UnBuildOptions {
@@ -27,7 +19,7 @@ export class UnBuild extends Component {
 
 	readonly unbuildOptions: UnBuildBuildConfig
 
-	readonly file: TypeScriptSourceFile
+	readonly file: TypeScriptSourceConfig<UnBuildBuildConfig>
 
 	constructor(
 		public readonly project: TypeScriptProject,
@@ -64,14 +56,17 @@ export class UnBuild extends Component {
 		})
 		this.project.package.addField('files', [this.project.libdir])
 
-		const source = [
-			`const config: BuildConfig = {}`,
-			`export default defineBuildConfig(config)`,
-		].join('\n')
+		const source = [`export default defineBuildConfig({})`].join('\n')
 
-		this.file = new TypeScriptSourceFile(project, 'build.config.ts', {
-			source,
-		})
+		this.file = TypeScriptSourceConfig.withCallExpressionConfig(
+			project,
+			'build.config.ts',
+			{
+				source,
+				marker: true,
+				config: this.unbuildOptions,
+			}
+		)
 
 		this.file.addImport({
 			moduleSpecifier: 'unbuild',
@@ -81,13 +76,11 @@ export class UnBuild extends Component {
 				{ name: 'BuildConfig', isTypeOnly: true },
 			],
 		})
-
-		// add build options
-		this.addConfigTransform((configExpr) => {
-			addPropertyAssignmentsFromObject(configExpr, this.unbuildOptions)
-		})
 	}
 
+	/**
+	 * Build package exports.
+	 */
 	buildExportInfo() {
 		const makePath = (distFile: string) =>
 			cwdRelativePath('.', path.join(this.project.libdir, distFile))
@@ -99,20 +92,11 @@ export class UnBuild extends Component {
 		return defaultExports
 	}
 
-	addConfigTransform(
-		transform: (
-			configObjectLiteral: ObjectLiteralExpression,
-			sourceFile: SourceFile
-		) => void
-	) {
-		const transformer: TypeScriptSourceFileTransform = (src: SourceFile) => {
-			const cfgNode = src.getVariableDeclarationOrThrow('config')
-			const configExpr = cfgNode.getInitializerIfKindOrThrow(
-				SyntaxKind.ObjectLiteralExpression
-			)
-			transform(configExpr, src)
-		}
-		this.file.addTransformer(transformer)
-		return this
+	/**
+	 * Add config to merge.
+	 * @param config merge config.
+	 */
+	addConfig(config: ObjectLiteralMergeSchema<UnBuildBuildConfig>) {
+		return this.file.addConfig(config)
 	}
 }

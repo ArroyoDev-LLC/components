@@ -7,6 +7,10 @@
       "component": "@arroyodev-llc/utils.fs",
       "release-type": "node"
     },
+    "packages/utils/ts-ast": {
+      "component": "@arroyodev-llc/utils.ts-ast",
+      "release-type": "node"
+    },
     "packages/utils/projen": {
       "component": "@arroyodev-llc/utils.projen",
       "release-type": "node"

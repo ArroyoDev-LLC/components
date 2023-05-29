@@ -19,5 +19,6 @@
   "packages/projen/component/tailwind": "0.1.6",
   "packages/projen/component/postcss": "0.1.6",
   "packages/utils/fs": "0.1.4",
-  "packages/projen/component/dir-env": "0.1.2"
+  "packages/projen/component/dir-env": "0.1.2",
+  "packages/utils/ts-ast": "0.0.0"
 }

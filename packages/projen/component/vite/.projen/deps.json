@@ -91,6 +91,11 @@
       "type": "runtime"
     },
     {
+      "name": "@arroyodev-llc/utils.ts-ast",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@vitejs/plugin-vue",
       "type": "runtime"
     },

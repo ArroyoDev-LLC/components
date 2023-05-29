@@ -16,6 +16,9 @@
       ],
       "@arroyodev-llc/projen.component.vite": [
         "../vite/src/index"
+      ],
+      "@arroyodev-llc/utils.ts-ast": [
+        "../../../utils/ts-ast/src/index"
       ]
     }
   },

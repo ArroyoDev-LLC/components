@@ -16,6 +16,9 @@
       ],
       "@arroyodev-llc/utils.fs": [
         "../../../utils/fs/src/index"
+      ],
+      "@arroyodev-llc/utils.ts-ast": [
+        "../../../utils/ts-ast/src/index"
       ]
     }
   },

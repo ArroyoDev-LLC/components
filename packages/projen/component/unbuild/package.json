@@ -47,6 +47,7 @@
   "dependencies": {
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
+    "@arroyodev-llc/utils.ts-ast": "workspace:*",
     "@aws-prototyping-sdk/nx-monorepo": "^0.18.16",
     "ts-morph": "^18.0.0",
     "unbuild": "^1.2.1"

@@ -73,13 +73,7 @@ new Vitest(utilsTsAst)
 
 const utilsProjen = TypescriptProject.fromParent(monorepo, {
 	name: 'utils.projen',
-	deps: [
-		'ts-morph',
-		'@sindresorhus/is',
-		'type-fest',
-		'projen',
-		'reflect-metadata',
-	],
+	deps: ['@sindresorhus/is', 'type-fest', 'projen'],
 	workspaceDeps: [utilsFs],
 })
 new Vitest(utilsProjen)
@@ -97,7 +91,7 @@ const tsSourceComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.typescript-source-file',
 	parent: monorepo,
 	tsconfigBase: monorepo.esmBundledTsconfigExtends,
-	workspaceDeps: [utilsProjen, lintingComponent, utilsFs],
+	workspaceDeps: [utilsProjen, lintingComponent, utilsFs, utilsTsAst],
 	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo'],
 })
 
@@ -110,20 +104,20 @@ const pnpmWorkspaceComponent = ProjenComponentProject.fromParent(monorepo, {
 
 const unbuildComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.unbuild',
-	workspaceDeps: [utilsProjen, tsSourceComponent],
+	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
 	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo', 'unbuild'],
 })
 
 const viteComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vite',
-	workspaceDeps: [utilsProjen, tsSourceComponent, lintingComponent],
+	workspaceDeps: [utilsProjen, tsSourceComponent, lintingComponent, utilsTsAst],
 	deps: ['ts-morph', 'vite', '@vitejs/plugin-vue', '@vitejs/plugin-vue-jsx'],
 })
 new Vitest(viteComponent)
 
 const vitestComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.vitest',
-	workspaceDeps: [utilsProjen, tsSourceComponent, viteComponent],
+	workspaceDeps: [utilsProjen, tsSourceComponent, viteComponent, utilsTsAst],
 	deps: ['ts-morph', 'vitest'],
 })
 
@@ -168,7 +162,7 @@ new Vitest(tailwindComponent)
 const postcssComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.postcss',
 	deps: ['ts-morph', 'postcss-load-config'],
-	workspaceDeps: [utilsProjen, tsSourceComponent],
+	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
 })
 new Vitest(postcssComponent)
 

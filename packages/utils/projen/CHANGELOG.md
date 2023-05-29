@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.11...@arroyodev-llc/utils.projen-v0.1.12) (2023-05-29)
+
+
+### Features
+
+* **build:** Update unbuild config ([eabe562](https://github.com/ArroyoDev-LLC/components/commit/eabe562bea3f7592d1b95f8b8a5d479fa91dd53f))
+* **projen.component.ts-ast:** Extract `utils.projen` to `utils.ts-ast` modules ([fdc3844](https://github.com/ArroyoDev-LLC/components/commit/fdc384475ba9be72121c1a511ed7a18bf7255049))
+* **projenrc:** Add `utils.ts-ast` deps where needed ([8c03bfb](https://github.com/ArroyoDev-LLC/components/commit/8c03bfbc233ee0b660b619363f4d72e2b6aa22ca))
+* **utils.ts-ast:** Scaffold managed files. ([f78a39f](https://github.com/ArroyoDev-LLC/components/commit/f78a39f8c3530af9e914e6dc0413359dde3f2ece))
+
+
+### Bug Fixes
+
+* **projen.component.tailwind:** Add `utils.ts-ast` dependency ([5c3349a](https://github.com/ArroyoDev-LLC/components/commit/5c3349ac4e7e48d8db8f10b4a33bbcb36fd358f4))
+* **utils.projen:** Remove old `reflect-metadata` import ([05dc11b](https://github.com/ArroyoDev-LLC/components/commit/05dc11b8d6c38b0ce9727170bfd1a0c4f9dc64cb))
+
+
+### Tests
+
+* **utils.projen:** `applyOverrides` unit test ([1de6e3c](https://github.com/ArroyoDev-LLC/components/commit/1de6e3c9516fb010d19fb08845e2900c62119d39))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.fs bumped to 0.1.5
+
 ## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.10...@arroyodev-llc/utils.projen-v0.1.11) (2023-05-29)
 
 

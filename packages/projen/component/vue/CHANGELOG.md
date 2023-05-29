@@ -31,6 +31,26 @@
     * @arroyodev-llc/projen.component.vitest bumped to 0.1.12
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.18](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.17...@arroyodev-llc/projen.component.vue-v0.1.18) (2023-05-29)
+
+
+### Features
+
+* **build:** Update unbuild config ([eabe562](https://github.com/ArroyoDev-LLC/components/commit/eabe562bea3f7592d1b95f8b8a5d479fa91dd53f))
+* **projen.component.vue:** Update `applyUnbuild` ([7592461](https://github.com/ArroyoDev-LLC/components/commit/7592461b89ffc4e12ffaa652b6c1426e8aba7bd1))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.12
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.13
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.13
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.15
+    * @arroyodev-llc/projen.component.vitest bumped to 0.1.14
+    * @arroyodev-llc/utils.projen bumped to 0.1.12
+
 ## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.16...@arroyodev-llc/projen.component.vue-v0.1.17) (2023-05-29)
 
 

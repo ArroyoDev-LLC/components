@@ -12,6 +12,20 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.11...@arroyodev-llc/projen.component.linting-v0.1.12) (2023-05-29)
+
+
+### Features
+
+* **build:** Update unbuild config ([eabe562](https://github.com/ArroyoDev-LLC/components/commit/eabe562bea3f7592d1b95f8b8a5d479fa91dd53f))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.12
+
 ## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.10...@arroyodev-llc/projen.component.linting-v0.1.11) (2023-05-29)
 
 

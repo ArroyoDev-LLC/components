@@ -20,6 +20,34 @@
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.11
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.12...@arroyodev-llc/projen.component.unbuild-v0.1.13) (2023-05-29)
+
+
+### Features
+
+* **build:** Update unbuild config ([eabe562](https://github.com/ArroyoDev-LLC/components/commit/eabe562bea3f7592d1b95f8b8a5d479fa91dd53f))
+* **projen.component.unbuild:** Utilize `TypeScriptSourceConfig` ([1363699](https://github.com/ArroyoDev-LLC/components/commit/1363699b880b7feaa12f5e0abd6d517cb27dd334))
+* **projenrc:** Add `utils.ts-ast` deps where needed ([8c03bfb](https://github.com/ArroyoDev-LLC/components/commit/8c03bfbc233ee0b660b619363f4d72e2b6aa22ca))
+
+
+### Bug Fixes
+
+* **projen.component.tailwind:** Add `utils.ts-ast` dependency ([5c3349a](https://github.com/ArroyoDev-LLC/components/commit/5c3349ac4e7e48d8db8f10b4a33bbcb36fd358f4))
+
+
+### Code Refactoring
+
+* **projen.component.unbuild:** Update `ts-ast` imports ([76578d2](https://github.com/ArroyoDev-LLC/components/commit/76578d2dfd1289dabe9746c4a035ea17602e5b3c))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.13
+    * @arroyodev-llc/utils.projen bumped to 0.1.12
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.2
+
 ## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.11...@arroyodev-llc/projen.component.unbuild-v0.1.12) (2023-05-29)
 
 

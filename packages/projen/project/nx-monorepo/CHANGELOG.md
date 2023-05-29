@@ -8,6 +8,23 @@
     * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.11
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.16...@arroyodev-llc/projen.project.nx-monorepo-v0.1.17) (2023-05-29)
+
+
+### Features
+
+* **build:** Update unbuild config ([eabe562](https://github.com/ArroyoDev-LLC/components/commit/eabe562bea3f7592d1b95f8b8a5d479fa91dd53f))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.12
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.13
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.7
+    * @arroyodev-llc/utils.projen bumped to 0.1.12
+
 ## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.15...@arroyodev-llc/projen.project.nx-monorepo-v0.1.16) (2023-05-29)
 
 

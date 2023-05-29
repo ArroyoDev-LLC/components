@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tailwind-v0.1.6...@arroyodev-llc/projen.component.tailwind-v0.1.7) (2023-05-29)
+
+
+### Features
+
+* **build:** Update unbuild config ([eabe562](https://github.com/ArroyoDev-LLC/components/commit/eabe562bea3f7592d1b95f8b8a5d479fa91dd53f))
+
+
+### Bug Fixes
+
+* **projen.component.tailwind:** Add `utils.ts-ast` dependency ([5c3349a](https://github.com/ArroyoDev-LLC/components/commit/5c3349ac4e7e48d8db8f10b4a33bbcb36fd358f4))
+
+
+### Code Refactoring
+
+* **projen.component.tailwind:** Refactor `ts-ast` imports ([2af6b48](https://github.com/ArroyoDev-LLC/components/commit/2af6b482e11f4c21bf907a8abea241e5d5e78cd8))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.13
+    * @arroyodev-llc/utils.projen bumped to 0.1.12
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.2
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tailwind-v0.1.5...@arroyodev-llc/projen.component.tailwind-v0.1.6) (2023-05-29)
 
 

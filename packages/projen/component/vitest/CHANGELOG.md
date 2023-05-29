@@ -7,6 +7,29 @@
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.4
     * @arroyodev-llc/utils.projen bumped to 0.1.4
 
+## [0.1.14](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.13...@arroyodev-llc/projen.component.vitest-v0.1.14) (2023-05-29)
+
+
+### Features
+
+* **build:** Update unbuild config ([eabe562](https://github.com/ArroyoDev-LLC/components/commit/eabe562bea3f7592d1b95f8b8a5d479fa91dd53f))
+* **projenrc:** Add `utils.ts-ast` deps where needed ([8c03bfb](https://github.com/ArroyoDev-LLC/components/commit/8c03bfbc233ee0b660b619363f4d72e2b6aa22ca))
+
+
+### Bug Fixes
+
+* **projen.component.tailwind:** Add `utils.ts-ast` dependency ([5c3349a](https://github.com/ArroyoDev-LLC/components/commit/5c3349ac4e7e48d8db8f10b4a33bbcb36fd358f4))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.13
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.15
+    * @arroyodev-llc/utils.projen bumped to 0.1.12
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.2
+
 ## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.12...@arroyodev-llc/projen.component.vitest-v0.1.13) (2023-05-29)
 
 

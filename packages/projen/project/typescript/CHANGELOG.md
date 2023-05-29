@@ -20,6 +20,26 @@
   * dependencies
     * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.13
 
+## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.16...@arroyodev-llc/projen.project.typescript-v0.1.17) (2023-05-29)
+
+
+### Features
+
+* **build:** Update unbuild config ([eabe562](https://github.com/ArroyoDev-LLC/components/commit/eabe562bea3f7592d1b95f8b8a5d479fa91dd53f))
+* **projen.project.typescript:** Enable treeshaking/sourcemap, cjsBridge for unbuild ([c68f340](https://github.com/ArroyoDev-LLC/components/commit/c68f34057f8389993cf5553d9d9cce674cab153d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.12
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.13
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.14
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.13
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.17
+    * @arroyodev-llc/utils.projen bumped to 0.1.12
+
 ## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.15...@arroyodev-llc/projen.project.typescript-v0.1.16) (2023-05-29)
 
 

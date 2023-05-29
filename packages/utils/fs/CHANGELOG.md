@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.fs-v0.1.4...@arroyodev-llc/utils.fs-v0.1.5) (2023-05-29)
+
+
+### Features
+
+* **build:** Update unbuild config ([eabe562](https://github.com/ArroyoDev-LLC/components/commit/eabe562bea3f7592d1b95f8b8a5d479fa91dd53f))
+
 ## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.fs-v0.1.3...@arroyodev-llc/utils.fs-v0.1.4) (2023-05-29)
 
 

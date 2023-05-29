@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.fs-v0.1.3...@arroyodev-llc/utils.fs-v0.1.4) (2023-05-29)
+
+
+### Features
+
+* **package:** Update pnpmVersion related fields ([b352a00](https://github.com/ArroyoDev-LLC/components/commit/b352a00148ca0f7c3f5aa526de55f552b47c814b))
+* **projenrc:** Set `pnpmVersion` to v8.6.0 ([eea5f2c](https://github.com/ArroyoDev-LLC/components/commit/eea5f2c3e3e6ac6f4fc72811c9b1751a297a48db))
+
 ## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.fs-v0.1.2...@arroyodev-llc/utils.fs-v0.1.3) (2023-05-28)
 
 

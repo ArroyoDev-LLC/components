@@ -11,7 +11,7 @@ import {
 	getMergeStrategy,
 	mergeObjectLiteral,
 	setMergeStrategy,
-} from '../src'
+} from '..'
 
 describe('mergeObjectLiteral', () => {
 	interface MergeObjectLiteralContext {

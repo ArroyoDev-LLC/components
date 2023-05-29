@@ -3,10 +3,8 @@ import {
 	TypeScriptSourceFile,
 	type TypeScriptSourceFileTransform,
 } from '@arroyodev-llc/projen.component.typescript-source-file'
-import {
-	addPropertyAssignmentsFromObject,
-	cwdRelativePath,
-} from '@arroyodev-llc/utils.projen'
+import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
+import { addPropertyAssignmentsFromObject } from '@arroyodev-llc/utils.ts-ast'
 import { Component, DependencyType } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import {

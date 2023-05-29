@@ -94,7 +94,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 				...(tsconfig?.compilerOptions ?? {}),
 			},
 			extends: tsconfigBase,
-		})
+		} as unknown as javascript.TypescriptConfigOptions)
 
 		this.tryRemoveFile('tsconfig.dev.json')
 		this.tsconfigDev = new javascript.TypescriptConfig(this, {
@@ -135,6 +135,11 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 				entries: ['./src/index'],
 				rollup: {
 					emitCJS: true,
+					cjsBridge: true,
+					esbuild: {
+						treeShaking: true,
+						sourcemap: true,
+					},
 				},
 			},
 		})

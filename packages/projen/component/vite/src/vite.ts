@@ -3,10 +3,8 @@ import {
 	TypeScriptSourceConfig,
 	type TypeScriptSourceConfigPlugin,
 } from '@arroyodev-llc/projen.component.typescript-source-file'
-import {
-	findComponent,
-	type ObjectLiteralMergeSchema,
-} from '@arroyodev-llc/utils.projen'
+import { findComponent } from '@arroyodev-llc/utils.projen'
+import type { ObjectLiteralMergeSchema } from '@arroyodev-llc/utils.ts-ast'
 import { Component, DependencyType, type Project } from 'projen'
 import { type NodePackage } from 'projen/lib/javascript'
 import { type TypeScriptProject } from 'projen/lib/typescript'

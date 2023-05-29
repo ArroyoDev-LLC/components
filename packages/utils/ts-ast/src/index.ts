@@ -1,5 +1,5 @@
-export class Hello {
-  public sayHello() {
-    return 'hello, world!';
-  }
-}
+import 'reflect-metadata'
+export * from './types'
+export * from './expressions'
+export * from './strategy'
+export * from './merge'

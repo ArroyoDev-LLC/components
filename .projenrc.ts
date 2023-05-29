@@ -155,7 +155,7 @@ const tsconfigContainerComponent = ProjenComponentProject.fromParent(monorepo, {
 const tailwindComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.tailwind',
 	deps: ['ts-morph', 'tailwindcss'],
-	workspaceDeps: [utilsProjen, tsSourceComponent],
+	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
 })
 new Vitest(tailwindComponent)
 

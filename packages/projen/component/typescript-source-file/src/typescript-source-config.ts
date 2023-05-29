@@ -1,8 +1,7 @@
 import {
 	mergeObjectLiteral,
 	type ObjectLiteralMergeSchema,
-} from '@arroyodev-llc/utils.projen'
-
+} from '@arroyodev-llc/utils.ts-ast'
 import { DependencyType } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import {

@@ -48,6 +48,7 @@
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/projen.component.vite": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
+    "@arroyodev-llc/utils.ts-ast": "workspace:*",
     "ts-morph": "^18.0.0",
     "vitest": "^0.31.1"
   },

@@ -87,6 +87,11 @@
       "type": "runtime"
     },
     {
+      "name": "@arroyodev-llc/utils.ts-ast",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@aws-prototyping-sdk/nx-monorepo",
       "type": "runtime"
     },

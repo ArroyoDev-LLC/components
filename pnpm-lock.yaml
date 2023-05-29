@@ -342,6 +342,9 @@ importers:
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen
+      '@arroyodev-llc/utils.ts-ast':
+        specifier: workspace:*
+        version: link:../../../utils/ts-ast
       postcss-load-config:
         specifier: ^4.0.1
         version: 4.0.1(postcss@8.4.23)(ts-node@10.9.1)
@@ -621,6 +624,9 @@ importers:
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen
+      '@arroyodev-llc/utils.ts-ast':
+        specifier: workspace:*
+        version: link:../../../utils/ts-ast
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.18.16
         version: 0.18.16(patch_hash=vizkutn345nlltbrneqzzpermm)(@pnpm/logger@5.0.0)(projen@0.71.74)
@@ -682,6 +688,9 @@ importers:
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen
+      '@arroyodev-llc/utils.ts-ast':
+        specifier: workspace:*
+        version: link:../../../utils/ts-ast
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.18.16
         version: 0.18.16(patch_hash=vizkutn345nlltbrneqzzpermm)(@pnpm/logger@5.0.0)(projen@0.71.74)
@@ -746,6 +755,9 @@ importers:
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen
+      '@arroyodev-llc/utils.ts-ast':
+        specifier: workspace:*
+        version: link:../../../utils/ts-ast
       '@vitejs/plugin-vue':
         specifier: ^4.2.3
         version: 4.2.3(vite@4.3.9)(vue@3.3.4)
@@ -819,6 +831,9 @@ importers:
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen
+      '@arroyodev-llc/utils.ts-ast':
+        specifier: workspace:*
+        version: link:../../../utils/ts-ast
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
@@ -1206,12 +1221,6 @@ importers:
       projen:
         specifier: ^0.71.74
         version: 0.71.74
-      reflect-metadata:
-        specifier: ^0.1.13
-        version: 0.1.13
-      ts-morph:
-        specifier: ^18.0.0
-        version: 18.0.0
       type-fest:
         specifier: ^3.11.0
         version: 3.11.0

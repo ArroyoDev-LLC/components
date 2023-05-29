@@ -48,6 +48,7 @@
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/utils.fs": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
+    "@arroyodev-llc/utils.ts-ast": "workspace:*",
     "@aws-prototyping-sdk/nx-monorepo": "^0.18.16",
     "ts-morph": "^18.0.0"
   },

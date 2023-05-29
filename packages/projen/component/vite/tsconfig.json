@@ -16,6 +16,9 @@
       ],
       "@arroyodev-llc/projen.component.linting": [
         "../linting/src/index"
+      ],
+      "@arroyodev-llc/utils.ts-ast": [
+        "../../../utils/ts-ast/src/index"
       ]
     }
   },

@@ -81,14 +81,6 @@
       "type": "runtime"
     },
     {
-      "name": "reflect-metadata",
-      "type": "runtime"
-    },
-    {
-      "name": "ts-morph",
-      "type": "runtime"
-    },
-    {
       "name": "type-fest",
       "type": "runtime"
     }

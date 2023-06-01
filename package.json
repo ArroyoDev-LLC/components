@@ -37,7 +37,7 @@
     "@mrgrain/jsii-struct-builder": "^0.4.3",
     "@sindresorhus/is": "^5.4.0",
     "@types/fs-extra": "^11.0.1",
-    "@types/node": "^16",
+    "@types/node": "^18",
     "@types/prettier": "^2.7.3",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",

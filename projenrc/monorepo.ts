@@ -19,7 +19,7 @@ import {
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
 import { github, typescript } from 'projen'
 import { type GitHub } from 'projen/lib/github'
-import { NodeProject, type NpmConfig } from 'projen/lib/javascript'
+import { type NpmConfig } from 'projen/lib/javascript'
 
 const arroyoBot = github.GithubCredentials.fromApp({
 	appIdSecret: 'AD_BOT_APP_ID',
@@ -74,7 +74,16 @@ export class ComponentsMonorepo extends MonorepoProject {
 								commands: [
 									NodePackageUtils.command.exec(
 										this.package.packageManager,
-										'eslint --no-error-on-umatched-pattern --cache --fix'
+										'eslint --no-error-on-unmatched-pattern --cache --fix'
+									),
+								],
+							},
+							{
+								extensions: [ExtensionMatch.YAML],
+								commands: [
+									NodePackageUtils.command.exec(
+										this.package.packageManager,
+										'prettier --write'
 									),
 								],
 							},

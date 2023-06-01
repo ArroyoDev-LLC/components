@@ -40,15 +40,15 @@
     "standard-version": "^9",
     "typescript": "^5",
     "unbuild": "^1.2.1",
-    "vitest": "^0.31.1"
+    "vitest": "^0.31.3"
   },
   "dependencies": {
     "@arroyodev-llc/utils.fs": "workspace:*",
-    "@sindresorhus/is": "^5.3.0",
-    "projen": "^0.71.74",
+    "@sindresorhus/is": "^5.4.0",
+    "projen": "^0.71.81",
     "reflect-metadata": "^0.1.13",
     "ts-morph": "^18.0.0",
-    "type-fest": "^3.11.0"
+    "type-fest": "^3.11.1"
   },
   "pnpm": {},
   "main": "./dist/index.cjs",

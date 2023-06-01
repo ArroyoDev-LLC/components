@@ -10,9 +10,6 @@ overrides:
   wrap-ansi: ^7.0.0
 
 patchedDependencies:
-  '@aws-prototyping-sdk/nx-monorepo@0.18.16':
-    hash: vizkutn345nlltbrneqzzpermm
-    path: patches/@aws-prototyping-sdk__nx-monorepo@0.18.16.patch
   '@mrgrain/jsii-struct-builder@0.4.3':
     hash: 5n7l7qiehk4lghp47ostr53ckq
     path: patches/@mrgrain__jsii-struct-builder@0.4.3.patch
@@ -65,26 +62,26 @@ importers:
         version: link:packages/utils/projen
       aws-cdk-lib:
         specifier: ^2.81.0
-        version: 2.81.0(constructs@10.2.35)
+        version: 2.81.0(constructs@10.2.39)
       cdk-nag:
-        specifier: ^2.27.20
-        version: 2.27.20(aws-cdk-lib@2.81.0)(constructs@10.2.35)
+        specifier: ^2.27.24
+        version: 2.27.24(aws-cdk-lib@2.81.0)(constructs@10.2.39)
       constructs:
-        specifier: ^10.2.35
-        version: 10.2.35
+        specifier: ^10.2.39
+        version: 10.2.39
     devDependencies:
       '@aws-prototyping-sdk/nx-monorepo':
-        specifier: ^0.18.16
-        version: 0.18.16(patch_hash=vizkutn345nlltbrneqzzpermm)(@pnpm/logger@5.0.0)(projen@0.71.74)
+        specifier: ^0.19.12
+        version: 0.19.12(@pnpm/logger@5.0.0)(projen@0.71.81)
       '@jsii/spec':
         specifier: ^1.82.0
         version: 1.82.0
       '@mrgrain/jsii-struct-builder':
         specifier: ^0.4.3
-        version: 0.4.3(patch_hash=5n7l7qiehk4lghp47ostr53ckq)(projen@0.71.74)
+        version: 0.4.3(patch_hash=5n7l7qiehk4lghp47ostr53ckq)(projen@0.71.81)
       '@sindresorhus/is':
-        specifier: ^5.3.0
-        version: 5.3.0
+        specifier: ^5.4.0
+        version: 5.4.0
       '@types/fs-extra':
         specifier: ^11.0.1
         version: 11.0.1
@@ -92,8 +89,8 @@ importers:
         specifier: ^16
         version: 16.18.34
       '@types/prettier':
-        specifier: ^2.7.2
-        version: 2.7.2
+        specifier: ^2.7.3
+        version: 2.7.3
       '@typescript-eslint/eslint-plugin':
         specifier: ^5
         version: 5.59.6(@typescript-eslint/parser@5.59.6)(eslint@8.41.0)(typescript@5.0.4)
@@ -140,8 +137,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       rimraf:
         specifier: ^5.0.1
         version: 5.0.1
@@ -149,8 +146,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0(@vue/compiler-sfc@3.3.4)
       syncpack:
-        specifier: ^10.0.0
-        version: 10.0.0
+        specifier: ^10.1.0
+        version: 10.1.0
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
@@ -173,8 +170,8 @@ importers:
         specifier: ^4.3.9
         version: 4.3.9(@types/node@16.18.34)
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
 
   packages/projen/component/dir-env:
     devDependencies:
@@ -212,8 +209,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: 0.71.65
-        version: 0.71.65
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -224,8 +221,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
 
   packages/projen/component/linting:
     dependencies:
@@ -270,8 +267,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -322,8 +319,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -386,8 +383,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -398,8 +395,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
 
   packages/projen/component/release-please:
     dependencies:
@@ -441,8 +438,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -505,8 +502,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -517,8 +514,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
 
   packages/projen/component/tool-versions:
     devDependencies:
@@ -556,8 +553,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -604,8 +601,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -631,8 +628,8 @@ importers:
         specifier: workspace:*
         version: link:../../../utils/ts-ast
       '@aws-prototyping-sdk/nx-monorepo':
-        specifier: ^0.18.16
-        version: 0.18.16(patch_hash=vizkutn345nlltbrneqzzpermm)(@pnpm/logger@5.0.0)(projen@0.71.74)
+        specifier: ^0.19.12
+        version: 0.19.12(@pnpm/logger@5.0.0)(projen@0.71.81)
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
@@ -671,8 +668,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -695,8 +692,8 @@ importers:
         specifier: workspace:*
         version: link:../../../utils/ts-ast
       '@aws-prototyping-sdk/nx-monorepo':
-        specifier: ^0.18.16
-        version: 0.18.16(patch_hash=vizkutn345nlltbrneqzzpermm)(@pnpm/logger@5.0.0)(projen@0.71.74)
+        specifier: ^0.19.12
+        version: 0.19.12(@pnpm/logger@5.0.0)(projen@0.71.81)
       ts-morph:
         specifier: ^18.0.0
         version: 18.0.0
@@ -738,8 +735,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -808,8 +805,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -820,8 +817,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
 
   packages/projen/component/vitest:
     dependencies:
@@ -841,8 +838,8 @@ importers:
         specifier: ^18.0.0
         version: 18.0.0
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
     devDependencies:
       '@types/node':
         specifier: ^16
@@ -878,8 +875,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -948,8 +945,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -975,11 +972,11 @@ importers:
         specifier: workspace:*
         version: link:../../../utils/projen
       '@aws-prototyping-sdk/nx-monorepo':
-        specifier: ^0.18.16
-        version: 0.18.16(patch_hash=vizkutn345nlltbrneqzzpermm)(@pnpm/logger@5.0.0)(projen@0.71.74)
+        specifier: ^0.19.12
+        version: 0.19.12(@pnpm/logger@5.0.0)(projen@0.71.81)
       '@mrgrain/jsii-struct-builder':
         specifier: ^0.4.3
-        version: 0.4.3(patch_hash=5n7l7qiehk4lghp47ostr53ckq)(projen@0.71.74)
+        version: 0.4.3(patch_hash=5n7l7qiehk4lghp47ostr53ckq)(projen@0.71.81)
     devDependencies:
       '@types/node':
         specifier: ^16
@@ -1015,8 +1012,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1048,8 +1045,8 @@ importers:
         specifier: workspace:*
         version: link:../../../utils/projen
       '@aws-prototyping-sdk/nx-monorepo':
-        specifier: ^0.18.16
-        version: 0.18.16(patch_hash=vizkutn345nlltbrneqzzpermm)(@pnpm/logger@5.0.0)(projen@0.71.74)
+        specifier: ^0.19.12
+        version: 0.19.12(@pnpm/logger@5.0.0)(projen@0.71.81)
     devDependencies:
       '@types/node':
         specifier: ^16
@@ -1085,8 +1082,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1143,8 +1140,8 @@ importers:
         specifier: ^2.8.8
         version: 2.8.8
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1210,8 +1207,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
 
   packages/utils/projen:
     dependencies:
@@ -1219,14 +1216,14 @@ importers:
         specifier: workspace:*
         version: link:../fs
       '@sindresorhus/is':
-        specifier: ^5.3.0
-        version: 5.3.0
+        specifier: ^5.4.0
+        version: 5.4.0
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       type-fest:
-        specifier: ^3.11.0
-        version: 3.11.0
+        specifier: ^3.11.1
+        version: 3.11.1
     devDependencies:
       '@types/node':
         specifier: ^16
@@ -1271,8 +1268,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
 
   packages/utils/ts-ast:
     dependencies:
@@ -1280,11 +1277,11 @@ importers:
         specifier: workspace:*
         version: link:../fs
       '@sindresorhus/is':
-        specifier: ^5.3.0
-        version: 5.3.0
+        specifier: ^5.4.0
+        version: 5.4.0
       projen:
-        specifier: ^0.71.74
-        version: 0.71.74
+        specifier: ^0.71.81
+        version: 0.71.81
       reflect-metadata:
         specifier: ^0.1.13
         version: 0.1.13
@@ -1292,8 +1289,8 @@ importers:
         specifier: ^18.0.0
         version: 18.0.0
       type-fest:
-        specifier: ^3.11.0
-        version: 3.11.0
+        specifier: ^3.11.1
+        version: 3.11.1
     devDependencies:
       '@types/node':
         specifier: ^16
@@ -1338,8 +1335,8 @@ importers:
         specifier: ^1.2.1
         version: 1.2.1
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
 
   packages/vue/ui/button:
     dependencies:
@@ -1350,8 +1347,8 @@ importers:
         specifier: ^3.3.4
         version: 3.3.4
       primevue:
-        specifier: ^3.29.1
-        version: 3.29.1(vue@3.3.4)
+        specifier: ^3.29.2
+        version: 3.29.2(vue@3.3.4)
       vue:
         specifier: ^3.3.4
         version: 3.3.4
@@ -1426,8 +1423,8 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0(typescript@5.0.4)(vite@4.3.9)
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
       vue-tsc:
         specifier: ^1.6.5
         version: 1.6.5(typescript@5.0.4)
@@ -1511,8 +1508,8 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0(typescript@5.0.4)(vite@4.3.9)
       vitest:
-        specifier: ^0.31.1
-        version: 0.31.1(happy-dom@9.20.3)
+        specifier: ^0.31.3
+        version: 0.31.3(happy-dom@9.20.3)
       vue-tsc:
         specifier: ^1.6.5
         version: 1.6.5(typescript@5.0.4)
@@ -1547,15 +1544,15 @@ packages:
     resolution: {integrity: sha512-X7CjyphxMuAY1uNO2SMnTtQWxhnLf06ZAR9R4Ynm+8BOvyZfzqCrsmkT6O4nGRlhu5fGlRbNV//tCwU9e39yPQ==}
     dev: false
 
-  /@aws-prototyping-sdk/nx-monorepo@0.18.16(patch_hash=vizkutn345nlltbrneqzzpermm)(@pnpm/logger@5.0.0)(projen@0.71.74):
-    resolution: {integrity: sha512-q2pBg6n+CwiuCNF+revwo6RR+d8viPgySGyED7JITLAbtQ7Ppc+epxQm0QlTKHKej6m3PtMaf7184ec2Kjs+oQ==}
+  /@aws-prototyping-sdk/nx-monorepo@0.19.12(@pnpm/logger@5.0.0)(projen@0.71.81):
+    resolution: {integrity: sha512-8FdNKfmiKtPUjoq7djP8gOF21Cb23+VKI6i+gWv3K6Y/ZIdzsdVuJK8MY2T6dzxtsjyPma1kRLnIG4SRT2MGxw==}
     hasBin: true
     peerDependencies:
       projen: ^0.71.49
     dependencies:
       '@pnpm/reviewing.dependencies-hierarchy': 2.0.6(@pnpm/logger@5.0.0)
       fs-extra: 11.1.1
-      projen: 0.71.74
+      projen: 0.71.81
       semver: 7.5.1
     transitivePeerDependencies:
       - '@pnpm/logger'
@@ -1563,7 +1560,6 @@ packages:
       - '@pnpm/reviewing.dependencies-hierarchy'
       - fs-extra
       - semver
-    patched: true
 
   /@babel/code-frame@7.21.4:
     resolution: {integrity: sha512-LYvhNKfwWSPpocw8GI7gpK2nq3HSDuEPC/uSYaALSJu9xjsalaaYFOq0Pwt5KmVqwEbZlDu81aLXwBOmD/Fv9g==}
@@ -2217,14 +2213,14 @@ packages:
     resolution: {integrity: sha512-9b8mPpKrfeGRuhFH5iO1iwCLeIIsV6+H1sRfxbkoGXIyQE2BTsPd9zqSqQJ+pv5sJ/hT5M1zvOFL02MnEezFug==}
     dev: true
 
-  /@mrgrain/jsii-struct-builder@0.4.3(patch_hash=5n7l7qiehk4lghp47ostr53ckq)(projen@0.71.74):
+  /@mrgrain/jsii-struct-builder@0.4.3(patch_hash=5n7l7qiehk4lghp47ostr53ckq)(projen@0.71.81):
     resolution: {integrity: sha512-2DqZyKVi+SYLLKgmKI3hfYA146B7IDKhSlgGuo3BOq2JzoAOyj11OkyiGbcCeR35bPbPNgF3P96kDUEXRn51Aw==}
     peerDependencies:
       projen: x.x.x
     dependencies:
       '@jsii/spec': 1.82.0
       '@ungap/structured-clone': 1.0.2
-      projen: 0.71.74
+      projen: 0.71.81
     patched: true
 
   /@nodelib/fs.scandir@2.1.5:
@@ -2779,8 +2775,8 @@ packages:
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: true
 
-  /@sindresorhus/is@5.3.0:
-    resolution: {integrity: sha512-CX6t4SYQ37lzxicAqsBtxA3OseeoVrh9cSJ5PFYam0GksYlupRfy1A+Q4aYD3zvcfECLc0zO2u+ZnR2UYKvCrw==}
+  /@sindresorhus/is@5.4.0:
+    resolution: {integrity: sha512-Ggh6E9AnMpiNXlbXfFUcWE9qm408rL8jDi7+PMBBx7TMbwEmiqAiSmZ+zydYwxcJLqPGNDoLc9mXDuMDBZg0sA==}
     engines: {node: '>=14.16'}
 
   /@szmarczak/http-timer@5.0.1:
@@ -2879,8 +2875,8 @@ packages:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: true
 
-  /@types/prettier@2.7.2:
-    resolution: {integrity: sha512-KufADq8uQqo1pYKVIYzfKbJfBAc0sOeXqGbFaSpv8MRmC/zXgowNZmFcbngndGk922QDmOASEXUZCaY48gs4cg==}
+  /@types/prettier@2.7.3:
+    resolution: {integrity: sha512-+68kP9yzs4LMp7VNh8gdzMSPZFL44MLGqiHWvttYJe+6qnuVr4Ek9wSBQoveqY/r+LwjCcU29kNVkidwim+kYA==}
     dev: true
 
   /@types/resolve@1.20.2:
@@ -3048,35 +3044,35 @@ packages:
       vite: 4.3.9(@types/node@16.18.34)
       vue: 3.3.4
 
-  /@vitest/expect@0.31.1:
-    resolution: {integrity: sha512-BV1LyNvhnX+eNYzJxlHIGPWZpwJFZaCcOIzp2CNG0P+bbetenTupk6EO0LANm4QFt0TTit+yqx7Rxd1qxi/SQA==}
+  /@vitest/expect@0.31.3:
+    resolution: {integrity: sha512-J+npV64YwKRJN7hA8KVnuyGi5k5mIaq4XmqIxKbRUX0BRBkU1xZ7gZeTwQ4S4dBTcvSvcoxceBNfMTnOdTlg3g==}
     dependencies:
-      '@vitest/spy': 0.31.1
-      '@vitest/utils': 0.31.1
+      '@vitest/spy': 0.31.3
+      '@vitest/utils': 0.31.3
       chai: 4.3.7
 
-  /@vitest/runner@0.31.1:
-    resolution: {integrity: sha512-imWuc82ngOtxdCUpXwtEzZIuc1KMr+VlQ3Ondph45VhWoQWit5yvG/fFcldbnCi8DUuFi+NmNx5ehMUw/cGLUw==}
+  /@vitest/runner@0.31.3:
+    resolution: {integrity: sha512-89Fic1IRu4yNqnks/KJEncqZsmQpxq9RSnMVwV0RZeI9RWv/FYh9Nuoz8ld73YKOh6NiF4f9EE3COfNwX8aRpw==}
     dependencies:
-      '@vitest/utils': 0.31.1
+      '@vitest/utils': 0.31.3
       concordance: 5.0.4
       p-limit: 4.0.0
       pathe: 1.1.0
 
-  /@vitest/snapshot@0.31.1:
-    resolution: {integrity: sha512-L3w5uU9bMe6asrNzJ8WZzN+jUTX4KSgCinEJPXyny0o90fG4FPQMV0OWsq7vrCWfQlAilMjDnOF9nP8lidsJ+g==}
+  /@vitest/snapshot@0.31.3:
+    resolution: {integrity: sha512-CgcmlZyP083oPUgd83rwLZ+qoT4KdvLNsyWRiJNgHoJjR0r7StVY+LlLAfdC9qA70G8O+hJeug+Yn1u4H51OzA==}
     dependencies:
       magic-string: 0.30.0
       pathe: 1.1.0
       pretty-format: 27.5.1
 
-  /@vitest/spy@0.31.1:
-    resolution: {integrity: sha512-1cTpt2m9mdo3hRLDyCG2hDQvRrePTDgEJBFQQNz1ydHHZy03EiA6EpFxY+7ODaY7vMRCie+WlFZBZ0/dQWyssQ==}
+  /@vitest/spy@0.31.3:
+    resolution: {integrity: sha512-tXGIYPdqjBXLhOWSUhWV/eBWBllfD8f6ppQXR0YMBt95bZrCNV7pM29pkam2M/3GAlg7hS+I8wnKZVkIxgXz9A==}
     dependencies:
       tinyspy: 2.1.0
 
-  /@vitest/utils@0.31.1:
-    resolution: {integrity: sha512-yFyRD5ilwojsZfo3E0BnH72pSVSuLg2356cN1tCEe/0RtDzxTPYwOomIC+eQbot7m6DRy4tPZw+09mB7NkbMmA==}
+  /@vitest/utils@0.31.3:
+    resolution: {integrity: sha512-aLxfilR38ARSw6U/E9hl5bkn2TNeWLK7rZaIWZQUpT6BBilbehwJbSVGENubW5Pb9cawqchZZ7IQMW99t0Ww3A==}
     dependencies:
       concordance: 5.0.4
       loupe: 2.3.6
@@ -3763,7 +3759,7 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /aws-cdk-lib@2.81.0(constructs@10.2.35):
+  /aws-cdk-lib@2.81.0(constructs@10.2.39):
     resolution: {integrity: sha512-jnXvyhyRvoFTQcpZPtZOeOyY7k4Jb1+c83RLFic71KrwL6xxLxzImbS5rnoDOJHaX/otyfDxzQfziOQ7I0kt/g==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
@@ -3774,7 +3770,7 @@ packages:
       '@aws-cdk/asset-node-proxy-agent-v5': 2.0.151
       '@balena/dockerignore': 1.0.2
       case: 1.6.3
-      constructs: 10.2.35
+      constructs: 10.2.39
       fs-extra: 11.1.1
       ignore: 5.2.4
       jsonschema: 1.4.1
@@ -4042,14 +4038,14 @@ packages:
     resolution: {integrity: sha512-mzDSXIPaFwVDvZAHqZ9VlbyF4yyXRuX6IvB06WvPYkqJVO24kX1PPhv9bfpKNFZyxYFmmgo03HUiD8iklmJYRQ==}
     engines: {node: '>= 0.8.0'}
 
-  /cdk-nag@2.27.20(aws-cdk-lib@2.81.0)(constructs@10.2.35):
-    resolution: {integrity: sha512-ChoAGM/peAxVW4iV2UZeNlIz4yz0AxO0+f/ail6xMBxaifjlT/o6BOea2WsAWMtFXY1KLVLbkfpfQ+XlYJrKZg==}
+  /cdk-nag@2.27.24(aws-cdk-lib@2.81.0)(constructs@10.2.39):
+    resolution: {integrity: sha512-ZCARXKQVoQUT64qjoNZUjAkinKPz2ASRiNsTmqdlZsVOc5lKb6UUVUL83XroZTzIUGutFLFkjavZYKxeOSK+/Q==}
     peerDependencies:
       aws-cdk-lib: ^2.78.0
       constructs: ^10.0.5
     dependencies:
-      aws-cdk-lib: 2.81.0(constructs@10.2.35)
-      constructs: 10.2.35
+      aws-cdk-lib: 2.81.0(constructs@10.2.39)
+      constructs: 10.2.39
     dev: false
 
   /chai@4.3.7:
@@ -4290,8 +4286,8 @@ packages:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: true
 
-  /constructs@10.2.35:
-    resolution: {integrity: sha512-erBazI9i2cjUwxzz3GrLUj22NVbRlmjpaVIJDA0HT71bwRDC0DpQcOSeqUS/ecN1rMlMgGhIH2GLa3nPOQjLlA==}
+  /constructs@10.2.39:
+    resolution: {integrity: sha512-63eRvg9QYDTh8Vn3c+InrFjvjeZohl4Lwg6g2tWXWT5eBlSaOJcYdBBVKI9GkIc4B1OV/sRtUjgt39aAgujgQw==}
     engines: {node: '>= 16.14.0'}
     dev: false
 
@@ -5662,7 +5658,7 @@ packages:
     resolution: {integrity: sha512-WTcaQ963xV97MN3x0/CbAriXFZcXCfgxVp91I+Ze6pawQOa7SgzwSx2zIJJsX+kTajMnVs0xcFD1TxZKFqhdnQ==}
     engines: {node: '>=14.16'}
     dependencies:
-      '@sindresorhus/is': 5.3.0
+      '@sindresorhus/is': 5.4.0
       '@szmarczak/http-timer': 5.0.1
       cacheable-lookup: 7.0.0
       cacheable-request: 10.2.10
@@ -7639,8 +7635,8 @@ packages:
       ansi-styles: 5.2.0
       react-is: 17.0.2
 
-  /primevue@3.29.1(vue@3.3.4):
-    resolution: {integrity: sha512-dn00eWy5ZVL5srjVD/sLppjg4leDPKx3EUxOMuTi/o5e0XHGB1ZASfXPSSNTr314k3NWpoQqzuDfPNOg4PJ7fg==}
+  /primevue@3.29.2(vue@3.3.4):
+    resolution: {integrity: sha512-zMk1w5AySLR6ipWH2fONKtDabHrvRZhZFI1OdoiBDdMhZpARmWuCXwE/ZFusUh5Te0RBEd3iVCiizjUkSRraRQ==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
@@ -7661,42 +7657,8 @@ packages:
     engines: {node: '>=0.4.0'}
     dev: true
 
-  /projen@0.71.65:
-    resolution: {integrity: sha512-u0+UM7bcwqqAOx6CU6V51mkN4mNaH3Sb5akWL/SsLBvS7VyOvDmEJ0um+0P6uoKXxAtl+yHgHjDctzWV1U4hoA==}
-    engines: {node: '>= 14.0.0'}
-    hasBin: true
-    dependencies:
-      '@iarna/toml': 2.2.5
-      case: 1.6.3
-      chalk: 4.1.2
-      comment-json: 4.2.2
-      conventional-changelog-config-spec: 2.1.0
-      fast-json-patch: 3.1.1
-      glob: 8.1.0
-      ini: 2.0.0
-      semver: 7.5.1
-      shx: 0.3.4
-      xmlbuilder2: 3.1.1
-      yaml: 2.2.2
-      yargs: 17.7.2
-    dev: true
-    bundledDependencies:
-      - '@iarna/toml'
-      - case
-      - chalk
-      - comment-json
-      - conventional-changelog-config-spec
-      - fast-json-patch
-      - glob
-      - ini
-      - semver
-      - shx
-      - xmlbuilder2
-      - yaml
-      - yargs
-
-  /projen@0.71.74:
-    resolution: {integrity: sha512-k0jybT3Gi6ImhEKOte5+tQ3TLhECYNxROan6MN4j6iRAmzAcHklsjPhi0K8kOpEG6A2V/jGSen3i7lSueDfqjw==}
+  /projen@0.71.81:
+    resolution: {integrity: sha512-0ZejRGWymGVGWgkNII8IZEyzRot+38g58e2DNk1ORBLwDnQYnYaOorf0Fcm452RTUOf/jnQTfCaHhhSQ41zrZg==}
     engines: {node: '>= 14.0.0'}
     hasBin: true
     dependencies:
@@ -8568,8 +8530,8 @@ packages:
       tslib: 2.5.2
     dev: true
 
-  /syncpack@10.0.0:
-    resolution: {integrity: sha512-2NfjGsFNbsVUv/cdy6tnqFW4mCs02hJN/V/DGzPv8EYgVhdOyz52Q4RFSFm2P86utFkESnl5THqCcsUHNAqf8g==}
+  /syncpack@10.1.0:
+    resolution: {integrity: sha512-3SMPf49tpxw170ZokyurKuJc7G45xZLtzgH6W87+7OsbRQLc+oc9UfoelVf1CuYglZsMwFott4zEShCY8o+R1Q==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
@@ -8913,8 +8875,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /type-fest@3.11.0:
-    resolution: {integrity: sha512-JaPw5U9ixP0XcpUbQoVSbxSDcK/K4nww20C3kjm9yE6cDRRhptU28AH60VWf9ltXmCrIfIbtt9J+2OUk2Uqiaw==}
+  /type-fest@3.11.1:
+    resolution: {integrity: sha512-aCuRNRERRVh33lgQaJRlUxZqzfhzwTrsE98Mc3o3VXqmiaQdHacgUtJ0esp+7MvZ92qhtzKPeusaX6vIEcoreA==}
     engines: {node: '>=14.16'}
     dev: false
 
@@ -9216,8 +9178,8 @@ packages:
     engines: {node: '>= 0.10'}
     dev: true
 
-  /vite-node@0.31.1(@types/node@16.18.34):
-    resolution: {integrity: sha512-BajE/IsNQ6JyizPzu9zRgHrBwczkAs0erQf/JRpgTIESpKvNj9/Gd0vxX905klLkb0I0SJVCKbdrl5c6FnqYKA==}
+  /vite-node@0.31.3(@types/node@16.18.34):
+    resolution: {integrity: sha512-KGdemamy6imPlmTycADRs5yMX/CoxPq9vJwTAOgSfabzneJmyexmRBBVEX8Mesb3mleIXTBIVR6z0fmtoRTcww==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
     dependencies:
@@ -9308,8 +9270,8 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /vitest@0.31.1(happy-dom@9.20.3):
-    resolution: {integrity: sha512-/dOoOgzoFk/5pTvg1E65WVaobknWREN15+HF+0ucudo3dDG/vCZoXTQrjIfEaWvQXmqScwkRodrTbM/ScMpRcQ==}
+  /vitest@0.31.3(happy-dom@9.20.3):
+    resolution: {integrity: sha512-LMXIKXfI7tDClf6HIR5GjCSHZQdlmfCWWPaJwWcLF+M11V766Tzefb8LD9mLcHmX/zR0xtlfcokpg3JxEDLfeA==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
     peerDependencies:
@@ -9342,11 +9304,11 @@ packages:
       '@types/chai': 4.3.5
       '@types/chai-subset': 1.3.3
       '@types/node': 16.18.34
-      '@vitest/expect': 0.31.1
-      '@vitest/runner': 0.31.1
-      '@vitest/snapshot': 0.31.1
-      '@vitest/spy': 0.31.1
-      '@vitest/utils': 0.31.1
+      '@vitest/expect': 0.31.3
+      '@vitest/runner': 0.31.3
+      '@vitest/snapshot': 0.31.3
+      '@vitest/spy': 0.31.3
+      '@vitest/utils': 0.31.3
       acorn: 8.8.2
       acorn-walk: 8.2.0
       cac: 6.7.14
@@ -9363,7 +9325,7 @@ packages:
       tinybench: 2.5.0
       tinypool: 0.5.0
       vite: 4.3.9(@types/node@16.18.34)
-      vite-node: 0.31.1(@types/node@16.18.34)
+      vite-node: 0.31.3(@types/node@16.18.34)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less

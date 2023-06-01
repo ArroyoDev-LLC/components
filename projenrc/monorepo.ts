@@ -10,10 +10,17 @@ import {
 	MonorepoProject,
 	type NxMonorepoProjectOptions,
 } from '@arroyodev-llc/projen.project.nx-monorepo'
+import { github } from 'projen'
 import { type GitHub } from 'projen/lib/github'
 import { type NpmConfig } from 'projen/lib/javascript'
 
+const arroyoBot = github.GithubCredentials.fromApp({
+	appIdSecret: 'AD_BOT_APP_ID',
+	privateKeySecret: 'AD_BOT_PRIVATE_KEY',
+})
+
 export class ComponentsMonorepo extends MonorepoProject {
+	static readonly githubCredentials = arroyoBot
 	static readonly nxPublicReadonlyToken: string =
 		'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
 
@@ -24,7 +31,13 @@ export class ComponentsMonorepo extends MonorepoProject {
 	public readonly envrc: DirEnv
 
 	constructor(options: NxMonorepoProjectOptions) {
-		super(options)
+		super({
+			projenCredentials: ComponentsMonorepo.githubCredentials,
+			githubOptions: {
+				projenCredentials: ComponentsMonorepo.githubCredentials,
+			},
+			...options,
+		})
 		this.lintConfig = new LintConfig(this)
 		this.vitest = new Vitest(this, {
 			configType: VitestConfigType.WORKSPACE,

@@ -13,11 +13,6 @@ import { deepMerge } from 'projen/lib/util'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'
 import { TypeDocGithubPages } from './typedoc-workflow.ts'
 
-const arroyoBot = github.GithubCredentials.fromApp({
-	appIdSecret: 'AD_BOT_APP_ID',
-	privateKeySecret: 'AD_BOT_PRIVATE_KEY',
-})
-
 export const CONFIG_DEFAULTS = {
 	name: '',
 	defaultReleaseBranch: 'main',
@@ -25,9 +20,9 @@ export const CONFIG_DEFAULTS = {
 	pnpmVersion: '8',
 	npmAccess: javascript.NpmAccess.PUBLIC,
 	release: false,
-	releaseToNpm: true,
+	releaseToNpm: false,
 	jest: false,
-	projenDevDependency: false,
+	projenDevDependency: true,
 	entrypoint: 'dist/index.mjs',
 	entrypointTypes: 'dist/index.d.ts',
 	libdir: 'dist',
@@ -41,7 +36,6 @@ export const CONFIG_DEFAULTS = {
 	githubOptions: {
 		mergify: true,
 		workflows: true,
-		projenCredentials: arroyoBot,
 		pullRequestLintOptions: {
 			semanticTitleOptions: {
 				types: [
@@ -109,8 +103,6 @@ export class MonorepoProject extends NxMonorepoProject {
 		super({
 			defaultReleaseBranch: 'main',
 			...mergedOptions,
-			releaseToNpm: false,
-			projenDevDependency: true,
 		})
 		this.options = mergedOptions
 		this.pnpm = new PnpmWorkspace(this)

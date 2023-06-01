@@ -87,6 +87,11 @@ const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 	workspaceDeps: [utilsProjen],
 })
 
+const gitHooksComponent = ProjenComponentProject.fromParent(monorepo,{
+	name: 'projen.component.git-hooks',
+	peerDeps: ['lint-staged', 'simple-git-hooks'],
+})
+
 const tsSourceComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.typescript-source-file',
 	workspaceDeps: [utilsProjen, lintingComponent, utilsFs, utilsTsAst],
@@ -222,6 +227,7 @@ new NxMonorepoProjectOptionsBuilder(monorepo)
 monorepo.addWorkspaceDeps(
 	utilsProjen,
 	lintingComponent,
+	gitHooksComponent,
 	unbuildComponent,
 	tsSourceComponent,
 	viteComponent,

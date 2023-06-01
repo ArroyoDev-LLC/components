@@ -19,6 +19,10 @@
       "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"
     },
+    "packages/projen/component/git-hooks": {
+      "component": "@arroyodev-llc/projen.component.git-hooks",
+      "release-type": "node"
+    },
     "packages/projen/component/typescript-source-file": {
       "component": "@arroyodev-llc/projen.component.typescript-source-file",
       "release-type": "node"

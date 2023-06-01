@@ -33,6 +33,7 @@
     "@zkochan/js-yaml",
     "wrap-ansi",
     "@arroyodev-llc/projen.component.dir-env",
+    "@arroyodev-llc/projen.component.git-hooks",
     "@arroyodev-llc/projen.component.linting",
     "@arroyodev-llc/projen.component.pnpm-workspace",
     "@arroyodev-llc/projen.component.release-please",

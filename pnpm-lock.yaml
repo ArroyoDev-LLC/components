@@ -21,6 +21,9 @@ importers:
       '@arroyodev-llc/projen.component.dir-env':
         specifier: workspace:*
         version: link:packages/projen/component/dir-env
+      '@arroyodev-llc/projen.component.git-hooks':
+        specifier: workspace:*
+        version: link:packages/projen/component/git-hooks
       '@arroyodev-llc/projen.component.linting':
         specifier: workspace:*
         version: link:packages/projen/component/linting
@@ -265,6 +268,9 @@ importers:
       projen:
         specifier: 0.71.81
         version: 0.71.81
+      simple-git-hooks:
+        specifier: 2.8.1
+        version: 2.8.1
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -8429,6 +8435,12 @@ packages:
       tuf-js: 1.1.6
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /simple-git-hooks@2.8.1:
+    resolution: {integrity: sha512-DYpcVR1AGtSfFUNzlBdHrQGPsOhuuEJ/FkmPOOlFysP60AHd3nsEpkGq/QEOdtUyT1Qhk7w9oLmFoMG+75BDog==}
+    hasBin: true
+    requiresBuild: true
     dev: true
 
   /sirv@2.0.3:

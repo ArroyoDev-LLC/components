@@ -6,7 +6,13 @@ import {
 	NodePackageUtils,
 	NxMonorepoProject,
 } from '@aws-prototyping-sdk/nx-monorepo'
-import { github, javascript, JsonFile, type Project, typescript } from 'projen'
+import {
+	type github,
+	javascript,
+	JsonFile,
+	type Project,
+	typescript,
+} from 'projen'
 import { secretToString } from 'projen/lib/github/util'
 import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
 import { deepMerge } from 'projen/lib/util'
@@ -33,6 +39,7 @@ export const CONFIG_DEFAULTS = {
 	authorOrganization: true,
 	projenrcTs: true,
 	github: true,
+	workflowPackageCache: true,
 	githubOptions: {
 		mergify: true,
 		workflows: true,

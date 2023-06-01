@@ -1,7 +1,11 @@
 import path from 'node:path'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
 import { TypescriptConfigContainer } from '@arroyodev-llc/projen.component.tsconfig-container'
-import { cwdRelativePath, findComponent } from '@arroyodev-llc/utils.projen'
+import {
+	cwdRelativePath,
+	findComponent,
+	ProjectName,
+} from '@arroyodev-llc/utils.projen'
 import {
 	NodePackageUtils,
 	NxMonorepoProject,
@@ -411,6 +415,13 @@ export class MonorepoProject extends NxMonorepoProject {
 
 	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
 		return this.pnpm.addWorkspaceDeps(...dependency)
+	}
+
+	/**
+	 * Default project naming scheme.
+	 */
+	get nameScheme(): (name: string) => ProjectName {
+		return ProjectName.fromScheme(this.options.namingScheme ?? {})
 	}
 
 	preSynthesize() {

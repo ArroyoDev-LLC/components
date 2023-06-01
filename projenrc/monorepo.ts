@@ -37,6 +37,9 @@ export class ComponentsMonorepo extends MonorepoProject {
 				projenCredentials: ComponentsMonorepo.githubCredentials,
 			},
 			minNodeVersion: '18.16.0',
+			namingScheme: {
+				scope: '@arroyodev-llc',
+			},
 			...options,
 		})
 		this.lintConfig = new LintConfig(this)

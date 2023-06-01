@@ -348,6 +348,7 @@ export class MonorepoProject extends NxMonorepoProject {
 	protected applyNpmConfig(npmConfig: javascript.NpmConfig): this {
 		// default '*' to highest resolution.
 		npmConfig.addConfig('resolution-mode', 'highest')
+		npmConfig.addConfig('link-workspace-packages', 'deep')
 		return this
 	}
 

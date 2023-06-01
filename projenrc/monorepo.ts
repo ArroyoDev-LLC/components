@@ -1,4 +1,10 @@
 import { DirEnv } from '@arroyodev-llc/projen.component.dir-env'
+import {
+	ExtensionMatch,
+	GitHooks,
+	LintStaged,
+	ValidGitHooks,
+} from '@arroyodev-llc/projen.component.git-hooks'
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { ReleasePlease } from '@arroyodev-llc/projen.component.release-please'
 import { ToolVersions } from '@arroyodev-llc/projen.component.tool-versions'
@@ -10,9 +16,10 @@ import {
 	MonorepoProject,
 	type NxMonorepoProjectOptions,
 } from '@arroyodev-llc/projen.project.nx-monorepo'
-import { github } from 'projen'
+import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
+import { github, typescript } from 'projen'
 import { type GitHub } from 'projen/lib/github'
-import { type NpmConfig } from 'projen/lib/javascript'
+import { NodeProject, type NpmConfig } from 'projen/lib/javascript'
 
 const arroyoBot = github.GithubCredentials.fromApp({
 	appIdSecret: 'AD_BOT_APP_ID',
@@ -29,6 +36,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 	public releasePlease!: ReleasePlease
 	public readonly toolVersions: ToolVersions
 	public readonly envrc: DirEnv
+	public readonly gitHooks: GitHooks
 
 	constructor(options: NxMonorepoProjectOptions) {
 		super({
@@ -54,6 +62,34 @@ export class ComponentsMonorepo extends MonorepoProject {
 			tools: {
 				nodejs: ['18.16.0'],
 				pnpm: ['8.6.0'],
+			},
+		})
+		this.applyRecursive(
+			(project) => {
+				if (project instanceof typescript.TypeScriptProject) {
+					new LintStaged(project, {
+						entries: [
+							{
+								extensions: [ExtensionMatch.TS, ExtensionMatch.TS],
+								commands: [
+									NodePackageUtils.command.exec(
+										this.package.packageManager,
+										'eslint --no-error-on-umatched-pattern --cache --fix'
+									),
+								],
+							},
+						],
+					})
+				}
+			},
+			{ immediate: false, includeSelf: true }
+		)
+		this.gitHooks = new GitHooks(this, {
+			hooks: {
+				[ValidGitHooks.PreCommit]: NodePackageUtils.command.exec(
+					this.package.packageManager,
+					'lint-staged'
+				),
 			},
 		})
 		this.envrc = new DirEnv(this, { fileName: '.envrc' })

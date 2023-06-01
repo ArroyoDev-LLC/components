@@ -76,6 +76,15 @@ export class GitHooks extends Component {
 				? { preserveUnused: this.options.preserveUnused }
 				: {}),
 		})
+		const postInstall =
+			this.project.tasks.tryFind('post-install') ??
+			this.project.tasks.addTask('post-install', {
+				description: 'Node post-install hook.',
+			})
+		postInstall.exec('simple-git-hooks', {
+			name: 'Setup simple-git-hooks.',
+			condition: 'test -z "$CI"',
+		})
 		return this
 	}
 

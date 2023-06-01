@@ -89,23 +89,21 @@ const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 
 const tsSourceComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.typescript-source-file',
-	parent: monorepo,
-	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	workspaceDeps: [utilsProjen, lintingComponent, utilsFs, utilsTsAst],
-	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo'],
+	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
+	deps: ['ts-morph'],
 })
 
 const pnpmWorkspaceComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.pnpm-workspace',
-	parent: monorepo,
-	tsconfigBase: monorepo.esmBundledTsconfigExtends,
 	workspaceDeps: [utilsProjen],
 })
 
 const unbuildComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.unbuild',
 	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
-	deps: ['ts-morph', '@aws-prototyping-sdk/nx-monorepo', 'unbuild'],
+	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
+	deps: ['ts-morph', 'unbuild'],
 })
 
 const viteComponent = ProjenComponentProject.fromParent(monorepo, {
@@ -177,8 +175,8 @@ const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
 		pnpmWorkspaceComponent,
 		tsconfigContainerComponent,
 	],
-	deps: ['@mrgrain/jsii-struct-builder', '@aws-prototyping-sdk/nx-monorepo'],
-	peerDeps: ['projen'],
+	deps: ['@mrgrain/jsii-struct-builder'],
+	peerDeps: ['projen', '@aws-prototyping-sdk/nx-monorepo'],
 })
 LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
 	'src/nx-monorepo-project-options.ts'
@@ -186,7 +184,7 @@ LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
 
 const typescriptProject = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.project.typescript',
-	deps: ['@aws-prototyping-sdk/nx-monorepo'],
+	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
 	workspaceDeps: [
 		utilsProjen,
 		lintingComponent,

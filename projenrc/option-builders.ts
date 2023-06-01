@@ -1,5 +1,5 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
-import { CollectionKind, PrimitiveType } from '@jsii/spec'
+import { CollectionKind, PrimitiveType, TypeKind } from '@jsii/spec'
 import { ProjenStruct, Struct } from '@mrgrain/jsii-struct-builder'
 import path from 'pathe'
 import { type cdk, Component, type typescript } from 'projen'
@@ -35,6 +35,7 @@ const typescriptStructMixin = Struct.empty()
 	})
 
 export class NxMonorepoProjectOptionsBuilder extends Component {
+	readonly optionsStruct: ProjenStruct
 	constructor(project: typescript.TypeScriptProject) {
 		super(project)
 
@@ -49,6 +50,9 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 		const struct = new ProjenStruct(project, {
 			name: 'NxMonorepoProjectOptions',
 			filePath,
+			importLocations: {
+				'@arroyodev-llc/utils-projen': '@arroyodev-llc/utils.projen',
+			},
 		})
 
 		struct.mixin(
@@ -67,9 +71,25 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 					type: {
 						primitive: PrimitiveType.Any,
 					},
+				})
+				// TODO: fix jsii assembly path issues
+				.add({
+					name: 'namingScheme',
+					optional: true,
+					docs: {
+						summary:
+							'Default {@link @arroyodev-llc/utils.projen!ProjectNameSchemeOptions}',
+					},
+					type: Struct.fromSpec({
+						name: 'ProjectNameScheme',
+						fqn: '@arroyodev-llc/utils-projen.ProjectNameSchemeOptions',
+						assembly: '@arroyodev-llc/utils-projen',
+						kind: TypeKind.Interface,
+					}),
 				}),
 			typescriptStructMixin
 		)
+		this.optionsStruct = struct
 	}
 }
 

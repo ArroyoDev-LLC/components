@@ -41,7 +41,7 @@
     "standard-version": "^9",
     "typescript": "^5",
     "unbuild": "^1.2.1",
-    "vitest": "^0.31.1"
+    "vitest": "^0.31.3"
   },
   "dependencies": {
     "fs-extra": "^11.1.1",

@@ -86,21 +86,42 @@ export const findRootProject = (project: Project): Project => {
 	return project
 }
 
+export interface ProjectNameSchemeOptions {
+	/**
+	 * Package name scope.
+	 */
+	scope?: string
+	/**
+	 * Root packages directory.
+	 * @default 'packages/'
+	 */
+	packagesDir?: string
+}
+
 /**
  * Project name utility.
  */
 export class ProjectName {
-	constructor(readonly name: string) {}
+	public static fromScheme(
+		scheme: ProjectNameSchemeOptions
+	): (name: string) => ProjectName {
+		return (name) => new ProjectName(name, scheme)
+	}
+
+	constructor(
+		readonly name: string,
+		readonly scheme?: ProjectNameSchemeOptions
+	) {}
 
 	get path(): string {
 		return this.name.split('.').join('/')
 	}
 
 	get outDir(): string {
-		return `packages/${this.path}`
+		return path.join(this.scheme?.packagesDir ?? 'packages', this.path)
 	}
 
 	get packageName(): string {
-		return `@arroyodev-llc/${this.name}`
+		return [this.scheme?.scope, this.name].filter(Boolean).join('/')
 	}
 }

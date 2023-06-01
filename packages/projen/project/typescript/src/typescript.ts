@@ -214,4 +214,12 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
 		return PnpmWorkspace.of(this)!.addWorkspaceDeps(...dependency)
 	}
+
+	/**
+	 * Format executable command with project package manager.
+	 * @param args command args.
+	 */
+	formatExecCommand(...args: string[]): string {
+		return NodePackageUtils.command.exec(this.package.packageManager, ...args)
+	}
 }

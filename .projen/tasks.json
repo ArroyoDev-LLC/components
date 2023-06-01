@@ -166,6 +166,11 @@
         {
           "exec": "pnpm exec nx run-many --target=post-install --output-style=stream --nx-bail",
           "receiveArgs": true
+        },
+        {
+          "exec": "simple-git-hooks",
+          "name": "Setup simple-git-hooks.",
+          "condition": "test -z \"$CI\""
         }
       ]
     },

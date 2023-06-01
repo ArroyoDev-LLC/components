@@ -73,6 +73,10 @@
       "type": "build"
     },
     {
+      "name": "lint-staged",
+      "type": "build"
+    },
+    {
       "name": "npm-check-updates",
       "type": "build"
     },
@@ -103,6 +107,10 @@
     },
     {
       "name": "rollup-plugin-vue",
+      "type": "build"
+    },
+    {
+      "name": "simple-git-hooks",
       "type": "build"
     },
     {

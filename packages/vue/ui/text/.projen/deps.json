@@ -65,6 +65,10 @@
       "type": "build"
     },
     {
+      "name": "lint-staged",
+      "type": "build"
+    },
+    {
       "name": "npm-check-updates",
       "version": "^16",
       "type": "build"

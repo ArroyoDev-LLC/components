@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'fs'
 import path from 'node:path'
 import { findComponent } from '@arroyodev-llc/utils.projen'
-import { Component, github, JsonFile, type Project } from 'projen'
+import { Component, github, javascript, JsonFile, type Project } from 'projen'
 import { secretToString } from 'projen/lib/github/util'
 import { NodeProject } from 'projen/lib/javascript'
 import { kebabCaseKeys } from 'projen/lib/util'
@@ -141,6 +141,11 @@ export class ReleasePleaseWorkflow extends Component {
 	) {
 		super(project)
 
+		const nodeVersion =
+			(this.project instanceof javascript.NodeProject
+				? this.project.minNodeVersion
+				: undefined) ?? '18.16.0'
+
 		this.workflow =
 			options.workflow ??
 			new github.GithubWorkflow(github.GitHub.of(this.project)!, 'Release')
@@ -172,7 +177,7 @@ export class ReleasePleaseWorkflow extends Component {
 				if: this.releasesCreatedRef,
 				uses: 'actions/setup-node@v3',
 				with: {
-					'node-version': '18',
+					'node-version': nodeVersion,
 					cache: 'pnpm',
 				},
 			},

@@ -107,6 +107,13 @@
         "cwd": "packages/projen/component/vitest"
       }
     },
+    "post-install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen post-install",
+        "cwd": "packages/projen/component/vitest"
+      }
+    },
     "clean": {
       "executor": "nx:run-commands",
       "options": {

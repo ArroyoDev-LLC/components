@@ -164,13 +164,23 @@
       "name": "post-install",
       "steps": [
         {
-          "exec": "pnpm exec projen stub"
+          "exec": "pnpm exec nx run-many --target=post-install --output-style=stream --nx-bail",
+          "receiveArgs": true
         }
       ]
     },
     "post-upgrade": {
       "name": "post-upgrade",
       "description": "Runs after upgrading dependencies"
+    },
+    "postinstall": {
+      "name": "postinstall",
+      "description": "Post install hook.",
+      "steps": [
+        {
+          "exec": "pnpm exec projen post-install"
+        }
+      ]
     },
     "pre-compile": {
       "name": "pre-compile",
@@ -188,15 +198,6 @@
       "steps": [
         {
           "exec": "pnpm exec nx run-many",
-          "receiveArgs": true
-        }
-      ]
-    },
-    "stub": {
-      "name": "stub",
-      "steps": [
-        {
-          "exec": "pnpm exec nx run-many --target=stub --output-style=stream --parallel=5 --skip-nx-cache --nx-ignore-cycles",
           "receiveArgs": true
         }
       ]

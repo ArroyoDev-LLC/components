@@ -107,6 +107,13 @@
         "cwd": "packages/projen/project/typescript"
       }
     },
+    "post-install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen post-install",
+        "cwd": "packages/projen/project/typescript"
+      }
+    },
     "clean": {
       "executor": "nx:run-commands",
       "options": {

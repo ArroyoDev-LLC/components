@@ -103,6 +103,14 @@
         }
       ]
     },
+    "post-install": {
+      "name": "post-install",
+      "steps": [
+        {
+          "spawn": "stub"
+        }
+      ]
+    },
     "post-upgrade": {
       "name": "post-upgrade",
       "description": "Runs after upgrading dependencies"
@@ -139,7 +147,7 @@
       "name": "stub",
       "steps": [
         {
-          "exec": "unbuild --stub"
+          "exec": "pnpm exec unbuild --stub"
         }
       ],
       "condition": "test -z \"$CI\""

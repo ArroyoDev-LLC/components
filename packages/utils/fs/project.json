@@ -107,6 +107,13 @@
         "cwd": "packages/utils/fs"
       }
     },
+    "post-install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen post-install",
+        "cwd": "packages/utils/fs"
+      }
+    },
     "test:watch": {
       "executor": "nx:run-commands",
       "options": {

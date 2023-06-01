@@ -107,6 +107,13 @@
         "cwd": "packages/utils/projen"
       }
     },
+    "post-install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen post-install",
+        "cwd": "packages/utils/projen"
+      }
+    },
     "test:watch": {
       "executor": "nx:run-commands",
       "options": {

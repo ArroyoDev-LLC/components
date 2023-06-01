@@ -1,24 +1,12 @@
 import path from 'node:path'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
 import { TypescriptConfigContainer } from '@arroyodev-llc/projen.component.tsconfig-container'
-import {
-	cwdRelativePath,
-	findComponent,
-	replaceTask,
-} from '@arroyodev-llc/utils.projen'
+import { cwdRelativePath, findComponent } from '@arroyodev-llc/utils.projen'
 import {
 	NodePackageUtils,
 	NxMonorepoProject,
 } from '@aws-prototyping-sdk/nx-monorepo'
-import {
-	github,
-	javascript,
-	JsonFile,
-	type Project,
-	type Task,
-	type TaskStep,
-	typescript,
-} from 'projen'
+import { github, javascript, JsonFile, type Project, typescript } from 'projen'
 import { secretToString } from 'projen/lib/github/util'
 import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
 import { deepMerge } from 'projen/lib/util'
@@ -178,7 +166,6 @@ export class MonorepoProject extends NxMonorepoProject {
 			.applyPackage(this.package)
 			.applyDefaultTask()
 			.applyNx()
-			.applyUpgradeTask(this.tasks.tryFind('upgrade-deps'))
 			.applyCleanTask()
 			.applyTypeDoc(this.github)
 	}
@@ -262,18 +249,6 @@ export class MonorepoProject extends NxMonorepoProject {
 				noEmit: true,
 				jsx: javascript.TypeScriptJsxMode.PRESERVE,
 			})
-	}
-
-	protected applyUpgradeTask(task?: Task): this {
-		if (!task) return this
-		// fix invalid install step.
-		const mergeUpdate = task.steps.map((step) =>
-			step.exec === 'pnpm exec install'
-				? { exec: 'pnpm exec projen install' }
-				: undefined
-		) as TaskStep[]
-		replaceTask(this, task.name, mergeUpdate)
-		return this
 	}
 
 	protected applyNx(): this {

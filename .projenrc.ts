@@ -87,7 +87,7 @@ const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
 	workspaceDeps: [utilsProjen],
 })
 
-const gitHooksComponent = ProjenComponentProject.fromParent(monorepo,{
+const gitHooksComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.git-hooks',
 	peerDeps: ['lint-staged', 'simple-git-hooks'],
 })

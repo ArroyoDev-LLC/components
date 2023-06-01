@@ -58,6 +58,10 @@
       "type": "build"
     },
     {
+      "name": "simple-git-hooks",
+      "type": "build"
+    },
+    {
       "name": "standard-version",
       "version": "^9",
       "type": "build"
@@ -77,6 +81,10 @@
     },
     {
       "name": "projen",
+      "type": "peer"
+    },
+    {
+      "name": "simple-git-hooks",
       "type": "peer"
     }
   ],

@@ -168,6 +168,11 @@
       "type": "runtime"
     },
     {
+      "name": "@arroyodev-llc/projen.component.git-hooks",
+      "version": "workspace:*",
+      "type": "runtime"
+    },
+    {
       "name": "@arroyodev-llc/projen.component.linting",
       "version": "workspace:*",
       "type": "runtime"

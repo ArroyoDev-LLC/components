@@ -334,25 +334,23 @@ export class MonorepoProject extends NxMonorepoProject {
 				{ immediate: false, includeSelf: true }
 			)
 		}
-		this.addNxRunManyTask('stub', {
-			skipCache: true,
-			target: 'stub',
-			parallel: 5,
-			noBail: true,
-			ignoreCycles: true,
-			outputStyle: 'stream',
+
+		this.addNxRunManyTask('post-install', {
+			target: 'post-install',
 		})
+		// 'postinstall' is intentional here,
+		// as that is the name of the npm hook.
 		const postInstall =
-			this.tasks.tryFind('post-install') ?? this.tasks.addTask('post-install')
+			this.tasks.tryFind('postinstall') ??
+			this.addTask('postinstall', {
+				description: 'Post install hook.',
+			})
 		postInstall.exec(
-			NodePackageUtils.command.projen(this.package.packageManager, 'stub')
-		)
-		this.addScripts({
-			postinstall: NodePackageUtils.command.projen(
+			NodePackageUtils.command.projen(
 				this.package.packageManager,
 				'post-install'
-			),
-		})
+			)
+		)
 		return this
 	}
 

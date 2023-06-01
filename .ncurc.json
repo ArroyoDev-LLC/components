@@ -1,6 +1,5 @@
 {
   "reject": [
-    "@mrgrain/jsii-struct-builder",
-    "@aws-prototyping-sdk/nx-monorepo"
+    "@mrgrain/jsii-struct-builder"
   ]
 }

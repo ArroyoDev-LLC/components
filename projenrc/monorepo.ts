@@ -54,10 +54,6 @@ export class ComponentsMonorepo extends MonorepoProject {
 			'@mrgrain/jsii-struct-builder@0.4.3',
 			'patches/@mrgrain__jsii-struct-builder@0.4.3.patch'
 		)
-		this.pnpm.addPatch(
-			'@aws-prototyping-sdk/nx-monorepo@0.18.16',
-			'patches/@aws-prototyping-sdk__nx-monorepo@0.18.16.patch'
-		)
 	}
 
 	protected applyNx(): this {

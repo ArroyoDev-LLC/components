@@ -5,7 +5,10 @@ import {
 	ReleaseType,
 } from '@arroyodev-llc/projen.component.release-please'
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
-import { type MonorepoProject } from '@arroyodev-llc/projen.project.nx-monorepo'
+import {
+	MonorepoProject,
+	TSConfig,
+} from '@arroyodev-llc/projen.project.nx-monorepo'
 import { ProjectName } from '@arroyodev-llc/utils.projen'
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
 import { type Component, javascript, LogLevel, typescript } from 'projen'
@@ -39,6 +42,11 @@ export const CONFIG_DEFAULTS = {
 } satisfies Omit<TypeScriptProjectOptions, 'name'>
 
 export class TypescriptProject extends typescript.TypeScriptProject {
+	/**
+	 * Create new package under monorepo parent.
+	 * @param monorepo Parent monorepo project.
+	 * @param options Project options.
+	 */
 	static fromParent(
 		monorepo: MonorepoProject,
 		options: TypeScriptProjectOptions
@@ -46,7 +54,13 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		const { tsconfigBase, ...rest } = options
 		return new this({
 			parent: monorepo,
-			tsconfigBase: tsconfigBase ?? monorepo.esmBundledTsconfigExtends,
+			tsconfigBase:
+				tsconfigBase ??
+				monorepo.tsconfigContainer.buildExtends(
+					TSConfig.BASE,
+					TSConfig.ESM,
+					TSConfig.BUNDLER
+				),
 			...rest,
 		})
 	}
@@ -60,7 +74,10 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 
 	constructor(options: TypeScriptProjectOptions) {
 		const { name, workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
-		const projectName = new ProjectName(name)
+		let projectName: ProjectName = new ProjectName(name)
+		if (options.parent && options.parent instanceof MonorepoProject) {
+			projectName = options.parent.nameScheme(name)
+		}
 		const mergedOptions = deepMerge(
 			[Object.assign({}, CONFIG_DEFAULTS), rest],
 			true

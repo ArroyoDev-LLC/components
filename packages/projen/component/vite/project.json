@@ -107,6 +107,13 @@
         "cwd": "packages/projen/component/vite"
       }
     },
+    "post-install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen post-install",
+        "cwd": "packages/projen/component/vite"
+      }
+    },
     "test:watch": {
       "executor": "nx:run-commands",
       "options": {

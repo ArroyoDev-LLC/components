@@ -107,6 +107,13 @@
         "cwd": "packages/projen/project/vue-component"
       }
     },
+    "post-install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen post-install",
+        "cwd": "packages/projen/project/vue-component"
+      }
+    },
     "clean": {
       "executor": "nx:run-commands",
       "options": {

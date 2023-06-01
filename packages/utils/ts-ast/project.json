@@ -107,6 +107,13 @@
         "cwd": "packages/utils/ts-ast"
       }
     },
+    "post-install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen post-install",
+        "cwd": "packages/utils/ts-ast"
+      }
+    },
     "test:watch": {
       "executor": "nx:run-commands",
       "options": {

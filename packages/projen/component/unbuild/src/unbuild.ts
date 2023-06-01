@@ -2,6 +2,7 @@ import path from 'node:path'
 import { TypeScriptSourceConfig } from '@arroyodev-llc/projen.component.typescript-source-file'
 import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
 import { type ObjectLiteralMergeSchema } from '@arroyodev-llc/utils.ts-ast'
+import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
 import { Component, DependencyType } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import { type BuildConfig as UnBuildBuildConfig } from 'unbuild'
@@ -38,8 +39,16 @@ export class UnBuild extends Component {
 
 		const stubTask = this.project.addTask('stub', {
 			condition: 'test -z "$CI"',
+			exec: NodePackageUtils.command.exec(
+				project.package.packageManager,
+				'unbuild',
+				'--stub'
+			),
 		})
-		stubTask.exec('unbuild --stub')
+		const postInstall =
+			this.project.tasks.tryFind('post-install') ??
+			this.project.tasks.addTask('post-install')
+		postInstall.spawn(stubTask)
 
 		const exportInfo = this.buildExportInfo()
 		this.project.package.addField('module', exportInfo.import)

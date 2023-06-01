@@ -14,16 +14,15 @@
     "post-compile": "pnpm exec projen post-compile",
     "post-install": "pnpm exec projen post-install",
     "post-upgrade": "pnpm exec projen post-upgrade",
+    "postinstall": "pnpm exec projen postinstall",
     "pre-compile": "pnpm exec projen pre-compile",
     "run-many": "pnpm exec projen run-many",
-    "stub": "pnpm exec projen stub",
     "test": "pnpm exec projen test",
     "test:watch": "pnpm exec projen test:watch",
     "upgrade": "pnpm exec projen upgrade",
     "upgrade-deps": "pnpm exec projen upgrade-deps",
     "watch": "pnpm exec projen watch",
-    "synth-workspace": "pnpm exec projen",
-    "postinstall": "pnpm exec projen post-install"
+    "synth-workspace": "pnpm exec projen"
   },
   "author": {
     "name": "arroyoDev-LLC",

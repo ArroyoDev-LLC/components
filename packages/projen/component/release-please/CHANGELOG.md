@@ -6,6 +6,25 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.15](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.14...@arroyodev-llc/projen.component.release-please-v0.1.15) (2023-06-01)
+
+
+### Features
+
+* **deps:** Upgrade dependencies ([0d550b2](https://github.com/ArroyoDev-LLC/components/commit/0d550b219e4fc4691e3b4aab7088a19148cc3deb))
+* **projen.component.release-please:** Resolve appropriate `node-version` from project ([6727a92](https://github.com/ArroyoDev-LLC/components/commit/6727a9263268b9d252af2ff9aa25a6bca2020834))
+* **projen.component.unbuild:** Hook `stub` task into `post-install` task ([e51c35c](https://github.com/ArroyoDev-LLC/components/commit/e51c35ce69749e33e469970e84fb86d3259c9434))
+* **projen.project.nx-monorepo:** Remove `upgrade-deps` workaround ([0543a07](https://github.com/ArroyoDev-LLC/components/commit/0543a07658d8b4023809a1cb2f154ba8923e23f5))
+* **projen.project.typescript:** Check for and use monorepo name scheme, update  `tsconfigBase` ([3e6d731](https://github.com/ArroyoDev-LLC/components/commit/3e6d7313dd6d85fa91db4348ce7ed94abdc0a0b4))
+* **projenrc:** Use `LintStaged`, `GitHooks` in `ComponentsMonorepo` ([6f4985c](https://github.com/ArroyoDev-LLC/components/commit/6f4985c01b6ed125698182dc7fccf377f93a33a7))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.13
+
 ## [0.1.14](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.13...@arroyodev-llc/projen.component.release-please-v0.1.14) (2023-05-29)
 
 

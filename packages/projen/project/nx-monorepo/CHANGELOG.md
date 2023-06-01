@@ -8,6 +8,37 @@
     * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.11
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.18](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.17...@arroyodev-llc/projen.project.nx-monorepo-v0.1.18) (2023-06-01)
+
+
+### Features
+
+* **deps:** Upgrade dependencies ([0d550b2](https://github.com/ArroyoDev-LLC/components/commit/0d550b219e4fc4691e3b4aab7088a19148cc3deb))
+* **projen.component.unbuild:** Hook `stub` task into `post-install` task ([e51c35c](https://github.com/ArroyoDev-LLC/components/commit/e51c35ce69749e33e469970e84fb86d3259c9434))
+* **projen.project.nx-monorepo:** `nameScheme` default project name scheme getter ([734d8c3](https://github.com/ArroyoDev-LLC/components/commit/734d8c3bc9342a977c33fa6ee041d83d025e57d9))
+* **projen.project.nx-monorepo:** Enable `workspaceNodeCache` ([9b2f625](https://github.com/ArroyoDev-LLC/components/commit/9b2f62518b0a5737cd800b3b8d36e84cfcab8cfc))
+* **projen.project.nx-monorepo:** Move credentials defaults to `ComponentsMonorepo` ([0c79c2f](https://github.com/ArroyoDev-LLC/components/commit/0c79c2f21466c46faf56ca1b6ba9087237b50b97))
+* **projen.project.nx-monorepo:** Remove `upgrade-deps` workaround ([0543a07](https://github.com/ArroyoDev-LLC/components/commit/0543a07658d8b4023809a1cb2f154ba8923e23f5))
+* **projen.project.nx-monorepo:** Set `link-workspace-packages=deep` by default ([e5c618a](https://github.com/ArroyoDev-LLC/components/commit/e5c618ad82c373c977aec3a6e8df98dc4d0c59a5))
+* **projen.project.nx-monorepo:** Setup `post-install` nx task, hook using `postinstall` ([79615b9](https://github.com/ArroyoDev-LLC/components/commit/79615b998f2bc0ce64734598be036174979dd367))
+* **projen.project.typescript:** Check for and use monorepo name scheme, update  `tsconfigBase` ([3e6d731](https://github.com/ArroyoDev-LLC/components/commit/3e6d7313dd6d85fa91db4348ce7ed94abdc0a0b4))
+* **projenrc:** Use `LintStaged`, `GitHooks` in `ComponentsMonorepo` ([6f4985c](https://github.com/ArroyoDev-LLC/components/commit/6f4985c01b6ed125698182dc7fccf377f93a33a7))
+
+
+### Bug Fixes
+
+* **deps:** Set `@aws-prototyping-sdk/nx-monorepo` as peer dependency ([9164411](https://github.com/ArroyoDev-LLC/components/commit/91644119a06691912b591e0d2737f533e541a988))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.13
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.14
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.8
+    * @arroyodev-llc/utils.projen bumped to 0.1.13
+
 ## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.16...@arroyodev-llc/projen.project.nx-monorepo-v0.1.17) (2023-05-29)
 
 

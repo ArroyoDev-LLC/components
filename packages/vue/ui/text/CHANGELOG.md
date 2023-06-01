@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.15](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.14...@arroyodev-llc/vue.ui.text-v0.1.15) (2023-06-01)
+
+
+### Features
+
+* **deps:** Upgrade dependencies ([0d550b2](https://github.com/ArroyoDev-LLC/components/commit/0d550b219e4fc4691e3b4aab7088a19148cc3deb))
+* **projen.project.nx-monorepo:** Remove `upgrade-deps` workaround ([0543a07](https://github.com/ArroyoDev-LLC/components/commit/0543a07658d8b4023809a1cb2f154ba8923e23f5))
+* **projenrc:** Use `LintStaged`, `GitHooks` in `ComponentsMonorepo` ([6f4985c](https://github.com/ArroyoDev-LLC/components/commit/6f4985c01b6ed125698182dc7fccf377f93a33a7))
+
 ## [0.1.14](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.13...@arroyodev-llc/vue.ui.text-v0.1.14) (2023-05-29)
 
 

@@ -20,6 +20,35 @@
   * dependencies
     * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.13
 
+## [0.1.18](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.17...@arroyodev-llc/projen.project.typescript-v0.1.18) (2023-06-01)
+
+
+### Features
+
+* **deps:** Upgrade dependencies ([0d550b2](https://github.com/ArroyoDev-LLC/components/commit/0d550b219e4fc4691e3b4aab7088a19148cc3deb))
+* **projen.component.unbuild:** Hook `stub` task into `post-install` task ([e51c35c](https://github.com/ArroyoDev-LLC/components/commit/e51c35ce69749e33e469970e84fb86d3259c9434))
+* **projen.project.nx-monorepo:** Remove `upgrade-deps` workaround ([0543a07](https://github.com/ArroyoDev-LLC/components/commit/0543a07658d8b4023809a1cb2f154ba8923e23f5))
+* **projen.project.typescript:** `formatExecCommand` helper ([ff00894](https://github.com/ArroyoDev-LLC/components/commit/ff0089457cfbda481d6d8cf1951b23c7b41373b4))
+* **projen.project.typescript:** Check for and use monorepo name scheme, update  `tsconfigBase` ([3e6d731](https://github.com/ArroyoDev-LLC/components/commit/3e6d7313dd6d85fa91db4348ce7ed94abdc0a0b4))
+* **projenrc:** Use `LintStaged`, `GitHooks` in `ComponentsMonorepo` ([6f4985c](https://github.com/ArroyoDev-LLC/components/commit/6f4985c01b6ed125698182dc7fccf377f93a33a7))
+
+
+### Bug Fixes
+
+* **deps:** Set `@aws-prototyping-sdk/nx-monorepo` as peer dependency ([9164411](https://github.com/ArroyoDev-LLC/components/commit/91644119a06691912b591e0d2737f533e541a988))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.13
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.14
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.15
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.14
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.18
+    * @arroyodev-llc/utils.projen bumped to 0.1.13
+
 ## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.16...@arroyodev-llc/projen.project.typescript-v0.1.17) (2023-05-29)
 
 

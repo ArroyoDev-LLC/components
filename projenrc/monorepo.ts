@@ -36,6 +36,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 			githubOptions: {
 				projenCredentials: ComponentsMonorepo.githubCredentials,
 			},
+			minNodeVersion: '18.16.0',
 			...options,
 		})
 		this.lintConfig = new LintConfig(this)
@@ -48,7 +49,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 		this.toolVersions = new ToolVersions(this, {
 			// TODO: resolve from project.
 			tools: {
-				nodejs: ['18.15.0'],
+				nodejs: ['18.16.0'],
 				pnpm: ['8.6.0'],
 			},
 		})

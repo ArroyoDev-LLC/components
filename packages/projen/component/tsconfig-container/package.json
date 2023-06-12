@@ -62,7 +62,8 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
     "dist"

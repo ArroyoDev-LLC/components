@@ -62,6 +62,7 @@ export class UnBuild extends Component {
 				types: exportInfo.types,
 				...(this.options.cjs ? { require: exportInfo.require } : {}),
 			},
+			'./package.json': './package.json',
 		})
 		this.project.package.addField('files', [this.project.libdir])
 

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.15...@arroyodev-llc/vue.ui.text-v0.1.16) (2023-06-12)
+
+
+### Features
+
+* **deps:** Update dependencies ([b01d60b](https://github.com/ArroyoDev-LLC/components/commit/b01d60bbc0bbe8e70b3fa28e3064d5bddf885dc3))
+* **deps:** Update vue-tsc ([8f4579a](https://github.com/ArroyoDev-LLC/components/commit/8f4579a17c29e9479a2e4702a4020ac032802a31))
+
+
+### Bug Fixes
+
+* **projen.component.vue:** Do not recreate vue shims ([35e277f](https://github.com/ArroyoDev-LLC/components/commit/35e277fbad9be6e31e22cee048db926be8853a66))
+
 ## [0.1.15](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.14...@arroyodev-llc/vue.ui.text-v0.1.15) (2023-06-01)
 
 

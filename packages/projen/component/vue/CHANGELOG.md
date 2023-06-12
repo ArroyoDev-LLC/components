@@ -31,6 +31,32 @@
     * @arroyodev-llc/projen.component.vitest bumped to 0.1.12
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.20](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.19...@arroyodev-llc/projen.component.vue-v0.1.20) (2023-06-12)
+
+
+### Features
+
+* **deps:** Update dependencies ([b01d60b](https://github.com/ArroyoDev-LLC/components/commit/b01d60bbc0bbe8e70b3fa28e3064d5bddf885dc3))
+* **deps:** Update vue-tsc ([8f4579a](https://github.com/ArroyoDev-LLC/components/commit/8f4579a17c29e9479a2e4702a4020ac032802a31))
+* **projen.components.unbuild:** `package.json` package export ([ffe0a48](https://github.com/ArroyoDev-LLC/components/commit/ffe0a483f32585d1cb552c7c5d26f1a121e5c30d))
+
+
+### Bug Fixes
+
+* **projen.component.vue:** Do not recreate vue shims ([35e277f](https://github.com/ArroyoDev-LLC/components/commit/35e277fbad9be6e31e22cee048db926be8853a66))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.14
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.15
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.15
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.17
+    * @arroyodev-llc/projen.component.vitest bumped to 0.1.16
+    * @arroyodev-llc/utils.projen bumped to 0.1.14
+
 ## [0.1.19](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.18...@arroyodev-llc/projen.component.vue-v0.1.19) (2023-06-01)
 
 

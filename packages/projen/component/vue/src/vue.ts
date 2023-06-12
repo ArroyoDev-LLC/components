@@ -47,6 +47,8 @@ export class Vue extends Component {
 		]
 		new TypeScriptSourceFile(this.project, 'env.d.ts', {
 			source: source.join('\n'),
+			recreate: false,
+			marker: false,
 		})
 		return this
 	}

@@ -39,14 +39,14 @@
     "lint-staged": "^13.2.2",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "projen": "^0.71.81",
+    "projen": "^0.71.90",
     "standard-version": "^9",
     "typescript": "^5",
     "unbuild": "^1.2.1",
-    "vitest": "^0.31.3"
+    "vitest": "^0.32.0"
   },
   "peerDependencies": {
-    "projen": "^0.71.81"
+    "projen": "^0.71.90"
   },
   "dependencies": {
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",

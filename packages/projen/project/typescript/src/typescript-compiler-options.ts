@@ -25,7 +25,7 @@ export interface TypeScriptCompilerOptions {
    */
   readonly target?: string;
   /**
-   * Do not emit declarations for code that has an @internal annotation in it’s JSDoc comment.
+   * Do not emit declarations for code that has an `@internal` annotation in it’s JSDoc comment.
    * @default true
    * @stability experimental
    */
@@ -213,9 +213,10 @@ export interface TypeScriptCompilerOptions {
    */
   readonly jsx?: javascript.TypeScriptJsxMode;
   /**
-   * Perform additional checks to ensure that separate compilation (such as with transpileModule or @babel/plugin-transform-typescript) would be safe.
+   * Perform additional checks to ensure that separate compilation (such as with transpileModule or.
    * @default false
    * @stability experimental
+   * @babel /plugin-transform-typescript) would be safe.
    */
   readonly isolatedModules?: boolean;
   /**

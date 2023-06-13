@@ -77,7 +77,6 @@
     },
     {
       "name": "@arroyodev-llc/utils.projen",
-      "version": "workspace:*",
       "type": "runtime"
     }
   ],

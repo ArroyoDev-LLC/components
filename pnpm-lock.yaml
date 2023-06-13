@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -17,51 +17,6 @@ patchedDependencies:
 importers:
   .:
     dependencies:
-      '@arroyodev-llc/projen.component.dir-env':
-        specifier: workspace:*
-        version: link:packages/projen/component/dir-env
-      '@arroyodev-llc/projen.component.git-hooks':
-        specifier: workspace:*
-        version: link:packages/projen/component/git-hooks
-      '@arroyodev-llc/projen.component.linting':
-        specifier: workspace:*
-        version: link:packages/projen/component/linting
-      '@arroyodev-llc/projen.component.pnpm-workspace':
-        specifier: workspace:*
-        version: link:packages/projen/component/pnpm-workspace
-      '@arroyodev-llc/projen.component.release-please':
-        specifier: workspace:*
-        version: link:packages/projen/component/release-please
-      '@arroyodev-llc/projen.component.tool-versions':
-        specifier: workspace:*
-        version: link:packages/projen/component/tool-versions
-      '@arroyodev-llc/projen.component.typescript-source-file':
-        specifier: workspace:*
-        version: link:packages/projen/component/typescript-source-file
-      '@arroyodev-llc/projen.component.unbuild':
-        specifier: workspace:*
-        version: link:packages/projen/component/unbuild
-      '@arroyodev-llc/projen.component.vite':
-        specifier: workspace:*
-        version: link:packages/projen/component/vite
-      '@arroyodev-llc/projen.component.vitest':
-        specifier: workspace:*
-        version: link:packages/projen/component/vitest
-      '@arroyodev-llc/projen.component.vue':
-        specifier: workspace:*
-        version: link:packages/projen/component/vue
-      '@arroyodev-llc/projen.project.nx-monorepo':
-        specifier: workspace:*
-        version: link:packages/projen/project/nx-monorepo
-      '@arroyodev-llc/projen.project.typescript':
-        specifier: workspace:*
-        version: link:packages/projen/project/typescript
-      '@arroyodev-llc/projen.project.vue-component':
-        specifier: workspace:*
-        version: link:packages/projen/project/vue-component
-      '@arroyodev-llc/utils.projen':
-        specifier: workspace:*
-        version: link:packages/utils/projen
       aws-cdk-lib:
         specifier: ^2.83.1
         version: 2.83.1(constructs@10.2.50)
@@ -72,6 +27,51 @@ importers:
         specifier: ^10.2.50
         version: 10.2.50
     devDependencies:
+      '@arroyodev-llc/projen.component.dir-env':
+        specifier: ^0.1.5
+        version: link:packages/projen/component/dir-env
+      '@arroyodev-llc/projen.component.git-hooks':
+        specifier: ^0.1.3
+        version: link:packages/projen/component/git-hooks
+      '@arroyodev-llc/projen.component.linting':
+        specifier: ^0.1.14
+        version: link:packages/projen/component/linting
+      '@arroyodev-llc/projen.component.pnpm-workspace':
+        specifier: ^0.1.15
+        version: link:packages/projen/component/pnpm-workspace
+      '@arroyodev-llc/projen.component.release-please':
+        specifier: ^0.1.16
+        version: link:packages/projen/component/release-please
+      '@arroyodev-llc/projen.component.tool-versions':
+        specifier: ^0.1.11
+        version: link:packages/projen/component/tool-versions
+      '@arroyodev-llc/projen.component.typescript-source-file':
+        specifier: ^0.1.16
+        version: link:packages/projen/component/typescript-source-file
+      '@arroyodev-llc/projen.component.unbuild':
+        specifier: ^0.1.16
+        version: link:packages/projen/component/unbuild
+      '@arroyodev-llc/projen.component.vite':
+        specifier: ^0.1.18
+        version: link:packages/projen/component/vite
+      '@arroyodev-llc/projen.component.vitest':
+        specifier: ^0.1.17
+        version: link:packages/projen/component/vitest
+      '@arroyodev-llc/projen.component.vue':
+        specifier: ^0.1.21
+        version: link:packages/projen/component/vue
+      '@arroyodev-llc/projen.project.nx-monorepo':
+        specifier: ^0.1.19
+        version: link:packages/projen/project/nx-monorepo
+      '@arroyodev-llc/projen.project.typescript':
+        specifier: ^0.1.20
+        version: link:packages/projen/project/typescript
+      '@arroyodev-llc/projen.project.vue-component':
+        specifier: ^0.1.23
+        version: link:packages/projen/project/vue-component
+      '@arroyodev-llc/utils.projen':
+        specifier: ^0.1.14
+        version: link:packages/utils/projen
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.19.18
         version: 0.19.18(@pnpm/logger@5.0.0)(projen@0.71.90)

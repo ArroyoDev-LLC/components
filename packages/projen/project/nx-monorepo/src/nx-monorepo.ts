@@ -411,7 +411,9 @@ export class MonorepoProject extends NxMonorepoProject {
 		return this
 	}
 
-	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
+	addWorkspaceDeps(
+		...dependency: Parameters<typeof this.pnpm.addWorkspaceDeps>
+	) {
 		return this.pnpm.addWorkspaceDeps(...dependency)
 	}
 

@@ -58,10 +58,9 @@ export class ComponentsMonorepo extends MonorepoProject {
 			},
 		})
 		this.toolVersions = new ToolVersions(this, {
-			// TODO: resolve from project.
 			tools: {
-				nodejs: ['18.16.0'],
-				pnpm: ['8.6.0'],
+				nodejs: [this.package.minNodeVersion ?? 'lts'],
+				pnpm: [this.package.pnpmVersion ?? '8.6.0'],
 			},
 		})
 		this.applyRecursive(

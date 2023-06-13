@@ -51,7 +51,6 @@
     "@arroyodev-llc/projen.component.vue": "workspace:*",
     "@arroyodev-llc/projen.project.typescript": "workspace:*"
   },
-  "pnpm": {},
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",
   "publishConfig": {

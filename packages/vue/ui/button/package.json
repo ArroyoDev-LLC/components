@@ -58,7 +58,6 @@
     "primevue": "^3.29.2",
     "vue": "^3.3.4"
   },
-  "pnpm": {},
   "main": "dist/index.cjs",
   "license": "Apache-2.0",
   "publishConfig": {

@@ -55,7 +55,6 @@
     "postcss-load-config": "^4.0.1",
     "ts-morph": "^18.0.0"
   },
-  "pnpm": {},
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",
   "publishConfig": {

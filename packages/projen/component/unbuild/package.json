@@ -55,7 +55,6 @@
     "ts-morph": "^18.0.0",
     "unbuild": "^1.2.1"
   },
-  "pnpm": {},
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",
   "publishConfig": {

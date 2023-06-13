@@ -50,7 +50,6 @@
     "projen": "^0.71.90",
     "type-fest": "^3.11.1"
   },
-  "pnpm": {},
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",
   "publishConfig": {

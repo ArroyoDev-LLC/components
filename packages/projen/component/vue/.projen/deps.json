@@ -77,32 +77,26 @@
     },
     {
       "name": "@arroyodev-llc/projen.component.linting",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.typescript-source-file",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.unbuild",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.vite",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.vitest",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/utils.projen",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {

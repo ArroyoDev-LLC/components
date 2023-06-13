@@ -188,19 +188,19 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep dev --upgrade --target=minor"
         },
         {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep optional --upgrade --target=minor"
         },
         {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep peer --upgrade --target=minor"
         },
         {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep prod --upgrade --target=minor"
         },
         {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --dep bundle --upgrade --target=minor"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"

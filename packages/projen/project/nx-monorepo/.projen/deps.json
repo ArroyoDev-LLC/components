@@ -85,22 +85,18 @@
     },
     {
       "name": "@arroyodev-llc/projen.component.linting",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.pnpm-workspace",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.tsconfig-container",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/utils.projen",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {

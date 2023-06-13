@@ -151,6 +151,66 @@
       "type": "build"
     },
     {
+      "name": "@arroyodev-llc/projen.component.dir-env",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.git-hooks",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.linting",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.pnpm-workspace",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.release-please",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.tool-versions",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.typescript-source-file",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.unbuild",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.vite",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.vitest",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.vue",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.project.nx-monorepo",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.project.typescript",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/projen.project.vue-component",
+      "type": "devenv"
+    },
+    {
+      "name": "@arroyodev-llc/utils.projen",
+      "type": "devenv"
+    },
+    {
       "name": "@types/babel__traverse",
       "version": "7.18.2",
       "type": "override"
@@ -169,81 +229,6 @@
       "name": "nx",
       "version": "^16",
       "type": "peer"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.dir-env",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.git-hooks",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.linting",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.pnpm-workspace",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.release-please",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.tool-versions",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.typescript-source-file",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.unbuild",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.vite",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.vitest",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.component.vue",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.project.nx-monorepo",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.project.typescript",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/projen.project.vue-component",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
-      "name": "@arroyodev-llc/utils.projen",
-      "version": "workspace:*",
-      "type": "runtime"
     },
     {
       "name": "aws-cdk-lib",

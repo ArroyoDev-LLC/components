@@ -73,7 +73,6 @@
     },
     {
       "name": "@arroyodev-llc/utils.fs",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {

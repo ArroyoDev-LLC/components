@@ -85,32 +85,26 @@
     },
     {
       "name": "@arroyodev-llc/projen.component.linting",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.pnpm-workspace",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.release-please",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.unbuild",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.project.nx-monorepo",
-      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/utils.projen",
-      "version": "workspace:*",
       "type": "runtime"
     }
   ],

@@ -11,7 +11,13 @@ import {
 } from '@arroyodev-llc/projen.project.nx-monorepo'
 import { ProjectName } from '@arroyodev-llc/utils.projen'
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
-import { type Component, javascript, LogLevel, typescript } from 'projen'
+import {
+	type Component,
+	DependencyType,
+	javascript,
+	LogLevel,
+	typescript,
+} from 'projen'
 import { deepMerge } from 'projen/lib/util'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
 
@@ -125,7 +131,10 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			]),
 		})
 
-		this.addWorkspaceDeps(...(workspaceDeps ?? []))
+		this.addWorkspaceDeps(
+			{ depType: DependencyType.RUNTIME, addTsPath: true },
+			...(workspaceDeps ?? [])
+		)
 
 		this.lintConfig = new LintConfig(this)
 
@@ -211,7 +220,9 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		}
 	}
 
-	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
+	addWorkspaceDeps(
+		...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>
+	) {
 		return PnpmWorkspace.of(this)!.addWorkspaceDeps(...dependency)
 	}
 

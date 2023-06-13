@@ -13,6 +13,12 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.8
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.16
+
 ## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.16...@arroyodev-llc/projen.component.vite-v0.1.17) (2023-06-12)
 
 

@@ -66,6 +66,14 @@
     * @arroyodev-llc/projen.component.vue bumped to 0.1.16
     * @arroyodev-llc/projen.project.typescript bumped to 0.1.15
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.18
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.21
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.20
+
 ## [0.1.22](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.21...@arroyodev-llc/projen.project.vue-component-v0.1.22) (2023-06-12)
 
 

@@ -49,7 +49,6 @@
     "projen": "^0.71.90",
     "simple-git-hooks": "^2.8.1"
   },
-  "pnpm": {},
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",
   "publishConfig": {

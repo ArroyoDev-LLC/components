@@ -50,7 +50,6 @@
     "@arroyodev-llc/utils.projen": "workspace:*",
     "p-queue": "^7.3.4"
   },
-  "pnpm": {},
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",
   "publishConfig": {

@@ -56,7 +56,6 @@
     "@arroyodev-llc/projen.project.nx-monorepo": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*"
   },
-  "pnpm": {},
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",
   "publishConfig": {

@@ -55,7 +55,6 @@
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@mrgrain/jsii-struct-builder": "^0.4.3"
   },
-  "pnpm": {},
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",
   "publishConfig": {

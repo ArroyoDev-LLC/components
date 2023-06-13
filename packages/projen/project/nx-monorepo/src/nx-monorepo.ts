@@ -11,6 +11,7 @@ import {
 	NxMonorepoProject,
 } from '@aws-prototyping-sdk/nx-monorepo'
 import {
+	DependencyType,
 	type github,
 	javascript,
 	JsonFile,
@@ -117,7 +118,10 @@ export class MonorepoProject extends NxMonorepoProject {
 		})
 		this.options = mergedOptions
 		this.pnpm = new PnpmWorkspace(this)
-		this.pnpm.addWorkspaceDeps(...(workspaceDeps ?? []))
+		this.pnpm.addWorkspaceDeps(
+			{ addTsPath: true, depType: DependencyType.DEVENV },
+			...(workspaceDeps ?? [])
+		)
 		this.gitignore.addPatterns('.idea', '.idea/**')
 		new JsonFile(this, '.ncurc.json', {
 			readonly: true,
@@ -412,7 +416,7 @@ export class MonorepoProject extends NxMonorepoProject {
 	}
 
 	addWorkspaceDeps(
-		...dependency: Parameters<typeof this.pnpm.addWorkspaceDeps>
+		...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>
 	) {
 		return this.pnpm.addWorkspaceDeps(...dependency)
 	}

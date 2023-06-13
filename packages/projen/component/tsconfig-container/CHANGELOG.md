@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tsconfig-container-v0.1.9...@arroyodev-llc/projen.component.tsconfig-container-v0.1.10) (2023-06-13)
+
+
+### Features
+
+* **deps:** Set pnpm to 8.6.2 ([6f170ec](https://github.com/ArroyoDev-LLC/components/commit/6f170ec6974d005723bd593bf86fb269b9b34fb8))
+
+
+### Bug Fixes
+
+* **projen.component.nx-monorepo:** Remove all subproject `pnpm` fields ([31cd278](https://github.com/ArroyoDev-LLC/components/commit/31cd278b8e3969f7a80a1ab29dd43683a56f0425))
+* **projen.project.typescript:** Update `addWorkspaceDeps`, default props to runtime ([33a3cae](https://github.com/ArroyoDev-LLC/components/commit/33a3caea11ba09eb9b70eb7c684edeed12783581))
+
 ## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tsconfig-container-v0.1.8...@arroyodev-llc/projen.component.tsconfig-container-v0.1.9) (2023-06-12)
 
 

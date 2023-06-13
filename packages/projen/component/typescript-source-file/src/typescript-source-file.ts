@@ -7,6 +7,7 @@ import {
 	type typescript,
 } from 'projen'
 import { Eslint } from 'projen/lib/javascript'
+import { tryReadFileSync } from 'projen/lib/util'
 import {
 	type ImportDeclarationStructure,
 	type KindToExpressionMappings,
@@ -139,6 +140,7 @@ export class TypeScriptSourceFile extends FileBase {
 		})
 
 		let sourceFile: SourceFile
+
 		if (this.options.recreate) {
 			sourceFile = tsProject.createSourceFile(
 				this.filePath,
@@ -146,6 +148,11 @@ export class TypeScriptSourceFile extends FileBase {
 				{ overwrite: true }
 			)
 		} else {
+			const existing = tryReadFileSync(this.absolutePath)
+			if (existing && !this.options.marker) {
+				// do not update / re-render.
+				return existing
+			}
 			sourceFile =
 				tsProject.addSourceFileAtPathIfExists(this.filePath) ??
 				tsProject.createSourceFile(this.filePath, this.options.source)

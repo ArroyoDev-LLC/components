@@ -333,6 +333,10 @@ export class MonorepoProject extends NxMonorepoProject {
 					const projectPackage = findComponent(project, NodePackage)
 					if (projectPackage) {
 						projectPackage.addField('packageManager', `pnpm@${pnpmVersion}`)
+						if (!(project instanceof MonorepoProject)) {
+							// only root pnpm takes effect.
+							projectPackage.file.addDeletionOverride('pnpm')
+						}
 					}
 				},
 				{ immediate: false, includeSelf: true }

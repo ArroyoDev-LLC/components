@@ -74,7 +74,10 @@ export class PnpmWorkspace extends Component {
 				  })
 				: { depType: DependencyType.RUNTIME, addTsPath: true }
 		;(dependency as (javascript.NodeProject | string)[]).forEach((dep) => {
-			const depName = typeof dep === 'string' ? dep : dep.package.packageName
+			const depName =
+				typeof dep === 'string'
+					? dep
+					: this.formatWorkspaceProtocol(dep.package.packageName)
 			this.project.deps.addDependency(depName, opts.depType)
 			if (dep instanceof typescript.TypeScriptProject && opts.addTsPath) {
 				this.addTsConfigPath(dep)

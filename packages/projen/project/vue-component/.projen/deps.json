@@ -77,14 +77,17 @@
     },
     {
       "name": "@arroyodev-llc/projen.component.vite",
+      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.component.vue",
+      "version": "workspace:*",
       "type": "runtime"
     },
     {
       "name": "@arroyodev-llc/projen.project.typescript",
+      "version": "workspace:*",
       "type": "runtime"
     }
   ],

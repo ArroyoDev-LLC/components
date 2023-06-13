@@ -152,62 +152,77 @@
     },
     {
       "name": "@arroyodev-llc/projen.component.dir-env",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.git-hooks",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.linting",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.pnpm-workspace",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.release-please",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.tool-versions",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.typescript-source-file",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.unbuild",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.vite",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.vitest",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.component.vue",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.project.nx-monorepo",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.project.typescript",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/projen.project.vue-component",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {
       "name": "@arroyodev-llc/utils.projen",
+      "version": "workspace:*",
       "type": "devenv"
     },
     {

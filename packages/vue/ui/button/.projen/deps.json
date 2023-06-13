@@ -113,6 +113,7 @@
     },
     {
       "name": "@arroyodev-llc/vue.ui.text",
+      "version": "workspace:*",
       "type": "runtime"
     },
     {

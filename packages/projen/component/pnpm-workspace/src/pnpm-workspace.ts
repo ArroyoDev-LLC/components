@@ -2,7 +2,8 @@ import path from 'node:path'
 import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
 import {
 	Component,
-	type javascript,
+	DependencyType,
+	javascript,
 	JsonPatch,
 	type Project,
 	typescript,
@@ -55,11 +56,27 @@ export class PnpmWorkspace extends Component {
 	 * Add given dependency as runtime dep using `workspace` protocol.
 	 * @param dependency Dependency to add.
 	 */
-	addWorkspaceDeps(...dependency: (javascript.NodeProject | string)[]) {
-		dependency.forEach((dep) => {
+	addWorkspaceDeps(
+		...dependency: [
+			options:
+				| { depType: DependencyType; addTsPath: boolean }
+				| (javascript.NodeProject | string),
+			...deps: (javascript.NodeProject | string)[]
+		]
+	) {
+		// TODO: nuke this
+		const opts =
+			typeof dependency[0] !== 'string' &&
+			!(dependency[0] instanceof javascript.NodeProject)
+				? (dependency.shift()! as {
+						depType: DependencyType
+						addTsPath: boolean
+				  })
+				: { depType: DependencyType.RUNTIME, addTsPath: true }
+		;(dependency as (javascript.NodeProject | string)[]).forEach((dep) => {
 			const depName = typeof dep === 'string' ? dep : dep.package.packageName
-			this.project.addDeps(this.formatWorkspaceProtocol(depName))
-			if (dep instanceof typescript.TypeScriptProject) {
+			this.project.deps.addDependency(depName, opts.depType)
+			if (dep instanceof typescript.TypeScriptProject && opts.addTsPath) {
 				this.addTsConfigPath(dep)
 			}
 		})

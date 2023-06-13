@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.ts-ast-v0.1.4...@arroyodev-llc/utils.ts-ast-v0.1.5) (2023-06-13)
+
+
+### Features
+
+* **deps:** Set pnpm to 8.6.2 ([6f170ec](https://github.com/ArroyoDev-LLC/components/commit/6f170ec6974d005723bd593bf86fb269b9b34fb8))
+
+
+### Bug Fixes
+
+* **projen.component.nx-monorepo:** Remove all subproject `pnpm` fields ([31cd278](https://github.com/ArroyoDev-LLC/components/commit/31cd278b8e3969f7a80a1ab29dd43683a56f0425))
+* **projen.component.pnpm-workspace:** Revert dropped workspace protocol ([3e73083](https://github.com/ArroyoDev-LLC/components/commit/3e73083bd971367a1046156386977b3897191063))
+* **projen.project.typescript:** Update `addWorkspaceDeps`, default props to runtime ([33a3cae](https://github.com/ArroyoDev-LLC/components/commit/33a3caea11ba09eb9b70eb7c684edeed12783581))
+* **projenrc:** Set all root workspace deps as dev ([e98ba9d](https://github.com/ArroyoDev-LLC/components/commit/e98ba9d7824b66130f8f542332d9148fe0e60ce3))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.fs bumped to 0.1.8
+
 ## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.ts-ast-v0.1.3...@arroyodev-llc/utils.ts-ast-v0.1.4) (2023-06-12)
 
 

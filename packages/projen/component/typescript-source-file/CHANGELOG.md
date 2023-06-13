@@ -14,6 +14,13 @@
     * @arroyodev-llc/utils.fs bumped to 0.1.3
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.15...@arroyodev-llc/projen.component.typescript-source-file-v0.1.16) (2023-06-13)
+
+
+### Bug Fixes
+
+* **projen.component.ts-source:** Do not update if no marker and no recreate ([013636b](https://github.com/ArroyoDev-LLC/components/commit/013636b3ca0b3e555874d560a91cd5d58a1f530f))
+
 ## [0.1.15](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.14...@arroyodev-llc/projen.component.typescript-source-file-v0.1.15) (2023-06-12)
 
 

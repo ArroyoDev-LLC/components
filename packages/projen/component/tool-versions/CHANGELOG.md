@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.12...@arroyodev-llc/projen.component.tool-versions-v0.1.13) (2023-07-07)
+
+
+### Features
+
+* **deps:** Update dependencies and generated files ([bf84839](https://github.com/ArroyoDev-LLC/components/commit/bf84839a3b8ee79342001ccd16936cf13b307bdc))
+
 ## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.11...@arroyodev-llc/projen.component.tool-versions-v0.1.12) (2023-06-13)
 
 

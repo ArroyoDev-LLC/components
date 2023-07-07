@@ -26,6 +26,25 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.16
 
+## [0.1.22](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.21...@arroyodev-llc/projen.project.typescript-v0.1.22) (2023-07-07)
+
+
+### Features
+
+* **deps:** Update dependencies and generated files ([bf84839](https://github.com/ArroyoDev-LLC/components/commit/bf84839a3b8ee79342001ccd16936cf13b307bdc))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.16
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.17
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.18
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.18
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.21
+    * @arroyodev-llc/utils.projen bumped to 0.1.16
+
 ## [0.1.21](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.20...@arroyodev-llc/projen.project.typescript-v0.1.21) (2023-06-13)
 
 

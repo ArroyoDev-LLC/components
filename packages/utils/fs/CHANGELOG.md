@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.9](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.fs-v0.1.8...@arroyodev-llc/utils.fs-v0.1.9) (2023-07-07)
+
+
+### Features
+
+* **deps:** Update dependencies and generated files ([bf84839](https://github.com/ArroyoDev-LLC/components/commit/bf84839a3b8ee79342001ccd16936cf13b307bdc))
+
 ## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.fs-v0.1.7...@arroyodev-llc/utils.fs-v0.1.8) (2023-06-13)
 
 

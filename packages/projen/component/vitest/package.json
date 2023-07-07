@@ -35,16 +35,16 @@
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^4.2.1",
-    "lint-staged": "^13.2.2",
+    "lint-staged": "^13.2.3",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "projen": "^0.71.90",
+    "projen": "^0.71.126",
     "standard-version": "^9",
     "typescript": "^5",
     "unbuild": "^1.2.1"
   },
   "peerDependencies": {
-    "projen": "^0.71.90"
+    "projen": "^0.71.126"
   },
   "dependencies": {
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
@@ -52,7 +52,7 @@
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@arroyodev-llc/utils.ts-ast": "workspace:*",
     "ts-morph": "^18.0.0",
-    "vitest": "^0.32.0"
+    "vitest": "^0.33.0"
   },
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",

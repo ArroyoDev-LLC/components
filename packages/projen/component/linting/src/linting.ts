@@ -164,6 +164,19 @@ export class LintConfig extends Component {
 	}
 
 	/**
+	 * Ensure all readonly files are ignored by lint tools.
+	 * @protected
+	 */
+	protected ignoreReadOnlyFiles() {
+		this.project.files
+			.filter((f) => f.readonly)
+			.forEach((f) => {
+				this.eslint.addIgnorePattern(f.path)
+				this.prettier.addIgnorePattern(f.path)
+			})
+	}
+
+	/**
 	 * Resolve and process queued file format request.
 	 * Requests are processed in parallel for speed.
 	 * @protected
@@ -262,6 +275,7 @@ export class LintConfig extends Component {
 	 * @inheritDoc
 	 */
 	preSynthesize() {
+		this.ignoreReadOnlyFiles()
 		this.applyResolvableExtensions()
 		super.preSynthesize()
 	}

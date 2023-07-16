@@ -86,6 +86,23 @@ export const findRootProject = (project: Project): Project => {
 	return project
 }
 
+/**
+ * Return callback result from first ancestor that returns a truthy value.
+ * @param project - Project to search upwards from.
+ * @param callback
+ */
+export const firstAncestor = <
+	T extends (project: Project, ...args: any[]) => unknown
+>(
+	project: Project,
+	callback: T
+): ReturnType<T> | undefined => {
+	if (!project.parent) return undefined
+	const result = callback(project.parent)
+	if (result) return result as ReturnType<T>
+	return firstAncestor(project.parent, callback)
+}
+
 export interface ProjectNameSchemeOptions {
 	/**
 	 * Package name scope.

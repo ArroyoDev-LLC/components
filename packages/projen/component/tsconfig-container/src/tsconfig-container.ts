@@ -1,7 +1,12 @@
 import path from 'node:path'
+import { firstAncestor, isComponent } from '@arroyodev-llc/utils.projen'
 import { Component, javascript, type Project } from 'projen'
 
 export interface TypescriptConfigContainerOptions {
+	/**
+	 * Root directory for extendable configs.
+	 * @default '.'
+	 */
 	readonly configsDirectory?: string
 }
 
@@ -11,6 +16,25 @@ export class TypescriptConfigContainer extends Component {
 			c: Component
 		): c is TypescriptConfigContainer => c instanceof TypescriptConfigContainer
 		return project.components.find(isTsConfigContainer)
+	}
+
+	public static ensure(
+		project: Project,
+		options?: TypescriptConfigContainerOptions
+	): TypescriptConfigContainer {
+		return this.of(project) ?? new TypescriptConfigContainer(project, options)
+	}
+
+	/**
+	 * Find nearest config container up project ancestry.
+	 * @param project
+	 */
+	public static nearest(
+		project: Project
+	): TypescriptConfigContainer | undefined {
+		return firstAncestor(project, (parent: Project) =>
+			TypescriptConfigContainer.of(parent)
+		)
 	}
 
 	public readonly configs: Map<string, javascript.TypescriptConfig> = new Map()

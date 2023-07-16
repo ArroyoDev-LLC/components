@@ -4,7 +4,7 @@ import { type NodeProject } from 'projen/lib/javascript'
 /**
  * Common extension matches.
  */
-export const enum ExtensionMatch {
+export enum ExtensionMatch {
 	TS = 'ts,tsx,mts,cts',
 	JS = 'js,jsx,jts,jts',
 	YAML = 'yaml,yml',

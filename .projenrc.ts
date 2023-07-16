@@ -153,6 +153,7 @@ const releasePleaseComponent = ProjenComponentProject.fromParent(monorepo, {
 
 const tsconfigContainerComponent = ProjenComponentProject.fromParent(monorepo, {
 	name: 'projen.component.tsconfig-container',
+	workspaceDeps: [utilsProjen],
 })
 
 const tailwindComponent = ProjenComponentProject.fromParent(monorepo, {

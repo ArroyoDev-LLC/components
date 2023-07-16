@@ -23,7 +23,7 @@ export const cwdRelativePath = (from: string, to: string): string => {
  * @param ctor Component class.
  * @param component Component instance to guard/test.
  */
-export const isComponent = <T extends typeof Component>(
+export const isComponent = <T extends new (...args: any[]) => Component>(
 	ctor: T,
 	component: any
 ): component is InstanceType<T> => component instanceof ctor
@@ -33,7 +33,7 @@ export const isComponent = <T extends typeof Component>(
  * @param project Project to search through.
  * @param component Component type to look for.
  */
-export const findComponent = <T extends typeof Component>(
+export const findComponent = <T extends new (...args: any[]) => Component>(
 	project: Project,
 	component: T
 ): InstanceType<T> | undefined => {

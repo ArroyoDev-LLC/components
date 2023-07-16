@@ -75,7 +75,20 @@
     "*.d.ts",
     "node_modules/",
     "*.generated.ts",
-    "coverage"
+    "coverage",
+    ".eslintrc.json",
+    ".gitattributes",
+    ".gitignore",
+    ".npmignore",
+    ".prettierignore",
+    ".prettierrc.json",
+    ".projen/deps.json",
+    ".projen/files.json",
+    ".projen/tasks.json",
+    "LICENSE",
+    "project.json",
+    "tsconfig.dev.json",
+    "tsconfig.json"
   ],
   "rules": {
     "prettier/prettier": [

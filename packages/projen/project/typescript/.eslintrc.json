@@ -67,7 +67,20 @@
     "coverage",
     "src/typescript-project-options.ts",
     "src/typescript-config-options.ts",
-    "src/typescript-compiler-options.ts"
+    "src/typescript-compiler-options.ts",
+    ".eslintrc.json",
+    ".gitattributes",
+    ".gitignore",
+    ".npmignore",
+    ".prettierignore",
+    ".prettierrc.json",
+    ".projen/deps.json",
+    ".projen/files.json",
+    ".projen/tasks.json",
+    "LICENSE",
+    "project.json",
+    "tsconfig.dev.json",
+    "tsconfig.json"
   ],
   "rules": {
     "prettier/prettier": [

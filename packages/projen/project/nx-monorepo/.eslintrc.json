@@ -65,7 +65,20 @@
     "node_modules/",
     "*.generated.ts",
     "coverage",
-    "src/nx-monorepo-project-options.ts"
+    "src/nx-monorepo-project-options.ts",
+    ".eslintrc.json",
+    ".gitattributes",
+    ".gitignore",
+    ".npmignore",
+    ".prettierignore",
+    ".prettierrc.json",
+    ".projen/deps.json",
+    ".projen/files.json",
+    ".projen/tasks.json",
+    "LICENSE",
+    "project.json",
+    "tsconfig.dev.json",
+    "tsconfig.json"
   ],
   "rules": {
     "prettier/prettier": [

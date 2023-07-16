@@ -1,6 +1,7 @@
 import path from 'node:path'
 import { firstAncestor, isComponent } from '@arroyodev-llc/utils.projen'
 import { Component, javascript, type Project } from 'projen'
+import { deepMerge } from 'projen/lib/util'
 
 export interface TypescriptConfigContainerOptions {
 	/**
@@ -8,6 +9,23 @@ export interface TypescriptConfigContainerOptions {
 	 * @default '.'
 	 */
 	readonly configsDirectory?: string
+}
+
+export interface TypescriptConfigContainerBuildOptions
+	extends Partial<javascript.TypescriptConfigOptions> {
+	/**
+	 * Override strategy.
+	 * Only applicable when {@link projen#javascript.TypescriptConfigOptions.fileName} exists.
+	 * @remarks
+	 * 'merge-files' - Unique merge of only 'include' and 'exclude'
+	 * 'merge' - Deep merge entire config.
+	 * 'overwrite' - Overwrite entire config.
+	 * 'fail' - Throw error.
+	 *
+	 * @default 'fail'
+	 *
+	 */
+	override?: 'merge-files' | 'merge' | 'overwrite' | 'fail'
 }
 
 export class TypescriptConfigContainer extends Component {
@@ -94,5 +112,100 @@ export class TypescriptConfigContainer extends Component {
 			return config
 		})
 		return javascript.TypescriptConfigExtends.fromTypescriptConfigs(configs)
+	}
+
+	/**
+	 * Merge two tsconfig include/exclude files.
+	 * @param base Base config.
+	 * @param paths Override config.
+	 */
+	mergeTsConfigFiles<ConfigT extends { include: string[]; exclude: string[] }>(
+		base?: ConfigT,
+		paths?: { include?: string[]; exclude?: string[] }
+	): { include: string[]; exclude: string[] } {
+		const uniqMerge = <T>(arrA: T[], arrB: T[]): T[] =>
+			Array.from(new Set([...arrA.slice(), ...arrB.slice()]))
+		return {
+			include: uniqMerge((base?.include ?? []).slice(), paths?.include ?? []),
+			exclude: uniqMerge((base?.exclude ?? []).slice(), paths?.exclude ?? []),
+		}
+	}
+
+	/**
+	 * Merge two tsconfig objects.
+	 * @param base Base config.
+	 * @param override Override config.
+	 */
+	mergeTsConfigs(
+		base: javascript.TypescriptConfigOptions,
+		override: javascript.TypescriptConfigOptions
+	) {
+		return deepMerge(
+			[base, override],
+			true
+		) as javascript.TypescriptConfigOptions
+	}
+
+	/**
+	 * Build {@link projen#javascript.TypescriptConfig} from options.
+	 * @param project Parent project.
+	 * @param options {@link TypescriptConfigContainerBuildOptions}
+	 */
+	buildConfig(
+		project: Project,
+		options: TypescriptConfigContainerBuildOptions
+	): javascript.TypescriptConfig {
+		const {
+			fileName = 'tsconfig.json',
+			compilerOptions = {},
+			override = 'fail',
+			include,
+			exclude,
+			extends: baseExtends,
+		} = options
+
+		const existing = project.components.find(
+			(c) =>
+				isComponent(javascript.TypescriptConfig, c) && c.fileName === fileName
+		) as javascript.TypescriptConfig | undefined
+
+		let props: javascript.TypescriptConfigOptions = {
+			fileName,
+			compilerOptions,
+			...(override === 'merge-files'
+				? this.mergeTsConfigFiles(existing, { include, exclude })
+				: {
+						...(include ? { include } : {}),
+						...(exclude ? { exclude } : {}),
+				  }),
+			extends: baseExtends,
+		}
+
+		if (existing && override === 'merge') {
+			props = this.mergeTsConfigs(
+				{
+					fileName: existing.fileName,
+					...(existing.extends.length
+						? {
+								extends: javascript.TypescriptConfigExtends.fromPaths(
+									existing.extends
+								),
+						  }
+						: {}),
+					include: existing.include,
+					exclude: existing.exclude,
+					compilerOptions: existing.compilerOptions,
+				},
+				Object.assign({}, props)
+			)
+		}
+
+		// projen will throw if we try to write to an existing file,
+		// so only need to handle when override is not 'fail'.
+		if (existing && override !== 'fail') {
+			project.tryRemoveFile(existing.fileName)
+		}
+
+		return new javascript.TypescriptConfig(project, props)
 	}
 }

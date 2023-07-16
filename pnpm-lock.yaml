@@ -1143,6 +1143,9 @@ importers:
       '@arroyodev-llc/projen.component.release-please':
         specifier: workspace:*
         version: link:../../component/release-please
+      '@arroyodev-llc/projen.component.tsconfig-container':
+        specifier: workspace:*
+        version: link:../../component/tsconfig-container
       '@arroyodev-llc/projen.component.unbuild':
         specifier: workspace:*
         version: link:../../component/unbuild

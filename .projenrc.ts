@@ -197,6 +197,7 @@ const typescriptProject = ProjenComponentProject.fromParent(monorepo, {
 		unbuildComponent,
 		pnpmWorkspaceComponent,
 		releasePleaseComponent,
+		tsconfigContainerComponent,
 		nxMonorepoProject,
 	],
 })

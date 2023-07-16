@@ -23,6 +23,9 @@
       "@arroyodev-llc/projen.component.release-please": [
         "../../component/release-please/src/index"
       ],
+      "@arroyodev-llc/projen.component.tsconfig-container": [
+        "../../component/tsconfig-container/src/index"
+      ],
       "@arroyodev-llc/projen.project.nx-monorepo": [
         "../nx-monorepo/src/index"
       ]

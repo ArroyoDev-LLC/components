@@ -52,6 +52,7 @@
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
     "@arroyodev-llc/projen.component.release-please": "workspace:*",
+    "@arroyodev-llc/projen.component.tsconfig-container": "workspace:*",
     "@arroyodev-llc/projen.component.unbuild": "workspace:*",
     "@arroyodev-llc/projen.project.nx-monorepo": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*"

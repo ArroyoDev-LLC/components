@@ -4,6 +4,7 @@ import {
 	ReleasePlease,
 	ReleaseType,
 } from '@arroyodev-llc/projen.component.release-please'
+import { TypescriptConfigContainer } from '@arroyodev-llc/projen.component.tsconfig-container'
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
 import {
 	MonorepoProject,
@@ -72,6 +73,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 	}
 
 	public readonly projectName: ProjectName
+	public readonly tsconfigContainer: TypescriptConfigContainer
 	public readonly tsconfig: javascript.TypescriptConfig
 	public readonly tsconfigDev: javascript.TypescriptConfig
 	public readonly lintConfig: LintConfig
@@ -100,35 +102,29 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		this.projectName = projectName
 		this.pnpm = new PnpmWorkspace(this)
 
-		const tsconfigPaths = this.copyTsConfigFiles(super.tsconfig, {
-			include: ['src/*.ts', 'src/**/*.ts'],
-		})
-		const devTsconfigPaths = this.copyTsConfigFiles(super.tsconfigDev, {
-			include: [...tsconfigPaths.include, '*.ts', '**/*.ts'],
-			exclude: ['node_modules'],
-		})
+		this.tsconfigContainer =
+			TypescriptConfigContainer.nearest(this) ??
+			TypescriptConfigContainer.ensure(this)
 
-		this.tryRemoveFile('tsconfig.json')
-		this.tsconfig = new javascript.TypescriptConfig(this, {
+		const srcDir = this.options.srcdir ?? 'src'
+		this.tsconfig = this.tsconfigContainer.buildConfig(this, {
 			fileName: 'tsconfig.json',
-			...tsconfigPaths,
 			compilerOptions: {
-				outDir: 'dist',
+				outDir: this.options.libdir ?? 'dist',
 				...(tsconfig?.compilerOptions ?? {}),
 			},
 			extends: tsconfigBase,
-		} as unknown as javascript.TypescriptConfigOptions)
-
-		this.tryRemoveFile('tsconfig.dev.json')
-		this.tsconfigDev = new javascript.TypescriptConfig(this, {
+			override: 'merge-files',
+			include: [`${srcDir}/*.ts`, `${srcDir}/**/*.ts`],
+		})
+		this.tsconfigDev = this.tsconfigContainer.buildConfig(this, {
 			fileName: 'tsconfig.dev.json',
-			...devTsconfigPaths,
-			compilerOptions: {
-				outDir: 'dist',
-			},
 			extends: javascript.TypescriptConfigExtends.fromTypescriptConfigs([
 				this.tsconfig,
 			]),
+			override: 'merge-files',
+			include: [...this.tsconfig.include, '*.ts', '**/*.ts'],
+			exclude: ['node_modules'],
 		})
 
 		this.addWorkspaceDeps(
@@ -199,25 +195,6 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 			releasePlease.addProject(this, { releaseType: ReleaseType.NODE }, '0.0.0')
 		}
 		return this
-	}
-
-	copyTsConfigFiles(
-		typescriptConfig?: javascript.TypescriptConfig,
-		paths?: { include?: string[]; exclude?: string[] }
-	): { include: string[]; exclude: string[] } {
-		const uniq = <T>(arr: T[]): T[] => Array.from(new Set(arr))
-		const uniqMerge = <T>(arrA: T[], arrB: T[]): T[] =>
-			uniq([...arrA.slice(), ...arrB.slice()])
-		return {
-			include: uniqMerge(
-				(typescriptConfig?.include ?? []).slice(),
-				paths?.include ?? []
-			),
-			exclude: uniqMerge(
-				(typescriptConfig?.exclude ?? []).slice(),
-				paths?.exclude ?? []
-			),
-		}
 	}
 
 	addWorkspaceDeps(

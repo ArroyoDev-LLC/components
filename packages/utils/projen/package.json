@@ -47,6 +47,7 @@
   "dependencies": {
     "@arroyodev-llc/utils.fs": "workspace:*",
     "@sindresorhus/is": "^5.4.1",
+    "defu": "^6.1.2",
     "projen": "^0.71.126",
     "type-fest": "^3.12.0"
   },

@@ -81,6 +81,10 @@
       "type": "runtime"
     },
     {
+      "name": "defu",
+      "type": "runtime"
+    },
+    {
       "name": "projen",
       "type": "runtime"
     },

@@ -1338,6 +1338,9 @@ importers:
       '@sindresorhus/is':
         specifier: ^5.4.1
         version: 5.4.1
+      defu:
+        specifier: ^6.1.2
+        version: 6.1.2
       projen:
         specifier: ^0.71.126
         version: 0.71.126

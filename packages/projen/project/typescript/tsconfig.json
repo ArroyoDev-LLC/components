@@ -11,6 +11,9 @@
       "@arroyodev-llc/utils.projen": [
         "../../../utils/projen/src/index"
       ],
+      "@arroyodev-llc/utils.projen-builder": [
+        "../../../utils/projen-builder/src/index"
+      ],
       "@arroyodev-llc/projen.component.linting": [
         "../../component/linting/src/index"
       ],

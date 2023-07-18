@@ -200,6 +200,7 @@ const typescriptProject = ProjenComponentProject.fromParent(monorepo, {
 	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
 	workspaceDeps: [
 		utilsProjen,
+		utilsProjenBuilder,
 		lintingComponent,
 		unbuildComponent,
 		pnpmWorkspaceComponent,
@@ -236,6 +237,7 @@ new NxMonorepoProjectOptionsBuilder(monorepo)
 monorepo.addWorkspaceDeps(
 	{ depType: DependencyType.DEVENV, addTsPath: true },
 	utilsProjen,
+	utilsProjenBuilder,
 	lintingComponent,
 	gitHooksComponent,
 	unbuildComponent,

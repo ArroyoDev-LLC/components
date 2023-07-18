@@ -43,6 +43,7 @@
     "@arroyodev-llc/projen.project.nx-monorepo",
     "@arroyodev-llc/projen.project.typescript",
     "@arroyodev-llc/projen.project.vue-component",
+    "@arroyodev-llc/utils.projen-builder",
     "@arroyodev-llc/utils.projen",
     "@types/babel__traverse",
     "@zkochan/js-yaml",

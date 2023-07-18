@@ -221,6 +221,11 @@
       "type": "devenv"
     },
     {
+      "name": "@arroyodev-llc/utils.projen-builder",
+      "version": "workspace:*",
+      "type": "devenv"
+    },
+    {
       "name": "@arroyodev-llc/utils.projen",
       "version": "workspace:*",
       "type": "devenv"

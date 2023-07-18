@@ -4,19 +4,12 @@ import {
 	withDefaults,
 } from '@arroyodev-llc/utils.projen'
 import { type Project, type ProjectOptions } from 'projen'
-
-type Constructor = new (...args: any[]) => {}
-type GConstructor<T, Args extends any[] = any[]> = new (...args: Args) => T
-type GenericProjectConstructor = GConstructor<Project>
-type ProjectConstructorOptions<T extends Constructor> =
-	ConstructorParameters<T> extends [options: infer O]
-		? O extends ProjectOptions
-			? O
-			: never
-		: never
-type TypedPropertyDescriptorMap<T> = {
-	[P in keyof T]: TypedPropertyDescriptor<T[P]>
-}
+import type {
+	GConstructor,
+	GenericProjectConstructor,
+	ProjectConstructorOptions,
+	TypedPropertyDescriptorMap,
+} from './types.ts'
 
 export abstract class BuildStep {
 	declare abstract outputOptionsType: {}

@@ -183,16 +183,6 @@
   "overrides": [
     {
       "files": [
-        "test/**"
-      ],
-      "rules": {
-        "@typescript-eslint/require-await": [
-          "warn"
-        ]
-      }
-    },
-    {
-      "files": [
         "build.config.ts"
       ],
       "rules": {
@@ -208,6 +198,16 @@
       "rules": {
         "import/order": [
           "off"
+        ]
+      }
+    },
+    {
+      "files": [
+        "test/**"
+      ],
+      "rules": {
+        "@typescript-eslint/require-await": [
+          "warn"
         ]
       }
     },

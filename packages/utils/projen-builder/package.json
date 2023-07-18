@@ -46,7 +46,8 @@
   },
   "dependencies": {
     "@arroyodev-llc/utils.projen": "workspace:*",
-    "projen": "^0.71.126"
+    "projen": "^0.71.126",
+    "type-fest": "^3.12.0"
   },
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",

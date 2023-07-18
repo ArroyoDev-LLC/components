@@ -1405,6 +1405,9 @@ importers:
       projen:
         specifier: ^0.71.126
         version: 0.71.126
+      type-fest:
+        specifier: ^3.12.0
+        version: 3.12.0
     devDependencies:
       '@types/node':
         specifier: ^16

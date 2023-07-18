@@ -1,8 +1,10 @@
 import {
 	ProjectName,
 	type ProjectNameSchemeOptions,
+	withDefaults,
 } from '@arroyodev-llc/utils.projen'
 import { type Project, type ProjectOptions } from 'projen'
+import type { PartialDeep } from 'type-fest'
 import { BaseBuildStep } from './build-step'
 import { type TypedPropertyDescriptorMap } from './types.ts'
 
@@ -72,5 +74,25 @@ export class NameSchemeBuilder extends BaseBuildStep<
 				writable: false,
 			},
 		} as TypedPropertyDescriptorMap<this['outputType']>
+	}
+}
+
+/**
+ * Add default options.
+ */
+export class DefaultOptionsBuilder<
+	Options extends object
+> extends BaseBuildStep<PartialDeep<Options>, {}> {
+	constructor(readonly defaultOptions: PartialDeep<Options>) {
+		super()
+	}
+
+	applyOptions(
+		options: ProjectOptions & this['outputOptionsType']
+	): ProjectOptions & this['outputOptionsType'] {
+		return super.applyOptions(
+			withDefaults(this.defaultOptions)(options) as ProjectOptions &
+				this['outputOptionsType']
+		)
 	}
 }

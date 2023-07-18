@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/utils.ts-ast',
+	name: 'utils.ts-ast',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

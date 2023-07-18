@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/utils.projen-builder',
+	name: 'utils.projen-builder',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

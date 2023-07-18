@@ -3,7 +3,7 @@ import {
 	type ProjectNameSchemeOptions,
 } from '@arroyodev-llc/utils.projen'
 import { type Project, type ProjectOptions } from 'projen'
-import { type BuildStep } from './index.ts'
+import { type BuildStep } from './build-step.ts'
 import { type TypedPropertyDescriptorMap } from './types.ts'
 
 export class OptionsPropertyBuilder<InputT extends ProjectOptions>

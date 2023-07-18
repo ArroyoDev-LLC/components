@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.pnpm-workspace',
+	name: 'projen.component.pnpm-workspace',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

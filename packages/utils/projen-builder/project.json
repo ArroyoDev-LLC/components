@@ -93,6 +93,13 @@
         "cwd": "packages/utils/projen-builder"
       }
     },
+    "eslint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen eslint",
+        "cwd": "packages/utils/projen-builder"
+      }
+    },
     "stub": {
       "executor": "nx:run-commands",
       "options": {
@@ -104,13 +111,6 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm exec projen post-install",
-        "cwd": "packages/utils/projen-builder"
-      }
-    },
-    "eslint": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen eslint",
         "cwd": "packages/utils/projen-builder"
       }
     },

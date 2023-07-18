@@ -93,6 +93,13 @@
         "cwd": "packages/utils/fs"
       }
     },
+    "eslint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen eslint",
+        "cwd": "packages/utils/fs"
+      }
+    },
     "stub": {
       "executor": "nx:run-commands",
       "options": {
@@ -104,13 +111,6 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm exec projen post-install",
-        "cwd": "packages/utils/fs"
-      }
-    },
-    "eslint": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen eslint",
         "cwd": "packages/utils/fs"
       }
     },

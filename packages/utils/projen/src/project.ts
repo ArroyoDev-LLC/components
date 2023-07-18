@@ -116,14 +116,43 @@ export interface ProjectNameSchemeOptions {
 	packagesDir?: string
 }
 
+export interface SupportsNameScheme {
+	readonly namingScheme: ProjectNameSchemeOptions
+
+	nameScheme(name: string): ProjectName
+}
+
 /**
  * Project name utility.
  */
 export class ProjectName {
+	public static supportsNameScheme<ProjectT extends Project>(
+		project: ProjectT
+	): project is ProjectT & SupportsNameScheme {
+		return 'namingScheme' in project && 'nameScheme' in project
+	}
+
 	public static fromScheme(
 		scheme: ProjectNameSchemeOptions
 	): (name: string) => ProjectName {
 		return (name) => new ProjectName(name, scheme)
+	}
+
+	public static ensureScheme(
+		name: string,
+		parent?: Project,
+		defaultOptions?: ProjectNameSchemeOptions
+	) {
+		let projectName = new ProjectName(name, defaultOptions)
+		if (parent) {
+			projectName =
+				firstAncestor(parent, (project) =>
+					ProjectName.supportsNameScheme(project)
+						? project.nameScheme(name)
+						: undefined
+				) ?? projectName
+		}
+		return projectName
 	}
 
 	constructor(

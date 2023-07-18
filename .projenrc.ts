@@ -1,19 +1,15 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { Vitest } from '@arroyodev-llc/projen.component.vitest'
-import {
-	TypescriptProject,
-	TypescriptBaseBuilder,
-} from '@arroyodev-llc/projen.project.typescript'
+import { TypescriptBaseBuilder } from '@arroyodev-llc/projen.project.typescript'
 import { VueComponentProject } from '@arroyodev-llc/projen.project.vue-component'
 import { builders } from '@arroyodev-llc/utils.projen-builder'
-import { DependencyType, LogLevel, type Project } from 'projen'
+import { DependencyType, LogLevel } from 'projen'
 import { ComponentsMonorepo } from './projenrc/monorepo'
 import {
 	NxMonorepoProjectOptionsBuilder,
 	ProjenProjectOptionsBuilder,
 	TypeScriptProjectOptionsBuilder,
 } from './projenrc/option-builders'
-import { ProjenComponentProject } from './projenrc/project'
 
 const monorepo = new ComponentsMonorepo({
 	name: 'components',
@@ -45,20 +41,27 @@ const monorepo = new ComponentsMonorepo({
 	],
 })
 
-const TypescriptProjectBuilder = TypescriptBaseBuilder.add(
+const TypescriptOptionsBuilder = new builders.OptionsPropertyBuilder<
+	(typeof TypescriptBaseBuilder)['__optionsType']
+>()
+
+const BaseTypescriptProjectBuilder = TypescriptBaseBuilder.add(
 	new builders.DefaultOptionsBuilder<{
 		parent?: typeof monorepo
 		defaultReleaseBranch?: string
 	}>({
 		parent: monorepo,
 	})
+).add(new builders.NameSchemeBuilder({ scope: '@arroyodev-llc' }))
+
+const TypescriptProjectBuilder = BaseTypescriptProjectBuilder.add(
+	TypescriptOptionsBuilder
 )
-	.add(new builders.NameSchemeBuilder({ scope: '@arroyodev-llc' }))
-	.add(
-		new builders.OptionsPropertyBuilder<
-			(typeof TypescriptBaseBuilder)['__optionsType']
-		>()
-	)
+const ProjenComponentProjectBuilder = BaseTypescriptProjectBuilder.add(
+	new builders.DefaultOptionsBuilder({
+		peerDeps: ['projen'],
+	})
+).add(TypescriptOptionsBuilder)
 
 /**
  * Utility Projects
@@ -109,59 +112,59 @@ new Vitest(utilsProjenBuilder)
 /**
  * Projen Components
  */
-const lintingComponent = ProjenComponentProject.fromParent(monorepo, {
+const lintingComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.linting',
 	deps: ['p-queue'],
 	workspaceDeps: [utilsProjen],
 })
 
-const gitHooksComponent = ProjenComponentProject.fromParent(monorepo, {
+const gitHooksComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.git-hooks',
 	peerDeps: ['lint-staged', 'simple-git-hooks'],
 })
 
-const tsSourceComponent = ProjenComponentProject.fromParent(monorepo, {
+const tsSourceComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.typescript-source-file',
 	workspaceDeps: [utilsProjen, lintingComponent, utilsFs, utilsTsAst],
 	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
 	deps: ['ts-morph'],
 })
 
-const pnpmWorkspaceComponent = ProjenComponentProject.fromParent(monorepo, {
+const pnpmWorkspaceComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.pnpm-workspace',
 	workspaceDeps: [utilsProjen],
 })
 
-const unbuildComponent = ProjenComponentProject.fromParent(monorepo, {
+const unbuildComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.unbuild',
 	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
 	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
 	deps: ['ts-morph', 'unbuild'],
 })
 
-const viteComponent = ProjenComponentProject.fromParent(monorepo, {
+const viteComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.vite',
 	workspaceDeps: [utilsProjen, tsSourceComponent, lintingComponent, utilsTsAst],
 	deps: ['ts-morph', 'vite', '@vitejs/plugin-vue', '@vitejs/plugin-vue-jsx'],
 })
 new Vitest(viteComponent)
 
-const vitestComponent = ProjenComponentProject.fromParent(monorepo, {
+const vitestComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.vitest',
 	workspaceDeps: [utilsProjen, tsSourceComponent, viteComponent, utilsTsAst],
 	deps: ['ts-morph', 'vitest'],
 })
 
-const toolVersionsComponent = ProjenComponentProject.fromParent(monorepo, {
+const toolVersionsComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.tool-versions',
 })
 
-const dirEnvComponent = ProjenComponentProject.fromParent(monorepo, {
+const dirEnvComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.dir-env',
 })
 new Vitest(dirEnvComponent)
 
-const vueComponent = ProjenComponentProject.fromParent(monorepo, {
+const vueComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.vue',
 	workspaceDeps: [
 		utilsProjen,
@@ -174,24 +177,24 @@ const vueComponent = ProjenComponentProject.fromParent(monorepo, {
 	deps: ['ts-morph'],
 })
 
-const releasePleaseComponent = ProjenComponentProject.fromParent(monorepo, {
+const releasePleaseComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.release-please',
 	workspaceDeps: [utilsProjen],
 })
 
-const tsconfigContainerComponent = ProjenComponentProject.fromParent(monorepo, {
+const tsconfigContainerComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.tsconfig-container',
 	workspaceDeps: [utilsProjen],
 })
 
-const tailwindComponent = ProjenComponentProject.fromParent(monorepo, {
+const tailwindComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.tailwind',
 	deps: ['ts-morph', 'tailwindcss'],
 	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
 })
 new Vitest(tailwindComponent)
 
-const postcssComponent = ProjenComponentProject.fromParent(monorepo, {
+const postcssComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.postcss',
 	deps: ['ts-morph', 'postcss-load-config'],
 	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
@@ -201,7 +204,7 @@ new Vitest(postcssComponent)
 /**
  * Projen Projects
  */
-const nxMonorepoProject = ProjenComponentProject.fromParent(monorepo, {
+const nxMonorepoProject = ProjenComponentProjectBuilder.build({
 	name: 'projen.project.nx-monorepo',
 	workspaceDeps: [
 		utilsProjen,
@@ -216,7 +219,7 @@ LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
 	'src/nx-monorepo-project-options.ts'
 )
 
-const typescriptProject = ProjenComponentProject.fromParent(monorepo, {
+const typescriptProject = ProjenComponentProjectBuilder.build({
 	name: 'projen.project.typescript',
 	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
 	workspaceDeps: [
@@ -240,7 +243,7 @@ typescriptProject.lintConfig.eslint.addIgnorePattern(
 	'src/typescript-compiler-options.ts'
 )
 
-const vueComponentProject = ProjenComponentProject.fromParent(monorepo, {
+const vueComponentProject = ProjenComponentProjectBuilder.build({
 	name: 'projen.project.vue-component',
 	workspaceDeps: [typescriptProject, vueComponent, viteComponent],
 })

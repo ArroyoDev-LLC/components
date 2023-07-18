@@ -108,3 +108,42 @@ export class OptionsPropertyBuilder<InputT extends ProjectOptions>
 	}
 }
 
+export class NameSchemeBuilder implements BuilderStep {
+	declare outputType: { readonly projectName: ProjectName }
+	declare outputOptionsType: {
+		readonly packageName?: string
+		readonly outdir?: string
+		readonly useScheme?: boolean
+	}
+
+	constructor(readonly options?: ProjectNameSchemeOptions) {}
+
+	applyOptions<Options extends ProjectOptions>(
+		options: Options
+	): Options & this['outputOptionsType'] {
+		const { name, parent, ...rest } = options
+		const nameScheme = ProjectName.ensureScheme(name, parent, this.options)
+		return {
+			...rest,
+			...(parent && { parent }),
+			name: nameScheme.name,
+			outdir: nameScheme.outDir,
+			packageName: nameScheme.packageName,
+		} as Options & this['outputOptionsType']
+	}
+
+	applyProject(
+		project: Project
+	): TypedPropertyDescriptorMap<this['outputType']> {
+		return {
+			projectName: {
+				value: ProjectName.ensureScheme(
+					project.name,
+					project.parent,
+					this.options
+				),
+				writable: false,
+			},
+		} as TypedPropertyDescriptorMap<this['outputType']>
+	}
+}

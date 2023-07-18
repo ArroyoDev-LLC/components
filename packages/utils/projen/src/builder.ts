@@ -19,7 +19,7 @@ type TypedPropertyDescriptorMap<T> = {
 	[P in keyof T]: TypedPropertyDescriptor<T[P]>
 }
 
-export abstract class BuilderStep {
+export abstract class BuildStep {
 	declare abstract outputOptionsType: {}
 	declare abstract outputType: {}
 
@@ -42,10 +42,10 @@ export class ProjectBuilder<
 	constructor(
 		readonly projectConstructor: T,
 		readonly defaultOptions: Array<Partial<Options>> = [],
-		readonly steps: Array<BuilderStep> = []
+		readonly steps: Array<BuildStep> = []
 	) {}
 
-	add<StepT extends BuilderStep>(step: StepT) {
+	add<StepT extends BuildStep>(step: StepT) {
 		const builder = new ProjectBuilder(
 			this.projectConstructor as unknown as GConstructor<
 				InstanceType<T> & (typeof step)['outputType'],
@@ -82,7 +82,7 @@ export class ProjectBuilder<
 }
 
 export class OptionsPropertyBuilder<InputT extends ProjectOptions>
-	implements BuilderStep
+	implements BuildStep
 {
 	declare outputOptionsType: {}
 	declare outputType: { readonly options: InputT }
@@ -108,7 +108,7 @@ export class OptionsPropertyBuilder<InputT extends ProjectOptions>
 	}
 }
 
-export class NameSchemeBuilder implements BuilderStep {
+export class NameSchemeBuilder implements BuildStep {
 	declare outputType: { readonly projectName: ProjectName }
 	declare outputOptionsType: {
 		readonly packageName?: string

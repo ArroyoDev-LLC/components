@@ -131,6 +131,43 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 	}
 }
 
+export class TypescriptESMManifestBuilder extends BaseBuildStep<
+	{},
+	{
+		addWorkspaceDeps(
+			...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>
+		): void
+		formatExecCommand(...args: string[]): string
+	}
+> {
+	constructor(readonly options?: { sideEffects: boolean }) {
+		super()
+	}
+
+	applyProject(
+		project: typescript.TypeScriptProject
+	): TypedPropertyDescriptorMap<this['outputType']> {
+		project.package.addField('type', 'module')
+		project.package.addField('sideEffects', this.options?.sideEffects ?? false)
+		project.tasks.tryFind('package')?.reset?.()
+		return {
+			addWorkspaceDeps: {
+				value(...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>) {
+					return PnpmWorkspace.of(this)?.addWorkspaceDeps?.(...dependency)
+				},
+			},
+			formatExecCommand: {
+				value(this: typescript.TypeScriptProject, ...args: string[]) {
+					return NodePackageUtils.command.exec(
+						this.package.packageManager,
+						...args
+					)
+				},
+			},
+		} as TypedPropertyDescriptorMap<this['outputType']>
+	}
+}
+
 export class TypescriptProject extends typescript.TypeScriptProject {
 	/**
 	 * Create new package under monorepo parent.

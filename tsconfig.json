@@ -84,6 +84,7 @@
       "./packages/projen/project/vue-component",
       "./packages/utils/fs",
       "./packages/utils/projen",
+      "./packages/utils/projen-builder",
       "./packages/utils/ts-ast",
       "./packages/vue/ui/button",
       "./packages/vue/ui/text"

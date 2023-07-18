@@ -2,6 +2,7 @@
   "./packages/utils/fs/vitest.config.ts",
   "./packages/utils/ts-ast/vitest.config.ts",
   "./packages/utils/projen/vitest.config.ts",
+  "./packages/utils/projen-builder/vitest.config.ts",
   "./packages/projen/component/vite/vitest.config.ts",
   "./packages/projen/component/dir-env/vitest.config.ts",
   "./packages/projen/component/tailwind/vitest.config.ts",

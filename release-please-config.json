@@ -15,6 +15,10 @@
       "component": "@arroyodev-llc/utils.projen",
       "release-type": "node"
     },
+    "packages/utils/projen-builder": {
+      "component": "@arroyodev-llc/utils.projen-builder",
+      "release-type": "node"
+    },
     "packages/projen/component/linting": {
       "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"

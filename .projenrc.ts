@@ -78,6 +78,13 @@ const utilsProjen = TypescriptProject.fromParent(monorepo, {
 })
 new Vitest(utilsProjen)
 
+const utilsProjenBuilder = TypescriptProject.fromParent(monorepo, {
+	name: 'utils.projen-builder',
+	workspaceDeps: [utilsProjen],
+	deps: ['projen'],
+})
+new Vitest(utilsProjenBuilder)
+
 /**
  * Projen Components
  */

@@ -40,22 +40,6 @@ describe.concurrent('ProjectBuilder', () => {
 		}
 	}
 
-	test('handles default values', () => {
-		const builder = new ProjectBuilder(typescript.TypeScriptProject, [
-			{
-				defaultReleaseBranch: 'main',
-				packageManager: javascript.NodePackageManager.PNPM,
-			},
-			{ github: true, githubOptions: { pullRequestLint: true, mergify: true } },
-			{ githubOptions: { pullRequestLintOptions: { semanticTitle: true } } },
-		])
-		const options = builder.buildOptions({
-			defaultReleaseBranch: 'other',
-			name: 'test.project',
-		})
-		expect(options).toMatchInlineSnapshot()
-	})
-
 	test('applies step options', () => {
 		const options = new ProjectBuilder(typescript.TypeScriptProject)
 			.add(new CustomBuilder())
@@ -85,6 +69,22 @@ describe.concurrent('ProjectBuilder', () => {
 
 describe.concurrent('builders', () => {
 	const base = new ProjectBuilder(typescript.TypeScriptProject)
+
+	test('DefaultOptionsBuilder', () => {
+		const project = base
+			.add(
+				new builders.DefaultOptionsBuilder({
+					defaultReleaseBranch: 'main',
+					packageManager: javascript.NodePackageManager.PNPM,
+				})
+			)
+			.build({
+				name: 'test.project',
+			})
+		expect(project.package.packageManager).toBe(
+			javascript.NodePackageManager.PNPM
+		)
+	})
 
 	test('NameSchemeBuilder', () => {
 		const project = base

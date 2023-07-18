@@ -46,6 +46,7 @@
     "@arroyodev-llc/projen.project.typescript": "workspace:*",
     "@arroyodev-llc/projen.project.vue-component": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
+    "@arroyodev-llc/utils.projen-builder": "workspace:*",
     "@aws-prototyping-sdk/nx-monorepo": "^0.19.34",
     "@jsii/spec": "^1.84.0",
     "@mrgrain/jsii-struct-builder": "^0.4.3",

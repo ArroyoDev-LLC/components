@@ -72,6 +72,9 @@ importers:
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:packages/utils/projen
+      '@arroyodev-llc/utils.projen-builder':
+        specifier: workspace:*
+        version: link:packages/utils/projen-builder
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.19.34
         version: 0.19.34(@pnpm/logger@5.0.0)(projen@0.71.126)
@@ -1155,6 +1158,9 @@ importers:
       '@arroyodev-llc/utils.projen':
         specifier: workspace:*
         version: link:../../../utils/projen
+      '@arroyodev-llc/utils.projen-builder':
+        specifier: workspace:*
+        version: link:../../../utils/projen-builder
     devDependencies:
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.19.34

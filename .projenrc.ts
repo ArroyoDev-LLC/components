@@ -1,8 +1,12 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { Vitest } from '@arroyodev-llc/projen.component.vitest'
-import { TypescriptProject } from '@arroyodev-llc/projen.project.typescript'
+import {
+	TypescriptProject,
+	TypescriptBaseBuilder,
+} from '@arroyodev-llc/projen.project.typescript'
 import { VueComponentProject } from '@arroyodev-llc/projen.project.vue-component'
-import { DependencyType, LogLevel } from 'projen'
+import { builders } from '@arroyodev-llc/utils.projen-builder'
+import { DependencyType, LogLevel, type Project } from 'projen'
 import { ComponentsMonorepo } from './projenrc/monorepo'
 import {
 	NxMonorepoProjectOptionsBuilder,
@@ -40,6 +44,21 @@ const monorepo = new ComponentsMonorepo({
 		'pathe',
 	],
 })
+
+const TypescriptProjectBuilder = TypescriptBaseBuilder.add(
+	new builders.DefaultOptionsBuilder<{
+		parent?: typeof monorepo
+		defaultReleaseBranch?: string
+	}>({
+		parent: monorepo,
+	})
+)
+	.add(new builders.NameSchemeBuilder({ scope: '@arroyodev-llc' }))
+	.add(
+		new builders.OptionsPropertyBuilder<
+			(typeof TypescriptBaseBuilder)['__optionsType']
+		>()
+	)
 
 /**
  * Utility Projects

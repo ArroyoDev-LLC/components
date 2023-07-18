@@ -1,4 +1,5 @@
 import path from 'node:path'
+import { defu } from 'defu'
 import { type Component, type Project, type TaskStep } from 'projen'
 
 /**
@@ -141,4 +142,14 @@ export class ProjectName {
 	get packageName(): string {
 		return [this.scheme?.scope, this.name].filter(Boolean).join('/')
 	}
+}
+
+/**
+ * Create a function that deeply merges a source object with a list of defaults.
+ * @param defaults list of default values to use as fallbacks.
+ */
+export const withDefaults = <T extends object>(
+	...defaults: Array<Partial<T>>
+): ((source: Partial<T>) => T) => {
+	return (source: Partial<T>) => defu(source, ...(defaults as T[])) as T
 }

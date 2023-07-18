@@ -97,9 +97,9 @@ export const firstAncestor = <
 	project: Project,
 	callback: T
 ): ReturnType<T> | undefined => {
-	if (!project.parent) return undefined
-	const result = callback(project.parent)
+	const result = callback(project)
 	if (result) return result as ReturnType<T>
+	if (!project.parent) return undefined
 	return firstAncestor(project.parent, callback)
 }
 

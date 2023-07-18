@@ -233,6 +233,27 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 	}
 }
 
+export class TypescriptReleasePleaseBuilder extends BaseBuildStep<{}, {}> {
+	applyProject(
+		project: typescript.TypeScriptProject
+	): TypedPropertyDescriptorMap<this['outputType']> {
+		const releasePlease = ReleasePlease.of(project.parent ?? project)
+		if (releasePlease) {
+			releasePlease.addProject(project, { releaseType: ReleaseType.NODE })
+			const version = releasePlease.packages.get(project.name)
+			if (version) {
+				project.package.addVersion(version)
+			} else {
+				releasePlease.addProject(
+					project,
+					{ releaseType: ReleaseType.NODE },
+					'0.0.0'
+				)
+			}
+		}
+		return super.applyProject(project)
+	}
+}
 export class TypescriptProject extends typescript.TypeScriptProject {
 	/**
 	 * Create new package under monorepo parent.

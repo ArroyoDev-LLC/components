@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.dir-env',
+	name: 'projen.component.dir-env',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

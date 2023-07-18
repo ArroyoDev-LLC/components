@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.vue',
+	name: 'projen.component.vue',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

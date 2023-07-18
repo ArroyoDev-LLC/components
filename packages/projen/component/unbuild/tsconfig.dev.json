@@ -8,8 +8,7 @@
     "test/**/*.ts",
     "src/*.ts",
     "*.ts",
-    "**/*.ts",
-    "build.config.ts"
+    "**/*.ts"
   ],
   "exclude": [
     "node_modules"

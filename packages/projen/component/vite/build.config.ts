@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.vite',
+	name: 'projen.component.vite',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.linting',
+	name: 'projen.component.linting',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

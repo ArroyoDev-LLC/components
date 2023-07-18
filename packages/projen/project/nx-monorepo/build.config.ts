@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.project.nx-monorepo',
+	name: 'projen.project.nx-monorepo',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.tool-versions',
+	name: 'projen.component.tool-versions',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

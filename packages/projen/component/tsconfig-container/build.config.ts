@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.tsconfig-container',
+	name: 'projen.component.tsconfig-container',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

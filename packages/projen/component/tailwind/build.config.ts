@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.tailwind',
+	name: 'projen.component.tailwind',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

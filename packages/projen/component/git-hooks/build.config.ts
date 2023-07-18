@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.git-hooks',
+	name: 'projen.component.git-hooks',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

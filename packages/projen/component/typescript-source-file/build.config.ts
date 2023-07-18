@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.typescript-source-file',
+	name: 'projen.component.typescript-source-file',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

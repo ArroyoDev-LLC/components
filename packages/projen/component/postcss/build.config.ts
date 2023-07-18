@@ -3,7 +3,7 @@
 import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
-	name: '@arroyodev-llc/projen.component.postcss',
+	name: 'projen.component.postcss',
 	declaration: true,
 	clean: true,
 	entries: ['./src/index'],

@@ -81,3 +81,30 @@ export class ProjectBuilder<
 	}
 }
 
+export class OptionsPropertyBuilder<InputT extends ProjectOptions>
+	implements BuilderStep
+{
+	declare outputOptionsType: {}
+	declare outputType: { readonly options: InputT }
+
+	private _options!: InputT
+
+	constructor() {}
+
+	applyOptions(options: InputT): InputT {
+		this._options = options
+		return options
+	}
+
+	applyProject(
+		_project: Project
+	): TypedPropertyDescriptorMap<this['outputType']> {
+		return {
+			options: {
+				value: this._options,
+				writable: false,
+			},
+		} as TypedPropertyDescriptorMap<this['outputType']>
+	}
+}
+

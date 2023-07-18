@@ -3,21 +3,16 @@ import {
 	type ProjectNameSchemeOptions,
 } from '@arroyodev-llc/utils.projen'
 import { type Project, type ProjectOptions } from 'projen'
-import { type BuildStep } from './build-step.ts'
+import { BaseBuildStep } from './build-step'
 import { type TypedPropertyDescriptorMap } from './types.ts'
 
 /**
  * Store the options used to create a project under an `options` property.
  */
-export class OptionsPropertyBuilder<InputT extends ProjectOptions>
-	implements BuildStep
-{
-	declare outputOptionsType: {}
-	declare outputType: { readonly options: InputT }
-
+export class OptionsPropertyBuilder<
+	InputT extends ProjectOptions
+> extends BaseBuildStep<{}, { readonly options: InputT }> {
 	private _options!: InputT
-
-	constructor() {}
 
 	applyOptions(options: InputT): InputT {
 		this._options = options
@@ -39,14 +34,16 @@ export class OptionsPropertyBuilder<InputT extends ProjectOptions>
 /**
  * Utilize a naming scheme for a project.
  */
-export class NameSchemeBuilder implements BuildStep {
-	declare outputType: { readonly projectName: ProjectName }
-	declare outputOptionsType: {
+export class NameSchemeBuilder extends BaseBuildStep<
+	{
 		readonly packageName?: string
 		readonly outdir?: string
+	},
+	{ readonly projectName: ProjectName }
+> {
+	constructor(readonly options?: ProjectNameSchemeOptions) {
+		super()
 	}
-
-	constructor(readonly options?: ProjectNameSchemeOptions) {}
 
 	applyOptions<Options extends ProjectOptions>(
 		options: Options

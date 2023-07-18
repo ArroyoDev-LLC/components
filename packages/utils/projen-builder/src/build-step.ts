@@ -36,3 +36,23 @@ export abstract class BuildStep {
 		project: Project
 	): TypedPropertyDescriptorMap<this['outputType']>
 }
+
+export class BaseBuildStep<
+	OutputOptions extends object = {},
+	OutputProps extends object = {}
+> implements BuildStep
+{
+	declare outputOptionsType: OutputOptions
+	declare outputType: OutputProps
+	applyOptions(
+		options: ProjectOptions & this['outputOptionsType']
+	): ProjectOptions & this['outputOptionsType'] {
+		return options
+	}
+
+	applyProject(
+		_project: Project
+	): TypedPropertyDescriptorMap<this['outputType']> {
+		return {} as TypedPropertyDescriptorMap<this['outputType']>
+	}
+}

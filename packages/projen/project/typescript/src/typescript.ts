@@ -168,6 +168,51 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 	}
 }
 
+export class TypescriptBundlerBuilder extends BaseBuildStep<
+	{ readonly unbuild?: boolean },
+	{ readonly unbuild?: UnBuild | undefined }
+> {
+	private unbuild: boolean = false
+
+	applyOptions(
+		options: ProjectOptions & this['outputOptionsType']
+	): ProjectOptions & this['outputOptionsType'] {
+		const { unbuild, ...rest } = options
+		this.unbuild = unbuild ?? false
+		return super.applyOptions(rest)
+	}
+
+	applyProject(
+		project: typescript.TypeScriptProject
+	): TypedPropertyDescriptorMap<this['outputType']> {
+		if (this.unbuild) {
+			project.tasks
+				.tryFind('post-compile')!
+				.exec('unbuild', { name: 'Unbuild' })
+			const unbuild = new UnBuild(project, {
+				cjs: true,
+				options: {
+					name: project.name,
+					declaration: true,
+					clean: true,
+					entries: ['./src/index'],
+					rollup: {
+						emitCJS: true,
+						cjsBridge: true,
+						esbuild: {
+							treeShaking: true,
+							sourcemap: true,
+						},
+					},
+				},
+			})
+			return {
+				unbuild: { writable: false, value: unbuild },
+			} as TypedPropertyDescriptorMap<this['outputType']>
+		}
+		return super.applyProject(project)
+	}
+}
 export class TypescriptProject extends typescript.TypeScriptProject {
 	/**
 	 * Create new package under monorepo parent.

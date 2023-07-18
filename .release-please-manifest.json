@@ -21,5 +21,6 @@
   "packages/utils/fs": "0.1.9",
   "packages/projen/component/dir-env": "0.1.7",
   "packages/utils/ts-ast": "0.1.6",
-  "packages/projen/component/git-hooks": "0.1.5"
+  "packages/projen/component/git-hooks": "0.1.5",
+  "packages/utils/projen-builder": "0.0.0"
 }

@@ -1397,6 +1397,64 @@ importers:
         specifier: ^0.33.0
         version: 0.33.0(happy-dom@9.20.3)
 
+  packages/utils/projen-builder:
+    dependencies:
+      '@arroyodev-llc/utils.projen':
+        specifier: workspace:*
+        version: link:../projen
+      projen:
+        specifier: ^0.71.126
+        version: 0.71.126
+    devDependencies:
+      '@types/node':
+        specifier: ^16
+        version: 16.18.38
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^5
+        version: 5.59.6(@typescript-eslint/parser@5.59.6)(eslint@8.41.0)(typescript@5.0.4)
+      '@typescript-eslint/parser':
+        specifier: ^5
+        version: 5.59.6(eslint@8.41.0)(typescript@5.0.4)
+      eslint:
+        specifier: ^8
+        version: 8.41.0
+      eslint-config-prettier:
+        specifier: ^8.8.0
+        version: 8.8.0(eslint@8.41.0)
+      eslint-import-resolver-node:
+        specifier: ^0.3.7
+        version: 0.3.7
+      eslint-import-resolver-typescript:
+        specifier: ^3.5.5
+        version: 3.5.5(@typescript-eslint/parser@5.59.6)(eslint-import-resolver-node@0.3.7)(eslint-plugin-import@2.27.5)(eslint@8.41.0)
+      eslint-plugin-import:
+        specifier: ^2.27.5
+        version: 2.27.5(@typescript-eslint/parser@5.59.6)(eslint-import-resolver-typescript@3.5.5)(eslint@8.41.0)
+      eslint-plugin-prettier:
+        specifier: ^4.2.1
+        version: 4.2.1(eslint-config-prettier@8.8.0)(eslint@8.41.0)(prettier@2.8.8)
+      lint-staged:
+        specifier: ^13.2.3
+        version: 13.2.3
+      npm-check-updates:
+        specifier: ^16
+        version: 16.10.15
+      prettier:
+        specifier: ^2.8.8
+        version: 2.8.8
+      standard-version:
+        specifier: ^9
+        version: 9.5.0
+      typescript:
+        specifier: ^5
+        version: 5.0.4
+      unbuild:
+        specifier: ^1.2.1
+        version: 1.2.1
+      vitest:
+        specifier: ^0.33.0
+        version: 0.33.0(happy-dom@9.20.3)
+
   packages/utils/ts-ast:
     dependencies:
       '@arroyodev-llc/utils.fs':
@@ -1746,10 +1804,10 @@ packages:
       '@babel/helper-compilation-targets': 7.21.5(@babel/core@7.21.8)
       '@babel/helper-module-transforms': 7.21.5
       '@babel/helpers': 7.21.5
-      '@babel/parser': 7.22.3
+      '@babel/parser': 7.22.5
       '@babel/template': 7.20.7
       '@babel/traverse': 7.21.5
-      '@babel/types': 7.21.5
+      '@babel/types': 7.22.5
       convert-source-map: 1.9.0
       debug: 4.3.4
       gensync: 1.0.0-beta.2
@@ -1777,7 +1835,7 @@ packages:
       }
     engines: { node: '>=6.9.0' }
     dependencies:
-      '@babel/types': 7.21.5
+      '@babel/types': 7.22.5
 
   /@babel/helper-compilation-targets@7.21.5(@babel/core@7.21.8):
     resolution:
@@ -1991,7 +2049,7 @@ packages:
     engines: { node: '>=6.0.0' }
     hasBin: true
     dependencies:
-      '@babel/types': 7.21.5
+      '@babel/types': 7.22.5
 
   /@babel/parser@7.22.5:
     resolution:
@@ -3897,7 +3955,7 @@ packages:
         integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==,
       }
     dependencies:
-      '@types/node': 16.18.38
+      '@types/node': 18.16.17
     dev: true
 
   /@types/minimist@1.2.2:
@@ -4059,7 +4117,7 @@ packages:
       debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.5.1
+      semver: 7.5.3
       tsutils: 3.21.0(typescript@5.0.4)
       typescript: 5.0.4
     transitivePeerDependencies:
@@ -4083,7 +4141,7 @@ packages:
       '@typescript-eslint/typescript-estree': 5.59.6(typescript@5.0.4)
       eslint: 8.41.0
       eslint-scope: 5.1.1
-      semver: 7.5.1
+      semver: 7.5.3
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -4620,7 +4678,7 @@ packages:
         integrity: sha512-cquyDNvZ6jTbf/+x+AgM2Arrp6G4Dzbb0R64jiG804HRMfRiFXWI6kqUVqZ6ZR0bQhIoQjB4+2bhNtVwndW15g==,
       }
     dependencies:
-      '@babel/parser': 7.22.3
+      '@babel/parser': 7.22.5
       '@vue/shared': 3.3.4
       estree-walker: 2.0.2
       source-map-js: 1.0.2
@@ -4647,8 +4705,8 @@ packages:
       '@vue/reactivity-transform': 3.3.4
       '@vue/shared': 3.3.4
       estree-walker: 2.0.2
-      magic-string: 0.30.0
-      postcss: 8.4.23
+      magic-string: 0.30.1
+      postcss: 8.4.25
       source-map-js: 1.0.2
 
   /@vue/compiler-ssr@3.3.4:
@@ -4688,7 +4746,7 @@ packages:
         integrity: sha512-MXgwjako4nu5WFLAjpBnCj/ieqcjE2aJBINUNQzkZQfzIZA4xn+0fV1tIYBJvvva3N3OvKGofRLvQIwEQPpaXw==,
       }
     dependencies:
-      '@babel/parser': 7.22.3
+      '@babel/parser': 7.22.5
       '@vue/compiler-core': 3.3.4
       '@vue/shared': 3.3.4
       estree-walker: 2.0.2
@@ -4838,7 +4896,7 @@ packages:
       }
     dev: true
 
-  /acorn-jsx@5.3.2(acorn@8.8.2):
+  /acorn-jsx@5.3.2(acorn@8.10.0):
     resolution:
       {
         integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==,
@@ -4846,7 +4904,7 @@ packages:
     peerDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      acorn: 8.8.2
+      acorn: 8.10.0
     dev: true
 
   /acorn-walk@8.2.0:
@@ -7178,8 +7236,8 @@ packages:
       }
     engines: { node: ^12.22.0 || ^14.17.0 || >=16.0.0 }
     dependencies:
-      acorn: 8.8.2
-      acorn-jsx: 5.3.2(acorn@8.8.2)
+      acorn: 8.10.0
+      acorn-jsx: 5.3.2(acorn@8.10.0)
       eslint-visitor-keys: 3.4.1
     dev: true
 
@@ -9878,7 +9936,7 @@ packages:
       fs-extra: 11.1.1
       globby: 13.1.4
       jiti: 1.18.2
-      mlly: 1.2.1
+      mlly: 1.4.0
       mri: 1.2.0
       pathe: 1.1.1
       typescript: 5.0.4
@@ -9889,7 +9947,7 @@ packages:
         integrity: sha512-1aMEByaWgBPEbWV2BOPEMySRrzl7rIHXmQxam4DM8jVjalTQDjpN2ZKOLUrwyhfZQO7IXHml2StcHMhooDeEEQ==,
       }
     dependencies:
-      acorn: 8.8.2
+      acorn: 8.10.0
       pathe: 1.1.1
       pkg-types: 1.0.3
       ufo: 1.1.2
@@ -10910,7 +10968,7 @@ packages:
       }
     dependencies:
       jsonc-parser: 3.2.0
-      mlly: 1.2.1
+      mlly: 1.4.0
       pathe: 1.1.1
 
   /postcss-import@15.1.0(postcss@8.4.23):
@@ -11002,6 +11060,7 @@ packages:
       nanoid: 3.3.6
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: false
 
   /postcss@8.4.25:
     resolution:
@@ -11631,7 +11690,7 @@ packages:
       rollup: ^3.0.0
       typescript: ^4.1 || ^5.0
     dependencies:
-      magic-string: 0.30.0
+      magic-string: 0.30.1
       rollup: 3.23.0
       typescript: 5.0.4
     optionalDependencies:

@@ -1,4 +1,4 @@
-import { withDefaults } from '@arroyodev-llc/utils.projen'
+import type { Simplify } from 'type-fest'
 import { type BuildStep } from './build-step.ts'
 import {
 	type GConstructor,
@@ -12,7 +12,7 @@ import {
  */
 export class ProjectBuilder<
 	T extends GenericProjectConstructor = GenericProjectConstructor,
-	Options extends ProjectConstructorOptions<T> = ProjectConstructorOptions<T>
+	Options extends object = ProjectConstructorOptions<T>
 > {
 	/**
 	 * Current project constructor output type.
@@ -27,12 +27,10 @@ export class ProjectBuilder<
 	/**
 	 * Construct a new builder instance.
 	 * @param projectConstructor Projen project type to wrap.
-	 * @param defaultOptions Default options to utilize as fallback values.
 	 * @param steps Build steps to apply (in order) on build.
 	 */
 	constructor(
 		readonly projectConstructor: T,
-		readonly defaultOptions: Array<Partial<Options>> = [],
 		readonly steps: Array<BuildStep> = []
 	) {}
 
@@ -46,13 +44,29 @@ export class ProjectBuilder<
 	 * @returns A new builder instance with the added step and merged types.
 	 */
 	add<StepT extends BuildStep>(step: StepT) {
-		const builder = new ProjectBuilder(
+		const builder = new ProjectBuilder<
+			GConstructor<
+				InstanceType<T> & (typeof step)['outputType'],
+				[
+					options: Simplify<
+						Omit<Options, keyof (typeof step)['outputOptionsType']> &
+							(typeof step)['outputOptionsType']
+					>
+				]
+			>,
+			Simplify<
+				Omit<Options, keyof (typeof step)['outputOptionsType']> &
+					(typeof step)['outputOptionsType']
+			>
+		>(
 			this.projectConstructor as unknown as GConstructor<
 				InstanceType<T> & (typeof step)['outputType'],
-				[options: Options & (typeof step)['outputOptionsType']]
-			>,
-			this.defaultOptions as Array<
-				Partial<Options & (typeof step)['outputOptionsType']>
+				[
+					options: Simplify<
+						Omit<Options, keyof (typeof step)['outputOptionsType']> &
+							(typeof step)['outputOptionsType']
+					>
+				]
 			>,
 			[...this.steps, step]
 		)
@@ -66,11 +80,13 @@ export class ProjectBuilder<
 	buildOptions(options: Options): Options {
 		const mappedOptions = this.steps.reduce(
 			(acc, step) =>
-				({ ...acc, ...step.applyOptions(acc as Options) } as Options),
+				({
+					...acc,
+					...step.applyOptions(acc as Options & { name: string }),
+				} as Options),
 			Object.assign({}, options) as object
 		) as Options
-
-		return withDefaults(...this.defaultOptions)(mappedOptions)
+		return mappedOptions
 	}
 
 	/**

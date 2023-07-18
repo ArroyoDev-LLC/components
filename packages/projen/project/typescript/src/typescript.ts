@@ -132,16 +132,29 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 }
 
 export class TypescriptESMManifestBuilder extends BaseBuildStep<
-	{},
 	{
+		readonly workspaceDeps?: Array<string | javascript.NodeProject> | undefined
+	},
+	{
+		pnpm: PnpmWorkspace
 		addWorkspaceDeps(
 			...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>
 		): void
 		formatExecCommand(...args: string[]): string
 	}
 > {
+	private workspaceDeps: Array<string | javascript.NodeProject> | undefined
+
 	constructor(readonly options?: { sideEffects: boolean }) {
 		super()
+	}
+
+	applyOptions(
+		options: ProjectOptions & this['outputOptionsType']
+	): ProjectOptions & this['outputOptionsType'] {
+		const { workspaceDeps, ...rest } = options
+		this.workspaceDeps = workspaceDeps
+		return super.applyOptions(rest)
 	}
 
 	applyProject(
@@ -150,16 +163,23 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 		project.package.addField('type', 'module')
 		project.package.addField('sideEffects', this.options?.sideEffects ?? false)
 		project.tasks.tryFind('package')?.reset?.()
+		const pnpm = new PnpmWorkspace(project)
+		if (this.workspaceDeps) {
+			pnpm.addWorkspaceDeps?.(
+				{ depType: DependencyType.RUNTIME, addTsPath: true },
+				...(this.workspaceDeps ?? [])
+			)
+		}
 		return {
 			addWorkspaceDeps: {
 				value(...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>) {
-					return PnpmWorkspace.of(this)?.addWorkspaceDeps?.(...dependency)
+					return PnpmWorkspace.of(project)?.addWorkspaceDeps?.(...dependency)
 				},
 			},
 			formatExecCommand: {
 				value(this: typescript.TypeScriptProject, ...args: string[]) {
 					return NodePackageUtils.command.exec(
-						this.package.packageManager,
+						project.package.packageManager,
 						...args
 					)
 				},

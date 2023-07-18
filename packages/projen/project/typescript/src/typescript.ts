@@ -1,4 +1,7 @@
-import { LintConfig } from '@arroyodev-llc/projen.component.linting'
+import {
+	LintConfig,
+	type LintConfigOptions,
+} from '@arroyodev-llc/projen.component.linting'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
 import {
 	ReleasePlease,
@@ -11,18 +14,26 @@ import {
 	TSConfig,
 } from '@arroyodev-llc/projen.project.nx-monorepo'
 import { ProjectName } from '@arroyodev-llc/utils.projen'
+import {
+	BaseBuildStep,
+	builders,
+	ProjectBuilder,
+	type TypedPropertyDescriptorMap,
+} from '@arroyodev-llc/utils.projen-builder'
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
 import {
 	type Component,
 	DependencyType,
 	javascript,
 	LogLevel,
+	type ProjectOptions,
 	typescript,
 } from 'projen'
 import { deepMerge } from 'projen/lib/util'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
 
 export const CONFIG_DEFAULTS = {
+	defaultReleaseBranch: 'main',
 	packageManager: javascript.NodePackageManager.PNPM,
 	pnpmVersion: '8',
 	npmAccess: javascript.NpmAccess.PUBLIC,
@@ -47,6 +58,78 @@ export const CONFIG_DEFAULTS = {
 	prettier: true,
 	unbuild: true,
 } satisfies Omit<TypeScriptProjectOptions, 'name'>
+
+interface TypescriptConfigBuilderProps {
+	readonly tsconfigContainer: TypescriptConfigContainer
+	readonly tsconfig: javascript.TypescriptConfig
+	readonly tsconfigDev: javascript.TypescriptConfig
+}
+
+export class TypescriptConfigBuilder extends BaseBuildStep<
+	{ readonly tsconfigBase?: javascript.TypescriptConfigExtends },
+	TypescriptConfigBuilderProps
+> {
+	protected tsconfigBase: javascript.TypescriptConfigExtends | undefined =
+		undefined
+	protected projectOptions!: typescript.TypeScriptProjectOptions
+
+	constructor(
+		readonly options?: {
+			extendsDefault: (
+				container: TypescriptConfigContainer
+			) => javascript.TypescriptConfigExtends
+		}
+	) {
+		super()
+	}
+
+	applyOptions<Options extends typescript.TypeScriptProjectOptions>(
+		options: Options & this['outputOptionsType']
+	): Options & this['outputOptionsType'] {
+		const { tsconfigBase, ...rest } = options
+		this.tsconfigBase = tsconfigBase
+		this.projectOptions = rest
+		return options
+	}
+
+	applyProject(
+		project: typescript.TypeScriptProject
+	): TypedPropertyDescriptorMap<this['outputType']> {
+		const tsconfigContainer =
+			TypescriptConfigContainer.nearest(project) ??
+			TypescriptConfigContainer.ensure(project)
+		const tsconfigBase =
+			this.tsconfigBase ?? this.options?.extendsDefault?.(tsconfigContainer)
+		const srcDir = project.srcdir
+		const tsconfig = tsconfigContainer.buildConfig(project, {
+			fileName: 'tsconfig.json',
+			compilerOptions: {
+				outDir: project.libdir ?? 'dist',
+				...(this.projectOptions.tsconfig?.compilerOptions ?? {}),
+			},
+			...(tsconfigBase && { extends: tsconfigBase }),
+			override: 'merge-files',
+			include: [`${srcDir}/*.ts`, `${srcDir}/**/*.ts`],
+		})
+		const tsconfigDev = tsconfigContainer.buildConfig(project, {
+			fileName: 'tsconfig.dev.json',
+			extends: javascript.TypescriptConfigExtends.fromTypescriptConfigs([
+				tsconfig,
+			]),
+			override: 'merge-files',
+			include: [...tsconfig.include, '*.ts', '**/*.ts'],
+			exclude: ['node_modules'],
+			...(this.projectOptions.tsconfigDev && {
+				compilerOptions: this.projectOptions.tsconfigDev.compilerOptions,
+			}),
+		})
+		return {
+			tsconfig: { writable: false, value: tsconfig },
+			tsconfigDev: { writable: false, value: tsconfigDev },
+			tsconfigContainer: { writable: false, value: tsconfigContainer },
+		} as TypedPropertyDescriptorMap<this['outputType']>
+	}
+}
 
 export class TypescriptProject extends typescript.TypeScriptProject {
 	/**

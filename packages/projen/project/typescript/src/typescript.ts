@@ -254,6 +254,22 @@ export class TypescriptReleasePleaseBuilder extends BaseBuildStep<{}, {}> {
 		return super.applyProject(project)
 	}
 }
+
+export const TypescriptBaseBuilder = new ProjectBuilder(
+	typescript.TypeScriptProject
+)
+	.add(new builders.DefaultOptionsBuilder(CONFIG_DEFAULTS))
+	.add(
+		new TypescriptConfigBuilder({
+			extendsDefault: (container) =>
+				container.buildExtends(TSConfig.BASE, TSConfig.ESM, TSConfig.BUNDLER),
+		})
+	)
+	.add(new TypescriptESMManifestBuilder())
+	.add(new TypescriptBundlerBuilder())
+	.add(new TypescriptLintingBuilder({ useTypeInformation: true }))
+	.add(new TypescriptReleasePleaseBuilder())
+
 export class TypescriptProject extends typescript.TypeScriptProject {
 	/**
 	 * Create new package under monorepo parent.

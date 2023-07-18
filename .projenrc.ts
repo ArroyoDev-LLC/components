@@ -63,7 +63,7 @@ const TypescriptProjectBuilder = TypescriptBaseBuilder.add(
 /**
  * Utility Projects
  */
-const utilsFs = TypescriptProject.fromParent(monorepo, {
+const utilsFs = TypescriptProjectBuilder.build({
 	name: 'utils.fs',
 	deps: ['fs-extra', 'pathe'],
 	devDeps: ['@types/fs-extra'],

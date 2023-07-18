@@ -70,7 +70,7 @@ const utilsFs = TypescriptProjectBuilder.build({
 })
 new Vitest(utilsFs)
 
-const utilsTsAst = TypescriptProject.fromParent(monorepo, {
+const utilsTsAst = TypescriptProjectBuilder.build({
 	name: 'utils.ts-ast',
 	deps: [
 		'ts-morph',
@@ -82,22 +82,24 @@ const utilsTsAst = TypescriptProject.fromParent(monorepo, {
 	workspaceDeps: [utilsFs],
 	tsconfig: {
 		compilerOptions: {
-			types: ['reflect-metadata'],
 			experimentalDecorators: true,
 			emitDecoratorMetadata: true,
 		},
 	},
 })
+utilsTsAst.tsconfig.file.addOverride('compilerOptions.types', [
+	'reflect-metadata',
+])
 new Vitest(utilsTsAst)
 
-const utilsProjen = TypescriptProject.fromParent(monorepo, {
+const utilsProjen = TypescriptProjectBuilder.build({
 	name: 'utils.projen',
 	deps: ['@sindresorhus/is', 'type-fest', 'projen', 'defu'],
 	workspaceDeps: [utilsFs],
 })
 new Vitest(utilsProjen)
 
-const utilsProjenBuilder = TypescriptProject.fromParent(monorepo, {
+const utilsProjenBuilder = TypescriptProjectBuilder.build({
 	name: 'utils.projen-builder',
 	workspaceDeps: [utilsProjen],
 	deps: ['projen', 'type-fest'],

@@ -1,9 +1,9 @@
-import { type Project, type ProjectOptions } from 'projen'
 import {
 	ProjectName,
 	type ProjectNameSchemeOptions,
 	withDefaults,
-} from './project.ts'
+} from '@arroyodev-llc/utils.projen'
+import { type Project, type ProjectOptions } from 'projen'
 
 type Constructor = new (...args: any[]) => {}
 type GConstructor<T, Args extends any[] = any[]> = new (...args: Args) => T
@@ -14,7 +14,6 @@ type ProjectConstructorOptions<T extends Constructor> =
 			? O
 			: never
 		: never
-
 type TypedPropertyDescriptorMap<T> = {
 	[P in keyof T]: TypedPropertyDescriptor<T[P]>
 }

@@ -213,6 +213,26 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 		return super.applyProject(project)
 	}
 }
+
+export class TypescriptLintingBuilder extends BaseBuildStep<
+	{},
+	{ readonly lintConfig: LintConfig }
+> {
+	constructor(readonly options?: LintConfigOptions) {
+		super()
+	}
+
+	applyProject(
+		project: typescript.TypeScriptProject
+	): TypedPropertyDescriptorMap<this['outputType']> {
+		const lintConfig = new LintConfig(project, this.options)
+		lintConfig.setEslintExec('eslint --cache')
+		return {
+			lintConfig: { writable: false, value: lintConfig },
+		} as TypedPropertyDescriptorMap<this['outputType']>
+	}
+}
+
 export class TypescriptProject extends typescript.TypeScriptProject {
 	/**
 	 * Create new package under monorepo parent.

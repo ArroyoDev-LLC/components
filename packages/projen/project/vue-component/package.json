@@ -49,7 +49,8 @@
   "dependencies": {
     "@arroyodev-llc/projen.component.vite": "workspace:*",
     "@arroyodev-llc/projen.component.vue": "workspace:*",
-    "@arroyodev-llc/projen.project.typescript": "workspace:*"
+    "@arroyodev-llc/projen.project.typescript": "workspace:*",
+    "@arroyodev-llc/utils.projen-builder": "workspace:*"
   },
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",

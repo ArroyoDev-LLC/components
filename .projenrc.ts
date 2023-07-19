@@ -247,7 +247,12 @@ typescriptProject.lintConfig.eslint.addIgnorePattern(
 
 const vueComponentProject = ProjenComponentProjectBuilder.build({
 	name: 'projen.project.vue-component',
-	workspaceDeps: [typescriptProject, vueComponent, viteComponent],
+	workspaceDeps: [
+		typescriptProject,
+		vueComponent,
+		viteComponent,
+		utilsProjenBuilder,
+	],
 })
 
 /**

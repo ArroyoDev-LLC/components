@@ -36,11 +36,18 @@ export class TypescriptConfigContainer extends Component {
 		return project.components.find(isTsConfigContainer)
 	}
 
+	/**
+	 * Find the nearest config container up project ancestry or create one.
+	 * @param project target project.
+	 * @param options {@link TypescriptConfigContainerOptions} used to create new config container if needed.
+	 */
 	public static ensure(
 		project: Project,
 		options?: TypescriptConfigContainerOptions
 	): TypescriptConfigContainer {
-		return this.of(project) ?? new TypescriptConfigContainer(project, options)
+		return (
+			this.nearest(project) ?? new TypescriptConfigContainer(project, options)
+		)
 	}
 
 	/**

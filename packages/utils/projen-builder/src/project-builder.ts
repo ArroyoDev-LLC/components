@@ -1,10 +1,11 @@
 import type { ProjectOptions } from 'projen'
 import { deepMerge } from 'projen/lib/util'
-import type { Simplify } from 'type-fest'
 import { type BuildStep } from './build-step.ts'
 import {
 	type GConstructor,
 	type GenericProjectConstructor,
+	type MergeBuildConstructor,
+	type MergeBuildOptions,
 	type ProjectConstructorOptions,
 } from './types.ts'
 
@@ -49,31 +50,18 @@ export class ProjectBuilder<
 	add<StepT extends BuildStep>(
 		step: StepT,
 		options: { prepend?: boolean } = { prepend: false }
-	) {
+	): ProjectBuilder<
+		GConstructor<
+			InstanceType<T> & StepT['outputType'],
+			[options: MergeBuildOptions<T, StepT>]
+		>,
+		MergeBuildOptions<T, StepT>
+	> {
 		const builder = new ProjectBuilder<
-			GConstructor<
-				InstanceType<T> & (typeof step)['outputType'],
-				[
-					options: Simplify<
-						Omit<Options, keyof (typeof step)['outputOptionsType']> &
-							(typeof step)['outputOptionsType']
-					>
-				]
-			>,
-			Simplify<
-				Omit<Options, keyof (typeof step)['outputOptionsType']> &
-					(typeof step)['outputOptionsType']
-			>
+			GConstructor<InstanceType<T> & StepT['outputType']>,
+			MergeBuildOptions<T, StepT>
 		>(
-			this.projectConstructor as unknown as GConstructor<
-				InstanceType<T> & (typeof step)['outputType'],
-				[
-					options: Simplify<
-						Omit<Options, keyof (typeof step)['outputOptionsType']> &
-							(typeof step)['outputOptionsType']
-					>
-				]
-			>,
+			this.projectConstructor as unknown as MergeBuildConstructor<T, StepT>,
 			options.prepend ? [step, ...this.steps] : [...this.steps, step]
 		)
 		return builder

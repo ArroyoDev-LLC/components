@@ -1,3 +1,4 @@
+import type { ProjectOptions } from 'projen'
 import type { Simplify } from 'type-fest'
 import { type BuildStep } from './build-step.ts'
 import {
@@ -41,9 +42,13 @@ export class ProjectBuilder<
 	 * This will create a new builder instance and will not mutate the caller.
 	 *
 	 * @param step Build step to add.
+	 * @param options Step options.
 	 * @returns A new builder instance with the added step and merged types.
 	 */
-	add<StepT extends BuildStep>(step: StepT) {
+	add<StepT extends BuildStep>(
+		step: StepT,
+		options: { prepend?: boolean } = { prepend: false }
+	) {
 		const builder = new ProjectBuilder<
 			GConstructor<
 				InstanceType<T> & (typeof step)['outputType'],
@@ -68,7 +73,7 @@ export class ProjectBuilder<
 					>
 				]
 			>,
-			[...this.steps, step]
+			options.prepend ? [step, ...this.steps] : [...this.steps, step]
 		)
 		return builder
 	}

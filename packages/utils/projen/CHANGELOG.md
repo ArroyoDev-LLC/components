@@ -1,5 +1,40 @@
 # Changelog
 
+## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.16...@arroyodev-llc/utils.projen-v0.1.17) (2023-07-19)
+
+
+### Features
+
+* **deps:** Add defu dep to utils.projen ([b9a5831](https://github.com/ArroyoDev-LLC/components/commit/b9a5831f3b574d96372fca08c4dee04f8d542fa6))
+* **projen.component.tsc-container:** Implement config building with merge strategies ([3d01b01](https://github.com/ArroyoDev-LLC/components/commit/3d01b0191efe15465dde4fa6c9211a7bfcdffc66))
+* **projenrc:** Add type-fest scope, add missing peer deps to vue component project ([bac249d](https://github.com/ArroyoDev-LLC/components/commit/bac249d97a51b8534b76fd0f89f9435e687915bc))
+* **projenrc:** Update all utils to use `TypescriptProjectBuilder` ([bda0549](https://github.com/ArroyoDev-LLC/components/commit/bda05495b396470d725e5561a2f4f68e196a69c1))
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+* **utils.projen:** Abstract `BuilderStep` interface ([510a305](https://github.com/ArroyoDev-LLC/components/commit/510a30510c03932d9b16b38c7619e52ae85736f0))
+* **utils.projen:** Add `firstAncestor` utility function ([812bbda](https://github.com/ArroyoDev-LLC/components/commit/812bbdaf093c0cefed3b6bc9f074de427d5163db))
+* **utils.projen:** Implement `NameSchemeBuilder` for using project name schemes ([e789c37](https://github.com/ArroyoDev-LLC/components/commit/e789c37128ba31e6cdde7b155c491538c9660083))
+* **utils.projen:** Implement `OptionsPropertyBuilder` for exposing used ([1827f9f](https://github.com/ArroyoDev-LLC/components/commit/1827f9fea31e192ea83db15bf5fd1352170ddd63))
+* **utils.projen:** Implement `ProjectBuilder` for reusable build logic ([f920846](https://github.com/ArroyoDev-LLC/components/commit/f9208467be80146e3dd1bd50726ea647910d81cb))
+* **utils.projen:** Implement `SupportsNameScheme`, `ensureScheme` into `ProjectName` ([4b234c9](https://github.com/ArroyoDev-LLC/components/commit/4b234c90d2f564c03ad25b76fbe75cd1a7cada29))
+* **utils.projen:** Implement `withDefaults` utility ([b71b7ac](https://github.com/ArroyoDev-LLC/components/commit/b71b7ac9adc3e6d32c86d781cd2c2e276ab3fc97))
+
+
+### Bug Fixes
+
+* **projenrc:** Type-fest dependency issues ([56b738c](https://github.com/ArroyoDev-LLC/components/commit/56b738cf981c962182438ca764c88ac7a1631c24))
+* **utils.projen:** Improved types for `isComponent`, `findComponent` ([f170262](https://github.com/ArroyoDev-LLC/components/commit/f1702629ec4fff3ce6c91cd5528609d070486b3b))
+* **utils.projen:** Start at given project, not that projects parent in `firstAncestor` ([58ebaa0](https://github.com/ArroyoDev-LLC/components/commit/58ebaa0c88db8f786d8769c4ecbed7c062ca00cd))
+
+
+### Code Refactoring
+
+* **utils.projen:** Rename `BuilderStep` -&gt; `BuildStep` ([c705ad7](https://github.com/ArroyoDev-LLC/components/commit/c705ad75dfba9c0887bf2b3233cb098b3e514b7b))
+
+
+### Tests
+
+* **utils.projen-builder:** Update tests, add `DefaultOptionsBuilder` test ([55321dd](https://github.com/ArroyoDev-LLC/components/commit/55321dd89d21b0c3b3b2b716020973adbc766398))
+
 ## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-v0.1.15...@arroyodev-llc/utils.projen-v0.1.16) (2023-07-07)
 
 

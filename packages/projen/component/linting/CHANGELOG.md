@@ -12,6 +12,25 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.16...@arroyodev-llc/projen.component.linting-v0.1.17) (2023-07-19)
+
+
+### Features
+
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+
+
+### Bug Fixes
+
+* **projen.component.linting:** Ensure all readonly files are ignored by eslint/prettier ([e430209](https://github.com/ArroyoDev-LLC/components/commit/e43020955faaa9cd42e19881d25d7ae04788a3d2))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.17
+
 ## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.15...@arroyodev-llc/projen.component.linting-v0.1.16) (2023-07-07)
 
 

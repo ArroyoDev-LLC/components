@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tsconfig-container-v0.1.11...@arroyodev-llc/projen.component.tsconfig-container-v0.1.12) (2023-07-19)
+
+
+### Features
+
+* **projen.component.tsc-container:** Add static `ensure` and `nearest` methods ([7f8dc6f](https://github.com/ArroyoDev-LLC/components/commit/7f8dc6f9980d0d8cddb3491e57c2e7baf07a446f))
+* **projen.component.tsc-container:** Add utils.projen as dependency ([286bcc0](https://github.com/ArroyoDev-LLC/components/commit/286bcc0a706a1e8dfef11046b7e9eafa6a0d2157))
+* **projen.component.tsc-container:** Implement config building with merge strategies ([3d01b01](https://github.com/ArroyoDev-LLC/components/commit/3d01b0191efe15465dde4fa6c9211a7bfcdffc66))
+* **projen.component.tsconfig-container:** Support tsconfig project paths mapping ([6f7948e](https://github.com/ArroyoDev-LLC/components/commit/6f7948e29996d714b67c4dd32ef61de558fab2d5))
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+
+
+### Bug Fixes
+
+* **projen.component.tsconfig-container:** Use `nearest` in `ensure` ([e609ab7](https://github.com/ArroyoDev-LLC/components/commit/e609ab7df7e8f0b2bc0cca409f60d87f78e97523))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.17
+
 ## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tsconfig-container-v0.1.10...@arroyodev-llc/projen.component.tsconfig-container-v0.1.11) (2023-07-07)
 
 

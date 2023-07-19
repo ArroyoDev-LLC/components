@@ -26,6 +26,51 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.16
 
+## [0.1.23](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.22...@arroyodev-llc/projen.project.typescript-v0.1.23) (2023-07-19)
+
+
+### Features
+
+* **projen.project.typescript:** `TypescriptBaseBuilder` export ([c27bf1f](https://github.com/ArroyoDev-LLC/components/commit/c27bf1f31550942c35e27185ac1a0cfb196d876f))
+* **projen.project.typescript:** `TypescriptBundlerBuilder` impl ([3f9e2ca](https://github.com/ArroyoDev-LLC/components/commit/3f9e2ca283a361533fa2f3aef3e7769616e2e3d1))
+* **projen.project.typescript:** `TypescriptConfigBuilder` impl ([7fa46ab](https://github.com/ArroyoDev-LLC/components/commit/7fa46ab79c41980398e388b7ab72618412a9c05b))
+* **projen.project.typescript:** `TypescriptESMManifestBuilder` impl ([675296d](https://github.com/ArroyoDev-LLC/components/commit/675296d5d6f7e81b2ead68f702a813c7a780a11d))
+* **projen.project.typescript:** `TypescriptLintingBuilder` impl ([8b0ddc2](https://github.com/ArroyoDev-LLC/components/commit/8b0ddc25521e8cfc3fbd79cd624060b46e404e7c))
+* **projen.project.typescript:** `TypescriptReleasePleaseBuilder` impl ([38ed109](https://github.com/ArroyoDev-LLC/components/commit/38ed10987f3dc5560a998c43b1e4a3573c93402b))
+* **projen.project.typescript:** Add projen.component.tsc-container as dep ([5702922](https://github.com/ArroyoDev-LLC/components/commit/57029224c4cec00c4f000b5f6300c31baf8efdef))
+* **projen.project.typescript:** Export builders, add missing type export ([b3da707](https://github.com/ArroyoDev-LLC/components/commit/b3da707dc4db7f019974ed1eef2dd914e767d475))
+* **projen.project.typescript:** Mark `TypescriptProject` as `[@deprecated](https://github.com/deprecated)` ([fdf2261](https://github.com/ArroyoDev-LLC/components/commit/fdf2261cb363f3ecfa9baecc76d9389166b70669))
+* **projen.project.typescript:** Setup pnpm, initial workspaceDeps in `TypescriptESMManifestBuilder` ([26e0135](https://github.com/ArroyoDev-LLC/components/commit/26e013573289875569dd770fbdd5da55db187c9f))
+* **projen.project.typescript:** Utilize projen.component.tsc-container to build typescript configs ([835146f](https://github.com/ArroyoDev-LLC/components/commit/835146fcd0a01e9ef4eb305e1947a0eceb1d7c4b))
+* **projenrc:** Add `utils.projen-builder` to monorepo, `projen.project.typescript` ([5b3adf1](https://github.com/ArroyoDev-LLC/components/commit/5b3adf1448bee90e8e466e465c68321d4fdb357a))
+* **projenrc:** Add type-fest scope, add missing peer deps to vue component project ([bac249d](https://github.com/ArroyoDev-LLC/components/commit/bac249d97a51b8534b76fd0f89f9435e687915bc))
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+
+
+### Bug Fixes
+
+* **projen.project.typescript:** Use ts container to map project tsconfig paths ([c86f956](https://github.com/ArroyoDev-LLC/components/commit/c86f95677d4130c984badaa4f8cec2d397d349b5))
+* **projenrc:** Type-fest dependency issues ([56b738c](https://github.com/ArroyoDev-LLC/components/commit/56b738cf981c962182438ca764c88ac7a1631c24))
+
+
+### Code Refactoring
+
+* **projen.project.typescript:** Extract `builders` module ([b42e647](https://github.com/ArroyoDev-LLC/components/commit/b42e64730c21bb8fa1d34391462bf31c4d5a9bf2))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.17
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.18
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.19
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.12
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.19
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.22
+    * @arroyodev-llc/utils.projen bumped to 0.1.17
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.2
+
 ## [0.1.22](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.21...@arroyodev-llc/projen.project.typescript-v0.1.22) (2023-07-07)
 
 

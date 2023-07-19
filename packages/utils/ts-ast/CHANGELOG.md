@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.ts-ast-v0.1.6...@arroyodev-llc/utils.ts-ast-v0.1.7) (2023-07-19)
+
+
+### Features
+
+* **projenrc:** Add type-fest scope, add missing peer deps to vue component project ([bac249d](https://github.com/ArroyoDev-LLC/components/commit/bac249d97a51b8534b76fd0f89f9435e687915bc))
+* **projenrc:** Update all utils to use `TypescriptProjectBuilder` ([bda0549](https://github.com/ArroyoDev-LLC/components/commit/bda05495b396470d725e5561a2f4f68e196a69c1))
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+
+
+### Bug Fixes
+
+* **projenrc:** Type-fest dependency issues ([56b738c](https://github.com/ArroyoDev-LLC/components/commit/56b738cf981c962182438ca764c88ac7a1631c24))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.fs bumped to 0.1.10
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.ts-ast-v0.1.5...@arroyodev-llc/utils.ts-ast-v0.1.6) (2023-07-07)
 
 

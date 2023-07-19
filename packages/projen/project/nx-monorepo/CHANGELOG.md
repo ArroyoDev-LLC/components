@@ -8,6 +8,30 @@
     * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.11
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.22](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.21...@arroyodev-llc/projen.project.nx-monorepo-v0.1.22) (2023-07-19)
+
+
+### Features
+
+* **projen.project.nx-monorepo:** Add local nx runner, use for post-install ([6c6eac8](https://github.com/ArroyoDev-LLC/components/commit/6c6eac800a68f6195ac4dcbc3582263ec764910c))
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+
+
+### Bug Fixes
+
+* **projen.project.nx-monorepo:** Do not set link-workspace-packages deep by default ([d7eb0d7](https://github.com/ArroyoDev-LLC/components/commit/d7eb0d72ae8962eaa995e5c81b567388d78ce12c))
+* **projen.project.nx-monorepo:** Nx npm scope, use exec for default command ([4b1dfa6](https://github.com/ArroyoDev-LLC/components/commit/4b1dfa610b26d63957fec06e65ab9168215710d7))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.17
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.18
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.12
+    * @arroyodev-llc/utils.projen bumped to 0.1.17
+
 ## [0.1.21](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.20...@arroyodev-llc/projen.project.nx-monorepo-v0.1.21) (2023-07-07)
 
 

@@ -19,6 +19,23 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.16
 
+## [0.1.21](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.20...@arroyodev-llc/projen.component.vite-v0.1.21) (2023-07-19)
+
+
+### Features
+
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.17
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.19
+    * @arroyodev-llc/utils.projen bumped to 0.1.17
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.7
+
 ## [0.1.20](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vite-v0.1.19...@arroyodev-llc/projen.component.vite-v0.1.20) (2023-07-07)
 
 

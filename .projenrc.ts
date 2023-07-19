@@ -21,6 +21,7 @@ const monorepo = new ComponentsMonorepo({
 		level: LogLevel.DEBUG,
 		usePrefix: true,
 	},
+	typescriptVersion: '~5.1',
 	pnpmVersion: '8.6.2',
 	devDeps: [
 		'@aws-prototyping-sdk/nx-monorepo',
@@ -49,9 +50,13 @@ const BaseTypescriptProjectBuilder = TypescriptBaseBuilder.add(
 	new builders.DefaultOptionsBuilder<{
 		parent?: typeof monorepo
 		defaultReleaseBranch?: string
+		typescriptVersion?: string
 	}>({
 		parent: monorepo,
-	})
+		defaultReleaseBranch: 'main',
+		typescriptVersion: '~5.1',
+	}),
+	{ prepend: true }
 ).add(new builders.NameSchemeBuilder({ scope: '@arroyodev-llc' }))
 
 const TypescriptProjectBuilder = BaseTypescriptProjectBuilder.add(
@@ -75,13 +80,8 @@ new Vitest(utilsFs)
 
 const utilsTsAst = TypescriptProjectBuilder.build({
 	name: 'utils.ts-ast',
-	deps: [
-		'ts-morph',
-		'@sindresorhus/is',
-		'type-fest',
-		'reflect-metadata',
-		'projen',
-	],
+	deps: ['ts-morph', '@sindresorhus/is', 'reflect-metadata', 'projen'],
+	devDeps: ['type-fest'],
 	workspaceDeps: [utilsFs],
 	tsconfig: {
 		compilerOptions: {
@@ -97,7 +97,8 @@ new Vitest(utilsTsAst)
 
 const utilsProjen = TypescriptProjectBuilder.build({
 	name: 'utils.projen',
-	deps: ['@sindresorhus/is', 'type-fest', 'projen', 'defu'],
+	deps: ['@sindresorhus/is', 'projen', 'defu'],
+	devDeps: ['type-fest'],
 	workspaceDeps: [utilsFs],
 })
 new Vitest(utilsProjen)
@@ -105,7 +106,8 @@ new Vitest(utilsProjen)
 const utilsProjenBuilder = TypescriptProjectBuilder.build({
 	name: 'utils.projen-builder',
 	workspaceDeps: [utilsProjen],
-	deps: ['projen', 'type-fest'],
+	deps: ['projen'],
+	devDeps: ['type-fest'],
 })
 new Vitest(utilsProjenBuilder)
 

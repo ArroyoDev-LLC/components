@@ -16,6 +16,10 @@ import {
 	MonorepoProject,
 	type NxMonorepoProjectOptions,
 } from '@arroyodev-llc/projen.project.nx-monorepo'
+import {
+	type ProjectNameSchemeOptions,
+	type SupportsNameScheme,
+} from '@arroyodev-llc/utils.projen'
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
 import { github, typescript } from 'projen'
 import { type GitHub } from 'projen/lib/github'
@@ -26,7 +30,10 @@ const arroyoBot = github.GithubCredentials.fromApp({
 	privateKeySecret: 'AD_BOT_PRIVATE_KEY',
 })
 
-export class ComponentsMonorepo extends MonorepoProject {
+export class ComponentsMonorepo
+	extends MonorepoProject
+	implements SupportsNameScheme
+{
 	static readonly githubCredentials = arroyoBot
 	static readonly nxPublicReadonlyToken: string =
 		'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
@@ -37,6 +44,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 	public readonly toolVersions: ToolVersions
 	public readonly envrc: DirEnv
 	public readonly gitHooks: GitHooks
+	public readonly namingScheme: ProjectNameSchemeOptions
 
 	constructor(options: NxMonorepoProjectOptions) {
 		super({
@@ -50,6 +58,7 @@ export class ComponentsMonorepo extends MonorepoProject {
 			},
 			...options,
 		})
+		this.namingScheme = this.options.namingScheme!
 		this.lintConfig = new LintConfig(this)
 		this.vitest = new Vitest(this, {
 			configType: VitestConfigType.WORKSPACE,

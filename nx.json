@@ -38,10 +38,19 @@
         "useDaemonProcess": false,
         "cacheableOperations": [
           "build",
-          "test",
-          "post-install"
+          "test"
         ],
         "accessToken": "NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=="
+      }
+    },
+    "local": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "useDaemonProcess": false,
+        "cacheableOperations": [
+          "build",
+          "test"
+        ]
       }
     }
   },

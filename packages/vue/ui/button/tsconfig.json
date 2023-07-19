@@ -7,15 +7,15 @@
   ],
   "compilerOptions": {
     "outDir": "dist",
+    "types": [
+      "vite/client",
+      "unplugin-vue-macros/macros-global"
+    ],
     "paths": {
       "@arroyodev-llc/vue.ui.text": [
         "../text/src/index"
       ]
-    },
-    "types": [
-      "vite/client",
-      "unplugin-vue-macros/macros-global"
-    ]
+    }
   },
   "include": [
     "src/**/*.ts",

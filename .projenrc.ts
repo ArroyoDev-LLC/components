@@ -1,7 +1,7 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { Vitest } from '@arroyodev-llc/projen.component.vitest'
 import { TypescriptBaseBuilder } from '@arroyodev-llc/projen.project.typescript'
-import { VueComponentProject } from '@arroyodev-llc/projen.project.vue-component'
+import { VueComponentBaseBuilder } from '@arroyodev-llc/projen.project.vue-component'
 import { builders } from '@arroyodev-llc/utils.projen-builder'
 import { DependencyType, LogLevel } from 'projen'
 import { ComponentsMonorepo } from './projenrc/monorepo'
@@ -42,22 +42,29 @@ const monorepo = new ComponentsMonorepo({
 	],
 })
 
+// Builders
+
 const TypescriptOptionsBuilder = new builders.OptionsPropertyBuilder<
 	(typeof TypescriptBaseBuilder)['__optionsType']
 >()
 
+const CommonDefaultsBuilder = new builders.DefaultOptionsBuilder<{
+	parent?: typeof monorepo
+	defaultReleaseBranch?: string
+	typescriptVersion?: string
+}>({
+	parent: monorepo,
+	defaultReleaseBranch: 'main',
+	typescriptVersion: '~5.1',
+})
+const NameSchemeBuilder = new builders.NameSchemeBuilder({
+	scope: '@arroyodev-llc',
+})
+
 const BaseTypescriptProjectBuilder = TypescriptBaseBuilder.add(
-	new builders.DefaultOptionsBuilder<{
-		parent?: typeof monorepo
-		defaultReleaseBranch?: string
-		typescriptVersion?: string
-	}>({
-		parent: monorepo,
-		defaultReleaseBranch: 'main',
-		typescriptVersion: '~5.1',
-	}),
+	CommonDefaultsBuilder,
 	{ prepend: true }
-).add(new builders.NameSchemeBuilder({ scope: '@arroyodev-llc' }))
+).add(NameSchemeBuilder)
 
 const TypescriptProjectBuilder = BaseTypescriptProjectBuilder.add(
 	TypescriptOptionsBuilder
@@ -67,6 +74,11 @@ const ProjenComponentProjectBuilder = BaseTypescriptProjectBuilder.add(
 		peerDeps: ['projen'],
 	})
 ).add(TypescriptOptionsBuilder)
+
+const VueComponentProjectBuilder = VueComponentBaseBuilder.add(
+	CommonDefaultsBuilder,
+	{ prepend: true }
+).add(NameSchemeBuilder)
 
 /**
  * Utility Projects
@@ -287,20 +299,19 @@ monorepo.addWorkspaceDeps(
 
 // Vue Components
 
-const text = VueComponentProject.fromParent(monorepo, {
+const text = VueComponentProjectBuilder.build({
 	name: 'vue.ui.text',
-	release: true,
 })
-LintConfig.of(text)!.eslint.addRules({
+text.lintConfig.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
 })
 
-const button = VueComponentProject.fromParent(monorepo, {
+const button = VueComponentProjectBuilder.build({
 	name: 'vue.ui.button',
 	workspaceDeps: [text],
 	deps: ['primevue'],
 })
-LintConfig.of(button)!.eslint.addRules({
+button.lintConfig.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
 })
 

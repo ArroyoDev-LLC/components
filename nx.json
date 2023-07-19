@@ -1,6 +1,6 @@
 {
   "extends": "nx/presets/npm.json",
-  "npmScope": "monorepo",
+  "npmScope": "@arroyodev-llc",
   "affected": {
     "defaultBase": "main"
   },
@@ -38,7 +38,8 @@
         "useDaemonProcess": false,
         "cacheableOperations": [
           "build",
-          "test"
+          "test",
+          "post-install"
         ],
         "accessToken": "NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=="
       }

@@ -65,7 +65,7 @@
       "description": "Synthesize project files",
       "steps": [
         {
-          "exec": "tsx .projenrc.ts"
+          "exec": "pnpm exec tsx .projenrc.ts"
         }
       ]
     },

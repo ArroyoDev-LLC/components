@@ -92,8 +92,13 @@ new Vitest(utilsFs)
 
 const utilsTsAst = TypescriptProjectBuilder.build({
 	name: 'utils.ts-ast',
-	deps: ['ts-morph', '@sindresorhus/is', 'reflect-metadata', 'projen'],
-	devDeps: ['type-fest'],
+	deps: [
+		'ts-morph',
+		'type-fest',
+		'@sindresorhus/is',
+		'reflect-metadata',
+		'projen',
+	],
 	workspaceDeps: [utilsFs],
 	tsconfig: {
 		compilerOptions: {
@@ -109,8 +114,7 @@ new Vitest(utilsTsAst)
 
 const utilsProjen = TypescriptProjectBuilder.build({
 	name: 'utils.projen',
-	deps: ['@sindresorhus/is', 'projen', 'defu'],
-	devDeps: ['type-fest'],
+	deps: ['@sindresorhus/is', 'projen', 'type-fest', 'defu'],
 	workspaceDeps: [utilsFs],
 })
 new Vitest(utilsProjen)
@@ -118,8 +122,7 @@ new Vitest(utilsProjen)
 const utilsProjenBuilder = TypescriptProjectBuilder.build({
 	name: 'utils.projen-builder',
 	workspaceDeps: [utilsProjen],
-	deps: ['projen'],
-	devDeps: ['type-fest'],
+	deps: ['projen', 'type-fest'],
 })
 new Vitest(utilsProjenBuilder)
 
@@ -235,6 +238,7 @@ LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
 
 const typescriptProject = ProjenComponentProjectBuilder.build({
 	name: 'projen.project.typescript',
+	deps: ['type-fest'],
 	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
 	workspaceDeps: [
 		utilsProjen,

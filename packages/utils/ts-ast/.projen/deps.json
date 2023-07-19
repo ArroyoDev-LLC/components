@@ -59,10 +59,6 @@
       "type": "build"
     },
     {
-      "name": "type-fest",
-      "type": "build"
-    },
-    {
       "name": "typescript",
       "version": "~5.1",
       "type": "build"
@@ -94,6 +90,10 @@
     },
     {
       "name": "ts-morph",
+      "type": "runtime"
+    },
+    {
+      "name": "type-fest",
       "type": "runtime"
     }
   ],

@@ -9,7 +9,6 @@
     "src/*.ts",
     "*.ts",
     "**/*.ts",
-    "vitest.config.ts",
     "*.d.ts",
     "src/*.tsx",
     "src/**/*.tsx",

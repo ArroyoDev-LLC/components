@@ -261,7 +261,13 @@ export class MonorepoProject extends NxMonorepoProject {
 	protected applyNx(): this {
 		this.nx.autoInferProjectTargets = true
 		this.nx.npmScope = this.options.namingScheme?.scope ?? this.name
-		this.nx.cacheableOperations.push('post-install')
+		this.nx.tasksRunnerOptions.local = {
+			runner: 'nx/tasks-runners/default',
+			options: {
+				useDaemonProcess: false,
+				cacheableOperations: this.nx.cacheableOperations,
+			},
+		}
 		return this
 	}
 
@@ -353,6 +359,7 @@ export class MonorepoProject extends NxMonorepoProject {
 
 		this.addNxRunManyTask('post-install', {
 			target: 'post-install',
+			runner: 'local',
 		})
 		// 'postinstall' is intentional here,
 		// as that is the name of the npm hook.

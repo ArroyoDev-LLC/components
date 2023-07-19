@@ -85,7 +85,7 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 
 	applyOptions<Options extends typescript.TypeScriptProjectOptions>(
 		options: Options & this['outputOptionsType']
-	): Options & this['outputOptionsType'] {
+	): Options {
 		const { tsconfigBase, ...rest } = options
 		this.tsconfigBase = tsconfigBase
 		this.projectOptions = rest
@@ -95,9 +95,7 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 	applyProject(
 		project: typescript.TypeScriptProject
 	): TypedPropertyDescriptorMap<this['outputType']> {
-		const tsconfigContainer =
-			TypescriptConfigContainer.nearest(project) ??
-			TypescriptConfigContainer.ensure(project)
+		const tsconfigContainer = TypescriptConfigContainer.ensure(project)
 		const tsconfigBase =
 			this.tsconfigBase ?? this.options?.extendsDefault?.(tsconfigContainer)
 		const srcDir = project.srcdir
@@ -136,7 +134,7 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 		readonly workspaceDeps?: Array<string | javascript.NodeProject> | undefined
 	},
 	{
-		pnpm: PnpmWorkspace
+		readonly pnpm: PnpmWorkspace
 		addWorkspaceDeps(
 			...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>
 		): void
@@ -165,12 +163,19 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 		project.tasks.tryFind('package')?.reset?.()
 		const pnpm = new PnpmWorkspace(project)
 		if (this.workspaceDeps) {
+			TypescriptConfigContainer.ensure(project).addTsConfigPaths(
+				project,
+				this.workspaceDeps.filter(
+					(dep) => dep instanceof typescript.TypeScriptProject
+				) as typescript.TypeScriptProject[]
+			)
 			pnpm.addWorkspaceDeps?.(
 				{ depType: DependencyType.RUNTIME, addTsPath: true },
 				...(this.workspaceDeps ?? [])
 			)
 		}
 		return {
+			pnpm: { writable: false, value: pnpm },
 			addWorkspaceDeps: {
 				value(...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>) {
 					return PnpmWorkspace.of(project)?.addWorkspaceDeps?.(...dependency)

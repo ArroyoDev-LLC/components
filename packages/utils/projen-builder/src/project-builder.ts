@@ -1,4 +1,5 @@
 import type { ProjectOptions } from 'projen'
+import { deepMerge } from 'projen/lib/util'
 import type { Simplify } from 'type-fest'
 import { type BuildStep } from './build-step.ts'
 import {
@@ -83,14 +84,18 @@ export class ProjectBuilder<
 	 * @param options Source options to use.
 	 */
 	buildOptions(options: Options): Options {
-		const mappedOptions = this.steps.reduce(
-			(acc, step) =>
-				({
-					...acc,
-					...step.applyOptions(acc as Options & { name: string }),
-				} as Options),
-			Object.assign({}, options) as object
-		) as Options
+		// waterfall deeply merged options
+		let mappedOptions = Object.assign({}, options) as Options
+		this.steps.forEach((step) => {
+			mappedOptions = deepMerge(
+				[
+					mappedOptions as ProjectOptions,
+					step.applyOptions(mappedOptions as ProjectOptions) as Options,
+				],
+				true
+			) as Options
+		})
+
 		return mappedOptions
 	}
 

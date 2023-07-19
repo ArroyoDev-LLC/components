@@ -39,14 +39,14 @@
     "lint-staged": "^13.2.3",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "projen": "^0.71.126",
+    "projen": "^0.71.142",
     "standard-version": "^9",
-    "typescript": "^5",
+    "typescript": "~5.1",
     "unbuild": "^1.2.1",
     "vitest": "^0.33.0"
   },
   "peerDependencies": {
-    "projen": "^0.71.126"
+    "projen": "^0.71.142"
   },
   "dependencies": {
     "@arroyodev-llc/projen.component.linting": "workspace:*",
@@ -56,7 +56,7 @@
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "ts-morph": "^18.0.0",
-    "vite": "^4.4.1"
+    "vite": "^4.4.4"
   },
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",

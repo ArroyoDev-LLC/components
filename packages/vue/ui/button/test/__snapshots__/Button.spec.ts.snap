@@ -2,15 +2,7 @@
 
 exports[`Button > renders as expected. 1`] = `
 <button-stub
-  iconpos="left"
-  link="false"
-  loading="false"
-  outlined="false"
-  plain="false"
-  raised="false"
-  rounded="false"
   size="small"
-  text="false"
   variant="primary"
 />
 `;

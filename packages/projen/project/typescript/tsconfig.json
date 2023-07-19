@@ -6,7 +6,33 @@
     "../../../../tsconfig/tsconfig.bundler.json"
   ],
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "@arroyodev-llc/utils.projen": [
+        "../../../utils/projen/src/index"
+      ],
+      "@arroyodev-llc/utils.projen-builder": [
+        "../../../utils/projen-builder/src/index"
+      ],
+      "@arroyodev-llc/projen.component.linting": [
+        "../../component/linting/src/index"
+      ],
+      "@arroyodev-llc/projen.component.unbuild": [
+        "../../component/unbuild/src/index"
+      ],
+      "@arroyodev-llc/projen.component.pnpm-workspace": [
+        "../../component/pnpm-workspace/src/index"
+      ],
+      "@arroyodev-llc/projen.component.release-please": [
+        "../../component/release-please/src/index"
+      ],
+      "@arroyodev-llc/projen.component.tsconfig-container": [
+        "../../component/tsconfig-container/src/index"
+      ],
+      "@arroyodev-llc/projen.project.nx-monorepo": [
+        "../nx-monorepo/src/index"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts",

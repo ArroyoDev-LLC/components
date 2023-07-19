@@ -11,7 +11,12 @@
     "emitDecoratorMetadata": true,
     "types": [
       "reflect-metadata"
-    ]
+    ],
+    "paths": {
+      "@arroyodev-llc/utils.fs": [
+        "../fs/src/index"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts",

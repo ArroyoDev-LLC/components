@@ -260,12 +260,20 @@ export class MonorepoProject extends NxMonorepoProject {
 
 	protected applyNx(): this {
 		this.nx.autoInferProjectTargets = true
+		this.nx.npmScope = this.options.namingScheme?.scope ?? this.name
+		this.nx.cacheableOperations.push('post-install')
 		return this
 	}
 
 	protected applyDefaultTask(): this {
 		this.addDevDeps('tsx')
-		this.defaultTask!.reset('tsx .projenrc.ts')
+		this.defaultTask!.reset(
+			NodePackageUtils.command.exec(
+				this.package.packageManager,
+				'tsx',
+				'.projenrc.ts'
+			)
+		)
 		this.tasks.tryFind('eslint')?.exec?.('eslint', {
 			name: 'Lint Root',
 			args: [

@@ -1,9 +1,5 @@
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
-import {
-	TypescriptProject,
-	type TypeScriptProjectOptions,
-} from '@arroyodev-llc/projen.project.typescript'
 import { ProjectName } from '@arroyodev-llc/utils.projen'
 import { cdk, javascript } from 'projen'
 import type { ProjenProjectOptions } from './projen-project-options'
@@ -60,12 +56,5 @@ export class ProjenProject extends cdk.JsiiProject {
 		this.projectName = projectName
 		new LintConfig(this)
 		new PnpmWorkspace(this)
-	}
-}
-
-export class ProjenComponentProject extends TypescriptProject {
-	constructor(options: TypeScriptProjectOptions) {
-		super(options)
-		this.addPeerDeps('projen')
 	}
 }

@@ -40,7 +40,6 @@
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
     "standard-version": "^9",
-    "type-fest": "^3.13.1",
     "typescript": "~5.1",
     "unbuild": "^1.2.1",
     "vitest": "^0.33.0"
@@ -49,7 +48,8 @@
     "@arroyodev-llc/utils.fs": "workspace:*",
     "@sindresorhus/is": "^5.5.2",
     "defu": "^6.1.2",
-    "projen": "^0.71.142"
+    "projen": "^0.71.142",
+    "type-fest": "^4.0.0"
   },
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",

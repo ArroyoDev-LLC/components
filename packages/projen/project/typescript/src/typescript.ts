@@ -11,7 +11,10 @@ import {
 	TSConfig,
 } from '@arroyodev-llc/projen.project.nx-monorepo'
 import { ProjectName } from '@arroyodev-llc/utils.projen'
-import { builders, ProjectBuilder } from '@arroyodev-llc/utils.projen-builder'
+import {
+	builders as stdBuilders,
+	ProjectBuilder,
+} from '@arroyodev-llc/utils.projen-builder'
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
 import {
 	type Component,
@@ -21,13 +24,7 @@ import {
 	typescript,
 } from 'projen'
 import { deepMerge } from 'projen/lib/util'
-import {
-	TypescriptBundlerBuilder,
-	TypescriptConfigBuilder,
-	TypescriptESMManifestBuilder,
-	TypescriptLintingBuilder,
-	TypescriptReleasePleaseBuilder,
-} from './builders'
+import * as tsBuilders from './builders'
 import type { TypeScriptProjectOptions } from './typescript-project-options'
 
 export const CONFIG_DEFAULTS = {
@@ -63,17 +60,17 @@ export const CONFIG_DEFAULTS = {
 export const TypescriptBaseBuilder = new ProjectBuilder(
 	typescript.TypeScriptProject
 )
-	.add(new builders.DefaultOptionsBuilder(CONFIG_DEFAULTS))
+	.add(new stdBuilders.DefaultOptionsBuilder(CONFIG_DEFAULTS))
 	.add(
-		new TypescriptConfigBuilder({
+		new tsBuilders.TypescriptConfigBuilder({
 			extendsDefault: (container) =>
 				container.buildExtends(TSConfig.BASE, TSConfig.ESM, TSConfig.BUNDLER),
 		})
 	)
-	.add(new TypescriptLintingBuilder({ useTypeInformation: true }))
-	.add(new TypescriptESMManifestBuilder())
-	.add(new TypescriptBundlerBuilder())
-	.add(new TypescriptReleasePleaseBuilder())
+	.add(new tsBuilders.TypescriptLintingBuilder({ useTypeInformation: true }))
+	.add(new tsBuilders.TypescriptESMManifestBuilder())
+	.add(new tsBuilders.TypescriptBundlerBuilder())
+	.add(new tsBuilders.TypescriptReleasePleaseBuilder())
 
 /**
  * @deprecated Use `TypescriptBaseBuilder` instead

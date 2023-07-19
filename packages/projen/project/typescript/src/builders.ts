@@ -21,7 +21,7 @@ import {
 	typescript,
 } from 'projen'
 
-interface TypescriptConfigBuilderProps {
+export interface TypescriptConfigBuilderProps {
 	readonly tsconfigContainer: TypescriptConfigContainer
 	readonly tsconfig: javascript.TypescriptConfig
 	readonly tsconfigDev: javascript.TypescriptConfig

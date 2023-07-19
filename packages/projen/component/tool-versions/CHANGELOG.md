@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.14](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.13...@arroyodev-llc/projen.component.tool-versions-v0.1.14) (2023-07-19)
+
+
+### Features
+
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+
 ## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.12...@arroyodev-llc/projen.component.tool-versions-v0.1.13) (2023-07-07)
 
 

@@ -6,6 +6,21 @@
   * dependencies
     * @arroyodev-llc/vue.ui.text bumped to 0.1.7
 
+## [0.1.19](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.18...@arroyodev-llc/vue.ui.button-v0.1.19) (2023-07-19)
+
+
+### Features
+
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+* **vue.ui:** Update all vue ui components ([9e69133](https://github.com/ArroyoDev-LLC/components/commit/9e691334db04daf56a9d55a15e7e533dfdd888db))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/vue.ui.text bumped to 0.1.19
+
 ## [0.1.18](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.17...@arroyodev-llc/vue.ui.button-v0.1.18) (2023-07-07)
 
 

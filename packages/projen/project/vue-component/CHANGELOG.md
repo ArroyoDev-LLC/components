@@ -74,6 +74,35 @@
     * @arroyodev-llc/projen.component.vue bumped to 0.1.21
     * @arroyodev-llc/projen.project.typescript bumped to 0.1.20
 
+## [0.1.26](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.25...@arroyodev-llc/projen.project.vue-component-v0.1.26) (2023-07-19)
+
+
+### Features
+
+* **projen.project.vue-component:** Add utils.projen-builder dep ([e3260fe](https://github.com/ArroyoDev-LLC/components/commit/e3260fe86a70b014ebbfacbc4971202e889e40ab))
+* **projen.project.vue-component:** Implement `VueComponentBaseBuilder` ([f060047](https://github.com/ArroyoDev-LLC/components/commit/f060047e186082f5c31a1c1c525c3b28274d2e37))
+* **projen.project.vue-component:** Remove `VueComponentProject` ([4137d23](https://github.com/ArroyoDev-LLC/components/commit/4137d234011f4de614ea90c1e62aa8a47be8735d))
+* **projenrc:** Add type-fest scope, add missing peer deps to vue component project ([bac249d](https://github.com/ArroyoDev-LLC/components/commit/bac249d97a51b8534b76fd0f89f9435e687915bc))
+* **projenrc:** Update managed files and dependencies ([7e24f20](https://github.com/ArroyoDev-LLC/components/commit/7e24f20b0551bdd8972a3a6aac3622e88e3eb19e))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.21
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.24
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.23
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.2
+  * devDependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.17
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.18
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.19
+  * peerDependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.17
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.18
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.19
+
 ## [0.1.25](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.24...@arroyodev-llc/projen.project.vue-component-v0.1.25) (2023-07-07)
 
 

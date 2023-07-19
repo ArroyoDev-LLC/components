@@ -75,6 +75,9 @@ export const TypescriptBaseBuilder = new ProjectBuilder(
 	.add(new TypescriptBundlerBuilder())
 	.add(new TypescriptReleasePleaseBuilder())
 
+/**
+ * @deprecated Use `TypescriptBaseBuilder` instead
+ */
 export class TypescriptProject extends typescript.TypeScriptProject {
 	/**
 	 * Create new package under monorepo parent.

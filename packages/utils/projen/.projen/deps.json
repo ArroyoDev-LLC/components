@@ -72,11 +72,6 @@
       "type": "build"
     },
     {
-      "name": "@arroyodev-llc/utils.fs",
-      "version": "workspace:*",
-      "type": "runtime"
-    },
-    {
       "name": "@sindresorhus/is",
       "type": "runtime"
     },
@@ -90,6 +85,7 @@
     },
     {
       "name": "type-fest",
+      "version": "^4",
       "type": "runtime"
     }
   ],

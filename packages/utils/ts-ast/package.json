@@ -50,7 +50,7 @@
     "projen": "^0.71.142",
     "reflect-metadata": "^0.1.13",
     "ts-morph": "^18.0.0",
-    "type-fest": "^4.0.0"
+    "type-fest": "^4"
   },
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",

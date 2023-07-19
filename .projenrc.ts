@@ -94,7 +94,7 @@ const utilsTsAst = TypescriptProjectBuilder.build({
 	name: 'utils.ts-ast',
 	deps: [
 		'ts-morph',
-		'type-fest',
+		'type-fest@^4',
 		'@sindresorhus/is',
 		'reflect-metadata',
 		'projen',
@@ -114,15 +114,14 @@ new Vitest(utilsTsAst)
 
 const utilsProjen = TypescriptProjectBuilder.build({
 	name: 'utils.projen',
-	deps: ['@sindresorhus/is', 'projen', 'type-fest', 'defu'],
-	workspaceDeps: [utilsFs],
+	deps: ['@sindresorhus/is', 'projen', 'type-fest@^4', 'defu'],
 })
 new Vitest(utilsProjen)
 
 const utilsProjenBuilder = TypescriptProjectBuilder.build({
 	name: 'utils.projen-builder',
 	workspaceDeps: [utilsProjen],
-	deps: ['projen', 'type-fest'],
+	deps: ['projen', 'type-fest@^4'],
 })
 new Vitest(utilsProjenBuilder)
 
@@ -238,7 +237,7 @@ LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
 
 const typescriptProject = ProjenComponentProjectBuilder.build({
 	name: 'projen.project.typescript',
-	deps: ['type-fest'],
+	deps: ['type-fest@^4'],
 	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
 	workspaceDeps: [
 		utilsProjen,
@@ -270,6 +269,12 @@ const vueComponentProject = ProjenComponentProjectBuilder.build({
 		utilsProjenBuilder,
 	],
 })
+vueComponentProject.pnpm.addWorkspaceDeps(
+	{ depType: DependencyType.PEER, addTsPath: false },
+	unbuildComponent,
+	pnpmWorkspaceComponent,
+	lintingComponent
+)
 
 /**
  * JSII Structs

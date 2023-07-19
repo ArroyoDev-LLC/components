@@ -125,6 +125,7 @@
     },
     {
       "name": "type-fest",
+      "version": "^4",
       "type": "runtime"
     }
   ],

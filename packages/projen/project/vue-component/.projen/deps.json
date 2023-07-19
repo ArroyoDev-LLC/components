@@ -1,6 +1,21 @@
 {
   "dependencies": [
     {
+      "name": "@arroyodev-llc/projen.component.linting",
+      "version": "workspace:*",
+      "type": "build"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.pnpm-workspace",
+      "version": "workspace:*",
+      "type": "build"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.unbuild",
+      "version": "workspace:*",
+      "type": "build"
+    },
+    {
       "name": "@types/node",
       "version": "^16",
       "type": "build"
@@ -70,6 +85,21 @@
     {
       "name": "unbuild",
       "type": "build"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.linting",
+      "version": "workspace:*",
+      "type": "peer"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.pnpm-workspace",
+      "version": "workspace:*",
+      "type": "peer"
+    },
+    {
+      "name": "@arroyodev-llc/projen.component.unbuild",
+      "version": "workspace:*",
+      "type": "peer"
     },
     {
       "name": "projen",

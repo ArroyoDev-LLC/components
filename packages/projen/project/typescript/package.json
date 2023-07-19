@@ -57,7 +57,7 @@
     "@arroyodev-llc/projen.project.nx-monorepo": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@arroyodev-llc/utils.projen-builder": "workspace:*",
-    "type-fest": "*"
+    "type-fest": "^4"
   },
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",

@@ -1,6 +1,10 @@
 import path from 'node:path'
-import { firstAncestor, isComponent } from '@arroyodev-llc/utils.projen'
-import { Component, javascript, type Project } from 'projen'
+import {
+	cwdRelativePath,
+	firstAncestor,
+	isComponent,
+} from '@arroyodev-llc/utils.projen'
+import { Component, javascript, type Project, type typescript } from 'projen'
 import { deepMerge } from 'projen/lib/util'
 
 export interface TypescriptConfigContainerOptions {
@@ -62,7 +66,19 @@ export class TypescriptConfigContainer extends Component {
 		)
 	}
 
+	/**
+	 * Mapping of reusable configs.
+	 */
 	public readonly configs: Map<string, javascript.TypescriptConfig> = new Map()
+
+	/**
+	 * Mapping of project paths that will be established
+	 * during pre synthesis.
+	 */
+	readonly projectPaths: Map<
+		typescript.TypeScriptProject,
+		Set<typescript.TypeScriptProject>
+	> = new Map()
 
 	constructor(
 		project: Project,
@@ -214,5 +230,59 @@ export class TypescriptConfigContainer extends Component {
 		}
 
 		return new javascript.TypescriptConfig(project, props)
+	}
+
+	/**
+	 * Add paths reference from one project to another in tsconfig.json
+	 * @param fromProject Target to add path to.
+	 * @param toProject Target of the path.
+	 * @protected
+	 */
+	protected linkProjectTsPath(
+		fromProject: typescript.TypeScriptProject,
+		toProject: typescript.TypeScriptProject
+	) {
+		const tsPath = cwdRelativePath(
+			fromProject.outdir,
+			path.join(path.join(toProject.outdir, toProject.srcdir), 'index')
+		)
+		if (!fromProject.tsconfig) {
+			this.project.logger.warn(
+				`Cannot add tsconfig path (${fromProject.name} -> ${toProject.name}) because ${fromProject.name} does not have a tsconfig!`
+			)
+			return
+		}
+		const depNamePath = toProject.package.packageName.replaceAll('.', '\\.')
+		fromProject.tsconfig.file.addOverride(
+			`compilerOptions.paths.${depNamePath}`,
+			[tsPath]
+		)
+	}
+
+	/**
+	 * Add tsconfig path entries for the given projects.
+	 * @param fromProject Target project to modify.
+	 * @param toProjects Projects to reference.
+	 */
+	addTsConfigPaths(
+		fromProject: typescript.TypeScriptProject,
+		toProjects: typescript.TypeScriptProject[]
+	): this {
+		const current = this.projectPaths.get(fromProject) ?? []
+		this.projectPaths.set(fromProject, new Set([...current, ...toProjects]))
+		return this
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	preSynthesize() {
+		this.projectPaths.forEach((toProjects, fromProject) => {
+			toProjects.forEach((toProj) =>
+				this.linkProjectTsPath(fromProject, toProj)
+			)
+		})
+		this.projectPaths.clear()
+		super.preSynthesize()
 	}
 }

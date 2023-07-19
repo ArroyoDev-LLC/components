@@ -4,11 +4,15 @@ import {
 	type ProjectOptions,
 	typescript,
 } from 'projen'
-import { describe, expect, test } from 'vitest'
+import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { builders, type BuildStep, ProjectBuilder } from '../src'
 import { type TypedPropertyDescriptorMap } from '../src/types'
 
 describe.concurrent('ProjectBuilder', () => {
+	const optionsSpy = vi.fn()
+
+	beforeEach(() => optionsSpy.mockReset())
+
 	class CustomBuilder implements BuildStep {
 		declare outputOptionsType: {
 			readonly newOption?: boolean
@@ -18,14 +22,18 @@ describe.concurrent('ProjectBuilder', () => {
 			readonly customProperty: string
 		}
 
+		constructor(readonly options?: { overrideReleaseBranch: string }) {}
+
 		applyOptions(
 			options: ProjectOptions & this['outputOptionsType']
 		): ProjectOptions & this['outputOptionsType'] {
-			return {
+			const opts = {
 				...options,
-				defaultReleaseBranch: 'override',
+				defaultReleaseBranch: this.options?.overrideReleaseBranch ?? 'override',
 				newOption: options.newOption ?? true,
 			}
+			optionsSpy(opts)
+			return opts
 		}
 
 		applyProject(
@@ -64,6 +72,30 @@ describe.concurrent('ProjectBuilder', () => {
 				defaultReleaseBranch: 'willOverride',
 			})
 		expect(project.customProperty).toBe('customValue')
+	})
+
+	test('applies step options with prepend', () => {
+		const options = new ProjectBuilder(typescript.TypeScriptProject)
+			.add(new CustomBuilder())
+			.add(new CustomBuilder({ overrideReleaseBranch: 'different' }), {
+				prepend: true,
+			}) // because prepend, release branch should result as 'override'
+			.buildOptions({
+				name: 'test.project',
+				defaultReleaseBranch: 'willOverride',
+			})
+		expect(options).toMatchInlineSnapshot(`
+			{
+			  "defaultReleaseBranch": "override",
+			  "name": "test.project",
+			  "newOption": true,
+			}
+		`)
+		expect(optionsSpy).toHaveBeenCalledTimes(2)
+		expect(
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access
+			optionsSpy.mock.calls.map((call) => call[0].defaultReleaseBranch)
+		).toEqual(['different', 'override'])
 	})
 })
 

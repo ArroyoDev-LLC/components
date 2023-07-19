@@ -6,7 +6,12 @@
     "../../../tsconfig/tsconfig.bundler.json"
   ],
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "@arroyodev-llc/utils.projen": [
+        "../projen/src/index"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts",

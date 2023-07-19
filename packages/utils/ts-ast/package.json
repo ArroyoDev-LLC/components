@@ -40,17 +40,17 @@
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
     "standard-version": "^9",
-    "typescript": "^5",
+    "type-fest": "^3.13.1",
+    "typescript": "~5.1",
     "unbuild": "^1.2.1",
     "vitest": "^0.33.0"
   },
   "dependencies": {
     "@arroyodev-llc/utils.fs": "workspace:*",
-    "@sindresorhus/is": "^5.4.1",
-    "projen": "^0.71.126",
+    "@sindresorhus/is": "^5.5.2",
+    "projen": "^0.71.142",
     "reflect-metadata": "^0.1.13",
-    "ts-morph": "^18.0.0",
-    "type-fest": "^3.12.0"
+    "ts-morph": "^18.0.0"
   },
   "main": "./dist/index.cjs",
   "license": "Apache-2.0",

@@ -38,15 +38,15 @@
     "lint-staged": "^13.2.3",
     "npm-check-updates": "^16",
     "prettier": "^2.8.8",
-    "projen": "^0.71.126",
+    "projen": "^0.71.142",
     "simple-git-hooks": "^2.8.1",
     "standard-version": "^9",
-    "typescript": "^5",
+    "typescript": "~5.1",
     "unbuild": "^1.2.1"
   },
   "peerDependencies": {
     "lint-staged": "^13.2.3",
-    "projen": "^0.71.126",
+    "projen": "^0.71.142",
     "simple-git-hooks": "^2.8.1"
   },
   "main": "./dist/index.cjs",

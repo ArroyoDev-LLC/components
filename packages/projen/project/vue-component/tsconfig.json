@@ -6,7 +6,18 @@
     "../../../../tsconfig/tsconfig.bundler.json"
   ],
   "compilerOptions": {
-    "outDir": "dist"
+    "outDir": "dist",
+    "paths": {
+      "@arroyodev-llc/projen.project.typescript": [
+        "../typescript/src/index"
+      ],
+      "@arroyodev-llc/projen.component.vue": [
+        "../../component/vue/src/index"
+      ],
+      "@arroyodev-llc/projen.component.vite": [
+        "../../component/vite/src/index"
+      ]
+    }
   },
   "include": [
     "src/**/*.ts",

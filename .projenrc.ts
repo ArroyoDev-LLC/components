@@ -324,4 +324,6 @@ button.lintConfig.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
 })
 
+// adds support for .cts/.mts
+monorepo.package.addPackageResolutions('unbuild@2.0.0-rc.0')
 monorepo.synth()

@@ -40,6 +40,12 @@
     * @arroyodev-llc/projen.component.vite bumped to 0.1.18
     * @arroyodev-llc/projen.component.vitest bumped to 0.1.17
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
+
 ## [0.1.24](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.23...@arroyodev-llc/projen.component.vue-v0.1.24) (2023-07-19)
 
 

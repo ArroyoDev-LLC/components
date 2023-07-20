@@ -63,7 +63,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.1.26",
+  "version": "0.1.27",
   "types": "./dist/index.d.mts",
   "type": "module",
   "sideEffects": false,

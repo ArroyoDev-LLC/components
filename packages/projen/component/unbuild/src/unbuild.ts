@@ -51,17 +51,28 @@ export class UnBuild extends Component {
 		postInstall.spawn(stubTask)
 
 		const exportInfo = this.buildExportInfo()
-		this.project.package.addField('module', exportInfo.import)
+		this.project.package.addField('import', exportInfo.import)
 		if (this.options.cjs) {
-			this.project.package.addField('main', exportInfo.require)
+			this.project.package.addField('require', exportInfo.require)
 		}
 		this.project.package.addField('types', exportInfo.types)
+		const exports = this.options.cjs
+			? {
+					import: {
+						types: exportInfo.types,
+						default: exportInfo.import,
+					},
+					require: {
+						types: exportInfo.requireTypes,
+						default: exportInfo.require,
+					},
+			  }
+			: {
+					types: exportInfo.types,
+					default: exportInfo.import,
+			  }
 		this.project.package.addField('exports', {
-			'.': {
-				import: exportInfo.import,
-				types: exportInfo.types,
-				...(this.options.cjs ? { require: exportInfo.require } : {}),
-			},
+			'.': exports,
 			'./package.json': './package.json',
 		})
 		this.project.package.addField('files', [this.project.libdir])
@@ -96,7 +107,8 @@ export class UnBuild extends Component {
 			cwdRelativePath('.', path.join(this.project.libdir, distFile))
 		const defaultExports = {
 			import: makePath('index.mjs'),
-			types: makePath('index.d.ts'),
+			types: makePath('index.d.mts'),
+			requireTypes: makePath('index.d.cts'),
 			require: makePath('index.cjs'),
 		}
 		return defaultExports

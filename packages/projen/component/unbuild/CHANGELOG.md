@@ -26,6 +26,13 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.16
 
+## [0.1.20](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.19...@arroyodev-llc/projen.component.unbuild-v0.1.20) (2023-07-20)
+
+
+### Bug Fixes
+
+* **projen.component.unbuild:** Resolve esm/cjs masquerading package exports ([43fcf71](https://github.com/ArroyoDev-LLC/components/commit/43fcf71bcf4b953b5118270b5c8048429ff43d72))
+
 ## [0.1.19](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.18...@arroyodev-llc/projen.component.unbuild-v0.1.19) (2023-07-19)
 
 

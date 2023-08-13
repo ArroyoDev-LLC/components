@@ -1,5 +1,4 @@
 import { type Project } from 'projen'
-import type { BuildStep } from './build-step.ts'
 
 /**
  * Represents a class constructor.
@@ -16,7 +15,14 @@ export type GConstructor<T, Args extends any[] = any[]> = new (
 /**
  * Represents a projen project constructor.
  */
-export type GenericProjectConstructor = GConstructor<Project>
+export type GenericProjectConstructor<
+	T extends Project = Project,
+	Options = [options: any]
+> = GConstructor<T, [options: Options]>
+
+export type Identity<T> = T
+export type Flatten<T> = Identity<{ [k in keyof T]: T[k] }>
+export type ExtendShape<A, B> = Flatten<Omit<A, keyof B> & B>
 
 /**
  * Retrieve the options type from a projen project constructor.
@@ -34,23 +40,3 @@ export type ProjectConstructorOptions<T extends Constructor> =
 export type TypedPropertyDescriptorMap<T> = {
 	[P in keyof T]: TypedPropertyDescriptor<T[P]>
 }
-
-/**
- * Merge builder options with step.
- */
-export type MergeBuildOptions<
-	Ctor extends GenericProjectConstructor,
-	Step extends BuildStep
-> = Omit<ProjectConstructorOptions<Ctor>, keyof Step['outputOptionsType']> &
-	Step['outputOptionsType']
-
-/**
- * Merge constructor output of step.
- */
-export type MergeBuildConstructor<
-	Ctor extends GenericProjectConstructor,
-	Step extends BuildStep
-> = GConstructor<
-	InstanceType<Ctor> & Step['outputType'],
-	[options: MergeBuildOptions<Ctor, Step>]
->

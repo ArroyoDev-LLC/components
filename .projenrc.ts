@@ -45,7 +45,7 @@ const monorepo = new ComponentsMonorepo({
 // Builders
 
 const TypescriptOptionsBuilder = new builders.OptionsPropertyBuilder<
-	(typeof TypescriptBaseBuilder)['__optionsType']
+	(typeof TypescriptBaseBuilder)['_options']
 >()
 
 const CommonDefaultsBuilder = new builders.DefaultOptionsBuilder<{

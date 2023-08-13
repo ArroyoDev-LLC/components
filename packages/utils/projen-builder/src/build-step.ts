@@ -1,19 +1,22 @@
 import { type Project, type ProjectOptions } from 'projen'
 import { type TypedPropertyDescriptorMap } from './types.ts'
 
+export type AnyBuildStep = BuildStep<any, any>
+export type BuildOutput<T extends BuildStep<any, any>> = T['_output']
+export type BuildOptions<T extends BuildStep<any, any>> = T['_outputOptions']
+
 /**
- * Represents a build step.
- */
-export abstract class BuildStep {
+ * Represents a build step. */
+export abstract class BuildStep<Options = any, Output = any> {
 	/**
 	 * Options type to merge with project options.
 	 */
-	declare abstract outputOptionsType: {}
+	readonly _outputOptions!: Options
 
 	/**
 	 * Additional project property types to merge with resulting project type.
 	 */
-	declare abstract outputType: {}
+	readonly _output!: Output
 
 	/**
 	 * Apply modifications to project options prior to instantiation.
@@ -21,7 +24,7 @@ export abstract class BuildStep {
 	 */
 	abstract applyOptions(
 		options: ProjectOptions
-	): ProjectOptions & this['outputOptionsType']
+	): ProjectOptions & BuildOptions<this>
 
 	/**
 	 * Apply modifications to instantiated project.
@@ -34,25 +37,22 @@ export abstract class BuildStep {
 	 */
 	abstract applyProject(
 		project: Project
-	): TypedPropertyDescriptorMap<this['outputType']>
+	): TypedPropertyDescriptorMap<BuildOutput<this>>
 }
 
 export class BaseBuildStep<
 	OutputOptions extends object = {},
 	OutputProps extends object = {}
-> implements BuildStep
-{
-	declare outputOptionsType: OutputOptions
-	declare outputType: OutputProps
+> extends BuildStep<OutputOptions, OutputProps> {
 	applyOptions(
-		options: ProjectOptions & this['outputOptionsType']
-	): ProjectOptions & this['outputOptionsType'] {
+		options: ProjectOptions & this['_outputOptions']
+	): ProjectOptions & this['_outputOptions'] {
 		return options
 	}
 
 	applyProject(
 		_project: Project
-	): TypedPropertyDescriptorMap<this['outputType']> {
-		return {} as TypedPropertyDescriptorMap<this['outputType']>
+	): TypedPropertyDescriptorMap<BuildOutput<this>> {
+		return {} as TypedPropertyDescriptorMap<BuildOutput<this>>
 	}
 }

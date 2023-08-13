@@ -4,7 +4,6 @@ import {
 	withDefaults,
 } from '@arroyodev-llc/utils.projen'
 import { type Project, type ProjectOptions } from 'projen'
-import type { PartialDeep } from 'type-fest'
 import { BaseBuildStep } from './build-step'
 import { type TypedPropertyDescriptorMap } from './types.ts'
 
@@ -21,15 +20,13 @@ export class OptionsPropertyBuilder<
 		return options
 	}
 
-	applyProject(
-		_project: Project
-	): TypedPropertyDescriptorMap<this['outputType']> {
+	applyProject(_project: Project): TypedPropertyDescriptorMap<this['_output']> {
 		return {
 			options: {
 				value: this._options,
 				writable: false,
 			},
-		} as TypedPropertyDescriptorMap<this['outputType']>
+		} as TypedPropertyDescriptorMap<this['_output']>
 	}
 }
 
@@ -49,7 +46,7 @@ export class NameSchemeBuilder extends BaseBuildStep<
 
 	applyOptions<Options extends ProjectOptions>(
 		options: Options
-	): Options & this['outputOptionsType'] {
+	): Options & this['_outputOptions'] {
 		const { name, parent, ...rest } = options
 		const nameScheme = ProjectName.ensureScheme(name, parent, this.options)
 		return {
@@ -58,12 +55,10 @@ export class NameSchemeBuilder extends BaseBuildStep<
 			name: nameScheme.name,
 			outdir: nameScheme.outDir,
 			packageName: nameScheme.packageName,
-		} as Options & this['outputOptionsType']
+		} as Options & this['_outputOptions']
 	}
 
-	applyProject(
-		project: Project
-	): TypedPropertyDescriptorMap<this['outputType']> {
+	applyProject(project: Project): TypedPropertyDescriptorMap<this['_output']> {
 		return {
 			projectName: {
 				value: ProjectName.ensureScheme(
@@ -73,7 +68,7 @@ export class NameSchemeBuilder extends BaseBuildStep<
 				),
 				writable: false,
 			},
-		} as TypedPropertyDescriptorMap<this['outputType']>
+		} as TypedPropertyDescriptorMap<this['_output']>
 	}
 }
 
@@ -82,17 +77,17 @@ export class NameSchemeBuilder extends BaseBuildStep<
  */
 export class DefaultOptionsBuilder<
 	Options extends object
-> extends BaseBuildStep<PartialDeep<Options>, {}> {
-	constructor(readonly defaultOptions: PartialDeep<Options>) {
+> extends BaseBuildStep<Partial<Options>, {}> {
+	constructor(readonly defaultOptions: Partial<Options>) {
 		super()
 	}
 
 	applyOptions(
-		options: ProjectOptions & this['outputOptionsType']
-	): ProjectOptions & this['outputOptionsType'] {
+		options: ProjectOptions & this['_outputOptions']
+	): ProjectOptions & this['_outputOptions'] {
 		return super.applyOptions(
 			withDefaults(this.defaultOptions)(options) as ProjectOptions &
-				this['outputOptionsType']
+				this['_outputOptions']
 		)
 	}
 }

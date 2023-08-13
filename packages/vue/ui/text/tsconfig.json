@@ -9,7 +9,7 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
-    "declarationDir": "src",
+    "declarationDir": "dist",
     "types": [
       "vite/client",
       "unplugin-vue-macros/macros-global"

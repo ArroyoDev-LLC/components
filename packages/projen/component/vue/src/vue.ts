@@ -65,6 +65,7 @@ export class Vue extends Component {
 		]
 		tsconfig.addToArray('include', ...includes)
 		tsconfigDev?.addToArray?.('include', ...includes)
+		tsconfig.addOverride('compilerOptions.declarationDir', 'dist')
 		return this
 	}
 

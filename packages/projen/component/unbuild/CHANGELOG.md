@@ -26,6 +26,28 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.16
 
+## [0.1.21](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.20...@arroyodev-llc/projen.component.unbuild-v0.1.21) (2023-08-13)
+
+
+### Features
+
+* **projenrc:** Update all manage tsconfigs/unbuild/package exports ([0808084](https://github.com/ArroyoDev-LLC/components/commit/0808084c6cebd9d7ead2b01fd021efaf470088bc))
+* **projenrc:** Update dependencies ([296048f](https://github.com/ArroyoDev-LLC/components/commit/296048f5d578df7c81e1927ed2c7c84898c2153b))
+
+
+### Bug Fixes
+
+* **projen.component.unbuild:** Resolve masquerading issues with unbuild exports ([2268eb3](https://github.com/ArroyoDev-LLC/components/commit/2268eb335f472f42e100963249c0ec09c0086415))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.20
+    * @arroyodev-llc/utils.projen bumped to 0.1.18
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.8
+
 ## [0.1.20](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.19...@arroyodev-llc/projen.component.unbuild-v0.1.20) (2023-07-20)
 
 

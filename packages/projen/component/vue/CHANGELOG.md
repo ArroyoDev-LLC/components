@@ -46,6 +46,31 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+## [0.1.26](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.25...@arroyodev-llc/projen.component.vue-v0.1.26) (2023-08-13)
+
+
+### Features
+
+* **projenrc:** Update all manage tsconfigs/unbuild/package exports ([0808084](https://github.com/ArroyoDev-LLC/components/commit/0808084c6cebd9d7ead2b01fd021efaf470088bc))
+* **projenrc:** Update dependencies ([296048f](https://github.com/ArroyoDev-LLC/components/commit/296048f5d578df7c81e1927ed2c7c84898c2153b))
+
+
+### Bug Fixes
+
+* **projen.component.vue:** Override declarationDir directory to work with vite ([78adccf](https://github.com/ArroyoDev-LLC/components/commit/78adccfba43ee734c48fefc7c90dfc48cb2056ce))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.18
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.20
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.21
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.22
+    * @arroyodev-llc/projen.component.vitest bumped to 0.1.21
+    * @arroyodev-llc/utils.projen bumped to 0.1.18
+
 ## [0.1.24](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.23...@arroyodev-llc/projen.component.vue-v0.1.24) (2023-07-19)
 
 

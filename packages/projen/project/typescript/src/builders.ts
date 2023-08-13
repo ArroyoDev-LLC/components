@@ -67,7 +67,9 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 		const tsconfig = tsconfigContainer.buildConfig(project, {
 			fileName: 'tsconfig.json',
 			compilerOptions: {
+				rootDir: project.srcdir,
 				outDir: project.libdir ?? 'dist',
+				declarationDir: project.srcdir,
 				...(this.projectOptions.tsconfig?.compilerOptions ?? {}),
 			},
 			...(tsconfigBase && { extends: tsconfigBase }),
@@ -128,12 +130,11 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 		project.tasks.tryFind('package')?.reset?.()
 		const pnpm = new PnpmWorkspace(project)
 		if (this.workspaceDeps) {
-			TypescriptConfigContainer.ensure(project).addTsConfigPaths(
-				project,
-				this.workspaceDeps.filter(
-					(dep) => dep instanceof typescript.TypeScriptProject
-				) as typescript.TypeScriptProject[]
-			)
+			const tsContainer = TypescriptConfigContainer.ensure(project)
+			const targets = this.workspaceDeps.filter(
+				(dep) => dep instanceof javascript.NodeProject
+			) as typescript.TypeScriptProject[]
+			tsContainer.addTsConfigReferences(project, targets)
 			pnpm.addWorkspaceDeps?.(
 				{ depType: DependencyType.RUNTIME, addTsPath: true },
 				...(this.workspaceDeps ?? [])
@@ -143,6 +144,12 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 			pnpm: { writable: false, value: pnpm },
 			addWorkspaceDeps: {
 				value(...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>) {
+					TypescriptConfigContainer.ensure(project).addTsConfigReferences(
+						project,
+						dependency.filter(
+							(i) => i instanceof javascript.NodeProject
+						) as typescript.TypeScriptProject[]
+					)
 					return PnpmWorkspace.of(project)?.addWorkspaceDeps?.(...dependency)
 				},
 			},

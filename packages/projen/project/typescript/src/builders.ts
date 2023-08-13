@@ -183,9 +183,34 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 		project: typescript.TypeScriptProject
 	): TypedPropertyDescriptorMap<this['outputType']> {
 		if (this.unbuild) {
+			const compileTask = project.tasks.tryFind('compile')!
+			compileTask.reset(
+				NodePackageUtils.command.exec(
+					project.package.packageManager,
+					'tsc',
+					'--build',
+					'--emitDeclarationOnly'
+				)
+			)
+			project.tasks
+				.tryFind('compile')!
+				.exec(
+					NodePackageUtils.command.exec(
+						project.package.packageManager,
+						'unbuild'
+					),
+					{ name: 'Unbuild' }
+				)
 			project.tasks
 				.tryFind('post-compile')!
-				.exec('unbuild', { name: 'Unbuild' })
+				.exec(
+					NodePackageUtils.command.exec(
+						project.package.packageManager,
+						'tsc',
+						'--build',
+						'--clean'
+					)
+				)
 			const unbuild = new UnBuild(project, {
 				cjs: true,
 				options: {
@@ -193,6 +218,7 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 					declaration: true,
 					clean: true,
 					entries: ['./src/index'],
+					sourcemap: true,
 					rollup: {
 						emitCJS: true,
 						cjsBridge: true,

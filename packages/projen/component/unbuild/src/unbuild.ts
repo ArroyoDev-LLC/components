@@ -51,21 +51,11 @@ export class UnBuild extends Component {
 		postInstall.spawn(stubTask)
 
 		const exportInfo = this.buildExportInfo()
-		this.project.package.addField('import', exportInfo.import)
-		if (this.options.cjs) {
-			this.project.package.addField('require', exportInfo.require)
-		}
 		this.project.package.addField('types', exportInfo.types)
 		const exports = this.options.cjs
 			? {
-					import: {
-						types: exportInfo.types,
-						default: exportInfo.import,
-					},
-					require: {
-						types: exportInfo.requireTypes,
-						default: exportInfo.require,
-					},
+					import: exportInfo.import,
+					require: exportInfo.require,
 			  }
 			: {
 					types: exportInfo.types,
@@ -107,8 +97,7 @@ export class UnBuild extends Component {
 			cwdRelativePath('.', path.join(this.project.libdir, distFile))
 		const defaultExports = {
 			import: makePath('index.mjs'),
-			types: makePath('index.d.mts'),
-			requireTypes: makePath('index.d.cts'),
+			types: makePath('index.d.ts'),
 			require: makePath('index.cjs'),
 		}
 		return defaultExports

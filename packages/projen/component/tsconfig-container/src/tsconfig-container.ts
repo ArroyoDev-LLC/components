@@ -302,7 +302,7 @@ export class TypescriptConfigContainer extends Component {
 			fromProject.outdir,
 			path.join(toProject.outdir, toProject.tryFindFile('tsconfig.json')!.path)
 		)
-		fromProject.logger.info(
+		fromProject.logger.debug(
 			`Adding tsconfig reference -> ${toProject.name}@${configPath}`
 		)
 		return { path: configPath }

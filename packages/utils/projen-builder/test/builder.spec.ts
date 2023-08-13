@@ -14,19 +14,19 @@ describe.concurrent('ProjectBuilder', () => {
 	beforeEach(() => optionsSpy.mockReset())
 
 	class CustomBuilder implements BuildStep {
-		declare outputOptionsType: {
+		declare _outputOptions: {
 			readonly newOption?: boolean
 			readonly defaultReleaseBranch?: string
 		}
-		declare outputType: {
+		declare _output: {
 			readonly customProperty: string
 		}
 
 		constructor(readonly options?: { overrideReleaseBranch: string }) {}
 
 		applyOptions(
-			options: ProjectOptions & this['outputOptionsType']
-		): ProjectOptions & this['outputOptionsType'] {
+			options: ProjectOptions & this['_outputOptions']
+		): ProjectOptions & this['_outputOptions'] {
 			const opts = {
 				...options,
 				defaultReleaseBranch: this.options?.overrideReleaseBranch ?? 'override',
@@ -38,13 +38,13 @@ describe.concurrent('ProjectBuilder', () => {
 
 		applyProject(
 			project: Project
-		): TypedPropertyDescriptorMap<this['outputType']> {
+		): TypedPropertyDescriptorMap<this['_output']> {
 			return {
 				customProperty: {
 					writable: false,
 					value: 'customValue',
 				},
-			} as TypedPropertyDescriptorMap<this['outputType']>
+			} as TypedPropertyDescriptorMap<this['_output']>
 		}
 	}
 
@@ -130,9 +130,7 @@ describe.concurrent('builders', () => {
 
 	test('OptionsPropertyBuilder', () => {
 		const project = base
-			.add(
-				new builders.OptionsPropertyBuilder<(typeof base)['__optionsType']>()
-			)
+			.add(new builders.OptionsPropertyBuilder<(typeof base)['_options']>())
 			.build({
 				name: 'test.project',
 				defaultReleaseBranch: 'main',

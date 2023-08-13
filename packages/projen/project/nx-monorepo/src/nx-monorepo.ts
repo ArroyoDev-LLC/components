@@ -324,13 +324,15 @@ export class MonorepoProject extends NxMonorepoProject {
 				cleanTask.exec(
 					NodePackageUtils.command.exec(
 						this.package.packageManager,
-						'rimraf dist'
+						'tsc',
+						'--build',
+						'--clean'
 					)
 				)
 				cleanTask.exec(
 					NodePackageUtils.command.exec(
 						this.package.packageManager,
-						'rimraf lib'
+						'rimraf dist lib tsconfig.tsbuildinfo'
 					)
 				)
 			},

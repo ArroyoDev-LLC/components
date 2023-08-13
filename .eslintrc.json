@@ -97,6 +97,7 @@
     "tsconfig.json",
     "tsconfig/tsconfig.base.json",
     "tsconfig/tsconfig.bundler.json",
+    "tsconfig/tsconfig.composite.json",
     "tsconfig/tsconfig.esm.json",
     "vitest.workspace.json",
     "projenrc/projen-project-options.ts"

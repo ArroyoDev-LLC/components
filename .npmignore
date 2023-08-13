@@ -17,5 +17,6 @@ tsconfig.tsbuildinfo
 /tsconfig/tsconfig.base.json
 /tsconfig/tsconfig.esm.json
 /tsconfig/tsconfig.bundler.json
+/tsconfig/tsconfig.composite.json
 /tsconfig.json
 /tsconfig.dev.json

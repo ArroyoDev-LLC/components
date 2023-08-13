@@ -18,7 +18,7 @@ import {
 	DependencyType,
 	javascript,
 	type ProjectOptions,
-	typescript,
+	type typescript,
 } from 'projen'
 
 export interface TypescriptConfigBuilderProps {
@@ -49,7 +49,7 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 	}
 
 	applyOptions<Options extends typescript.TypeScriptProjectOptions>(
-		options: Options & this['outputOptionsType']
+		options: Options & this['_outputOptions']
 	): Options {
 		const { tsconfigBase, ...rest } = options
 		this.tsconfigBase = tsconfigBase
@@ -59,7 +59,7 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 
 	applyProject(
 		project: typescript.TypeScriptProject
-	): TypedPropertyDescriptorMap<this['outputType']> {
+	): TypedPropertyDescriptorMap<this['_output']> {
 		const tsconfigContainer = TypescriptConfigContainer.ensure(project)
 		const tsconfigBase =
 			this.tsconfigBase ?? this.options?.extendsDefault?.(tsconfigContainer)
@@ -92,7 +92,7 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 			tsconfig: { writable: false, value: tsconfig },
 			tsconfigDev: { writable: false, value: tsconfigDev },
 			tsconfigContainer: { writable: false, value: tsconfigContainer },
-		} as TypedPropertyDescriptorMap<this['outputType']>
+		} as TypedPropertyDescriptorMap<this['_output']>
 	}
 }
 
@@ -115,8 +115,8 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 	}
 
 	applyOptions(
-		options: ProjectOptions & this['outputOptionsType']
-	): ProjectOptions & this['outputOptionsType'] {
+		options: ProjectOptions & this['_outputOptions']
+	): ProjectOptions & this['_outputOptions'] {
 		const { workspaceDeps, ...rest } = options
 		this.workspaceDeps = workspaceDeps
 		return super.applyOptions(rest)
@@ -124,7 +124,7 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 
 	applyProject(
 		project: typescript.TypeScriptProject
-	): TypedPropertyDescriptorMap<this['outputType']> {
+	): TypedPropertyDescriptorMap<this['_output']> {
 		project.package.addField('type', 'module')
 		project.package.addField('sideEffects', this.options?.sideEffects ?? false)
 		project.tasks.tryFind('package')?.reset?.()
@@ -161,7 +161,7 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 					)
 				},
 			},
-		} as TypedPropertyDescriptorMap<this['outputType']>
+		} as TypedPropertyDescriptorMap<this['_output']>
 	}
 }
 
@@ -172,8 +172,8 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 	private unbuild: boolean = false
 
 	applyOptions(
-		options: ProjectOptions & this['outputOptionsType']
-	): ProjectOptions & this['outputOptionsType'] {
+		options: ProjectOptions & this['_outputOptions']
+	): ProjectOptions & this['_outputOptions'] {
 		const { unbuild, ...rest } = options
 		this.unbuild = unbuild ?? false
 		return super.applyOptions(rest)
@@ -181,7 +181,7 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 
 	applyProject(
 		project: typescript.TypeScriptProject
-	): TypedPropertyDescriptorMap<this['outputType']> {
+	): TypedPropertyDescriptorMap<this['_output']> {
 		if (this.unbuild) {
 			const compileTask = project.tasks.tryFind('compile')!
 			compileTask.reset(
@@ -231,7 +231,7 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 			})
 			return {
 				unbuild: { writable: false, value: unbuild },
-			} as TypedPropertyDescriptorMap<this['outputType']>
+			} as TypedPropertyDescriptorMap<this['_output']>
 		}
 		return super.applyProject(project)
 	}
@@ -247,20 +247,20 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 
 	applyProject(
 		project: typescript.TypeScriptProject
-	): TypedPropertyDescriptorMap<this['outputType']> {
+	): TypedPropertyDescriptorMap<this['_output']> {
 		const lintConfig = new LintConfig(project, this.options).setEslintExec(
 			'eslint --cache'
 		)
 		return {
 			lintConfig: { writable: false, value: lintConfig },
-		} as TypedPropertyDescriptorMap<this['outputType']>
+		} as TypedPropertyDescriptorMap<this['_output']>
 	}
 }
 
 export class TypescriptReleasePleaseBuilder extends BaseBuildStep<{}, {}> {
 	applyProject(
 		project: typescript.TypeScriptProject
-	): TypedPropertyDescriptorMap<this['outputType']> {
+	): TypedPropertyDescriptorMap<this['_output']> {
 		const releasePlease = ReleasePlease.of(project.parent ?? project)
 		if (releasePlease) {
 			releasePlease.addProject(project, { releaseType: ReleaseType.NODE })

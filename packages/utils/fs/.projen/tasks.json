@@ -42,10 +42,10 @@
       "name": "clean",
       "steps": [
         {
-          "exec": "pnpm exec rimraf dist"
+          "exec": "pnpm exec tsc --build --clean"
         },
         {
-          "exec": "pnpm exec rimraf lib"
+          "exec": "pnpm exec rimraf dist lib tsconfig.tsbuildinfo"
         }
       ]
     },
@@ -54,7 +54,11 @@
       "description": "Only compile",
       "steps": [
         {
-          "exec": "tsc --build"
+          "exec": "pnpm exec tsc --build --emitDeclarationOnly"
+        },
+        {
+          "exec": "pnpm exec unbuild",
+          "name": "Unbuild"
         }
       ]
     },
@@ -98,8 +102,7 @@
       "description": "Runs after successful compilation",
       "steps": [
         {
-          "exec": "unbuild",
-          "name": "Unbuild"
+          "exec": "pnpm exec tsc --build --clean"
         }
       ]
     },

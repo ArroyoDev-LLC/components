@@ -3,21 +3,13 @@
   "extends": [
     "../../../../tsconfig/tsconfig.base.json",
     "../../../../tsconfig/tsconfig.esm.json",
-    "../../../../tsconfig/tsconfig.bundler.json"
+    "../../../../tsconfig/tsconfig.bundler.json",
+    "../../../../tsconfig/tsconfig.composite.json"
   ],
   "compilerOptions": {
+    "rootDir": "src",
     "outDir": "dist",
-    "paths": {
-      "@arroyodev-llc/utils.projen": [
-        "../../../utils/projen/src/index"
-      ],
-      "@arroyodev-llc/projen.component.typescript-source-file": [
-        "../typescript-source-file/src/index"
-      ],
-      "@arroyodev-llc/utils.ts-ast": [
-        "../../../utils/ts-ast/src/index"
-      ]
-    }
+    "declarationDir": "src"
   },
   "include": [
     "src/**/*.ts",
@@ -29,5 +21,16 @@
       "src/index.ts"
     ],
     "useTsLinkResolution": true
-  }
+  },
+  "references": [
+    {
+      "path": "../../../utils/projen/tsconfig.json"
+    },
+    {
+      "path": "../typescript-source-file/tsconfig.json"
+    },
+    {
+      "path": "../../../utils/ts-ast/tsconfig.json"
+    }
+  ]
 }

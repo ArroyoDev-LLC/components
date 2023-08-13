@@ -97,5 +97,55 @@
     "includeVersion": true,
     "json": "docs/docs.json",
     "useTsLinkResolution": true
-  }
+  },
+  "references": [
+    {
+      "path": "./packages/utils/projen/tsconfig.json"
+    },
+    {
+      "path": "./packages/utils/projen-builder/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/linting/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/git-hooks/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/unbuild/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/typescript-source-file/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/vite/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/vitest/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/vue/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/pnpm-workspace/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/release-please/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/tool-versions/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/dir-env/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/project/nx-monorepo/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/project/typescript/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/project/vue-component/tsconfig.json"
+    }
+  ]
 }

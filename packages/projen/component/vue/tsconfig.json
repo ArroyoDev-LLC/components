@@ -3,30 +3,13 @@
   "extends": [
     "../../../../tsconfig/tsconfig.base.json",
     "../../../../tsconfig/tsconfig.esm.json",
-    "../../../../tsconfig/tsconfig.bundler.json"
+    "../../../../tsconfig/tsconfig.bundler.json",
+    "../../../../tsconfig/tsconfig.composite.json"
   ],
   "compilerOptions": {
+    "rootDir": "src",
     "outDir": "dist",
-    "paths": {
-      "@arroyodev-llc/utils.projen": [
-        "../../../utils/projen/src/index"
-      ],
-      "@arroyodev-llc/projen.component.linting": [
-        "../linting/src/index"
-      ],
-      "@arroyodev-llc/projen.component.unbuild": [
-        "../unbuild/src/index"
-      ],
-      "@arroyodev-llc/projen.component.vite": [
-        "../vite/src/index"
-      ],
-      "@arroyodev-llc/projen.component.vitest": [
-        "../vitest/src/index"
-      ],
-      "@arroyodev-llc/projen.component.typescript-source-file": [
-        "../typescript-source-file/src/index"
-      ]
-    }
+    "declarationDir": "src"
   },
   "include": [
     "src/**/*.ts",
@@ -38,5 +21,25 @@
       "src/index.ts"
     ],
     "useTsLinkResolution": true
-  }
+  },
+  "references": [
+    {
+      "path": "../../../utils/projen/tsconfig.json"
+    },
+    {
+      "path": "../linting/tsconfig.json"
+    },
+    {
+      "path": "../unbuild/tsconfig.json"
+    },
+    {
+      "path": "../vite/tsconfig.json"
+    },
+    {
+      "path": "../vitest/tsconfig.json"
+    },
+    {
+      "path": "../typescript-source-file/tsconfig.json"
+    }
+  ]
 }

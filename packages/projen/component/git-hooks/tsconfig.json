@@ -3,10 +3,13 @@
   "extends": [
     "../../../../tsconfig/tsconfig.base.json",
     "../../../../tsconfig/tsconfig.esm.json",
-    "../../../../tsconfig/tsconfig.bundler.json"
+    "../../../../tsconfig/tsconfig.bundler.json",
+    "../../../../tsconfig/tsconfig.composite.json"
   ],
   "compilerOptions": {
-    "outDir": "dist"
+    "rootDir": "src",
+    "outDir": "dist",
+    "declarationDir": "src"
   },
   "include": [
     "src/**/*.ts",

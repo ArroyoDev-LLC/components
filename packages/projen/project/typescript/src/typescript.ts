@@ -64,7 +64,12 @@ export const TypescriptBaseBuilder = new ProjectBuilder(
 	.add(
 		new tsBuilders.TypescriptConfigBuilder({
 			extendsDefault: (container) =>
-				container.buildExtends(TSConfig.BASE, TSConfig.ESM, TSConfig.BUNDLER),
+				container.buildExtends(
+					TSConfig.BASE,
+					TSConfig.ESM,
+					TSConfig.BUNDLER,
+					TSConfig.COMPOSITE
+				),
 		})
 	)
 	.add(new tsBuilders.TypescriptLintingBuilder({ useTypeInformation: true }))

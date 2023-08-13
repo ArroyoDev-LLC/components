@@ -208,25 +208,13 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='typescript,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen,@arroyodev-llc/utils.ts-ast'"
-        },
-        {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='typescript,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen,@arroyodev-llc/utils.ts-ast'"
-        },
-        {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='typescript,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen,@arroyodev-llc/utils.ts-ast'"
-        },
-        {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='typescript,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen,@arroyodev-llc/utils.ts-ast'"
-        },
-        {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='typescript,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/utils.projen,@arroyodev-llc/utils.ts-ast'"
+          "exec": "npm-check-updates --upgrade --target=minor --filter=@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,lint-staged,npm-check-updates,prettier,projen,standard-version,unbuild,vitest,tailwindcss,ts-morph"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update"
+          "exec": "pnpm update @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint lint-staged npm-check-updates prettier projen standard-version unbuild vitest tailwindcss ts-morph"
         },
         {
           "exec": "pnpm exec projen"

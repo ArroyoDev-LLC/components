@@ -1,5 +1,6 @@
 import path from 'node:path'
 import {
+	applyOverrides,
 	cwdRelativePath,
 	firstAncestor,
 	isComponent,
@@ -117,9 +118,26 @@ export class TypescriptConfigContainer extends Component {
 	 * @param name Name of tsconfig.
 	 * @param options Compiler options.
 	 */
-	defineConfig(name: string, options: javascript.TypeScriptCompilerOptions) {
+	defineConfig<
+		Options extends javascript.TypeScriptCompilerOptions & {
+			overrides?: Record<string, unknown>
+		}
+	>(name: string, options: Options) {
 		const configPath = this.#resolvePath(name)
-		const config = this.buildExtendableTypeScriptConfig(configPath, options)
+		const { overrides, ...configOptions } = options
+		const config = this.buildExtendableTypeScriptConfig(
+			configPath,
+			configOptions
+		)
+		if (overrides) {
+			applyOverrides(
+				config.file,
+				{
+					compilerOptions: overrides,
+				},
+				{ extendArrays: true }
+			)
+		}
 		this.configs.set(name, config)
 		return this
 	}

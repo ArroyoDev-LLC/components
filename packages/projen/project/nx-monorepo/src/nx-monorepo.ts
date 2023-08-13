@@ -77,6 +77,7 @@ export enum TSConfig {
 	BASE = 'base',
 	ESM = 'esm',
 	BUNDLER = 'bundler',
+	COMPOSITE = 'composite',
 }
 
 export interface ApplyRecursiveOptions {
@@ -253,8 +254,18 @@ export class MonorepoProject extends NxMonorepoProject {
 				allowArbitraryExtensions: true,
 				resolveJsonModule: true,
 				verbatimModuleSyntax: true,
-				noEmit: true,
+				emitDeclarationOnly: true,
 				jsx: javascript.TypeScriptJsxMode.PRESERVE,
+			})
+			.defineConfig(TSConfig.COMPOSITE, {
+				declaration: true,
+				overrides: {
+					composite: true,
+					declarationMap: true,
+					incremental: true,
+					inlineSources: true,
+					inlineSourceMap: true,
+				},
 			})
 	}
 

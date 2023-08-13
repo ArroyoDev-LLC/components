@@ -449,6 +449,12 @@ export class MonorepoProject extends NxMonorepoProject {
 	addWorkspaceDeps(
 		...dependency: Parameters<PnpmWorkspace['addWorkspaceDeps']>
 	) {
+		this.tsconfigContainer.addTsConfigReferences(
+			this,
+			dependency.filter(
+				(i) => i instanceof javascript.NodeProject
+			) as typescript.TypeScriptProject[]
+		)
 		return this.pnpm.addWorkspaceDeps(...dependency)
 	}
 

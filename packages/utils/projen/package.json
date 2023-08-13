@@ -27,6 +27,7 @@
     "organization": true
   },
   "devDependencies": {
+    "@types/flat": "^5.0.2",
     "@types/node": "^16",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
@@ -47,6 +48,7 @@
   "dependencies": {
     "@sindresorhus/is": "^5.5.2",
     "defu": "^6.1.2",
+    "flat": "^5.0.2",
     "projen": "^0.71.142",
     "type-fest": "^4"
   },

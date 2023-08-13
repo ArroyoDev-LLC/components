@@ -14,6 +14,9 @@ patchedDependencies:
   '@mrgrain/jsii-struct-builder@0.4.3':
     hash: 5n7l7qiehk4lghp47ostr53ckq
     path: patches/@mrgrain__jsii-struct-builder@0.4.3.patch
+  unbuild@2.0.0-rc.0:
+    hash: lulzlhanbemembpay2kcfiuibq
+    path: patches/unbuild@2.0.0-rc.0.patch
 
 importers:
   .:
@@ -177,7 +180,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
       vite:
         specifier: ^4.4.4
         version: 4.4.4(@types/node@18.16.17)
@@ -234,7 +237,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
       vitest:
         specifier: ^0.33.0
         version: 0.33.0(happy-dom@9.20.3)
@@ -291,7 +294,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/component/linting:
     dependencies:
@@ -349,7 +352,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/component/pnpm-workspace:
     dependencies:
@@ -404,7 +407,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/component/postcss:
     dependencies:
@@ -471,7 +474,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
       vitest:
         specifier: ^0.33.0
         version: 0.33.0(happy-dom@9.20.3)
@@ -529,7 +532,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/component/tailwind:
     dependencies:
@@ -596,7 +599,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
       vitest:
         specifier: ^0.33.0
         version: 0.33.0(happy-dom@9.20.3)
@@ -650,7 +653,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/component/tsconfig-container:
     dependencies:
@@ -705,7 +708,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/component/typescript-source-file:
     dependencies:
@@ -775,7 +778,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/component/unbuild:
     dependencies:
@@ -793,7 +796,7 @@ importers:
         version: 18.0.0
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
     devDependencies:
       '@aws-prototyping-sdk/nx-monorepo':
         specifier: ^0.19.45
@@ -918,7 +921,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
       vitest:
         specifier: ^0.33.0
         version: 0.33.0(happy-dom@9.20.3)
@@ -991,7 +994,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/component/vue:
     dependencies:
@@ -1064,7 +1067,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/project/nx-monorepo:
     dependencies:
@@ -1134,7 +1137,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/project/typescript:
     dependencies:
@@ -1216,7 +1219,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/projen/project/vue-component:
     dependencies:
@@ -1289,7 +1292,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
 
   packages/utils/fs:
     dependencies:
@@ -1347,7 +1350,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
       vitest:
         specifier: ^0.33.0
         version: 0.33.0(happy-dom@9.20.3)
@@ -1360,6 +1363,9 @@ importers:
       defu:
         specifier: ^6.1.2
         version: 6.1.2
+      flat:
+        specifier: ^5.0.2
+        version: 5.0.2
       projen:
         specifier: ^0.71.142
         version: 0.71.142
@@ -1367,6 +1373,9 @@ importers:
         specifier: ^4
         version: 4.0.0
     devDependencies:
+      '@types/flat':
+        specifier: ^5.0.2
+        version: 5.0.2
       '@types/node':
         specifier: ^16
         version: 16.18.38
@@ -1411,7 +1420,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
       vitest:
         specifier: ^0.33.0
         version: 0.33.0(happy-dom@9.20.3)
@@ -1472,7 +1481,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
       vitest:
         specifier: ^0.33.0
         version: 0.33.0(happy-dom@9.20.3)
@@ -1542,7 +1551,7 @@ importers:
         version: 5.1.6
       unbuild:
         specifier: 2.0.0-rc.0
-        version: 2.0.0-rc.0(typescript@5.1.6)
+        version: 2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6)
       vitest:
         specifier: ^0.33.0
         version: 0.33.0(happy-dom@9.20.3)
@@ -4154,6 +4163,13 @@ packages:
       {
         integrity: sha512-LG4opVs2ANWZ1TJoKc937iMmNstM/d0ae1vNbnBvBhqCSezgVUOzcLCqbI5elV8Vy6WKwKjaqR+zO9VKirBBCA==,
       }
+
+  /@types/flat@5.0.2:
+    resolution:
+      {
+        integrity: sha512-3zsplnP2djeps5P9OyarTxwRpMLoe5Ash8aL9iprw0JxB+FAHjY+ifn4yZUuW4/9hqtnmor6uvjSRzJhiVbrEQ==,
+      }
+    dev: true
 
   /@types/fs-extra@11.0.1:
     resolution:
@@ -7769,7 +7785,6 @@ packages:
         integrity: sha512-b6suED+5/3rTpUBdG1gupIl8MPFCAMA0QXwmljLhvCUKcUvdE4gWky9zpuGCcXHOsz4J9wPGNWq6OKpmIzz3hQ==,
       }
     hasBin: true
-    dev: true
 
   /flatted@3.2.7:
     resolution:
@@ -13300,7 +13315,7 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /unbuild@2.0.0-rc.0(typescript@5.1.6):
+  /unbuild@2.0.0-rc.0(patch_hash=lulzlhanbemembpay2kcfiuibq)(typescript@5.1.6):
     resolution:
       {
         integrity: sha512-JuOaQHOd7pa+9l/DtgGTJutXjYtbaD0qvDVo/qudB2ESZ5Z1RKR1y0G1nApySzgUSjfFLVWQtp3rXGpE6Dqpqw==,
@@ -13340,6 +13355,7 @@ packages:
     transitivePeerDependencies:
       - sass
       - supports-color
+    patched: true
 
   /unique-filename@2.0.1:
     resolution:
@@ -13757,9 +13773,9 @@ packages:
         optional: true
     dependencies:
       '@types/node': 18.16.17
-      esbuild: 0.18.14
+      esbuild: 0.18.11
       postcss: 8.4.25
-      rollup: 3.26.3
+      rollup: 3.26.2
     optionalDependencies:
       fsevents: 2.3.2
 

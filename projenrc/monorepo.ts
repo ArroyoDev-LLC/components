@@ -124,6 +124,7 @@ export class ComponentsMonorepo
 			'@mrgrain/jsii-struct-builder@0.4.3',
 			'patches/@mrgrain__jsii-struct-builder@0.4.3.patch'
 		)
+		this.pnpm.addPatch('unbuild@2.0.0-rc.0', 'patches/unbuild@2.0.0-rc.0.patch')
 	}
 
 	protected applyNx(): this {

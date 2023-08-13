@@ -7,7 +7,7 @@
     "allowArbitraryExtensions": true,
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
-    "noEmit": true,
+    "emitDeclarationOnly": true,
     "jsx": "preserve"
   }
 }

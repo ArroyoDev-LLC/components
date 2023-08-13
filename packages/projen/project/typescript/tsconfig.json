@@ -3,36 +3,13 @@
   "extends": [
     "../../../../tsconfig/tsconfig.base.json",
     "../../../../tsconfig/tsconfig.esm.json",
-    "../../../../tsconfig/tsconfig.bundler.json"
+    "../../../../tsconfig/tsconfig.bundler.json",
+    "../../../../tsconfig/tsconfig.composite.json"
   ],
   "compilerOptions": {
+    "rootDir": "src",
     "outDir": "dist",
-    "paths": {
-      "@arroyodev-llc/utils.projen": [
-        "../../../utils/projen/src/index"
-      ],
-      "@arroyodev-llc/utils.projen-builder": [
-        "../../../utils/projen-builder/src/index"
-      ],
-      "@arroyodev-llc/projen.component.linting": [
-        "../../component/linting/src/index"
-      ],
-      "@arroyodev-llc/projen.component.unbuild": [
-        "../../component/unbuild/src/index"
-      ],
-      "@arroyodev-llc/projen.component.pnpm-workspace": [
-        "../../component/pnpm-workspace/src/index"
-      ],
-      "@arroyodev-llc/projen.component.release-please": [
-        "../../component/release-please/src/index"
-      ],
-      "@arroyodev-llc/projen.component.tsconfig-container": [
-        "../../component/tsconfig-container/src/index"
-      ],
-      "@arroyodev-llc/projen.project.nx-monorepo": [
-        "../nx-monorepo/src/index"
-      ]
-    }
+    "declarationDir": "src"
   },
   "include": [
     "src/**/*.ts",
@@ -44,5 +21,31 @@
       "src/index.ts"
     ],
     "useTsLinkResolution": true
-  }
+  },
+  "references": [
+    {
+      "path": "../../../utils/projen/tsconfig.json"
+    },
+    {
+      "path": "../../../utils/projen-builder/tsconfig.json"
+    },
+    {
+      "path": "../../component/linting/tsconfig.json"
+    },
+    {
+      "path": "../../component/unbuild/tsconfig.json"
+    },
+    {
+      "path": "../../component/pnpm-workspace/tsconfig.json"
+    },
+    {
+      "path": "../../component/release-please/tsconfig.json"
+    },
+    {
+      "path": "../../component/tsconfig-container/tsconfig.json"
+    },
+    {
+      "path": "../nx-monorepo/tsconfig.json"
+    }
+  ]
 }

@@ -14,7 +14,7 @@ export class VueComponentViteBuilder extends BaseBuildStep<
 > {
 	applyProject(
 		project: typescript.TypeScriptProject
-	): TypedPropertyDescriptorMap<this['outputType']> {
+	): TypedPropertyDescriptorMap<this['_output']> {
 		const vite = new Vite(project)
 			.addPlugin({
 				name: 'tsconfigPaths',
@@ -48,7 +48,7 @@ export class VueComponentViteBuilder extends BaseBuildStep<
 			})
 		return {
 			vite: { writable: false, value: vite },
-		} as TypedPropertyDescriptorMap<this['outputType']>
+		} as TypedPropertyDescriptorMap<this['_output']>
 	}
 }
 
@@ -60,7 +60,7 @@ export class VueComponentManifestBuilder extends BaseBuildStep<
 > {
 	applyProject(
 		project: typescript.TypeScriptProject
-	): TypedPropertyDescriptorMap<this['outputType']> {
+	): TypedPropertyDescriptorMap<this['_output']> {
 		project.package.addField('sideEffects', true)
 		project.package.addField('module', 'dist/index.js')
 		project.package.addField('main', 'dist/index.cjs')
@@ -73,7 +73,7 @@ export class VueComponentManifestBuilder extends BaseBuildStep<
 		})
 		return {
 			vue: { writable: false, value: new Vue(project) },
-		} as TypedPropertyDescriptorMap<this['outputType']>
+		} as TypedPropertyDescriptorMap<this['_output']>
 	}
 }
 

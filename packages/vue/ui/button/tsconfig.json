@@ -3,19 +3,17 @@
   "extends": [
     "../../../../tsconfig/tsconfig.base.json",
     "../../../../tsconfig/tsconfig.esm.json",
-    "../../../../tsconfig/tsconfig.bundler.json"
+    "../../../../tsconfig/tsconfig.bundler.json",
+    "../../../../tsconfig/tsconfig.composite.json"
   ],
   "compilerOptions": {
+    "rootDir": "src",
     "outDir": "dist",
+    "declarationDir": "src",
     "types": [
       "vite/client",
       "unplugin-vue-macros/macros-global"
-    ],
-    "paths": {
-      "@arroyodev-llc/vue.ui.text": [
-        "../text/src/index"
-      ]
-    }
+    ]
   },
   "include": [
     "src/**/*.ts",
@@ -32,5 +30,10 @@
       "src/index.ts"
     ],
     "useTsLinkResolution": true
-  }
+  },
+  "references": [
+    {
+      "path": "../text/tsconfig.json"
+    }
+  ]
 }

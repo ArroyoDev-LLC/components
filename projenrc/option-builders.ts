@@ -53,6 +53,9 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 			importLocations: {
 				'@arroyodev-llc/utils-projen': '@arroyodev-llc/utils.projen',
 			},
+			outputFileOptions: {
+				useTypeImports: true,
+			},
 		})
 
 		struct.mixin(
@@ -173,6 +176,9 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 			importLocations: {
 				'@arroyodev-llc/projen-project-typescript': './',
 			},
+			outputFileOptions: {
+				useTypeImports: true,
+			},
 		})
 		tsconfigStruct.mixin(
 			Struct.fromFqn('projen.javascript.TypescriptConfigOptions').update(
@@ -188,6 +194,9 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 			filePath,
 			importLocations: {
 				'@arroyodev-llc/projen-project-typescript': './',
+			},
+			outputFileOptions: {
+				useTypeImports: true,
 			},
 		})
 

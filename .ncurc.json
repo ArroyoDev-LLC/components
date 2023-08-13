@@ -1,6 +1,5 @@
 {
   "reject": [
-    "@mrgrain/jsii-struct-builder",
     "unbuild"
   ]
 }

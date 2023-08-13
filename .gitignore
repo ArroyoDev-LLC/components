@@ -2,6 +2,7 @@
 !/.gitattributes
 !/.projen/tasks.json
 !/.projen/deps.json
+!/renovate.json5
 !/.projen/files.json
 !/.github/workflows/pull-request-lint.yml
 !/.devcontainer.json
@@ -33,7 +34,6 @@ jspm_packages/
 .yarn-integrity
 .cache
 .tmp
-.nx/cache
 /.idea
 !/.projenrc.js
 !/.github/workflows/build.yml
@@ -48,6 +48,7 @@ jspm_packages/
 /dist
 /dist/
 !/.eslintrc.json
+.nx/cache
 !/nx.json
 !/.nxignore
 !/.syncpackrc.json
@@ -71,7 +72,6 @@ docs/**
 !/.envrc
 .envrc.local
 !/pnpm-workspace.yaml
-!/renovate.json5
 !/projenrc/projen-project-options.ts
 !/packages/projen/project/typescript/src/typescript-compiler-options.ts
 !/packages/projen/project/typescript/src/typescript-config-options.ts

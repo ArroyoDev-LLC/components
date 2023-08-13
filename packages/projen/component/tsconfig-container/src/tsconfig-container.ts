@@ -81,6 +81,11 @@ export class TypescriptConfigContainer extends Component {
 		Set<typescript.TypeScriptProject>
 	> = new Map()
 
+	readonly projectReferences: Map<
+		typescript.TypeScriptProject,
+		Set<typescript.TypeScriptProject>
+	> = new Map()
+
 	constructor(
 		project: Project,
 		public readonly options: TypescriptConfigContainerOptions = {
@@ -278,6 +283,59 @@ export class TypescriptConfigContainer extends Component {
 	}
 
 	/**
+	 * Build tsconfig project reference object.
+	 * @param fromProject Target to add reference to.
+	 * @param toProject Reference target.
+	 * @protected
+	 */
+	protected buildReference(
+		fromProject: typescript.TypeScriptProject,
+		toProject: typescript.TypeScriptProject
+	) {
+		if (!fromProject.tsconfig) {
+			this.project.logger.warn(
+				`Cannot add tsconfig path (${fromProject.name} -> ${toProject.name}) because ${fromProject.name} does not have a tsconfig!`
+			)
+			return
+		}
+		const configPath = cwdRelativePath(
+			fromProject.outdir,
+			path.join(toProject.outdir, toProject.tryFindFile('tsconfig.json')!.path)
+		)
+		fromProject.logger.info(
+			`Adding tsconfig reference -> ${toProject.name}@${configPath}`
+		)
+		return { path: configPath }
+	}
+
+	/**
+	 * Apply all tsconfig paths.
+	 * @protected
+	 */
+	protected applyTsConfigPaths() {
+		this.projectPaths.forEach((toProjects, fromProject) => {
+			toProjects.forEach((toProj) =>
+				this.linkProjectTsPath(fromProject, toProj)
+			)
+		})
+		this.projectPaths.clear()
+	}
+
+	/**
+	 * Apply all tsconfig references.
+	 * @protected
+	 */
+	protected applyTsProjectReferences() {
+		this.projectReferences.forEach((toProjects, fromProject) => {
+			const references = Array.from(toProjects)
+				.map((toProj) => this.buildReference(fromProject, toProj))
+				.filter(Boolean)
+			fromProject.tsconfig!.file.addOverride('references', references)
+		})
+		this.projectReferences.clear()
+	}
+
+	/**
 	 * Add tsconfig path entries for the given projects.
 	 * @param fromProject Target project to modify.
 	 * @param toProjects Projects to reference.
@@ -292,15 +350,28 @@ export class TypescriptConfigContainer extends Component {
 	}
 
 	/**
+	 * Add tsconfig reference entries for the given projects.
+	 * @param fromProject Target project to modify.
+	 * @param toProjects Projects to reference.
+	 */
+	addTsConfigReferences(
+		fromProject: typescript.TypeScriptProject,
+		toProjects: typescript.TypeScriptProject[]
+	): this {
+		const current = this.projectReferences.get(fromProject) ?? []
+		this.projectReferences.set(
+			fromProject,
+			new Set([...current, ...toProjects])
+		)
+		return this
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	preSynthesize() {
-		this.projectPaths.forEach((toProjects, fromProject) => {
-			toProjects.forEach((toProj) =>
-				this.linkProjectTsPath(fromProject, toProj)
-			)
-		})
-		this.projectPaths.clear()
+		this.applyTsConfigPaths()
+		this.applyTsProjectReferences()
 		super.preSynthesize()
 	}
 }

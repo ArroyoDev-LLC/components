@@ -114,7 +114,8 @@ new Vitest(utilsTsAst)
 
 const utilsProjen = TypescriptProjectBuilder.build({
 	name: 'utils.projen',
-	deps: ['@sindresorhus/is', 'projen', 'type-fest@^4', 'defu'],
+	deps: ['@sindresorhus/is', 'projen', 'type-fest@^4', 'defu', 'flat'],
+	devDeps: ['@types/flat'],
 })
 new Vitest(utilsProjen)
 

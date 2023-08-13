@@ -8,6 +8,27 @@
     * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.11
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.23](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.22...@arroyodev-llc/projen.project.nx-monorepo-v0.1.23) (2023-08-13)
+
+
+### Features
+
+* **projen.component.nx-monorepo:** Add all workspace deps as references to monorepo root ([73607dd](https://github.com/ArroyoDev-LLC/components/commit/73607dd1d472b1af72f09ca6a35aafc6516f950c))
+* **projen.project.nx-monorepo:** Add and define `composite` base tsconfig ([3925e80](https://github.com/ArroyoDev-LLC/components/commit/3925e802fc658325fc296685b7c9dab6c7cce9c4))
+* **projen.project.nx-monorepo:** Execute tsc clean, attempt to remove tsbuildinfo during clean task ([07c304f](https://github.com/ArroyoDev-LLC/components/commit/07c304fdbd294cd65fdf06e5369a56e98ad2b726))
+* **projenrc:** Update all manage tsconfigs/unbuild/package exports ([0808084](https://github.com/ArroyoDev-LLC/components/commit/0808084c6cebd9d7ead2b01fd021efaf470088bc))
+* **projenrc:** Update dependencies ([296048f](https://github.com/ArroyoDev-LLC/components/commit/296048f5d578df7c81e1927ed2c7c84898c2153b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.18
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.19
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.13
+    * @arroyodev-llc/utils.projen bumped to 0.1.18
+
 ## [0.1.22](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.21...@arroyodev-llc/projen.project.nx-monorepo-v0.1.22) (2023-07-19)
 
 

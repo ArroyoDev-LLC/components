@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tsconfig-container-v0.1.12...@arroyodev-llc/projen.component.tsconfig-container-v0.1.13) (2023-08-13)
+
+
+### Features
+
+* **projen.component.ts-container:** Add inline `overrides` property to `defineConfig` method ([c51beb4](https://github.com/ArroyoDev-LLC/components/commit/c51beb40725b5756168a0fcfaa4ebaad8a2e7d95))
+* **projen.component.ts-container:** Implement support for tsconfig project references ([333ca03](https://github.com/ArroyoDev-LLC/components/commit/333ca031f585f64c07465c37fc99bfe2fde4eed1))
+* **projenrc:** Update all manage tsconfigs/unbuild/package exports ([0808084](https://github.com/ArroyoDev-LLC/components/commit/0808084c6cebd9d7ead2b01fd021efaf470088bc))
+* **projenrc:** Update dependencies ([296048f](https://github.com/ArroyoDev-LLC/components/commit/296048f5d578df7c81e1927ed2c7c84898c2153b))
+
+
+### Bug Fixes
+
+* **projen.component.ts-container:** Reduce logging verbosity ([68b8488](https://github.com/ArroyoDev-LLC/components/commit/68b8488ec519d48d06d41aeebc34f4c4eb15f335))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.18
+
 ## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tsconfig-container-v0.1.11...@arroyodev-llc/projen.component.tsconfig-container-v0.1.12) (2023-07-19)
 
 

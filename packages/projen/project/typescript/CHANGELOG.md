@@ -32,6 +32,31 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+## [0.1.25](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.24...@arroyodev-llc/projen.project.typescript-v0.1.25) (2023-08-13)
+
+
+### Features
+
+* **projen.project.typescript:** Add `composite` tsconfig base to default extends builder ([001b301](https://github.com/ArroyoDev-LLC/components/commit/001b3014a511a82824ed059acb966d0216282697))
+* **projen.project.typescript:** Auto-add workspace dependency ([53d4526](https://github.com/ArroyoDev-LLC/components/commit/53d452696979969f744521cfe72e4df8468743ee))
+* **projen.project.typescript:** Rollup .dts generated from tsc during ([e38e08a](https://github.com/ArroyoDev-LLC/components/commit/e38e08a46e212a843b9539dda6f538efef59a7a3))
+* **projenrc:** Update all manage tsconfigs/unbuild/package exports ([0808084](https://github.com/ArroyoDev-LLC/components/commit/0808084c6cebd9d7ead2b01fd021efaf470088bc))
+* **projenrc:** Update dependencies ([296048f](https://github.com/ArroyoDev-LLC/components/commit/296048f5d578df7c81e1927ed2c7c84898c2153b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.18
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.19
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.20
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.13
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.21
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.23
+    * @arroyodev-llc/utils.projen bumped to 0.1.18
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.3
+
 ## [0.1.23](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.22...@arroyodev-llc/projen.project.typescript-v0.1.23) (2023-07-19)
 
 

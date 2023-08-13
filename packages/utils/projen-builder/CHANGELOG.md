@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-builder-v0.1.2...@arroyodev-llc/utils.projen-builder-v0.1.3) (2023-08-13)
+
+
+### Features
+
+* **projen.component.projen-builder:** Merge props/options separately from constructor to reduce type complexity and possibility of excessively deep errors ([d1eca5d](https://github.com/ArroyoDev-LLC/components/commit/d1eca5da966c320dc62a35311860ad33f377c64b))
+* **projenrc:** Update all manage tsconfigs/unbuild/package exports ([0808084](https://github.com/ArroyoDev-LLC/components/commit/0808084c6cebd9d7ead2b01fd021efaf470088bc))
+* **projenrc:** Update dependencies ([296048f](https://github.com/ArroyoDev-LLC/components/commit/296048f5d578df7c81e1927ed2c7c84898c2153b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.18
+
 ## 0.1.2 (2023-07-19)
 
 

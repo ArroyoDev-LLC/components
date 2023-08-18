@@ -93,7 +93,7 @@ interface PipelineWorkflowProps extends ghpipelines.GitHubWorkflowProps {
 	assetsS3Prefix: string
 }
 
-export class PipelineWorkflow extends ghpipelines.GitHubWorkflow {
+export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 	constructor(
 		scope: Construct,
 		id: string,

@@ -273,7 +273,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		}
 	}
 
-	onWorkflowCall(inputs: Record<string, ActionsWorkflowCallInput>): this {
+	onWorkflowCall(inputs?: Record<string, ActionsWorkflowCallInput>): this {
 		const patch = ghpipelines.JsonPatch.add('/on/workflow_call', {
 			inputs,
 		})
@@ -282,7 +282,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 	}
 
 	onWorkflowDispatch(
-		inputs: Record<string, ActionsWorkflowDispatchInput>,
+		inputs?: Record<string, ActionsWorkflowDispatchInput>,
 	): this {
 		const patch = ghpipelines.JsonPatch.add('/on/workflow_dispatch', {
 			inputs,

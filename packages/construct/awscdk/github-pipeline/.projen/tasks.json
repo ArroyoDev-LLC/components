@@ -168,13 +168,13 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --upgrade --target=minor --filter=@types/flat,@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,jsii-diff,jsii-docgen,jsii-pacmak,lint-staged,npm-check-updates,prettier,projen,unbuild,aws-cdk-lib,constructs,cdk-pipelines-github,flat"
+          "exec": "npm-check-updates --upgrade --target=minor --filter=@types/flat,@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,cdk-pipelines-github,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,jsii-diff,jsii-docgen,jsii-pacmak,lint-staged,npm-check-updates,prettier,projen,unbuild,aws-cdk-lib,constructs,defu,flat"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update @types/flat @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jsii-diff jsii-docgen jsii-pacmak lint-staged npm-check-updates prettier projen unbuild aws-cdk-lib constructs cdk-pipelines-github flat"
+          "exec": "pnpm update @types/flat @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-pipelines-github eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jsii-diff jsii-docgen jsii-pacmak lint-staged npm-check-updates prettier projen unbuild aws-cdk-lib constructs defu flat"
         },
         {
           "exec": "npx projen"

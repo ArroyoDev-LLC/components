@@ -21,6 +21,7 @@
     "pre-compile": "npx projen pre-compile",
     "stub": "npx projen stub",
     "test": "npx projen test",
+    "test:watch": "npx projen test:watch",
     "upgrade": "npx projen upgrade",
     "watch": "npx projen watch"
   },
@@ -53,7 +54,8 @@
     "prettier": "^3.0.1",
     "projen": "^0.72.11",
     "typescript": "~5.1",
-    "unbuild": "^2.0.0-rc.0"
+    "unbuild": "^2.0.0-rc.0",
+    "vitest": "^0.34.1"
   },
   "peerDependencies": {
     "aws-cdk-lib": "^2.91.0",

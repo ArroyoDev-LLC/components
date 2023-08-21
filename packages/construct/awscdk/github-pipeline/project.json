@@ -136,6 +136,13 @@
         "cwd": "packages/construct/awscdk/github-pipeline"
       }
     },
+    "test:watch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec projen test:watch",
+        "cwd": "packages/construct/awscdk/github-pipeline"
+      }
+    },
     "clean": {
       "executor": "nx:run-commands",
       "options": {

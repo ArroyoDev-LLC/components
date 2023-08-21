@@ -1,6 +1,6 @@
 import * as ghpipelines from 'cdk-pipelines-github'
 import defu from 'defu'
-import { ActionsContext, interpolateValue } from './github-pipeline'
+import { ActionsContext, interpolateValue } from './workflow'
 
 export interface S3BucketStepProps {
 	env?: ghpipelines.GitHubActionStepProps['env']

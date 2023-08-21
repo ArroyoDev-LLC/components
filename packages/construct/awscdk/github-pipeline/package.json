@@ -35,6 +35,7 @@
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "aws-cdk-lib": "2.91.0",
+    "cdk-pipelines-github": "0.4.103",
     "constructs": "10.2.69",
     "eslint": "^8",
     "eslint-config-prettier": "^8.10.0",
@@ -56,11 +57,12 @@
   },
   "peerDependencies": {
     "aws-cdk-lib": "^2.91.0",
+    "cdk-pipelines-github": "^0.4.103",
     "constructs": "^10.2.69"
   },
   "dependencies": {
     "@crisiscleanup/config": "workspace:*",
-    "cdk-pipelines-github": "^0.4.103",
+    "defu": "^6.1.2",
     "flat": "^5.0.2"
   },
   "keywords": [

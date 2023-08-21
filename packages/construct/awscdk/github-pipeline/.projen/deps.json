@@ -25,6 +25,10 @@
       "type": "build"
     },
     {
+      "name": "cdk-pipelines-github",
+      "type": "build"
+    },
+    {
       "name": "constructs",
       "version": "10.2.69",
       "type": "build"
@@ -108,6 +112,10 @@
       "type": "peer"
     },
     {
+      "name": "cdk-pipelines-github",
+      "type": "peer"
+    },
+    {
       "name": "constructs",
       "version": "^10.2.69",
       "type": "peer"
@@ -118,7 +126,7 @@
       "type": "runtime"
     },
     {
-      "name": "cdk-pipelines-github",
+      "name": "defu",
       "type": "runtime"
     },
     {

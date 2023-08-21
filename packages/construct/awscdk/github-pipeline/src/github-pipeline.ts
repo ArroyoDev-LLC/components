@@ -1,7 +1,13 @@
+import { Stack, type Stage } from 'aws-cdk-lib'
+import type * as cdkpipelines from 'aws-cdk-lib/pipelines'
+import type { AddGitHubStageOptions } from 'cdk-pipelines-github'
 import * as ghpipelines from 'cdk-pipelines-github'
 import { type Construct } from 'constructs'
 import flat from 'flat'
 
+/**
+ * Github Actions Contexts.
+ */
 export enum ActionsContext {
 	GITHUB = 'github',
 	SECRET = 'secrets',
@@ -10,11 +16,17 @@ export enum ActionsContext {
 	INTERPOLATE = 'interpolate',
 }
 
+/**
+ * Actions context value for interpolation.
+ */
 export interface ActionsContextValue {
 	context: ActionsContext
 	key: string
 }
 
+/**
+ * Github Actions Workflow Call Input.
+ */
 export interface ActionsWorkflowCallInput {
 	type: 'boolean' | 'number' | 'string'
 	description?: string
@@ -22,10 +34,21 @@ export interface ActionsWorkflowCallInput {
 	default?: string | number | boolean
 }
 
+/**
+ * Github Actions Workflow Dispatch Input.
+ */
 export interface ActionsWorkflowDispatchInput
 	extends Omit<ActionsWorkflowCallInput, 'type'> {
 	type: ActionsWorkflowCallInput['type'] | 'choice' | 'environment'
 	options?: string[]
+}
+
+/**
+ * Github Actions workflow file model.
+ */
+export interface GithubWorkflowModel {
+	[key: string]: unknown
+	jobs: Record<string, ghpipelines.Job>
 }
 
 /**
@@ -88,33 +111,90 @@ export class MaskValueStep extends ghpipelines.GitHubActionStep {
 	}
 }
 
-interface PipelineWorkflowProps extends ghpipelines.GitHubWorkflowProps {
+export interface PipelineBuildProps {
+	/**
+	 * Bucket to use to store assets.
+	 */
 	assetsS3Bucket: string
-	assetsS3Prefix: string
+	/**
+	 * Key prefix to store any assets under.
+	 */
+	assetsS3Prefix?: string
+	/**
+	 * Project root directory.
+	 */
+	rootDir: string
+}
+
+export interface PipelineWorkflowProps
+	extends ghpipelines.GitHubWorkflowProps,
+		Omit<PipelineBuildProps, 'rootDir'> {
+	rootDir?: string
 }
 
 export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
+	#stageAccounts: Map<string, string>
+	#workflowAccounts: Record<string, string> | undefined = undefined
+
 	constructor(
 		scope: Construct,
 		id: string,
 		readonly props: PipelineWorkflowProps,
 	) {
 		super(scope, id, props)
+		this.#stageAccounts = new Map()
+		if (Stack.isStack(scope)) {
+			this.#stageAccounts.set(scope.account, 'pipeline')
+		}
 	}
 
+	/**
+	 * @inheritDoc
+	 */
+	addStage(
+		stage: Stage,
+		options?: cdkpipelines.AddStageOpts,
+	): cdkpipelines.StageDeployment {
+		if (stage.account) {
+			this.#stageAccounts.set(stage.account, stage.stageName)
+		}
+		return super.addStage(stage, options)
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	addStageWithGitHubOptions(
+		stage: Stage,
+		options?: AddGitHubStageOptions,
+	): cdkpipelines.StageDeployment {
+		if (stage.account) {
+			this.#stageAccounts.set(stage.account, stage.stageName)
+		}
+		return super.addStageWithGitHubOptions(stage, options)
+	}
+
+	/**
+	 * Get a map of account ids to stage names.
+	 */
 	getStageAccountIds(): Record<string, string> {
-		const accountIds = this.waves.reduce(
-			(acc, wave) => [
-				...acc,
-				...wave.stages.map(
-					(stage) =>
-						[stage.stacks[0].account!, stage.stageName] as [string, string],
-				),
-			],
-			[] as [string, string][],
+		if (this.#workflowAccounts) return this.#workflowAccounts
+		const accountIdsToStage: Record<string, string> = Object.fromEntries(
+			this.#stageAccounts.entries(),
 		)
 
-		return Object.fromEntries(accountIds)
+		for (const wave of this.waves) {
+			wave.stages.forEach((stage) => {
+				stage.stacks.forEach((stack) => {
+					if (stack.account) {
+						accountIdsToStage[stack.account] = stage.stageName
+					}
+				})
+			})
+		}
+
+		this.#workflowAccounts = accountIdsToStage
+		return this.#workflowAccounts
 	}
 
 	/**

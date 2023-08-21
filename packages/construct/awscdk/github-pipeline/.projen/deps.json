@@ -107,6 +107,10 @@
       "type": "build"
     },
     {
+      "name": "vitest",
+      "type": "build"
+    },
+    {
       "name": "aws-cdk-lib",
       "version": "^2.91.0",
       "type": "peer"

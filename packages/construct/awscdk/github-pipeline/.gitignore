@@ -44,4 +44,5 @@ tsconfig.json
 !/tsconfig.json
 !/tsconfig.dev.json
 !/build.config.ts
+!/vitest.config.ts
 !/project.json

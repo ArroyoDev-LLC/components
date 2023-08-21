@@ -117,6 +117,9 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		return Object.fromEntries(accountIds)
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	protected doBuildPipeline() {
 		super.doBuildPipeline()
 		const patches = Array.from(this.iterPatches())
@@ -131,7 +134,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		].join('-')
 		return [
 			`s3://${this.props.assetsS3Bucket}`,
-			this.props.assetsS3Prefix,
+			this.props.assetsS3Prefix!,
 			assetsRun,
 			'cdk.out',
 		].join('/')
@@ -229,6 +232,13 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		const isCheckoutAction = String(value).startsWith('actions/checkout')
 		const isTarget = isUses && isCheckoutAction
 		if (!isTarget) return
+		// only update actions that do not have explicit parameters already set.
+		const keyParts = key.split('/')
+		const jobName = keyParts[1]
+		const stepIdx = keyParts[3]
+		const stepValue = this.workflowObj.jobs[jobName].steps[parseInt(stepIdx)]
+		if (stepValue.with && 'repository' in stepValue.with) return
+
 		const stepKey = '/' + key.split('/').slice(0, -1).join('/')
 		return ghpipelines.JsonPatch.replace(stepKey, {
 			name: 'Checkout',
@@ -241,11 +251,14 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		})
 	}
 
-	*iterPatches() {
+	get workflowObj(): GithubWorkflowModel {
 		// @ts-expect-error - private property
-		const workflowObj = this.workflowFile.obj as object
+		return Object.assign({}, this.workflowFile.obj) as GithubWorkflowModel
+	}
+
+	protected *iterPatches() {
 		const flatWorkflow: Record<string, string | number> = flat.flatten(
-			workflowObj,
+			this.workflowObj,
 			{ delimiter: '/' },
 		)
 		for (const [key, value] of Object.entries(flatWorkflow)) {

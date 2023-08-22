@@ -11,7 +11,7 @@ on:
       - main
   workflow_dispatch: {}
 jobs:
-  Build-deploy-test-stack-synth:
+  build-deploy-test-stack-synth:
     name: Synthesize
     permissions:
       contents: read
@@ -82,16 +82,21 @@ jobs:
           S3_SOURCE: cdk.out
           S3_DESTINATION: s3://test-bucket/cdk-assets/test-stack/\${{github.run_id}}-\${{github.run_attempt}}/cdk.out
         run: aws s3 sync \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
-  Assets-FileAsset1:
-    name: Publish Assets Assets-FileAsset1
-    needs:
-      - Build-deploy-test-stack-synth
+  publish:
+    name: Publish Assets
     permissions:
       contents: read
       id-token: write
-    runs-on: ubuntu-latest
     outputs:
-      asset-hash: \${{ steps.Publish.outputs.asset-hash }}
+      asset-hash1: \${{steps.publish.outputs.asset-hash1}}
+    runs-on: \${{inputs.runner || 'ubuntu-latest'}}
+    needs:
+      - Build-deploy-test-stack-synth
+    strategy:
+      fail-fast: true
+      matrix:
+        target:
+          - Assets-FileAsset1
     steps:
       - name: Mask values
         run: |-
@@ -110,19 +115,19 @@ jobs:
           S3_SOURCE: s3://test-bucket/cdk-assets/test-stack/\${{github.run_id}}-\${{github.run_attempt}}/cdk.out
           S3_DESTINATION: cdk.out
         run: aws s3 sync \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
-      - name: Install
+      - name: Install cdk-assets
         run: npm install --no-save cdk-assets
-      - id: Publish
-        name: Publish Assets-FileAsset1
-        run: /bin/bash ./cdk.out/publish-Assets-FileAsset1-step.sh
-  test-test-stack-Deploy:
+      - name: Publish
+        id: publish
+        run: /bin/bash ./cdk.out/publish-\${{matrix.target}}-step.sh
+  test-test-stack-deploy:
     name: Deploy testteststack14D97B62
     permissions:
       contents: read
       id-token: write
     needs:
       - Build-deploy-test-stack-synth
-      - Assets-FileAsset1
+      - publish
     runs-on: \${{inputs.runner || 'ubuntu-latest'}}
     steps:
       - name: Mask values
@@ -153,7 +158,7 @@ jobs:
         with:
           name: test-test-stack
           template: https://cdk-hnb659fds-assets-\${{secrets.AWS_ACCOUNT_ID_TEST}}-us-east-1.s3.us-east-1.amazonaws.com/\${{
-            needs.Assets-FileAsset1.outputs.asset-hash }}.json
+            needs.publish.outputs.asset-hash1 }}.json
           no-fail-on-empty-changeset: \\"1\\"
           role-arn: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_TEST}}:role/cdk-hnb659fds-cfn-exec-role-\${{secrets.AWS_ACCOUNT_ID_TEST}}-us-east-1
 "

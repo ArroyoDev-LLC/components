@@ -337,6 +337,7 @@ export class GithubCodePipeline {
 			publishAssetsAuthRegion: 'us-east-1',
 			...props,
 			synth,
+			assetsS3Prefix: this.assetsKeyPrefix,
 		})
 	}
 }

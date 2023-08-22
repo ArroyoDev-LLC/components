@@ -1,3 +1,4 @@
+import path from 'node:path'
 import * as ghpipelines from 'cdk-pipelines-github'
 import defu from 'defu'
 import { ActionsContext, interpolateValue } from './workflow'
@@ -81,24 +82,31 @@ export class S3BucketStep extends ghpipelines.GitHubActionStep {
 		readonly id: string,
 		readonly props: S3BucketStepProps,
 	) {
+		const source = S3BucketStep.buildS3Uri(props.source, props.scopeS3Uris)
+		const destination = S3BucketStep.buildS3Uri(
+			props.destination,
+			props.scopeS3Uris,
+		)
 		const env = {
 			...props.env,
-			S3_SOURCE: S3BucketStep.buildS3Uri(props.source, props.scopeS3Uris),
-			S3_DESTINATION: S3BucketStep.buildS3Uri(
-				props.destination,
-				props.scopeS3Uris,
-			),
+			S3_SOURCE: source,
+			S3_DESTINATION: destination,
 		}
 		const sourceRef = interpolateValue(ActionsContext.ENV, 'S3_SOURCE')
 		const destRef = interpolateValue(ActionsContext.ENV, 'S3_DESTINATION')
-		const command = ['aws', 's3', props.action, sourceRef, destRef].join(' ')
+		const s3Action = props.action === 'copy' ? 'cp' : props.action
+		const command = ['aws', 's3', s3Action, sourceRef, destRef].join(' ')
 		const preSteps = props.preSteps ?? []
 		const postSteps = props.postSteps ?? []
+		const title = source.includes('s3://')
+			? `Pull ${path.basename(destination)}`
+			: `Push ${path.basename(source)}`
 		super(id, {
 			env,
 			jobSteps: [
 				...preSteps,
 				{
+					name: title,
 					...(props.stepProps ?? {}),
 					env,
 					run: command,

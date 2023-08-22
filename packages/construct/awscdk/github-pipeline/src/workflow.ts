@@ -1,10 +1,13 @@
-import { Stack, type Stage } from 'aws-cdk-lib'
+import fs from 'node:fs'
+import path from 'node:path'
+import { Stack, Stage } from 'aws-cdk-lib'
 import type * as cdkpipelines from 'aws-cdk-lib/pipelines'
 import type { AddGitHubStageOptions } from 'cdk-pipelines-github'
 import * as ghpipelines from 'cdk-pipelines-github'
 import { type Construct } from 'constructs'
 import flat from 'flat'
 import { S3BucketStep } from './s3.ts'
+import { snakeCaseKeys } from './util'
 
 /**
  * Github Actions Contexts.
@@ -14,6 +17,7 @@ export enum ActionsContext {
 	SECRET = 'secrets',
 	ENV = 'env',
 	INPUTS = 'inputs',
+	MATRIX = 'matrix',
 	INTERPOLATE = 'interpolate',
 }
 
@@ -59,6 +63,10 @@ export interface GithubWorkflowModel {
 	[key: string]: unknown
 	jobs: Record<string, ghpipelines.Job>
 	concurrency?: WorkflowConcurrency
+}
+
+interface WorkflowPatcher {
+	(key: string, value: string | number): ghpipelines.JsonPatch | undefined
 }
 
 /**
@@ -223,12 +231,115 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 	}
 
 	/**
+	 * Build matrix for publishing job assets.
+	 * @protected
+	 */
+	protected buildFileAssetsMatrix(): ghpipelines.Job {
+		// @ts-expect-error - private property
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+		const assetHashMap: Record<string, string> = this.assetHashMap
+		const assetJobNames: string[] = Object.values(assetHashMap)
+
+		const outDir = Stage.of(this)!.outdir
+
+		const jobOutputs = Object.entries(assetHashMap).map(
+			([assetHash, jobName]) => {
+				const scriptPath = path.posix.join(outDir, `publish-${jobName}-step.sh`)
+				const lines = fs
+					.readFileSync(scriptPath, { encoding: 'utf-8' })
+					.toString()
+					.split('\n')
+				const assetNum = jobName.slice(jobName.lastIndexOf('t') + 1)
+				const assetOutput = `asset-hash${assetNum}`
+				lines.push(`echo '${assetOutput}=${assetHash}' >> $GITHUB_OUTPUT`)
+				fs.writeFileSync(scriptPath, lines.join('\n'), { encoding: 'utf-8' })
+				return [assetOutput, jobName]
+			},
+		)
+
+		const matrix: ghpipelines.JobMatrix = {
+			// @ts-expect-error JobMatrix has typing issues
+			target: assetJobNames,
+		}
+		const synthStep = this.synth as cdkpipelines.ShellStep
+
+		const targetRef = interpolateValue(ActionsContext.MATRIX, 'target')
+
+		const outputs = Object.fromEntries(
+			jobOutputs.map(([assetOutput, _]) => [
+				assetOutput,
+				interpolateValue(
+					ActionsContext.INTERPOLATE,
+					`steps.publish.outputs.${assetOutput}`,
+				),
+			]),
+		)
+
+		return {
+			name: 'Publish Assets',
+			permissions: {
+				contents: ghpipelines.JobPermission.READ,
+				idToken: ghpipelines.JobPermission.WRITE,
+			},
+			outputs,
+			runsOn: interpolateValue(
+				ActionsContext.INTERPOLATE,
+				`inputs.runner || 'ubuntu-latest'`,
+			),
+			needs: [`Build-${synthStep.id}`],
+			strategy: { failFast: true, matrix },
+			steps: [
+				...this.props.awsCreds!.credentialSteps('us-east-1'),
+				...this.buildAssetsSync('cdk.out', 'pull'),
+				{
+					name: 'Install cdk-assets',
+					run: 'npm install --no-save cdk-assets',
+				},
+				{
+					name: 'Publish',
+					id: 'publish',
+					run: `/bin/bash ./cdk.out/publish-${targetRef}-step.sh`,
+				},
+			],
+		}
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	protected doBuildPipeline() {
 		super.doBuildPipeline()
-		const patches = Array.from(this.iterPatches())
-		this.workflowFile.patch(...patches)
+
+		const publishJob = this.buildFileAssetsMatrix()
+		// update needs to use matrix
+		const updateNeeds = (job: ghpipelines.Job) => {
+			if (!job.needs) return job
+			if (job.needs.some((n) => n.startsWith('Assets-FileAsset'))) {
+				return {
+					...job,
+					needs: [
+						...job.needs.filter((n) => !n.startsWith('Assets-FileAsset')),
+						'publish',
+					],
+				}
+			}
+			return job
+		}
+
+		const jobs = Object.keys(this.workflowObj.jobs)
+			.filter((key) => !key.startsWith('Assets-File'))
+			.map((key) => [key, updateNeeds(this.workflowObj.jobs[key])])
+
+		jobs.splice(1, 0, ['publish', publishJob])
+		this.workflowFile.update({
+			...this.workflowObj,
+			jobs: snakeCaseKeys(Object.fromEntries(jobs)) as Record<
+				string,
+				ghpipelines.Job
+			>,
+		})
+
+		this.applyPatches({ assetsMatrix: true })
 		const patched = ghpipelines.JsonPatch.apply(
 			this.workflowObj,
 			// @ts-expect-error - private property
@@ -236,10 +347,11 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 			...this.workflowFile.patchOperations,
 		) as GithubWorkflowModel
 		this.workflowFile.update(patched)
+
 		// @ts-expect-error private property
 		this.workflowFile.patchOperations = []
 		const [maskStep] = this.buildMaskStep()
-		const jobNames = Object.keys(patched.jobs)
+		const jobNames = Object.keys(this.workflowObj.jobs)
 		const maskPatches = jobNames.map((name) =>
 			ghpipelines.JsonPatch.add(
 				`/jobs/${name}/steps/0`,
@@ -354,6 +466,22 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		})
 	}
 
+	protected removeFileAssetNeeds(key: string, value: string | number) {
+		const needsMatch = key.match(/needs\/(\d+)$/)
+		const isFileAssets = String(value).startsWith('Assets-FileAsset')
+		if (!needsMatch || !isFileAssets) return
+		return ghpipelines.JsonPatch.remove('/' + key)
+	}
+
+	protected replaceFileAssetMatrixRefs(key: string, value: string | number) {
+		const matcher = /needs\.Assets-FileAsset(\d+)\.outputs\.asset-hash/
+		if (!String(value).match(matcher)) return
+		return ghpipelines.JsonPatch.replace(
+			'/' + key,
+			String(value).replace(matcher, 'needs.publish.outputs.asset-hash$1'),
+		)
+	}
+
 	get workflowObj(): GithubWorkflowModel {
 		return JSON.parse(
 			// @ts-expect-error - private property
@@ -361,20 +489,31 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		) as GithubWorkflowModel
 	}
 
-	protected *iterPatches() {
-		const flatWorkflow: Record<string, string | number> = flat.flatten(
-			this.workflowObj,
-			{ delimiter: '/' },
-		)
-		for (const [key, value] of Object.entries(flatWorkflow)) {
-			const patches: ghpipelines.JsonPatch[] = [
-				this.runnerPatch(key, value),
-				this.checkoutPatch(key, value),
-				this.stepsToSyncAssemblyPatch(key, value),
-				this.moveAssetAuthenticationPatch(key, value),
-				this.maskAccountIdPatch(key, value),
-			].filter(Boolean) as ghpipelines.JsonPatch[]
-			yield* patches
+	protected applyPatches(options?: { assetsMatrix?: boolean }) {
+		const patchers = [
+			this.runnerPatch.bind(this),
+			this.checkoutPatch.bind(this),
+			this.stepsToSyncAssemblyPatch.bind(this),
+			this.moveAssetAuthenticationPatch.bind(this),
+			this.maskAccountIdPatch.bind(this),
+			options?.assetsMatrix && this.removeFileAssetNeeds.bind(this),
+			options?.assetsMatrix && this.replaceFileAssetMatrixRefs.bind(this),
+		].filter(Boolean) as WorkflowPatcher[]
+
+		for (const patcher of patchers) {
+			const inObject = Object.assign({}, this.workflowObj)
+			const flatWorkflow: Record<string, string | number> = flat.flatten(
+				inObject,
+				{ delimiter: '/' },
+			)
+			const patches = []
+			for (const [key, value] of Object.entries(flatWorkflow)) {
+				patches.push(patcher(key, value))
+			}
+			const ops = patches.filter(Boolean) as ghpipelines.JsonPatch[]
+			if (ops.length) {
+				this.workflowFile.update(ghpipelines.JsonPatch.apply(inObject, ...ops))
+			}
 		}
 	}
 

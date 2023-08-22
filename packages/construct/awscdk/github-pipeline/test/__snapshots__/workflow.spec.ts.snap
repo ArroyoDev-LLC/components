@@ -1,5 +1,540 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`GithubCodePipeline > builder has expected props 1`] = `
+{
+  "assetsS3Bucket": "test-stack",
+  "assetsS3Prefix": "multi-stage",
+  "awsCreds": OpenIdConnectProvider {
+    "gitHubActionRoleArn": "arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole",
+    "roleSessionName": "deploy-many-stages",
+  },
+  "postBuildSteps": [
+    {
+      "continueOnError": true,
+      "env": {
+        "S3_DESTINATION": "s3://test-stack/cdk-assets/multi-stage/cdk.context.json",
+        "S3_SOURCE": "packages/test-many/cdk.context.json",
+      },
+      "name": "Push cdk.context.json",
+      "run": "aws s3 cp \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}",
+    },
+  ],
+  "postPublishSteps": [
+    {
+      "name": "My Custom post publish step",
+      "run": "echo \\"hello world\\"",
+    },
+  ],
+  "preBuildSteps": [
+    {
+      "name": "Setup PNPM",
+      "uses": "pnpm/action-setup@v2.4.0",
+      "with": {
+        "version": "8",
+      },
+    },
+    {
+      "name": "Setup Node",
+      "uses": "actions/setup-node@v3",
+      "with": {
+        "cache": "pnpm",
+        "node-version": "18",
+      },
+    },
+    {
+      "name": "Install SOPs",
+      "uses": "CrisisCleanup/mozilla-sops-action@main",
+      "with": {
+        "version": "3.7.3",
+      },
+    },
+    {
+      "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
+      "name": "Install AWS CLI",
+      "uses": "unfor19/install-aws-cli-action@v1",
+      "with": {
+        "arch": "arm64",
+        "version": "2",
+      },
+    },
+    {
+      "name": "Install Helm",
+      "uses": "azure/setup-helm@v3",
+      "with": {
+        "version": "3.6.3",
+      },
+    },
+    {
+      "name": "Authenticate Via OIDC Role",
+      "uses": "aws-actions/configure-aws-credentials@v1-node16",
+      "with": {
+        "aws-access-key-id": undefined,
+        "aws-region": "us-east-1",
+        "aws-secret-access-key": undefined,
+        "role-duration-seconds": 1800,
+        "role-session-name": "deploy-many-stages",
+        "role-skip-session-tagging": true,
+        "role-to-assume": "arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole",
+      },
+    },
+    {
+      "continueOnError": true,
+      "env": {
+        "S3_DESTINATION": "packages/test-many/cdk.context.json",
+        "S3_SOURCE": "s3://test-stack/cdk-assets/multi-stage/cdk.context.json",
+      },
+      "name": "Pull cdk.context.json",
+      "run": "aws s3 cp \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}",
+    },
+  ],
+  "prePublishSteps": [
+    {
+      "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
+      "name": "Install AWS CLI",
+      "uses": "unfor19/install-aws-cli-action@v1",
+      "with": {
+        "arch": "arm64",
+        "version": "2",
+      },
+    },
+  ],
+  "rootDir": "/tmp/github-pipeline-test/builder-has-expected-props",
+  "workflowName": "Deploy Many Stages",
+}
+`;
+
+exports[`GithubCodePipeline > builder has expected props 2`] = `
+{
+  "commands": [
+    "pnpm build",
+    "pnpm -F 'test.many' run synth:silent",
+    "cp -r packages/test-many/cdk.out ./cdk.out",
+  ],
+  "env": {
+    "CI": "true",
+    "GIGET_AUTH": "\${{secrets.GH_CONFIGS_RO_PAT}}",
+    "NX_BRANCH": "\${{github.event.number}}",
+    "NX_CLOUD_ACCESS_TOKEN": "\${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
+    "NX_NON_NATIVE_HASHER": "true",
+    "NX_RUN_GROUP": "\${{github.run_id}}",
+  },
+  "installCommands": [
+    "pnpm install",
+  ],
+}
+`;
+
+exports[`GithubCodePipeline > builder has expected props 3`] = `
+GithubCodePipeline {
+  "props": {
+    "assetsS3Bucket": "test-stack",
+    "assetsS3Prefix": "multi-stage",
+    "awsCreds": OpenIdConnectProvider {
+      "gitHubActionRoleArn": "arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole",
+      "roleSessionName": "deploy-many-stages",
+    },
+    "postBuildSteps": [
+      {
+        "continueOnError": true,
+        "env": {
+          "S3_DESTINATION": "s3://test-stack/cdk-assets/multi-stage/cdk.context.json",
+          "S3_SOURCE": "packages/test-many/cdk.context.json",
+        },
+        "name": "Push cdk.context.json",
+        "run": "aws s3 cp \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}",
+      },
+    ],
+    "postPublishSteps": [
+      {
+        "name": "My Custom post publish step",
+        "run": "echo \\"hello world\\"",
+      },
+    ],
+    "preBuildSteps": [
+      {
+        "name": "Setup PNPM",
+        "uses": "pnpm/action-setup@v2.4.0",
+        "with": {
+          "version": "8",
+        },
+      },
+      {
+        "name": "Setup Node",
+        "uses": "actions/setup-node@v3",
+        "with": {
+          "cache": "pnpm",
+          "node-version": "18",
+        },
+      },
+      {
+        "name": "Install SOPs",
+        "uses": "CrisisCleanup/mozilla-sops-action@main",
+        "with": {
+          "version": "3.7.3",
+        },
+      },
+      {
+        "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
+        "name": "Install AWS CLI",
+        "uses": "unfor19/install-aws-cli-action@v1",
+        "with": {
+          "arch": "arm64",
+          "version": "2",
+        },
+      },
+      {
+        "name": "Install Helm",
+        "uses": "azure/setup-helm@v3",
+        "with": {
+          "version": "3.6.3",
+        },
+      },
+      {
+        "name": "Authenticate Via OIDC Role",
+        "uses": "aws-actions/configure-aws-credentials@v1-node16",
+        "with": {
+          "aws-access-key-id": undefined,
+          "aws-region": "us-east-1",
+          "aws-secret-access-key": undefined,
+          "role-duration-seconds": 1800,
+          "role-session-name": "deploy-many-stages",
+          "role-skip-session-tagging": true,
+          "role-to-assume": "arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole",
+        },
+      },
+      {
+        "continueOnError": true,
+        "env": {
+          "S3_DESTINATION": "packages/test-many/cdk.context.json",
+          "S3_SOURCE": "s3://test-stack/cdk-assets/multi-stage/cdk.context.json",
+        },
+        "name": "Pull cdk.context.json",
+        "run": "aws s3 cp \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}",
+      },
+    ],
+    "prePublishSteps": [
+      {
+        "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
+        "name": "Install AWS CLI",
+        "uses": "unfor19/install-aws-cli-action@v1",
+        "with": {
+          "arch": "arm64",
+          "version": "2",
+        },
+      },
+    ],
+    "rootDir": "/tmp/github-pipeline-test/builder-has-expected-props",
+    "workflowName": "Deploy Many Stages",
+  },
+  "synthProps": {
+    "commands": [
+      "pnpm build",
+      "pnpm -F 'test.many' run synth:silent",
+      "cp -r packages/test-many/cdk.out ./cdk.out",
+    ],
+    "env": {
+      "CI": "true",
+      "GIGET_AUTH": "\${{secrets.GH_CONFIGS_RO_PAT}}",
+      "NX_BRANCH": "\${{github.event.number}}",
+      "NX_CLOUD_ACCESS_TOKEN": "\${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
+      "NX_NON_NATIVE_HASHER": "true",
+      "NX_RUN_GROUP": "\${{github.run_id}}",
+    },
+    "installCommands": [
+      "pnpm install",
+    ],
+  },
+}
+`;
+
+exports[`GithubCodePipeline > synthesizes as expected with many stages 1`] = `
+"# AUTOMATICALLY GENERATED FILE, DO NOT EDIT MANUALLY.
+# Generated by AWS CDK and [cdk-pipelines-github](https://github.com/cdklabs/cdk-pipelines-github)
+
+name: Deploy Many Stages
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+  workflow_call:
+    inputs:
+      runner:
+        type: string
+        default: self-hosted
+        description: custom runner
+        required: false
+jobs:
+  build-deploy-many-stages-synth:
+    name: Synthesize
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: \${{inputs.runner || 'ubuntu-latest'}}
+    needs: []
+    env:
+      CI: \\"true\\"
+      GIGET_AUTH: \${{secrets.GH_CONFIGS_RO_PAT}}
+      NX_NON_NATIVE_HASHER: \\"true\\"
+      NX_BRANCH: \${{github.event.number}}
+      NX_RUN_GROUP: \${{github.run_id}}
+      NX_CLOUD_ACCESS_TOKEN: \${{secrets.NX_CLOUD_ACCESS_TOKEN}}
+    steps:
+      - name: Mask values
+        run: |-
+          echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: CrisisCleanup/infrastructure
+          ref: main
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2.4.0
+        with:
+          version: \\"8\\"
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: \\"18\\"
+          cache: pnpm
+      - name: Install SOPs
+        uses: CrisisCleanup/mozilla-sops-action@main
+        with:
+          version: 3.7.3
+      - name: Install AWS CLI
+        uses: unfor19/install-aws-cli-action@v1
+        if: runner.arch == 'ARM64' || inputs.runner == 'self-hosted'
+        with:
+          arch: arm64
+          version: \\"2\\"
+      - name: Install Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: 3.6.3
+      - name: Authenticate Via OIDC Role
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: us-east-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
+          role-session-name: deploy-many-stages
+      - name: Pull cdk.context.json
+        continue-on-error: true
+        env:
+          S3_SOURCE: s3://test-stack/cdk-assets/multi-stage/cdk.context.json
+          S3_DESTINATION: packages/test-many/cdk.context.json
+        run: aws s3 cp \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
+      - name: Install
+        run: pnpm install
+      - name: Build
+        run: |-
+          pnpm build
+          pnpm -F 'test.many' run synth:silent
+          cp -r packages/test-many/cdk.out ./cdk.out
+      - name: Push cdk.context.json
+        continue-on-error: true
+        env:
+          S3_SOURCE: packages/test-many/cdk.context.json
+          S3_DESTINATION: s3://test-stack/cdk-assets/multi-stage/cdk.context.json
+        run: aws s3 cp \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
+      - name: Push cdk.out
+        env:
+          S3_SOURCE: cdk.out
+          S3_DESTINATION: s3://test-stack/cdk-assets/multi-stage/\${{github.run_id}}-\${{github.run_attempt}}/cdk.out
+        run: aws s3 sync \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
+  publish:
+    name: Publish Assets
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      asset-hash1: \${{steps.publish.outputs.asset-hash1}}
+      asset-hash2: \${{steps.publish.outputs.asset-hash2}}
+      asset-hash3: \${{steps.publish.outputs.asset-hash3}}
+    runs-on: \${{inputs.runner || 'ubuntu-latest'}}
+    needs:
+      - Build-deploy-many-stages-synth
+    strategy:
+      fail-fast: true
+      matrix:
+        target:
+          - Assets-FileAsset1
+          - Assets-FileAsset2
+          - Assets-FileAsset3
+    steps:
+      - name: Mask values
+        run: |-
+          echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
+      - name: Install AWS CLI
+        uses: unfor19/install-aws-cli-action@v1
+        if: runner.arch == 'ARM64' || inputs.runner == 'self-hosted'
+        with:
+          arch: arm64
+          version: \\"2\\"
+      - name: Authenticate Via OIDC Role
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: us-east-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
+          role-session-name: deploy-many-stages
+      - name: Pull cdk.out
+        env:
+          S3_SOURCE: s3://test-stack/cdk-assets/multi-stage/\${{github.run_id}}-\${{github.run_attempt}}/cdk.out
+          S3_DESTINATION: cdk.out
+        run: aws s3 sync \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
+      - name: Install cdk-assets
+        run: npm install --no-save cdk-assets
+      - name: Publish
+        id: publish
+        run: /bin/bash ./cdk.out/publish-\${{matrix.target}}-step.sh
+      - name: My Custom post publish step
+        run: echo \\"hello world\\"
+  alpha-alpha-stack-deploy:
+    name: Deploy alphaalphastack5A5103F7
+    permissions:
+      contents: read
+      id-token: write
+    needs:
+      - Build-deploy-many-stages-synth
+      - publish
+    runs-on: \${{inputs.runner || 'ubuntu-latest'}}
+    steps:
+      - name: Mask values
+        run: |-
+          echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
+      - name: Authenticate Via OIDC Role
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: us-east-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
+          role-session-name: deploy-many-stages
+      - name: Assume CDK Deploy Role
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: us-east-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          aws-access-key-id: \${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: \${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: \${{ env.AWS_SESSION_TOKEN }}
+          role-to-assume: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}:role/cdk-hnb659fds-deploy-role-\${{secrets.AWS_ACCOUNT_ID_ALPHA}}-us-east-1
+          role-external-id: Pipeline
+      - id: Deploy
+        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+        with:
+          name: alpha-alpha-stack
+          template: https://cdk-hnb659fds-assets-\${{secrets.AWS_ACCOUNT_ID_ALPHA}}-us-east-1.s3.us-east-1.amazonaws.com/\${{
+            needs.publish.outputs.asset-hash1 }}.json
+          no-fail-on-empty-changeset: \\"1\\"
+          role-arn: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}:role/cdk-hnb659fds-cfn-exec-role-\${{secrets.AWS_ACCOUNT_ID_ALPHA}}-us-east-1
+  beta-beta-stack-deploy:
+    name: Deploy betabetastackB3010893
+    permissions:
+      contents: read
+      id-token: write
+    needs:
+      - Build-deploy-many-stages-synth
+      - alpha-alpha-stack-Deploy
+      - publish
+    runs-on: \${{inputs.runner || 'ubuntu-latest'}}
+    steps:
+      - name: Mask values
+        run: |-
+          echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
+      - name: Authenticate Via OIDC Role
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: us-east-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
+          role-session-name: deploy-many-stages
+      - name: Assume CDK Deploy Role
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: us-east-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          aws-access-key-id: \${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: \${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: \${{ env.AWS_SESSION_TOKEN }}
+          role-to-assume: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_BETA}}:role/cdk-hnb659fds-deploy-role-\${{secrets.AWS_ACCOUNT_ID_BETA}}-us-east-1
+          role-external-id: Pipeline
+      - id: Deploy
+        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+        with:
+          name: beta-beta-stack
+          template: https://cdk-hnb659fds-assets-\${{secrets.AWS_ACCOUNT_ID_BETA}}-us-east-1.s3.us-east-1.amazonaws.com/\${{
+            needs.publish.outputs.asset-hash2 }}.json
+          no-fail-on-empty-changeset: \\"1\\"
+          role-arn: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_BETA}}:role/cdk-hnb659fds-cfn-exec-role-\${{secrets.AWS_ACCOUNT_ID_BETA}}-us-east-1
+  delta-delta-stack-deploy:
+    name: Deploy deltadeltastack739940B6
+    permissions:
+      contents: read
+      id-token: write
+    needs:
+      - Build-deploy-many-stages-synth
+      - beta-beta-stack-Deploy
+      - publish
+    runs-on: \${{inputs.runner || 'ubuntu-latest'}}
+    steps:
+      - name: Mask values
+        run: |-
+          echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
+          echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
+      - name: Authenticate Via OIDC Role
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: us-east-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
+          role-session-name: deploy-many-stages
+      - name: Assume CDK Deploy Role
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-region: us-east-1
+          role-duration-seconds: 1800
+          role-skip-session-tagging: true
+          aws-access-key-id: \${{ env.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: \${{ env.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: \${{ env.AWS_SESSION_TOKEN }}
+          role-to-assume: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_DELTA}}:role/cdk-hnb659fds-deploy-role-\${{secrets.AWS_ACCOUNT_ID_DELTA}}-us-east-1
+          role-external-id: Pipeline
+      - id: Deploy
+        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+        with:
+          name: delta-delta-stack
+          template: https://cdk-hnb659fds-assets-\${{secrets.AWS_ACCOUNT_ID_DELTA}}-us-east-1.s3.us-east-1.amazonaws.com/\${{
+            needs.publish.outputs.asset-hash3 }}.json
+          no-fail-on-empty-changeset: \\"1\\"
+          role-arn: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_DELTA}}:role/cdk-hnb659fds-cfn-exec-role-\${{secrets.AWS_ACCOUNT_ID_DELTA}}-us-east-1
+concurrency:
+  group: deploy-multi-stack
+  cancel-in-progress: false
+"
+`;
+
 exports[`GithubCodePipeline > synthesizes minimal expected pipeline 1`] = `
 "# AUTOMATICALLY GENERATED FILE, DO NOT EDIT MANUALLY.
 # Generated by AWS CDK and [cdk-pipelines-github](https://github.com/cdklabs/cdk-pipelines-github)
@@ -30,26 +565,6 @@ jobs:
         with:
           repository: CrisisCleanup/infrastructure
           ref: main
-      - name: Install Helm
-        uses: azure/setup-helm@v3
-        with:
-          version: 3.12.2
-      - name: Install AWS CLI
-        uses: unfor19/install-aws-cli-action@v1
-        if: inputs.runner == 'self-hosted'
-        with:
-          arch: arm64
-      - name: Install SOPs
-        uses: CrisisCleanup/mozilla-sops-action@main
-        with:
-          version: 3.7.3
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2.4.0
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: \\"18\\"
-          cache: pnpm
       - name: Authenticate Via OIDC Role
         uses: aws-actions/configure-aws-credentials@v1-node16
         with:

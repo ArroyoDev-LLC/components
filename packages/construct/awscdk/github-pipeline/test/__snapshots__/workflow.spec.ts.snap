@@ -54,11 +54,12 @@ jobs:
           role-skip-session-tagging: true
           role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
           role-session-name: deploy-test-stack
-      - continue-on-error: true
+      - name: Pull cdk.context.json
+        continue-on-error: true
         env:
           S3_SOURCE: s3://test-bucket/cdk-assets/test-stack/cdk.context.json
           S3_DESTINATION: packages/test-stack/cdk.context.json
-        run: aws s3 copy \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
+        run: aws s3 cp \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
       - name: Install
         run: pnpm install
       - name: Build
@@ -66,11 +67,12 @@ jobs:
           pnpm build
           pnpm -F 'test-stack' run synth:silent
           cp -r packages/test-stack/cdk.out ./cdk.out
-      - continue-on-error: true
+      - name: Push cdk.context.json
+        continue-on-error: true
         env:
           S3_SOURCE: packages/test-stack/cdk.context.json
           S3_DESTINATION: s3://test-bucket/cdk-assets/test-stack/cdk.context.json
-        run: aws s3 copy \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
+        run: aws s3 cp \${{env.S3_SOURCE}} \${{env.S3_DESTINATION}}
       - name: Push assets
         env:
           SOURCE: cdk.out

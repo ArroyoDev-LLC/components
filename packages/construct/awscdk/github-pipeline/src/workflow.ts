@@ -4,6 +4,7 @@ import type { AddGitHubStageOptions } from 'cdk-pipelines-github'
 import * as ghpipelines from 'cdk-pipelines-github'
 import { type Construct } from 'constructs'
 import flat from 'flat'
+import { S3BucketStep } from './s3.ts'
 
 /**
  * Github Actions Contexts.
@@ -249,50 +250,30 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		this.workflowFile.writeFile()
 	}
 
-	buildAssetsS3Path(): string {
-		const assetsRun = [
-			interpolateValue(ActionsContext.GITHUB, 'run_id'),
-			interpolateValue(ActionsContext.GITHUB, 'run_attempt'),
-		].join('-')
-		return [
-			`s3://${this.props.assetsS3Bucket}`,
-			this.props.assetsS3Prefix!,
-			assetsRun,
-			'cdk.out',
-		].join('/')
-	}
-
+	/**
+	 * Build assets sync steps.
+	 * @param target Target directory.
+	 * @param direction Direction to sync.
+	 */
 	buildAssetsSync(
 		target: string,
 		direction: 'pull' | 'push',
 	): ghpipelines.JobStep[] {
-		const s3Path = this.buildAssetsS3Path()
-		const source = direction === 'pull' ? s3Path : target
-		const dest = direction === 'pull' ? target : s3Path
-		const stageAccountIds = this.getStageAccountIds()
-		const maskValues: [ActionsContext, string][] = Object.values(
-			stageAccountIds,
-		).map((envName) => [
-			ActionsContext.SECRET,
-			`AWS_ACCOUNT_ID_${envName.toUpperCase()}`,
-		])
-		const maskStep = MaskValueStep.values('Mask IDs', ...maskValues, [
-			ActionsContext.SECRET,
-			'AWS_PIPELINE_ACCOUNT_ID',
-		])
-		const maskRun = maskStep.jobSteps[0].run!
-		return [
-			{
-				name: `${
-					direction.charAt(0).toUpperCase() + direction.slice(1)
-				} assets`,
-				env: {
-					SOURCE: source,
-					DESTINATION: dest,
-				},
-				run: [maskRun, 'aws s3 sync $SOURCE $DESTINATION'].join('\n'),
+		const pullAssetsStep = new S3BucketStep('CDK Assets', {
+			scopeS3Uris: true,
+			action: 'sync',
+			source: {
+				bucketName: this.props.assetsS3Bucket,
+				prefix: this.props.assetsS3Prefix,
+				key: 'cdk.out',
 			},
-		]
+			destination: target,
+		})
+
+		const step =
+			direction === 'pull' ? pullAssetsStep : pullAssetsStep.flipDirection()
+
+		return step.jobSteps
 	}
 
 	protected stepsToSyncAssemblyPatch(key: string, value: string | number) {

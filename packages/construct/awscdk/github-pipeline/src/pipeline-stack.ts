@@ -253,6 +253,82 @@ export class GithubCodePipeline {
 	}
 
 	/**
+	 * Install Helm.
+	 * @param toolVersion The version of Helm to install.
+	 */
+	installHelm(toolVersion?: string) {
+		return this.synthPreStep({
+			name: 'Install Helm',
+			uses: 'azure/setup-helm@v3',
+			with: {
+				version: toolVersion ?? process.env.TOOLS_HELM_VERSION ?? '3.12.2',
+			},
+		})
+	}
+
+	/**
+	 * Install AWS CLI.
+	 * @param toolVersion The version of AWS CLI to install.
+	 */
+	installAwsCli(toolVersion?: string) {
+		const step: ghpipelines.JobStep = {
+			name: 'Install AWS CLI',
+			uses: 'unfor19/install-aws-cli-action@v1',
+			if: `runner.arch == 'ARM64' || inputs.runner == 'self-hosted'`,
+			with: {
+				arch: 'arm64',
+				version: toolVersion ?? process.env.TOOLS_AWSCLI_VERSION ?? '2',
+			},
+		}
+		return this.synthPreStep(step).publishPreStep(step)
+	}
+
+	/**
+	 * Setup NodeJS and PNPM.
+	 * @param nodeVersion The version of NodeJS to install.
+	 * @param pnpmVersion The version of PNPM to install.
+	 */
+	installPnpm(nodeVersion?: string, pnpmVersion?: string) {
+		return this.synthPreStep(
+			{
+				name: 'Setup PNPM',
+				uses: 'pnpm/action-setup@v2.4.0',
+				// defaults to 'packageManager' field in package.json
+				...(pnpmVersion ? { with: { version: pnpmVersion } } : {}),
+			},
+			{
+				name: 'Setup Node',
+				uses: 'actions/setup-node@v3',
+				with: {
+					'node-version': nodeVersion ?? '18',
+					cache: 'pnpm',
+				},
+			},
+		)
+	}
+
+	/**
+	 * Install SOPs.
+	 * @param toolVersion The version of SOPs to install.
+	 */
+	installSops(toolVersion?: string) {
+		return this.synthPreStep({
+			name: 'Install SOPs',
+			uses: 'CrisisCleanup/mozilla-sops-action@main',
+			with: {
+				version: toolVersion ?? process.env.TOOLS_SOPS_VERSION ?? '3.7.3',
+			},
+		})
+	}
+
+	/**
+	 * Install default tools.
+	 */
+	defaultTools() {
+		return this.installHelm().installAwsCli().installSops().installPnpm()
+	}
+
+	/**
 	 * Add a synth target to the pipeline.
 	 *
 	 * @remarks
@@ -277,60 +353,17 @@ export class GithubCodePipeline {
 
 		const pushContextStep = pullContextStep.flipDirection()
 
-		// todo: do not hardcode setup dependencies.
-		const preBuildSteps = [
-			{
-				name: 'Install Helm',
-				uses: 'azure/setup-helm@v3',
-				with: {
-					version: '3.12.2',
-				},
-			},
-			{
-				name: 'Install AWS CLI',
-				uses: 'unfor19/install-aws-cli-action@v1',
-				if: "inputs.runner == 'self-hosted'",
-				with: {
-					arch: 'arm64',
-				},
-			},
-			{
-				name: 'Install SOPs',
-				uses: 'CrisisCleanup/mozilla-sops-action@main',
-				with: {
-					version: '3.7.3',
-				},
-			},
-			{
-				name: 'Setup PNPM',
-				uses: 'pnpm/action-setup@v2.4.0',
-			},
-			{
-				name: 'Setup Node',
-				uses: 'actions/setup-node@v3',
-				with: {
-					'node-version': '18',
-					cache: 'pnpm',
-				},
-			},
-			...this.props.awsCreds!.credentialSteps('us-east-1'),
-			...pullContextStep.jobSteps,
-		]
-
-		const postBuildSteps = [...pushContextStep.jobSteps]
-
 		const cdkOut = path.join(target.workingDirectory, 'cdk.out')
 
-		return this.clone(
-			{
-				preBuildSteps,
-				postBuildSteps,
-			},
-			{
+		return this.synthPreStep(
+			...this.props.awsCreds!.credentialSteps('us-east-1'),
+			...pullContextStep.jobSteps,
+		)
+			.synthPostStep(...pushContextStep.jobSteps)
+			.clone(undefined, {
 				installCommands: ['pnpm install'],
 				commands: ['pnpm build', synthCommand, `cp -r ${cdkOut} ./cdk.out`],
-			},
-		)
+			})
 	}
 
 	/**

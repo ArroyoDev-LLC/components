@@ -142,6 +142,14 @@ export interface PipelineBuildProps {
 	 * Project root directory.
 	 */
 	rootDir: string
+	/**
+	 * Steps to execute prior to assets publish.
+	 */
+	prePublishSteps?: ghpipelines.JobStep[]
+	/**
+	 * Steps to execute post assets publish.
+	 */
+	postPublishSteps?: ghpipelines.JobStep[]
 }
 
 export interface PipelineWorkflowProps
@@ -289,6 +297,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 			needs: [`Build-${synthStep.id}`],
 			strategy: { failFast: true, matrix },
 			steps: [
+				...(this.props.prePublishSteps ?? []),
 				...this.props.awsCreds!.credentialSteps('us-east-1'),
 				...this.buildAssetsSync('cdk.out', 'pull'),
 				{
@@ -300,6 +309,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 					id: 'publish',
 					run: `/bin/bash ./cdk.out/publish-${targetRef}-step.sh`,
 				},
+				...(this.props.postPublishSteps ?? []),
 			],
 		}
 	}

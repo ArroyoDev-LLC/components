@@ -44,11 +44,20 @@ export interface ActionsWorkflowDispatchInput
 }
 
 /**
+ * Workflow concurrency options.
+ */
+export interface WorkflowConcurrency {
+	group: string
+	cancelInProgress?: boolean
+}
+
+/**
  * Github Actions workflow file model.
  */
 export interface GithubWorkflowModel {
 	[key: string]: unknown
 	jobs: Record<string, ghpipelines.Job>
+	concurrency?: WorkflowConcurrency
 }
 
 /**
@@ -366,6 +375,21 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 	): this {
 		const patch = ghpipelines.JsonPatch.add('/on/workflow_dispatch', {
 			inputs,
+		})
+		this.workflowFile.patch(patch)
+		return this
+	}
+
+	/**
+	 * Define workflow concurrency
+	 * @param options
+	 */
+	concurrency(options: WorkflowConcurrency): this {
+		const patch = ghpipelines.JsonPatch.add('/concurrency', {
+			group: options.group,
+			...(options.cancelInProgress
+				? { 'cancel-in-progress': options.cancelInProgress }
+				: {}),
 		})
 		this.workflowFile.patch(patch)
 		return this

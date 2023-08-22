@@ -64,6 +64,7 @@
   },
   "dependencies": {
     "@crisiscleanup/config": "workspace:*",
+    "decamelize": "^5.0.1",
     "defu": "^6.1.2",
     "flat": "^5.0.2"
   },

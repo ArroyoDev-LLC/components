@@ -130,6 +130,10 @@
       "type": "runtime"
     },
     {
+      "name": "decamelize",
+      "type": "runtime"
+    },
+    {
       "name": "defu",
       "type": "runtime"
     },

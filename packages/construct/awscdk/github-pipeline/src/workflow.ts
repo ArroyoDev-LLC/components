@@ -552,7 +552,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 	concurrency(options: WorkflowConcurrency): this {
 		const patch = ghpipelines.JsonPatch.add('/concurrency', {
 			group: options.group,
-			...(options.cancelInProgress
+			...(typeof options.cancelInProgress === 'boolean'
 				? { 'cancel-in-progress': options.cancelInProgress }
 				: {}),
 		})

@@ -206,6 +206,21 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		return this.#workflowAccounts
 	}
 
+	protected buildMaskStep() {
+		const accountIds = this.getStageAccountIds()
+		const maskValues: [ActionsContext, string][] = Object.values(
+			accountIds,
+		).map((name) => [
+			ActionsContext.SECRET,
+			`AWS_ACCOUNT_ID_${name.toUpperCase()}`,
+		])
+		return MaskValueStep.values(
+			'Mask values',
+			[ActionsContext.SECRET, 'AWS_PIPELINE_ACCOUNT_ID'],
+			...maskValues,
+		).jobSteps
+	}
+
 	/**
 	 * @inheritDoc
 	 */
@@ -213,6 +228,24 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		super.doBuildPipeline()
 		const patches = Array.from(this.iterPatches())
 		this.workflowFile.patch(...patches)
+		const patched = ghpipelines.JsonPatch.apply(
+			this.workflowObj,
+			// @ts-expect-error - private property
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+			...this.workflowFile.patchOperations,
+		) as GithubWorkflowModel
+		this.workflowFile.update(patched)
+		// @ts-expect-error private property
+		this.workflowFile.patchOperations = []
+		const [maskStep] = this.buildMaskStep()
+		const jobNames = Object.keys(patched.jobs)
+		const maskPatches = jobNames.map((name) =>
+			ghpipelines.JsonPatch.add(
+				`/jobs/${name}/steps/0`,
+				Object.assign({}, maskStep),
+			),
+		)
+		this.workflowFile.patch(...maskPatches)
 		this.workflowFile.writeFile()
 	}
 
@@ -341,8 +374,10 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 	}
 
 	get workflowObj(): GithubWorkflowModel {
-		// @ts-expect-error - private property
-		return Object.assign({}, this.workflowFile.obj) as GithubWorkflowModel
+		return JSON.parse(
+			// @ts-expect-error - private property
+			JSON.stringify(this.workflowFile.obj),
+		) as GithubWorkflowModel
 	}
 
 	protected *iterPatches() {

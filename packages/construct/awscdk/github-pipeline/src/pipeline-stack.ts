@@ -203,7 +203,7 @@ export class GithubCodePipeline {
 	 */
 	synthPreStep(...step: ghpipelines.JobStep[]) {
 		return this.clone({
-			preBuildSteps: [...(this.props.preBuildSteps ?? []), ...step],
+			preBuildSteps: step,
 		})
 	}
 
@@ -213,7 +213,27 @@ export class GithubCodePipeline {
 	 */
 	synthPostStep(...step: ghpipelines.JobStep[]) {
 		return this.clone({
-			postBuildSteps: [...(this.props.postBuildSteps ?? []), ...step],
+			postBuildSteps: step,
+		})
+	}
+
+	/**
+	 * Add pre-publish step(s) to the publish step.
+	 * @param step The step(s) to add.
+	 */
+	publishPreStep(...step: ghpipelines.JobStep[]) {
+		return this.clone({
+			prePublishSteps: step,
+		})
+	}
+
+	/**
+	 * Add post-publish step(s) to the publish step.
+	 * @param step The step(s) to add.
+	 */
+	publishPostStep(...step: ghpipelines.JobStep[]) {
+		return this.clone({
+			postPublishSteps: step,
 		})
 	}
 

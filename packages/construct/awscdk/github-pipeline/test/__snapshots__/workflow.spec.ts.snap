@@ -374,13 +374,6 @@ jobs:
     runs-on: \${{inputs.runner || 'ubuntu-latest'}}
     needs:
       - Build-deploy-many-stages-synth
-    strategy:
-      fail-fast: true
-      matrix:
-        target:
-          - Assets-FileAsset1
-          - Assets-FileAsset2
-          - Assets-FileAsset3
     steps:
       - name: Mask values
         run: |-
@@ -416,7 +409,10 @@ jobs:
         run: npm install --no-save cdk-assets
       - name: Publish
         id: publish
-        run: /bin/bash ./cdk.out/publish-\${{matrix.target}}-step.sh
+        run: >-
+          targets=\\"./cdk.out/publish-Assets-FileAsset1-step.sh,./cdk.out/publish-Assets-FileAsset2-step.sh,./cdk.out/publish-Assets-FileAsset3-step.sh\\"
+
+          echo -n \\"$targets\\" | xargs -r -d',' -t -n1 -P2 /bin/bash
       - name: My Custom post publish step
         run: echo \\"hello world\\"
   alpha-alpha-stack-deploy:
@@ -628,11 +624,6 @@ jobs:
     runs-on: \${{inputs.runner || 'ubuntu-latest'}}
     needs:
       - Build-deploy-test-stack-synth
-    strategy:
-      fail-fast: true
-      matrix:
-        target:
-          - Assets-FileAsset1
     steps:
       - name: Mask values
         run: |-
@@ -655,7 +646,9 @@ jobs:
         run: npm install --no-save cdk-assets
       - name: Publish
         id: publish
-        run: /bin/bash ./cdk.out/publish-\${{matrix.target}}-step.sh
+        run: |-
+          targets=\\"./cdk.out/publish-Assets-FileAsset1-step.sh\\"
+          echo -n \\"$targets\\" | xargs -r -d',' -t -n1 -P2 /bin/bash
   test-test-stack-deploy:
     name: Deploy testteststack14D97B62
     permissions:

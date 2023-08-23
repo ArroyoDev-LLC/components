@@ -265,13 +265,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 			},
 		)
 
-		const matrix: ghpipelines.JobMatrix = {
-			// @ts-expect-error JobMatrix has typing issues
-			target: assetJobNames,
-		}
 		const synthStep = this.synth as cdkpipelines.ShellStep
-
-		const targetRef = interpolateValue(ActionsContext.MATRIX, 'target')
 
 		const outputs = Object.fromEntries(
 			jobOutputs.map(([assetOutput, _]) => [
@@ -282,6 +276,15 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 				),
 			]),
 		)
+
+		const scripts = assetJobNames.map(
+			(name) => `./cdk.out/publish-${name}-step.sh`,
+		)
+
+		const run = [
+			`targets="${scripts.join(',')}"`,
+			`echo -n "$targets" | xargs -r -d',' -t -n1 -P2 /bin/bash`,
+		].join('\n')
 
 		return {
 			name: 'Publish Assets',
@@ -295,7 +298,6 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 				`inputs.runner || 'ubuntu-latest'`,
 			),
 			needs: [`Build-${synthStep.id}`],
-			strategy: { failFast: true, matrix },
 			steps: [
 				...(this.props.prePublishSteps ?? []),
 				...this.props.awsCreds!.credentialSteps('us-east-1'),
@@ -307,7 +309,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 				{
 					name: 'Publish',
 					id: 'publish',
-					run: `/bin/bash ./cdk.out/publish-${targetRef}-step.sh`,
+					run,
 				},
 				...(this.props.postPublishSteps ?? []),
 			],

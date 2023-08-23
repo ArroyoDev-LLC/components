@@ -89,6 +89,14 @@ exports[`GithubCodePipeline > builder has expected props 1`] = `
   ],
   "prePublishSteps": [
     {
+      "if": "inputs.runner == 'self-hosted'",
+      "name": "Setup Node",
+      "uses": "actions/setup-node@v3",
+      "with": {
+        "node-version": "18",
+      },
+    },
+    {
       "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
       "name": "Install AWS CLI",
       "uses": "unfor19/install-aws-cli-action@v1",
@@ -213,6 +221,14 @@ GithubCodePipeline {
       },
     ],
     "prePublishSteps": [
+      {
+        "if": "inputs.runner == 'self-hosted'",
+        "name": "Setup Node",
+        "uses": "actions/setup-node@v3",
+        "with": {
+          "node-version": "18",
+        },
+      },
       {
         "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
         "name": "Install AWS CLI",
@@ -372,6 +388,11 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: \\"18\\"
+        if: inputs.runner == 'self-hosted'
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
         if: runner.arch == 'ARM64' || inputs.runner == 'self-hosted'

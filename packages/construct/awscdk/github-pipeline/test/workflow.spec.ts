@@ -63,7 +63,8 @@ describe('GithubCodePipeline', () => {
 			.installHelm('3.6.3')
 			.installAwsCli('2')
 			.installSops('3.7.3')
-			.installPnpm('18', '8')
+			.installNode('18', 'pnpm')
+			.installPnpm('8')
 			.publishPostStep({
 				name: 'My Custom post publish step',
 				run: 'echo "hello world"',

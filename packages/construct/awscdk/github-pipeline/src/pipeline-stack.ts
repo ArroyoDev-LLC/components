@@ -284,27 +284,41 @@ export class GithubCodePipeline {
 	}
 
 	/**
-	 * Setup NodeJS and PNPM.
+	 * Setup NodeJS
 	 * @param nodeVersion The version of NodeJS to install.
+	 * @param cache The version of NodeJS to install.
+	 */
+	installNode(nodeVersion?: string, cache?: string) {
+		const step: ghpipelines.JobStep = {
+			name: 'Setup Node',
+			uses: 'actions/setup-node@v3',
+			with: {
+				'node-version': nodeVersion ?? '18',
+			},
+		}
+		return this.publishPreStep({
+			...step,
+			if: `inputs.runner == 'self-hosted'`,
+		}).synthPreStep({
+			...step,
+			with: {
+				...step.with,
+				...(cache ? { cache } : {}),
+			},
+		})
+	}
+
+	/**
+	 * Setup PNPM.
 	 * @param pnpmVersion The version of PNPM to install.
 	 */
-	installPnpm(nodeVersion?: string, pnpmVersion?: string) {
-		return this.synthPreStep(
-			{
-				name: 'Setup PNPM',
-				uses: 'pnpm/action-setup@v2.4.0',
-				// defaults to 'packageManager' field in package.json
-				...(pnpmVersion ? { with: { version: pnpmVersion } } : {}),
-			},
-			{
-				name: 'Setup Node',
-				uses: 'actions/setup-node@v3',
-				with: {
-					'node-version': nodeVersion ?? '18',
-					cache: 'pnpm',
-				},
-			},
-		)
+	installPnpm(pnpmVersion?: string) {
+		return this.synthPreStep({
+			name: 'Setup PNPM',
+			uses: 'pnpm/action-setup@v2.4.0',
+			// defaults to 'packageManager' field in package.json
+			...(pnpmVersion ? { with: { version: pnpmVersion } } : {}),
+		})
 	}
 
 	/**
@@ -325,7 +339,11 @@ export class GithubCodePipeline {
 	 * Install default tools.
 	 */
 	defaultTools() {
-		return this.installHelm().installAwsCli().installSops().installPnpm()
+		return this.installHelm()
+			.installAwsCli()
+			.installSops()
+			.installNode(undefined, 'pnpm')
+			.installPnpm()
 	}
 
 	/**

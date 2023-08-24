@@ -69,7 +69,10 @@ export class LintConfig extends Component {
 
 	constructor(
 		project: NodeProject,
-		options: LintConfigOptions = { useTypeInformation: true, formatTimeout: 30 }
+		options: LintConfigOptions = {
+			useTypeInformation: true,
+			formatTimeout: 30,
+		},
 	) {
 		super(project)
 		this.#formatQueue = this.buildFormatQueue(options.formatTimeout)
@@ -158,7 +161,7 @@ export class LintConfig extends Component {
 	 */
 	protected enableEslintTypeInformation() {
 		this.eslint.addExtends(
-			'plugin:@typescript-eslint/recommended-requiring-type-checking'
+			'plugin:@typescript-eslint/recommended-requiring-type-checking',
 		)
 		this.eslintFile.addOverride('parserOptions.tsconfigRootDir', '.')
 	}
@@ -193,7 +196,7 @@ export class LintConfig extends Component {
 		const extensions = Array.from(this.#extensions)
 		this.eslintFile.addOverride(
 			'settings.import/resolver.node.extensions',
-			extensions
+			extensions,
 		)
 		this.eslintFile.addOverride('settings.import/extensions', extensions)
 	}
@@ -239,7 +242,7 @@ export class LintConfig extends Component {
 		void this.#formatQueue.add(async () => {
 			const cmd = `eslint --cache --no-ignore --fix ${request.filePath}`
 			this.project.logger.verbose(
-				`formatting typescript source file: ${request.filePath} (from: ${request.workingDirectory})`
+				`formatting typescript source file: ${request.filePath} (from: ${request.workingDirectory})`,
 			)
 			return new Promise<void>((resolve) =>
 				child_process.exec(
@@ -252,8 +255,8 @@ export class LintConfig extends Component {
 							this.project.logger.warn(err)
 						}
 						resolve()
-					}
-				)
+					},
+				),
 			)
 		})
 		return this

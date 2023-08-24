@@ -137,7 +137,7 @@ export class ReleasePleaseWorkflow extends Component {
 
 	constructor(
 		project: Project,
-		public readonly options: ReleasePleaseWorkflowOptions
+		public readonly options: ReleasePleaseWorkflowOptions,
 	) {
 		super(project)
 
@@ -155,7 +155,7 @@ export class ReleasePleaseWorkflow extends Component {
 		})
 		this.workflow.file!.addOverride(
 			'env.NPM_TOKEN',
-			secretToString('NPM_AUTH_TOKEN')
+			secretToString('NPM_AUTH_TOKEN'),
 		)
 
 		const steps: github.workflows.JobStep[] = [
@@ -245,7 +245,7 @@ export class ReleasePlease extends Component {
 
 	constructor(
 		project: Project,
-		public readonly options?: ReleasePleaseOptions
+		public readonly options?: ReleasePleaseOptions,
 	) {
 		super(project)
 
@@ -271,7 +271,7 @@ export class ReleasePlease extends Component {
 	protected buildManifest() {
 		const manifestFile = path.join(
 			this.project.outdir,
-			'.release-please-manifest.json'
+			'.release-please-manifest.json',
 		)
 		if (existsSync(manifestFile)) {
 			const data = JSON.parse(readFileSync(manifestFile, 'utf-8')) as Record<
@@ -314,7 +314,7 @@ export class ReleasePlease extends Component {
 	addPackage(
 		packagePath: string,
 		spec: ReleasePleasePackage,
-		version?: string
+		version?: string,
 	): this {
 		this.#manifestConfig.packages = {
 			...this.#manifestConfig.packages,
@@ -329,7 +329,7 @@ export class ReleasePlease extends Component {
 	addProject(
 		project: Project,
 		options?: ReleasePleasePackage,
-		version?: string
+		version?: string,
 	): this {
 		const relPath = project.parent
 			? path.relative(project.parent.outdir, project.outdir)
@@ -345,7 +345,7 @@ export class ReleasePlease extends Component {
 				component: componentName,
 				...(options ?? {}),
 			},
-			version
+			version,
 		)
 	}
 }

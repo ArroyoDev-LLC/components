@@ -126,7 +126,7 @@ export class Vue extends Component {
 				initializer: existingHooks?.getText?.() ?? '{}',
 			})
 			const hooksInit = hooksExpr.getInitializerIfKindOrThrow(
-				SyntaxKind.ObjectLiteralExpression
+				SyntaxKind.ObjectLiteralExpression,
 			)
 			hooksInit.addMethod({
 				name: "'rollup:options'",
@@ -150,18 +150,18 @@ export class Vue extends Component {
 			?.patch?.(
 				JsonPatch.add(
 					'/compilerOptions/types/-',
-					'unplugin-vue-macros/macros-global'
-				)
+					'unplugin-vue-macros/macros-global',
+				),
 			)
 		this.project.deps.addDependency('@vitejs/plugin-vue', DependencyType.BUILD)
 		this.project.deps.addDependency(
 			'@vitejs/plugin-vue-jsx',
-			DependencyType.BUILD
+			DependencyType.BUILD,
 		)
 		this.project.deps.addDependency('unplugin-vue-macros', DependencyType.BUILD)
 		component.file.addImport(
 			{ moduleSpecifier: '@vitejs/plugin-vue', defaultImport: 'vue' },
-			{ moduleSpecifier: '@vitejs/plugin-vue-jsx', defaultImport: 'vueJsx' }
+			{ moduleSpecifier: '@vitejs/plugin-vue-jsx', defaultImport: 'vueJsx' },
 		)
 		component.addBuildConfig({
 			resolve: {
@@ -178,7 +178,7 @@ export class Vue extends Component {
 				writer
 					.write('VueMacros(')
 					.block(() =>
-						writer.write('plugins: ').block(() => writer.write('vue: vue()'))
+						writer.write('plugins: ').block(() => writer.write('vue: vue()')),
 					)
 					.write('),')
 					.writeLine('vueJsx()'),
@@ -206,7 +206,7 @@ export class Vue extends Component {
 			'@vitejs/plugin-vue',
 			'happy-dom',
 			'@vue/test-utils',
-			'faker'
+			'faker',
 		)
 		if (!component.vite) {
 			component.configFile.addImport({

@@ -47,7 +47,7 @@ export class Vitest extends Component {
 			configFilePath: 'vitest.config.ts',
 			configType: VitestConfigType.PROJECT,
 			settings: {},
-		}
+		},
 	) {
 		super(project)
 		this.vite = Vite.of(this.project)
@@ -100,7 +100,7 @@ export class Vitest extends Component {
 					recreate: true,
 					marker: true,
 					config: this.options.settings,
-				}
+				},
 			)
 
 		this.configFile.addImport({
@@ -144,7 +144,7 @@ export class Vitest extends Component {
 		this.configFile.addImport({
 			moduleSpecifier: cwdRelativePath(
 				this.project.outdir,
-				this.vite.file.absolutePath.split('.').slice(0, -1).join('.')
+				this.vite.file.absolutePath.split('.').slice(0, -1).join('.'),
 			),
 			defaultImport: 'viteConfig',
 		})
@@ -152,7 +152,7 @@ export class Vitest extends Component {
 			src.addExportAssignment({
 				expression: (writer) =>
 					writer.write(
-						`mergeConfig(viteConfig, ${this.defineName}(${cfg.getFullText()}))`
+						`mergeConfig(viteConfig, ${this.defineName}(${cfg.getFullText()}))`,
 					),
 				isExportEquals: false,
 			})
@@ -182,7 +182,7 @@ export class Vitest extends Component {
 			dir: '.',
 			base: path.relative(
 				path.dirname(this.configFile.absolutePath),
-				component.configFile.absolutePath
+				component.configFile.absolutePath,
 			),
 		})
 		this.#workspaceProjects.set(relPath, component)

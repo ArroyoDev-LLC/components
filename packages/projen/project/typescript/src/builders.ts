@@ -41,15 +41,15 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 	constructor(
 		readonly options?: {
 			extendsDefault: (
-				container: TypescriptConfigContainer
+				container: TypescriptConfigContainer,
 			) => javascript.TypescriptConfigExtends
-		}
+		},
 	) {
 		super()
 	}
 
 	applyOptions<Options extends typescript.TypeScriptProjectOptions>(
-		options: Options & this['_outputOptions']
+		options: Options & this['_outputOptions'],
 	): Options {
 		const { tsconfigBase, ...rest } = options
 		this.tsconfigBase = tsconfigBase
@@ -58,7 +58,7 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 	}
 
 	applyProject(
-		project: typescript.TypeScriptProject
+		project: typescript.TypeScriptProject,
 	): TypedPropertyDescriptorMap<this['_output']> {
 		const tsconfigContainer = TypescriptConfigContainer.ensure(project)
 		const tsconfigBase =
@@ -115,7 +115,7 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 	}
 
 	applyOptions(
-		options: ProjectOptions & this['_outputOptions']
+		options: ProjectOptions & this['_outputOptions'],
 	): ProjectOptions & this['_outputOptions'] {
 		const { workspaceDeps, ...rest } = options
 		this.workspaceDeps = workspaceDeps
@@ -123,7 +123,7 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 	}
 
 	applyProject(
-		project: typescript.TypeScriptProject
+		project: typescript.TypeScriptProject,
 	): TypedPropertyDescriptorMap<this['_output']> {
 		project.package.addField('type', 'module')
 		project.package.addField('sideEffects', this.options?.sideEffects ?? false)
@@ -132,12 +132,12 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 		if (this.workspaceDeps) {
 			const tsContainer = TypescriptConfigContainer.ensure(project)
 			const targets = this.workspaceDeps.filter(
-				(dep) => dep instanceof javascript.NodeProject
+				(dep) => dep instanceof javascript.NodeProject,
 			) as typescript.TypeScriptProject[]
 			tsContainer.addTsConfigReferences(project, targets)
 			pnpm.addWorkspaceDeps?.(
 				{ depType: DependencyType.RUNTIME, addTsPath: true },
-				...(this.workspaceDeps ?? [])
+				...(this.workspaceDeps ?? []),
 			)
 		}
 		return {
@@ -147,8 +147,8 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 					TypescriptConfigContainer.ensure(project).addTsConfigReferences(
 						project,
 						dependency.filter(
-							(i) => i instanceof javascript.NodeProject
-						) as typescript.TypeScriptProject[]
+							(i) => i instanceof javascript.NodeProject,
+						) as typescript.TypeScriptProject[],
 					)
 					return PnpmWorkspace.of(project)?.addWorkspaceDeps?.(...dependency)
 				},
@@ -157,7 +157,7 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 				value(this: typescript.TypeScriptProject, ...args: string[]) {
 					return NodePackageUtils.command.exec(
 						project.package.packageManager,
-						...args
+						...args,
 					)
 				},
 			},
@@ -172,7 +172,7 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 	private unbuild: boolean = false
 
 	applyOptions(
-		options: ProjectOptions & this['_outputOptions']
+		options: ProjectOptions & this['_outputOptions'],
 	): ProjectOptions & this['_outputOptions'] {
 		const { unbuild, ...rest } = options
 		this.unbuild = unbuild ?? false
@@ -180,7 +180,7 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 	}
 
 	applyProject(
-		project: typescript.TypeScriptProject
+		project: typescript.TypeScriptProject,
 	): TypedPropertyDescriptorMap<this['_output']> {
 		if (this.unbuild) {
 			const compileTask = project.tasks.tryFind('compile')!
@@ -189,17 +189,17 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 					project.package.packageManager,
 					'tsc',
 					'--build',
-					'--emitDeclarationOnly'
-				)
+					'--emitDeclarationOnly',
+				),
 			)
 			project.tasks
 				.tryFind('compile')!
 				.exec(
 					NodePackageUtils.command.exec(
 						project.package.packageManager,
-						'unbuild'
+						'unbuild',
 					),
-					{ name: 'Unbuild' }
+					{ name: 'Unbuild' },
 				)
 			project.tasks
 				.tryFind('post-compile')!
@@ -208,8 +208,8 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 						project.package.packageManager,
 						'tsc',
 						'--build',
-						'--clean'
-					)
+						'--clean',
+					),
 				)
 			const unbuild = new UnBuild(project, {
 				cjs: true,
@@ -246,10 +246,10 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 	}
 
 	applyProject(
-		project: typescript.TypeScriptProject
+		project: typescript.TypeScriptProject,
 	): TypedPropertyDescriptorMap<this['_output']> {
 		const lintConfig = new LintConfig(project, this.options).setEslintExec(
-			'eslint --cache'
+			'eslint --cache',
 		)
 		return {
 			lintConfig: { writable: false, value: lintConfig },
@@ -259,7 +259,7 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 
 export class TypescriptReleasePleaseBuilder extends BaseBuildStep<{}, {}> {
 	applyProject(
-		project: typescript.TypeScriptProject
+		project: typescript.TypeScriptProject,
 	): TypedPropertyDescriptorMap<this['_output']> {
 		const releasePlease = ReleasePlease.of(project.parent ?? project)
 		if (releasePlease) {
@@ -271,7 +271,7 @@ export class TypescriptReleasePleaseBuilder extends BaseBuildStep<{}, {}> {
 				releasePlease.addProject(
 					project,
 					{ releaseType: ReleaseType.NODE },
-					'0.0.0'
+					'0.0.0',
 				)
 			}
 		}

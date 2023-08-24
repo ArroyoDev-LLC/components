@@ -36,7 +36,7 @@ export class PostCSS extends Component {
 				pluginsProperty: 'plugins',
 				recreate: true,
 				source: `export default {}`,
-			}
+			},
 		)
 	}
 

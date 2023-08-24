@@ -26,7 +26,7 @@ export const cwdRelativePath = (from: string, to: string): string => {
  */
 export const isComponent = <T extends new (...args: any[]) => Component>(
 	ctor: T,
-	component: any
+	component: any,
 ): component is InstanceType<T> => component instanceof ctor
 
 /**
@@ -36,7 +36,7 @@ export const isComponent = <T extends new (...args: any[]) => Component>(
  */
 export const findComponent = <T extends new (...args: any[]) => Component>(
 	project: Project,
-	component: T
+	component: T,
 ): InstanceType<T> | undefined => {
 	return project.components.find((c) => isComponent(component, c)) as
 		| InstanceType<T>
@@ -52,7 +52,7 @@ export const findComponent = <T extends new (...args: any[]) => Component>(
 export const replaceTask = (
 	project: Project,
 	taskId: string,
-	steps: TaskStep[]
+	steps: TaskStep[],
 ) => {
 	const task = project.tasks.tryFind(taskId)
 	if (!task) {
@@ -65,7 +65,7 @@ export const replaceTask = (
 	const numSteps = Math.max(steps.length, spec.steps?.length ?? 0)
 	const newSteps = Array.from(
 		{ length: numSteps },
-		(_, i) => i + 1
+		(_, i) => i + 1,
 	).map<TaskStep>((idx) => ({
 		...(spec.steps?.[idx - 1] ?? {}),
 		...(steps[idx - 1] ?? {}),
@@ -93,10 +93,10 @@ export const findRootProject = (project: Project): Project => {
  * @param callback
  */
 export const firstAncestor = <
-	T extends (project: Project, ...args: any[]) => unknown
+	T extends (project: Project, ...args: any[]) => unknown,
 >(
 	project: Project,
-	callback: T
+	callback: T,
 ): ReturnType<T> | undefined => {
 	const result = callback(project)
 	if (result) return result as ReturnType<T>
@@ -127,13 +127,13 @@ export interface SupportsNameScheme {
  */
 export class ProjectName {
 	public static supportsNameScheme<ProjectT extends Project>(
-		project: ProjectT
+		project: ProjectT,
 	): project is ProjectT & SupportsNameScheme {
 		return 'namingScheme' in project && 'nameScheme' in project
 	}
 
 	public static fromScheme(
-		scheme: ProjectNameSchemeOptions
+		scheme: ProjectNameSchemeOptions,
 	): (name: string) => ProjectName {
 		return (name) => new ProjectName(name, scheme)
 	}
@@ -141,7 +141,7 @@ export class ProjectName {
 	public static ensureScheme(
 		name: string,
 		parent?: Project,
-		defaultOptions?: ProjectNameSchemeOptions
+		defaultOptions?: ProjectNameSchemeOptions,
 	) {
 		let projectName = new ProjectName(name, defaultOptions)
 		if (parent) {
@@ -149,7 +149,7 @@ export class ProjectName {
 				firstAncestor(parent, (project) =>
 					ProjectName.supportsNameScheme(project)
 						? project.nameScheme(name)
-						: undefined
+						: undefined,
 				) ?? projectName
 		}
 		return projectName
@@ -157,7 +157,7 @@ export class ProjectName {
 
 	constructor(
 		readonly name: string,
-		readonly scheme?: ProjectNameSchemeOptions
+		readonly scheme?: ProjectNameSchemeOptions,
 	) {}
 
 	get path(): string {

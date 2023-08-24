@@ -13,7 +13,7 @@ export class VueComponentViteBuilder extends BaseBuildStep<
 	{ readonly vite: Vite }
 > {
 	applyProject(
-		project: typescript.TypeScriptProject
+		project: typescript.TypeScriptProject,
 	): TypedPropertyDescriptorMap<this['_output']> {
 		const vite = new Vite(project)
 			.addPlugin({
@@ -59,7 +59,7 @@ export class VueComponentManifestBuilder extends BaseBuildStep<
 	}
 > {
 	applyProject(
-		project: typescript.TypeScriptProject
+		project: typescript.TypeScriptProject,
 	): TypedPropertyDescriptorMap<this['_output']> {
 		project.package.addField('sideEffects', true)
 		project.package.addField('module', 'dist/index.js')
@@ -79,7 +79,7 @@ export class VueComponentManifestBuilder extends BaseBuildStep<
 
 export const VueComponentBaseBuilder = TypescriptBaseBuilder.add(
 	new builders.DefaultOptionsBuilder({ release: true, unbuild: false }),
-	{ prepend: true }
+	{ prepend: true },
 )
 	.add(new VueComponentViteBuilder())
 	.add(new VueComponentManifestBuilder())

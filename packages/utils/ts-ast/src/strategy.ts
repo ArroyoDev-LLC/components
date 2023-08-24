@@ -2,7 +2,7 @@
  * Metadata key for object array merge strategy.
  */
 export const ArrayLiteralMergeStrategy = Symbol(
-	'@arroyodev-llc/utils.projen:ArrayLiteralMergeStrategy'
+	'@arroyodev-llc/utils.projen:ArrayLiteralMergeStrategy',
 )
 
 /**
@@ -31,7 +31,7 @@ export enum ArrayLiteralMergeStrategyType {
  */
 export const setMergeStrategy = <T extends Object>(
 	obj: T,
-	strategy: ArrayLiteralMergeStrategyType
+	strategy: ArrayLiteralMergeStrategyType,
 ): T => {
 	Reflect.defineMetadata(ArrayLiteralMergeStrategy, strategy, obj)
 	return obj
@@ -42,13 +42,13 @@ export const setMergeStrategy = <T extends Object>(
  * @default {@link ArrayLiteralMergeStrategyType.APPEND}
  */
 export const getMergeStrategy = <T extends Object>(
-	obj: T
+	obj: T,
 ): ArrayLiteralMergeStrategyType => {
 	try {
 		return (
 			(Reflect.getMetadata(
 				ArrayLiteralMergeStrategy,
-				obj
+				obj,
 			) as ArrayLiteralMergeStrategyType) ??
 			ArrayLiteralMergeStrategyType.APPEND
 		)

@@ -15,13 +15,13 @@ import type { LiteralExpressionMergeValue } from './types.ts'
  */
 export const addPropertyAssignmentsFromObject = <T extends object>(
 	expression: ObjectLiteralExpression,
-	obj: T
+	obj: T,
 ): PropertyAssignment[] => {
 	return expression.addPropertyAssignments(
 		Object.entries(obj).map(([key, value]) => ({
 			name: key,
 			initializer: (writer) => writer.write(JSON.stringify(value)),
-		}))
+		})),
 	)
 }
 /**
@@ -29,7 +29,7 @@ export const addPropertyAssignmentsFromObject = <T extends object>(
  * @param value Input writer function or primitive value.
  */
 export const convertInitializer = <T extends LiteralExpressionMergeValue>(
-	value: T
+	value: T,
 ): WriterFunction | string =>
 	is.function_(value) ? value : JSON.stringify(value)
 /**
@@ -37,7 +37,7 @@ export const convertInitializer = <T extends LiteralExpressionMergeValue>(
  * @param value Input value.
  */
 export const defaultInitializerFor = <T extends LiteralExpressionMergeValue>(
-	value: T
+	value: T,
 ) => {
 	switch (true) {
 		case is.plainObject(value):
@@ -60,7 +60,7 @@ export const defaultInitializerFor = <T extends LiteralExpressionMergeValue>(
  */
 export const isExpressionEqual = (
 	a: Expression | string,
-	b: Expression | string
+	b: Expression | string,
 ): boolean => {
 	const prepareValue = (value: string) => stripFormatting(value)
 	const toText = (value: Expression | string) =>

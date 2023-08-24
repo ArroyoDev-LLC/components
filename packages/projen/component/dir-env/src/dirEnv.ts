@@ -63,7 +63,10 @@ export class DirEnv extends Component {
 
 	public readonly file: SourceCode
 
-	constructor(project: Project, public readonly options: DirEnvOptions = {}) {
+	constructor(
+		project: Project,
+		public readonly options: DirEnvOptions = {},
+	) {
 		super(project)
 		const { fileName = '.envrc' } = options
 		this.#validateFileName(fileName)
@@ -156,7 +159,7 @@ export class DirEnv extends Component {
 	addCommand(
 		command: DirEnvStdLibCommand | string,
 		args?: string | string[],
-		block?: () => this | void
+		block?: () => this | void,
 	) {
 		if (!args) {
 			this.#addLine(`${command}`)
@@ -236,24 +239,24 @@ export class DirEnv extends Component {
 			.addBlankLine()
 			.addComment('Load rtx or asdf')
 			.addCommand('if has rtx && has use_rtx; then', '', () =>
-				this.addCommand('use rtx')
+				this.addCommand('use rtx'),
 			)
 			.addCommand('elif has asdf && has use_asdf; then', '', () =>
 				this.addLog(
 					DirEnvLogType.INFO,
-					'rtx not found. Falling back to asdf.'
-				).addCommand('use asdf')
+					'rtx not found. Falling back to asdf.',
+				).addCommand('use asdf'),
 			)
 			.addCommand('else', '', () =>
 				this.addLog(
 					DirEnvLogType.ERROR,
-					'Neither rtx nor asdf are installed or integrated with direnv.'
+					'Neither rtx nor asdf are installed or integrated with direnv.',
 				)
 					.addLog(DirEnvLogType.ERROR, 'For asdf: https://asdf-vm.com/')
 					.addLog(
 						DirEnvLogType.ERROR,
-						'For rtx (asdf clone in rust): https://github.com/jdxcode/rtx'
-					)
+						'For rtx (asdf clone in rust): https://github.com/jdxcode/rtx',
+					),
 			)
 			.addCommand('fi')
 			.addBlankLine()

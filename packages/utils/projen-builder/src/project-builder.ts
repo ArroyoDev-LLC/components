@@ -31,7 +31,7 @@ export type ProjectBuilderOutput<T extends AnyProjectBuilder> = InstanceType<
 export class ProjectBuilder<
 	T extends GConstructor<any, any[]> = GenericProjectConstructor,
 	Options extends object = ProjectConstructorOptions<T>,
-	Props = {}
+	Props = {},
 > {
 	/**
 	 * Input project constructor.
@@ -55,7 +55,7 @@ export class ProjectBuilder<
 	 */
 	constructor(
 		readonly projectConstructor: T,
-		readonly steps: Array<AnyBuildStep> = []
+		readonly steps: Array<AnyBuildStep> = [],
 	) {}
 
 	/**
@@ -70,7 +70,7 @@ export class ProjectBuilder<
 	 */
 	add<StepT extends AnyBuildStep>(
 		step: StepT,
-		options: { prepend?: boolean } = { prepend: false }
+		options: { prepend?: boolean } = { prepend: false },
 	): ProjectBuilder<
 		T,
 		ExtendShape<this['_options'], BuildOptions<StepT>>,
@@ -82,7 +82,7 @@ export class ProjectBuilder<
 			this['_props'] & BuildOutput<StepT>
 		>(
 			this.projectConstructor,
-			options.prepend ? [step, ...this.steps] : [...this.steps, step]
+			options.prepend ? [step, ...this.steps] : [...this.steps, step],
 		)
 		return builder
 	}
@@ -100,7 +100,7 @@ export class ProjectBuilder<
 					mappedOptions as ProjectOptions,
 					step.applyOptions(mappedOptions as ProjectOptions) as Options,
 				],
-				true
+				true,
 			) as Options
 		})
 
@@ -121,7 +121,7 @@ export class ProjectBuilder<
 
 		const properties = this.steps.reduce(
 			(acc, step) => ({ ...acc, ...step.applyProject(project as Project) }),
-			{} as PropertyDescriptorMap
+			{} as PropertyDescriptorMap,
 		)
 		Object.defineProperties(project, properties)
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-return

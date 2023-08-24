@@ -64,13 +64,17 @@ export class TypescriptConfigBuilder extends BaseBuildStep<
 		const tsconfigBase =
 			this.tsconfigBase ?? this.options?.extendsDefault?.(tsconfigContainer)
 		const srcDir = project.srcdir
+		project.addGitIgnore('dist-types')
 		const tsconfig = tsconfigContainer.buildConfig(project, {
 			fileName: 'tsconfig.json',
 			compilerOptions: {
 				rootDir: project.srcdir,
 				outDir: project.libdir ?? 'dist',
-				declarationDir: project.srcdir,
+				declarationDir: 'dist-types',
 				...(this.projectOptions.tsconfig?.compilerOptions ?? {}),
+			},
+			compilerOptionsOverrides: {
+				tsBuildInfoFile: 'tsconfig.tsbuildinfo',
 			},
 			...(tsconfigBase && { extends: tsconfigBase }),
 			override: 'merge-files',
@@ -166,16 +170,18 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 }
 
 export class TypescriptBundlerBuilder extends BaseBuildStep<
-	{ readonly unbuild?: boolean },
+	{ readonly unbuild?: boolean; readonly unbuildCompositePreset?: boolean },
 	{ readonly unbuild?: UnBuild | undefined }
 > {
 	private unbuild: boolean = false
+	private unbuildCompositePreset: boolean = true
 
 	applyOptions(
 		options: ProjectOptions & this['_outputOptions'],
 	): ProjectOptions & this['_outputOptions'] {
-		const { unbuild, ...rest } = options
+		const { unbuild, unbuildCompositePreset, ...rest } = options
 		this.unbuild = unbuild ?? false
+		this.unbuildCompositePreset = unbuildCompositePreset ?? true
 		return super.applyOptions(rest)
 	}
 
@@ -201,16 +207,6 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 					),
 					{ name: 'Unbuild' },
 				)
-			project.tasks
-				.tryFind('post-compile')!
-				.exec(
-					NodePackageUtils.command.exec(
-						project.package.packageManager,
-						'tsc',
-						'--build',
-						'--clean',
-					),
-				)
 			const unbuild = new UnBuild(project, {
 				cjs: true,
 				options: {
@@ -229,6 +225,16 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 					},
 				},
 			})
+			if (this.unbuildCompositePreset) {
+				project.addDevDeps('@arroyodev-llc/utils.unbuild-composite-preset')
+				unbuild.file.addImport({
+					moduleSpecifier: '@arroyodev-llc/utils.unbuild-composite-preset',
+					namedImports: ['compositePreset'],
+				})
+				unbuild.file.addConfig({
+					preset: (writer) => writer.write('compositePreset()'),
+				})
+			}
 			return {
 				unbuild: { writable: false, value: unbuild },
 			} as TypedPropertyDescriptorMap<this['_output']>

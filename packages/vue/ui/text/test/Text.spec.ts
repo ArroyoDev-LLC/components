@@ -13,6 +13,6 @@ describe('Text', () => {
 		async (variant) => {
 			const mnt = mount(Text, { props: { variant }, slots: { default: 'Hi' } })
 			expect(mnt.element).toMatchSnapshot()
-		}
+		},
 	)
 })

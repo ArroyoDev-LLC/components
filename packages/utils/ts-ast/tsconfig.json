@@ -9,9 +9,10 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
-    "declarationDir": "src",
+    "declarationDir": "dist-types",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "tsBuildInfoFile": "tsconfig.tsbuildinfo",
     "types": [
       "reflect-metadata"
     ]

@@ -186,13 +186,13 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --upgrade --target=minor --filter=@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,lint-staged,npm-check-updates,prettier,standard-version,unbuild,@arroyodev-llc/utils.unbuild-composite-preset"
+          "exec": "npm-check-updates --upgrade --target=minor --filter=@arroyodev-llc/utils.unbuild-composite-preset,@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,lint-staged,npm-check-updates,prettier,standard-version,unbuild"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint lint-staged npm-check-updates prettier standard-version unbuild @arroyodev-llc/utils.unbuild-composite-preset"
+          "exec": "pnpm update @arroyodev-llc/utils.unbuild-composite-preset @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint lint-staged npm-check-updates prettier standard-version unbuild"
         },
         {
           "exec": "pnpm exec projen"

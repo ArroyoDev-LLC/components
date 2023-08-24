@@ -99,12 +99,7 @@
     },
     "post-compile": {
       "name": "post-compile",
-      "description": "Runs after successful compilation",
-      "steps": [
-        {
-          "exec": "pnpm exec tsc --build --clean"
-        }
-      ]
+      "description": "Runs after successful compilation"
     },
     "post-install": {
       "name": "post-install",
@@ -191,13 +186,13 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --upgrade --target=minor --filter=@aws-prototyping-sdk/nx-monorepo,@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,lint-staged,npm-check-updates,prettier,projen,standard-version,unbuild,ts-morph"
+          "exec": "npm-check-updates --upgrade --target=minor --filter=@arroyodev-llc/utils.unbuild-composite-preset,@aws-prototyping-sdk/nx-monorepo,@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,lint-staged,npm-check-updates,prettier,projen,standard-version,unbuild,ts-morph"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update @aws-prototyping-sdk/nx-monorepo @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint lint-staged npm-check-updates prettier projen standard-version unbuild ts-morph"
+          "exec": "pnpm update @arroyodev-llc/utils.unbuild-composite-preset @aws-prototyping-sdk/nx-monorepo @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint lint-staged npm-check-updates prettier projen standard-version unbuild ts-morph"
         },
         {
           "exec": "pnpm exec projen"

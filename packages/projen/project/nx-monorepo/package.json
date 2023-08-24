@@ -26,6 +26,7 @@
     "organization": true
   },
   "devDependencies": {
+    "@arroyodev-llc/utils.unbuild-composite-preset": "^0.0.0",
     "@aws-prototyping-sdk/nx-monorepo": "^0.19.67",
     "@types/node": "^16",
     "@typescript-eslint/eslint-plugin": "^5",

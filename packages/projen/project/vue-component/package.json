@@ -29,6 +29,7 @@
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
     "@arroyodev-llc/projen.component.unbuild": "workspace:*",
+    "@arroyodev-llc/utils.unbuild-composite-preset": "^0.0.0",
     "@types/node": "^16",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",

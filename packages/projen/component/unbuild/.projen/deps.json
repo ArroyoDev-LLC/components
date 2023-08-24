@@ -1,6 +1,10 @@
 {
   "dependencies": [
     {
+      "name": "@arroyodev-llc/utils.unbuild-composite-preset",
+      "type": "build"
+    },
+    {
       "name": "@aws-prototyping-sdk/nx-monorepo",
       "type": "build"
     },

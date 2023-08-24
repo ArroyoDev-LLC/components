@@ -31,6 +31,10 @@ export interface TypescriptConfigContainerBuildOptions
 	 *
 	 */
 	override?: 'merge-files' | 'merge' | 'overwrite' | 'fail'
+	/**
+	 * Overrides to apply to compiler options.
+	 */
+	compilerOptionsOverrides?: Record<string, unknown>
 }
 
 export class TypescriptConfigContainer extends Component {
@@ -208,6 +212,7 @@ export class TypescriptConfigContainer extends Component {
 			include,
 			exclude,
 			extends: baseExtends,
+			compilerOptionsOverrides,
 		} = options
 
 		const existing = project.components.find(
@@ -252,7 +257,13 @@ export class TypescriptConfigContainer extends Component {
 			project.tryRemoveFile(existing.fileName)
 		}
 
-		return new javascript.TypescriptConfig(project, props)
+		const finalConfig = new javascript.TypescriptConfig(project, props)
+		if (compilerOptionsOverrides) {
+			applyOverrides(finalConfig.file, {
+				compilerOptions: compilerOptionsOverrides,
+			})
+		}
+		return finalConfig
 	}
 
 	/**

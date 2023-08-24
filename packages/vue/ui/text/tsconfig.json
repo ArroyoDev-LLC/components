@@ -10,6 +10,7 @@
     "rootDir": "src",
     "outDir": "dist",
     "declarationDir": "dist",
+    "tsBuildInfoFile": "tsconfig.tsbuildinfo",
     "types": [
       "vite/client",
       "unplugin-vue-macros/macros-global"

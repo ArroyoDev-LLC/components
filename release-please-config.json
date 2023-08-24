@@ -19,6 +19,10 @@
       "component": "@arroyodev-llc/utils.projen-builder",
       "release-type": "node"
     },
+    "packages/utils/unbuild-composite-preset": {
+      "component": "@arroyodev-llc/utils.unbuild-composite-preset",
+      "release-type": "node"
+    },
     "packages/projen/component/linting": {
       "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"

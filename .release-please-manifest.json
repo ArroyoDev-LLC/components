@@ -22,5 +22,6 @@
   "packages/projen/component/dir-env": "0.1.9",
   "packages/utils/ts-ast": "0.1.8",
   "packages/projen/component/git-hooks": "0.1.7",
-  "packages/utils/projen-builder": "0.1.3"
+  "packages/utils/projen-builder": "0.1.3",
+  "packages/utils/unbuild-composite-preset": "0.0.0"
 }

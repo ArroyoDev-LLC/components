@@ -6,6 +6,22 @@
   * dependencies
     * @arroyodev-llc/vue.ui.text bumped to 0.1.7
 
+## [0.1.21](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.20...@arroyodev-llc/vue.ui.button-v0.1.21) (2023-08-24)
+
+
+### Features
+
+* **deps:** Update all dependencies ([c095641](https://github.com/ArroyoDev-LLC/components/commit/c095641714560189f59a19f89d1ab06e1815ad6e))
+* **deps:** Update pnpm to 8.6.12 ([42ea764](https://github.com/ArroyoDev-LLC/components/commit/42ea7642497786063ff160cf5ce591e56155b4ca))
+* **projenrc:** Update all managed unbuild/package files ([923874b](https://github.com/ArroyoDev-LLC/components/commit/923874b536dfa15ae21b81812d70b383551b87c2))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/vue.ui.text bumped to 0.1.21
+
 ## [0.1.20](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.19...@arroyodev-llc/vue.ui.button-v0.1.20) (2023-08-13)
 
 

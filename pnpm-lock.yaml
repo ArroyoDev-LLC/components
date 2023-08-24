@@ -1618,9 +1618,6 @@ importers:
 
   packages/utils/unbuild-composite-preset:
     devDependencies:
-      '@arroyodev-llc/utils.unbuild-composite-preset':
-        specifier: ^0.0.0
-        version: 'link:'
       '@types/node':
         specifier: ^16
         version: 16.18.44

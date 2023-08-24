@@ -129,7 +129,17 @@ new Vitest(utilsProjenBuilder)
 const utilsUnbuildCompositePreset = TypescriptProjectBuilder.build({
 	name: 'utils.unbuild-composite-preset',
 	peerDeps: ['unbuild'],
+	unbuildCompositePreset: false,
 })
+// the preset uses itself to build itself.
+utilsUnbuildCompositePreset
+	.unbuild!.file.addImport({
+		moduleSpecifier: './src',
+		namedImports: ['compositePreset'],
+	})
+	.addConfig({
+		preset: (writer) => writer.write('compositePreset()'),
+	})
 
 /**
  * Projen Components

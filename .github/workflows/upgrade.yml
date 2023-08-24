@@ -66,8 +66,8 @@ jobs:
         run: '[ -s ${{ runner.temp }}/.repo.patch ] && git apply ${{ runner.temp }}/.repo.patch || echo "Empty patch. Skipping."'
       - name: Set git identity
         run: |-
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config user.name "${{ vars.AD_BOT_GIT_USER }}"
+          git config user.email "${{ vars.AD_BOT_GIT_EMAIL }}"
       - name: Create Pull Request
         id: create-pr
         uses: peter-evans/create-pull-request@v4
@@ -94,6 +94,6 @@ jobs:
             ------
 
             *Automatically created by projen via the "upgrade" workflow*
-          author: github-actions <github-actions@github.com>
-          committer: github-actions <github-actions@github.com>
+          author: ${{ vars.AD_BOT_GIT_USER }} <${{ vars.AD_BOT_GIT_EMAIL }}>
+          committer: ${{ vars.AD_BOT_GIT_USER }} <${{ vars.AD_BOT_GIT_EMAIL }}>
           signoff: true

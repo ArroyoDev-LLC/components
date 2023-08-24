@@ -49,6 +49,10 @@ export class ComponentsMonorepo
 	constructor(options: NxMonorepoProjectOptions) {
 		super({
 			projenCredentials: ComponentsMonorepo.githubCredentials,
+			workflowGitIdentity: {
+				name: '${{ vars.AD_BOT_GIT_USER }}',
+				email: '${{ vars.AD_BOT_GIT_EMAIL }}',
+			},
 			githubOptions: {
 				projenCredentials: ComponentsMonorepo.githubCredentials,
 			},
@@ -82,7 +86,7 @@ export class ComponentsMonorepo
 								commands: [
 									NodePackageUtils.command.exec(
 										this.package.packageManager,
-										'eslint --no-error-on-unmatched-pattern --cache --fix'
+										'eslint --no-error-on-unmatched-pattern --cache --fix',
 									),
 								],
 							},
@@ -91,7 +95,7 @@ export class ComponentsMonorepo
 								commands: [
 									NodePackageUtils.command.exec(
 										this.package.packageManager,
-										'prettier --write'
+										'prettier --write',
 									),
 								],
 							},
@@ -99,13 +103,13 @@ export class ComponentsMonorepo
 					})
 				}
 			},
-			{ immediate: false, includeSelf: true }
+			{ immediate: false, includeSelf: true },
 		)
 		this.gitHooks = new GitHooks(this, {
 			hooks: {
 				[ValidGitHooks.PreCommit]: NodePackageUtils.command.exec(
 					this.package.packageManager,
-					'lint-staged'
+					'lint-staged',
 				),
 			},
 		})
@@ -136,7 +140,7 @@ export class ComponentsMonorepo
 		})
 		this.applyGithubJobNxEnv(
 			this.releasePlease.releaseWorkflow.workflow,
-			'release-please'
+			'release-please',
 		)
 		return super.applyGithub(gh)
 	}

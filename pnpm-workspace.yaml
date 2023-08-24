@@ -22,5 +22,6 @@ packages:
   - packages/utils/projen
   - packages/utils/projen-builder
   - packages/utils/ts-ast
+  - packages/utils/unbuild-composite-preset
   - packages/vue/ui/button
   - packages/vue/ui/text

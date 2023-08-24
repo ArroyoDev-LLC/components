@@ -63,21 +63,21 @@ const NameSchemeBuilder = new builders.NameSchemeBuilder({
 
 const BaseTypescriptProjectBuilder = TypescriptBaseBuilder.add(
 	CommonDefaultsBuilder,
-	{ prepend: true }
+	{ prepend: true },
 ).add(NameSchemeBuilder)
 
 const TypescriptProjectBuilder = BaseTypescriptProjectBuilder.add(
-	TypescriptOptionsBuilder
+	TypescriptOptionsBuilder,
 )
 const ProjenComponentProjectBuilder = BaseTypescriptProjectBuilder.add(
 	new builders.DefaultOptionsBuilder({
 		peerDeps: ['projen'],
-	})
+	}),
 ).add(TypescriptOptionsBuilder)
 
 const VueComponentProjectBuilder = VueComponentBaseBuilder.add(
 	CommonDefaultsBuilder,
-	{ prepend: true }
+	{ prepend: true },
 ).add(NameSchemeBuilder)
 
 /**
@@ -125,6 +125,11 @@ const utilsProjenBuilder = TypescriptProjectBuilder.build({
 	deps: ['projen', 'type-fest@^4'],
 })
 new Vitest(utilsProjenBuilder)
+
+const utilsUnbuildCompositePreset = TypescriptProjectBuilder.build({
+	name: 'utils.unbuild-composite-preset',
+	peerDeps: ['unbuild'],
+})
 
 /**
  * Projen Components
@@ -233,7 +238,7 @@ const nxMonorepoProject = ProjenComponentProjectBuilder.build({
 	peerDeps: ['projen', '@aws-prototyping-sdk/nx-monorepo'],
 })
 LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
-	'src/nx-monorepo-project-options.ts'
+	'src/nx-monorepo-project-options.ts',
 )
 
 const typescriptProject = ProjenComponentProjectBuilder.build({
@@ -252,13 +257,13 @@ const typescriptProject = ProjenComponentProjectBuilder.build({
 	],
 })
 typescriptProject.lintConfig.eslint.addIgnorePattern(
-	'src/typescript-project-options.ts'
+	'src/typescript-project-options.ts',
 )
 typescriptProject.lintConfig.eslint.addIgnorePattern(
-	'src/typescript-config-options.ts'
+	'src/typescript-config-options.ts',
 )
 typescriptProject.lintConfig.eslint.addIgnorePattern(
-	'src/typescript-compiler-options.ts'
+	'src/typescript-compiler-options.ts',
 )
 
 const vueComponentProject = ProjenComponentProjectBuilder.build({
@@ -274,7 +279,7 @@ vueComponentProject.pnpm.addWorkspaceDeps(
 	{ depType: DependencyType.PEER, addTsPath: false },
 	unbuildComponent,
 	pnpmWorkspaceComponent,
-	lintingComponent
+	lintingComponent,
 )
 
 /**
@@ -304,7 +309,7 @@ monorepo.addWorkspaceDeps(
 	dirEnvComponent,
 	nxMonorepoProject,
 	typescriptProject,
-	vueComponentProject
+	vueComponentProject,
 )
 
 // Vue Components

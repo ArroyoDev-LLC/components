@@ -162,11 +162,8 @@
     },
     "post-install": {
       "name": "post-install",
+      "description": "Node post-install hook.",
       "steps": [
-        {
-          "exec": "pnpm exec nx run-many --target=post-install --output-style=stream --runner=local --nx-bail",
-          "receiveArgs": true
-        },
         {
           "exec": "simple-git-hooks",
           "name": "Setup simple-git-hooks.",
@@ -183,7 +180,7 @@
       "description": "Post install hook.",
       "steps": [
         {
-          "exec": "pnpm exec projen post-install"
+          "exec": "pnpm --no-bail --recursive --parallel --stream --if-present run post-install"
         }
       ]
     },

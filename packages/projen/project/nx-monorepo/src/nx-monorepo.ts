@@ -370,10 +370,6 @@ export class MonorepoProject extends NxMonorepoProject {
 			)
 		}
 
-		this.addNxRunManyTask('post-install', {
-			target: 'post-install',
-			runner: 'local',
-		})
 		// 'postinstall' is intentional here,
 		// as that is the name of the npm hook.
 		const postInstall =
@@ -382,8 +378,14 @@ export class MonorepoProject extends NxMonorepoProject {
 				description: 'Post install hook.',
 			})
 		postInstall.exec(
-			NodePackageUtils.command.projen(
+			NodePackageUtils.command.cmd(
 				this.package.packageManager,
+				'--no-bail',
+				'--recursive',
+				'--parallel',
+				'--stream',
+				'--if-present',
+				'run',
 				'post-install'
 			)
 		)

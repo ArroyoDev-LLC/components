@@ -25,7 +25,7 @@ describe.concurrent('ProjectBuilder', () => {
 		constructor(readonly options?: { overrideReleaseBranch: string }) {}
 
 		applyOptions(
-			options: ProjectOptions & this['_outputOptions']
+			options: ProjectOptions & this['_outputOptions'],
 		): ProjectOptions & this['_outputOptions'] {
 			const opts = {
 				...options,
@@ -37,7 +37,7 @@ describe.concurrent('ProjectBuilder', () => {
 		}
 
 		applyProject(
-			project: Project
+			project: Project,
 		): TypedPropertyDescriptorMap<this['_output']> {
 			return {
 				customProperty: {
@@ -94,7 +94,7 @@ describe.concurrent('ProjectBuilder', () => {
 		expect(optionsSpy).toHaveBeenCalledTimes(2)
 		expect(
 			// eslint-disable-next-line @typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access
-			optionsSpy.mock.calls.map((call) => call[0].defaultReleaseBranch)
+			optionsSpy.mock.calls.map((call) => call[0].defaultReleaseBranch),
 		).toEqual(['different', 'override'])
 	})
 })
@@ -108,13 +108,13 @@ describe.concurrent('builders', () => {
 				new builders.DefaultOptionsBuilder({
 					defaultReleaseBranch: 'main',
 					packageManager: javascript.NodePackageManager.PNPM,
-				})
+				}),
 			)
 			.build({
 				name: 'test.project',
 			})
 		expect(project.package.packageManager).toBe(
-			javascript.NodePackageManager.PNPM
+			javascript.NodePackageManager.PNPM,
 		)
 	})
 

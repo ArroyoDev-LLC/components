@@ -36,7 +36,7 @@ export class Tailwind extends Component {
 
 	constructor(
 		project: typescript.TypeScriptProject,
-		options?: TailwindOptions
+		options?: TailwindOptions,
 	) {
 		super(project)
 
@@ -67,10 +67,10 @@ export class Tailwind extends Component {
 				config: this.options.config,
 				pluginsProperty: 'plugins',
 				marker: true,
-			}
+			},
 		)
 		this.file.tsconfigFile.patch(
-			JsonPatch.add('/include/-', this.options.filePath)
+			JsonPatch.add('/include/-', this.options.filePath),
 		)
 
 		if (options?.config) {

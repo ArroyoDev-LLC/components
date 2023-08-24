@@ -24,7 +24,7 @@ export class Vite extends Component {
 
 	constructor(
 		public readonly project: TypeScriptProject,
-		public readonly options?: ViteOptions
+		public readonly options?: ViteOptions,
 	) {
 		super(project)
 		this.options = options ?? { build: {} }
@@ -55,7 +55,7 @@ export class Vite extends Component {
 					recreate: true,
 					marker: true,
 					pluginsProperty: 'plugins',
-				}
+				},
 			)
 		file.addImport({
 			moduleSpecifier: 'vite',

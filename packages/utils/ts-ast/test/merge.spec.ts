@@ -36,7 +36,7 @@ describe('mergeObjectLiteral', () => {
 			'temptest.ts',
 			[
 				`const testObj = { scalar: 1, topLevelArray: [1,2], secondLevel: { secondLevelArray: [{nestedKey: '1'}], secondLevelScalar: 1 } };`,
-			].join('\n')
+			].join('\n'),
 		)
 		ctx.testObj = ctx.sourceFile
 			.getVariableDeclarationOrThrow('testObj')
@@ -133,7 +133,7 @@ describe('mergeObjectLiteral', () => {
 				    }
 				};"
 			`)
-		}
+		},
 	)
 
 	testx('should concat unique arrays', async (ctx) => {
@@ -141,7 +141,7 @@ describe('mergeObjectLiteral', () => {
 			topLevelArray: [1, 2, 3, 4],
 		})
 		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(
-			'"const testObj = { scalar: 1, topLevelArray: [1, 2,  3,  4], secondLevel: { secondLevelArray: [{nestedKey: \'1\'}], secondLevelScalar: 1 } };"'
+			'"const testObj = { scalar: 1, topLevelArray: [1, 2,  3,  4], secondLevel: { secondLevelArray: [{nestedKey: \'1\'}], secondLevelScalar: 1 } };"',
 		)
 	})
 
@@ -169,7 +169,7 @@ describe('mergeObjectLiteral', () => {
 	testx('should apply overwrite array merge strategies', async (ctx) => {
 		const obj = setMergeStrategy(
 			{ nestedKey: '-1' },
-			ArrayLiteralMergeStrategyType.OVERWRITE
+			ArrayLiteralMergeStrategyType.OVERWRITE,
 		)
 		mergeObjectLiteral<TestObj>(ctx.testObj, {
 			secondLevel: {
@@ -190,7 +190,7 @@ describe('mergeObjectLiteral', () => {
 	testx('should apply merge array merge strategies', async (ctx) => {
 		const obj = setMergeStrategy(
 			{ newKey: 'newValueOn1' },
-			ArrayLiteralMergeStrategyType.MERGE
+			ArrayLiteralMergeStrategyType.MERGE,
 		)
 		mergeObjectLiteral<TestObj>(ctx.testObj, {
 			secondLevel: {

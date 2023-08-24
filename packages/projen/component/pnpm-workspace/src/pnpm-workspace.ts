@@ -30,7 +30,7 @@ export class PnpmWorkspace extends Component {
 	 */
 	formatWorkspaceProtocol(
 		dependencyName: string,
-		constraint: string = '*'
+		constraint: string = '*',
 	): string {
 		return [dependencyName, '@', 'workspace:', constraint].join('')
 	}
@@ -43,12 +43,12 @@ export class PnpmWorkspace extends Component {
 		if (!(this.project instanceof typescript.TypeScriptProject)) return
 		const tsPath = cwdRelativePath(
 			this.project.outdir,
-			path.join(path.join(dependency.outdir, dependency.srcdir), 'index')
+			path.join(path.join(dependency.outdir, dependency.srcdir), 'index'),
 		)
 		const depNamePath = dependency.package.packageName.replaceAll('.', '\\.')
 		this.project.tsconfig?.file?.addOverride?.(
 			`compilerOptions.paths.${depNamePath}`,
-			[tsPath]
+			[tsPath],
 		)
 	}
 
@@ -61,7 +61,7 @@ export class PnpmWorkspace extends Component {
 			options:
 				| { depType: DependencyType; addTsPath: boolean }
 				| (javascript.NodeProject | string),
-			...deps: (javascript.NodeProject | string)[]
+			...deps: (javascript.NodeProject | string)[],
 		]
 	) {
 		// TODO: nuke this
@@ -94,15 +94,15 @@ export class PnpmWorkspace extends Component {
 		const escapedName = dependency.replaceAll('.', '\\.')
 		this.project.package.file.addOverride(
 			`pnpm.patchedDependencies.${escapedName}`,
-			patchPath
+			patchPath,
 		)
 		const ncuFile = this.project.tryFindObjectFile('.ncurc.json')
 		if (ncuFile) {
 			ncuFile.patch(
 				JsonPatch.add(
 					'/reject/-',
-					dependency.slice(0, dependency.lastIndexOf('@'))
-				)
+					dependency.slice(0, dependency.lastIndexOf('@')),
+				),
 			)
 		}
 		return this

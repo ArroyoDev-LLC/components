@@ -34,14 +34,14 @@ describe.concurrent.each(stripFormatCases)(
 			const result = stripFormatting(input, options as StripOptions)
 			ctx.expect(result).toBe(expected)
 		})
-	}
+	},
 )
 
 const worldParts = ['Hello', ', ', '"World"!']
 const checksumGeneratorCases: [
 	string[],
 	ChecksumOptions | undefined,
-	string
+	string,
 ][] = [
 	[worldParts, undefined, '6b06afea412a1611e2c42df1838620a19ad852e0'],
 	[worldParts, { algorithm: 'md5' }, 'e646fb07f547d4ad70cf7f0d760dd95d'],
@@ -68,7 +68,7 @@ describe.concurrent.each(checksumGeneratorCases)(
 			const result = generator.next(null).value
 			ctx.expect(result).toBe(expected)
 		})
-	}
+	},
 )
 
 const checksumCases: [string, ChecksumOptions | undefined, string][] =
@@ -81,7 +81,7 @@ describe.concurrent.each(checksumCases)(
 			const result = computeChecksum(input, options as ChecksumOptions)
 			ctx.expect(result).toBe(expected)
 		})
-	}
+	},
 )
 
 describe.concurrent.each(checksumCases)(
@@ -92,10 +92,10 @@ describe.concurrent.each(checksumCases)(
 			await fse.writeFile(filePath, input)
 			const result = await computeFileChecksum(
 				filePath,
-				options as ChecksumOptions
+				options as ChecksumOptions,
 			)
 			ctx.expect(result).toBe(expected)
 			await fse.rm(filePath, { force: true })
 		})
-	}
+	},
 )

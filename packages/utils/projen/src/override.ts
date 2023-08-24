@@ -26,7 +26,7 @@ interface ApplyOverridesOptions {
 export const applyOverrides = <T extends SupportsOverrides>(
 	item: T,
 	overrides: Record<string, any>,
-	options?: ApplyOverridesOptions
+	options?: ApplyOverridesOptions,
 ): T => {
 	const extendArrays = options?.extendArrays ?? false
 	const flatItem: Record<string, any | Array<any>> = flatten.flatten(
@@ -34,7 +34,7 @@ export const applyOverrides = <T extends SupportsOverrides>(
 		{
 			delimiter: '.',
 			safe: true,
-		}
+		},
 	)
 	Object.entries(flatItem).forEach(([key, value]) => {
 		if (Array.isArray(value) && extendArrays) {

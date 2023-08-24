@@ -22,7 +22,7 @@ export class ToolVersions extends Component {
 
 	constructor(
 		project: Project,
-		public readonly options: ToolVersionsOptions = { tools: {} }
+		public readonly options: ToolVersionsOptions = { tools: {} },
 	) {
 		super(project)
 		const { tools } = options
@@ -69,7 +69,7 @@ export class ToolVersions extends Component {
 		const current = this.#tools.get(toolName) ?? []
 		return this.setVersions(
 			toolName,
-			Array.from(new Set([...current, ...versions]))
+			Array.from(new Set([...current, ...versions])),
 		)
 	}
 

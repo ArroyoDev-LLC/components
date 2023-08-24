@@ -41,7 +41,10 @@ export class LintStaged extends Component {
 
 	#entries: LintStagedEntry[]
 
-	constructor(readonly project: NodeProject, options: LintStagedOptions = {}) {
+	constructor(
+		readonly project: NodeProject,
+		options: LintStagedOptions = {},
+	) {
 		super(project)
 		this.#entries = options.entries ?? []
 		this.project.addDevDeps('lint-staged')
@@ -56,14 +59,17 @@ export class LintStaged extends Component {
 	 * Lint Staged configuration.
 	 */
 	get lintStagedConfig(): Record<string, string[]> {
-		return this.#entries.reduce((acc, { extensions, commands }) => {
-			const key = Array.isArray(extensions)
-				? `*.{${extensions.join(',')}}`
-				: extensions
-			acc[key] ??= []
-			acc[key]!.push(...commands)
-			return acc
-		}, {} as Record<string, string[]>)
+		return this.#entries.reduce(
+			(acc, { extensions, commands }) => {
+				const key = Array.isArray(extensions)
+					? `*.{${extensions.join(',')}}`
+					: extensions
+				acc[key] ??= []
+				acc[key]!.push(...commands)
+				return acc
+			},
+			{} as Record<string, string[]>,
+		)
 	}
 
 	/**

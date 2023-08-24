@@ -55,7 +55,7 @@ export interface NodeModulesCacheStoreOptions {
  * @param options Store configuration.
  */
 export const simpleNodeModulesCacheStore = <T>(
-	options: NodeModulesCacheStoreOptions
+	options: NodeModulesCacheStoreOptions,
 ): SimpleJsonStore<T> => {
 	const { name, cwd = process.cwd() } = options
 	const sourceName = name.endsWith('.json') ? name : `${name}.json`
@@ -64,7 +64,7 @@ export const simpleNodeModulesCacheStore = <T>(
 		'node_modules',
 		'.cache',
 		name.split('.json')[0],
-		sourceName
+		sourceName,
 	)
 	fse.ensureDirSync(pathe.dirname(sourcePath))
 	const initData = fse.readJsonSync(sourcePath, { throws: false }) as

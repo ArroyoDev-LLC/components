@@ -34,7 +34,7 @@ export interface TypeScriptSourceConfigOptions<ConfigT = Record<string, any>>
 	 */
 	configResolver?: (
 		tsConfig: TypeScriptSourceConfig,
-		source: SourceFile
+		source: SourceFile,
 	) => ObjectLiteralExpression
 }
 
@@ -64,7 +64,7 @@ export interface TypeScriptSourceConfigPlugin<OptionsT = Record<string, any>> {
 }
 
 export class TypeScriptSourceConfig<
-	T extends Record<string, any> = Record<string, any>
+	T extends Record<string, any> = Record<string, any>,
 > extends TypeScriptSourceFile {
 	/**
 	 * Create config with call expression config resolver.
@@ -73,11 +73,11 @@ export class TypeScriptSourceConfig<
 	 * @param options Config options.
 	 */
 	static withCallExpressionConfig<
-		ET extends Record<string, any> = Record<string, any>
+		ET extends Record<string, any> = Record<string, any>,
 	>(
 		project: TypeScriptProject,
 		filePath: string,
-		options: TypeScriptSourceConfigOptions<ET>
+		options: TypeScriptSourceConfigOptions<ET>,
 	): TypeScriptSourceConfig<ET> {
 		return new TypeScriptSourceConfig<ET>(project, filePath, {
 			...options,
@@ -95,7 +95,7 @@ export class TypeScriptSourceConfig<
 	constructor(
 		project: TypeScriptProject,
 		filePath: string,
-		public readonly options: TypeScriptSourceConfigOptions<T>
+		public readonly options: TypeScriptSourceConfigOptions<T>,
 	) {
 		const { config, pluginsProperty, ...rest } = options
 		super(project, filePath, rest)
@@ -109,7 +109,7 @@ export class TypeScriptSourceConfig<
 	 * @param config
 	 */
 	addConfig<ConfigT extends ObjectLiteralMergeSchema<T>>(
-		config: ConfigT
+		config: ConfigT,
 	): this {
 		this.addConfigTransform((configExpr) => {
 			mergeObjectLiteral(configExpr, config)
@@ -137,14 +137,14 @@ export class TypeScriptSourceConfig<
 		).join('/')
 		this.project.deps.addDependency(
 			depName,
-			dependencyType ?? DependencyType.BUILD
+			dependencyType ?? DependencyType.BUILD,
 		)
 		this.addImport(moduleImport)
 		this.addConfigTransform((configExpr) => {
 			const existsPlugins = this.getOrCreatePropertyAssignmentInitializer(
 				configExpr,
 				this.options.pluginsProperty ?? 'plugins',
-				SyntaxKind.ArrayLiteralExpression
+				SyntaxKind.ArrayLiteralExpression,
 			)
 			existsPlugins.addElements(pluginSpec)
 		})
@@ -158,8 +158,8 @@ export class TypeScriptSourceConfig<
 	addConfigTransform(
 		transform: (
 			configObjectLiteral: ObjectLiteralExpression,
-			sourceFile: SourceFile
-		) => void
+			sourceFile: SourceFile,
+		) => void,
 	) {
 		const configResolver =
 			this.options.configResolver ??

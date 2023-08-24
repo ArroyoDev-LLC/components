@@ -47,7 +47,7 @@ export const CONFIG_DEFAULTS = {
 	logging: { usePrefix: true, level: LogLevel.INFO },
 	projenCommand: NodePackageUtils.command.exec(
 		javascript.NodePackageManager.PNPM,
-		'projen'
+		'projen',
 	),
 	projenrcTs: true,
 	prettier: true,
@@ -58,7 +58,7 @@ export const CONFIG_DEFAULTS = {
  * Base {@link typescript.TypeScriptProject} builder with most commonly used steps.
  */
 export const TypescriptBaseBuilder = new ProjectBuilder(
-	typescript.TypeScriptProject
+	typescript.TypeScriptProject,
 )
 	.add(new stdBuilders.DefaultOptionsBuilder(CONFIG_DEFAULTS))
 	.add(
@@ -68,9 +68,9 @@ export const TypescriptBaseBuilder = new ProjectBuilder(
 					TSConfig.BASE,
 					TSConfig.ESM,
 					TSConfig.BUNDLER,
-					TSConfig.COMPOSITE
+					TSConfig.COMPOSITE,
 				),
-		})
+		}),
 	)
 	.add(new tsBuilders.TypescriptLintingBuilder({ useTypeInformation: true }))
 	.add(new tsBuilders.TypescriptESMManifestBuilder())
@@ -88,7 +88,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 	 */
 	static fromParent(
 		monorepo: MonorepoProject,
-		options: TypeScriptProjectOptions
+		options: TypeScriptProjectOptions,
 	) {
 		const { tsconfigBase, ...rest } = options
 		return new this({
@@ -98,7 +98,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 				monorepo.tsconfigContainer.buildExtends(
 					TSConfig.BASE,
 					TSConfig.ESM,
-					TSConfig.BUNDLER
+					TSConfig.BUNDLER,
 				),
 			...rest,
 		})
@@ -120,7 +120,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		}
 		const mergedOptions = deepMerge(
 			[Object.assign({}, CONFIG_DEFAULTS), rest],
-			true
+			true,
 		) as Omit<TypeScriptProjectOptions, 'name'>
 		super({
 			defaultReleaseBranch: 'main',
@@ -161,7 +161,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 
 		this.addWorkspaceDeps(
 			{ depType: DependencyType.RUNTIME, addTsPath: true },
-			...(workspaceDeps ?? [])
+			...(workspaceDeps ?? []),
 		)
 
 		this.lintConfig = new LintConfig(this)

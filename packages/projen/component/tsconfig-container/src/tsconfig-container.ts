@@ -36,7 +36,7 @@ export interface TypescriptConfigContainerBuildOptions
 export class TypescriptConfigContainer extends Component {
 	public static of(project: Project): TypescriptConfigContainer | undefined {
 		const isTsConfigContainer = (
-			c: Component
+			c: Component,
 		): c is TypescriptConfigContainer => c instanceof TypescriptConfigContainer
 		return project.components.find(isTsConfigContainer)
 	}
@@ -48,7 +48,7 @@ export class TypescriptConfigContainer extends Component {
 	 */
 	public static ensure(
 		project: Project,
-		options?: TypescriptConfigContainerOptions
+		options?: TypescriptConfigContainerOptions,
 	): TypescriptConfigContainer {
 		return (
 			this.nearest(project) ?? new TypescriptConfigContainer(project, options)
@@ -60,10 +60,10 @@ export class TypescriptConfigContainer extends Component {
 	 * @param project
 	 */
 	public static nearest(
-		project: Project
+		project: Project,
 	): TypescriptConfigContainer | undefined {
 		return firstAncestor(project, (parent: Project) =>
-			TypescriptConfigContainer.of(parent)
+			TypescriptConfigContainer.of(parent),
 		)
 	}
 
@@ -90,7 +90,7 @@ export class TypescriptConfigContainer extends Component {
 		project: Project,
 		public readonly options: TypescriptConfigContainerOptions = {
 			configsDirectory: '.',
-		}
+		},
 	) {
 		super(project)
 	}
@@ -107,7 +107,7 @@ export class TypescriptConfigContainer extends Component {
 	 */
 	buildExtendableTypeScriptConfig(
 		fileName: string,
-		options: javascript.TypeScriptCompilerOptions
+		options: javascript.TypeScriptCompilerOptions,
 	): javascript.TypescriptConfig {
 		const config = new javascript.TypescriptConfig(this.project, {
 			fileName,
@@ -126,13 +126,13 @@ export class TypescriptConfigContainer extends Component {
 	defineConfig<
 		Options extends javascript.TypeScriptCompilerOptions & {
 			overrides?: Record<string, unknown>
-		}
+		},
 	>(name: string, options: Options) {
 		const configPath = this.#resolvePath(name)
 		const { overrides, ...configOptions } = options
 		const config = this.buildExtendableTypeScriptConfig(
 			configPath,
-			configOptions
+			configOptions,
 		)
 		if (overrides) {
 			applyOverrides(
@@ -140,7 +140,7 @@ export class TypescriptConfigContainer extends Component {
 				{
 					compilerOptions: overrides,
 				},
-				{ extendArrays: true }
+				{ extendArrays: true },
 			)
 		}
 		this.configs.set(name, config)
@@ -167,7 +167,7 @@ export class TypescriptConfigContainer extends Component {
 	 */
 	mergeTsConfigFiles<ConfigT extends { include: string[]; exclude: string[] }>(
 		base?: ConfigT,
-		paths?: { include?: string[]; exclude?: string[] }
+		paths?: { include?: string[]; exclude?: string[] },
 	): { include: string[]; exclude: string[] } {
 		const uniqMerge = <T>(arrA: T[], arrB: T[]): T[] =>
 			Array.from(new Set([...arrA.slice(), ...arrB.slice()]))
@@ -184,11 +184,11 @@ export class TypescriptConfigContainer extends Component {
 	 */
 	mergeTsConfigs(
 		base: javascript.TypescriptConfigOptions,
-		override: javascript.TypescriptConfigOptions
+		override: javascript.TypescriptConfigOptions,
 	) {
 		return deepMerge(
 			[base, override],
-			true
+			true,
 		) as javascript.TypescriptConfigOptions
 	}
 
@@ -199,7 +199,7 @@ export class TypescriptConfigContainer extends Component {
 	 */
 	buildConfig(
 		project: Project,
-		options: TypescriptConfigContainerBuildOptions
+		options: TypescriptConfigContainerBuildOptions,
 	): javascript.TypescriptConfig {
 		const {
 			fileName = 'tsconfig.json',
@@ -212,7 +212,7 @@ export class TypescriptConfigContainer extends Component {
 
 		const existing = project.components.find(
 			(c) =>
-				isComponent(javascript.TypescriptConfig, c) && c.fileName === fileName
+				isComponent(javascript.TypescriptConfig, c) && c.fileName === fileName,
 		) as javascript.TypescriptConfig | undefined
 
 		let props: javascript.TypescriptConfigOptions = {
@@ -234,7 +234,7 @@ export class TypescriptConfigContainer extends Component {
 					...(existing.extends.length
 						? {
 								extends: javascript.TypescriptConfigExtends.fromPaths(
-									existing.extends
+									existing.extends,
 								),
 						  }
 						: {}),
@@ -242,7 +242,7 @@ export class TypescriptConfigContainer extends Component {
 					exclude: existing.exclude,
 					compilerOptions: existing.compilerOptions,
 				},
-				Object.assign({}, props)
+				Object.assign({}, props),
 			)
 		}
 
@@ -263,22 +263,22 @@ export class TypescriptConfigContainer extends Component {
 	 */
 	protected linkProjectTsPath(
 		fromProject: typescript.TypeScriptProject,
-		toProject: typescript.TypeScriptProject
+		toProject: typescript.TypeScriptProject,
 	) {
 		const tsPath = cwdRelativePath(
 			fromProject.outdir,
-			path.join(path.join(toProject.outdir, toProject.srcdir), 'index')
+			path.join(path.join(toProject.outdir, toProject.srcdir), 'index'),
 		)
 		if (!fromProject.tsconfig) {
 			this.project.logger.warn(
-				`Cannot add tsconfig path (${fromProject.name} -> ${toProject.name}) because ${fromProject.name} does not have a tsconfig!`
+				`Cannot add tsconfig path (${fromProject.name} -> ${toProject.name}) because ${fromProject.name} does not have a tsconfig!`,
 			)
 			return
 		}
 		const depNamePath = toProject.package.packageName.replaceAll('.', '\\.')
 		fromProject.tsconfig.file.addOverride(
 			`compilerOptions.paths.${depNamePath}`,
-			[tsPath]
+			[tsPath],
 		)
 	}
 
@@ -290,20 +290,20 @@ export class TypescriptConfigContainer extends Component {
 	 */
 	protected buildReference(
 		fromProject: typescript.TypeScriptProject,
-		toProject: typescript.TypeScriptProject
+		toProject: typescript.TypeScriptProject,
 	) {
 		if (!fromProject.tsconfig) {
 			this.project.logger.warn(
-				`Cannot add tsconfig path (${fromProject.name} -> ${toProject.name}) because ${fromProject.name} does not have a tsconfig!`
+				`Cannot add tsconfig path (${fromProject.name} -> ${toProject.name}) because ${fromProject.name} does not have a tsconfig!`,
 			)
 			return
 		}
 		const configPath = cwdRelativePath(
 			fromProject.outdir,
-			path.join(toProject.outdir, toProject.tryFindFile('tsconfig.json')!.path)
+			path.join(toProject.outdir, toProject.tryFindFile('tsconfig.json')!.path),
 		)
 		fromProject.logger.debug(
-			`Adding tsconfig reference -> ${toProject.name}@${configPath}`
+			`Adding tsconfig reference -> ${toProject.name}@${configPath}`,
 		)
 		return { path: configPath }
 	}
@@ -315,7 +315,7 @@ export class TypescriptConfigContainer extends Component {
 	protected applyTsConfigPaths() {
 		this.projectPaths.forEach((toProjects, fromProject) => {
 			toProjects.forEach((toProj) =>
-				this.linkProjectTsPath(fromProject, toProj)
+				this.linkProjectTsPath(fromProject, toProj),
 			)
 		})
 		this.projectPaths.clear()
@@ -342,7 +342,7 @@ export class TypescriptConfigContainer extends Component {
 	 */
 	addTsConfigPaths(
 		fromProject: typescript.TypeScriptProject,
-		toProjects: typescript.TypeScriptProject[]
+		toProjects: typescript.TypeScriptProject[],
 	): this {
 		const current = this.projectPaths.get(fromProject) ?? []
 		this.projectPaths.set(fromProject, new Set([...current, ...toProjects]))
@@ -356,12 +356,12 @@ export class TypescriptConfigContainer extends Component {
 	 */
 	addTsConfigReferences(
 		fromProject: typescript.TypeScriptProject,
-		toProjects: typescript.TypeScriptProject[]
+		toProjects: typescript.TypeScriptProject[],
 	): this {
 		const current = this.projectReferences.get(fromProject) ?? []
 		this.projectReferences.set(
 			fromProject,
-			new Set([...current, ...toProjects])
+			new Set([...current, ...toProjects]),
 		)
 		return this
 	}

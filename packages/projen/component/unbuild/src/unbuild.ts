@@ -24,7 +24,7 @@ export class UnBuild extends Component {
 
 	constructor(
 		public readonly project: TypeScriptProject,
-		public readonly options: UnBuildOptions = { cjs: true }
+		public readonly options: UnBuildOptions = { cjs: true },
 	) {
 		super(project)
 		this.unbuildOptions = options.options ?? {}
@@ -42,7 +42,7 @@ export class UnBuild extends Component {
 			exec: NodePackageUtils.command.exec(
 				project.package.packageManager,
 				'unbuild',
-				'--stub'
+				'--stub',
 			),
 		})
 		const postInstall =
@@ -76,7 +76,7 @@ export class UnBuild extends Component {
 				source,
 				marker: true,
 				config: this.unbuildOptions,
-			}
+			},
 		)
 
 		this.file.addImport({

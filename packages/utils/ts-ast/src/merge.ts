@@ -33,7 +33,7 @@ import {
  */
 export function mergeArrayLiteral(
 	arrayLiteral: ArrayLiteralExpression,
-	value: ArrayLiteralMergeValue
+	value: ArrayLiteralMergeValue,
 ) {
 	const literalElements = arrayLiteral.getElements()
 
@@ -65,7 +65,7 @@ export function mergeArrayLiteral(
 				mergeStrategy === ArrayLiteralMergeStrategyType.APPEND)
 		) {
 			existingElement = arrayLiteral.addElement(
-				defaultInitializerFor(mergeElement)
+				defaultInitializerFor(mergeElement),
 			)
 			existingType = mergeIsObj
 				? SyntaxKind.ObjectLiteralExpression
@@ -79,13 +79,13 @@ export function mergeArrayLiteral(
 			// merge object literal.
 			mergeObjectLiteral(
 				existingElement!.asKindOrThrow(SyntaxKind.ObjectLiteralExpression),
-				mergeElement
+				mergeElement,
 			)
 		} else if (existsIsArray && mergeIsArray) {
 			// merge array literal.
 			mergeArrayLiteral(
 				existingElement!.asKindOrThrow(SyntaxKind.ArrayLiteralExpression),
-				mergeElement
+				mergeElement,
 			)
 		} else {
 			// add scalar or write functions.
@@ -94,21 +94,24 @@ export function mergeArrayLiteral(
 	})
 
 	// deduplicate elements.
-	return arrayLiteral.getElements().reduce((acc, curr) => {
-		// cannot test equality on writer functions.
-		if (!is.function_(curr)) {
-			const idx = acc.findIndex((item) =>
-				is.function_(item) ? false : isExpressionEqual(curr, item)
-			)
-			if (idx === -1) {
-				// convert any expression objects to raw text.
-				acc.push(is.string(curr) ? curr : curr.getFullText())
+	return arrayLiteral.getElements().reduce(
+		(acc, curr) => {
+			// cannot test equality on writer functions.
+			if (!is.function_(curr)) {
+				const idx = acc.findIndex((item) =>
+					is.function_(item) ? false : isExpressionEqual(curr, item),
+				)
+				if (idx === -1) {
+					// convert any expression objects to raw text.
+					acc.push(is.string(curr) ? curr : curr.getFullText())
+				}
+			} else {
+				acc.push(curr as unknown as WriterFunction)
 			}
-		} else {
-			acc.push(curr as unknown as WriterFunction)
-		}
-		return acc
-	}, [] as Array<WriterFunction | string>)
+			return acc
+		},
+		[] as Array<WriterFunction | string>,
+	)
 }
 
 /**
@@ -118,38 +121,38 @@ export function mergeArrayLiteral(
  */
 export function mergePropertyAssignment<T extends LiteralExpressionMergeValue>(
 	propAssign: PropertyAssignment,
-	value: T
+	value: T,
 ) {
 	const valueIsObject = is.plainObject(value)
 	const valueIsArray = Array.isArray(value)
 
 	// existing object literal expression initializer, if defined.
 	const initializer = propAssign.getInitializerIfKind(
-		SyntaxKind.ObjectLiteralExpression
+		SyntaxKind.ObjectLiteralExpression,
 	)
 	// existing array literal expression initializer, if defined.
 	const arrayInitializer = propAssign.getInitializerIfKind(
-		SyntaxKind.ArrayLiteralExpression
+		SyntaxKind.ArrayLiteralExpression,
 	)
 
 	if (initializer && valueIsObject) {
 		// merge object value -> object initializer.
 		mergeObjectLiteral(
 			initializer,
-			value as ObjectLiteralMergeSchema<Record<string, any>>
+			value as ObjectLiteralMergeSchema<Record<string, any>>,
 		)
 	} else if (arrayInitializer && valueIsArray) {
 		// merge array value into array initializer.
 		const uniqueArray = mergeArrayLiteral(
 			arrayInitializer,
-			value as ArrayLiteralMergeValue
+			value as ArrayLiteralMergeValue,
 		)
 		// set merge array
 		propAssign.setInitializer(`[${uniqueArray.join(', ')}]`)
 	} else {
 		// create or override initializer (missing or type mismatch)
 		propAssign.setInitializer(
-			convertInitializer(value as ObjectLiteralMergeObjectValue)
+			convertInitializer(value as ObjectLiteralMergeObjectValue),
 		)
 	}
 }
@@ -161,7 +164,7 @@ export function mergePropertyAssignment<T extends LiteralExpressionMergeValue>(
  */
 export function mergeObjectLiteral<T extends Record<string, any>>(
 	expression: ObjectLiteralExpression,
-	obj: Schema<T, LiteralExpressionMergeValue>
+	obj: Schema<T, LiteralExpressionMergeValue>,
 ): ObjectLiteralExpression {
 	for (const [key, value] of Object.entries(obj)) {
 		// existing assignment if defined.
@@ -184,7 +187,7 @@ export function mergeObjectLiteral<T extends Record<string, any>>(
 					name: key,
 					initializer: defaultInit,
 				}),
-				value as LiteralExpressionMergeValue
+				value as LiteralExpressionMergeValue,
 			)
 		} else {
 			// otherwise add primitives / writer functions as is.

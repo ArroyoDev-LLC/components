@@ -39,7 +39,7 @@ export class TypeScriptSourceFileCache extends Component {
 	constructor(project: Project) {
 		if (TypeScriptSourceFileCache.of(project)) {
 			throw new Error(
-				'Only one TypeScriptSourceFileCache per project tree is allowed'
+				'Only one TypeScriptSourceFileCache per project tree is allowed',
 			)
 		}
 		super(project)

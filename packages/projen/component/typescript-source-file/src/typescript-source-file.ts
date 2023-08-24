@@ -46,7 +46,7 @@ export class TypeScriptSourceFile extends FileBase {
 	constructor(
 		public readonly project: typescript.TypeScriptProject,
 		public readonly filePath: string,
-		options: TypeScriptSourceFileOptions
+		options: TypeScriptSourceFileOptions,
 	) {
 		super(project, filePath, { ...options, readonly: false })
 
@@ -93,7 +93,7 @@ export class TypeScriptSourceFile extends FileBase {
 	 */
 	getDefaultExport<T extends SyntaxKind>(
 		source: SourceFile,
-		expressionKind: T
+		expressionKind: T,
 	): KindToExpressionMappings[T] {
 		const defaultExportNode = source
 			.getExportAssignments()
@@ -112,7 +112,7 @@ export class TypeScriptSourceFile extends FileBase {
 		objectLiteral: ObjectLiteralExpression,
 		name: string,
 		initializerKind: T,
-		defaultInitializer?: string | WriterFunction
+		defaultInitializer?: string | WriterFunction,
 	) {
 		const initDefaults: Partial<Record<SyntaxKind, string>> = {
 			[SyntaxKind.ObjectLiteralExpression]: '{}',
@@ -145,7 +145,7 @@ export class TypeScriptSourceFile extends FileBase {
 			sourceFile = tsProject.createSourceFile(
 				this.filePath,
 				this.options.source,
-				{ overwrite: true }
+				{ overwrite: true },
 			)
 		} else {
 			const existing = tryReadFileSync(this.absolutePath)

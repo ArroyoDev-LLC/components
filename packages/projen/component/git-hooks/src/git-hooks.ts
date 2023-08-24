@@ -58,7 +58,7 @@ export class GitHooks extends Component {
 
 	constructor(
 		readonly project: NodeProject,
-		readonly options: GitHooksOptions = {}
+		readonly options: GitHooksOptions = {},
 	) {
 		super(project)
 		this.#hooks = options.hooks ?? {}

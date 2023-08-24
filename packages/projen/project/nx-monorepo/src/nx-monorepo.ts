@@ -111,7 +111,7 @@ export class MonorepoProject extends NxMonorepoProject {
 		const { workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
 		const mergedOptions = deepMerge(
 			[Object.assign({}, CONFIG_DEFAULTS), rest],
-			true
+			true,
 		) as NxMonorepoProjectOptions
 		super({
 			defaultReleaseBranch: 'main',
@@ -121,7 +121,7 @@ export class MonorepoProject extends NxMonorepoProject {
 		this.pnpm = new PnpmWorkspace(this)
 		this.pnpm.addWorkspaceDeps(
 			{ addTsPath: true, depType: DependencyType.DEVENV },
-			...(workspaceDeps ?? [])
+			...(workspaceDeps ?? []),
 		)
 		this.gitignore.addPatterns('.idea', '.idea/**')
 		new JsonFile(this, '.ncurc.json', {
@@ -136,11 +136,11 @@ export class MonorepoProject extends NxMonorepoProject {
 		this.esmBundledTsconfigExtends = this.tsconfigContainer.buildExtends(
 			TSConfig.BASE,
 			TSConfig.ESM,
-			TSConfig.BUNDLER
+			TSConfig.BUNDLER,
 		)
 		const tsconfigExtends = this.tsconfigContainer.buildExtends(
 			TSConfig.BASE,
-			TSConfig.ESM
+			TSConfig.ESM,
 		)
 		this.tryRemoveFile('tsconfig.json')
 		this.tsconfig = new javascript.TypescriptConfig(this, {
@@ -168,7 +168,7 @@ export class MonorepoProject extends NxMonorepoProject {
 		this.tsconfigDev.addExtends(this.tsconfig)
 		this.applyNpmConfig(
 			findComponent(this, javascript.NpmConfig) ??
-				new javascript.NpmConfig(this)
+				new javascript.NpmConfig(this),
 		)
 			.applyGithub(this.github)
 			.applyPackage(this.package)
@@ -191,12 +191,12 @@ export class MonorepoProject extends NxMonorepoProject {
 		this.tasks
 			.tryFind('docgen')!
 			.reset(
-				NodePackageUtils.command.exec(this.package.packageManager, 'typedoc')
+				NodePackageUtils.command.exec(this.package.packageManager, 'typedoc'),
 			)
 		this.applyPreSynth(() => {
 			this.tsconfig.file.addOverride('typedocOptions', {
 				entryPoints: this.sortedSubProjects.map((subproj) =>
-					cwdRelativePath(this.outdir, subproj.outdir)
+					cwdRelativePath(this.outdir, subproj.outdir),
 				),
 				entryPointStrategy: 'packages',
 				out: 'docs',
@@ -216,7 +216,7 @@ export class MonorepoProject extends NxMonorepoProject {
 						useTsLinkResolution: true,
 						...(this.options.docgenOptions as Record<string, any>),
 					}),
-			{ immediate: false, includeSelf: false }
+			{ immediate: false, includeSelf: false },
 		)
 		return this
 	}
@@ -288,8 +288,8 @@ export class MonorepoProject extends NxMonorepoProject {
 			NodePackageUtils.command.exec(
 				this.package.packageManager,
 				'tsx',
-				'.projenrc.ts'
-			)
+				'.projenrc.ts',
+			),
 		)
 		this.tasks.tryFind('eslint')?.exec?.('eslint', {
 			name: 'Lint Root',
@@ -316,7 +316,10 @@ export class MonorepoProject extends NxMonorepoProject {
 				if (nodePackage) {
 					nodePackage.setScript(
 						'clean',
-						NodePackageUtils.command.projen(nodePackage.packageManager, 'clean')
+						NodePackageUtils.command.projen(
+							nodePackage.packageManager,
+							'clean',
+						),
 					)
 				}
 				const cleanTask =
@@ -326,17 +329,17 @@ export class MonorepoProject extends NxMonorepoProject {
 						this.package.packageManager,
 						'tsc',
 						'--build',
-						'--clean'
-					)
+						'--clean',
+					),
 				)
 				cleanTask.exec(
 					NodePackageUtils.command.exec(
 						this.package.packageManager,
-						'rimraf dist lib tsconfig.tsbuildinfo'
-					)
+						'rimraf dist lib tsconfig.tsbuildinfo',
+					),
 				)
 			},
-			{ immediate: false, includeSelf: false }
+			{ immediate: false, includeSelf: false },
 		)
 	}
 
@@ -366,7 +369,7 @@ export class MonorepoProject extends NxMonorepoProject {
 						}
 					}
 				},
-				{ immediate: false, includeSelf: true }
+				{ immediate: false, includeSelf: true },
 			)
 		}
 
@@ -386,8 +389,8 @@ export class MonorepoProject extends NxMonorepoProject {
 				'--stream',
 				'--if-present',
 				'run',
-				'post-install'
-			)
+				'post-install',
+			),
 		)
 		return this
 	}
@@ -414,7 +417,7 @@ export class MonorepoProject extends NxMonorepoProject {
 	 */
 	applyRecursive(
 		cb: (project: Project, monorepo: this) => void,
-		options?: ApplyRecursiveOptions
+		options?: ApplyRecursiveOptions,
 	): this {
 		const executor = () => {
 			if (options?.includeSelf ?? false) cb(this, this)
@@ -431,7 +434,7 @@ export class MonorepoProject extends NxMonorepoProject {
 	applyGithubJobNxEnv(workflow: github.GithubWorkflow, jobId: string): this {
 		workflow.file!.addOverride(
 			'env.NPM_TOKEN',
-			secretToString('NPM_AUTH_TOKEN')
+			secretToString('NPM_AUTH_TOKEN'),
 		)
 		const job = workflow.getJob(jobId) as github.workflows.Job
 		workflow.updateJob(jobId, {
@@ -454,8 +457,8 @@ export class MonorepoProject extends NxMonorepoProject {
 		this.tsconfigContainer.addTsConfigReferences(
 			this,
 			dependency.filter(
-				(i) => i instanceof javascript.NodeProject
-			) as typescript.TypeScriptProject[]
+				(i) => i instanceof javascript.NodeProject,
+			) as typescript.TypeScriptProject[],
 		)
 		return this.pnpm.addWorkspaceDeps(...dependency)
 	}

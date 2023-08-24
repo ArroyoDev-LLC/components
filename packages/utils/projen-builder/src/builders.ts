@@ -11,7 +11,7 @@ import { type TypedPropertyDescriptorMap } from './types.ts'
  * Store the options used to create a project under an `options` property.
  */
 export class OptionsPropertyBuilder<
-	InputT extends ProjectOptions
+	InputT extends ProjectOptions,
 > extends BaseBuildStep<{}, { readonly options: InputT }> {
 	private _options!: InputT
 
@@ -45,7 +45,7 @@ export class NameSchemeBuilder extends BaseBuildStep<
 	}
 
 	applyOptions<Options extends ProjectOptions>(
-		options: Options
+		options: Options,
 	): Options & this['_outputOptions'] {
 		const { name, parent, ...rest } = options
 		const nameScheme = ProjectName.ensureScheme(name, parent, this.options)
@@ -64,7 +64,7 @@ export class NameSchemeBuilder extends BaseBuildStep<
 				value: ProjectName.ensureScheme(
 					project.name,
 					project.parent,
-					this.options
+					this.options,
 				),
 				writable: false,
 			},
@@ -76,18 +76,18 @@ export class NameSchemeBuilder extends BaseBuildStep<
  * Add default options.
  */
 export class DefaultOptionsBuilder<
-	Options extends object
+	Options extends object,
 > extends BaseBuildStep<Partial<Options>, {}> {
 	constructor(readonly defaultOptions: Partial<Options>) {
 		super()
 	}
 
 	applyOptions(
-		options: ProjectOptions & this['_outputOptions']
+		options: ProjectOptions & this['_outputOptions'],
 	): ProjectOptions & this['_outputOptions'] {
 		return super.applyOptions(
 			withDefaults(this.defaultOptions)(options) as ProjectOptions &
-				this['_outputOptions']
+				this['_outputOptions'],
 		)
 	}
 }

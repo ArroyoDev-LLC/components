@@ -66,7 +66,7 @@ export interface ChecksumOptions {
 
 export function stripFormatting(
 	content: string,
-	options?: StripOptions
+	options?: StripOptions,
 ): string {
 	const {
 		spaces = true,
@@ -100,7 +100,7 @@ export function stripFormatting(
  * @param options Pre-processing and checksum options.
  */
 export function* checksumGenerator(
-	options?: ChecksumOptions
+	options?: ChecksumOptions,
 ): Generator<void, string, string | null | undefined> {
 	const {
 		algorithm = 'sha1',
@@ -131,7 +131,7 @@ export function* checksumGenerator(
  */
 export function computeChecksum(
 	content: string,
-	options?: ChecksumOptions
+	options?: ChecksumOptions,
 ): string {
 	const generator = checksumGenerator(options)
 	generator.next()
@@ -146,7 +146,7 @@ export function computeChecksum(
  */
 export async function computeFileChecksum(
 	filePath: string,
-	options?: ChecksumOptions
+	options?: ChecksumOptions,
 ): Promise<string> {
 	return new Promise<string>((resolve, reject) => {
 		try {

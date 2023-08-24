@@ -17,7 +17,7 @@ export type GConstructor<T, Args extends any[] = any[]> = new (
  */
 export type GenericProjectConstructor<
 	T extends Project = Project,
-	Options = [options: any]
+	Options = [options: any],
 > = GConstructor<T, [options: Options]>
 
 export type Identity<T> = T

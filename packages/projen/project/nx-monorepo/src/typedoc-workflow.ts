@@ -16,7 +16,7 @@ export class TypeDocGithubPages extends Component {
 		project: Project,
 		public readonly options: TypeDocGithubPagesOptions = {
 			workflowName: 'static',
-		}
+		},
 	) {
 		super(project)
 
@@ -48,7 +48,7 @@ export class TypeDocGithubPages extends Component {
 			'actions/setup-node': 'v3',
 		}
 		Object.entries(defaults).forEach(([name, version]) =>
-			setDefault(name, version)
+			setDefault(name, version),
 		)
 		return this
 	}
@@ -63,7 +63,7 @@ export class TypeDocGithubPages extends Component {
 			this.options.workflowName,
 			{
 				concurrency: 'pages',
-			}
+			},
 		)
 		workflow.on({
 			push: { branches: ['main'] },
@@ -71,7 +71,7 @@ export class TypeDocGithubPages extends Component {
 		})
 		workflow.file!.addOverride(
 			'env.NPM_TOKEN',
-			secretToString('NPM_AUTH_TOKEN')
+			secretToString('NPM_AUTH_TOKEN'),
 		)
 		return workflow
 	}

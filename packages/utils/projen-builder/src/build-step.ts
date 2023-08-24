@@ -23,7 +23,7 @@ export abstract class BuildStep<Options = any, Output = any> {
 	 * @param options Input project options.
 	 */
 	abstract applyOptions(
-		options: ProjectOptions
+		options: ProjectOptions,
 	): ProjectOptions & BuildOptions<this>
 
 	/**
@@ -36,22 +36,22 @@ export abstract class BuildStep<Options = any, Output = any> {
 	 * @param project Input project.
 	 */
 	abstract applyProject(
-		project: Project
+		project: Project,
 	): TypedPropertyDescriptorMap<BuildOutput<this>>
 }
 
 export class BaseBuildStep<
 	OutputOptions extends object = {},
-	OutputProps extends object = {}
+	OutputProps extends object = {},
 > extends BuildStep<OutputOptions, OutputProps> {
 	applyOptions(
-		options: ProjectOptions & this['_outputOptions']
+		options: ProjectOptions & this['_outputOptions'],
 	): ProjectOptions & this['_outputOptions'] {
 		return options
 	}
 
 	applyProject(
-		_project: Project
+		_project: Project,
 	): TypedPropertyDescriptorMap<BuildOutput<this>> {
 		return {} as TypedPropertyDescriptorMap<BuildOutput<this>>
 	}

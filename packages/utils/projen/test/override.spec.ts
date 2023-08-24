@@ -9,7 +9,7 @@ test('applyOverrides', async () => {
 		},
 	}
 	expect(
-		applyOverrides(overridable, { key: 'value', one: 'two' }).overrides
+		applyOverrides(overridable, { key: 'value', one: 'two' }).overrides,
 	).toEqual([
 		['key', 'value'],
 		['one', 'two'],

@@ -41,6 +41,7 @@ jspm_packages/
 .jsii
 tsconfig.json
 !/API.md
+dist-types
 !/tsconfig.json
 !/tsconfig.dev.json
 !/build.config.ts

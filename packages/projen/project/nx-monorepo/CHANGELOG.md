@@ -8,6 +8,28 @@
     * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.11
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.24](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.23...@arroyodev-llc/projen.project.nx-monorepo-v0.1.24) (2023-08-24)
+
+
+### Features
+
+* **deps:** Update all dependencies ([c095641](https://github.com/ArroyoDev-LLC/components/commit/c095641714560189f59a19f89d1ab06e1815ad6e))
+* **deps:** Update pnpm to 8.6.12 ([42ea764](https://github.com/ArroyoDev-LLC/components/commit/42ea7642497786063ff160cf5ce591e56155b4ca))
+* **projen.project.nx-monorepo:** Execute dev post-install scripts all in parallel using pnpm ([05d1559](https://github.com/ArroyoDev-LLC/components/commit/05d15597d651cfdf98acf3517b978712a98eae20))
+* **projenrc:** Update all managed unbuild/package files ([923874b](https://github.com/ArroyoDev-LLC/components/commit/923874b536dfa15ae21b81812d70b383551b87c2))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.19
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.20
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.14
+    * @arroyodev-llc/utils.projen bumped to 0.1.19
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from ^0.0.0 to ^0.1.2
+
 ## [0.1.23](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.22...@arroyodev-llc/projen.project.nx-monorepo-v0.1.23) (2023-08-13)
 
 

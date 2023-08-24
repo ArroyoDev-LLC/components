@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.15...@arroyodev-llc/projen.component.tool-versions-v0.1.16) (2023-08-24)
+
+
+### Features
+
+* **deps:** Update all dependencies ([c095641](https://github.com/ArroyoDev-LLC/components/commit/c095641714560189f59a19f89d1ab06e1815ad6e))
+* **deps:** Update pnpm to 8.6.12 ([42ea764](https://github.com/ArroyoDev-LLC/components/commit/42ea7642497786063ff160cf5ce591e56155b4ca))
+* **projenrc:** Update all managed unbuild/package files ([923874b](https://github.com/ArroyoDev-LLC/components/commit/923874b536dfa15ae21b81812d70b383551b87c2))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from ^0.0.0 to ^0.1.2
+
 ## [0.1.15](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.14...@arroyodev-llc/projen.component.tool-versions-v0.1.15) (2023-08-13)
 
 

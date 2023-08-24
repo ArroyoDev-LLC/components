@@ -32,6 +32,37 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+## [0.1.26](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.25...@arroyodev-llc/projen.project.typescript-v0.1.26) (2023-08-24)
+
+
+### Features
+
+* **deps:** Update all dependencies ([c095641](https://github.com/ArroyoDev-LLC/components/commit/c095641714560189f59a19f89d1ab06e1815ad6e))
+* **deps:** Update pnpm to 8.6.12 ([42ea764](https://github.com/ArroyoDev-LLC/components/commit/42ea7642497786063ff160cf5ce591e56155b4ca))
+* **projenrc:** Update all managed unbuild/package files ([923874b](https://github.com/ArroyoDev-LLC/components/commit/923874b536dfa15ae21b81812d70b383551b87c2))
+
+
+### Bug Fixes
+
+* **projen.project.typescript:** Use `compositePreset` in unbuild by default to preserve incremental builds ([85b19f2](https://github.com/ArroyoDev-LLC/components/commit/85b19f2aacada94630e043b655a6658c0b417da6))
+* **projenrc:** Specify useTypeImports on missed projen structs ([fd20489](https://github.com/ArroyoDev-LLC/components/commit/fd204897bb1e6ce4e23b3a970d505aba43e1478a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.19
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.20
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.21
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.14
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.22
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.24
+    * @arroyodev-llc/utils.projen bumped to 0.1.19
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.4
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from ^0.0.0 to ^0.1.2
+
 ## [0.1.25](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.24...@arroyodev-llc/projen.project.typescript-v0.1.25) (2023-08-13)
 
 

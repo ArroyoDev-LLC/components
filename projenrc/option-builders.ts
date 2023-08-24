@@ -45,7 +45,7 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 			'project',
 			'nx-monorepo',
 			'src',
-			'nx-monorepo-project-options.ts'
+			'nx-monorepo-project-options.ts',
 		)
 		const struct = new ProjenStruct(project, {
 			name: 'NxMonorepoProjectOptions',
@@ -60,7 +60,7 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 
 		struct.mixin(
 			Struct.fromFqn(
-				'@aws-prototyping-sdk/nx-monorepo.NxMonorepoProjectOptions'
+				'@aws-prototyping-sdk/nx-monorepo.NxMonorepoProjectOptions',
 			)
 				.withoutDeprecated()
 				.update('defaultReleaseBranch', { optional: true })
@@ -90,7 +90,7 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 						kind: TypeKind.Interface,
 					}),
 				}),
-			typescriptStructMixin
+			typescriptStructMixin,
 		)
 		this.optionsStruct = struct
 	}
@@ -105,6 +105,9 @@ export class ProjenProjectOptionsBuilder extends Component {
 		const struct = new ProjenStruct(project, {
 			name: 'ProjenProjectOptions',
 			filePath: this.filePath,
+			outputFileOptions: {
+				useTypeImports: true,
+			},
 		})
 
 		const optional: Array<keyof cdk.JsiiProjectOptions> = [
@@ -115,7 +118,7 @@ export class ProjenProjectOptionsBuilder extends Component {
 		]
 
 		struct.mixin(
-			Struct.fromFqn('projen.cdk.JsiiProjectOptions').withoutDeprecated()
+			Struct.fromFqn('projen.cdk.JsiiProjectOptions').withoutDeprecated(),
 		)
 
 		optional.forEach((name) => {
@@ -144,7 +147,7 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 			'projen',
 			'project',
 			'typescript',
-			'src'
+			'src',
 		)
 		const filePath = path.join(basePath, 'typescript-project-options.ts')
 		const tsconfigPath = path.join(basePath, 'typescript-config-options.ts')
@@ -152,6 +155,9 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 			name: 'TypeScriptCompilerOptions',
 			filePath: path.join(basePath, 'typescript-compiler-options.ts'),
 			fqn: '@arroyodev-llc/projen-project-typescript.TypeScriptCompilerOptions',
+			outputFileOptions: {
+				useTypeImports: true,
+			},
 		})
 		tsconfigCompilerStruct.mixin(
 			Struct.fromFqn('projen.javascript.TypeScriptCompilerOptions').add({
@@ -166,7 +172,7 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 						elementtype: { primitive: PrimitiveType.String },
 					},
 				},
-			})
+			}),
 		)
 
 		const tsconfigStruct = new ProjenStruct(project, {
@@ -185,8 +191,8 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 				'compilerOptions',
 				{
 					type: tsconfigCompilerStruct,
-				}
-			)
+				},
+			),
 		)
 
 		const struct = new ProjenStruct(project, {
@@ -212,7 +218,7 @@ export class TypeScriptProjectOptionsBuilder extends Component {
 				})
 				.update('tsconfig', { type: tsconfigStruct })
 				.update('tsconfigDev', { type: tsconfigStruct }),
-			typescriptStructMixin
+			typescriptStructMixin,
 		)
 
 		LintConfig.of(project)?.eslint?.addIgnorePattern?.(filePath)

@@ -22,7 +22,7 @@ const monorepo = new ComponentsMonorepo({
 		usePrefix: true,
 	},
 	typescriptVersion: '~5.1',
-	pnpmVersion: '8.6.2',
+	pnpmVersion: '8.6.12',
 	devDeps: [
 		'@aws-prototyping-sdk/nx-monorepo',
 		'vite',

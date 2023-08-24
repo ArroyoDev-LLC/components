@@ -1,6 +1,10 @@
 {
   "dependencies": [
     {
+      "name": "@arroyodev-llc/utils.unbuild-composite-preset",
+      "type": "build"
+    },
+    {
       "name": "@types/node",
       "version": "^16",
       "type": "build"

@@ -26,6 +26,7 @@
     "organization": true
   },
   "devDependencies": {
+    "@arroyodev-llc/utils.unbuild-composite-preset": "^0.0.0",
     "@types/node": "^16",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
@@ -44,9 +45,6 @@
   },
   "peerDependencies": {
     "unbuild": "^2.0.0-rc.0"
-  },
-  "dependencies": {
-    "@arroyodev-llc/utils.unbuild-composite-preset": "*"
   },
   "main": "dist/index.mjs",
   "license": "Apache-2.0",

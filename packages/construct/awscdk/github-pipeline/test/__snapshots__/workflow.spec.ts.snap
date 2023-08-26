@@ -49,7 +49,7 @@ exports[`GithubCodePipeline > builder has expected props 1`] = `
       },
     },
     {
-      "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
+      "if": "runner.arch == 'ARM64' && (inputs.runner && !contains(inputs.runner, 'ubuntu'))",
       "name": "Install AWS CLI",
       "uses": "unfor19/install-aws-cli-action@v1",
       "with": {
@@ -89,7 +89,7 @@ exports[`GithubCodePipeline > builder has expected props 1`] = `
   ],
   "prePublishSteps": [
     {
-      "if": "inputs.runner == 'self-hosted'",
+      "if": "inputs.runner && !contains(inputs.runner, 'ubuntu')",
       "name": "Setup Node",
       "uses": "actions/setup-node@v3",
       "with": {
@@ -97,7 +97,7 @@ exports[`GithubCodePipeline > builder has expected props 1`] = `
       },
     },
     {
-      "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
+      "if": "runner.arch == 'ARM64' && (inputs.runner && !contains(inputs.runner, 'ubuntu'))",
       "name": "Install AWS CLI",
       "uses": "unfor19/install-aws-cli-action@v1",
       "with": {
@@ -182,7 +182,7 @@ GithubCodePipeline {
         },
       },
       {
-        "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
+        "if": "runner.arch == 'ARM64' && (inputs.runner && !contains(inputs.runner, 'ubuntu'))",
         "name": "Install AWS CLI",
         "uses": "unfor19/install-aws-cli-action@v1",
         "with": {
@@ -222,7 +222,7 @@ GithubCodePipeline {
     ],
     "prePublishSteps": [
       {
-        "if": "inputs.runner == 'self-hosted'",
+        "if": "inputs.runner && !contains(inputs.runner, 'ubuntu')",
         "name": "Setup Node",
         "uses": "actions/setup-node@v3",
         "with": {
@@ -230,7 +230,7 @@ GithubCodePipeline {
         },
       },
       {
-        "if": "runner.arch == 'ARM64' || inputs.runner == 'self-hosted'",
+        "if": "runner.arch == 'ARM64' && (inputs.runner && !contains(inputs.runner, 'ubuntu'))",
         "name": "Install AWS CLI",
         "uses": "unfor19/install-aws-cli-action@v1",
         "with": {
@@ -322,7 +322,8 @@ jobs:
           version: 3.7.3
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
-        if: runner.arch == 'ARM64' || inputs.runner == 'self-hosted'
+        if: runner.arch == 'ARM64' && (inputs.runner && !contains(inputs.runner,
+          'ubuntu'))
         with:
           arch: arm64
           version: \\"2\\"
@@ -385,10 +386,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: \\"18\\"
-        if: inputs.runner == 'self-hosted'
+        if: inputs.runner && !contains(inputs.runner, 'ubuntu')
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
-        if: runner.arch == 'ARM64' || inputs.runner == 'self-hosted'
+        if: runner.arch == 'ARM64' && (inputs.runner && !contains(inputs.runner,
+          'ubuntu'))
         with:
           arch: arm64
           version: \\"2\\"

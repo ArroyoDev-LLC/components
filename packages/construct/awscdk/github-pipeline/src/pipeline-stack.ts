@@ -274,7 +274,7 @@ export class GithubCodePipeline {
 		const step: ghpipelines.JobStep = {
 			name: 'Install AWS CLI',
 			uses: 'unfor19/install-aws-cli-action@v1',
-			if: `runner.arch == 'ARM64' || inputs.runner == 'self-hosted'`,
+			if: `runner.arch == 'ARM64' && (inputs.runner && !contains(inputs.runner, 'ubuntu'))`,
 			with: {
 				arch: 'arm64',
 				version: toolVersion ?? process.env.TOOLS_AWSCLI_VERSION ?? '2',
@@ -298,7 +298,7 @@ export class GithubCodePipeline {
 		}
 		return this.publishPreStep({
 			...step,
-			if: `inputs.runner == 'self-hosted'`,
+			if: `inputs.runner && !contains(inputs.runner, 'ubuntu')`,
 		}).synthPreStep({
 			...step,
 			with: {

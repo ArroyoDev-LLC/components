@@ -220,6 +220,13 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		}
 
 		this.#workflowAccounts = accountIdsToStage
+		if (
+			this.node.scope &&
+			'account' in this.node.scope &&
+			typeof this.node.scope?.account === 'string'
+		) {
+			this.#workflowAccounts[this.node.scope?.account] = 'pipeline'
+		}
 		return this.#workflowAccounts
 	}
 

@@ -19,6 +19,7 @@ export enum ActionsContext {
 	INPUTS = 'inputs',
 	MATRIX = 'matrix',
 	INTERPOLATE = 'interpolate',
+	VARS = 'vars',
 }
 
 /**

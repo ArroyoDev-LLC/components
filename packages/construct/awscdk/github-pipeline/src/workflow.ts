@@ -66,8 +66,13 @@ export interface GithubWorkflowModel {
 	concurrency?: WorkflowConcurrency
 }
 
-interface WorkflowPatcher {
+export interface WorkflowPatcher {
 	(key: string, value: string | number): ghpipelines.JsonPatch | undefined
+	(
+		this: GithubWorkflowPipeline,
+		key: string,
+		value: string | number,
+	): ghpipelines.JsonPatch | undefined
 }
 
 /**
@@ -151,6 +156,10 @@ export interface PipelineBuildProps {
 	 * Steps to execute post assets publish.
 	 */
 	postPublishSteps?: ghpipelines.JobStep[]
+	/**
+	 * Additional workflow patchers to apply.
+	 */
+	patchers?: WorkflowPatcher[]
 }
 
 export interface PipelineWorkflowProps
@@ -501,7 +510,6 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 			String(value).replace(matcher, 'needs.publish.outputs.asset-hash$1'),
 		)
 	}
-
 	get workflowObj(): GithubWorkflowModel {
 		return JSON.parse(
 			// @ts-expect-error - private property
@@ -518,6 +526,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 			this.maskAccountIdPatch.bind(this),
 			options?.assetsMatrix && this.removeFileAssetNeeds.bind(this),
 			options?.assetsMatrix && this.replaceFileAssetMatrixRefs.bind(this),
+			...(this.props.patchers ?? []),
 		].filter(Boolean) as WorkflowPatcher[]
 
 		for (const patcher of patchers) {

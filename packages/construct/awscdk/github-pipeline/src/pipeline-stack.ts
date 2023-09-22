@@ -11,6 +11,7 @@ import {
 	interpolateValue,
 	type PipelineBuildProps,
 	type PipelineWorkflowProps,
+	type WorkflowPatcher,
 } from './workflow.ts'
 
 interface SynthTarget {
@@ -27,6 +28,10 @@ interface SynthTarget {
 	 * @default pnpm -F '${packageName}' run synth:silent
 	 */
 	command?: string
+	/**
+	 * Github environment to use for synth stage.
+	 */
+	environment?: ghpipelines.GitHubEnvironment
 }
 
 interface GithubCodePipelineCreateProps extends PipelineBuildProps {
@@ -218,6 +223,28 @@ export class GithubCodePipeline {
 	}
 
 	/**
+	 * Add patcher for synth job.
+	 * @param patcher - patcher factory to apply.
+	 */
+	synthJobPatch(patcher: WorkflowPatcher) {
+		function synthPatcher(
+			this: GithubWorkflowPipeline,
+			key: string,
+			value: string | number,
+		) {
+			const isSynthJob =
+				key.startsWith('jobs/build-') &&
+				key.endsWith('-synth/name') &&
+				value === 'Synthesize'
+			if (!isSynthJob) return undefined
+			return patcher.bind(this)(key, value)
+		}
+		return this.clone({
+			patchers: [synthPatcher],
+		})
+	}
+
+	/**
 	 * Add pre-publish step(s) to the publish step.
 	 * @param step The step(s) to add.
 	 */
@@ -356,7 +383,7 @@ export class GithubCodePipeline {
 	 * @param target The target to add.
 	 */
 	synthTarget(target: SynthTarget) {
-		const { packageName, command } = target
+		const { packageName, command, environment } = target
 		const synthCommand = command ?? `pnpm -F '${packageName}' run synth:silent`
 		const cdkContextRef = this.buildS3Ref('cdk.context.json')
 		const pullContextStep = new S3BucketStep('Pull Context', {
@@ -373,7 +400,7 @@ export class GithubCodePipeline {
 
 		const cdkOut = path.join(target.workingDirectory, 'cdk.out')
 
-		return this.synthPreStep(
+		const pipeline = this.synthPreStep(
 			...this.props.awsCreds!.credentialSteps('us-east-1'),
 			...pullContextStep.jobSteps,
 		)
@@ -382,6 +409,13 @@ export class GithubCodePipeline {
 				installCommands: ['pnpm install'],
 				commands: ['pnpm build', synthCommand, `cp -r ${cdkOut} ./cdk.out`],
 			})
+		if (environment) {
+			return pipeline.synthJobPatch((key, _) => {
+				const environmentKey = '/' + key.replace('/name', '/environment')
+				return ghpipelines.JsonPatch.add(environmentKey, environment)
+			})
+		}
+		return pipeline
 	}
 
 	/**

@@ -125,6 +125,34 @@ describe('GithubCodePipeline', () => {
 		expect(contents).toMatchSnapshot()
 	})
 
+	test<TestContext>('synthesizes expected pipeline with synth environment', async (ctx) => {
+		const env = { account: '123', region: 'us-east-1' }
+
+		const pipe = GithubCodePipeline.create({
+			assetsS3Bucket: 'test-bucket',
+			workflowName: 'Deploy Test Stack',
+			assetsS3Prefix: 'test-stack',
+			rootDir: ctx.rootDir,
+		})
+			.synthTarget({
+				workingDirectory: 'packages/test-stack',
+				packageName: 'test-stack',
+				environment: {
+					name: 'my-environment',
+					url: 'https://example.com',
+				},
+			})
+			.build(ctx.app)
+
+		pipe.addStageWithGitHubOptions(new ctx.stage(ctx.app, 'test', { env }))
+		ctx.app.synth()
+
+		const contents = (await fs.readFile(pipe.workflowPath)).toString()
+		expect(contents).to.include('my-environment')
+		expect(contents).to.include('https://example.com')
+		expect(contents).toMatchSnapshot()
+	})
+
 	test<TestContext>('synthesizes as expected with many stages', async (ctx) => {
 		const [pipe, _] = buildMultiStage(ctx)
 		ctx.app.synth()

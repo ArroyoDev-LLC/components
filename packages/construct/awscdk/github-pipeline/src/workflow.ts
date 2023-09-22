@@ -98,6 +98,17 @@ export function interpolateValue(
 }
 
 /**
+ * Interpolate a set of values for use in a workflow file.
+ * @param context context to use.
+ * @param keys keys to create object with.
+ */
+export function interpolateObject(context: ActionsContext, ...keys: string[]) {
+	return Object.fromEntries(
+		keys.map((key) => [key, interpolateValue(context, key)]),
+	)
+}
+
+/**
  * Mask given values from workflow logs.
  */
 export class MaskValueStep extends ghpipelines.GitHubActionStep {

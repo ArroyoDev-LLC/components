@@ -605,6 +605,8 @@ jobs:
           pnpm build
           pnpm -F 'test-stack' run synth:silent
           cp -r packages/test-stack/cdk.out ./cdk.out
+        env:
+          ABC: \\"123\\"
       - name: Push cdk.context.json
         continue-on-error: true
         env:

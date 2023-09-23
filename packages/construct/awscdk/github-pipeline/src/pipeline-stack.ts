@@ -32,6 +32,10 @@ interface SynthTarget {
 	 * Github environment to use for synth stage.
 	 */
 	environment?: ghpipelines.GitHubEnvironment
+	/**
+	 * Step-level environment variables.
+	 */
+	commandEnv?: Record<string, string>
 }
 
 interface GithubCodePipelineCreateProps extends PipelineBuildProps {
@@ -398,7 +402,7 @@ export class GithubCodePipeline {
 	 * @param target The target to add.
 	 */
 	synthTarget(target: SynthTarget) {
-		const { packageName, command, environment } = target
+		const { packageName, command, environment, commandEnv } = target
 		const synthCommand = command ?? `pnpm -F '${packageName}' run synth:silent`
 		const cdkContextRef = this.buildS3Ref('cdk.context.json')
 		const pullContextStep = new S3BucketStep('Pull Context', {
@@ -415,7 +419,7 @@ export class GithubCodePipeline {
 
 		const cdkOut = path.join(target.workingDirectory, 'cdk.out')
 
-		const pipeline = this.synthPreStep(
+		let pipeline = this.synthPreStep(
 			...this.props.awsCreds!.credentialSteps('us-east-1'),
 			...pullContextStep.jobSteps,
 		)
@@ -425,9 +429,20 @@ export class GithubCodePipeline {
 				commands: ['pnpm build', synthCommand, `cp -r ${cdkOut} ./cdk.out`],
 			})
 		if (environment) {
-			return pipeline.synthJobPatch((key, _) => {
+			pipeline = pipeline.synthJobPatch((key, _) => {
 				const environmentKey = '/' + key.replace('/name', '/environment')
 				return ghpipelines.JsonPatch.add(environmentKey, environment)
+			})
+		}
+		if (commandEnv) {
+			pipeline = pipeline.patch((key, value) => {
+				const isSynthBuild =
+					key.startsWith('jobs/build-') &&
+					key.endsWith('/name') &&
+					value === 'Build'
+				if (!isSynthBuild) return undefined
+				const envKey = '/' + key.replace('/name', '/env')
+				return ghpipelines.JsonPatch.add(envKey, commandEnv)
 			})
 		}
 		return pipeline

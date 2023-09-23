@@ -137,6 +137,9 @@ describe('GithubCodePipeline', () => {
 			.synthTarget({
 				workingDirectory: 'packages/test-stack',
 				packageName: 'test-stack',
+				commandEnv: {
+					ABC: '123',
+				},
 				environment: {
 					name: 'my-environment',
 					url: 'https://example.com',

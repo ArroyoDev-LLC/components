@@ -20,6 +20,7 @@ export enum ActionsContext {
 	MATRIX = 'matrix',
 	INTERPOLATE = 'interpolate',
 	VARS = 'vars',
+	RUNNER = 'runner',
 }
 
 /**

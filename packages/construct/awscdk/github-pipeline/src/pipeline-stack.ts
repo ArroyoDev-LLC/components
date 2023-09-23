@@ -51,6 +51,13 @@ interface GithubCodePipelineCreateProps extends PipelineBuildProps {
 	oidcRoleName?: string
 }
 
+interface PipelineStep extends ghpipelines.JobStep {
+	/**
+	 * Working directory to use.
+	 */
+	workingDirectory?: string
+}
+
 /**
  * Builder for a GitHub CodePipeline.
  */
@@ -206,7 +213,7 @@ export class GithubCodePipeline {
 	 * Add pre-build step(s) to the synth step.
 	 * @param step The step(s) to add.
 	 */
-	synthPreStep(...step: ghpipelines.JobStep[]) {
+	synthPreStep(...step: PipelineStep[]) {
 		return this.clone({
 			preBuildSteps: step,
 		})
@@ -216,9 +223,19 @@ export class GithubCodePipeline {
 	 * Add post-build step(s) to the synth step.
 	 * @param step The step(s) to add.
 	 */
-	synthPostStep(...step: ghpipelines.JobStep[]) {
+	synthPostStep(...step: PipelineStep[]) {
 		return this.clone({
 			postBuildSteps: step,
+		})
+	}
+
+	/**
+	 * Add patch callback.
+	 * @param patcher factory for creating patches.
+	 */
+	patch(patcher: WorkflowPatcher) {
+		return this.clone({
+			patchers: [patcher],
 		})
 	}
 
@@ -239,9 +256,7 @@ export class GithubCodePipeline {
 			if (!isSynthJob) return undefined
 			return patcher.bind(this)(key, value)
 		}
-		return this.clone({
-			patchers: [synthPatcher],
-		})
+		return this.patch(synthPatcher)
 	}
 
 	/**

@@ -27,7 +27,7 @@
     "organization": true
   },
   "devDependencies": {
-    "@arroyodev-llc/utils.unbuild-composite-preset": "^0.1.2",
+    "@arroyodev-llc/utils.unbuild-composite-preset": "^0.1.3",
     "@types/node": "^16",
     "@typescript-eslint/eslint-plugin": "^6",
     "@typescript-eslint/parser": "^6",
@@ -64,7 +64,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.1.23",
+  "version": "0.1.24",
   "types": "./dist/index.d.ts",
   "type": "module",
   "sideEffects": false,

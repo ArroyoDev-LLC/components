@@ -32,6 +32,37 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+## [0.1.27](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.26...@arroyodev-llc/projen.project.typescript-v0.1.27) (2023-09-25)
+
+
+### Features
+
+* **deps:** Upgrade all dependencies ([7d92d7a](https://github.com/ArroyoDev-LLC/components/commit/7d92d7a3219d0c1df79e7c311391deb7f7ed98be))
+* Migrate [@aws-prototyping-sdk](https://github.com/aws-prototyping-sdk) -&gt; @aws/pdk ([c701585](https://github.com/ArroyoDev-LLC/components/commit/c701585692de6b4ba01b018805ecedadbab67ca7))
+* Update all managed files ([0192cab](https://github.com/ArroyoDev-LLC/components/commit/0192cab235b2bfe7e68a218b2373b919b819085a))
+
+
+### Bug Fixes
+
+* **projen.project.typescript:** Do not set --cache on eslint task as to not conflict with type-enriched linting ([e1b66e9](https://github.com/ArroyoDev-LLC/components/commit/e1b66e9818b406ca8c34958cd5f0ba93bfb2e415))
+* **projenrc:** Remove --cache arg from lint-staged eslint command ([aa18d24](https://github.com/ArroyoDev-LLC/components/commit/aa18d24368ab0c1283bc9dab7dfbaa54a1c69447))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.20
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.21
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.22
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.15
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.23
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.25
+    * @arroyodev-llc/utils.projen bumped to 0.1.20
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.5
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from ^0.1.2 to ^0.1.3
+
 ## [0.1.26](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.25...@arroyodev-llc/projen.project.typescript-v0.1.26) (2023-08-24)
 
 

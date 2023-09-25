@@ -254,9 +254,7 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 	applyProject(
 		project: typescript.TypeScriptProject,
 	): TypedPropertyDescriptorMap<this['_output']> {
-		const lintConfig = new LintConfig(project, this.options).setEslintExec(
-			'eslint --cache',
-		)
+		const lintConfig = new LintConfig(project, this.options)
 		return {
 			lintConfig: { writable: false, value: lintConfig },
 		} as TypedPropertyDescriptorMap<this['_output']>

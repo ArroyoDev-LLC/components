@@ -235,7 +235,7 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --upgrade --target=minor --filter=@aws-prototyping-sdk/nx-monorepo,@jsii/spec,@mrgrain/jsii-struct-builder,@sindresorhus/is,@types/fs-extra,@types/node,@types/prettier,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,@vitejs/plugin-vue,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,fs-extra,lint-staged,npm-check-updates,nx-cloud,pathe,prettier,projen,rimraf,rollup-plugin-vue,simple-git-hooks,syncpack,ts-morph,ts-node,tsx,typedoc,unbuild,vite,vitest,nx,aws-cdk-lib,cdk-nag,constructs"
+          "exec": "npm-check-updates --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@aws-prototyping-sdk/nx-monorepo,@jsii/spec,@mrgrain/jsii-struct-builder,@sindresorhus/is,@types/fs-extra,@types/node,@types/prettier,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,@vitejs/plugin-vue,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,fs-extra,lint-staged,npm-check-updates,nx-cloud,pathe,prettier,projen,rimraf,rollup-plugin-vue,simple-git-hooks,syncpack,ts-morph,ts-node,tsx,typedoc,unbuild,vite,vitest,nx,aws-cdk-lib,cdk-nag,constructs"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"

@@ -189,6 +189,13 @@
       {
         "prefer-inline": true
       }
+    ],
+    "@typescript-eslint/no-explicit-any": [
+      "warn",
+      {
+        "fixToUnknown": false,
+        "ignoreRestArgs": true
+      }
     ]
   },
   "overrides": [

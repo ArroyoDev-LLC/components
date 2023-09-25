@@ -21,7 +21,7 @@ import {
 	type SupportsNameScheme,
 } from '@arroyodev-llc/utils.projen'
 import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
-import { github, typescript } from 'projen'
+import { github } from 'projen'
 import { type GitHub } from 'projen/lib/github'
 import { type NpmConfig } from 'projen/lib/javascript'
 
@@ -78,7 +78,7 @@ export class ComponentsMonorepo
 		})
 		this.applyRecursive(
 			(project) => {
-				if (project instanceof typescript.TypeScriptProject) {
+				if (NodePackageUtils.isNodeProject(project)) {
 					new LintStaged(project, {
 						entries: [
 							{

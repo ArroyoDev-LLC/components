@@ -16,12 +16,6 @@ export interface TypeScriptCompilerOptions {
    */
   readonly verbatimModuleSyntax?: boolean;
   /**
-   * Change the type of the variable in a catch clause from any to unknown Available with TypeScript 4.4 and newer.
-   * @default true
-   * @stability experimental
-   */
-  readonly useUnknownInCatchVariables?: boolean;
-  /**
    * Modern browsers support all ES6 features, so ES6 is a good choice.
    * You might choose to set
    * a lower target if your code is deployed to older environments, or a higher target if your
@@ -257,12 +251,6 @@ Posed for deprecation upon TypeScript 5.5.
    * @stability experimental
    */
   readonly experimentalDecorators?: boolean;
-  /**
-   * Specifies that optional property types should be interpreted exactly as written, meaning that `| undefined` is not added to the type Available with TypeScript 4.4 and newer.
-   * @default false
-   * @stability experimental
-   */
-  readonly exactOptionalPropertyTypes?: boolean;
   /**
    * Emit __importStar and __importDefault helpers for runtime babel ecosystem compatibility and enable --allowSyntheticDefaultImports for typesystem compatibility.
    * @default false

@@ -108,7 +108,7 @@ export class MonorepoProject extends NxMonorepoProject {
 	#presynthCallbacks: Array<() => void> = []
 
 	constructor(options: NxMonorepoProjectOptions) {
-		const { workspaceDeps, tsconfigBase, tsconfig, ...rest } = options
+		const { workspaceDeps, tsconfig, ...rest } = options
 		const mergedOptions = deepMerge(
 			[Object.assign({}, CONFIG_DEFAULTS), rest],
 			true,

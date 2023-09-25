@@ -29,7 +29,7 @@ export enum ArrayLiteralMergeStrategyType {
  * @param obj Merge object in question.
  * @param strategy Strategy to utilize.
  */
-export const setMergeStrategy = <T extends Object>(
+export const setMergeStrategy = <T extends NonNullable<unknown>>(
 	obj: T,
 	strategy: ArrayLiteralMergeStrategyType,
 ): T => {
@@ -41,7 +41,7 @@ export const setMergeStrategy = <T extends Object>(
  * @param obj Merge object in question.
  * @default {@link ArrayLiteralMergeStrategyType.APPEND}
  */
-export const getMergeStrategy = <T extends Object>(
+export const getMergeStrategy = <T extends NonNullable<unknown>>(
 	obj: T,
 ): ArrayLiteralMergeStrategyType => {
 	try {

@@ -6,7 +6,6 @@ import {
 } from 'ts-morph'
 import { beforeEach, describe, expect, test } from 'vitest'
 import {
-	ArrayLiteralMergeStrategy,
 	ArrayLiteralMergeStrategyType,
 	getMergeStrategy,
 	mergeObjectLiteral,

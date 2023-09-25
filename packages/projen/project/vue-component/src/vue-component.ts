@@ -53,7 +53,7 @@ export class VueComponentViteBuilder extends BaseBuildStep<
 }
 
 export class VueComponentManifestBuilder extends BaseBuildStep<
-	{},
+	object,
 	{
 		readonly vue: Vue
 	}

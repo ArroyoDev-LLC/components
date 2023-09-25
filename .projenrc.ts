@@ -148,7 +148,8 @@ utilsUnbuildCompositePreset
  */
 const lintingComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.linting',
-	deps: ['p-queue'],
+	deps: ['p-queue', 'shell-quote'],
+	devDeps: ['@types/shell-quote'],
 	workspaceDeps: [utilsProjen],
 })
 

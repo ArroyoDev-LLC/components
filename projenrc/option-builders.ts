@@ -60,7 +60,7 @@ export class NxMonorepoProjectOptionsBuilder extends Component {
 
 		struct.mixin(
 			Struct.fromFqn(
-				'@aws-prototyping-sdk/nx-monorepo.NxMonorepoProjectOptions',
+				'@aws/pdk.monorepo.MonorepoTsProjectOptions',
 			)
 				.withoutDeprecated()
 				.update('defaultReleaseBranch', { optional: true })

@@ -1,7 +1,8 @@
 {
   "dependencies": [
     {
-      "name": "@aws-prototyping-sdk/nx-monorepo",
+      "name": "@aws/pdk",
+      "version": "^0",
       "type": "build"
     },
     {
@@ -31,12 +32,12 @@
     },
     {
       "name": "@typescript-eslint/eslint-plugin",
-      "version": "^5",
+      "version": "^6",
       "type": "build"
     },
     {
       "name": "@typescript-eslint/parser",
-      "version": "^5",
+      "version": "^6",
       "type": "build"
     },
     {
@@ -99,7 +100,7 @@
     },
     {
       "name": "projen",
-      "version": "0.71.92",
+      "version": "0.73.31",
       "type": "build"
     },
     {
@@ -243,7 +244,7 @@
     },
     {
       "name": "projen",
-      "version": "0.71.92",
+      "version": "0.73.31",
       "type": "override"
     },
     {

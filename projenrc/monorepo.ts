@@ -20,7 +20,7 @@ import {
 	type ProjectNameSchemeOptions,
 	type SupportsNameScheme,
 } from '@arroyodev-llc/utils.projen'
-import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
+import { NodePackageUtils } from '@aws/pdk/monorepo'
 import { github } from 'projen'
 import { type GitHub } from 'projen/lib/github'
 import { type NpmConfig } from 'projen/lib/javascript'

@@ -15,7 +15,7 @@ import {
 	builders as stdBuilders,
 	ProjectBuilder,
 } from '@arroyodev-llc/utils.projen-builder'
-import { NodePackageUtils } from '@aws-prototyping-sdk/nx-monorepo'
+import { NodePackageUtils } from '@aws/pdk/monorepo'
 import {
 	type Component,
 	DependencyType,

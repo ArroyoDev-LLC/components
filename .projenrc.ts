@@ -23,9 +23,9 @@ const monorepo = new ComponentsMonorepo({
 	},
 	typescriptVersion: '~5.1',
 	pnpmVersion: '8.6.12',
-	projenVersion: '0.71.92',
+	projenVersion: '0.73.31',
 	devDeps: [
-		'@aws-prototyping-sdk/nx-monorepo',
+		'@aws/pdk',
 		'vite',
 		'@vitejs/plugin-vue',
 		'unbuild',
@@ -42,7 +42,7 @@ const monorepo = new ComponentsMonorepo({
 		'pathe',
 	],
 })
-monorepo.package.addPackageResolutions('projen@0.71.92')
+monorepo.package.addPackageResolutions('projen@0.73.31')
 
 // Builders
 
@@ -160,7 +160,7 @@ const gitHooksComponent = ProjenComponentProjectBuilder.build({
 const tsSourceComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.typescript-source-file',
 	workspaceDeps: [utilsProjen, lintingComponent, utilsFs, utilsTsAst],
-	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
+	peerDeps: ['@aws/pdk'],
 	deps: ['ts-morph'],
 })
 
@@ -172,7 +172,7 @@ const pnpmWorkspaceComponent = ProjenComponentProjectBuilder.build({
 const unbuildComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.unbuild',
 	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
-	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
+	peerDeps: ['@aws/pdk'],
 	deps: ['ts-morph', 'unbuild'],
 })
 
@@ -247,7 +247,7 @@ const nxMonorepoProject = ProjenComponentProjectBuilder.build({
 		tsconfigContainerComponent,
 	],
 	deps: ['@mrgrain/jsii-struct-builder'],
-	peerDeps: ['projen', '@aws-prototyping-sdk/nx-monorepo'],
+	peerDeps: ['projen', '@aws/pdk'],
 })
 LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
 	'src/nx-monorepo-project-options.ts',
@@ -256,7 +256,7 @@ LintConfig.of(nxMonorepoProject)!.eslint.addIgnorePattern(
 const typescriptProject = ProjenComponentProjectBuilder.build({
 	name: 'projen.project.typescript',
 	deps: ['type-fest@^4'],
-	peerDeps: ['@aws-prototyping-sdk/nx-monorepo'],
+	peerDeps: ['@aws/pdk'],
 	workspaceDeps: [
 		utilsProjen,
 		utilsProjenBuilder,

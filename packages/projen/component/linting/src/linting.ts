@@ -112,6 +112,10 @@ export class LintConfig extends Component {
 				{ prefer: 'type-imports', fixStyle: 'inline-type-imports' },
 			],
 			'import/no-duplicates': ['error', { 'prefer-inline': true }],
+			'@typescript-eslint/no-explicit-any': [
+				'warn',
+				{ fixToUnknown: false, ignoreRestArgs: true },
+			],
 		})
 		if (this.project instanceof typescript.TypeScriptProject) {
 			this.eslint.addOverride({

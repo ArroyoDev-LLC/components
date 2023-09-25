@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.dir-env-v0.1.10...@arroyodev-llc/projen.component.dir-env-v0.1.11) (2023-09-25)
+
+
+### Features
+
+* **deps:** Upgrade all dependencies ([7d92d7a](https://github.com/ArroyoDev-LLC/components/commit/7d92d7a3219d0c1df79e7c311391deb7f7ed98be))
+* Migrate [@aws-prototyping-sdk](https://github.com/aws-prototyping-sdk) -&gt; @aws/pdk ([c701585](https://github.com/ArroyoDev-LLC/components/commit/c701585692de6b4ba01b018805ecedadbab67ca7))
+* Update all managed files ([0192cab](https://github.com/ArroyoDev-LLC/components/commit/0192cab235b2bfe7e68a218b2373b919b819085a))
+
+
+### Bug Fixes
+
+* **projenrc:** Remove --cache arg from lint-staged eslint command ([aa18d24](https://github.com/ArroyoDev-LLC/components/commit/aa18d24368ab0c1283bc9dab7dfbaa54a1c69447))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from ^0.1.2 to ^0.1.3
+
 ## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.dir-env-v0.1.9...@arroyodev-llc/projen.component.dir-env-v0.1.10) (2023-08-24)
 
 

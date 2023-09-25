@@ -157,14 +157,14 @@ describe('GithubCodePipeline', () => {
 	})
 
 	test<TestContext>('synthesizes as expected with many stages', async (ctx) => {
-		const [pipe, _] = buildMultiStage(ctx)
+		const [pipe] = buildMultiStage(ctx)
 		ctx.app.synth()
 		const contents = (await fs.readFile(pipe.workflowPath)).toString()
 		expect(contents).toMatchSnapshot()
 	})
 
 	test<TestContext>('masks all stage account ids', async (ctx) => {
-		const [pipe, _] = buildMultiStage(ctx)
+		const [pipe] = buildMultiStage(ctx)
 		ctx.app.synth()
 		const contents = (await fs.readFile(pipe.workflowPath)).toString()
 		expect(contents).not.to.include('123')
@@ -176,14 +176,14 @@ describe('GithubCodePipeline', () => {
 	})
 
 	test<TestContext>('builder has expected props', (ctx) => {
-		const [_, builder] = buildMultiStage(ctx)
+		const [, builder] = buildMultiStage(ctx)
 		expect(builder.props).toMatchSnapshot()
 		expect(builder.synthProps).toMatchSnapshot()
 		expect(builder).toMatchSnapshot()
 	})
 
 	test<TestContext>('synthesize prebuild steps are in expected order', (ctx) => {
-		const [_, builder] = buildMultiStage(ctx)
+		const [, builder] = buildMultiStage(ctx)
 		const awsIdx = builder.props.preBuildSteps!.findIndex(
 			(step) => step.name === 'Install AWS CLI',
 		)

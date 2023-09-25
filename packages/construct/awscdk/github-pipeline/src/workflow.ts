@@ -297,7 +297,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		const synthStep = this.synth as cdkpipelines.ShellStep
 
 		const outputs = Object.fromEntries(
-			jobOutputs.map(([assetOutput, _]) => [
+			jobOutputs.map(([assetOutput]) => [
 				assetOutput,
 				interpolateValue(
 					ActionsContext.INTERPOLATE,
@@ -468,7 +468,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		return ghpipelines.JsonPatch.replace(`/${key}`, newValue)
 	}
 
-	protected runnerPatch(key: string, _: string | number) {
+	protected runnerPatch(key: string) {
 		const isRunsOn = key.endsWith('runs-on')
 		const isAssetJob = key.startsWith('jobs/Assets-')
 		const isTarget = isRunsOn && !isAssetJob

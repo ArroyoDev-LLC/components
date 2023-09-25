@@ -5,7 +5,7 @@
       "type": "build"
     },
     {
-      "name": "@aws-prototyping-sdk/nx-monorepo",
+      "name": "@aws/pdk",
       "type": "build"
     },
     {
@@ -15,12 +15,12 @@
     },
     {
       "name": "@typescript-eslint/eslint-plugin",
-      "version": "^5",
+      "version": "^6",
       "type": "build"
     },
     {
       "name": "@typescript-eslint/parser",
-      "version": "^5",
+      "version": "^6",
       "type": "build"
     },
     {
@@ -80,7 +80,7 @@
       "type": "build"
     },
     {
-      "name": "@aws-prototyping-sdk/nx-monorepo",
+      "name": "@aws/pdk",
       "type": "peer"
     },
     {

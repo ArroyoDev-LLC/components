@@ -8,8 +8,8 @@ import {
 } from '@arroyodev-llc/utils.projen'
 import {
 	NodePackageUtils,
-	NxMonorepoProject,
-} from '@aws-prototyping-sdk/nx-monorepo'
+	MonorepoTsProject as NxMonorepoProject,
+} from '@aws/pdk/monorepo'
 import {
 	DependencyType,
 	type github,

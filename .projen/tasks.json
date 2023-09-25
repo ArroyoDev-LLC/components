@@ -235,25 +235,13 @@
           "exec": "pnpm update npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='nx,projen,typescript,@arroyodev-llc/projen.component.dir-env,@arroyodev-llc/projen.component.git-hooks,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.tool-versions,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/projen.project.typescript,@arroyodev-llc/projen.project.vue-component,@arroyodev-llc/utils.projen-builder,@arroyodev-llc/utils.projen'"
-        },
-        {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='nx,projen,typescript,@arroyodev-llc/projen.component.dir-env,@arroyodev-llc/projen.component.git-hooks,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.tool-versions,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/projen.project.typescript,@arroyodev-llc/projen.project.vue-component,@arroyodev-llc/utils.projen-builder,@arroyodev-llc/utils.projen'"
-        },
-        {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='nx,projen,typescript,@arroyodev-llc/projen.component.dir-env,@arroyodev-llc/projen.component.git-hooks,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.tool-versions,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/projen.project.typescript,@arroyodev-llc/projen.project.vue-component,@arroyodev-llc/utils.projen-builder,@arroyodev-llc/utils.projen'"
-        },
-        {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='nx,projen,typescript,@arroyodev-llc/projen.component.dir-env,@arroyodev-llc/projen.component.git-hooks,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.tool-versions,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/projen.project.typescript,@arroyodev-llc/projen.project.vue-component,@arroyodev-llc/utils.projen-builder,@arroyodev-llc/utils.projen'"
-        },
-        {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='nx,projen,typescript,@arroyodev-llc/projen.component.dir-env,@arroyodev-llc/projen.component.git-hooks,@arroyodev-llc/projen.component.linting,@arroyodev-llc/projen.component.pnpm-workspace,@arroyodev-llc/projen.component.release-please,@arroyodev-llc/projen.component.tool-versions,@arroyodev-llc/projen.component.typescript-source-file,@arroyodev-llc/projen.component.unbuild,@arroyodev-llc/projen.component.vite,@arroyodev-llc/projen.component.vitest,@arroyodev-llc/projen.component.vue,@arroyodev-llc/projen.project.nx-monorepo,@arroyodev-llc/projen.project.typescript,@arroyodev-llc/projen.project.vue-component,@arroyodev-llc/utils.projen-builder,@arroyodev-llc/utils.projen'"
+          "exec": "npm-check-updates --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@aws/pdk,@jsii/spec,@mrgrain/jsii-struct-builder,@sindresorhus/is,@types/fs-extra,@types/node,@types/prettier,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,@vitejs/plugin-vue,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,fs-extra,lint-staged,npm-check-updates,nx-cloud,pathe,prettier,rimraf,rollup-plugin-vue,simple-git-hooks,syncpack,ts-morph,ts-node,tsx,typedoc,unbuild,vite,vitest,nx,aws-cdk-lib,cdk-nag,constructs"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update"
+          "exec": "pnpm update @aws/pdk @jsii/spec @mrgrain/jsii-struct-builder @sindresorhus/is @types/fs-extra @types/node @types/prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser @vitejs/plugin-vue eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint fs-extra lint-staged npm-check-updates nx-cloud pathe prettier rimraf rollup-plugin-vue simple-git-hooks syncpack ts-morph ts-node tsx typedoc unbuild vite vitest nx aws-cdk-lib cdk-nag constructs"
         },
         {
           "exec": "pnpm exec projen"

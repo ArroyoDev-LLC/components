@@ -244,7 +244,7 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 }
 
 export class TypescriptLintingBuilder extends BaseBuildStep<
-	{},
+	object,
 	{ readonly lintConfig: LintConfig }
 > {
 	constructor(readonly options?: LintConfigOptions) {
@@ -261,7 +261,7 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 	}
 }
 
-export class TypescriptReleasePleaseBuilder extends BaseBuildStep<{}, {}> {
+export class TypescriptReleasePleaseBuilder extends BaseBuildStep {
 	applyProject(
 		project: typescript.TypeScriptProject,
 	): TypedPropertyDescriptorMap<this['_output']> {

@@ -3,7 +3,7 @@ import { type Project } from 'projen'
 /**
  * Represents a class constructor.
  */
-export type Constructor = new (...args: any[]) => {}
+export type Constructor = new (...args: any[]) => any
 
 /**
  * Represents a generic constructor.

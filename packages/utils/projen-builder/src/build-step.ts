@@ -41,8 +41,8 @@ export abstract class BuildStep<Options = any, Output = any> {
 }
 
 export class BaseBuildStep<
-	OutputOptions extends object = {},
-	OutputProps extends object = {},
+	OutputOptions extends object = object,
+	OutputProps extends object = object,
 > extends BuildStep<OutputOptions, OutputProps> {
 	applyOptions(
 		options: ProjectOptions & this['_outputOptions'],
@@ -51,6 +51,7 @@ export class BaseBuildStep<
 	}
 
 	applyProject(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		_project: Project,
 	): TypedPropertyDescriptorMap<BuildOutput<this>> {
 		return {} as TypedPropertyDescriptorMap<BuildOutput<this>>

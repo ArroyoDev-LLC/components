@@ -18,7 +18,7 @@ beforeEach<TestContext>((ctx) => {
 })
 
 test<TestContext>('renders as expected.', async (ctx) => {
-	const tailwind = new Tailwind(ctx.project)
+	new Tailwind(ctx.project)
 	const synth = Testing.synth(ctx.project)
 	expect(synth['tailwind.config.mjs']).toBeDefined()
 	expect(synth['tailwind.config.mjs']).toMatchSnapshot()

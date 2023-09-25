@@ -72,7 +72,7 @@
   "packageManager": "pnpm@8.6.12",
   "lint-staged": {
     "*.{ts,tsx,mts,cts,ts,tsx,mts,cts}": [
-      "pnpm exec eslint --no-error-on-unmatched-pattern --cache --fix"
+      "pnpm exec eslint --no-error-on-unmatched-pattern --fix"
     ],
     "*.{yaml,yml}": [
       "pnpm exec prettier --write"

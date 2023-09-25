@@ -86,7 +86,7 @@ export class ComponentsMonorepo
 								commands: [
 									NodePackageUtils.command.exec(
 										this.package.packageManager,
-										'eslint --no-error-on-unmatched-pattern --cache --fix',
+										'eslint --no-error-on-unmatched-pattern --fix',
 									),
 								],
 							},

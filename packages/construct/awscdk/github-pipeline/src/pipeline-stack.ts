@@ -429,7 +429,7 @@ export class GithubCodePipeline {
 				commands: ['pnpm build', synthCommand, `cp -r ${cdkOut} ./cdk.out`],
 			})
 		if (environment) {
-			pipeline = pipeline.synthJobPatch((key, _) => {
+			pipeline = pipeline.synthJobPatch((key) => {
 				const environmentKey = '/' + key.replace('/name', '/environment')
 				return ghpipelines.JsonPatch.add(environmentKey, environment)
 			})

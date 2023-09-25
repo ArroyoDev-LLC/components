@@ -244,7 +244,7 @@ export class LintConfig extends Component {
 	 */
 	enqueueFormatRequest(request: FormatRequest): this {
 		void this.#formatQueue.add(async () => {
-			const cmd = `eslint --cache --no-ignore --fix ${request.filePath}`
+			const cmd = `eslint --no-ignore --fix ${request.filePath}`
 			this.project.logger.verbose(
 				`formatting typescript source file: ${request.filePath} (from: ${request.workingDirectory})`,
 			)

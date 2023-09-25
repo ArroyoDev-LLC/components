@@ -19,6 +19,7 @@ import {
 	Prettier,
 	type PrettierOptions,
 } from 'projen/lib/javascript'
+import shellquote from 'shell-quote'
 
 export interface LintConfigOptions {
 	/**
@@ -244,8 +245,9 @@ export class LintConfig extends Component {
 	 */
 	enqueueFormatRequest(request: FormatRequest): this {
 		void this.#formatQueue.add(async () => {
-			const cmd = `eslint --no-ignore --fix ${request.filePath}`
-			this.project.logger.verbose(
+			const cmd =
+				`eslint --no-ignore --fix ` + shellquote.quote([request.filePath])
+			this.project.logger.debug(
 				`formatting typescript source file: ${request.filePath} (from: ${request.workingDirectory})`,
 			)
 			return new Promise<void>((resolve) =>

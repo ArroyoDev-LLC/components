@@ -2,7 +2,6 @@
 !/.gitattributes
 !/.projen/tasks.json
 !/.projen/deps.json
-!/renovate.json5
 !/.projen/files.json
 !/.github/workflows/pull-request-lint.yml
 !/.devcontainer.json
@@ -72,6 +71,7 @@ docs/**
 !/.envrc
 .envrc.local
 !/pnpm-workspace.yaml
+!/renovate.json5
 !/projenrc/projen-project-options.ts
 !/packages/projen/project/typescript/src/typescript-compiler-options.ts
 !/packages/projen/project/typescript/src/typescript-config-options.ts

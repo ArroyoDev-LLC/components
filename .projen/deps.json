@@ -31,12 +31,12 @@
     },
     {
       "name": "@typescript-eslint/eslint-plugin",
-      "version": "^6",
+      "version": "^5",
       "type": "build"
     },
     {
       "name": "@typescript-eslint/parser",
-      "version": "^6",
+      "version": "^5",
       "type": "build"
     },
     {
@@ -99,6 +99,7 @@
     },
     {
       "name": "projen",
+      "version": "0.71.92",
       "type": "build"
     },
     {
@@ -238,6 +239,11 @@
     {
       "name": "@zkochan/js-yaml",
       "version": "npm:js-yaml@4.1.0",
+      "type": "override"
+    },
+    {
+      "name": "projen",
+      "version": "0.71.92",
       "type": "override"
     },
     {

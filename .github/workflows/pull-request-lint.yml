@@ -34,4 +34,3 @@ jobs:
             build
             ci
           requireScope: false
-          githubBaseUrl: ${{ github.api_url }}

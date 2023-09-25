@@ -23,6 +23,7 @@ const monorepo = new ComponentsMonorepo({
 	},
 	typescriptVersion: '~5.1',
 	pnpmVersion: '8.6.12',
+	projenVersion: '0.71.92',
 	devDeps: [
 		'@aws-prototyping-sdk/nx-monorepo',
 		'vite',
@@ -41,6 +42,7 @@ const monorepo = new ComponentsMonorepo({
 		'pathe',
 	],
 })
+monorepo.package.addPackageResolutions('projen@0.71.92')
 
 // Builders
 

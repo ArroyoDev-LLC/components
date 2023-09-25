@@ -12,7 +12,7 @@ import { type TypedPropertyDescriptorMap } from './types.ts'
  */
 export class OptionsPropertyBuilder<
 	InputT extends ProjectOptions,
-> extends BaseBuildStep<{}, { readonly options: InputT }> {
+> extends BaseBuildStep<object, { readonly options: InputT }> {
 	private _options!: InputT
 
 	applyOptions(options: InputT): InputT {
@@ -20,7 +20,7 @@ export class OptionsPropertyBuilder<
 		return options
 	}
 
-	applyProject(_project: Project): TypedPropertyDescriptorMap<this['_output']> {
+	applyProject(): TypedPropertyDescriptorMap<this['_output']> {
 		return {
 			options: {
 				value: this._options,
@@ -77,7 +77,7 @@ export class NameSchemeBuilder extends BaseBuildStep<
  */
 export class DefaultOptionsBuilder<
 	Options extends object,
-> extends BaseBuildStep<Partial<Options>, {}> {
+> extends BaseBuildStep<Partial<Options>, object> {
 	constructor(readonly defaultOptions: Partial<Options>) {
 		super()
 	}

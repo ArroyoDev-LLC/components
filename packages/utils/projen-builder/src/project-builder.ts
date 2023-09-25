@@ -4,7 +4,6 @@ import {
 	type AnyBuildStep,
 	type BuildOptions,
 	type BuildOutput,
-	type BuildStep,
 } from './build-step.ts'
 import type {
 	ExtendShape,
@@ -31,7 +30,7 @@ export type ProjectBuilderOutput<T extends AnyProjectBuilder> = InstanceType<
 export class ProjectBuilder<
 	T extends GConstructor<any, any[]> = GenericProjectConstructor,
 	Options extends object = ProjectConstructorOptions<T>,
-	Props = {},
+	Props = object,
 > {
 	/**
 	 * Input project constructor.

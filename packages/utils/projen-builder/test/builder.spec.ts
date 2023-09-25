@@ -1,9 +1,4 @@
-import {
-	javascript,
-	type Project,
-	type ProjectOptions,
-	typescript,
-} from 'projen'
+import { javascript, type ProjectOptions, typescript } from 'projen'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { builders, type BuildStep, ProjectBuilder } from '../src'
 import { type TypedPropertyDescriptorMap } from '../src/types'
@@ -36,9 +31,7 @@ describe.concurrent('ProjectBuilder', () => {
 			return opts
 		}
 
-		applyProject(
-			project: Project,
-		): TypedPropertyDescriptorMap<this['_output']> {
+		applyProject(): TypedPropertyDescriptorMap<this['_output']> {
 			return {
 				customProperty: {
 					writable: false,

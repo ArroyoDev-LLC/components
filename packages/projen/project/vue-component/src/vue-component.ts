@@ -9,7 +9,7 @@ import {
 import { type typescript } from 'projen'
 
 export class VueComponentViteBuilder extends BaseBuildStep<
-	{},
+	object,
 	{ readonly vite: Vite }
 > {
 	applyProject(

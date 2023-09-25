@@ -18,7 +18,7 @@ beforeEach<TestContext>((ctx) => {
 })
 
 test<TestContext>('initializes correctly', (ctx) => {
-	const dirEnv = new DirEnv(ctx.project, { fileName: '.envrc' })
+	new DirEnv(ctx.project, { fileName: '.envrc' })
 	const synth = Testing.synth(ctx.project)
 	expect(synth['.envrc']).toBeDefined()
 	expect(synth['.envrc']).toMatchInlineSnapshot('""')
@@ -43,7 +43,7 @@ describe.each([
 
 test<TestContext>('renders sheBang and marker correctly', (ctx) => {
 	const fileName = '.envrc'
-	const dirEnv = new DirEnv(ctx.project, { fileName }).startBuild()
+	new DirEnv(ctx.project, { fileName }).startBuild()
 	const synth = Testing.synth(ctx.project)
 	expect(synth[fileName]).toMatchInlineSnapshot(`
 		"#!/usr/bin/env bash
@@ -54,7 +54,7 @@ test<TestContext>('renders sheBang and marker correctly', (ctx) => {
 
 test<TestContext>('helper functions', (ctx) => {
 	const fileName = '.envrc'
-	const dirEnv = new DirEnv(ctx.project, { fileName })
+	new DirEnv(ctx.project, { fileName })
 		.startBuild()
 		.addCommand(DirEnvStdLibCommand.DIRENV_VERSION, '2.32.1')
 		.addBlankLine()
@@ -80,7 +80,7 @@ test<TestContext>('helper functions', (ctx) => {
 
 test<TestContext>('renders default envrc template', (ctx) => {
 	const fileName = '.envrc'
-	const dirEnv = new DirEnv(ctx.project, { fileName })
+	new DirEnv(ctx.project, { fileName })
 		.buildDefaultEnvRc({})
 		.addComment('Required Env Vars')
 		.addEnvVar('DEBUG_COLORS', '', { defaultValue: '1' })

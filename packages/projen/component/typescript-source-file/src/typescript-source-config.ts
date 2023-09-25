@@ -97,7 +97,7 @@ export class TypeScriptSourceConfig<
 		filePath: string,
 		public readonly options: TypeScriptSourceConfigOptions<T>,
 	) {
-		const { config, pluginsProperty, ...rest } = options
+		const { config, ...rest } = options
 		super(project, filePath, rest)
 		if (config) {
 			this.addConfig(config)

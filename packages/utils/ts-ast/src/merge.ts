@@ -40,7 +40,7 @@ export function mergeArrayLiteral(
 	value.forEach((mergeElement, idx) => {
 		let existingElement: Expression | undefined = literalElements[idx]
 		let existingType: SyntaxKind | undefined = existingElement?.getKind?.()
-		const mergeStrategy = getMergeStrategy(mergeElement as Object)
+		const mergeStrategy = getMergeStrategy(mergeElement as object)
 
 		// If strategy is overwrite, remove existing element.
 		if (

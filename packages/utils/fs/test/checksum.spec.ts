@@ -2,7 +2,7 @@ import crypto from 'node:crypto'
 import os from 'node:os'
 import fse from 'fs-extra'
 import pathe from 'pathe'
-import { test, describe, expect } from 'vitest'
+import { test, describe } from 'vitest'
 import {
 	stripFormatting,
 	checksumGenerator,

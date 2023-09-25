@@ -29,13 +29,10 @@ export const applyOverrides = <T extends SupportsOverrides>(
 	options?: ApplyOverridesOptions,
 ): T => {
 	const extendArrays = options?.extendArrays ?? false
-	const flatItem: Record<string, any | Array<any>> = flatten.flatten(
-		overrides,
-		{
-			delimiter: '.',
-			safe: true,
-		},
-	)
+	const flatItem: Record<string, unknown> = flatten.flatten(overrides, {
+		delimiter: '.',
+		safe: true,
+	})
 	Object.entries(flatItem).forEach(([key, value]) => {
 		if (Array.isArray(value) && extendArrays) {
 			item.addToArray(key, ...(value as unknown[]))

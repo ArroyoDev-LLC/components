@@ -36,28 +36,28 @@
     "eslint-import-resolver-node": "^0.3.9",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.28.1",
-    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
     "lint-staged": "^14.0.1",
     "npm-check-updates": "^16",
     "prettier": "^3.0.3",
-    "projen": "^0.73.31",
+    "projen": "0.76.0",
     "standard-version": "^9",
     "typescript": "~5.1",
     "unbuild": "^1.2.1",
-    "vitest": "^0.34.5"
+    "vitest": "^0.34.6"
   },
   "peerDependencies": {
-    "projen": "^0.73.31"
+    "projen": "^0.76.0"
   },
   "dependencies": {
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@arroyodev-llc/utils.ts-ast": "workspace:*",
-    "@vitejs/plugin-vue": "^4.3.4",
+    "@vitejs/plugin-vue": "^4.4.0",
     "@vitejs/plugin-vue-jsx": "^3.0.2",
     "ts-morph": "^19.0.0",
-    "vite": "^4.4.9"
+    "vite": "^4.5.0"
   },
   "main": "dist/index.mjs",
   "license": "Apache-2.0",
@@ -78,7 +78,7 @@
   "files": [
     "dist"
   ],
-  "packageManager": "pnpm@8.6.12",
+  "packageManager": "pnpm@8.9.2",
   "lint-staged": {
     "*.{ts,tsx,mts,cts,ts,tsx,mts,cts}": [
       "pnpm exec eslint --no-error-on-unmatched-pattern --fix"

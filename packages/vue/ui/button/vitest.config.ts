@@ -10,5 +10,5 @@ export default mergeConfig(
 			include: ['test/**/*.spec.ts'],
 			environment: 'happy-dom',
 		},
-	})
+	}),
 )

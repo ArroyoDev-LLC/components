@@ -42,7 +42,9 @@ const monorepo = new ComponentsMonorepo({
 		'pathe',
 	],
 })
-monorepo.package.addPackageResolutions('projen@0.73.31')
+monorepo.package.addPackageResolutions(
+	`projen@${monorepo.options.projenVersion!}`,
+)
 
 // Builders
 

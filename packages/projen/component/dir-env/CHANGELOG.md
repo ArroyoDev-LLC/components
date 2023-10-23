@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.dir-env-v0.1.11...@arroyodev-llc/projen.component.dir-env-v0.1.12) (2023-10-23)
+
+
+### Features
+
+* **deps:** Update dependencies, update pnpm ([c275c7e](https://github.com/ArroyoDev-LLC/components/commit/c275c7ef2ac040380ba49aa9393ac2a8f6e3210c))
+* **deps:** Upgrade lint-staged to latest ([c95e7c6](https://github.com/ArroyoDev-LLC/components/commit/c95e7c606c8e6b1eebd9fa00a3bcbaa8485cc21b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from ^0.1.3 to ^0.1.4
+
 ## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.dir-env-v0.1.10...@arroyodev-llc/projen.component.dir-env-v0.1.11) (2023-09-25)
 
 

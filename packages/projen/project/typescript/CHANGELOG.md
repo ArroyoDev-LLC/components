@@ -32,6 +32,35 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+## [0.1.28](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.27...@arroyodev-llc/projen.project.typescript-v0.1.28) (2023-10-23)
+
+
+### Features
+
+* **deps:** Update dependencies, update pnpm ([c275c7e](https://github.com/ArroyoDev-LLC/components/commit/c275c7ef2ac040380ba49aa9393ac2a8f6e3210c))
+* **deps:** Upgrade lint-staged to latest ([c95e7c6](https://github.com/ArroyoDev-LLC/components/commit/c95e7c606c8e6b1eebd9fa00a3bcbaa8485cc21b))
+* **projen.project.typescript:** Add git-hooks component as dependency ([a9ac014](https://github.com/ArroyoDev-LLC/components/commit/a9ac01489aae58a2de3b7a481e4019a447610f1d))
+* **projen.project.typescript:** Implement `CdkTsAppCompileBuilder` build step ([ca6ca0e](https://github.com/ArroyoDev-LLC/components/commit/ca6ca0eb38b2f65ad92b334eeacfd1ee77a25a67))
+* **projen.project.typescript:** Implement `TypescriptLintStagedHooksBuilder` build step ([5f6978a](https://github.com/ArroyoDev-LLC/components/commit/5f6978a3aef601c8f37af63da2a1b593e3599a6f))
+* **projen.project.typescript:** Implement base builders for AwsCdkTs constructs and apps ([6001e28](https://github.com/ArroyoDev-LLC/components/commit/6001e28b37d67194b0c0e04cc6029d6f147b7666))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.git-hooks bumped to 0.1.10
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.21
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.22
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.23
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.16
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.24
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.26
+    * @arroyodev-llc/utils.projen bumped to 0.1.21
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.6
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from ^0.1.3 to ^0.1.4
+
 ## [0.1.27](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.26...@arroyodev-llc/projen.project.typescript-v0.1.27) (2023-09-25)
 
 

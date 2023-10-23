@@ -11,10 +11,14 @@ import { TypescriptConfigContainer } from '@arroyodev-llc/projen.component.tscon
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
 import {
 	BaseBuildStep,
+	type BuildOptions,
+	type BuildOutput,
+	type BuildStep,
 	type TypedPropertyDescriptorMap,
 } from '@arroyodev-llc/utils.projen-builder'
 import { NodePackageUtils } from '@aws/pdk/monorepo'
 import {
+	type awscdk,
 	DependencyType,
 	javascript,
 	type ProjectOptions,
@@ -253,11 +257,11 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 
 	applyProject(
 		project: typescript.TypeScriptProject,
-	): TypedPropertyDescriptorMap<this['_output']> {
+	): TypedPropertyDescriptorMap<BuildOutput<this>> {
 		const lintConfig = new LintConfig(project, this.options)
 		return {
 			lintConfig: { writable: false, value: lintConfig },
-		} as TypedPropertyDescriptorMap<this['_output']>
+		} as TypedPropertyDescriptorMap<BuildOutput<this>>
 	}
 }
 
@@ -280,5 +284,49 @@ export class TypescriptReleasePleaseBuilder extends BaseBuildStep {
 			}
 		}
 		return super.applyProject(project)
+	}
+}
+
+/**
+ * Configure CDK compilation and synth.
+ */
+export class CdkTsAppCompileBuilder extends BaseBuildStep<{
+	synthPostCompileCondition?: string
+}> {
+	private synthPostCompileCondition: string
+	constructor(options?: { synthPostCompileCondition?: string }) {
+		super()
+		this.synthPostCompileCondition =
+			options?.synthPostCompileCondition ?? `bash -c '[[ -z "$SKIP_SYNTH" ]]'`
+	}
+
+	applyOptions(
+		options: ProjectOptions & BuildOptions<this>,
+	): ProjectOptions & BuildOptions<this> {
+		const { synthPostCompileCondition, ...rest } = options
+		this.synthPostCompileCondition =
+			synthPostCompileCondition ?? this.synthPostCompileCondition
+		return rest
+	}
+
+	applyProject(
+		project: awscdk.AwsCdkTypeScriptApp,
+	): TypedPropertyDescriptorMap<BuildOutput<BuildStep>> {
+		project.addGitIgnore('cdk.context.json')
+		project.addGitIgnore('cdk.out')
+		project.cdkConfig.json.addOverride(
+			'app',
+			NodePackageUtils.command.exec(
+				project.package.packageManager,
+				'tsx',
+				'src/main.ts',
+			),
+		)
+		const postCompile = project.tasks.tryFind('post-compile')!
+		postCompile.reset()
+		postCompile.spawn(project.tasks.tryFind('synth:silent')!, {
+			condition: this.synthPostCompileCondition,
+		})
+		return {} as TypedPropertyDescriptorMap<BuildOutput<BuildStep>>
 	}
 }

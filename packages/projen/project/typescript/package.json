@@ -50,6 +50,7 @@
     "projen": "^0.76.0"
   },
   "dependencies": {
+    "@arroyodev-llc/projen.component.git-hooks": "workspace:*",
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
     "@arroyodev-llc/projen.component.release-please": "workspace:*",

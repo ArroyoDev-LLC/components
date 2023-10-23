@@ -40,7 +40,7 @@
     "eslint-plugin-vue": "^9.17.0",
     "faker": "^6.6.6",
     "happy-dom": "^10.11.2",
-    "lint-staged": "^14.0.1",
+    "lint-staged": "^15.0.2",
     "npm-check-updates": "^16",
     "prettier": "^3.0.3",
     "standard-version": "^9",

@@ -1,4 +1,10 @@
 import {
+	ExtensionMatch,
+	GitHooks,
+	LintStaged,
+	ValidGitHooks,
+} from '@arroyodev-llc/projen.component.git-hooks'
+import {
 	LintConfig,
 	type LintConfigOptions,
 } from '@arroyodev-llc/projen.component.linting'
@@ -9,6 +15,8 @@ import {
 } from '@arroyodev-llc/projen.component.release-please'
 import { TypescriptConfigContainer } from '@arroyodev-llc/projen.component.tsconfig-container'
 import { UnBuild } from '@arroyodev-llc/projen.component.unbuild'
+import { MonorepoProject } from '@arroyodev-llc/projen.project.nx-monorepo'
+import { findRootProject } from '@arroyodev-llc/utils.projen'
 import {
 	BaseBuildStep,
 	type BuildOptions,
@@ -283,6 +291,74 @@ export class TypescriptReleasePleaseBuilder extends BaseBuildStep {
 				)
 			}
 		}
+		return super.applyProject(project)
+	}
+}
+
+/**
+ * Configure common lint-staged and git hooks.
+ */
+export class TypescriptLintStagedHooksBuilder extends BaseBuildStep {
+	private readonly eslintCmd: string
+	private readonly prettierCmd: string
+	constructor(options?: { eslintCmd?: string; prettierCmd?: string }) {
+		super()
+		const {
+			eslintCmd = 'eslint --fix --no-error-on-unmatched-pattern',
+			prettierCmd = 'prettier --write',
+		} = options ?? {}
+		this.eslintCmd = eslintCmd
+		this.prettierCmd = prettierCmd
+	}
+
+	protected applyLintStaged(project: javascript.NodeProject) {
+		return new LintStaged(project, {
+			entries: [
+				{
+					extensions: [ExtensionMatch.TS, ExtensionMatch.JS],
+					commands: [
+						NodePackageUtils.command.exec(
+							project.package.packageManager,
+							this.eslintCmd,
+						),
+					],
+				},
+				{
+					extensions: [ExtensionMatch.YAML],
+					commands: [
+						NodePackageUtils.command.exec(
+							project.package.packageManager,
+							this.prettierCmd,
+						),
+					],
+				},
+			],
+		})
+	}
+
+	applyProject(project: typescript.TypeScriptProject) {
+		const root = findRootProject(project)
+		if (root instanceof MonorepoProject) {
+			root.applyRecursive(
+				(subproject) => {
+					if (NodePackageUtils.isNodeProject(subproject)) {
+						this.applyLintStaged(subproject)
+					}
+				},
+				{ immediate: false, includeSelf: true },
+			)
+		} else {
+			this.applyLintStaged(project)
+		}
+		new GitHooks(project, {
+			hooks: {
+				[ValidGitHooks.PreCommit]: NodePackageUtils.command.exec(
+					project.package.packageManager,
+					'lint-staged',
+				),
+			},
+			preserveUnused: true,
+		})
 		return super.applyProject(project)
 	}
 }

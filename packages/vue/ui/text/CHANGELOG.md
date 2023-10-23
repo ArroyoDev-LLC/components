@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.23](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.22...@arroyodev-llc/vue.ui.text-v0.1.23) (2023-10-23)
+
+
+### Features
+
+* **deps:** Update dependencies, update pnpm ([c275c7e](https://github.com/ArroyoDev-LLC/components/commit/c275c7ef2ac040380ba49aa9393ac2a8f6e3210c))
+* **deps:** Upgrade lint-staged to latest ([c95e7c6](https://github.com/ArroyoDev-LLC/components/commit/c95e7c606c8e6b1eebd9fa00a3bcbaa8485cc21b))
+
 ## [0.1.22](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.21...@arroyodev-llc/vue.ui.text-v0.1.22) (2023-09-25)
 
 

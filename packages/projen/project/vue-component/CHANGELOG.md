@@ -85,6 +85,33 @@
   * peerDependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+## [0.1.31](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.30...@arroyodev-llc/projen.project.vue-component-v0.1.31) (2023-10-23)
+
+
+### Features
+
+* **deps:** Update dependencies, update pnpm ([c275c7e](https://github.com/ArroyoDev-LLC/components/commit/c275c7ef2ac040380ba49aa9393ac2a8f6e3210c))
+* **deps:** Upgrade lint-staged to latest ([c95e7c6](https://github.com/ArroyoDev-LLC/components/commit/c95e7c606c8e6b1eebd9fa00a3bcbaa8485cc21b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.25
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.29
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.28
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.6
+  * devDependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.21
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.22
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.24
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from ^0.1.3 to ^0.1.4
+  * peerDependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.21
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.22
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.24
+
 ## [0.1.30](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.29...@arroyodev-llc/projen.project.vue-component-v0.1.30) (2023-09-25)
 
 

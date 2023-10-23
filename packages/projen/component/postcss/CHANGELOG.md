@@ -6,6 +6,25 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.16
 
+## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.postcss-v0.1.16...@arroyodev-llc/projen.component.postcss-v0.1.17) (2023-10-23)
+
+
+### Features
+
+* **deps:** Update dependencies, update pnpm ([c275c7e](https://github.com/ArroyoDev-LLC/components/commit/c275c7ef2ac040380ba49aa9393ac2a8f6e3210c))
+* **deps:** Upgrade lint-staged to latest ([c95e7c6](https://github.com/ArroyoDev-LLC/components/commit/c95e7c606c8e6b1eebd9fa00a3bcbaa8485cc21b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.23
+    * @arroyodev-llc/utils.projen bumped to 0.1.21
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.11
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from ^0.1.3 to ^0.1.4
+
 ## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.postcss-v0.1.15...@arroyodev-llc/projen.component.postcss-v0.1.16) (2023-09-25)
 
 

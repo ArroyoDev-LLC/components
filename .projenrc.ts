@@ -269,6 +269,7 @@ const typescriptProject = ProjenComponentProjectBuilder.build({
 		releasePleaseComponent,
 		tsconfigContainerComponent,
 		nxMonorepoProject,
+		gitHooksComponent,
 	],
 })
 typescriptProject.lintConfig.eslint.addIgnorePattern(

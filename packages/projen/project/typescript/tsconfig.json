@@ -47,6 +47,9 @@
     },
     {
       "path": "../nx-monorepo/tsconfig.json"
+    },
+    {
+      "path": "../../component/git-hooks/tsconfig.json"
     }
   ]
 }

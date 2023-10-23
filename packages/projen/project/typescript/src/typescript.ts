@@ -17,6 +17,7 @@ import {
 } from '@arroyodev-llc/utils.projen-builder'
 import { NodePackageUtils } from '@aws/pdk/monorepo'
 import {
+	awscdk,
 	type Component,
 	DependencyType,
 	javascript,
@@ -54,6 +55,16 @@ export const CONFIG_DEFAULTS = {
 	unbuild: true,
 } satisfies Omit<TypeScriptProjectOptions, 'name'>
 
+const BaseTSConfigBuilder = new tsBuilders.TypescriptConfigBuilder({
+	extendsDefault: (container) =>
+		container.buildExtends(
+			TSConfig.BASE,
+			TSConfig.ESM,
+			TSConfig.BUNDLER,
+			TSConfig.COMPOSITE,
+		),
+})
+
 /**
  * Base {@link typescript.TypeScriptProject} builder with most commonly used steps.
  */
@@ -61,21 +72,36 @@ export const TypescriptBaseBuilder = new ProjectBuilder(
 	typescript.TypeScriptProject,
 )
 	.add(new stdBuilders.DefaultOptionsBuilder(CONFIG_DEFAULTS))
-	.add(
-		new tsBuilders.TypescriptConfigBuilder({
-			extendsDefault: (container) =>
-				container.buildExtends(
-					TSConfig.BASE,
-					TSConfig.ESM,
-					TSConfig.BUNDLER,
-					TSConfig.COMPOSITE,
-				),
-		}),
-	)
+	.add(BaseTSConfigBuilder)
 	.add(new tsBuilders.TypescriptLintingBuilder({ useTypeInformation: true }))
 	.add(new tsBuilders.TypescriptESMManifestBuilder())
 	.add(new tsBuilders.TypescriptBundlerBuilder())
 	.add(new tsBuilders.TypescriptReleasePleaseBuilder())
+
+/**
+ * Base {@link awscdk.AwsCdkConstructLibrary} builder with most commonly used steps.
+ */
+export const AwsCdkTsConstructBaseBuilder = new ProjectBuilder(
+	awscdk.AwsCdkConstructLibrary,
+)
+	.add(new stdBuilders.DefaultOptionsBuilder(CONFIG_DEFAULTS))
+	.add(BaseTSConfigBuilder)
+	.add(new tsBuilders.TypescriptLintingBuilder({ useTypeInformation: true }))
+	.add(new tsBuilders.TypescriptESMManifestBuilder())
+	.add(new tsBuilders.TypescriptBundlerBuilder())
+	.add(new tsBuilders.TypescriptReleasePleaseBuilder())
+
+/**
+ * Base {@link awscdk} builder with most commonly used steps.
+ */
+export const AwsCdkTsAppBaseBuilder = new ProjectBuilder(
+	awscdk.AwsCdkTypeScriptApp,
+)
+	.add(new stdBuilders.DefaultOptionsBuilder(CONFIG_DEFAULTS))
+	.add(BaseTSConfigBuilder)
+	.add(new tsBuilders.TypescriptLintingBuilder({ useTypeInformation: true }))
+	.add(new tsBuilders.TypescriptESMManifestBuilder({ sideEffects: true }))
+	.add(new tsBuilders.TypescriptBundlerBuilder())
 
 /**
  * @deprecated Use `TypescriptBaseBuilder` instead

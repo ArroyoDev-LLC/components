@@ -258,8 +258,9 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 			accountIds,
 		).map((name) => [
 			ActionsContext.SECRET,
-			`AWS_ACCOUNT_ID_${name.toUpperCase()}`,
+			`AWS_ACCOUNT_ID_${name.replaceAll('-', '_').toUpperCase()}`,
 		])
+		console.log(maskValues)
 		return MaskValueStep.values(
 			'Mask values',
 			[ActionsContext.SECRET, 'AWS_PIPELINE_ACCOUNT_ID'],

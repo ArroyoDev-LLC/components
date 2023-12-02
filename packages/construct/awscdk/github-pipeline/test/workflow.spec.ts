@@ -175,6 +175,19 @@ describe('GithubCodePipeline', () => {
 		expect(contents).to.include('AWS_ACCOUNT_ID_DELTA')
 	})
 
+	test<TestContext>('masks kebab-case stage account ids as expected', async (ctx) => {
+		const [pipe] = buildMultiStage(ctx)
+		pipe.addStageWithGitHubOptions(
+			new ctx.stage(ctx.app, 'delta-au', {
+				env: { account: '098', region: 'ap-southeast-4' },
+			}),
+		)
+		ctx.app.synth()
+		const contents = (await fs.readFile(pipe.workflowPath)).toString()
+		expect(contents).not.to.include('098')
+		expect(contents).to.include('AWS_ACCOUNT_ID_DELTA_AU')
+	})
+
 	test<TestContext>('builder has expected props', (ctx) => {
 		const [, builder] = buildMultiStage(ctx)
 		expect(builder.props).toMatchSnapshot()

@@ -459,7 +459,7 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		const aidFound = accountIds.find((aid) => String(value).includes(aid))
 		if (!aidFound) return
 		// mask account ids
-		const envName = stageAccountIds[aidFound]
+		const envName = stageAccountIds[aidFound].replaceAll('-', '_')
 		const inter = interpolateValue(
 			ActionsContext.SECRET,
 			`AWS_ACCOUNT_ID_${envName.toUpperCase()}`,

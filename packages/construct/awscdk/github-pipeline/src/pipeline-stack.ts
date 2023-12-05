@@ -119,7 +119,7 @@ export class GithubCodePipeline {
 	buildCredentialsProvider(accountIdSecretName?: string, roleName?: string) {
 		const pipeAccountId = interpolateValue(
 			ActionsContext.SECRET,
-			accountIdSecretName ?? 'AWS_PIPELINE_ACCOUNT_ID',
+			(accountIdSecretName ?? 'AWS_PIPELINE_ACCOUNT_ID').replaceAll('-', '_'),
 		)
 		const roleArn = `arn:aws:iam::${pipeAccountId}:role/${
 			roleName ?? 'GitHubActionRole'

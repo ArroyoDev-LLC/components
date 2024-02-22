@@ -145,6 +145,12 @@ utilsUnbuildCompositePreset
 		preset: (writer) => writer.write('compositePreset()'),
 	})
 
+const utilsFirebase = TypescriptProjectBuilder.build({
+	name: 'utils.firebase',
+	deps: ['firebase-admin', 'firebase-functions'],
+})
+new Vitest(utilsFirebase)
+
 /**
  * Projen Components
  */

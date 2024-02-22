@@ -18,6 +18,7 @@ packages:
   - packages/projen/project/nx-monorepo
   - packages/projen/project/typescript
   - packages/projen/project/vue-component
+  - packages/utils/firebase
   - packages/utils/fs
   - packages/utils/projen
   - packages/utils/projen-builder

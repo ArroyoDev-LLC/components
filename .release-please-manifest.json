@@ -23,5 +23,6 @@
   "packages/utils/ts-ast": "0.1.11",
   "packages/projen/component/git-hooks": "0.1.10",
   "packages/utils/projen-builder": "0.1.6",
-  "packages/utils/unbuild-composite-preset": "0.1.4"
+  "packages/utils/unbuild-composite-preset": "0.1.4",
+  "packages/utils/firebase": "0.0.0"
 }

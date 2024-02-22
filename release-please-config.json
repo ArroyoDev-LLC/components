@@ -23,6 +23,10 @@
       "component": "@arroyodev-llc/utils.unbuild-composite-preset",
       "release-type": "node"
     },
+    "packages/utils/firebase": {
+      "component": "@arroyodev-llc/utils.firebase",
+      "release-type": "node"
+    },
     "packages/projen/component/linting": {
       "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"

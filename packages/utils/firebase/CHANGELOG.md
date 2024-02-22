@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.firebase-v0.1.2...@arroyodev-llc/utils.firebase-v0.1.3) (2024-02-22)
+
+
+### Bug Fixes
+
+* **utils.firebase:** Use firestore timestamp in handleDocumentWrite ([29e0e6e](https://github.com/ArroyoDev-LLC/components/commit/29e0e6efe6113090a45cbfa0aa04c7e2a9b46a1b))
+
 ## 0.1.2 (2024-02-22)
 
 

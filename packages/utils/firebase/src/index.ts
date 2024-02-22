@@ -53,7 +53,7 @@ export const handleDocumentWrite = async (
 	change: FbDocumentChange,
 	context: functions.EventContext,
 ) => {
-	const now = admin.firestore.FieldValue.serverTimestamp()
+	const now = admin.firestore.Timestamp.now()
 	const docId = context.params.docId
 	const documentPath = context.resource.name // Get the path of the document affected
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.dir-env-v0.1.12...@arroyodev-llc/projen.component.dir-env-v0.1.13) (2024-03-19)
+
+
+### Features
+
+* **projen.component.dir-env:** Add mise config in buildDefaultEnvRc func ([a20d617](https://github.com/ArroyoDev-LLC/components/commit/a20d617507c2278f981e084470933fd5946df4b2))
+
+
+### Tests
+
+* **projen.component.dir-env:** Update dir-env test snapshots ([3aaab3f](https://github.com/ArroyoDev-LLC/components/commit/3aaab3f8f2ca8c668734d1d8bf71a2002dd9189d))
+
 ## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.dir-env-v0.1.11...@arroyodev-llc/projen.component.dir-env-v0.1.12) (2023-10-23)
 
 

@@ -20,6 +20,10 @@ export enum DirEnvUse {
 	 * RTX.
 	 */
 	RTX = 'rtx',
+	/**
+	 * MISE.
+	 */
+	MISE = 'mise',
 }
 
 /**
@@ -237,25 +241,31 @@ export class DirEnv extends Component {
 			.addComment('User local additions.')
 			.addSourceEnvIfExists(localEnvRc)
 			.addBlankLine()
-			.addComment('Load rtx or asdf')
-			.addCommand('if has rtx && has use_rtx; then', '', () =>
-				this.addCommand('use rtx'),
+			.addComment('Load mise (previously known as "rtx") or asdf')
+			.addCommand('if has mise && has use_mise; then', '', () =>
+				this.addCommand(DirEnvStdLibCommand.USE, DirEnvUse.MISE),
+			)
+			.addCommand('elif has rtx && has use_rtx; then', '', () =>
+				this.addLog(
+					DirEnvLogType.INFO,
+					'Note: rtx was renamed to mise. Consider migrating your local rtx config to mise. https://mise.jdx.dev/rtx.html',
+				).addCommand(DirEnvStdLibCommand.USE, DirEnvUse.RTX),
 			)
 			.addCommand('elif has asdf && has use_asdf; then', '', () =>
 				this.addLog(
 					DirEnvLogType.INFO,
-					'rtx not found. Falling back to asdf.',
-				).addCommand('use asdf'),
+					'mise/rtx not found. Falling back to asdf.',
+				).addCommand(DirEnvStdLibCommand.USE, DirEnvUse.ASDF),
 			)
 			.addCommand('else', '', () =>
 				this.addLog(
 					DirEnvLogType.ERROR,
-					'Neither rtx nor asdf are installed or integrated with direnv.',
+					'Neither mise (rtx) nor asdf are installed or integrated with direnv.',
 				)
 					.addLog(DirEnvLogType.ERROR, 'For asdf: https://asdf-vm.com/')
 					.addLog(
 						DirEnvLogType.ERROR,
-						'For rtx (asdf clone in rust): https://github.com/jdxcode/rtx',
+						'For mise (asdf clone in rust): https://github.com/jdx/mise',
 					),
 			)
 			.addCommand('fi')

@@ -19,7 +19,7 @@
   "packages/projen/component/tailwind": "0.1.17",
   "packages/projen/component/postcss": "0.1.17",
   "packages/utils/fs": "0.1.14",
-  "packages/projen/component/dir-env": "0.1.12",
+  "packages/projen/component/dir-env": "0.1.13",
   "packages/utils/ts-ast": "0.1.11",
   "packages/projen/component/git-hooks": "0.1.10",
   "packages/utils/projen-builder": "0.1.6",

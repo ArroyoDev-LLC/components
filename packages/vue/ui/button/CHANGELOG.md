@@ -6,6 +6,20 @@
   * dependencies
     * @arroyodev-llc/vue.ui.text bumped to 0.1.7
 
+## [0.1.24](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.23...@arroyodev-llc/vue.ui.button-v0.1.24) (2024-07-03)
+
+
+### Features
+
+* Update dependencies ([0674f91](https://github.com/ArroyoDev-LLC/components/commit/0674f912cbe03641e93031221bae7d6aeacd6c1c))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/vue.ui.text bumped to 0.1.24
+
 ## [0.1.23](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.22...@arroyodev-llc/vue.ui.button-v0.1.23) (2023-10-23)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.unbuild-composite-preset-v0.1.4...@arroyodev-llc/utils.unbuild-composite-preset-v0.1.5) (2024-07-03)
+
+
+### Features
+
+* Update dependencies ([0674f91](https://github.com/ArroyoDev-LLC/components/commit/0674f912cbe03641e93031221bae7d6aeacd6c1c))
+
 ## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.unbuild-composite-preset-v0.1.3...@arroyodev-llc/utils.unbuild-composite-preset-v0.1.4) (2023-10-23)
 
 

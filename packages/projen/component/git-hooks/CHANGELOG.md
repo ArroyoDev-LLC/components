@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.11](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.git-hooks-v0.1.10...@arroyodev-llc/projen.component.git-hooks-v0.1.11) (2024-07-03)
+
+
+### Features
+
+* Update dependencies ([0674f91](https://github.com/ArroyoDev-LLC/components/commit/0674f912cbe03641e93031221bae7d6aeacd6c1c))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.4 to 0.1.5
+
 ## [0.1.10](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.git-hooks-v0.1.9...@arroyodev-llc/projen.component.git-hooks-v0.1.10) (2023-10-23)
 
 

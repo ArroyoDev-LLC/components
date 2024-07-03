@@ -102,8 +102,7 @@
       "wrap-ansi": "^7.0.0"
     },
     "patchedDependencies": {
-      "unbuild@2.0.0-rc.0": "patches/unbuild@2.0.0-rc.0.patch",
-      "projen@0.82.8": "patches/projen@0.82.8.patch"
+      "unbuild@2.0.0-rc.0": "patches/unbuild@2.0.0-rc.0.patch"
     }
   },
   "engines": {

@@ -46,6 +46,27 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+## [0.1.31](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.30...@arroyodev-llc/projen.component.vue-v0.1.31) (2024-07-03)
+
+
+### Features
+
+* Update ts to v5.2 ([dac3bbf](https://github.com/ArroyoDev-LLC/components/commit/dac3bbf05a61dcbf61adad1a3bf590541a42799b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.23
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.25
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.26
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.27
+    * @arroyodev-llc/projen.component.vitest bumped to 0.1.26
+    * @arroyodev-llc/utils.projen bumped to 0.1.23
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.5 to 0.1.6
+
 ## [0.1.30](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vue-v0.1.29...@arroyodev-llc/projen.component.vue-v0.1.30) (2024-07-03)
 
 

@@ -12,6 +12,22 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.23](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.22...@arroyodev-llc/projen.component.linting-v0.1.23) (2024-07-03)
+
+
+### Features
+
+* Update ts to v5.2 ([dac3bbf](https://github.com/ArroyoDev-LLC/components/commit/dac3bbf05a61dcbf61adad1a3bf590541a42799b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.23
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.5 to 0.1.6
+
 ## [0.1.22](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.linting-v0.1.21...@arroyodev-llc/projen.component.linting-v0.1.22) (2024-07-03)
 
 

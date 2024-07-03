@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.fs-v0.1.15...@arroyodev-llc/utils.fs-v0.1.16) (2024-07-03)
+
+
+### Features
+
+* Update ts to v5.2 ([dac3bbf](https://github.com/ArroyoDev-LLC/components/commit/dac3bbf05a61dcbf61adad1a3bf590541a42799b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.5 to 0.1.6
+
 ## [0.1.15](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.fs-v0.1.14...@arroyodev-llc/utils.fs-v0.1.15) (2024-07-03)
 
 

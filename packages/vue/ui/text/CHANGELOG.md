@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.25](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.24...@arroyodev-llc/vue.ui.text-v0.1.25) (2024-07-03)
+
+
+### Features
+
+* Update ts to v5.2 ([dac3bbf](https://github.com/ArroyoDev-LLC/components/commit/dac3bbf05a61dcbf61adad1a3bf590541a42799b))
+
 ## [0.1.24](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.text-v0.1.23...@arroyodev-llc/vue.ui.text-v0.1.24) (2024-07-03)
 
 

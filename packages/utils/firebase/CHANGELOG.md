@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.5](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.firebase-v0.1.4...@arroyodev-llc/utils.firebase-v0.1.5) (2024-07-03)
+
+
+### Features
+
+* Update ts to v5.2 ([dac3bbf](https://github.com/ArroyoDev-LLC/components/commit/dac3bbf05a61dcbf61adad1a3bf590541a42799b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.5 to 0.1.6
+
 ## [0.1.4](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.firebase-v0.1.3...@arroyodev-llc/utils.firebase-v0.1.4) (2024-07-03)
 
 

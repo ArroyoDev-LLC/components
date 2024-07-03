@@ -32,6 +32,30 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+## [0.1.30](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.29...@arroyodev-llc/projen.project.typescript-v0.1.30) (2024-07-03)
+
+
+### Features
+
+* Update ts to v5.2 ([dac3bbf](https://github.com/ArroyoDev-LLC/components/commit/dac3bbf05a61dcbf61adad1a3bf590541a42799b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.git-hooks bumped to 0.1.12
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.23
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.24
+    * @arroyodev-llc/projen.component.release-please bumped to 0.1.25
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.18
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.26
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.28
+    * @arroyodev-llc/utils.projen bumped to 0.1.23
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.8
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.5 to 0.1.6
+
 ## [0.1.29](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.28...@arroyodev-llc/projen.project.typescript-v0.1.29) (2024-07-03)
 
 

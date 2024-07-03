@@ -19,7 +19,7 @@ jobs:
       NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
       CI: "true"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
       - name: Generate token
@@ -36,10 +36,10 @@ jobs:
           command: manifest
       - name: Setup PNPM
         if: ${{ steps.release-please.outputs.releases_created }}
-        uses: pnpm/action-setup@v2.2.4
+        uses: pnpm/action-setup@v4
       - name: Setup Node
         if: ${{ steps.release-please.outputs.releases_created }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20.15.0
           cache: pnpm

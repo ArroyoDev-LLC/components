@@ -41,7 +41,7 @@ jobs:
         if: ${{ steps.release-please.outputs.releases_created }}
         uses: actions/setup-node@v3
         with:
-          node-version: 18.16.0
+          node-version: 20.15.0
           cache: pnpm
       - name: Install Dependencies
         if: ${{ steps.release-please.outputs.releases_created }}

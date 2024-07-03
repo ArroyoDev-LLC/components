@@ -2,7 +2,6 @@
   "dependencies": [
     {
       "name": "@aws/pdk",
-      "version": "^0",
       "type": "build"
     },
     {
@@ -87,7 +86,7 @@
     },
     {
       "name": "nx",
-      "version": "16.0.0",
+      "version": "19.0.0",
       "type": "build"
     },
     {
@@ -117,6 +116,7 @@
     },
     {
       "name": "syncpack",
+      "version": "^12",
       "type": "build"
     },
     {
@@ -259,8 +259,13 @@
     },
     {
       "name": "nx",
-      "version": "^16",
+      "version": "^19",
       "type": "peer"
+    },
+    {
+      "name": "@aws-cdk/aws-cognito-identitypool-alpha",
+      "version": "latest",
+      "type": "runtime"
     },
     {
       "name": "aws-cdk-lib",
@@ -268,10 +273,6 @@
     },
     {
       "name": "cdk-nag",
-      "type": "runtime"
-    },
-    {
-      "name": "constructs",
       "type": "runtime"
     }
   ],

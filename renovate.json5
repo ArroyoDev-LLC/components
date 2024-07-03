@@ -23,13 +23,13 @@
     }
   ],
   "ignoreDeps": [
-    "@aws/pdk",
     "@types/node",
     "@typescript-eslint/eslint-plugin",
     "@typescript-eslint/parser",
     "eslint",
     "nx",
     "projen",
+    "syncpack",
     "typescript",
     "@arroyodev-llc/projen.component.dir-env",
     "@arroyodev-llc/projen.component.git-hooks",
@@ -50,6 +50,7 @@
     "@types/babel__traverse",
     "@zkochan/js-yaml",
     "unbuild",
-    "wrap-ansi"
+    "wrap-ansi",
+    "@aws-cdk/aws-cognito-identitypool-alpha"
   ]
 }

@@ -8,7 +8,6 @@
 !/.devcontainer.json
 !/.github/workflows/auto-approve.yml
 !/package.json
-!/LICENSE
 !/.npmignore
 logs
 *.log
@@ -48,10 +47,10 @@ jspm_packages/
 /dist
 /dist/
 !/.eslintrc.json
-.nx/cache
+.nx/*
+!.nx/plugins
 !/nx.json
 !/.nxignore
-!/.syncpackrc.json
 .idea
 .idea/**
 !/.ncurc.json
@@ -72,6 +71,8 @@ docs/**
 !/.envrc
 .envrc.local
 !/pnpm-workspace.yaml
+!/.syncpackrc.json
+!/LICENSE
 !/projenrc/projen-project-options.ts
 !/packages/projen/project/typescript/src/typescript-compiler-options.ts
 !/packages/projen/project/typescript/src/typescript-config-options.ts

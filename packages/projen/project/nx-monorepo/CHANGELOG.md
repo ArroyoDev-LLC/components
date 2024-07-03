@@ -8,6 +8,27 @@
     * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.11
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.29](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.28...@arroyodev-llc/projen.project.nx-monorepo-v0.1.29) (2024-07-03)
+
+
+### Features
+
+* **deps:** Update projen to 0.83.1 ([006e959](https://github.com/ArroyoDev-LLC/components/commit/006e959a672f436bd3a3b7562bba3cf10f6f3a98))
+
+
+### Continuous Integration
+
+* Update generated workflows ([541ec48](https://github.com/ArroyoDev-LLC/components/commit/541ec482593494c50b82059c417de87c9ff89b8a))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.24
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.25
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.19
+
 ## [0.1.28](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.27...@arroyodev-llc/projen.project.nx-monorepo-v0.1.28) (2024-07-03)
 
 

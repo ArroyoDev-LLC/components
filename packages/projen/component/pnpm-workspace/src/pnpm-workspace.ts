@@ -71,7 +71,7 @@ export class PnpmWorkspace extends Component {
 				? (dependency.shift()! as {
 						depType: DependencyType
 						addTsPath: boolean
-				  })
+					})
 				: { depType: DependencyType.RUNTIME, addTsPath: true }
 		;(dependency as (javascript.NodeProject | string)[]).forEach((dep) => {
 			const depName =

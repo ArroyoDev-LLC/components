@@ -175,8 +175,8 @@ export function mergeObjectLiteral<T extends Record<string, any>>(
 		const defaultInit = is.plainObject(value)
 			? '{}'
 			: is.array(value)
-			? '[]'
-			: undefined
+				? '[]'
+				: undefined
 		if (propAssign && propAssign.getKind() === SyntaxKind.PropertyAssignment) {
 			// merge existing property assignment.
 			mergePropertyAssignment(propAssign, value as LiteralExpressionMergeValue)

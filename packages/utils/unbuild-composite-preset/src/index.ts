@@ -27,8 +27,8 @@ const getDtsFiles = async (dir: string): Promise<string[]> => {
 			return dirent.isDirectory()
 				? getDtsFiles(res)
 				: res.endsWith('.d.ts') || res.endsWith('.d.ts.map')
-				? res
-				: ''
+					? res
+					: ''
 		}),
 	)
 	return files.flat()

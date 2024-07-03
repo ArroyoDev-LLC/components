@@ -65,7 +65,7 @@ export class LintStaged extends Component {
 					? `*.{${extensions.join(',')}}`
 					: extensions
 				acc[key] ??= []
-				acc[key]!.push(...commands)
+				acc[key].push(...commands)
 				return acc
 			},
 			{} as Record<string, string[]>,

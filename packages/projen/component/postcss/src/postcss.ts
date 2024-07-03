@@ -49,7 +49,7 @@ export class PostCSS extends Component {
 			...(!plugin.options
 				? {
 						spec: (writer) => writer.write(plugin.name),
-				  }
+					}
 				: {}),
 			...plugin,
 		} satisfies TypeScriptSourceConfigPlugin

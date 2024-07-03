@@ -56,11 +56,11 @@ export class UnBuild extends Component {
 			? {
 					import: exportInfo.import,
 					require: exportInfo.require,
-			  }
+				}
 			: {
 					types: exportInfo.types,
 					default: exportInfo.import,
-			  }
+				}
 		this.project.package.addField('exports', {
 			'.': exports,
 			'./package.json': './package.json',

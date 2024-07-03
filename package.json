@@ -71,7 +71,7 @@
     "nx-cloud": "16.5.2",
     "pathe": "1.1.2",
     "prettier": "3.3.2",
-    "projen": "0.82.8",
+    "projen": "0.83.1",
     "rimraf": "5.0.7",
     "rollup-plugin-vue": "6.0.0",
     "simple-git-hooks": "2.11.1",
@@ -97,7 +97,7 @@
     "overrides": {
       "@types/babel__traverse": "7.18.2",
       "@zkochan/js-yaml": "npm:js-yaml@4.1.0",
-      "projen": "0.82.8",
+      "projen": "0.83.1",
       "unbuild": "2.0.0-rc.0",
       "wrap-ansi": "^7.0.0"
     },

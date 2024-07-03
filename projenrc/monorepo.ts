@@ -125,6 +125,7 @@ export class ComponentsMonorepo
 				defaultValue: ComponentsMonorepo.nxPublicReadonlyToken,
 			})
 		this.pnpm.addPatch('unbuild@2.0.0-rc.0', 'patches/unbuild@2.0.0-rc.0.patch')
+		this.pnpm.addPatch('projen@0.82.8', 'patches/projen@0.82.8.patch')
 	}
 
 	protected applyNx(): this {

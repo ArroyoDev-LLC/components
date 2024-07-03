@@ -25,7 +25,7 @@ export interface CheckoutProps {
  */
 export class CheckoutStep extends ghpipelines.GitHubActionStep {
 	constructor(id: string, props: CheckoutProps) {
-		const { actionVersion = 'v3', ...withProps } = props
+		const { actionVersion = 'v4', ...withProps } = props
 		const name = withProps?.repository
 			? 'Checkout'
 			: `Checkout ${withProps.repository!}`

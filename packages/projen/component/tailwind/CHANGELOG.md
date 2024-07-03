@@ -6,6 +6,29 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.16
 
+## [0.1.18](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tailwind-v0.1.17...@arroyodev-llc/projen.component.tailwind-v0.1.18) (2024-07-03)
+
+
+### Features
+
+* Update dependencies ([0674f91](https://github.com/ArroyoDev-LLC/components/commit/0674f912cbe03641e93031221bae7d6aeacd6c1c))
+
+
+### Tests
+
+* Update snapshots ([50a4470](https://github.com/ArroyoDev-LLC/components/commit/50a4470a11992305f71000a325d78714cd6fa842))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.24
+    * @arroyodev-llc/utils.projen bumped to 0.1.22
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.12
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.4 to 0.1.5
+
 ## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tailwind-v0.1.16...@arroyodev-llc/projen.component.tailwind-v0.1.17) (2023-10-23)
 
 

@@ -14,6 +14,25 @@
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.16
     * @arroyodev-llc/projen.component.vite bumped to 0.1.18
 
+## [0.1.25](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.24...@arroyodev-llc/projen.component.vitest-v0.1.25) (2024-07-03)
+
+
+### Features
+
+* Update dependencies ([0674f91](https://github.com/ArroyoDev-LLC/components/commit/0674f912cbe03641e93031221bae7d6aeacd6c1c))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.24
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.26
+    * @arroyodev-llc/utils.projen bumped to 0.1.22
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.12
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.4 to 0.1.5
+
 ## [0.1.24](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.vitest-v0.1.23...@arroyodev-llc/projen.component.vitest-v0.1.24) (2023-10-23)
 
 

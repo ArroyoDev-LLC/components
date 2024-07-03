@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-builder-v0.1.6...@arroyodev-llc/utils.projen-builder-v0.1.7) (2024-07-03)
+
+
+### Features
+
+* Update dependencies ([0674f91](https://github.com/ArroyoDev-LLC/components/commit/0674f912cbe03641e93031221bae7d6aeacd6c1c))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.22
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.4 to 0.1.5
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-builder-v0.1.5...@arroyodev-llc/utils.projen-builder-v0.1.6) (2023-10-23)
 
 

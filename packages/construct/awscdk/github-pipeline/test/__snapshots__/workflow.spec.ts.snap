@@ -28,14 +28,14 @@ exports[`GithubCodePipeline > builder has expected props 1`] = `
   "preBuildSteps": [
     {
       "name": "Setup PNPM",
-      "uses": "pnpm/action-setup@v2.4.0",
+      "uses": "pnpm/action-setup@v4",
       "with": {
         "version": "8",
       },
     },
     {
       "name": "Setup Node",
-      "uses": "actions/setup-node@v3",
+      "uses": "actions/setup-node@v4",
       "with": {
         "cache": "pnpm",
         "node-version": "18",
@@ -91,7 +91,7 @@ exports[`GithubCodePipeline > builder has expected props 1`] = `
     {
       "if": "inputs.runner && !contains(inputs.runner, 'ubuntu')",
       "name": "Setup Node",
-      "uses": "actions/setup-node@v3",
+      "uses": "actions/setup-node@v4",
       "with": {
         "node-version": "18",
       },
@@ -161,14 +161,14 @@ GithubCodePipeline {
     "preBuildSteps": [
       {
         "name": "Setup PNPM",
-        "uses": "pnpm/action-setup@v2.4.0",
+        "uses": "pnpm/action-setup@v4",
         "with": {
           "version": "8",
         },
       },
       {
         "name": "Setup Node",
-        "uses": "actions/setup-node@v3",
+        "uses": "actions/setup-node@v4",
         "with": {
           "cache": "pnpm",
           "node-version": "18",
@@ -224,7 +224,7 @@ GithubCodePipeline {
       {
         "if": "inputs.runner && !contains(inputs.runner, 'ubuntu')",
         "name": "Setup Node",
-        "uses": "actions/setup-node@v3",
+        "uses": "actions/setup-node@v4",
         "with": {
           "node-version": "18",
         },
@@ -308,11 +308,11 @@ jobs:
           repository: CrisisCleanup/infrastructure
           ref: main
       - name: Setup PNPM
-        uses: pnpm/action-setup@v2.4.0
+        uses: pnpm/action-setup@v4
         with:
           version: \\"8\\"
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: \\"18\\"
           cache: pnpm
@@ -383,7 +383,7 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: \\"18\\"
         if: inputs.runner && !contains(inputs.runner, 'ubuntu')

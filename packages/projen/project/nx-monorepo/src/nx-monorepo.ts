@@ -2,6 +2,7 @@ import path from 'node:path'
 import { PnpmWorkspace } from '@arroyodev-llc/projen.component.pnpm-workspace'
 import { TypescriptConfigContainer } from '@arroyodev-llc/projen.component.tsconfig-container'
 import {
+	applyOverrides,
 	cwdRelativePath,
 	findComponent,
 	ProjectName,
@@ -362,7 +363,12 @@ export class MonorepoProject extends NxMonorepoProject {
 				(project) => {
 					const projectPackage = findComponent(project, NodePackage)
 					if (projectPackage) {
-						projectPackage.addField('packageManager', `pnpm@${pnpmVersion}`)
+						applyOverrides(projectPackage.file, {
+							packageManager: `pnpm@${pnpmVersion}`,
+							engines: {
+								pnpm: `^${pnpmVersion}`,
+							},
+						})
 						if (!(project instanceof MonorepoProject)) {
 							// only root pnpm takes effect.
 							projectPackage.file.addDeletionOverride('pnpm')

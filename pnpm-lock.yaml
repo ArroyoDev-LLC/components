@@ -12,6 +12,9 @@ overrides:
   wrap-ansi: ^7.0.0
 
 patchedDependencies:
+  projen@0.82.8:
+    hash: ujo76gyuqvfztrtwnp3vkaogs4
+    path: patches/projen@0.82.8.patch
   unbuild@2.0.0-rc.0:
     hash: lulzlhanbemembpay2kcfiuibq
     path: patches/unbuild@2.0.0-rc.0.patch
@@ -148,7 +151,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       rimraf:
         specifier: 5.0.7
         version: 5.0.7
@@ -223,7 +226,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -274,7 +277,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       simple-git-hooks:
         specifier: 2.11.1
         version: 2.11.1
@@ -338,7 +341,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -390,7 +393,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -454,7 +457,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -509,7 +512,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -573,7 +576,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -624,7 +627,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -676,7 +679,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -743,7 +746,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -810,7 +813,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -880,7 +883,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -950,7 +953,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1020,7 +1023,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1087,7 +1090,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1169,7 +1172,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1239,7 +1242,7 @@ importers:
         version: 3.3.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       standard-version:
         specifier: ^9
         version: 9.5.0
@@ -1376,7 +1379,7 @@ importers:
         version: 5.0.2
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       type-fest:
         specifier: ^4
         version: 4.2.0
@@ -1437,7 +1440,7 @@ importers:
         version: link:../projen
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       type-fest:
         specifier: ^4
         version: 4.2.0
@@ -1498,7 +1501,7 @@ importers:
         version: 6.3.1
       projen:
         specifier: 0.82.8
-        version: 0.82.8(constructs@10.3.0)
+        version: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       reflect-metadata:
         specifier: 0.2.2
         version: 0.2.2
@@ -1883,7 +1886,7 @@ packages:
       log4js: 6.9.1
       mustache: 4.2.0
       openapi-types: 12.1.3
-      projen: 0.82.8(constructs@10.3.0)
+      projen: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       read-pkg-up: 7.0.1
       semver: 7.6.2
       shorthash2: 1.0.3
@@ -1969,7 +1972,7 @@ packages:
       log4js: 6.9.1
       mustache: 4.2.0
       openapi-types: 12.1.3
-      projen: 0.82.8(constructs@10.3.0)
+      projen: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
       read-pkg-up: 7.0.1
       semver: 7.6.2
       shorthash2: 1.0.3
@@ -3126,7 +3129,7 @@ packages:
       projen: 0.82.8
     dependencies:
       '@jsii/spec': 1.101.0
-      projen: 0.82.8(constructs@10.3.0)
+      projen: 0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0)
 
   /@nodelib/fs.scandir@2.1.5:
     resolution:
@@ -3461,7 +3464,7 @@ packages:
       }
     engines: { node: '>=16.14' }
     dependencies:
-      rfc4648: 1.5.2
+      rfc4648: 1.5.3
     dev: true
 
   /@pnpm/dependency-path@2.1.8:
@@ -3559,7 +3562,7 @@ packages:
       }
     engines: { node: '>=12.17' }
     dependencies:
-      bole: 5.0.9
+      bole: 5.0.13
       ndjson: 2.0.0
     dev: true
 
@@ -5909,10 +5912,10 @@ packages:
       - supports-color
     dev: false
 
-  /bole@5.0.9:
+  /bole@5.0.13:
     resolution:
       {
-        integrity: sha512-35GeBG6T7GW9VmLDF2IoKAtFCqMjmmq1uICbsICI0pID7ZAyUKlf7dg1wpXmn9GcMKHtg0S19CPMU5yfY3tv+g==,
+        integrity: sha512-JQ3xWh2nYsVUuJx7ZN4fzU3vHpzceWb7CC06LUXWwdY++Hzd7Wola7zN3Ud5XgmOVoH/6KzrdMmJokol/xtejw==,
       }
     dependencies:
       fast-safe-stringify: 2.1.1
@@ -6019,7 +6022,7 @@ packages:
         integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==,
       }
     dependencies:
-      semver: 7.5.4
+      semver: 7.6.2
     dev: true
 
   /bytes@3.1.2:
@@ -6082,15 +6085,6 @@ packages:
       responselike: 3.0.0
     dev: true
 
-  /call-bind@1.0.2:
-    resolution:
-      {
-        integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==,
-      }
-    dependencies:
-      function-bind: 1.1.1
-      get-intrinsic: 1.2.1
-
   /call-bind@1.0.7:
     resolution:
       {
@@ -6103,7 +6097,6 @@ packages:
       function-bind: 1.1.2
       get-intrinsic: 1.2.4
       set-function-length: 1.2.2
-    dev: true
 
   /callsites@3.1.0:
     resolution:
@@ -7190,7 +7183,6 @@ packages:
       es-define-property: 1.0.0
       es-errors: 1.3.0
       gopd: 1.0.1
-    dev: true
 
   /define-lazy-prop@2.0.0:
     resolution:
@@ -7208,7 +7200,7 @@ packages:
     engines: { node: '>= 0.4' }
     dependencies:
       define-data-property: 1.1.4
-      has-property-descriptors: 1.0.0
+      has-property-descriptors: 1.0.2
       object-keys: 1.1.1
     dev: true
 
@@ -7639,7 +7631,6 @@ packages:
     engines: { node: '>= 0.4' }
     dependencies:
       get-intrinsic: 1.2.4
-    dev: true
 
   /es-errors@1.3.0:
     resolution:
@@ -7647,7 +7638,6 @@ packages:
         integrity: sha512-Zf5H2Kxt2xjTvbJvP2ZWLEICxA6j+hAmMzIlypy4xcBg1vKVnx89Wy0GbS+kf5cwCVFFzdCFh2XSCFNULS6csw==,
       }
     engines: { node: '>= 0.4' }
-    dev: true
 
   /es-object-atoms@1.0.0:
     resolution:
@@ -8646,12 +8636,6 @@ packages:
     requiresBuild: true
     optional: true
 
-  /function-bind@1.1.1:
-    resolution:
-      {
-        integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==,
-      }
-
   /function-bind@1.1.2:
     resolution:
       {
@@ -8767,17 +8751,6 @@ packages:
         integrity: sha512-8vXOvuE167CtIc3OyItco7N/dpRtBbYOsPsXCz7X/PMnlGjYjSGuZJgM1Y7mmew7BKf9BqvLX2tnOVy1BBUsxQ==,
       }
 
-  /get-intrinsic@1.2.1:
-    resolution:
-      {
-        integrity: sha512-2DcsyfABl+gVHEfCOaTrWgyt+tb6MSEGmKq+kI5HwLbIYgjgmMcV8KQ41uaKz1xxUcn9tJtgFbQUEVcEbd0FYw==,
-      }
-    dependencies:
-      function-bind: 1.1.1
-      has: 1.0.3
-      has-proto: 1.0.1
-      has-symbols: 1.0.3
-
   /get-intrinsic@1.2.4:
     resolution:
       {
@@ -8787,10 +8760,9 @@ packages:
     dependencies:
       es-errors: 1.3.0
       function-bind: 1.1.2
-      has-proto: 1.0.1
+      has-proto: 1.0.3
       has-symbols: 1.0.3
       hasown: 2.0.2
-    dev: true
 
   /get-npm-tarball-url@2.1.0:
     resolution:
@@ -9122,7 +9094,6 @@ packages:
       }
     dependencies:
       get-intrinsic: 1.2.4
-    dev: true
 
   /got@12.6.1:
     resolution:
@@ -9246,15 +9217,6 @@ packages:
       }
     engines: { node: '>=8' }
 
-  /has-property-descriptors@1.0.0:
-    resolution:
-      {
-        integrity: sha512-62DVLZGoiEBDHQyqG4w9xCuZ7eJEwNmJRWw2VY84Oedb7WFcA27fiEVe8oUQx9hAUJ4ekurquucTGwsyO1XGdQ==,
-      }
-    dependencies:
-      get-intrinsic: 1.2.4
-    dev: true
-
   /has-property-descriptors@1.0.2:
     resolution:
       {
@@ -9262,14 +9224,6 @@ packages:
       }
     dependencies:
       es-define-property: 1.0.0
-    dev: true
-
-  /has-proto@1.0.1:
-    resolution:
-      {
-        integrity: sha512-7qE+iP+O+bgF9clE5+UoBFzE65mlBiVj3tKCrlNQ0Ogwm0BjpT/gK4SlLYDMybDh5I3TCTKnPPa0oMG7JDYrhg==,
-      }
-    engines: { node: '>= 0.4' }
 
   /has-proto@1.0.3:
     resolution:
@@ -9277,7 +9231,6 @@ packages:
         integrity: sha512-SJ1amZAJUiZS+PhsVLf5tGydlaVB8EdFpaSO4gmiUKUOxk8qzn5AIy4ZeJUmh22znIdk/uMAUT2pl3FxzVUH+Q==,
       }
     engines: { node: '>= 0.4' }
-    dev: true
 
   /has-symbols@1.0.3:
     resolution:
@@ -9285,16 +9238,6 @@ packages:
         integrity: sha512-l3LCuF6MgDNwTDKkdYGEihYjt5pRPbEg46rtlmnSPlUbgmB8LOIrKJbYYFBSbnPaJexMKtiPO8hmeRjRz2Td+A==,
       }
     engines: { node: '>= 0.4' }
-
-  /has-tostringtag@1.0.0:
-    resolution:
-      {
-        integrity: sha512-kFjcSNhnlGV1kyoGk7OXKSawH5JOb/LzUc5w9B02hOTO0dfFRjbHQKvg1d6cf3HbeUmtU9VbbV3qzZ2Teh97WQ==,
-      }
-    engines: { node: '>= 0.4' }
-    dependencies:
-      has-symbols: 1.0.3
-    dev: true
 
   /has-tostringtag@1.0.2:
     resolution:
@@ -9320,15 +9263,6 @@ packages:
       }
     engines: { node: ^12.20.0 || ^14.13.1 || >=16.0.0 }
     dev: true
-
-  /has@1.0.3:
-    resolution:
-      {
-        integrity: sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==,
-      }
-    engines: { node: '>= 0.4.0' }
-    dependencies:
-      function-bind: 1.1.1
 
   /hash-sum@2.0.0:
     resolution:
@@ -9720,7 +9654,7 @@ packages:
     engines: { node: '>= 0.4' }
     dependencies:
       call-bind: 1.0.7
-      has-tostringtag: 1.0.0
+      has-tostringtag: 1.0.2
     dev: true
 
   /is-buffer@1.1.6:
@@ -9757,15 +9691,6 @@ packages:
       ci-info: 3.8.0
     dev: true
 
-  /is-core-module@2.13.0:
-    resolution:
-      {
-        integrity: sha512-Z7dk6Qo8pOCp3l4tsX2C5ZVas4V+UxwQodwZhLopL91TX8UyyHEXafPcyoeeWuLrwzHcr3igO78wNLwHJHsMCQ==,
-      }
-    dependencies:
-      has: 1.0.3
-    dev: true
-
   /is-core-module@2.14.0:
     resolution:
       {
@@ -9792,7 +9717,7 @@ packages:
       }
     engines: { node: '>= 0.4' }
     dependencies:
-      has-tostringtag: 1.0.0
+      has-tostringtag: 1.0.2
     dev: true
 
   /is-docker@2.2.1:
@@ -9908,7 +9833,7 @@ packages:
       }
     engines: { node: '>= 0.4' }
     dependencies:
-      has-tostringtag: 1.0.0
+      has-tostringtag: 1.0.2
     dev: true
 
   /is-number@7.0.0:
@@ -9966,7 +9891,7 @@ packages:
     engines: { node: '>= 0.4' }
     dependencies:
       call-bind: 1.0.7
-      has-tostringtag: 1.0.0
+      has-tostringtag: 1.0.2
     dev: true
 
   /is-shared-array-buffer@1.0.3:
@@ -9985,6 +9910,7 @@ packages:
         integrity: sha512-hFoiJiTl63nn+kstHGBtewWSKnQLpyb155KHheA1l39uvtO9nWIop1p3udqPcUd/xbF1VLMO4n7OI6p7RbngDg==,
       }
     engines: { node: '>=8' }
+    requiresBuild: true
 
   /is-stream@3.0.0:
     resolution:
@@ -10001,7 +9927,7 @@ packages:
       }
     engines: { node: '>= 0.4' }
     dependencies:
-      has-tostringtag: 1.0.0
+      has-tostringtag: 1.0.2
     dev: true
 
   /is-symbol@1.0.4:
@@ -11699,8 +11625,8 @@ packages:
     engines: { node: ^14.17.0 || ^16.13.0 || >=18.0.0 }
     dependencies:
       hosted-git-info: 6.1.1
-      is-core-module: 2.13.0
-      semver: 7.5.4
+      is-core-module: 2.14.0
+      semver: 7.6.2
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -12012,19 +11938,12 @@ packages:
     engines: { node: '>= 6' }
     dev: false
 
-  /object-inspect@1.12.3:
-    resolution:
-      {
-        integrity: sha512-geUvdk7c+eizMNUDkRpW1wJwgfOiOeHbxBR/hLXK1aT6zmVSO0jsQcs7fj6MGw89jC/cjGfLcNOrtMYtGqm81g==,
-      }
-
   /object-inspect@1.13.2:
     resolution:
       {
         integrity: sha512-IRZSRuzJiynemAXPYtPe5BoI/RESNYR7TYm50MC5Mqbd3Jmw5y790sErYw3V6SryFJD64b74qQQs9wn5Bg/k3g==,
       }
     engines: { node: '>= 0.4' }
-    dev: true
 
   /object-keys@1.1.1:
     resolution:
@@ -12785,7 +12704,7 @@ packages:
     engines: { node: '>=0.4.0' }
     dev: true
 
-  /projen@0.82.8(constructs@10.3.0):
+  /projen@0.82.8(patch_hash=ujo76gyuqvfztrtwnp3vkaogs4)(constructs@10.3.0):
     resolution:
       {
         integrity: sha512-/YpYZf4g0/pck2tr34a4gpOveCV1xbCfdDT+H4Xq8qQzF0IbcDVsoV1kZXPcyzVWUyqHFT2/ORUeocV+Hka8tQ==,
@@ -12823,6 +12742,7 @@ packages:
       - xmlbuilder2
       - yaml
       - yargs
+    patched: true
 
   /promise-inflight@1.0.1:
     resolution:
@@ -13431,10 +13351,10 @@ packages:
       }
     engines: { iojs: '>=1.0.0', node: '>=0.10.0' }
 
-  /rfc4648@1.5.2:
+  /rfc4648@1.5.3:
     resolution:
       {
-        integrity: sha512-tLOizhR6YGovrEBLatX1sdcuhoSCXddw3mqNVAcKxGJ+J0hFeJ+SjeWCv5UPA/WU3YzWPPuCVYgXBKZUPGpKtg==,
+        integrity: sha512-MjOWxM065+WswwnmNONOT+bD1nXzY9Km6u3kzvnx8F8/HXGZdz3T6e6vZJ8Q/RIMUSp/nxqjH3GwvJDy8ijeQQ==,
       }
     dev: true
 
@@ -13710,7 +13630,6 @@ packages:
       get-intrinsic: 1.2.4
       gopd: 1.0.1
       has-property-descriptors: 1.0.2
-    dev: true
 
   /set-function-name@2.0.2:
     resolution:
@@ -13802,9 +13721,9 @@ packages:
         integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==,
       }
     dependencies:
-      call-bind: 1.0.2
-      get-intrinsic: 1.2.1
-      object-inspect: 1.12.3
+      call-bind: 1.0.7
+      get-intrinsic: 1.2.4
+      object-inspect: 1.13.2
 
   /siginfo@2.0.0:
     resolution:

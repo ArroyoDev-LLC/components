@@ -1,5 +1,6 @@
 {
   "reject": [
-    "unbuild"
+    "unbuild",
+    "projen"
   ]
 }

@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.21](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.20...@arroyodev-llc/projen.component.tool-versions-v0.1.21) (2024-07-03)
+
+
+### Features
+
+* **deps:** Update projen to 0.83.1 ([006e959](https://github.com/ArroyoDev-LLC/components/commit/006e959a672f436bd3a3b7562bba3cf10f6f3a98))
+
+
+### Continuous Integration
+
+* Update generated workflows ([541ec48](https://github.com/ArroyoDev-LLC/components/commit/541ec482593494c50b82059c417de87c9ff89b8a))
+
 ## [0.1.20](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tool-versions-v0.1.19...@arroyodev-llc/projen.component.tool-versions-v0.1.20) (2024-07-03)
 
 

@@ -23,7 +23,7 @@ const monorepo = new ComponentsMonorepo({
 		usePrefix: true,
 	},
 	typescriptVersion: '~5.1',
-	pnpmVersion: '8.9.2',
+	pnpmVersion: '9.4.0',
 	projenVersion: '0.82.8',
 	devDeps: [
 		'@aws/pdk',

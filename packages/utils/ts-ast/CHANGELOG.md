@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.13](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.ts-ast-v0.1.12...@arroyodev-llc/utils.ts-ast-v0.1.13) (2024-07-03)
+
+
+### Features
+
+* Update ts to v5.2 ([dac3bbf](https://github.com/ArroyoDev-LLC/components/commit/dac3bbf05a61dcbf61adad1a3bf590541a42799b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.fs bumped to 0.1.16
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.5 to 0.1.6
+
 ## [0.1.12](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.ts-ast-v0.1.11...@arroyodev-llc/utils.ts-ast-v0.1.12) (2024-07-03)
 
 

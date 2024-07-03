@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.1.8](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-builder-v0.1.7...@arroyodev-llc/utils.projen-builder-v0.1.8) (2024-07-03)
+
+
+### Features
+
+* Update ts to v5.2 ([dac3bbf](https://github.com/ArroyoDev-LLC/components/commit/dac3bbf05a61dcbf61adad1a3bf590541a42799b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.23
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.5 to 0.1.6
+
 ## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.projen-builder-v0.1.6...@arroyodev-llc/utils.projen-builder-v0.1.7) (2024-07-03)
 
 

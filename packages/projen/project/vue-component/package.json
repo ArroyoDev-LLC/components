@@ -29,7 +29,7 @@
     "@arroyodev-llc/projen.component.linting": "workspace:*",
     "@arroyodev-llc/projen.component.pnpm-workspace": "workspace:*",
     "@arroyodev-llc/projen.component.unbuild": "workspace:*",
-    "@arroyodev-llc/utils.unbuild-composite-preset": "0.1.5",
+    "@arroyodev-llc/utils.unbuild-composite-preset": "0.1.6",
     "@types/node": "^18",
     "@typescript-eslint/eslint-plugin": "^7",
     "@typescript-eslint/parser": "^7",
@@ -62,7 +62,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.1.32",
+  "version": "0.1.33",
   "types": "./dist/index.d.ts",
   "type": "module",
   "sideEffects": false,

@@ -146,9 +146,9 @@ export class ReleasePleaseWorkflow extends Component {
 				? this.project.minNodeVersion
 				: undefined) ?? '18.16.0'
 
+		const githubInstance = github.GitHub.of(this.project)!
 		this.workflow =
-			options.workflow ??
-			new github.GithubWorkflow(github.GitHub.of(this.project)!, 'Release')
+			options.workflow ?? new github.GithubWorkflow(githubInstance, 'Release')
 
 		this.workflow.on({
 			push: { branches: ['main'] },
@@ -160,7 +160,11 @@ export class ReleasePleaseWorkflow extends Component {
 
 		const steps: github.workflows.JobStep[] = [
 			{
-				uses: 'actions/checkout@v3',
+				uses: this.getActionWithDefault(
+					githubInstance.actions,
+					'actions/checkout',
+					'v4',
+				),
 				with: {
 					'persist-credentials': false,
 				},
@@ -170,12 +174,20 @@ export class ReleasePleaseWorkflow extends Component {
 			{
 				name: 'Setup PNPM',
 				if: this.releasesCreatedRef,
-				uses: 'pnpm/action-setup@v2.2.4',
+				uses: this.getActionWithDefault(
+					githubInstance.actions,
+					'pnpm/action-setup',
+					'v4',
+				),
 			},
 			{
 				name: 'Setup Node',
 				if: this.releasesCreatedRef,
-				uses: 'actions/setup-node@v3',
+				uses: this.getActionWithDefault(
+					githubInstance.actions,
+					'actions/setup-node',
+					'v4',
+				),
 				with: {
 					'node-version': nodeVersion,
 					cache: 'pnpm',
@@ -211,6 +223,25 @@ export class ReleasePleaseWorkflow extends Component {
 			},
 			steps,
 		})
+	}
+
+	/**
+	 * Get action version from provider with default.
+	 * @param provider @{link github.GitHubActionsProvider} instance.
+	 * @param actionName Name of action to get.
+	 * @param defaultVersion Default to set if not found.
+	 * @protected
+	 */
+	protected getActionWithDefault(
+		provider: github.GitHubActionsProvider,
+		actionName: string,
+		defaultVersion: string,
+	): string {
+		const version = provider.get(actionName)
+		if (version === actionName) {
+			provider.set(actionName, `${actionName}@${defaultVersion}`)
+		}
+		return provider.get(actionName)
 	}
 
 	get releasePleaseStep(): github.workflows.JobStep {

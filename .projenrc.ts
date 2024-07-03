@@ -1,3 +1,4 @@
+import path from 'node:path'
 import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import { Vitest } from '@arroyodev-llc/projen.component.vitest'
 import { TypescriptBaseBuilder } from '@arroyodev-llc/projen.project.typescript'
@@ -56,10 +57,12 @@ const CommonDefaultsBuilder = new builders.DefaultOptionsBuilder<{
 	parent?: typeof monorepo
 	defaultReleaseBranch?: string
 	typescriptVersion?: string
+	buildWorkflow?: boolean
 }>({
 	parent: monorepo,
 	defaultReleaseBranch: 'main',
 	typescriptVersion: '~5.1',
+	buildWorkflow: false,
 })
 const NameSchemeBuilder = new builders.NameSchemeBuilder({
 	scope: '@arroyodev-llc',
@@ -76,6 +79,7 @@ const TypescriptProjectBuilder = BaseTypescriptProjectBuilder.add(
 const ProjenComponentProjectBuilder = BaseTypescriptProjectBuilder.add(
 	new builders.DefaultOptionsBuilder({
 		peerDeps: ['projen'],
+		buildWorkflow: false,
 	}),
 ).add(TypescriptOptionsBuilder)
 
@@ -96,6 +100,7 @@ new Vitest(utilsFs)
 
 const utilsTsAst = TypescriptProjectBuilder.build({
 	name: 'utils.ts-ast',
+	buildWorkflow: false,
 	deps: [
 		'ts-morph',
 		'type-fest@^4',
@@ -354,4 +359,11 @@ button.lintConfig.eslint.addRules({
 
 // adds support for .cts/.mts
 monorepo.package.addPackageResolutions('unbuild@2.0.0-rc.0')
+// remove subject release workflows in favor of custom release
+monorepo.files
+	.filter(
+		(f) =>
+			path.basename(f.path).startsWith('release_') && f.path.endsWith('.yml'),
+	)
+	.forEach((f) => monorepo.tryRemoveFile(f.path))
 monorepo.synth()

@@ -24,7 +24,7 @@ const monorepo = new ComponentsMonorepo({
 	},
 	typescriptVersion: '~5.2',
 	pnpmVersion: '9.4.0',
-	projenVersion: '0.82.8',
+	projenVersion: '0.83.1',
 	devDeps: [
 		'@aws/pdk',
 		'vite',

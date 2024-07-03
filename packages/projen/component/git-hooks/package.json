@@ -37,7 +37,7 @@
     "eslint-plugin-prettier": "5.1.3",
     "lint-staged": "15.2.7",
     "prettier": "3.3.2",
-    "projen": "0.82.8",
+    "projen": "0.83.1",
     "simple-git-hooks": "2.11.1",
     "standard-version": "^9",
     "typescript": "~5.2",
@@ -45,7 +45,7 @@
   },
   "peerDependencies": {
     "lint-staged": "15.2.7",
-    "projen": "0.82.8",
+    "projen": "0.83.1",
     "simple-git-hooks": "2.11.1"
   },
   "main": "dist/index.mjs",

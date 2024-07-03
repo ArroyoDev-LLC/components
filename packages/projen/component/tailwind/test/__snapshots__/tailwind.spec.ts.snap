@@ -43,9 +43,9 @@ exports[`renders as expected. 2`] = `
     "node_modules",
   ],
   "include": [
-    ".projenrc.js",
     "src/**/*.ts",
     "test/**/*.ts",
+    ".projenrc.js",
     "tailwind.config.mjs",
   ],
 }
@@ -59,16 +59,15 @@ exports[`renders as expected. 3`] = `
   },
   "devDependencies": {
     "@types/jest": "*",
-    "@types/node": "^16",
-    "@typescript-eslint/eslint-plugin": "^6",
-    "@typescript-eslint/parser": "^6",
+    "@types/node": "^18",
+    "@typescript-eslint/eslint-plugin": "^7",
+    "@typescript-eslint/parser": "^7",
+    "constructs": "^10.0.0",
     "eslint": "^8",
-    "eslint-import-resolver-node": "*",
     "eslint-import-resolver-typescript": "*",
     "eslint-plugin-import": "*",
     "jest": "*",
     "jest-junit": "^15",
-    "npm-check-updates": "^16",
     "projen": "*",
     "standard-version": "^9",
     "ts-jest": "*",
@@ -81,6 +80,7 @@ exports[`renders as expected. 3`] = `
     "coveragePathIgnorePatterns": [
       "/node_modules/",
     ],
+    "coverageProvider": "v8",
     "coverageReporters": [
       "json",
       "lcov",
@@ -88,12 +88,6 @@ exports[`renders as expected. 3`] = `
       "cobertura",
       "text",
     ],
-    "globals": {
-      "ts-jest": {
-        "tsconfig": "tsconfig.dev.json",
-      },
-    },
-    "preset": "ts-jest",
     "reporters": [
       "default",
       [
@@ -105,11 +99,19 @@ exports[`renders as expected. 3`] = `
     ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
-      "<rootDir>/(test|src)/**/*(*.)@(spec|test).ts?(x)",
+      "<rootDir>/@(test|src)/**/*(*.)@(spec|test).ts?(x)",
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
     ],
+    "transform": {
+      "^.+\\\\.[t]sx?$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.dev.json",
+        },
+      ],
+    },
     "watchPathIgnorePatterns": [
       "/node_modules/",
     ],
@@ -117,6 +119,9 @@ exports[`renders as expected. 3`] = `
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "name": "-1924646760_0",
+  "publishConfig": {
+    "access": "public",
+  },
   "scripts": {
     "build": "npx projen build",
     "bump": "npx projen bump",

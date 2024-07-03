@@ -337,7 +337,8 @@ export class GithubCodePipeline {
 	installNode(nodeVersion?: string, cache?: string) {
 		const step: ghpipelines.JobStep = {
 			name: 'Setup Node',
-			uses: 'actions/setup-node@v3',
+			// todo: expose via provider somewhere
+			uses: 'actions/setup-node@v4',
 			with: {
 				'node-version': nodeVersion ?? '18',
 			},
@@ -361,7 +362,8 @@ export class GithubCodePipeline {
 	installPnpm(pnpmVersion?: string) {
 		return this.synthPreStep({
 			name: 'Setup PNPM',
-			uses: 'pnpm/action-setup@v2.4.0',
+			// todo: expose via provider somewhere
+			uses: 'pnpm/action-setup@v4',
 			// defaults to 'packageManager' field in package.json
 			...(pnpmVersion ? { with: { version: pnpmVersion } } : {}),
 		})

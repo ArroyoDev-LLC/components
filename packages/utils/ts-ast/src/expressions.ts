@@ -69,6 +69,6 @@ export const isExpressionEqual = (
 			: value.getText({
 					includeJsDocComments: false,
 					trimLeadingIndentation: true,
-			  })
+				})
 	return prepareValue(toText(a)) === prepareValue(toText(b))
 }

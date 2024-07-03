@@ -228,7 +228,7 @@ export class TypescriptConfigContainer extends Component {
 				: {
 						...(include ? { include } : {}),
 						...(exclude ? { exclude } : {}),
-				  }),
+					}),
 			extends: baseExtends,
 		}
 
@@ -241,7 +241,7 @@ export class TypescriptConfigContainer extends Component {
 								extends: javascript.TypescriptConfigExtends.fromPaths(
 									existing.extends,
 								),
-						  }
+							}
 						: {}),
 					include: existing.include,
 					exclude: existing.exclude,

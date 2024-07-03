@@ -84,7 +84,7 @@ export class TypeScriptSourceConfig<
 			configResolver: (cfg, src) =>
 				cfg
 					.getDefaultExport(src, SyntaxKind.CallExpression)
-					.getArguments()[0]!
+					.getArguments()[0]
 					.asKindOrThrow(SyntaxKind.ObjectLiteralExpression),
 		})
 	}
@@ -131,9 +131,9 @@ export class TypeScriptSourceConfig<
 		const depName = (
 			moduleImport.moduleSpecifier.startsWith('@')
 				? // @scope/package[/export] -> @scope/package
-				  moduleSpecParts.slice(0, 2)
+					moduleSpecParts.slice(0, 2)
 				: // package[/export] -> package
-				  moduleSpecParts.slice(0, 1)
+					moduleSpecParts.slice(0, 1)
 		).join('/')
 		this.project.deps.addDependency(
 			depName,

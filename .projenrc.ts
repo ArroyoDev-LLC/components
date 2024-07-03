@@ -22,7 +22,7 @@ const monorepo = new ComponentsMonorepo({
 		level: LogLevel.DEBUG,
 		usePrefix: true,
 	},
-	typescriptVersion: '~5.1',
+	typescriptVersion: '~5.2',
 	pnpmVersion: '9.4.0',
 	projenVersion: '0.82.8',
 	devDeps: [
@@ -61,7 +61,7 @@ const CommonDefaultsBuilder = new builders.DefaultOptionsBuilder<{
 }>({
 	parent: monorepo,
 	defaultReleaseBranch: 'main',
-	typescriptVersion: '~5.1',
+	typescriptVersion: '~5.2',
 	buildWorkflow: false,
 })
 const NameSchemeBuilder = new builders.NameSchemeBuilder({

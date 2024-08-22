@@ -99,7 +99,7 @@
   "files": [
     "dist"
   ],
-  "packageManager": "pnpm@9.2.0",
+  "packageManager": "pnpm@9.7.1",
   "lint-staged": {
     "*.{ts,tsx,mts,cts,js,jsx,jts,jts}": [
       "pnpm exec eslint --fix --no-error-on-unmatched-pattern"

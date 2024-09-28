@@ -26,11 +26,12 @@ import {
 } from '@arroyodev-llc/utils.projen-builder'
 import { NodePackageUtils } from '@aws/pdk/monorepo'
 import {
-	type awscdk,
+	awscdk,
 	DependencyType,
 	javascript,
+	type Project,
 	type ProjectOptions,
-	type typescript,
+	typescript,
 } from 'projen'
 
 export interface TypescriptConfigBuilderProps {
@@ -38,6 +39,14 @@ export interface TypescriptConfigBuilderProps {
 	readonly tsconfig: javascript.TypescriptConfig
 	readonly tsconfigDev: javascript.TypescriptConfig
 }
+
+const isNodeProject = (project: Project): project is javascript.NodeProject =>
+	project instanceof javascript.NodeProject
+
+const isTypescriptProject = (
+	project: Project,
+): project is typescript.TypeScriptProject =>
+	project instanceof typescript.TypeScriptProject
 
 /**
  * Build tsconfig files using container.
@@ -138,9 +147,10 @@ export class TypescriptESMManifestBuilder extends BaseBuildStep<
 		return super.applyOptions(rest)
 	}
 
-	applyProject(
-		project: typescript.TypeScriptProject,
-	): TypedPropertyDescriptorMap<this['_output']> {
+	applyProject(project: Project): TypedPropertyDescriptorMap<this['_output']> {
+		if (!isTypescriptProject(project)) {
+			throw new TypeError('Project must be or inherit from NodeProject')
+		}
 		project.package.addField('type', 'module')
 		project.package.addField('sideEffects', this.options?.sideEffects ?? false)
 		project.tasks.tryFind('package')?.reset?.()
@@ -197,9 +207,10 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 		return super.applyOptions(rest)
 	}
 
-	applyProject(
-		project: typescript.TypeScriptProject,
-	): TypedPropertyDescriptorMap<this['_output']> {
+	applyProject(project: Project): TypedPropertyDescriptorMap<this['_output']> {
+		if (!isTypescriptProject(project)) {
+			throw new TypeError('Project must be or inherit from NodeProject')
+		}
 		if (this.unbuild) {
 			const compileTask = project.tasks.tryFind('compile')!
 			compileTask.reset(
@@ -264,8 +275,11 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 	}
 
 	applyProject(
-		project: typescript.TypeScriptProject,
+		project: Project,
 	): TypedPropertyDescriptorMap<BuildOutput<this>> {
+		if (!isNodeProject(project)) {
+			throw new TypeError('Project must be a NodeProject')
+		}
 		const lintConfig = new LintConfig(project, this.options)
 		return {
 			lintConfig: { writable: false, value: lintConfig },
@@ -274,9 +288,10 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 }
 
 export class TypescriptReleasePleaseBuilder extends BaseBuildStep {
-	applyProject(
-		project: typescript.TypeScriptProject,
-	): TypedPropertyDescriptorMap<this['_output']> {
+	applyProject(project: Project): TypedPropertyDescriptorMap<this['_output']> {
+		if (!isNodeProject(project)) {
+			throw new TypeError('Project must be or inherit from NodeProject')
+		}
 		const releasePlease = ReleasePlease.of(project.parent ?? project)
 		if (releasePlease) {
 			releasePlease.addProject(project, { releaseType: ReleaseType.NODE })
@@ -336,7 +351,10 @@ export class TypescriptLintStagedHooksBuilder extends BaseBuildStep {
 		})
 	}
 
-	applyProject(project: typescript.TypeScriptProject) {
+	applyProject(project: Project) {
+		if (!isNodeProject(project)) {
+			throw new TypeError('Project must be or inherit from NodeProject')
+		}
 		const root = findRootProject(project)
 		if (root instanceof MonorepoProject) {
 			root.applyRecursive(
@@ -386,8 +404,11 @@ export class CdkTsAppCompileBuilder extends BaseBuildStep<{
 	}
 
 	applyProject(
-		project: awscdk.AwsCdkTypeScriptApp,
+		project: Project,
 	): TypedPropertyDescriptorMap<BuildOutput<BuildStep>> {
+		if (!(project instanceof awscdk.AwsCdkTypeScriptApp)) {
+			throw new TypeError('Project must be or inherit from AwsCdkTypeScriptApp')
+		}
 		project.addGitIgnore('cdk.context.json')
 		project.addGitIgnore('cdk.out')
 		project.cdkConfig.json.addOverride(

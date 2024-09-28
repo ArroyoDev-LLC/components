@@ -3,7 +3,6 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {},
   "include": [
-    ".projenrc.js",
     "src/**/*.ts",
     "test/**/*.ts",
     "src/*.ts",

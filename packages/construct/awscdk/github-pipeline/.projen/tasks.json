@@ -67,7 +67,8 @@
       "description": "Runs eslint against the codebase",
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools"
+          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern $@ src test build-tools",
+          "receiveArgs": true
         }
       ]
     },
@@ -107,7 +108,7 @@
       "description": "Create js language bindings",
       "steps": [
         {
-          "exec": "jsii-pacmak -v --target js"
+          "exec": "jsii-pacmak -v --pack-command 'pnpm pack' --target js"
         }
       ]
     },
@@ -179,16 +180,13 @@
       },
       "steps": [
         {
-          "exec": "pnpm update npm-check-updates"
-        },
-        {
-          "exec": "npm-check-updates --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@arroyodev-llc/utils.unbuild-composite-preset,@types/flat,@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,cdk-pipelines-github,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint,jsii-diff,jsii-docgen,jsii-pacmak,lint-staged,npm-check-updates,prettier,projen,unbuild,vitest,aws-cdk-lib,constructs,decamelize,defu,flat"
+          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@arroyodev-llc/utils.unbuild-composite-preset,@types/flat,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,jsii-diff,jsii-docgen,jsii-pacmak,lint-staged,prettier,unbuild,vitest,cdk-pipelines-github,decamelize,defu,flat"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"
         },
         {
-          "exec": "pnpm update @arroyodev-llc/utils.unbuild-composite-preset @types/flat @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdk-pipelines-github eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jsii-diff jsii-docgen jsii-pacmak lint-staged npm-check-updates prettier projen unbuild vitest aws-cdk-lib constructs decamelize defu flat"
+          "exec": "pnpm update @arroyodev-llc/utils.unbuild-composite-preset @types/flat @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii lint-staged prettier typescript unbuild vitest aws-cdk-lib cdk-pipelines-github constructs @crisiscleanup/config decamelize defu flat"
         },
         {
           "exec": "npx projen"

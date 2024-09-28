@@ -15,34 +15,16 @@
     },
     {
       "name": "@typescript-eslint/eslint-plugin",
-      "version": "^6",
+      "version": "^7",
       "type": "build"
     },
     {
       "name": "@typescript-eslint/parser",
-      "version": "^6",
-      "type": "build"
-    },
-    {
-      "name": "aws-cdk-lib",
-      "version": "2.97.0",
-      "type": "build"
-    },
-    {
-      "name": "cdk-pipelines-github",
-      "type": "build"
-    },
-    {
-      "name": "constructs",
-      "version": "10.2.70",
+      "version": "^7",
       "type": "build"
     },
     {
       "name": "eslint-config-prettier",
-      "type": "build"
-    },
-    {
-      "name": "eslint-import-resolver-node",
       "type": "build"
     },
     {
@@ -89,16 +71,7 @@
       "type": "build"
     },
     {
-      "name": "npm-check-updates",
-      "version": "^16",
-      "type": "build"
-    },
-    {
       "name": "prettier",
-      "type": "build"
-    },
-    {
-      "name": "projen",
       "type": "build"
     },
     {

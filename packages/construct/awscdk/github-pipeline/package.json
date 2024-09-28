@@ -54,7 +54,7 @@
     "npm-check-updates": "^16",
     "prettier": "^3.0.3",
     "projen": "^0.73.31",
-    "typescript": "~5.1",
+    "typescript": "~5.2",
     "unbuild": "^2.0.0-rc.0",
     "vitest": "^0.34.5"
   },

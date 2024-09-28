@@ -32,6 +32,13 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+## [0.1.32](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.31...@arroyodev-llc/projen.project.typescript-v0.1.32) (2024-09-28)
+
+
+### Bug Fixes
+
+* **projen.project.typescript:** Resolve type-errors when using tsBuilders on derived projects ([3cce97d](https://github.com/ArroyoDev-LLC/components/commit/3cce97db621548406224aac8c7225c2906dea08e))
+
 ## [0.1.31](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.30...@arroyodev-llc/projen.project.typescript-v0.1.31) (2024-07-03)
 
 

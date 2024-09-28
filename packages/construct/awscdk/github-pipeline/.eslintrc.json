@@ -7,8 +7,7 @@
   "root": true,
   "plugins": [
     "@typescript-eslint",
-    "import",
-    "prettier"
+    "import"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -19,9 +18,8 @@
   },
   "extends": [
     "plugin:import/typescript",
-    "prettier",
-    "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended"
   ],
   "settings": {
     "import/parsers": {
@@ -91,9 +89,6 @@
     "tsconfig.json"
   ],
   "rules": {
-    "prettier/prettier": [
-      "error"
-    ],
     "@typescript-eslint/no-require-imports": [
       "error"
     ],
@@ -124,8 +119,11 @@
         }
       }
     ],
-    "no-duplicate-imports": [
-      "error"
+    "import/no-duplicates": [
+      "error",
+      {
+        "prefer-inline": true
+      }
     ],
     "no-shadow": [
       "off"
@@ -182,12 +180,6 @@
       {
         "prefer": "type-imports",
         "fixStyle": "inline-type-imports"
-      }
-    ],
-    "import/no-duplicates": [
-      "error",
-      {
-        "prefer-inline": true
       }
     ],
     "@typescript-eslint/no-explicit-any": [

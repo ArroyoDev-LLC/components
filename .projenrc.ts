@@ -157,6 +157,17 @@ const utilsFirebase = TypescriptProjectBuilder.build({
 new Vitest(utilsFirebase)
 
 /**
+ * AWS CDK Constructs / Utilities
+ */
+const githubPipelineConstruct = TypescriptProjectBuilder.build({
+	name: 'construct.awscdk.github-pipeline',
+	deps: ['flat', 'defu', 'decamelize'],
+	devDeps: ['@types/flat'],
+	peerDeps: ['constructs', 'aws-cdk-lib', 'cdk-pipelines-github'],
+})
+new Vitest(githubPipelineConstruct)
+
+/**
  * Projen Components
  */
 const lintingComponent = ProjenComponentProjectBuilder.build({

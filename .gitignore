@@ -75,6 +75,7 @@ docs/**
 !/.github/workflows/release_utils.projen-builder.yml
 !/.github/workflows/release_utils.unbuild-composite-preset.yml
 !/.github/workflows/release_utils.firebase.yml
+!/.github/workflows/release_construct.awscdk.github-pipeline.yml
 !/.github/workflows/release_projen.component.linting.yml
 !/.github/workflows/release_projen.component.git-hooks.yml
 !/.github/workflows/release_projen.component.typescript-source-file.yml

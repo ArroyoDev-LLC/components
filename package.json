@@ -120,6 +120,7 @@
   "type": "module",
   "workspaces": {
     "packages": [
+      "packages/construct/awscdk/github-pipeline",
       "packages/projen/component/dir-env",
       "packages/projen/component/git-hooks",
       "packages/projen/component/linting",

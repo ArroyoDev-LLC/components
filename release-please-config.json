@@ -27,6 +27,10 @@
       "component": "@arroyodev-llc/utils.firebase",
       "release-type": "node"
     },
+    "packages/construct/awscdk/github-pipeline": {
+      "component": "@arroyodev-llc/construct.awscdk.github-pipeline",
+      "release-type": "node"
+    },
     "packages/projen/component/linting": {
       "component": "@arroyodev-llc/projen.component.linting",
       "release-type": "node"

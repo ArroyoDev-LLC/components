@@ -25,5 +25,5 @@
   "packages/utils/projen-builder": "0.1.8",
   "packages/utils/unbuild-composite-preset": "0.1.6",
   "packages/utils/firebase": "0.1.5",
-  "packages/construct/awscdk/github-pipeline": "1.0.0"
+  "packages/construct/awscdk/github-pipeline": "1.0.1"
 }

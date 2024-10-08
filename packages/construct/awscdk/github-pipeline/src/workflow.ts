@@ -268,6 +268,26 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 	}
 
 	/**
+	 * Resolve file asset path.
+	 *
+	 * Handles both the older behavior of placing assets directly under cdk.out
+	 * and the newer behavior of placing them under an assembly directory.
+	 *
+	 * @param name Asset name.
+	 * @protected
+	 */
+	protected resolveFileAsset(name: string): string | undefined {
+		const outDir = Stage.of(this)!.outdir
+		const assemblyNames = [...Object.values(this.getStageAccountIds())]
+		const assemblyPaths = assemblyNames.map((n) => `assembly-${n}`)
+		const possiblePaths = [
+			path.posix.join(outDir, name),
+			...assemblyPaths.map((p) => path.posix.join(outDir, p, name)),
+		]
+		return possiblePaths.find((p) => fs.existsSync(p))
+	}
+
+	/**
 	 * Build matrix for publishing job assets.
 	 * @protected
 	 */
@@ -277,11 +297,12 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 		const assetHashMap: Record<string, string> = this.assetHashMap
 		const assetJobNames: string[] = Object.values(assetHashMap)
 
-		const outDir = Stage.of(this)!.outdir
-
 		const jobOutputs = Object.entries(assetHashMap).map(
 			([assetHash, jobName]) => {
-				const scriptPath = path.posix.join(outDir, `publish-${jobName}-step.sh`)
+				const scriptPath = this.resolveFileAsset(`publish-${jobName}-step.sh`)
+				if (!scriptPath) {
+					throw new Error(`Could not find script for asset ${jobName}`)
+				}
 				const lines = fs
 					.readFileSync(scriptPath, { encoding: 'utf-8' })
 					.toString()

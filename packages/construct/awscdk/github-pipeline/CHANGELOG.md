@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.0...@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.1) (2024-10-08)
+
+
+### Bug Fixes
+
+* **construct.awscdk.github-pipeline:** Resolve asset files correctly on latest cdk-github-pipelines version ([bc481e9](https://github.com/ArroyoDev-LLC/components/commit/bc481e9e806abdc90d5993d94243201ad33f7ccd))
+
 ## 1.0.0 (2024-10-08)
 
 

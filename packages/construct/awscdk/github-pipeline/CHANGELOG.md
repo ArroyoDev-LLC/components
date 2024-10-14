@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.1...@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.2) (2024-10-14)
+
+
+### Bug Fixes
+
+* **construct.awscdk.github-pipeline:** Do not overwrite account-&gt;stage mappings with later stages ([b337a6b](https://github.com/ArroyoDev-LLC/components/commit/b337a6b27d36f7b9a2e81f30044598a80529fc16))
+
 ## [1.0.1](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.0...@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.1) (2024-10-08)
 
 

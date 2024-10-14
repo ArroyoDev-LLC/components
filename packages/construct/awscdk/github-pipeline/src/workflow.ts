@@ -235,7 +235,9 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 			wave.stages.forEach((stage) => {
 				stage.stacks.forEach((stack) => {
 					if (stack.account) {
-						accountIdsToStage[stack.account] = stage.stageName
+						if (!accountIdsToStage[stack.account]) {
+							accountIdsToStage[stack.account] = stage.stageName
+						}
 					}
 				})
 			})

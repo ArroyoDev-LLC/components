@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.2...@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.3) (2024-10-15)
+
+
+### Bug Fixes
+
+* **construct.awscdk.github-pipeline:** Ensure unique stage name per account ([40fbd56](https://github.com/ArroyoDev-LLC/components/commit/40fbd5640d0a430780e79527e278c8e4e29217bb))
+
 ## [1.0.2](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.1...@arroyodev-llc/construct.awscdk.github-pipeline-v1.0.2) (2024-10-14)
 
 

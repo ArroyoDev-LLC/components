@@ -90,6 +90,7 @@ docs/**
 !/.github/workflows/release_projen.component.tsconfig-container.yml
 !/.github/workflows/release_projen.component.tailwind.yml
 !/.github/workflows/release_projen.component.postcss.yml
+!/.github/workflows/release_projen.component.awscdk-ts-esm-lambda.yml
 !/.github/workflows/release_projen.project.nx-monorepo.yml
 !/.github/workflows/release_projen.project.typescript.yml
 !/.github/workflows/release_projen.project.vue-component.yml

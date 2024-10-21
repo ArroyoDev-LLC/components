@@ -9,6 +9,7 @@
 /.github/workflows/build.yml linguist-generated
 /.github/workflows/pull-request-lint.yml linguist-generated
 /.github/workflows/release_construct.awscdk.github-pipeline.yml linguist-generated
+/.github/workflows/release_projen.component.awscdk-ts-esm-lambda.yml linguist-generated
 /.github/workflows/release_projen.component.dir-env.yml linguist-generated
 /.github/workflows/release_projen.component.git-hooks.yml linguist-generated
 /.github/workflows/release_projen.component.linting.yml linguist-generated

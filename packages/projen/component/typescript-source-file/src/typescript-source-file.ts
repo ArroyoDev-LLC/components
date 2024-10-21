@@ -3,10 +3,10 @@ import { LintConfig } from '@arroyodev-llc/projen.component.linting'
 import {
 	FileBase,
 	type FileBaseOptions,
+	javascript,
 	type ObjectFile,
 	type typescript,
 } from 'projen'
-import { Eslint } from 'projen/lib/javascript'
 import { tryReadFileSync } from 'projen/lib/util'
 import {
 	type ImportDeclarationStructure,
@@ -61,7 +61,7 @@ export class TypeScriptSourceFile extends FileBase {
 			marker: true,
 			...options,
 		}
-		Eslint.of(this.project)?.addOverride?.({
+		javascript.Eslint.of(this.project)?.addOverride?.({
 			files: [this.filePath],
 			rules: {
 				'import/order': ['off'],

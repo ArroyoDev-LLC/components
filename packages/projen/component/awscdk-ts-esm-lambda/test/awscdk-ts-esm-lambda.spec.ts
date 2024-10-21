@@ -1,8 +1,10 @@
+import fs from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
+import { isComponent } from '@arroyodev-llc/utils.projen'
 import { awscdk, DependencyType, Testing, typescript } from 'projen'
-import { beforeEach, describe, expect, test } from 'vitest'
-import { AwsCdkTsEsmLambda } from '../src'
+import { afterEach, beforeEach, describe, expect, test } from 'vitest'
+import { AwsCdkTsEsmLambda, AwsCdkTsEsmLambdaAutoDiscover } from '../src'
 
 interface TestContext {
 	outdir: string
@@ -26,6 +28,14 @@ describe('AwsCdkTsEsmLambda', () => {
 				dependencyType: DependencyType.RUNTIME,
 			}),
 		})
+	})
+
+	afterEach<TestContext>(async (ctx) => {
+		try {
+			await fs.rmdir(ctx.outdir, { force: true })
+		} catch (e) {
+			console.warn(e)
+		}
 	})
 
 	test<TestContext>('renders as expected', (ctx) => {
@@ -68,5 +78,19 @@ describe('AwsCdkTsEsmLambda', () => {
 			  }
 			}"
 		`)
+	})
+
+	test<TestContext>('auto-discover works as expected', async (ctx) => {
+		const fakeHandler = path.join(ctx.outdir, 'src', 'test.lambda.ts')
+		await fs.mkdir(path.dirname(fakeHandler), { recursive: true })
+		await fs.writeFile(fakeHandler, 'export const handler = async () => {}')
+		new AwsCdkTsEsmLambdaAutoDiscover(ctx.project)
+		const comps = ctx.project.components.filter((c) =>
+			isComponent(AwsCdkTsEsmLambda, c),
+		)
+		expect(comps).toHaveLength(1)
+		const synth = Testing.synth(ctx.project)
+		expect(synth['src/test-function.ts']).toBeDefined()
+		expect(synth['src/test-function.ts']).to.include('__filename')
 	})
 })

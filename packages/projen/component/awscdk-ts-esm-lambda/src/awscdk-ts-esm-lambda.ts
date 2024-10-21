@@ -1,3 +1,4 @@
+import { existsSync } from 'node:fs'
 import { TypeScriptSourceFile } from '@arroyodev-llc/projen.component.typescript-source-file'
 import { findComponent, isComponent } from '@arroyodev-llc/utils.projen'
 import {
@@ -91,10 +92,10 @@ export class AwsCdkTsEsmLambdaAutoDiscover extends Component {
 		super(project)
 
 		const lambdaFunctionFiles = project.files
-			.filter((file) => file.path.endsWith('.lambda.ts'))
-			.map((file) => file.path.replace('.lambda.ts', '-function.ts'))
-			.map((fileName) => project.tryFindFile(fileName))
-			.filter((file) => file !== undefined) as FileBase[]
+			.filter((file) => file.path.endsWith('-function.ts'))
+			.filter((file) =>
+				existsSync(file.absolutePath.replace('-function.ts', '.lambda.ts')),
+			)
 
 		for (const lambdaFunctionFile of lambdaFunctionFiles) {
 			new AwsCdkTsEsmLambda(project, { filePath: lambdaFunctionFile.path })

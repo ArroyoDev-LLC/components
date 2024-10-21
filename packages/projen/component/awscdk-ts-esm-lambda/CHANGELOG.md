@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.1](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.awscdk-ts-esm-lambda-v1.0.0...@arroyodev-llc/projen.component.awscdk-ts-esm-lambda-v1.0.1) (2024-10-21)
+
+
+### Bug Fixes
+
+* **projen.component.awscdk-ts-esm-lambda:** Discover from tracked function files, not handlers ([abcf1fd](https://github.com/ArroyoDev-LLC/components/commit/abcf1fd3a64b8dd8552edbdeb3521a4f090811f3))
+
+
+### Tests
+
+* **projen.component.awscdk-ts-esm-lambda:** Add unit test for `AwsCdkTsEsmLambdaAutoDiscover` ([b3c9d5c](https://github.com/ArroyoDev-LLC/components/commit/b3c9d5c12ea90f5a48871b10b37e22d3b0ffbad8))
+
 ## 1.0.0 (2024-10-21)
 
 

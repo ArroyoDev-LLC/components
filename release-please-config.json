@@ -87,6 +87,10 @@
       "component": "@arroyodev-llc/projen.component.postcss",
       "release-type": "node"
     },
+    "packages/projen/component/awscdk-ts-esm-lambda": {
+      "component": "@arroyodev-llc/projen.component.awscdk-ts-esm-lambda",
+      "release-type": "node"
+    },
     "packages/projen/project/nx-monorepo": {
       "component": "@arroyodev-llc/projen.project.nx-monorepo",
       "release-type": "node"

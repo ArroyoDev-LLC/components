@@ -260,6 +260,19 @@ const postcssComponent = ProjenComponentProjectBuilder.build({
 })
 new Vitest(postcssComponent)
 
+// Patches auto-discovered lambdas to be es module compatible
+const awscdkTsEsmModuleLambda = ProjenComponentProjectBuilder.build({
+	name: 'projen.component.awscdk-ts-esm-lambda',
+	deps: ['ts-morph'],
+	workspaceDeps: [
+		utilsProjen,
+		utilsProjenBuilder,
+		tsSourceComponent,
+		utilsTsAst,
+	],
+})
+new Vitest(awscdkTsEsmModuleLambda)
+
 /**
  * Projen Projects
  */

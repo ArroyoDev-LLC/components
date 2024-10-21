@@ -32,6 +32,12 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.20
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.28
+
 ## [0.1.32](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.31...@arroyodev-llc/projen.project.typescript-v0.1.32) (2024-09-28)
 
 

@@ -14,6 +14,18 @@
     * @arroyodev-llc/utils.fs bumped to 0.1.3
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.27](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.26...@arroyodev-llc/projen.component.typescript-source-file-v0.1.27) (2024-10-21)
+
+
+### Bug Fixes
+
+* **projen.component.typescript-source-file:** Access `Eslint` via `javascript` namespace ([b3fcb65](https://github.com/ArroyoDev-LLC/components/commit/b3fcb654072c580a40b3f42b7b54544df6240182))
+
+
+### Tests
+
+* **projen.component.awscdk-ts-esm-lambda:** Add unit test for component ([669536f](https://github.com/ArroyoDev-LLC/components/commit/669536f9a19c88e1b32bb0ee41196b54722f0a54))
+
 ## [0.1.26](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.typescript-source-file-v0.1.25...@arroyodev-llc/projen.component.typescript-source-file-v0.1.26) (2024-07-03)
 
 

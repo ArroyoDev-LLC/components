@@ -6,6 +6,12 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.16
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.27
+
 ## [0.1.20](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tailwind-v0.1.19...@arroyodev-llc/projen.component.tailwind-v0.1.20) (2024-07-03)
 
 

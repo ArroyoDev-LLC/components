@@ -91,6 +91,18 @@
   * dependencies
     * @arroyodev-llc/projen.project.typescript bumped to 0.1.32
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.29
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.33
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.33
+  * devDependencies
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.28
+  * peerDependencies
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.28
+
 ## [0.1.34](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.33...@arroyodev-llc/projen.project.vue-component-v0.1.34) (2024-07-03)
 
 

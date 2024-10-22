@@ -78,8 +78,9 @@ export class AwsCdkTsEsmLambda extends Component {
 				throw new Error('Could not find class constructor in entrypoint file')
 			functionCtor.insertStatements(0, [
 				'const __filename = fileURLToPath(import.meta.url);',
-				'const __dirname = dirname(__filename);',
+				'const __dirname = path.dirname(__filename);',
 			])
+			sourceFile.formatText()
 		})
 	}
 }

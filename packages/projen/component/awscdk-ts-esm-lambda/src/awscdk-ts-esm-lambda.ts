@@ -8,6 +8,7 @@ import {
 	type Project,
 	TextFile,
 	typescript,
+	javascript,
 } from 'projen'
 
 export interface AwsCdkTsEsmLambdaOptions {
@@ -52,12 +53,13 @@ export class AwsCdkTsEsmLambda extends Component {
 		}
 
 		this.tsFile = new TypeScriptSourceFile(this.project, this.lambdaFile.path, {
-			marker: true,
+			marker: false,
 			recreate: true,
 			source,
-			format: true,
+			format: false,
 		})
 		this.applyTransforms()
+		javascript.Eslint.of(project)?.addIgnorePattern?.(this.tsFile.path)
 	}
 
 	/**

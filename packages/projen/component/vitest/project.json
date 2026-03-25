@@ -72,20 +72,6 @@
         "cwd": "packages/projen/component/vitest"
       }
     },
-    "post-upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen post-upgrade",
-        "cwd": "packages/projen/component/vitest"
-      }
-    },
-    "upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen upgrade",
-        "cwd": "packages/projen/component/vitest"
-      }
-    },
     "watch": {
       "executor": "nx:run-commands",
       "options": {

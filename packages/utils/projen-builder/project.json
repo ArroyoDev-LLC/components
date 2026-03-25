@@ -72,20 +72,6 @@
         "cwd": "packages/utils/projen-builder"
       }
     },
-    "post-upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen post-upgrade",
-        "cwd": "packages/utils/projen-builder"
-      }
-    },
-    "upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen upgrade",
-        "cwd": "packages/utils/projen-builder"
-      }
-    },
     "watch": {
       "executor": "nx:run-commands",
       "options": {

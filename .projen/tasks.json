@@ -93,6 +93,10 @@
     "eslint": {
       "name": "eslint",
       "description": "Runs eslint against the codebase for all affected projects",
+      "env": {
+        "ESLINT_USE_FLAT_CONFIG": "false",
+        "NODE_NO_WARNINGS": "1"
+      },
       "steps": [
         {
           "exec": "pnpm exec nx run-many --target=eslint --output-style=stream --nx-bail",
@@ -236,7 +240,7 @@
       },
       "steps": [
         {
-          "exec": "pnpm dlx npm-check-updates@16 --upgrade --target=minor --peer --dep=dev,peer,prod,optional --filter=@aws/pdk,@jsii/spec,@mrgrain/jsii-struct-builder,@sindresorhus/is,@types/fs-extra,@types/prettier,@vitejs/plugin-vue,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,fs-extra,lint-staged,npm-check-updates,nx-cloud,pathe,prettier,rimraf,rollup-plugin-vue,simple-git-hooks,ts-morph,ts-node,tsx,typedoc,unbuild,vite,vitest,aws-cdk-lib,cdk-nag"
+          "exec": "pnpm dlx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@sindresorhus/is,@types/fs-extra,@types/prettier,@vitejs/plugin-vue,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,fs-extra,lint-staged,npm-check-updates,nx-cloud,pathe,prettier,rimraf,rollup-plugin-vue,simple-git-hooks,ts-morph,ts-node,tsx,typedoc,unbuild,vite,vitest,aws-cdk-lib,cdk-nag"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"

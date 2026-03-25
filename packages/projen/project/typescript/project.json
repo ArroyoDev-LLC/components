@@ -72,20 +72,6 @@
         "cwd": "packages/projen/project/typescript"
       }
     },
-    "post-upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen post-upgrade",
-        "cwd": "packages/projen/project/typescript"
-      }
-    },
-    "upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen upgrade",
-        "cwd": "packages/projen/project/typescript"
-      }
-    },
     "watch": {
       "executor": "nx:run-commands",
       "options": {

@@ -22,11 +22,11 @@ const monorepo = new ComponentsMonorepo({
 		level: LogLevel.DEBUG,
 		usePrefix: true,
 	},
-	typescriptVersion: '~5.2',
-	pnpmVersion: '9.4.0',
-	projenVersion: '0.83.1',
+	typescriptVersion: '~5.8',
+	pnpmVersion: '10.33.0',
+	projenVersion: '0.99.23',
 	devDeps: [
-		'@aws/pdk',
+		'@aws/pdk@0.26.15',
 		'vite',
 		'@vitejs/plugin-vue',
 		'unbuild',
@@ -36,8 +36,8 @@ const monorepo = new ComponentsMonorepo({
 		'@types/prettier',
 		'fs-extra',
 		'@types/fs-extra',
-		'@mrgrain/jsii-struct-builder',
-		'@jsii/spec',
+		'@mrgrain/jsii-struct-builder@0.7.64',
+		'@jsii/spec@1.127.0',
 		'ts-morph',
 		'@sindresorhus/is',
 		'pathe',
@@ -61,7 +61,7 @@ const CommonDefaultsBuilder = new builders.DefaultOptionsBuilder<{
 }>({
 	parent: monorepo,
 	defaultReleaseBranch: 'main',
-	typescriptVersion: '~5.2',
+	typescriptVersion: '~5.8',
 	buildWorkflow: false,
 })
 const NameSchemeBuilder = new builders.NameSchemeBuilder({
@@ -383,6 +383,12 @@ button.lintConfig.eslint.addRules({
 
 // adds support for .cts/.mts
 monorepo.package.addPackageResolutions('unbuild@2.0.0-rc.0')
+// pin CDK deps to avoid version conflicts with @aws/pdk
+monorepo.package.addPackageResolutions(
+	'aws-cdk-lib@2.244.0',
+	'cdk-nag@2.37.55',
+	'@aws-cdk/aws-cognito-identitypool-alpha@2.244.0-alpha.0',
+)
 // remove subject release workflows in favor of custom release
 monorepo.files
 	.filter(

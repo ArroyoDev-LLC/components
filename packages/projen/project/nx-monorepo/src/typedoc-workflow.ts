@@ -1,5 +1,7 @@
 import { Component, github, type Project } from 'projen'
-import { secretToString } from 'projen/lib/github/util'
+
+const secretToString = (secretName: string): string =>
+	`\${{ secrets.${secretName} }}`
 
 export interface TypeDocGithubPagesOptions {
 	readonly workflowName: string

@@ -383,11 +383,18 @@ button.lintConfig.eslint.addRules({
 
 // adds support for .cts/.mts
 monorepo.package.addPackageResolutions('unbuild@2.0.0-rc.0')
+// pin eslint ecosystem to v8-compatible — projen still generates .eslintrc.json
+// (legacy format) but declares eslint@^9 and @typescript-eslint@^8
+monorepo.package.addPackageResolutions(
+	'eslint@^8',
+	'@typescript-eslint/eslint-plugin@^7',
+	'@typescript-eslint/parser@^7',
+)
 // pin CDK deps to avoid version conflicts with @aws/pdk
 monorepo.package.addPackageResolutions(
 	'aws-cdk-lib@2.244.0',
 	'cdk-nag@2.37.55',
-	'@aws-cdk/aws-cognito-identitypool-alpha@2.244.0-alpha.0',
+	'@aws-cdk/aws-cognito-identitypool-alpha@2.186.0-alpha.0',
 )
 // remove subject release workflows in favor of custom release
 monorepo.files

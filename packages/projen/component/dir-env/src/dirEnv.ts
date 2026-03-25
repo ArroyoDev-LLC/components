@@ -226,8 +226,13 @@ export class DirEnv extends Component {
 	buildDefaultEnvRc(options: {
 		localEnvRc?: string
 		minDirEnvVersion?: string
+		nixFlakeSupport?: boolean
 	}) {
-		const { localEnvRc = '.envrc.local', minDirEnvVersion = '2.32.1' } = options
+		const {
+			localEnvRc = '.envrc.local',
+			minDirEnvVersion = '2.32.1',
+			nixFlakeSupport = false,
+		} = options
 		this.startBuild()
 			.addComment('Team Shared direnv.')
 			.addComment('See: https://github.com/direnv/direnv')
@@ -241,7 +246,32 @@ export class DirEnv extends Component {
 			.addComment('User local additions.')
 			.addSourceEnvIfExists(localEnvRc)
 			.addBlankLine()
-			.addComment('Load mise (previously known as "rtx") or asdf')
+
+		if (nixFlakeSupport) {
+			this.addComment(
+				'Nix flake support (set USE_NIX_FLAKE=1 in .envrc.local to enable)',
+			)
+				.addCommand('if [ -n "${USE_NIX_FLAKE:-}" ]; then', '', () =>
+					this.addCommand('use flake ${NIX_FLAKE_ARGS:-}'),
+				)
+				.addCommand('else', '', () => this.#addMiseChain())
+				.addCommand('fi')
+		} else {
+			this.#addMiseChain()
+		}
+
+		this.addBlankLine()
+			.addLayout(DirEnvLayout.NODE)
+			.addBlankLine()
+			.addComment('Docker')
+			.addEnvVar('COMPOSE_DOCKER_CLI_BUILD', '1')
+			.addEnvVar('DOCKER_BUILDKIT', '1')
+			.addBlankLine()
+		return this
+	}
+
+	#addMiseChain() {
+		this.addComment('Load mise (previously known as "rtx") or asdf')
 			.addCommand('if has mise && has use_mise; then', '', () =>
 				this.addCommand(DirEnvStdLibCommand.USE, DirEnvUse.MISE),
 			)
@@ -269,13 +299,6 @@ export class DirEnv extends Component {
 					),
 			)
 			.addCommand('fi')
-			.addBlankLine()
-			.addLayout(DirEnvLayout.NODE)
-			.addBlankLine()
-			.addComment('Docker')
-			.addEnvVar('COMPOSE_DOCKER_CLI_BUILD', '1')
-			.addEnvVar('DOCKER_BUILDKIT', '1')
-			.addBlankLine()
 		return this
 	}
 

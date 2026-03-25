@@ -69,6 +69,8 @@ docs/**
 !/.tool-versions
 !/.envrc
 .envrc.local
+!/flake.nix
+!/flake.lock
 !/.github/workflows/release_utils.fs.yml
 !/.github/workflows/release_utils.ts-ast.yml
 !/.github/workflows/release_utils.projen.yml

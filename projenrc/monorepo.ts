@@ -117,6 +117,7 @@ export class ComponentsMonorepo
 			.buildDefaultEnvRc({
 				localEnvRc: '.envrc.local',
 				minDirEnvVersion: '2.32.1',
+				nixFlakeSupport: true,
 			})
 			.addComment('Required Env Vars for this project')
 			.addEnvVar('NPM_TOKEN', '', { defaultValue: '' })
@@ -124,6 +125,8 @@ export class ComponentsMonorepo
 			.addEnvVar('NX_CLOUD_ACCESS_TOKEN', '', {
 				defaultValue: ComponentsMonorepo.nxPublicReadonlyToken,
 			})
+		this.addGitIgnore('!/flake.nix')
+		this.addGitIgnore('!/flake.lock')
 		this.pnpm.addPatch('unbuild@2.0.0-rc.0', 'patches/unbuild@2.0.0-rc.0.patch')
 	}
 

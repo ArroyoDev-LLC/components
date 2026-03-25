@@ -2,7 +2,9 @@ import { existsSync, readFileSync } from 'fs'
 import path from 'node:path'
 import { findComponent } from '@arroyodev-llc/utils.projen'
 import { Component, github, javascript, JsonFile, type Project } from 'projen'
-import { secretToString } from 'projen/lib/github/util'
+
+const secretToString = (secretName: string): string =>
+	`\${{ secrets.${secretName} }}`
 import { NodeProject } from 'projen/lib/javascript'
 import { kebabCaseKeys } from 'projen/lib/util'
 

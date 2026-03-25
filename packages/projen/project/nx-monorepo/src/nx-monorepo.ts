@@ -19,7 +19,8 @@ import {
 	type Project,
 	typescript,
 } from 'projen'
-import { secretToString } from 'projen/lib/github/util'
+const secretToString = (secretName: string): string =>
+	`\${{ secrets.${secretName} }}`
 import { NodePackage, TypeScriptModuleResolution } from 'projen/lib/javascript'
 import { deepMerge } from 'projen/lib/util'
 import type { NxMonorepoProjectOptions } from './nx-monorepo-project-options'

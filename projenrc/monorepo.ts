@@ -56,7 +56,7 @@ export class ComponentsMonorepo
 			githubOptions: {
 				projenCredentials: ComponentsMonorepo.githubCredentials,
 			},
-			minNodeVersion: '20.15.0',
+			minNodeVersion: '24.14.1',
 			namingScheme: {
 				scope: '@arroyodev-llc',
 			},

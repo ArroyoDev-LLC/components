@@ -72,20 +72,6 @@
         "cwd": "packages/projen/component/linting"
       }
     },
-    "post-upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen post-upgrade",
-        "cwd": "packages/projen/component/linting"
-      }
-    },
-    "upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen upgrade",
-        "cwd": "packages/projen/component/linting"
-      }
-    },
     "watch": {
       "executor": "nx:run-commands",
       "options": {

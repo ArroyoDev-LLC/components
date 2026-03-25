@@ -81,9 +81,12 @@
     "tsconfig.json"
   ],
   "rules": {
-    "@typescript-eslint/no-require-imports": [
-      "error"
+    "curly": [
+      "error",
+      "multi-line",
+      "consistent"
     ],
+    "@typescript-eslint/no-require-imports": "error",
     "import/no-extraneous-dependencies": [
       "error",
       {
@@ -120,27 +123,12 @@
     "no-shadow": [
       "off"
     ],
-    "@typescript-eslint/no-shadow": [
-      "error"
-    ],
-    "key-spacing": [
-      "off"
-    ],
-    "no-multiple-empty-lines": [
-      "off"
-    ],
-    "@typescript-eslint/no-floating-promises": [
-      "error"
-    ],
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-floating-promises": "error",
     "no-return-await": [
       "off"
     ],
-    "@typescript-eslint/return-await": [
-      "error"
-    ],
-    "no-trailing-spaces": [
-      "off"
-    ],
+    "@typescript-eslint/return-await": "error",
     "dot-notation": [
       "error"
     ],
@@ -162,6 +150,15 @@
           "method"
         ]
       }
+    ],
+    "key-spacing": [
+      "off"
+    ],
+    "no-multiple-empty-lines": [
+      "off"
+    ],
+    "no-trailing-spaces": [
+      "off"
     ],
     "@typescript-eslint/consistent-type-definitions": [
       "error",

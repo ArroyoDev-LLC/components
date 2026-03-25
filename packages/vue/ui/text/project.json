@@ -72,20 +72,6 @@
         "cwd": "packages/vue/ui/text"
       }
     },
-    "post-upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen post-upgrade",
-        "cwd": "packages/vue/ui/text"
-      }
-    },
-    "upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen upgrade",
-        "cwd": "packages/vue/ui/text"
-      }
-    },
     "watch": {
       "executor": "nx:run-commands",
       "options": {

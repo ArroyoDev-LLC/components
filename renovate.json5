@@ -23,6 +23,9 @@
     }
   ],
   "ignoreDeps": [
+    "@aws/pdk",
+    "@jsii/spec",
+    "@mrgrain/jsii-struct-builder",
     "@types/node",
     "@typescript-eslint/eslint-plugin",
     "@typescript-eslint/parser",
@@ -48,10 +51,25 @@
     "@arroyodev-llc/projen.project.vue-component",
     "@arroyodev-llc/utils.projen-builder",
     "@arroyodev-llc/utils.projen",
+    "@aws-cdk/aws-cognito-identitypool-alpha",
     "@types/babel__traverse",
     "@zkochan/js-yaml",
+    "aws-cdk-lib",
+    "cdk-nag",
     "unbuild",
     "wrap-ansi",
-    "@aws-cdk/aws-cognito-identitypool-alpha"
+    "hmarr/auto-approve-action",
+    "actions/create-github-app-token",
+    "actions/checkout",
+    "actions/download-artifact",
+    "amannn/action-semantic-pull-request",
+    "google-github-actions/release-please-action",
+    "pnpm/action-setup",
+    "actions/setup-node",
+    "actions/upload-artifact",
+    "actions/configure-pages",
+    "actions/upload-pages-artifact",
+    "actions/deploy-pages",
+    "peter-evans/create-pull-request"
   ]
 }

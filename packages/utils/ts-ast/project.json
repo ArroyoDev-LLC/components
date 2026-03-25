@@ -72,20 +72,6 @@
         "cwd": "packages/utils/ts-ast"
       }
     },
-    "post-upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen post-upgrade",
-        "cwd": "packages/utils/ts-ast"
-      }
-    },
-    "upgrade": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "pnpm exec projen upgrade",
-        "cwd": "packages/utils/ts-ast"
-      }
-    },
     "watch": {
       "executor": "nx:run-commands",
       "options": {

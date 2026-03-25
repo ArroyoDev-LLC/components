@@ -2,14 +2,17 @@
   "dependencies": [
     {
       "name": "@aws/pdk",
+      "version": "0.26.15",
       "type": "build"
     },
     {
       "name": "@jsii/spec",
+      "version": "1.127.0",
       "type": "build"
     },
     {
       "name": "@mrgrain/jsii-struct-builder",
+      "version": "0.7.64",
       "type": "build"
     },
     {
@@ -22,7 +25,7 @@
     },
     {
       "name": "@types/node",
-      "version": "^20",
+      "version": "^24",
       "type": "build"
     },
     {
@@ -31,12 +34,12 @@
     },
     {
       "name": "@typescript-eslint/eslint-plugin",
-      "version": "^7",
+      "version": "^8",
       "type": "build"
     },
     {
       "name": "@typescript-eslint/parser",
-      "version": "^7",
+      "version": "^8",
       "type": "build"
     },
     {
@@ -66,7 +69,7 @@
     },
     {
       "name": "eslint",
-      "version": "^8",
+      "version": "^9",
       "type": "build"
     },
     {
@@ -100,7 +103,7 @@
     },
     {
       "name": "projen",
-      "version": "0.83.1",
+      "version": "0.99.23",
       "type": "build"
     },
     {
@@ -138,7 +141,7 @@
     },
     {
       "name": "typescript",
-      "version": "~5.2",
+      "version": "~5.8",
       "type": "build"
     },
     {
@@ -234,8 +237,23 @@
       "type": "devenv"
     },
     {
+      "name": "@aws-cdk/aws-cognito-identitypool-alpha",
+      "version": "2.186.0-alpha.0",
+      "type": "override"
+    },
+    {
       "name": "@types/babel__traverse",
       "version": "7.18.2",
+      "type": "override"
+    },
+    {
+      "name": "@typescript-eslint/eslint-plugin",
+      "version": "^7",
+      "type": "override"
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "version": "^7",
       "type": "override"
     },
     {
@@ -244,8 +262,23 @@
       "type": "override"
     },
     {
+      "name": "aws-cdk-lib",
+      "version": "2.244.0",
+      "type": "override"
+    },
+    {
+      "name": "cdk-nag",
+      "version": "2.37.55",
+      "type": "override"
+    },
+    {
+      "name": "eslint",
+      "version": "^8",
+      "type": "override"
+    },
+    {
       "name": "projen",
-      "version": "0.83.1",
+      "version": "0.99.23",
       "type": "override"
     },
     {

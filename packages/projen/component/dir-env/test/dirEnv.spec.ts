@@ -126,3 +126,12 @@ test<TestContext>('renders default envrc template', (ctx) => {
 		export DEBUG_COLORS=\\"\${DEBUG_COLORS:-1}\\""
 	`)
 })
+
+test<TestContext>('renders default envrc template with nix flake support', (ctx) => {
+	const fileName = '.envrc'
+	new DirEnv(ctx.project, { fileName }).buildDefaultEnvRc({
+		nixFlakeSupport: true,
+	})
+	const synth = Testing.synth(ctx.project)
+	expect(synth[fileName]).toMatchSnapshot()
+})

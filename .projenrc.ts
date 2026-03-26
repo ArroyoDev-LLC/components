@@ -102,7 +102,7 @@ const utilsTsAst = TypescriptProjectBuilder.build({
 	name: 'utils.ts-ast',
 	buildWorkflow: false,
 	deps: [
-		'ts-morph',
+		'ts-morph@26.0.0',
 		'type-fest@^4',
 		'@sindresorhus/is',
 		'reflect-metadata',
@@ -186,7 +186,7 @@ const tsSourceComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.typescript-source-file',
 	workspaceDeps: [utilsProjen, lintingComponent, utilsFs, utilsTsAst],
 	peerDeps: ['@aws/pdk'],
-	deps: ['ts-morph'],
+	deps: ['ts-morph@26.0.0'],
 })
 
 const pnpmWorkspaceComponent = ProjenComponentProjectBuilder.build({
@@ -198,20 +198,25 @@ const unbuildComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.unbuild',
 	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
 	peerDeps: ['@aws/pdk'],
-	deps: ['ts-morph', 'unbuild'],
+	deps: ['ts-morph@26.0.0', 'unbuild'],
 })
 
 const viteComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.vite',
 	workspaceDeps: [utilsProjen, tsSourceComponent, lintingComponent, utilsTsAst],
-	deps: ['ts-morph', 'vite', '@vitejs/plugin-vue', '@vitejs/plugin-vue-jsx'],
+	deps: [
+		'ts-morph@26.0.0',
+		'vite',
+		'@vitejs/plugin-vue',
+		'@vitejs/plugin-vue-jsx',
+	],
 })
 new Vitest(viteComponent)
 
 const vitestComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.vitest',
 	workspaceDeps: [utilsProjen, tsSourceComponent, viteComponent, utilsTsAst],
-	deps: ['ts-morph', 'vitest'],
+	deps: ['ts-morph@26.0.0', 'vitest'],
 })
 
 const toolVersionsComponent = ProjenComponentProjectBuilder.build({
@@ -233,7 +238,7 @@ const vueComponent = ProjenComponentProjectBuilder.build({
 		vitestComponent,
 		tsSourceComponent,
 	],
-	deps: ['ts-morph'],
+	deps: ['ts-morph@26.0.0'],
 })
 
 const releasePleaseComponent = ProjenComponentProjectBuilder.build({
@@ -248,14 +253,14 @@ const tsconfigContainerComponent = ProjenComponentProjectBuilder.build({
 
 const tailwindComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.tailwind',
-	deps: ['ts-morph', 'tailwindcss'],
+	deps: ['ts-morph@26.0.0', 'tailwindcss'],
 	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
 })
 new Vitest(tailwindComponent)
 
 const postcssComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.postcss',
-	deps: ['ts-morph', 'postcss-load-config'],
+	deps: ['ts-morph@26.0.0', 'postcss-load-config'],
 	workspaceDeps: [utilsProjen, tsSourceComponent, utilsTsAst],
 })
 new Vitest(postcssComponent)
@@ -263,7 +268,7 @@ new Vitest(postcssComponent)
 // Patches auto-discovered lambdas to be es module compatible
 const awscdkTsEsmModuleLambda = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.awscdk-ts-esm-lambda',
-	deps: ['ts-morph'],
+	deps: ['ts-morph@26.0.0'],
 	workspaceDeps: [
 		utilsProjen,
 		utilsProjenBuilder,

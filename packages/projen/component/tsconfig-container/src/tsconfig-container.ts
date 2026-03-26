@@ -190,10 +190,9 @@ export class TypescriptConfigContainer extends Component {
 		base: javascript.TypescriptConfigOptions,
 		override: javascript.TypescriptConfigOptions,
 	) {
-		return deepMerge(
-			[base, override],
-			true,
-		) as javascript.TypescriptConfigOptions
+		return deepMerge([base, override], {
+			destructive: true,
+		}) as javascript.TypescriptConfigOptions
 	}
 
 	/**

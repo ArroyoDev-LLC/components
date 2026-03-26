@@ -113,7 +113,7 @@ export class MonorepoProject extends NxMonorepoProject {
 		const { workspaceDeps, tsconfig, ...rest } = options
 		const mergedOptions = deepMerge(
 			[Object.assign({}, CONFIG_DEFAULTS), rest],
-			true,
+			{ destructive: true },
 		) as NxMonorepoProjectOptions
 		super({
 			defaultReleaseBranch: 'main',

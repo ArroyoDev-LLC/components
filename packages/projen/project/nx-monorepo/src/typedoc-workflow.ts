@@ -64,7 +64,10 @@ export class TypeDocGithubPages extends Component {
 			this.gh,
 			this.options.workflowName,
 			{
-				concurrency: 'pages',
+				limitConcurrency: true,
+				concurrencyOptions: {
+					group: 'pages',
+				},
 			},
 		)
 		workflow.on({

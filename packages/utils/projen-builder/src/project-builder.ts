@@ -92,14 +92,14 @@ export class ProjectBuilder<
 	 */
 	buildOptions(options: Options): Options {
 		// waterfall deeply merged options
-		let mappedOptions = Object.assign({}, options) as Options
+		let mappedOptions = Object.assign({}, options)
 		this.steps.forEach((step) => {
 			mappedOptions = deepMerge(
 				[
 					mappedOptions as ProjectOptions,
 					step.applyOptions(mappedOptions as ProjectOptions) as Options,
 				],
-				true,
+				{ destructive: true },
 			) as Options
 		})
 

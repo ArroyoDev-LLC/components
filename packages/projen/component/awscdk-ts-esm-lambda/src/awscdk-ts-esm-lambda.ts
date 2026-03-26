@@ -73,11 +73,13 @@ export class AwsCdkTsEsmLambda extends Component {
 		})
 		this.tsFile.addTransformer((sourceFile) => {
 			const functionClass = sourceFile.getClasses()[0]
-			if (!functionClass)
+			if (!functionClass) {
 				throw new Error('Could not find class in entrypoint file')
+			}
 			const functionCtor = functionClass.getConstructors()[0]
-			if (!functionCtor)
+			if (!functionCtor) {
 				throw new Error('Could not find class constructor in entrypoint file')
+			}
 			functionCtor.insertStatements(0, [
 				'const __filename = fileURLToPath(import.meta.url);',
 				'const __dirname = path.dirname(__filename);',

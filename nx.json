@@ -29,6 +29,11 @@
       "dependsOn": [
         "^build"
       ]
+    },
+    "compile": {
+      "dependsOn": [
+        "^compile"
+      ]
     }
   },
   "tasksRunnerOptions": {

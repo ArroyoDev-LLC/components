@@ -112,7 +112,10 @@ export class TypeScriptSourceConfig<
 		config: ConfigT,
 	): this {
 		this.addConfigTransform((configExpr) => {
-			mergeObjectLiteral(configExpr, config)
+			mergeObjectLiteral(
+				configExpr,
+				config as Parameters<typeof mergeObjectLiteral>[1],
+			)
 		})
 		return this
 	}

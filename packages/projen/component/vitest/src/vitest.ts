@@ -176,8 +176,9 @@ export class Vitest extends Component {
 	 * @param component Target component.
 	 */
 	addProjectConfig(component: Vitest): this {
-		if (this.configType !== VitestConfigType.WORKSPACE)
+		if (this.configType !== VitestConfigType.WORKSPACE) {
 			throw new Error('No vitest workspace found. Cannot add project config!')
+		}
 		const relPath = path.format({
 			dir: '.',
 			base: path.relative(

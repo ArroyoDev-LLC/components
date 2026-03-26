@@ -72,14 +72,16 @@ describe('Firebase Utils', () => {
 			const mockChange = {
 				before: {
 					get: vi.fn().mockImplementation((fieldName) => {
-						if (fieldName === 'created_at' || fieldName === 'updated_at')
+						if (fieldName === 'created_at' || fieldName === 'updated_at') {
 							return timestampBefore
+						}
 					}),
 				},
 				after: {
 					get: vi.fn().mockImplementation((fieldName) => {
-						if (fieldName === 'created_at' || fieldName === 'updated_at')
+						if (fieldName === 'created_at' || fieldName === 'updated_at') {
 							return timestampAfter
+						}
 					}),
 				},
 			} as unknown as FbDocumentChange

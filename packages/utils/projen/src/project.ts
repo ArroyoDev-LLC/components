@@ -38,9 +38,7 @@ export const findComponent = <T extends new (...args: any[]) => Component>(
 	project: Project,
 	component: T,
 ): InstanceType<T> | undefined => {
-	return project.components.find((c) => isComponent(component, c)) as
-		| InstanceType<T>
-		| undefined
+	return project.components.find((c) => isComponent(component, c))
 }
 
 /**

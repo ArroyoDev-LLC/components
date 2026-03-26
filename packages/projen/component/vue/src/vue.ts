@@ -31,7 +31,7 @@ export class Vue extends Component {
 
 	applyPackage(): this {
 		this.project.addDeps('vue', '@vue/runtime-dom')
-		this.project.addDevDeps('vue-tsc')
+		this.project.addDevDeps('vue-tsc@^2')
 		this.project.compileTask.reset('vue-tsc', { args: ['--build'] })
 		return this
 	}

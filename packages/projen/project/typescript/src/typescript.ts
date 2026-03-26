@@ -146,7 +146,7 @@ export class TypescriptProject extends typescript.TypeScriptProject {
 		}
 		const mergedOptions = deepMerge(
 			[Object.assign({}, CONFIG_DEFAULTS), rest],
-			true,
+			{ destructive: true },
 		) as Omit<TypeScriptProjectOptions, 'name'>
 		super({
 			defaultReleaseBranch: 'main',

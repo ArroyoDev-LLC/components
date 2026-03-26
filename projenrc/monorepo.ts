@@ -128,6 +128,9 @@ export class ComponentsMonorepo
 		this.addGitIgnore('!/flake.nix')
 		this.addGitIgnore('!/flake.lock')
 		this.pnpm.addPatch('unbuild@2.0.0-rc.0', 'patches/unbuild@2.0.0-rc.0.patch')
+		this.nx.setTargetDefault('compile', {
+			dependsOn: ['^compile'],
+		})
 	}
 
 	protected applyNx(): this {

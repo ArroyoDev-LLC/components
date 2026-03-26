@@ -166,7 +166,7 @@ export function mergeObjectLiteral<T extends Record<string, any>>(
 	expression: ObjectLiteralExpression,
 	obj: Schema<T, LiteralExpressionMergeValue>,
 ): ObjectLiteralExpression {
-	for (const [key, value] of Object.entries(obj)) {
+	for (const [key, value] of Object.entries(obj as Record<string, unknown>)) {
 		// existing assignment if defined.
 		const propAssign = expression.getProperty(key) as
 			| PropertyAssignment

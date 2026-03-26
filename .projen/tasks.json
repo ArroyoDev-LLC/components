@@ -240,7 +240,7 @@
       },
       "steps": [
         {
-          "exec": "pnpm dlx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@sindresorhus/is,@types/fs-extra,@types/prettier,@vitejs/plugin-vue,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,fs-extra,lint-staged,npm-check-updates,nx-cloud,pathe,prettier,rimraf,rollup-plugin-vue,simple-git-hooks,ts-morph,ts-node,tsx,typedoc,unbuild,vite,vitest,aws-cdk-lib,cdk-nag"
+          "exec": "pnpm dlx npm-check-updates@18 --upgrade --target=minor --peer --no-deprecated --dep=dev,peer,prod,optional --filter=@sindresorhus/is,@types/fs-extra,@types/prettier,@vitejs/plugin-vue,eslint-config-prettier,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,fs-extra,lint-staged,npm-check-updates,nx-cloud,pathe,prettier,rimraf,rollup-plugin-vue,simple-git-hooks,ts-node,tsx,typedoc,unbuild,vite,vitest,aws-cdk-lib,cdk-nag"
         },
         {
           "exec": "pnpm i --no-frozen-lockfile"

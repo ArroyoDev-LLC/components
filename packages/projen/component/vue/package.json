@@ -50,7 +50,7 @@
     "@arroyodev-llc/projen.component.vite": "workspace:*",
     "@arroyodev-llc/projen.component.vitest": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
-    "ts-morph": "19.0.0"
+    "ts-morph": "26.0.0"
   },
   "main": "dist/index.mjs",
   "license": "Apache-2.0",

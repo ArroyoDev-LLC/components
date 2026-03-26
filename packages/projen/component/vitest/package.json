@@ -48,7 +48,7 @@
     "@arroyodev-llc/projen.component.vite": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@arroyodev-llc/utils.ts-ast": "workspace:*",
-    "ts-morph": "19.0.0",
+    "ts-morph": "26.0.0",
     "vitest": "0.34.6"
   },
   "main": "dist/index.mjs",

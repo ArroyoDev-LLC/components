@@ -168,8 +168,8 @@ importers:
         specifier: ^12
         version: 12.3.3(typescript@5.8.3)
       ts-morph:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
       ts-node:
         specifier: 10.9.2
         version: 10.9.2(@types/node@24.12.0)(typescript@5.8.3)
@@ -277,8 +277,8 @@ importers:
         specifier: workspace:*
         version: link:../../../utils/ts-ast
       ts-morph:
-        specifier: ^19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
     devDependencies:
       '@arroyodev-llc/utils.unbuild-composite-preset':
         specifier: ^0.1.6
@@ -559,8 +559,8 @@ importers:
         specifier: 4.0.2
         version: 4.0.2(postcss@8.4.39)(ts-node@10.9.2(@types/node@25.5.0)(typescript@5.8.3))
       ts-morph:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
     devDependencies:
       '@arroyodev-llc/utils.unbuild-composite-preset':
         specifier: 0.1.6
@@ -678,8 +678,8 @@ importers:
         specifier: 3.4.4
         version: 3.4.4(ts-node@10.9.2(@types/node@25.5.0)(typescript@5.8.3))
       ts-morph:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
     devDependencies:
       '@arroyodev-llc/utils.unbuild-composite-preset':
         specifier: 0.1.6
@@ -845,8 +845,8 @@ importers:
         specifier: workspace:*
         version: link:../../../utils/ts-ast
       ts-morph:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
     devDependencies:
       '@arroyodev-llc/utils.unbuild-composite-preset':
         specifier: 0.1.6
@@ -909,8 +909,8 @@ importers:
         specifier: workspace:*
         version: link:../../../utils/ts-ast
       ts-morph:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
       unbuild:
         specifier: 2.0.0-rc.0
         version: 2.0.0-rc.0(patch_hash=47f70ec40787605e14e545a95802d32cd4a46f4d5c93cefdc2621e2fcfc68c4d)(typescript@5.8.3)
@@ -982,8 +982,8 @@ importers:
         specifier: 3.1.0
         version: 3.1.0(vite@4.5.3(@types/node@25.5.0))(vue@3.4.31(typescript@5.8.3))
       ts-morph:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
       vite:
         specifier: 4.5.3
         version: 4.5.3(@types/node@25.5.0)
@@ -1052,8 +1052,8 @@ importers:
         specifier: workspace:*
         version: link:../../../utils/ts-ast
       ts-morph:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
       vitest:
         specifier: 0.34.6
         version: 0.34.6(happy-dom@10.11.2)
@@ -1125,8 +1125,8 @@ importers:
         specifier: workspace:*
         version: link:../../../utils/projen
       ts-morph:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
     devDependencies:
       '@arroyodev-llc/utils.unbuild-composite-preset':
         specifier: 0.1.6
@@ -1646,8 +1646,8 @@ importers:
         specifier: 0.2.2
         version: 0.2.2
       ts-morph:
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 26.0.0
+        version: 26.0.0
       type-fest:
         specifier: ^4
         version: 4.2.0
@@ -3298,10 +3298,10 @@ packages:
       }
     engines: { node: '>= 10' }
 
-  '@ts-morph/common@0.20.0':
+  '@ts-morph/common@0.27.0':
     resolution:
       {
-        integrity: sha512-7uKjByfbPpwuzkstL3L5MQyuXPSKdoNG93Fmi2JoDcTf3pEP731JdRFAduRVkOs8oqxPsXKA+ScrWkdQ8t/I+Q==,
+        integrity: sha512-Wf29UqxWDpc+i61k3oIOzcUfQt79PIT9y/MWfAGlrkjg6lBC1hwDECLXPVJAhWjiGbfBCxZd65F/LIZF3+jeJQ==,
       }
 
   '@tsconfig/node10@1.0.9':
@@ -4468,6 +4468,13 @@ packages:
         integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==,
       }
 
+  balanced-match@4.0.4:
+    resolution:
+      {
+        integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==,
+      }
+    engines: { node: 18 || 20 || >=22 }
+
   base64-js@1.5.1:
     resolution:
       {
@@ -4524,6 +4531,13 @@ packages:
       {
         integrity: sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==,
       }
+
+  brace-expansion@5.0.5:
+    resolution:
+      {
+        integrity: sha512-VZznLgtwhn+Mact9tfiwx64fA9erHH/MCXEUfB/0bX/6Fz6ny5EGTXYltMocqg4xFAQZtnO3DHWWXi8RiuN7cQ==,
+      }
+    engines: { node: 18 || 20 || >=22 }
 
   braces@3.0.3:
     resolution:
@@ -4835,10 +4849,10 @@ packages:
       }
     engines: { node: '>=0.8' }
 
-  code-block-writer@12.0.0:
+  code-block-writer@13.0.3:
     resolution:
       {
-        integrity: sha512-q4dMFMlXtKR3XNBHyMHt/3pwYNA69EDk00lloMOaaUMKPUXBw6lpXtbu3MMVG6/uOihGnRDOlkyqsONEUj60+w==,
+        integrity: sha512-Oofo0pq3IKnsFtuHqSF7TqBfr71aeyZDVJ0HpmqB7FBM2qEigL0iPONSCZSO9pE9dZTAxANe5XHG9Uy0YMv8cg==,
       }
 
   color-convert@1.9.3:
@@ -6049,6 +6063,13 @@ packages:
     resolution:
       {
         integrity: sha512-oX2ruAFQwf/Orj8m737Y5adxDQO0LAB7/S5MnxCdTNDd4p6BsyIVsv9JQsATbTSq8KHRpLwIHbVlUNatxd+1Ow==,
+      }
+    engines: { node: '>=8.6.0' }
+
+  fast-glob@3.3.3:
+    resolution:
+      {
+        integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==,
       }
     engines: { node: '>=8.6.0' }
 
@@ -7968,6 +7989,13 @@ packages:
       }
     engines: { node: '>=8.6' }
 
+  micromatch@4.0.8:
+    resolution:
+      {
+        integrity: sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA==,
+      }
+    engines: { node: '>=8.6' }
+
   mime-db@1.52.0:
     resolution:
       {
@@ -8033,6 +8061,13 @@ packages:
       }
     engines: { node: '>=4' }
 
+  minimatch@10.2.4:
+    resolution:
+      {
+        integrity: sha512-oRjTw/97aTBN0RHbYCdtF1MQfvusSIBQM0IZEgzl6426+8jSC0nF1a/GmnVLpfB9yyr6g6FTqWqiZVbxrtaCIg==,
+      }
+    engines: { node: 18 || 20 || >=22 }
+
   minimatch@3.0.5:
     resolution:
       {
@@ -8055,13 +8090,6 @@ packages:
     resolution:
       {
         integrity: sha512-lKwV/1brpG6mBUFHtb7NUmtABCb2WZZmm2wNiOA5hAb8VdCS4B3dtMWyvcoViccwAW/COERjXLt0zP1zXUN26g==,
-      }
-    engines: { node: '>=10' }
-
-  minimatch@7.4.6:
-    resolution:
-      {
-        integrity: sha512-sBz8G/YjVniEz6lKPNpKxXwazJe4c19fEfV2GDMX6AjFz+MX9uDWIZW8XreVhkFW3fkIdTv/gxWr/Kks5FFAVw==,
       }
     engines: { node: '>=10' }
 
@@ -8179,14 +8207,6 @@ packages:
     resolution:
       {
         integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==,
-      }
-    engines: { node: '>=10' }
-    hasBin: true
-
-  mkdirp@2.1.6:
-    resolution:
-      {
-        integrity: sha512-+hEnITedc8LAtIP9u3HJDFIdcLV2vXP33sqLLIzkv1Db1zO/1OxbvYf0Y1OC/S/Qo5dxHXepofhmxL02PsKe+A==,
       }
     engines: { node: '>=10' }
     hasBin: true
@@ -10277,10 +10297,10 @@ packages:
         integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==,
       }
 
-  ts-morph@19.0.0:
+  ts-morph@26.0.0:
     resolution:
       {
-        integrity: sha512-D6qcpiJdn46tUqV45vr5UGM2dnIEuTGNxVhg0sk5NX11orcouwj6i1bMqZIz2mZTZB1Hcgy7C3oEVhAT+f6mbQ==,
+        integrity: sha512-ztMO++owQnz8c/gIENcM9XfCEzgoGphTv+nKpYNM1bgsdOVC/jRZuEBf6N+mLLDNg68Kl+GgUZfOySaRiG1/Ug==,
       }
 
   ts-node@10.9.2:
@@ -11987,11 +12007,10 @@ snapshots:
 
   '@tootallnate/once@2.0.0': {}
 
-  '@ts-morph/common@0.20.0':
+  '@ts-morph/common@0.27.0':
     dependencies:
-      fast-glob: 3.3.2
-      minimatch: 7.4.6
-      mkdirp: 2.1.6
+      fast-glob: 3.3.3
+      minimatch: 10.2.4
       path-browserify: 1.0.1
 
   '@tsconfig/node10@1.0.9': {}
@@ -12887,6 +12906,8 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
+  balanced-match@4.0.4: {}
+
   base64-js@1.5.1: {}
 
   bignumber.js@9.1.2:
@@ -12938,6 +12959,10 @@ snapshots:
   brace-expansion@2.0.1:
     dependencies:
       balanced-match: 1.0.2
+
+  brace-expansion@5.0.5:
+    dependencies:
+      balanced-match: 4.0.4
 
   braces@3.0.3:
     dependencies:
@@ -13129,7 +13154,7 @@ snapshots:
 
   clone@1.0.4: {}
 
-  code-block-writer@12.0.0: {}
+  code-block-writer@13.0.3: {}
 
   color-convert@1.9.3:
     dependencies:
@@ -13944,6 +13969,14 @@ snapshots:
       glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.7
+
+  fast-glob@3.3.3:
+    dependencies:
+      '@nodelib/fs.stat': 2.0.5
+      '@nodelib/fs.walk': 1.2.8
+      glob-parent: 5.1.2
+      merge2: 1.4.1
+      micromatch: 4.0.8
 
   fast-json-stable-stringify@2.1.0: {}
 
@@ -15115,6 +15148,11 @@ snapshots:
       braces: 3.0.3
       picomatch: 2.3.1
 
+  micromatch@4.0.8:
+    dependencies:
+      braces: 3.0.3
+      picomatch: 2.3.1
+
   mime-db@1.52.0: {}
 
   mime-types@2.1.35:
@@ -15136,6 +15174,10 @@ snapshots:
 
   min-indent@1.0.1: {}
 
+  minimatch@10.2.4:
+    dependencies:
+      brace-expansion: 5.0.5
+
   minimatch@3.0.5:
     dependencies:
       brace-expansion: 1.1.11
@@ -15149,10 +15191,6 @@ snapshots:
       brace-expansion: 1.1.11
 
   minimatch@5.1.6:
-    dependencies:
-      brace-expansion: 2.0.1
-
-  minimatch@7.4.6:
     dependencies:
       brace-expansion: 2.0.1
 
@@ -15223,8 +15261,6 @@ snapshots:
       yallist: 4.0.0
 
   mkdirp@1.0.4: {}
-
-  mkdirp@2.1.6: {}
 
   mkdist@1.3.0(typescript@5.8.3):
     dependencies:
@@ -16580,10 +16616,10 @@ snapshots:
 
   ts-interface-checker@0.1.13: {}
 
-  ts-morph@19.0.0:
+  ts-morph@26.0.0:
     dependencies:
-      '@ts-morph/common': 0.20.0
-      code-block-writer: 12.0.0
+      '@ts-morph/common': 0.27.0
+      code-block-writer: 13.0.3
 
   ts-node@10.9.2(@types/node@24.12.0)(typescript@5.8.3):
     dependencies:

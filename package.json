@@ -76,7 +76,7 @@
     "rollup-plugin-vue": "6.0.0",
     "simple-git-hooks": "2.11.1",
     "syncpack": "^12",
-    "ts-morph": "19.0.0",
+    "ts-morph": "26.0.0",
     "ts-node": "10.9.2",
     "tsx": "3.14.0",
     "typedoc": "0.26.3",

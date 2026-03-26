@@ -50,7 +50,7 @@
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@arroyodev-llc/utils.ts-ast": "workspace:*",
     "postcss-load-config": "4.0.2",
-    "ts-morph": "19.0.0"
+    "ts-morph": "26.0.0"
   },
   "main": "dist/index.mjs",
   "license": "Apache-2.0",

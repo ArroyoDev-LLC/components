@@ -49,7 +49,7 @@
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@arroyodev-llc/utils.ts-ast": "workspace:*",
-    "ts-morph": "19.0.0",
+    "ts-morph": "26.0.0",
     "unbuild": "^2.0.0-rc.0"
   },
   "main": "dist/index.mjs",

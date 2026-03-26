@@ -101,6 +101,7 @@
     },
     {
       "name": "ts-morph",
+      "version": "26.0.0",
       "type": "runtime"
     },
     {

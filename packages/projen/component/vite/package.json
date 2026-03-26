@@ -52,7 +52,7 @@
     "@arroyodev-llc/utils.ts-ast": "workspace:*",
     "@vitejs/plugin-vue": "4.6.2",
     "@vitejs/plugin-vue-jsx": "3.1.0",
-    "ts-morph": "19.0.0",
+    "ts-morph": "26.0.0",
     "vite": "4.5.3"
   },
   "main": "dist/index.mjs",

@@ -5,7 +5,7 @@ import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
 	name: 'projen.component.vite',
-	declaration: true,
+	declaration: 'compatible',
 	clean: true,
 	entries: ['./src/index'],
 	sourcemap: true,

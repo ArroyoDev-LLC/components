@@ -5,7 +5,7 @@ import { defineBuildConfig } from 'unbuild'
 
 export default defineBuildConfig({
 	name: 'utils.projen-builder',
-	declaration: true,
+	declaration: 'compatible',
 	clean: true,
 	entries: ['./src/index'],
 	sourcemap: true,

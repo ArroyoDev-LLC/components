@@ -81,7 +81,7 @@
     "tsx": "3.14.0",
     "typedoc": "0.26.3",
     "typescript": "~5.8",
-    "unbuild": "^2.0.0-rc.0",
+    "unbuild": "3.6.1",
     "vite": "4.5.3",
     "vitest": "0.34.6"
   },
@@ -104,11 +104,7 @@
       "cdk-nag": "2.37.55",
       "eslint": "^8",
       "projen": "0.99.23",
-      "unbuild": "2.0.0-rc.0",
       "wrap-ansi": "^7.0.0"
-    },
-    "patchedDependencies": {
-      "unbuild@2.0.0-rc.0": "patches/unbuild@2.0.0-rc.0.patch"
     }
   },
   "engines": {

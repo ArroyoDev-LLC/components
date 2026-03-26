@@ -5,7 +5,7 @@ import { compositePreset } from './src'
 
 export default defineBuildConfig({
 	name: 'utils.unbuild-composite-preset',
-	declaration: true,
+	declaration: 'compatible',
 	clean: true,
 	entries: ['./src/index'],
 	sourcemap: true,

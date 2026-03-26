@@ -147,6 +147,7 @@
     },
     {
       "name": "unbuild",
+      "version": "3.6.1",
       "type": "build"
     },
     {
@@ -280,11 +281,6 @@
     {
       "name": "projen",
       "version": "0.99.23",
-      "type": "override"
-    },
-    {
-      "name": "unbuild",
-      "version": "2.0.0-rc.0",
       "type": "override"
     },
     {

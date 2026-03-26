@@ -38,7 +38,7 @@ const monorepo = new ComponentsMonorepo({
 		'@types/fs-extra',
 		'@mrgrain/jsii-struct-builder@0.7.64',
 		'@jsii/spec@1.127.0',
-		'ts-morph',
+		'ts-morph@26.0.0',
 		'@sindresorhus/is',
 		'pathe',
 	],

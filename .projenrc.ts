@@ -29,7 +29,7 @@ const monorepo = new ComponentsMonorepo({
 		'@aws/pdk@0.26.15',
 		'vite',
 		'@vitejs/plugin-vue',
-		'unbuild',
+		'unbuild@3.6.1',
 		'vitest',
 		'rollup-plugin-vue',
 		'tsx',
@@ -386,8 +386,6 @@ button.lintConfig.eslint.addRules({
 	'vue/multi-word-component-names': ['off'],
 })
 
-// adds support for .cts/.mts
-monorepo.package.addPackageResolutions('unbuild@2.0.0-rc.0')
 // pin eslint ecosystem to v8-compatible — projen still generates .eslintrc.json
 // (legacy format) but declares eslint@^9 and @typescript-eslint@^8
 monorepo.package.addPackageResolutions(

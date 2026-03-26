@@ -234,7 +234,7 @@ export class TypescriptBundlerBuilder extends BaseBuildStep<
 				cjs: true,
 				options: {
 					name: project.name,
-					declaration: true,
+					declaration: 'compatible',
 					clean: true,
 					entries: ['./src/index'],
 					sourcemap: true,

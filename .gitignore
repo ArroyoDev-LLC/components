@@ -65,7 +65,6 @@ jspm_packages/
 !/.github/workflows/static.yml
 docs/**
 !/vitest.config.ts
-!/vitest.workspace.json
 !/.tool-versions
 !/.envrc
 .envrc.local

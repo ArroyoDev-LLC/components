@@ -50,10 +50,10 @@
     "@arroyodev-llc/projen.component.typescript-source-file": "workspace:*",
     "@arroyodev-llc/utils.projen": "workspace:*",
     "@arroyodev-llc/utils.ts-ast": "workspace:*",
-    "@vitejs/plugin-vue": "4.6.2",
-    "@vitejs/plugin-vue-jsx": "3.1.0",
+    "@vitejs/plugin-vue": "6.0.5",
+    "@vitejs/plugin-vue-jsx": "5.1.5",
     "ts-morph": "26.0.0",
-    "vite": "4.5.3"
+    "vite": "6.4.1"
   },
   "main": "dist/index.mjs",
   "license": "Apache-2.0",

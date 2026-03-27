@@ -94,6 +94,7 @@
     },
     {
       "name": "vitest",
+      "version": "4.1.1",
       "type": "runtime"
     }
   ],

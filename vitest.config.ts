@@ -6,6 +6,21 @@ export default defineConfig({
 	test: {
 		name: 'components',
 		include: ['test/**/*.spec.ts'],
-		threads: true,
+		pool: 'threads',
+		projects: [
+			'./packages/utils/fs/vitest.config.ts',
+			'./packages/utils/ts-ast/vitest.config.ts',
+			'./packages/utils/projen/vitest.config.ts',
+			'./packages/utils/projen-builder/vitest.config.ts',
+			'./packages/utils/firebase/vitest.config.ts',
+			'./packages/construct/awscdk/github-pipeline/vitest.config.ts',
+			'./packages/projen/component/vite/vitest.config.ts',
+			'./packages/projen/component/dir-env/vitest.config.ts',
+			'./packages/projen/component/tailwind/vitest.config.ts',
+			'./packages/projen/component/postcss/vitest.config.ts',
+			'./packages/projen/component/awscdk-ts-esm-lambda/vitest.config.ts',
+			'./packages/vue/ui/text/vitest.config.ts',
+			'./packages/vue/ui/button/vitest.config.ts',
+		],
 	},
 })

@@ -92,11 +92,13 @@
       "type": "runtime"
     },
     {
-      "name": "@vitejs/plugin-vue",
+      "name": "@vitejs/plugin-vue-jsx",
+      "version": "5.1.5",
       "type": "runtime"
     },
     {
-      "name": "@vitejs/plugin-vue-jsx",
+      "name": "@vitejs/plugin-vue",
+      "version": "6.0.5",
       "type": "runtime"
     },
     {
@@ -106,6 +108,7 @@
     },
     {
       "name": "vite",
+      "version": "6.4.1",
       "type": "runtime"
     }
   ],

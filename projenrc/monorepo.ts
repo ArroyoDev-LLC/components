@@ -67,7 +67,7 @@ export class ComponentsMonorepo
 		this.vitest = new Vitest(this, {
 			configType: VitestConfigType.WORKSPACE,
 			settings: {
-				test: { threads: true },
+				test: { pool: 'threads' },
 			},
 		})
 		this.toolVersions = new ToolVersions(this, {

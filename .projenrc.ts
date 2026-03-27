@@ -27,10 +27,10 @@ const monorepo = new ComponentsMonorepo({
 	projenVersion: '0.99.23',
 	devDeps: [
 		'@aws/pdk@0.26.15',
-		'vite',
-		'@vitejs/plugin-vue',
+		'vite@6.4.1',
+		'@vitejs/plugin-vue@6.0.5',
 		'unbuild@3.6.1',
-		'vitest',
+		'vitest@4.1.1',
 		'rollup-plugin-vue',
 		'tsx',
 		'@types/prettier',
@@ -206,9 +206,9 @@ const viteComponent = ProjenComponentProjectBuilder.build({
 	workspaceDeps: [utilsProjen, tsSourceComponent, lintingComponent, utilsTsAst],
 	deps: [
 		'ts-morph@26.0.0',
-		'vite',
-		'@vitejs/plugin-vue',
-		'@vitejs/plugin-vue-jsx',
+		'vite@6.4.1',
+		'@vitejs/plugin-vue@6.0.5',
+		'@vitejs/plugin-vue-jsx@5.1.5',
 	],
 })
 new Vitest(viteComponent)
@@ -216,7 +216,7 @@ new Vitest(viteComponent)
 const vitestComponent = ProjenComponentProjectBuilder.build({
 	name: 'projen.component.vitest',
 	workspaceDeps: [utilsProjen, tsSourceComponent, viteComponent, utilsTsAst],
-	deps: ['ts-morph@26.0.0', 'vitest'],
+	deps: ['ts-morph@26.0.0', 'vitest@4.1.1'],
 })
 
 const toolVersionsComponent = ProjenComponentProjectBuilder.build({

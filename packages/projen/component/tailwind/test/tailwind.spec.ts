@@ -11,8 +11,8 @@ interface TestContext {
 
 beforeEach<TestContext>((ctx) => {
 	ctx.project = new typescript.TypeScriptProject({
-		name: ctx.meta.id,
-		outdir: path.join(os.tmpdir(), ctx.meta.id),
+		name: ctx.task.id,
+		outdir: path.join(os.tmpdir(), ctx.task.id),
 		defaultReleaseBranch: 'main',
 	})
 })

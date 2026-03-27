@@ -2,9 +2,10 @@ import path from 'node:path'
 import { TypeScriptSourceConfig } from '@arroyodev-llc/projen.component.typescript-source-file'
 import { Vite } from '@arroyodev-llc/projen.component.vite'
 import { cwdRelativePath } from '@arroyodev-llc/utils.projen'
-import { Component, JsonFile, type Project, type Task } from 'projen'
+import { Component, type Project, type Task } from 'projen'
 import { type TypeScriptProject } from 'projen/lib/typescript'
 import { deepMerge } from 'projen/lib/util'
+import { type WriterFunction } from 'ts-morph'
 import { type UserWorkspaceConfig } from 'vitest/config'
 
 export enum VitestConfigType {
@@ -112,13 +113,8 @@ export class Vitest extends Component {
 			this.tryFindWorkspace()?.addProjectConfig?.(this)
 		}
 
-		if (this.configType === VitestConfigType.WORKSPACE) {
-			new JsonFile(this.project, 'vitest.workspace.json', {
-				readonly: true,
-				allowComments: false,
-				obj: () => Array.from(this.#workspaceProjects.keys()),
-			})
-		}
+		// workspace projects are injected into root config during preSynthesize
+		// via test.projects array (vitest 3.2+ deprecated vitest.workspace.json)
 	}
 
 	/**
@@ -209,10 +205,31 @@ export class Vitest extends Component {
 	}
 
 	/**
+	 * Inject workspace project paths into root config as test.projects array.
+	 * @protected
+	 */
+	protected applyWorkspaceProjects(): void {
+		if (
+			this.configType !== VitestConfigType.WORKSPACE ||
+			this.#workspaceProjects.size === 0
+		) {
+			return
+		}
+		const projects = Array.from(this.#workspaceProjects.keys())
+		this.configFile.addConfig({
+			test: {
+				projects: ((writer) =>
+					writer.write(JSON.stringify(projects))) as WriterFunction,
+			},
+		})
+	}
+
+	/**
 	 * @inheritDoc
 	 */
 	preSynthesize() {
 		super.preSynthesize()
 		this.mergeVite()
+		this.applyWorkspaceProjects()
 	}
 }

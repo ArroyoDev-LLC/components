@@ -134,8 +134,13 @@ export class ComponentsMonorepo
 
 	protected applyNx(): this {
 		super.applyNx()
-		// readonly access token (safe to be public)
-		this.nx.useNxCloud(ComponentsMonorepo.nxPublicReadonlyToken)
+		const nxJson = this.tryFindObjectFile('nx.json')
+		if (nxJson) {
+			nxJson.addOverride(
+				'nxCloudAccessToken',
+				ComponentsMonorepo.nxPublicReadonlyToken,
+			)
+		}
 		return this
 	}
 

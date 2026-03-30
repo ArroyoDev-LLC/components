@@ -41,11 +41,13 @@ const monorepo = new ComponentsMonorepo({
 		'ts-morph@26.0.0',
 		'@sindresorhus/is',
 		'pathe',
+		'nx@22.6.2',
 	],
 })
 monorepo.package.addPackageResolutions(
 	`projen@${monorepo.options.projenVersion!}`,
 )
+monorepo.package.addPackageResolutions('nx@22.6.2')
 
 // Builders
 

@@ -145,7 +145,6 @@ export class GithubCodePipeline {
 	 */
 	addNxEnv(accessTokenSecret?: string) {
 		return this.addSynthEnv({
-			NX_NON_NATIVE_HASHER: 'true',
 			NX_BRANCH: interpolateValue(ActionsContext.GITHUB, 'event.number'),
 			NX_RUN_GROUP: interpolateValue(ActionsContext.GITHUB, 'run_id'),
 			NX_CLOUD_ACCESS_TOKEN: interpolateValue(

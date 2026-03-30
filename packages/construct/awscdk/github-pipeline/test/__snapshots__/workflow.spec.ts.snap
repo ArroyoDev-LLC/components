@@ -123,7 +123,6 @@ exports[`GithubCodePipeline > builder has expected props 2`] = `
     "GIGET_AUTH": "\${{secrets.GH_CONFIGS_RO_PAT}}",
     "NX_BRANCH": "\${{github.event.number}}",
     "NX_CLOUD_ACCESS_TOKEN": "\${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
-    "NX_NON_NATIVE_HASHER": "true",
     "NX_RUN_GROUP": "\${{github.run_id}}",
   },
   "installCommands": [
@@ -253,7 +252,6 @@ GithubCodePipeline {
       "GIGET_AUTH": "\${{secrets.GH_CONFIGS_RO_PAT}}",
       "NX_BRANCH": "\${{github.event.number}}",
       "NX_CLOUD_ACCESS_TOKEN": "\${{secrets.NX_CLOUD_ACCESS_TOKEN}}",
-      "NX_NON_NATIVE_HASHER": "true",
       "NX_RUN_GROUP": "\${{github.run_id}}",
     },
     "installCommands": [
@@ -291,7 +289,6 @@ jobs:
     env:
       CI: \\"true\\"
       GIGET_AUTH: \${{secrets.GH_CONFIGS_RO_PAT}}
-      NX_NON_NATIVE_HASHER: \\"true\\"
       NX_BRANCH: \${{github.event.number}}
       NX_RUN_GROUP: \${{github.run_id}}
       NX_CLOUD_ACCESS_TOKEN: \${{secrets.NX_CLOUD_ACCESS_TOKEN}}

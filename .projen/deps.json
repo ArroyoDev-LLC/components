@@ -86,12 +86,8 @@
       "type": "build"
     },
     {
-      "name": "nx-cloud",
-      "type": "build"
-    },
-    {
       "name": "nx",
-      "version": "^19",
+      "version": "22.6.2",
       "type": "build"
     },
     {
@@ -278,6 +274,11 @@
     {
       "name": "eslint",
       "version": "^8",
+      "type": "override"
+    },
+    {
+      "name": "nx",
+      "version": "22.6.2",
       "type": "override"
     },
     {

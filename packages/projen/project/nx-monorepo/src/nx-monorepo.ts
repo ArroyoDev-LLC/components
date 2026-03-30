@@ -279,6 +279,7 @@ export class MonorepoProject extends NxMonorepoProject {
 			nxJson.addDeletionOverride('npmScope')
 			nxJson.addDeletionOverride('tasksRunnerOptions')
 			nxJson.addOverride('useDaemonProcess', false)
+			nxJson.addOverride('analytics', false)
 		}
 		return this
 	}

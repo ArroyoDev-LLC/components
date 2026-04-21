@@ -72,7 +72,7 @@ describe('GithubCodePipeline', () => {
 
 		const pipe = builder
 			.build(ctx.app)
-			.concurrency({ cancelInProgress: false, group: 'deploy-multi-stack' })
+			.withConcurrency({ cancelInProgress: false, group: 'deploy-multi-stack' })
 			.onWorkflowDispatch()
 			.onWorkflowCall({
 				runner: {

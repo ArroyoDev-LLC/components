@@ -18,8 +18,9 @@ import {
 	type TypeScriptSourceFileTransform,
 } from './typescript-source-file'
 
-export interface TypeScriptSourceConfigOptions<ConfigT = Record<string, any>>
-	extends TypeScriptSourceFileOptions {
+export interface TypeScriptSourceConfigOptions<
+	ConfigT = Record<string, any>,
+> extends TypeScriptSourceFileOptions {
 	/**
 	 * Config spec for current component.
 	 */

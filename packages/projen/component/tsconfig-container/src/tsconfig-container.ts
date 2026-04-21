@@ -16,8 +16,7 @@ export interface TypescriptConfigContainerOptions {
 	readonly configsDirectory?: string
 }
 
-export interface TypescriptConfigContainerBuildOptions
-	extends Partial<javascript.TypescriptConfigOptions> {
+export interface TypescriptConfigContainerBuildOptions extends Partial<javascript.TypescriptConfigOptions> {
 	/**
 	 * Override strategy.
 	 * Only applicable when {@link projen#javascript.TypescriptConfigOptions.fileName} exists.

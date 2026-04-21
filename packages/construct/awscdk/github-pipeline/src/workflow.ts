@@ -605,10 +605,14 @@ export class GithubWorkflowPipeline extends ghpipelines.GitHubWorkflow {
 	}
 
 	/**
-	 * Define workflow concurrency
+	 * Define workflow concurrency.
+	 *
+	 * Renamed from `concurrency` to avoid shadowing the private `concurrency`
+	 * field introduced in cdk-pipelines-github >= 0.4.135.
+	 *
 	 * @param options
 	 */
-	concurrency(options: WorkflowConcurrency): this {
+	withConcurrency(options: WorkflowConcurrency): this {
 		const patch = ghpipelines.JsonPatch.add('/concurrency', {
 			group: options.group,
 			...(typeof options.cancelInProgress === 'boolean'

@@ -39,7 +39,9 @@ const getDtsFiles = async (dir: string): Promise<string[]> => {
  *
  * @remarks
  * Copies declaration files that have already been compiled via tsc
- * temporarily into the source directory during rollup execution for rollup-dts-plugin.
+ * temporarily into the source directory during rollup execution for rollup-dts-plugin,
+ * then overlays the tsc declarations onto the output directory after build to work
+ * around unbuild 3.x emitting invalid `.d.ts` output (types stripped, bodies kept).
  *
  * @see https://github.com/unjs/unbuild/issues/304
  * @see https://github.com/Swatinem/rollup-plugin-dts/issues/127
@@ -70,6 +72,24 @@ export const compositePreset = (options?: CompositePresetsOptions) =>
 				},
 				'build:done': async (ctx) => {
 					if (ctx.options.stub) return
+					const typesDist = path.join(ctx.options.rootDir, declarationDir)
+					const outDir = ctx.options.outDir
+					const dtsFiles = await getDtsFiles(typesDist)
+					await Promise.all(
+						dtsFiles.map(async (filePath) => {
+							const rel = path.relative(typesDist, filePath)
+							const dest = path.join(outDir, rel)
+							await fs.mkdir(path.dirname(dest), { recursive: true })
+							await fs.copyFile(filePath, dest)
+						}),
+					)
+					const barrel = path.join(outDir, 'index.d.ts')
+					if (ctx.options.declaration === 'compatible') {
+						await Promise.all([
+							fs.copyFile(barrel, path.join(outDir, 'index.d.mts')),
+							fs.copyFile(barrel, path.join(outDir, 'index.d.cts')),
+						])
+					}
 					await Promise.all(
 						srcDtsFiles.map(([, srcDtsPath]) => fs.rm(srcDtsPath)),
 					)

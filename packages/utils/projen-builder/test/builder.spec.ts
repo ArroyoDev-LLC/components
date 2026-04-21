@@ -3,7 +3,7 @@ import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { builders, type BuildStep, ProjectBuilder } from '../src'
 import { type TypedPropertyDescriptorMap } from '../src/types'
 
-describe.concurrent('ProjectBuilder', () => {
+describe('ProjectBuilder', () => {
 	const optionsSpy = vi.fn()
 
 	beforeEach(() => optionsSpy.mockReset())

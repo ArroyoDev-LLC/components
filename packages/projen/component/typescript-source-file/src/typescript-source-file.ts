@@ -24,8 +24,10 @@ export interface TypeScriptSourceFileTransform {
 	(sourceFile: SourceFile): void
 }
 
-export interface TypeScriptSourceFileOptions
-	extends Omit<FileBaseOptions, 'readonly'> {
+export interface TypeScriptSourceFileOptions extends Omit<
+	FileBaseOptions,
+	'readonly'
+> {
 	source: string
 	format?: boolean
 	marker?: boolean

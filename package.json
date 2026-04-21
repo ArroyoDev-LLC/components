@@ -74,7 +74,7 @@
     "rimraf": "5.0.10",
     "rollup-plugin-vue": "6.0.0",
     "simple-git-hooks": "2.13.1",
-    "syncpack": "^12",
+    "syncpack": "^13",
     "ts-morph": "26.0.0",
     "ts-node": "10.9.2",
     "tsx": "3.14.0",

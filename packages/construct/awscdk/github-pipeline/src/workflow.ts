@@ -44,8 +44,10 @@ export interface ActionsWorkflowCallInput {
 /**
  * Github Actions Workflow Dispatch Input.
  */
-export interface ActionsWorkflowDispatchInput
-	extends Omit<ActionsWorkflowCallInput, 'type'> {
+export interface ActionsWorkflowDispatchInput extends Omit<
+	ActionsWorkflowCallInput,
+	'type'
+> {
 	type: ActionsWorkflowCallInput['type'] | 'choice' | 'environment'
 	options?: string[]
 }
@@ -175,8 +177,7 @@ export interface PipelineBuildProps {
 }
 
 export interface PipelineWorkflowProps
-	extends ghpipelines.GitHubWorkflowProps,
-		Omit<PipelineBuildProps, 'rootDir'> {
+	extends ghpipelines.GitHubWorkflowProps, Omit<PipelineBuildProps, 'rootDir'> {
 	rootDir?: string
 }
 

@@ -22,7 +22,7 @@ exports[`GithubCodePipeline > builder has expected props 1`] = `
   "postPublishSteps": [
     {
       "name": "My Custom post publish step",
-      "run": "echo \\"hello world\\"",
+      "run": "echo "hello world"",
     },
   ],
   "preBuildSteps": [
@@ -66,7 +66,7 @@ exports[`GithubCodePipeline > builder has expected props 1`] = `
     },
     {
       "name": "Authenticate Via OIDC Role",
-      "uses": "aws-actions/configure-aws-credentials@v1-node16",
+      "uses": "aws-actions/configure-aws-credentials@v4",
       "with": {
         "aws-access-key-id": undefined,
         "aws-region": "us-east-1",
@@ -154,7 +154,7 @@ GithubCodePipeline {
     "postPublishSteps": [
       {
         "name": "My Custom post publish step",
-        "run": "echo \\"hello world\\"",
+        "run": "echo "hello world"",
       },
     ],
     "preBuildSteps": [
@@ -198,7 +198,7 @@ GithubCodePipeline {
       },
       {
         "name": "Authenticate Via OIDC Role",
-        "uses": "aws-actions/configure-aws-credentials@v1-node16",
+        "uses": "aws-actions/configure-aws-credentials@v4",
         "with": {
           "aws-access-key-id": undefined,
           "aws-region": "us-east-1",
@@ -278,6 +278,9 @@ on:
         default: self-hosted
         description: custom runner
         required: false
+concurrency:
+  group: deploy-multi-stack
+  cancel-in-progress: false
 jobs:
   build-deploy-many-stages-synth:
     name: Synthesize
@@ -287,7 +290,7 @@ jobs:
     runs-on: \${{inputs.runner || 'ubuntu-latest'}}
     needs: []
     env:
-      CI: \\"true\\"
+      CI: "true"
       GIGET_AUTH: \${{secrets.GH_CONFIGS_RO_PAT}}
       NX_BRANCH: \${{github.event.number}}
       NX_RUN_GROUP: \${{github.run_id}}
@@ -300,18 +303,18 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           repository: CrisisCleanup/infrastructure
           ref: main
       - name: Setup PNPM
         uses: pnpm/action-setup@v4
         with:
-          version: \\"8\\"
+          version: "8"
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: \\"18\\"
+          node-version: "18"
           cache: pnpm
       - name: Install SOPs
         uses: CrisisCleanup/mozilla-sops-action@main
@@ -323,13 +326,13 @@ jobs:
           'ubuntu'))
         with:
           arch: arm64
-          version: \\"2\\"
+          version: "2"
       - name: Install Helm
         uses: azure/setup-helm@v3
         with:
           version: 3.6.3
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -382,7 +385,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: \\"18\\"
+          node-version: "18"
         if: inputs.runner && !contains(inputs.runner, 'ubuntu')
       - name: Install AWS CLI
         uses: unfor19/install-aws-cli-action@v1
@@ -390,9 +393,9 @@ jobs:
           'ubuntu'))
         with:
           arch: arm64
-          version: \\"2\\"
+          version: "2"
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -408,12 +411,11 @@ jobs:
         run: npm install --no-save cdk-assets
       - name: Publish
         id: publish
-        run: >-
-          targets=\\"./cdk.out/publish-Assets-FileAsset1-step.sh,./cdk.out/publish-Assets-FileAsset2-step.sh,./cdk.out/publish-Assets-FileAsset3-step.sh\\"
-
-          echo -n \\"$targets\\" | xargs -r -d',' -t -n1 -P2 /bin/bash
+        run: |-
+          targets="./cdk.out/publish-Assets-FileAsset1-step.sh,./cdk.out/publish-Assets-FileAsset2-step.sh,./cdk.out/publish-Assets-FileAsset3-step.sh"
+          echo -n "$targets" | xargs -r -d',' -t -n1 -P2 /bin/bash
       - name: My Custom post publish step
-        run: echo \\"hello world\\"
+        run: echo "hello world"
   alpha-alpha-stack-deploy:
     name: Deploy alphaalphastack5A5103F7
     permissions:
@@ -431,7 +433,7 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -439,7 +441,7 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
           role-session-name: deploy-many-stages
       - name: Assume CDK Deploy Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -450,12 +452,12 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}:role/cdk-hnb659fds-deploy-role-\${{secrets.AWS_ACCOUNT_ID_ALPHA}}-us-east-1
           role-external-id: Pipeline
       - id: Deploy
-        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+        uses: aws-actions/aws-cloudformation-github-deploy@v2
         with:
           name: alpha-alpha-stack
           template: https://cdk-hnb659fds-assets-\${{secrets.AWS_ACCOUNT_ID_ALPHA}}-us-east-1.s3.us-east-1.amazonaws.com/\${{
             needs.publish.outputs.asset-hash1 }}.json
-          no-fail-on-empty-changeset: \\"1\\"
+          no-fail-on-empty-changeset: "1"
           role-arn: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_ALPHA}}:role/cdk-hnb659fds-cfn-exec-role-\${{secrets.AWS_ACCOUNT_ID_ALPHA}}-us-east-1
   beta-beta-stack-deploy:
     name: Deploy betabetastackB3010893
@@ -475,7 +477,7 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -483,7 +485,7 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
           role-session-name: deploy-many-stages
       - name: Assume CDK Deploy Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -494,12 +496,12 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_BETA}}:role/cdk-hnb659fds-deploy-role-\${{secrets.AWS_ACCOUNT_ID_BETA}}-us-east-1
           role-external-id: Pipeline
       - id: Deploy
-        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+        uses: aws-actions/aws-cloudformation-github-deploy@v2
         with:
           name: beta-beta-stack
           template: https://cdk-hnb659fds-assets-\${{secrets.AWS_ACCOUNT_ID_BETA}}-us-east-1.s3.us-east-1.amazonaws.com/\${{
             needs.publish.outputs.asset-hash2 }}.json
-          no-fail-on-empty-changeset: \\"1\\"
+          no-fail-on-empty-changeset: "1"
           role-arn: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_BETA}}:role/cdk-hnb659fds-cfn-exec-role-\${{secrets.AWS_ACCOUNT_ID_BETA}}-us-east-1
   delta-delta-stack-deploy:
     name: Deploy deltadeltastack739940B6
@@ -519,7 +521,7 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_BETA}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_DELTA}}
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -527,7 +529,7 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
           role-session-name: deploy-many-stages
       - name: Assume CDK Deploy Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -538,16 +540,13 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_DELTA}}:role/cdk-hnb659fds-deploy-role-\${{secrets.AWS_ACCOUNT_ID_DELTA}}-us-east-1
           role-external-id: Pipeline
       - id: Deploy
-        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+        uses: aws-actions/aws-cloudformation-github-deploy@v2
         with:
           name: delta-delta-stack
           template: https://cdk-hnb659fds-assets-\${{secrets.AWS_ACCOUNT_ID_DELTA}}-us-east-1.s3.us-east-1.amazonaws.com/\${{
             needs.publish.outputs.asset-hash3 }}.json
-          no-fail-on-empty-changeset: \\"1\\"
+          no-fail-on-empty-changeset: "1"
           role-arn: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_DELTA}}:role/cdk-hnb659fds-cfn-exec-role-\${{secrets.AWS_ACCOUNT_ID_DELTA}}-us-east-1
-concurrency:
-  group: deploy-multi-stack
-  cancel-in-progress: false
 "
 `;
 
@@ -561,6 +560,7 @@ on:
     branches:
       - main
   workflow_dispatch: {}
+concurrency: {}
 jobs:
   build-deploy-test-stack-synth:
     name: Synthesize
@@ -570,19 +570,19 @@ jobs:
     runs-on: \${{inputs.runner || 'ubuntu-latest'}}
     needs: []
     env:
-      CI: \\"true\\"
+      CI: "true"
     steps:
       - name: Mask values
         run: |-
           echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_TEST}}
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           repository: CrisisCleanup/infrastructure
           ref: main
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -603,7 +603,7 @@ jobs:
           pnpm -F 'test-stack' run synth:silent
           cp -r packages/test-stack/cdk.out ./cdk.out
         env:
-          ABC: \\"123\\"
+          ABC: "123"
       - name: Push cdk.context.json
         continue-on-error: true
         env:
@@ -634,7 +634,7 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_TEST}}
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -651,8 +651,8 @@ jobs:
       - name: Publish
         id: publish
         run: |-
-          targets=\\"./cdk.out/publish-Assets-FileAsset1-step.sh\\"
-          echo -n \\"$targets\\" | xargs -r -d',' -t -n1 -P2 /bin/bash
+          targets="./cdk.out/publish-Assets-FileAsset1-step.sh"
+          echo -n "$targets" | xargs -r -d',' -t -n1 -P2 /bin/bash
   test-test-stack-deploy:
     name: Deploy testteststack14D97B62
     permissions:
@@ -668,7 +668,7 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_TEST}}
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -676,7 +676,7 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
           role-session-name: deploy-test-stack
       - name: Assume CDK Deploy Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -687,12 +687,12 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_TEST}}:role/cdk-hnb659fds-deploy-role-\${{secrets.AWS_ACCOUNT_ID_TEST}}-us-east-1
           role-external-id: Pipeline
       - id: Deploy
-        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+        uses: aws-actions/aws-cloudformation-github-deploy@v2
         with:
           name: test-test-stack
           template: https://cdk-hnb659fds-assets-\${{secrets.AWS_ACCOUNT_ID_TEST}}-us-east-1.s3.us-east-1.amazonaws.com/\${{
             needs.publish.outputs.asset-hash1 }}.json
-          no-fail-on-empty-changeset: \\"1\\"
+          no-fail-on-empty-changeset: "1"
           role-arn: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_TEST}}:role/cdk-hnb659fds-cfn-exec-role-\${{secrets.AWS_ACCOUNT_ID_TEST}}-us-east-1
 "
 `;
@@ -707,6 +707,7 @@ on:
     branches:
       - main
   workflow_dispatch: {}
+concurrency: {}
 jobs:
   build-deploy-test-stack-synth:
     name: Synthesize
@@ -716,19 +717,19 @@ jobs:
     runs-on: \${{inputs.runner || 'ubuntu-latest'}}
     needs: []
     env:
-      CI: \\"true\\"
+      CI: "true"
     steps:
       - name: Mask values
         run: |-
           echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_TEST}}
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           repository: CrisisCleanup/infrastructure
           ref: main
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -775,7 +776,7 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_TEST}}
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -792,8 +793,8 @@ jobs:
       - name: Publish
         id: publish
         run: |-
-          targets=\\"./cdk.out/publish-Assets-FileAsset1-step.sh\\"
-          echo -n \\"$targets\\" | xargs -r -d',' -t -n1 -P2 /bin/bash
+          targets="./cdk.out/publish-Assets-FileAsset1-step.sh"
+          echo -n "$targets" | xargs -r -d',' -t -n1 -P2 /bin/bash
   test-test-stack-deploy:
     name: Deploy testteststack14D97B62
     permissions:
@@ -809,7 +810,7 @@ jobs:
           echo ::add-mask::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}
           echo ::add-mask::\${{secrets.AWS_ACCOUNT_ID_TEST}}
       - name: Authenticate Via OIDC Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -817,7 +818,7 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_PIPELINE_ACCOUNT_ID}}:role/GitHubActionRole
           role-session-name: deploy-test-stack
       - name: Assume CDK Deploy Role
-        uses: aws-actions/configure-aws-credentials@v1-node16
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
           role-duration-seconds: 1800
@@ -828,12 +829,12 @@ jobs:
           role-to-assume: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_TEST}}:role/cdk-hnb659fds-deploy-role-\${{secrets.AWS_ACCOUNT_ID_TEST}}-us-east-1
           role-external-id: Pipeline
       - id: Deploy
-        uses: aws-actions/aws-cloudformation-github-deploy@v1.2.0
+        uses: aws-actions/aws-cloudformation-github-deploy@v2
         with:
           name: test-test-stack
           template: https://cdk-hnb659fds-assets-\${{secrets.AWS_ACCOUNT_ID_TEST}}-us-east-1.s3.us-east-1.amazonaws.com/\${{
             needs.publish.outputs.asset-hash1 }}.json
-          no-fail-on-empty-changeset: \\"1\\"
+          no-fail-on-empty-changeset: "1"
           role-arn: arn:aws:iam::\${{secrets.AWS_ACCOUNT_ID_TEST}}:role/cdk-hnb659fds-cfn-exec-role-\${{secrets.AWS_ACCOUNT_ID_TEST}}-us-east-1
 "
 `;

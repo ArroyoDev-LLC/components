@@ -62,15 +62,15 @@ describe('mergeObjectLiteral', () => {
 		console.log(ctx.sourceFile.getFullText())
 		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
 			"const testObj = { scalar: 1, topLevelArray: [1, 2,  3], secondLevel: { secondLevelArray: [{nestedKey: '1'},  {
-			            nestedKey: \\"2\\"
-			        }], secondLevelScalar: \\"override\\",
+			            nestedKey: "2"
+			        }], secondLevelScalar: "override",
 			    secondLevelWriter: anotherCallable(),
-			    secondLevelNew: \\"newValue\\",
+			    secondLevelNew: "newValue",
 			    thirdLevel: {
-			        thirdLevelArray: [\\"a\\"]
+			        thirdLevelArray: ["a"]
 			    }
 			},
-			    newScalar: \\"value\\",
+			    newScalar: "value",
 			    topLevelWriter: aCallable()
 			};"
 		`)
@@ -89,11 +89,11 @@ describe('mergeObjectLiteral', () => {
 		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
 			"const testObj = { scalar: 1, topLevelArray: [1,2], secondLevel: { secondLevelArray: [{nestedKey: '1'}], secondLevelScalar: 1 },
 			    newLevel: {
-			        key: \\"value\\",
-			        arrayKey: [\\"a\\",  \\"b\\"],
+			        key: "value",
+			        arrayKey: ["a",  "b"],
 			        nested: {
-			            nestedArrayObj: [\\"a\\",  \\"b\\",  {
-			                                key: \\"c\\"
+			            nestedArrayObj: ["a",  "b",  {
+			                                key: "c"
 			                            }]
 			        }
 			    }
@@ -121,11 +121,11 @@ describe('mergeObjectLiteral', () => {
 			expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
 				"const testObj = { scalar: 1, topLevelArray: [1,2], secondLevel: { secondLevelArray: [{nestedKey: '1'}], secondLevelScalar: 1 },
 				    newLevel: {
-				        key: \\"value\\",
-				        writerKey: \\"writerValue\\",
-				        arrayKey: [\\"a\\",  \\"b\\"],
+				        key: "value",
+				        writerKey: "writerValue",
+				        arrayKey: ["a",  "b"],
 				        nested: {
-				            nestedArrayObj: [\\"a\\",  \\"b\\",  {
+				            nestedArrayObj: ["a",  "b",  {
 				                                key: callable()
 				                            }]
 				        }
@@ -157,7 +157,7 @@ describe('mergeObjectLiteral', () => {
 			"const testObj = {
 			    scalar: 1, topLevelArray: [1, 2], secondLevel: {
 			        secondLevelArray: [{ nestedKey: '1' }, {
-			            nestedKey: \\"2\\"
+			            nestedKey: "2"
 			        }], secondLevelScalar: 1
 			    }
 			};
@@ -178,10 +178,10 @@ describe('mergeObjectLiteral', () => {
 		expect(getMergeStrategy(obj)).toBe(ArrayLiteralMergeStrategyType.OVERWRITE)
 		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
 			"const testObj = { scalar: 1, topLevelArray: [1,2], secondLevel: { secondLevelArray: [{
-			            nestedKey: \\"-1\\"
+			            nestedKey: "-1"
 			        }, 
 			            {
-			                nestedKey: \\"new\\"
+			                nestedKey: "new"
 			            }], secondLevelScalar: 1 } };"
 		`)
 	})
@@ -199,10 +199,10 @@ describe('mergeObjectLiteral', () => {
 		expect(getMergeStrategy(obj)).toBe(ArrayLiteralMergeStrategyType.MERGE)
 		expect(ctx.sourceFile.getFullText()).toMatchInlineSnapshot(`
 			"const testObj = { scalar: 1, topLevelArray: [1,2], secondLevel: { secondLevelArray: [{nestedKey: '1',
-			            newKey: \\"newValueOn1\\"
+			            newKey: "newValueOn1"
 			        }, 
 			            {
-			                nestedKey: \\"new\\"
+			                nestedKey: "new"
 			            }], secondLevelScalar: 1 } };"
 		`)
 	})

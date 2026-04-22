@@ -42,12 +42,12 @@ export class TypeDocGithubPages extends Component {
 			}
 		}
 		const defaults = {
-			'actions/checkout': 'v3',
-			'actions/configure-pages': 'v3',
-			'actions/upload-pages-artifact': 'v1',
-			'actions/deploy-pages': 'v2',
-			'pnpm/action-setup': 'v2.2.4',
-			'actions/setup-node': 'v3',
+			'actions/checkout': 'v4',
+			'actions/configure-pages': 'v5',
+			'actions/upload-pages-artifact': 'v3',
+			'actions/deploy-pages': 'v4',
+			'pnpm/action-setup': 'v4',
+			'actions/setup-node': 'v4',
 		}
 		Object.entries(defaults).forEach(([name, version]) =>
 			setDefault(name, version),
@@ -100,7 +100,7 @@ export class TypeDocGithubPages extends Component {
 				name: 'Setup Node',
 				uses: this.gh.actions.get('actions/setup-node'),
 				with: {
-					'node-version': '18',
+					'node-version': '24.14.1',
 					cache: 'pnpm',
 				},
 			},

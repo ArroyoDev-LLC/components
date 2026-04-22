@@ -290,7 +290,7 @@ export class LintConfig extends Component {
 
 	readonly backend: LintBackendKind
 
-	#backend: LintBackend
+	protected linter: LintBackend
 	#formatQueue: PQueue
 	#extensions: Set<string> = new Set([
 		'.js',
@@ -304,33 +304,29 @@ export class LintConfig extends Component {
 	])
 
 	get eslint(): Eslint | undefined {
-		return this.#backend instanceof EslintBackend
-			? this.#backend.eslint
-			: undefined
+		return this.linter instanceof EslintBackend ? this.linter.eslint : undefined
 	}
 
 	get eslintFile(): ObjectFile | undefined {
-		return this.#backend instanceof EslintBackend
-			? this.#backend.eslintFile
+		return this.linter instanceof EslintBackend
+			? this.linter.eslintFile
 			: undefined
 	}
 
 	get prettier(): Prettier | undefined {
-		return this.#backend instanceof EslintBackend
-			? this.#backend.prettier
+		return this.linter instanceof EslintBackend
+			? this.linter.prettier
 			: undefined
 	}
 
 	get prettierFile(): ObjectFile | undefined {
-		return this.#backend instanceof EslintBackend
-			? this.#backend.prettierFile
+		return this.linter instanceof EslintBackend
+			? this.linter.prettierFile
 			: undefined
 	}
 
 	get biome(): Biome | undefined {
-		return this.#backend instanceof BiomeBackend
-			? this.#backend.biome
-			: undefined
+		return this.linter instanceof BiomeBackend ? this.linter.biome : undefined
 	}
 
 	constructor(project: NodeProject, options: LintConfigOptions = {}) {
@@ -342,7 +338,7 @@ export class LintConfig extends Component {
 		} = options
 		this.backend = backend
 		this.#formatQueue = this.buildFormatQueue(formatTimeout)
-		this.#backend =
+		this.linter =
 			backend === 'biome'
 				? new BiomeBackend(project, options)
 				: new EslintBackend(project, { ...options, useTypeInformation })
@@ -397,7 +393,7 @@ export class LintConfig extends Component {
 	 * @param step Task step to merge.
 	 */
 	updateLintTask(step: TaskStep): this {
-		this.#backend.updateLintTask(step)
+		this.linter.updateLintTask(step)
 		return this
 	}
 
@@ -415,7 +411,7 @@ export class LintConfig extends Component {
 	 * @param replace Existing value to replace. Defaults to 'eslint'.
 	 */
 	setLintExec(exec: string, replace: string = 'eslint'): this {
-		this.#backend.setLintExec(exec, replace)
+		this.linter.setLintExec(exec, replace)
 		return this
 	}
 
@@ -431,7 +427,7 @@ export class LintConfig extends Component {
 	 * @param request format request.
 	 */
 	enqueueFormatRequest(request: FormatRequest): this {
-		const cmd = this.#backend.formatFileCommand(request.filePath)
+		const cmd = this.linter.formatFileCommand(request.filePath)
 		void this.#formatQueue.add(async () => {
 			this.project.logger.debug(
 				`formatting source file: ${request.filePath} (from: ${request.workingDirectory})`,
@@ -524,8 +520,8 @@ export class LintConfig extends Component {
 	 * @inheritDoc
 	 */
 	preSynthesize() {
-		this.#backend.ignoreReadOnlyFiles()
-		this.#backend.applyResolvableExtensions(Array.from(this.#extensions))
+		this.linter.ignoreReadOnlyFiles()
+		this.linter.applyResolvableExtensions(Array.from(this.#extensions))
 		this.maybeEmitRootBiomeConfig()
 		super.preSynthesize()
 	}

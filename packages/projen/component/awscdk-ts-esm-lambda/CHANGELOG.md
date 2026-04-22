@@ -1,5 +1,30 @@
 # Changelog
 
+## [1.1.0](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.awscdk-ts-esm-lambda-v1.0.2...@arroyodev-llc/projen.component.awscdk-ts-esm-lambda-v1.1.0) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+* Update generated files, update snapshots ([c84c10f](https://github.com/ArroyoDev-LLC/components/commit/c84c10fa2314024b855c1b60a2ef926eab94fd7c))
+
+
+### Bug Fixes
+
+* Resolve typescript 5.8, projen 0.99, and build compatibility issues ([257a4f9](https://github.com/ArroyoDev-LLC/components/commit/257a4f974215e437abeb710110d9f1fd2c39437d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.28
+    * @arroyodev-llc/utils.projen bumped to 0.1.24
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.9
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.14
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.6 to 0.1.7
+
 ## [1.0.2](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.awscdk-ts-esm-lambda-v1.0.1...@arroyodev-llc/projen.component.awscdk-ts-esm-lambda-v1.0.2) (2024-10-22)
 
 

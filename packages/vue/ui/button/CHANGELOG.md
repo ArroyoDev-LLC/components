@@ -6,6 +6,26 @@
   * dependencies
     * @arroyodev-llc/vue.ui.text bumped to 0.1.7
 
+## [0.1.26](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.25...@arroyodev-llc/vue.ui.button-v0.1.26) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+* Upgrade vitest 4.1.1, vite 6.4.1, migrate workspace to projects ([59df121](https://github.com/ArroyoDev-LLC/components/commit/59df1219ff51dd01d5aeedb9eb1bca6dbd55b107))
+
+
+### Bug Fixes
+
+* Resolve typescript 5.8, projen 0.99, and build compatibility issues ([257a4f9](https://github.com/ArroyoDev-LLC/components/commit/257a4f974215e437abeb710110d9f1fd2c39437d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/vue.ui.text bumped to 0.1.26
+
 ## [0.1.25](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/vue.ui.button-v0.1.24...@arroyodev-llc/vue.ui.button-v0.1.25) (2024-07-03)
 
 

@@ -8,6 +8,40 @@
     * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.11
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.30](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.29...@arroyodev-llc/projen.project.nx-monorepo-v0.1.30) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+* **projen.project.nx-monorepo:** Disable analytics by default ([7e909ec](https://github.com/ArroyoDev-LLC/components/commit/7e909ecd2f3abe441149d2291a499ae4c431df13))
+* **projen.project.nx-monorepo:** Update typedoc-workflow actions ([7112317](https://github.com/ArroyoDev-LLC/components/commit/7112317fb869465538aad9386e6b8062618287ea))
+* Update generated files, update snapshots ([c84c10f](https://github.com/ArroyoDev-LLC/components/commit/c84c10fa2314024b855c1b60a2ef926eab94fd7c))
+* Upgrade nx from 19 to 22 ([a38265f](https://github.com/ArroyoDev-LLC/components/commit/a38265fcd71c9a290d4c743b5f40e966f1fd40af))
+
+
+### Bug Fixes
+
+* Replace removed secretToString import, fix CDK alpha version, pin eslint v8 ([bf6a224](https://github.com/ArroyoDev-LLC/components/commit/bf6a224b5400e6cf2cf194c032efe3d10a6a881b))
+* Resolve typescript 5.8, projen 0.99, and build compatibility issues ([257a4f9](https://github.com/ArroyoDev-LLC/components/commit/257a4f974215e437abeb710110d9f1fd2c39437d))
+
+
+### Continuous Integration
+
+* Update generated static workflow ([7fba827](https://github.com/ArroyoDev-LLC/components/commit/7fba827d5036e34552fdfd09e9aa8469fbcbf44b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.25
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.26
+    * @arroyodev-llc/projen.component.tsconfig-container bumped to 0.1.20
+    * @arroyodev-llc/utils.projen bumped to 0.1.24
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.6 to 0.1.7
+
 ## [0.1.29](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.28...@arroyodev-llc/projen.project.nx-monorepo-v0.1.29) (2024-07-03)
 
 

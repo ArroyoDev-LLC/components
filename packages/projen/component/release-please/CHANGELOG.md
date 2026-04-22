@@ -6,6 +6,27 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.27](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.26...@arroyodev-llc/projen.component.release-please-v0.1.27) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+
+
+### Bug Fixes
+
+* Replace removed secretToString import, fix CDK alpha version, pin eslint v8 ([bf6a224](https://github.com/ArroyoDev-LLC/components/commit/bf6a224b5400e6cf2cf194c032efe3d10a6a881b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.24
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.6 to 0.1.7
+
 ## [0.1.26](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.release-please-v0.1.25...@arroyodev-llc/projen.component.release-please-v0.1.26) (2024-07-03)
 
 

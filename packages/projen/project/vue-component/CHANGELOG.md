@@ -103,6 +103,32 @@
   * peerDependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.28
 
+## [0.1.37](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.36...@arroyodev-llc/projen.project.vue-component-v0.1.37) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.vite bumped to 0.1.30
+    * @arroyodev-llc/projen.component.vue bumped to 0.1.34
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.34
+    * @arroyodev-llc/utils.projen-builder bumped to 0.1.9
+  * devDependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.25
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.26
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.29
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.6 to 0.1.7
+  * peerDependencies
+    * @arroyodev-llc/projen.component.linting bumped to 0.1.25
+    * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.26
+    * @arroyodev-llc/projen.component.unbuild bumped to 0.1.29
+
 ## [0.1.34](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.33...@arroyodev-llc/projen.project.vue-component-v0.1.34) (2024-07-03)
 
 

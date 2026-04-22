@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.1.17](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.dir-env-v0.1.16...@arroyodev-llc/projen.component.dir-env-v0.1.17) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+* **projen.component.dir-env:** Add support for nix flakes ([736ab4a](https://github.com/ArroyoDev-LLC/components/commit/736ab4ac5d6dc3739e20d5609a73ccc9bc314850))
+* Update generated files, update snapshots ([c84c10f](https://github.com/ArroyoDev-LLC/components/commit/c84c10fa2314024b855c1b60a2ef926eab94fd7c))
+* Upgrade vitest 4.1.1, vite 6.4.1, migrate workspace to projects ([59df121](https://github.com/ArroyoDev-LLC/components/commit/59df1219ff51dd01d5aeedb9eb1bca6dbd55b107))
+
+
+### Tests
+
+* **projen.component.dir-env:** Add unit tests for direnv with nix flake support ([4cbf833](https://github.com/ArroyoDev-LLC/components/commit/4cbf833988cc7b73743813258783a9a4a508734d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.6 to 0.1.7
+
 ## [0.1.16](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.dir-env-v0.1.15...@arroyodev-llc/projen.component.dir-env-v0.1.16) (2024-07-03)
 
 

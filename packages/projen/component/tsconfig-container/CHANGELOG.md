@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.20](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tsconfig-container-v0.1.19...@arroyodev-llc/projen.component.tsconfig-container-v0.1.20) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+
+
+### Bug Fixes
+
+* Resolve typescript 5.8, projen 0.99, and build compatibility issues ([257a4f9](https://github.com/ArroyoDev-LLC/components/commit/257a4f974215e437abeb710110d9f1fd2c39437d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.24
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.6 to 0.1.7
+
 ## [0.1.19](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.tsconfig-container-v0.1.18...@arroyodev-llc/projen.component.tsconfig-container-v0.1.19) (2024-07-03)
 
 

@@ -81,6 +81,11 @@ export class ComponentsMonorepo
 		this.applyRecursive(
 			(project) => {
 				if (NodePackageUtils.isNodeProject(project)) {
+					const lintConfig = LintConfig.of(project)
+					const tsCmd =
+						lintConfig?.backend === 'biome'
+							? 'biome check --files-ignore-unknown=true --no-errors-on-unmatched --write'
+							: 'eslint --no-error-on-unmatched-pattern --fix'
 					new LintStaged(project, {
 						entries: [
 							{
@@ -88,7 +93,7 @@ export class ComponentsMonorepo
 								commands: [
 									NodePackageUtils.command.exec(
 										this.package.packageManager,
-										'eslint --no-error-on-unmatched-pattern --fix',
+										tsCmd,
 									),
 								],
 							},

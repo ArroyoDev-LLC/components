@@ -56,6 +56,10 @@ export interface FormatRequest {
 	 * Working directory to spawn the formatter from.
 	 */
 	workingDirectory: string
+	/**
+	 * Linting implementation to use.
+	 */
+	linter?: LintBackend
 }
 
 /**
@@ -427,7 +431,8 @@ export class LintConfig extends Component {
 	 * @param request format request.
 	 */
 	enqueueFormatRequest(request: FormatRequest): this {
-		const cmd = this.linter.formatFileCommand(request.filePath)
+		const linter = request.linter ?? this.linter
+		const cmd = linter.formatFileCommand(request.filePath)
 		void this.#formatQueue.add(async () => {
 			this.project.logger.debug(
 				`formatting source file: ${request.filePath} (from: ${request.workingDirectory})`,
@@ -459,6 +464,7 @@ export class LintConfig extends Component {
 		return LintConfig.of(root)!.enqueueFormatRequest({
 			filePath,
 			workingDirectory: this.project.outdir,
+			linter: this.linter,
 		})
 	}
 

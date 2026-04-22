@@ -32,6 +32,24 @@
   * dependencies
     * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.27
 
+## [0.1.29](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.28...@arroyodev-llc/projen.component.unbuild-v0.1.29) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.component.typescript-source-file bumped to 0.1.28
+    * @arroyodev-llc/utils.projen bumped to 0.1.24
+    * @arroyodev-llc/utils.ts-ast bumped to 0.1.14
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.6 to 0.1.7
+
 ## [0.1.27](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.unbuild-v0.1.26...@arroyodev-llc/projen.component.unbuild-v0.1.27) (2024-07-03)
 
 

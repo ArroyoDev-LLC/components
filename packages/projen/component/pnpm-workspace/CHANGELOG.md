@@ -12,6 +12,22 @@
   * dependencies
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.26](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.pnpm-workspace-v0.1.25...@arroyodev-llc/projen.component.pnpm-workspace-v0.1.26) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/utils.projen bumped to 0.1.24
+  * devDependencies
+    * @arroyodev-llc/utils.unbuild-composite-preset bumped from 0.1.6 to 0.1.7
+
 ## [0.1.25](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.component.pnpm-workspace-v0.1.24...@arroyodev-llc/projen.component.pnpm-workspace-v0.1.25) (2024-07-03)
 
 

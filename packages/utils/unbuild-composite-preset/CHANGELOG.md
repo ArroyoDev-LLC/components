@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.7](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.unbuild-composite-preset-v0.1.6...@arroyodev-llc/utils.unbuild-composite-preset-v0.1.7) (2026-04-22)
+
+
+### Features
+
+* **deps:** Update dependencies ([f7ca76e](https://github.com/ArroyoDev-LLC/components/commit/f7ca76ea2c9a4b869b2d0145040047a49e75188d))
+
+
+### Bug Fixes
+
+* **utils.unbuild-composite-preset:** Resolve unbuild 3.x invalid .d.ts outputs ([28733e4](https://github.com/ArroyoDev-LLC/components/commit/28733e44eaba7724ee90a0733e6a1ff200a57f4d))
+
 ## [0.1.6](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/utils.unbuild-composite-preset-v0.1.5...@arroyodev-llc/utils.unbuild-composite-preset-v0.1.6) (2024-07-03)
 
 

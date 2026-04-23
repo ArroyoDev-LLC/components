@@ -178,6 +178,51 @@ export class MonorepoProject extends NxMonorepoProject {
 			.applyNx()
 			.applyCleanTask()
 			.applyTypeDoc(this.github)
+			.applyRootTsPaths()
+			.applyCompileFullTask()
+	}
+
+	/**
+	 * Add a `compile:full` task that runs `tsc --build` at the workspace root,
+	 * leveraging per-package composite references for a single-pass incremental
+	 * compile across the whole graph.
+	 * @protected
+	 */
+	protected applyCompileFullTask(): this {
+		const task =
+			this.tasks.tryFind('compile:full') ??
+			this.tasks.addTask('compile:full', {
+				description:
+					'Full workspace composite compile via tsc --build (leverages project references).',
+			})
+		task.reset()
+		task.exec(
+			NodePackageUtils.command.exec(
+				this.package.packageManager,
+				'tsc',
+				'--build',
+			),
+		)
+		return this
+	}
+
+	/**
+	 * Register tsconfig `paths` and `references` on the root tsconfig for every
+	 * TypeScript subproject. Runs at preSynth so newly added packages are covered
+	 * without each consumer having to route them through `addWorkspaceDeps`.
+	 * @protected
+	 */
+	protected applyRootTsPaths(): this {
+		this.applyPreSynth(() => {
+			const allTsSubProjects = this.sortedSubProjects.filter(
+				(p): p is typescript.TypeScriptProject =>
+					p instanceof typescript.TypeScriptProject,
+			)
+			this.tsconfigContainer
+				.addTsConfigReferences(this, allTsSubProjects)
+				.addTsConfigPaths(this, allTsSubProjects)
+		})
+		return this
 	}
 
 	/**

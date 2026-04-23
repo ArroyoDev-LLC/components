@@ -47,13 +47,13 @@
       ]
     },
     "compile": {
-      "dependsOn": [
-        "^compile"
-      ],
       "inputs": [
         "production",
         "^production",
         "sharedConfig"
+      ],
+      "dependsOn": [
+        "^compile"
       ]
     },
     "package": {

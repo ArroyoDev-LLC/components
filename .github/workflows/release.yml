@@ -15,7 +15,7 @@ jobs:
     env:
       NX_BRANCH: ${{ github.event.number }}
       NX_RUN_GROUP: ${{ github.run_id }}
-      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN_WRITE || secrets.NX_CLOUD_ACCESS_TOKEN }}
+      NX_CLOUD_ACCESS_TOKEN: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && secrets.NX_CLOUD_AUTH_TOKEN_WRITE || secrets.NX_CLOUD_ACCESS_TOKEN }}
       CI: "true"
     steps:
       - uses: actions/checkout@v4

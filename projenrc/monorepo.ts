@@ -188,6 +188,14 @@ export class ComponentsMonorepo
 			nxJson.addOverride('targetDefaults.eslint', {
 				inputs: ['production', 'test', 'sharedConfig'],
 			})
+			// @nx/js/typescript plugin: import-based graph edges.
+			// No target inference — we keep projen-owned build/compile/test targets.
+			nxJson.addOverride('plugins', [
+				{
+					plugin: '@nx/js/typescript',
+					options: {},
+				},
+			])
 		}
 		return this
 	}

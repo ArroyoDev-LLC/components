@@ -42,12 +42,15 @@ const monorepo = new ComponentsMonorepo({
 		'@sindresorhus/is',
 		'pathe',
 		'nx@22.6.2',
+		'@nx/js@22.6.2',
 	],
 })
 monorepo.package.addPackageResolutions(
 	`projen@${monorepo.options.projenVersion!}`,
 )
 monorepo.package.addPackageResolutions('nx@22.6.2')
+// collapse dual constructs peer-resolution of aws-cdk-lib/@aws/pdk/projen
+monorepo.package.addPackageResolutions('constructs@10.6.0')
 
 // Builders
 

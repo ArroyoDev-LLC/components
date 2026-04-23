@@ -37,6 +37,10 @@ export class ComponentsMonorepo
 	static readonly githubCredentials = arroyoBot
 	static readonly nxPublicReadonlyToken: string =
 		'NTc0NTE5MGItNjY3Ni00YmQzLTg0YTUtNWFkMzc5ZWZiY2Y4fHJlYWQtb25seQ=='
+	// prefers write-scope token on main-branch push; falls back to read-only
+	// on PRs, forks, and when the write secret is absent.
+	static readonly nxCloudAccessTokenExpression: string =
+		"${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && secrets.NX_CLOUD_AUTH_TOKEN_WRITE || secrets.NX_CLOUD_ACCESS_TOKEN }}"
 
 	public readonly lintConfig: LintConfig
 	public readonly vitest: Vitest
@@ -130,6 +134,25 @@ export class ComponentsMonorepo
 		this.nx.setTargetDefault('compile', {
 			dependsOn: ['^compile'],
 		})
+		this.applyAffectedAwareBuildTask()
+	}
+
+	/**
+	 * Rewrite the root `build` task to be affected-aware via env vars.
+	 * CI sets NX_AFFECTED_MODE=affected + base/head SHAs for PRs; push events
+	 * leave them empty and the task falls back to `nx run-many`.
+	 */
+	protected applyAffectedAwareBuildTask(): this {
+		this.tasks
+			.tryFind('build')
+			?.reset(
+				'pnpm exec nx ${NX_AFFECTED_MODE:-run-many} --target=build' +
+					' --output-style=stream --nx-bail' +
+					' ${NX_AFFECTED_BASE:+--base=$NX_AFFECTED_BASE}' +
+					' ${NX_AFFECTED_HEAD:+--head=$NX_AFFECTED_HEAD}',
+				{ receiveArgs: true },
+			)
+		return this
 	}
 
 	protected applyNx(): this {
@@ -208,7 +231,46 @@ export class ComponentsMonorepo
 			this.releasePlease.releaseWorkflow.workflow,
 			'release-please',
 		)
-		return super.applyGithub(gh)
+		// release workflow always runs on main — always prefer write token.
+		this.releasePlease.releaseWorkflow.workflow.file.addOverride(
+			'jobs.release-please.env.NX_CLOUD_ACCESS_TOKEN',
+			'${{ secrets.NX_CLOUD_AUTH_TOKEN_WRITE || secrets.NX_CLOUD_ACCESS_TOKEN }}',
+		)
+		super.applyGithub(gh)
+		this.applyAffectedAwareBuildEnv(gh)
+		return this
+	}
+
+	/**
+	 * Populate NX_AFFECTED_* env on the build workflow so PR runs hit
+	 * `nx affected` (base/head SHAs) while push/manual runs fall through to
+	 * `nx run-many`.
+	 */
+	protected applyAffectedAwareBuildEnv(gh: GitHub): this {
+		const build = gh.tryFindWorkflow('build')
+		if (!build) return this
+		build.file.addOverride(
+			'jobs.build.env.NX_AFFECTED_MODE',
+			"${{ github.event_name == 'pull_request' && 'affected' || 'run-many' }}",
+		)
+		build.file.addOverride(
+			'jobs.build.env.NX_AFFECTED_BASE',
+			'${{ github.event.pull_request.base.sha }}',
+		)
+		build.file.addOverride(
+			'jobs.build.env.NX_AFFECTED_HEAD',
+			'${{ github.event.pull_request.head.sha }}',
+		)
+		// nx affected needs base SHA present locally; default shallow clone would miss it.
+		build.file.addOverride('jobs.build.steps.0.with.fetch-depth', 0)
+		// prefer write-scope token on main pushes so cache is warmed; fall back
+		// to read-only token on PRs/forks. NX_CLOUD_AUTH_TOKEN_WRITE is
+		// optional — absent secret gracefully degrades to read-only.
+		build.file.addOverride(
+			'jobs.build.env.NX_CLOUD_ACCESS_TOKEN',
+			ComponentsMonorepo.nxCloudAccessTokenExpression,
+		)
+		return this
 	}
 
 	protected applyNpmConfig(npmConfig: NpmConfig): this {

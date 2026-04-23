@@ -60,6 +60,15 @@
         }
       ]
     },
+    "compile:full": {
+      "name": "compile:full",
+      "description": "Full workspace composite compile via tsc --build (leverages project references).",
+      "steps": [
+        {
+          "exec": "pnpm exec tsc --build"
+        }
+      ]
+    },
     "default": {
       "name": "default",
       "description": "Synthesize project files",

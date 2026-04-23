@@ -5,6 +5,7 @@
     "clean": "pnpm exec projen clean",
     "clobber": "pnpm exec projen clobber",
     "compile": "pnpm exec projen compile",
+    "compile:full": "pnpm exec projen compile:full",
     "default": "pnpm exec projen default",
     "docgen": "pnpm exec projen docgen",
     "eject": "pnpm exec projen eject",

@@ -55,6 +55,39 @@
       ],
       "@arroyodev-llc/projen.project.vue-component": [
         "./packages/projen/project/vue-component/src/index"
+      ],
+      "@arroyodev-llc/construct.awscdk.github-pipeline": [
+        "./packages/construct/awscdk/github-pipeline/src/index"
+      ],
+      "@arroyodev-llc/projen.component.awscdk-ts-esm-lambda": [
+        "./packages/projen/component/awscdk-ts-esm-lambda/src/index"
+      ],
+      "@arroyodev-llc/projen.component.postcss": [
+        "./packages/projen/component/postcss/src/index"
+      ],
+      "@arroyodev-llc/projen.component.tailwind": [
+        "./packages/projen/component/tailwind/src/index"
+      ],
+      "@arroyodev-llc/projen.component.tsconfig-container": [
+        "./packages/projen/component/tsconfig-container/src/index"
+      ],
+      "@arroyodev-llc/utils.firebase": [
+        "./packages/utils/firebase/src/index"
+      ],
+      "@arroyodev-llc/utils.fs": [
+        "./packages/utils/fs/src/index"
+      ],
+      "@arroyodev-llc/utils.ts-ast": [
+        "./packages/utils/ts-ast/src/index"
+      ],
+      "@arroyodev-llc/utils.unbuild-composite-preset": [
+        "./packages/utils/unbuild-composite-preset/src/index"
+      ],
+      "@arroyodev-llc/vue.ui.button": [
+        "./packages/vue/ui/button/src/index"
+      ],
+      "@arroyodev-llc/vue.ui.text": [
+        "./packages/vue/ui/text/src/index"
       ]
     }
   },
@@ -150,6 +183,39 @@
     },
     {
       "path": "./packages/projen/project/vue-component/tsconfig.json"
+    },
+    {
+      "path": "./packages/construct/awscdk/github-pipeline/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/awscdk-ts-esm-lambda/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/postcss/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/tailwind/tsconfig.json"
+    },
+    {
+      "path": "./packages/projen/component/tsconfig-container/tsconfig.json"
+    },
+    {
+      "path": "./packages/utils/firebase/tsconfig.json"
+    },
+    {
+      "path": "./packages/utils/fs/tsconfig.json"
+    },
+    {
+      "path": "./packages/utils/ts-ast/tsconfig.json"
+    },
+    {
+      "path": "./packages/utils/unbuild-composite-preset/tsconfig.json"
+    },
+    {
+      "path": "./packages/vue/ui/button/tsconfig.json"
+    },
+    {
+      "path": "./packages/vue/ui/text/tsconfig.json"
     }
   ]
 }

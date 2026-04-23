@@ -5,7 +5,7 @@
       "description": "Full release build for all affected projects",
       "steps": [
         {
-          "exec": "pnpm exec nx run-many --target=build --output-style=stream --nx-bail",
+          "exec": "pnpm exec nx ${NX_AFFECTED_MODE:-run-many} --target=build --output-style=stream --nx-bail ${NX_AFFECTED_BASE:+--base=$NX_AFFECTED_BASE} ${NX_AFFECTED_HEAD:+--head=$NX_AFFECTED_HEAD}",
           "receiveArgs": true
         }
       ]

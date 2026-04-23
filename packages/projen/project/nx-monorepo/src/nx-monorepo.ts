@@ -82,6 +82,81 @@ export enum TSConfig {
 	COMPOSITE = 'composite',
 }
 
+/**
+ * Default granular `namedInputs` for `nx.json`.
+ *
+ * Splits inputs by concern so README/test edits don't bust build caches:
+ * - `production` — source + per-package build config (excludes tests/dist)
+ * - `test` — test sources + vitest config
+ * - `docs` — markdown
+ * - `sharedConfig` — workspace-level tsconfig + projen config (forces
+ *   invalidation on repo-wide config changes)
+ */
+export const DEFAULT_NAMED_INPUTS: Record<string, string[]> = {
+	production: [
+		'{projectRoot}/src/**/*',
+		'{projectRoot}/build.config.ts',
+		'{projectRoot}/tsconfig*.json',
+		'{projectRoot}/package.json',
+		'!{projectRoot}/test/**/*',
+		'!{projectRoot}/**/*.spec.*',
+		'!{projectRoot}/dist/**/*',
+	],
+	test: [
+		'{projectRoot}/test/**/*',
+		'{projectRoot}/vitest.config.ts',
+		'{projectRoot}/**/*.spec.*',
+	],
+	docs: ['{projectRoot}/README.md', '{projectRoot}/**/*.md'],
+	sharedConfig: [
+		'{workspaceRoot}/tsconfig/*.json',
+		'{workspaceRoot}/.projenrc.ts',
+		'{workspaceRoot}/projenrc/**/*.ts',
+	],
+}
+
+/**
+ * Default `targetDefaults` for `nx.json` covering the common projen task graph.
+ */
+export const DEFAULT_TARGET_DEFAULTS: Record<
+	string,
+	Record<string, unknown>
+> = {
+	build: {
+		inputs: ['production', '^production', 'sharedConfig'],
+		outputs: ['{projectRoot}/dist', '{projectRoot}/coverage'],
+		dependsOn: ['^build'],
+	},
+	compile: {
+		inputs: ['production', '^production', 'sharedConfig'],
+		dependsOn: ['^compile'],
+	},
+	package: {
+		inputs: ['production', '^production', 'sharedConfig'],
+		outputs: ['{projectRoot}/dist'],
+		dependsOn: ['build'],
+	},
+	test: {
+		inputs: ['production', 'test', '^production', 'sharedConfig'],
+		outputs: ['{projectRoot}/coverage', '{projectRoot}/test-reports'],
+		dependsOn: ['^build'],
+	},
+	eslint: {
+		inputs: ['production', 'test', 'sharedConfig'],
+	},
+}
+
+/**
+ * Default GitHub Actions expression for the `NX_CLOUD_ACCESS_TOKEN` env var.
+ *
+ * Prefers a write-scope token (`NX_CLOUD_AUTH_TOKEN_WRITE`) on main-branch
+ * pushes so CI warms the distributed cache; falls back to the read-only token
+ * (`NX_CLOUD_ACCESS_TOKEN`) on PRs, forks, and when the write secret is
+ * absent. Missing secrets evaluate to empty — safe.
+ */
+export const DEFAULT_NX_CLOUD_ACCESS_TOKEN_EXPRESSION: string =
+	"${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && secrets.NX_CLOUD_AUTH_TOKEN_WRITE || secrets.NX_CLOUD_ACCESS_TOKEN }}"
+
 export interface ApplyRecursiveOptions {
 	/**
 	 * Invoke callback on monorepo as well as all children.
@@ -180,6 +255,7 @@ export class MonorepoProject extends NxMonorepoProject {
 			.applyTypeDoc(this.github)
 			.applyRootTsPaths()
 			.applyCompileFullTask()
+			.applyAffectedAwareBuildTask()
 	}
 
 	/**
@@ -323,9 +399,109 @@ export class MonorepoProject extends NxMonorepoProject {
 		if (nxJson) {
 			nxJson.addDeletionOverride('npmScope')
 			nxJson.addDeletionOverride('tasksRunnerOptions')
-			nxJson.addOverride('useDaemonProcess', false)
+			nxJson.addOverride('useDaemonProcess', this.options.nxUseDaemon ?? true)
 			nxJson.addOverride('analytics', false)
 		}
+		return this.applyNxCloudAccessToken()
+			.applyNxCacheDefaults()
+			.applyNxJsPlugin()
+	}
+
+	/**
+	 * Write the `nxCloudAccessToken` option (public read-only token) to `nx.json`.
+	 * @protected
+	 */
+	protected applyNxCloudAccessToken(): this {
+		if (!this.options.nxCloudAccessToken) return this
+		const nxJson = this.tryFindObjectFile('nx.json')
+		nxJson?.addOverride('nxCloudAccessToken', this.options.nxCloudAccessToken)
+		return this
+	}
+
+	/**
+	 * Apply default `namedInputs` + `targetDefaults` for granular cache invalidation.
+	 * @protected
+	 */
+	protected applyNxCacheDefaults(): this {
+		if (this.options.nxCacheDefaults === false) return this
+		const nxJson = this.tryFindObjectFile('nx.json')
+		if (!nxJson) return this
+		for (const [name, patterns] of Object.entries(DEFAULT_NAMED_INPUTS)) {
+			nxJson.addOverride(`namedInputs.${name}`, patterns)
+		}
+		for (const [target, config] of Object.entries(DEFAULT_TARGET_DEFAULTS)) {
+			nxJson.addOverride(`targetDefaults.${target}`, config)
+		}
+		return this
+	}
+
+	/**
+	 * Register the `@nx/js/typescript` plugin for import-based project graph edges.
+	 *
+	 * Target inference is not enabled — projen owns the build/compile/test
+	 * targets. Auto-adds `@nx/js` to devDeps matching the installed `nx` version.
+	 * @protected
+	 */
+	protected applyNxJsPlugin(): this {
+		if (!this.options.nxEnableJsPlugin) return this
+		const nxJson = this.tryFindObjectFile('nx.json')
+		if (!nxJson) return this
+		nxJson.addOverride('plugins', [
+			{ plugin: '@nx/js/typescript', options: {} },
+		])
+		const nxVersion =
+			this.package.tryResolveDependencyVersion?.('nx') ?? undefined
+		this.addDevDeps(nxVersion ? `@nx/js@${nxVersion}` : '@nx/js')
+		return this
+	}
+
+	/**
+	 * Rewrite the root `build` task to be affected-aware via env vars.
+	 *
+	 * CI sets `NX_AFFECTED_MODE=affected` + base/head SHAs for PR runs; push
+	 * and manual runs leave them empty and the task falls back to
+	 * `nx run-many`. Gated by the `nxAffectedBuild` option (default `true`).
+	 * @protected
+	 */
+	protected applyAffectedAwareBuildTask(): this {
+		if (this.options.nxAffectedBuild === false) return this
+		this.tasks
+			.tryFind('build')
+			?.reset(
+				'pnpm exec nx ${NX_AFFECTED_MODE:-run-many} --target=build' +
+					' --output-style=stream --nx-bail' +
+					' ${NX_AFFECTED_BASE:+--base=$NX_AFFECTED_BASE}' +
+					' ${NX_AFFECTED_HEAD:+--head=$NX_AFFECTED_HEAD}',
+				{ receiveArgs: true },
+			)
+		return this
+	}
+
+	/**
+	 * Populate `NX_AFFECTED_*` env on the build workflow so PR runs hit
+	 * `nx affected` (base/head SHAs) while push/manual runs fall through to
+	 * `nx run-many`. Also sets `fetch-depth: 0` so the base SHA is present
+	 * locally and wires `NX_CLOUD_ACCESS_TOKEN` via the configured expression.
+	 * @protected
+	 */
+	protected applyAffectedAwareBuildEnv(gh: github.GitHub): this {
+		if (this.options.nxAffectedBuild === false) return this
+		const build = gh.tryFindWorkflow('build')
+		if (!build?.file) return this
+		build.file.addOverride(
+			'jobs.build.env.NX_AFFECTED_MODE',
+			"${{ github.event_name == 'pull_request' && 'affected' || 'run-many' }}",
+		)
+		build.file.addOverride(
+			'jobs.build.env.NX_AFFECTED_BASE',
+			'${{ github.event.pull_request.base.sha }}',
+		)
+		build.file.addOverride(
+			'jobs.build.env.NX_AFFECTED_HEAD',
+			'${{ github.event.pull_request.head.sha }}',
+		)
+		// nx affected needs base SHA present locally; shallow clone would miss it.
+		build.file.addOverride('jobs.build.steps.0.with.fetch-depth', 0)
 		return this
 	}
 
@@ -393,7 +569,9 @@ export class MonorepoProject extends NxMonorepoProject {
 	protected applyGithub(gh?: github.GitHub): this {
 		if (!gh) return this
 		const build = gh.tryFindWorkflow('build')!
-		return this.applyGithubBuildFlow(build)
+		this.applyGithubBuildFlow(build)
+		this.applyAffectedAwareBuildEnv(gh)
+		return this
 	}
 
 	protected applyGithubBuildFlow(workflow: github.GithubWorkflow): this {
@@ -495,7 +673,9 @@ export class MonorepoProject extends NxMonorepoProject {
 				...job.env,
 				NX_BRANCH: '${{ github.event.number }}',
 				NX_RUN_GROUP: '${{ github.run_id }}',
-				NX_CLOUD_ACCESS_TOKEN: '${{ secrets.NX_CLOUD_ACCESS_TOKEN }}',
+				NX_CLOUD_ACCESS_TOKEN:
+					this.options.nxCloudAccessTokenExpression ??
+					DEFAULT_NX_CLOUD_ACCESS_TOKEN_EXPRESSION,
 				CI: 'true',
 			},
 		})

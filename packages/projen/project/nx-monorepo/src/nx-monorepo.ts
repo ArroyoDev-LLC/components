@@ -285,7 +285,7 @@ export class MonorepoProject extends NxMonorepoProject {
 				noUnusedParameters: true,
 				noFallthroughCasesInSwitch: true,
 				forceConsistentCasingInFileNames: true,
-				moduleResolution: TypeScriptModuleResolution.NODE,
+				moduleResolution: TypeScriptModuleResolution.BUNDLER,
 			})
 			.defineConfig(TSConfig.ESM, {
 				module: 'ESNext',

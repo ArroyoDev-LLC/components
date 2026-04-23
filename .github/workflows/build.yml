@@ -15,13 +15,17 @@ jobs:
       CI: "true"
       NX_BRANCH: ${{ github.event.number }}
       NX_RUN_GROUP: ${{ github.run_id }}
-      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+      NX_CLOUD_ACCESS_TOKEN: ${{ (github.event_name == 'push' && github.ref == 'refs/heads/main') && secrets.NX_CLOUD_AUTH_TOKEN_WRITE || secrets.NX_CLOUD_ACCESS_TOKEN }}
+      NX_AFFECTED_MODE: ${{ github.event_name == 'pull_request' && 'affected' || 'run-many' }}
+      NX_AFFECTED_BASE: ${{ github.event.pull_request.base.sha }}
+      NX_AFFECTED_HEAD: ${{ github.event.pull_request.head.sha }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
+          fetch-depth: 0
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
         with:

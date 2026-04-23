@@ -26,6 +26,7 @@
     "@aws/pdk",
     "@jsii/spec",
     "@mrgrain/jsii-struct-builder",
+    "@nx/js",
     "@types/node",
     "@typescript-eslint/eslint-plugin",
     "@typescript-eslint/parser",

@@ -16,6 +16,11 @@
       "type": "build"
     },
     {
+      "name": "@nx/js",
+      "version": "22.6.2",
+      "type": "build"
+    },
+    {
       "name": "@sindresorhus/is",
       "type": "build"
     },
@@ -269,6 +274,11 @@
     {
       "name": "cdk-nag",
       "version": "2.37.55",
+      "type": "override"
+    },
+    {
+      "name": "constructs",
+      "version": "10.6.0",
       "type": "override"
     },
     {

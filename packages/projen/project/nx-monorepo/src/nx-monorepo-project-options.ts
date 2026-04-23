@@ -16,6 +16,40 @@ export interface NxMonorepoProjectOptions {
    */
   readonly workspaceDeps?: Array<javascript.NodeProject | string>;
   /**
+   * GitHub Actions expression used for the `NX_CLOUD_ACCESS_TOKEN` env var on CI jobs.
+   * Defaults to a write-scope-on-main-push fallback: prefer `secrets.NX_CLOUD_AUTH_TOKEN_WRITE` on main-branch pushes, fall back to `secrets.NX_CLOUD_ACCESS_TOKEN`. Missing secrets evaluate to empty strings — safe.
+   */
+  readonly nxCloudAccessTokenExpression?: string;
+  /**
+   * Rewrite the root `build` task and build workflow env to use `nx affected` on PRs.
+   * CI PR builds run `nx affected` with base/head SHAs; push and manual runs fall through to `nx run-many`. Requires bash-compatible shell for task env-var expansion.
+   * @default true
+   */
+  readonly nxAffectedBuild?: boolean;
+  /**
+   * Public read-only Nx Cloud access token to embed in `nx.json`.
+   * Public read-only tokens are safe to commit and allow fresh clones to read from the distributed cache without local auth.
+   */
+  readonly nxCloudAccessToken?: string;
+  /**
+   * Register the `@nx/js/typescript` plugin for import-based project graph edges.
+   * Target inference is not enabled (projen owns targets). Auto-adds `@nx/js` to devDependencies when enabled.
+   * @default false
+   */
+  readonly nxEnableJsPlugin?: boolean;
+  /**
+   * Enable the Nx daemon process.
+   * Speeds up graph computation across invocations. Set to false if daemon staleness causes issues in specific environments.
+   * @default true
+   */
+  readonly nxUseDaemon?: boolean;
+  /**
+   * Write default `namedInputs` + `targetDefaults` entries to `nx.json`.
+   * Establishes granular cache invalidation for common targets (build/compile/package/test/eslint) so README/test edits do not bust build caches.
+   * @default true
+   */
+  readonly nxCacheDefaults?: boolean;
+  /**
    * Default {@link @arroyodev-llc/utils.projen!ProjectNameSchemeOptions}
    */
   readonly namingScheme?: ProjectNameSchemeOptions;

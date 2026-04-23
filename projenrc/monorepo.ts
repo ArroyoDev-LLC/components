@@ -140,6 +140,54 @@ export class ComponentsMonorepo
 				'nxCloudAccessToken',
 				ComponentsMonorepo.nxPublicReadonlyToken,
 			)
+			nxJson.addOverride('useDaemonProcess', true)
+			// granular namedInputs so doc/test edits don't bust build cache
+			nxJson.addOverride('namedInputs.production', [
+				'{projectRoot}/src/**/*',
+				'{projectRoot}/build.config.ts',
+				'{projectRoot}/tsconfig*.json',
+				'{projectRoot}/package.json',
+				'!{projectRoot}/test/**/*',
+				'!{projectRoot}/**/*.spec.*',
+				'!{projectRoot}/dist/**/*',
+			])
+			nxJson.addOverride('namedInputs.test', [
+				'{projectRoot}/test/**/*',
+				'{projectRoot}/vitest.config.ts',
+				'{projectRoot}/**/*.spec.*',
+			])
+			nxJson.addOverride('namedInputs.docs', [
+				'{projectRoot}/README.md',
+				'{projectRoot}/**/*.md',
+			])
+			// shared tsconfig + projenrc invalidate every package's cache
+			nxJson.addOverride('namedInputs.sharedConfig', [
+				'{workspaceRoot}/tsconfig/*.json',
+				'{workspaceRoot}/.projenrc.ts',
+				'{workspaceRoot}/projenrc/**/*.ts',
+			])
+			nxJson.addOverride('targetDefaults.build', {
+				inputs: ['production', '^production', 'sharedConfig'],
+				outputs: ['{projectRoot}/dist', '{projectRoot}/coverage'],
+				dependsOn: ['^build'],
+			})
+			nxJson.addOverride('targetDefaults.compile', {
+				inputs: ['production', '^production', 'sharedConfig'],
+				dependsOn: ['^compile'],
+			})
+			nxJson.addOverride('targetDefaults.package', {
+				inputs: ['production', '^production', 'sharedConfig'],
+				outputs: ['{projectRoot}/dist'],
+				dependsOn: ['build'],
+			})
+			nxJson.addOverride('targetDefaults.test', {
+				inputs: ['production', 'test', '^production', 'sharedConfig'],
+				outputs: ['{projectRoot}/coverage', '{projectRoot}/test-reports'],
+				dependsOn: ['^build'],
+			})
+			nxJson.addOverride('targetDefaults.eslint', {
+				inputs: ['production', 'test', 'sharedConfig'],
+			})
 		}
 		return this
 	}

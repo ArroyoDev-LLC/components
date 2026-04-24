@@ -370,8 +370,9 @@ export class TypescriptLintStagedHooksBuilder extends BaseBuildStep {
 
 	protected applyLintStaged(project: javascript.NodeProject) {
 		const lintConfig = LintConfig.of(project)
-		const tsCmd =
-			lintConfig?.backend === 'biome' ? this.biomeCmd : this.eslintCmd
+		const useBiome = lintConfig?.backend === 'biome'
+		const tsCmd = useBiome ? this.biomeCmd : this.eslintCmd
+		const yamlCmd = useBiome ? this.biomeCmd : this.prettierCmd
 		return new LintStaged(project, {
 			entries: [
 				{
@@ -388,7 +389,7 @@ export class TypescriptLintStagedHooksBuilder extends BaseBuildStep {
 					commands: [
 						NodePackageUtils.command.exec(
 							project.package.packageManager,
-							this.prettierCmd,
+							yamlCmd,
 						),
 					],
 				},

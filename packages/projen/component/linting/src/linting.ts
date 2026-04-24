@@ -1,5 +1,6 @@
 import child_process from 'node:child_process'
 import * as os from 'os'
+import * as path from 'path'
 import {
 	applyOverrides,
 	findRootProject,
@@ -14,6 +15,8 @@ import {
 	typescript,
 } from 'projen'
 import {
+	Biome,
+	type BiomeOptions,
 	Eslint,
 	type NodeProject,
 	Prettier,
@@ -21,9 +24,16 @@ import {
 } from 'projen/lib/javascript'
 import shellquote from 'shell-quote'
 
+export type LintBackendKind = 'eslint' | 'biome'
+
 export interface LintConfigOptions {
 	/**
-	 * Enable type-enriched linting in eslint.
+	 * Which linting/formatting backend to use.
+	 * @default 'eslint'
+	 */
+	readonly backend?: LintBackendKind
+	/**
+	 * Enable type-enriched linting in eslint (ignored for biome backend).
 	 */
 	readonly useTypeInformation?: boolean
 	/**
@@ -31,6 +41,10 @@ export interface LintConfigOptions {
 	 * @default 30
 	 */
 	readonly formatTimeout?: number
+	/**
+	 * Options passed to Projen's Biome component when `backend: 'biome'`.
+	 */
+	readonly biomeOptions?: BiomeOptions
 }
 
 export interface FormatRequest {
@@ -39,45 +53,52 @@ export interface FormatRequest {
 	 */
 	filePath: string
 	/**
-	 * Working directory to spawn eslint from.
+	 * Working directory to spawn the formatter from.
 	 */
 	workingDirectory: string
+	/**
+	 * Linting implementation to use.
+	 */
+	linter?: LintBackend
 }
 
-export class LintConfig extends Component {
-	public static of(project: Project): LintConfig | undefined {
-		const isLintConfig = (o: Component): o is LintConfig =>
-			o instanceof LintConfig
-		return project.components.find(isLintConfig)
+/**
+ * Projen's `Biome` constructor unconditionally spawns its task into the project's
+ * `testTask`. For this repo we run biome as a dedicated Nx target, so undo that
+ * spawn so `pnpm test` doesn't write formatter fixes as a side effect.
+ */
+function removeBiomeFromTestTask(project: NodeProject, biome: Biome): void {
+	const testTask = project.testTask
+	const steps = testTask.steps
+	for (let i = steps.length - 1; i >= 0; i--) {
+		if (steps[i].spawn === biome.task.name) {
+			testTask.removeStep(i)
+		}
 	}
+}
 
+abstract class LintBackend {
+	abstract readonly kind: LintBackendKind
+	abstract ignoreReadOnlyFiles(): void
+	abstract applyResolvableExtensions(extensions: readonly string[]): void
+	abstract formatFileCommand(filePath: string): string
+	abstract lintTaskName(): string
+	abstract setLintExec(exec: string, replace?: string): void
+	abstract updateLintTask(step: TaskStep): void
+}
+
+class EslintBackend extends LintBackend {
+	readonly kind = 'eslint' as const
 	readonly eslint: Eslint
 	readonly eslintFile: ObjectFile
 	readonly prettier: Prettier
 	readonly prettierFile: ObjectFile
 
-	#formatQueue: PQueue
-	#extensions: Set<string> = new Set([
-		'.js',
-		'.jsx',
-		'.mjs',
-		'.cjs',
-		'.ts',
-		'.tsx',
-		'.mts',
-		'.cts',
-	])
-
 	constructor(
-		project: NodeProject,
-		options: LintConfigOptions = {
-			useTypeInformation: true,
-			formatTimeout: 30,
-		},
+		private readonly project: NodeProject,
+		options: LintConfigOptions,
 	) {
-		super(project)
-		this.#formatQueue = this.buildFormatQueue(options.formatTimeout)
-
+		super()
 		this.eslint =
 			Eslint.of(project) ??
 			new Eslint(project, {
@@ -98,7 +119,6 @@ export class LintConfig extends Component {
 				settings: prettierConfig,
 			})
 		this.prettierFile = project.tryFindObjectFile('.prettierrc.json')!
-
 		applyOverrides(this.prettierFile, prettierConfig)
 
 		this.eslint.addRules({
@@ -130,8 +150,202 @@ export class LintConfig extends Component {
 		this.eslintFile = project.tryFindObjectFile('.eslintrc.json')!
 
 		if (options.useTypeInformation) {
-			this.enableEslintTypeInformation()
+			this.enableTypeInformation()
 		}
+	}
+
+	protected enableTypeInformation(): void {
+		this.eslint.addExtends(
+			'plugin:@typescript-eslint/recommended-requiring-type-checking',
+		)
+		this.eslintFile.addOverride('parserOptions.tsconfigRootDir', '.')
+	}
+
+	ignoreReadOnlyFiles(): void {
+		this.project.files
+			.filter((f) => f.readonly)
+			.forEach((f) => {
+				this.eslint.addIgnorePattern(f.path)
+				this.prettier.addIgnorePattern(f.path)
+			})
+	}
+
+	applyResolvableExtensions(extensions: readonly string[]): void {
+		const arr = Array.from(extensions)
+		this.eslintFile.addOverride('settings.import/resolver.node.extensions', arr)
+		this.eslintFile.addOverride('settings.import/extensions', arr)
+	}
+
+	formatFileCommand(filePath: string): string {
+		return `eslint --no-ignore --fix ` + shellquote.quote([filePath])
+	}
+
+	lintTaskName(): string {
+		return 'eslint'
+	}
+
+	setLintExec(exec: string, replace: string = 'eslint'): void {
+		const task = this.project.tasks.tryFind('eslint')!
+		const cmd = task.steps[0].exec!.replace(replace, exec)
+		replaceTask(this.project, 'eslint', [{ exec: cmd }])
+	}
+
+	updateLintTask(step: TaskStep): void {
+		replaceTask(this.project, 'eslint', [step])
+	}
+}
+
+class BiomeBackend extends LintBackend {
+	readonly kind = 'biome' as const
+	readonly biome: Biome
+
+	constructor(
+		private readonly project: NodeProject,
+		options: LintConfigOptions,
+	) {
+		super()
+		this.cleanupForeignConfig()
+
+		// Leaf biome.jsonc extends root; disable default sections locally so
+		// inherited rules aren't shadowed by locally re-emitted defaults.
+		const userOptions = options.biomeOptions ?? {}
+		const root = findRootProject(project)
+		const isRoot = root === project
+		const rootRelative = path.relative(project.outdir, root.outdir) || '.'
+		const extendsPath = `${rootRelative}/biome.jsonc`
+		const leafOptions: BiomeOptions = {
+			linter: userOptions.linter ?? false,
+			formatter: userOptions.formatter ?? false,
+			assist: userOptions.assist ?? false,
+			version: userOptions.version,
+			mergeArraysInConfiguration: userOptions.mergeArraysInConfiguration,
+			ignoreGeneratedFiles: userOptions.ignoreGeneratedFiles,
+			biomeConfig: {
+				...(isRoot ? {} : { extends: [extendsPath], root: false }),
+				...(userOptions.biomeConfig ?? {}),
+			},
+		}
+		this.biome = new Biome(project, leafOptions)
+		// Biome needs at least one positive include pattern when extending, otherwise
+		// the inherited all-negative includes list causes every file to be treated
+		// as excluded. Prepend `**` so the package's own files match.
+		this.biome.addFilePattern('**')
+		removeBiomeFromTestTask(project, this.biome)
+
+		if (this.project instanceof typescript.TypeScriptProject) {
+			this.biome.addOverride({
+				includes: [`${this.project.testdir}/**`],
+				linter: {
+					rules: {
+						suspicious: {
+							useAwait: 'warn',
+						},
+					},
+				},
+			})
+		}
+	}
+
+	protected cleanupForeignConfig(): void {
+		for (const name of [
+			'.eslintrc.json',
+			'.prettierrc.json',
+			'.prettierignore',
+			'.eslintignore',
+		]) {
+			this.project.tryRemoveFile(name)
+		}
+	}
+
+	ignoreReadOnlyFiles(): void {
+		// Biome's `ignoreGeneratedFiles` default handles this.
+	}
+
+	applyResolvableExtensions(): void {
+		// No-op; Biome resolves file extensions natively.
+	}
+
+	formatFileCommand(filePath: string): string {
+		return `biome format --write ` + shellquote.quote([filePath])
+	}
+
+	lintTaskName(): string {
+		return 'biome'
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	setLintExec(_exec: string, _replace?: string): void {
+		this.project.logger.debug(
+			'LintConfig.setLintExec is a no-op when backend is biome',
+		)
+	}
+
+	updateLintTask(step: TaskStep): void {
+		replaceTask(this.project, 'biome', [step])
+	}
+}
+
+export class LintConfig extends Component {
+	public static of(project: Project): LintConfig | undefined {
+		const isLintConfig = (o: Component): o is LintConfig =>
+			o instanceof LintConfig
+		return project.components.find(isLintConfig)
+	}
+
+	readonly backend: LintBackendKind
+
+	protected linter: LintBackend
+	#formatQueue: PQueue
+	#extensions: Set<string> = new Set([
+		'.js',
+		'.jsx',
+		'.mjs',
+		'.cjs',
+		'.ts',
+		'.tsx',
+		'.mts',
+		'.cts',
+	])
+
+	get eslint(): Eslint | undefined {
+		return this.linter instanceof EslintBackend ? this.linter.eslint : undefined
+	}
+
+	get eslintFile(): ObjectFile | undefined {
+		return this.linter instanceof EslintBackend
+			? this.linter.eslintFile
+			: undefined
+	}
+
+	get prettier(): Prettier | undefined {
+		return this.linter instanceof EslintBackend
+			? this.linter.prettier
+			: undefined
+	}
+
+	get prettierFile(): ObjectFile | undefined {
+		return this.linter instanceof EslintBackend
+			? this.linter.prettierFile
+			: undefined
+	}
+
+	get biome(): Biome | undefined {
+		return this.linter instanceof BiomeBackend ? this.linter.biome : undefined
+	}
+
+	constructor(project: NodeProject, options: LintConfigOptions = {}) {
+		super(project)
+		const {
+			backend = 'eslint',
+			formatTimeout = 30,
+			useTypeInformation = true,
+		} = options
+		this.backend = backend
+		this.#formatQueue = this.buildFormatQueue(formatTimeout)
+		this.linter =
+			backend === 'biome'
+				? new BiomeBackend(project, options)
+				: new EslintBackend(project, { ...options, useTypeInformation })
 	}
 
 	/**
@@ -161,30 +375,6 @@ export class LintConfig extends Component {
 	}
 
 	/**
-	 * Enable type enriched linting.
-	 * @protected
-	 */
-	protected enableEslintTypeInformation() {
-		this.eslint.addExtends(
-			'plugin:@typescript-eslint/recommended-requiring-type-checking',
-		)
-		this.eslintFile.addOverride('parserOptions.tsconfigRootDir', '.')
-	}
-
-	/**
-	 * Ensure all readonly files are ignored by lint tools.
-	 * @protected
-	 */
-	protected ignoreReadOnlyFiles() {
-		this.project.files
-			.filter((f) => f.readonly)
-			.forEach((f) => {
-				this.eslint.addIgnorePattern(f.path)
-				this.prettier.addIgnorePattern(f.path)
-			})
-	}
-
-	/**
 	 * Resolve and process queued file format request.
 	 * Requests are processed in parallel for speed.
 	 * @protected
@@ -194,49 +384,46 @@ export class LintConfig extends Component {
 	}
 
 	/**
-	 * Apply eslint extensions.
-	 * @protected
-	 */
-	protected applyResolvableExtensions(): void {
-		const extensions = Array.from(this.#extensions)
-		this.eslintFile.addOverride(
-			'settings.import/resolver.node.extensions',
-			extensions,
-		)
-		this.eslintFile.addOverride('settings.import/extensions', extensions)
-	}
-
-	/*
-	 * Add extensions to eslint resolvable settings.
+	 * Add extensions to the lint backend's resolvable settings.
 	 * @param extensions Extensions to add.
 	 */
 	addResolvableExtensions(...extensions: string[]): this {
-		// projen runs all patch calls as a single patch for some reason
-		// and just lets test ops throw, so only add once presynth.
 		extensions.forEach((ext) => this.#extensions.add(ext))
 		return this
 	}
 
 	/**
-	 * Merge task step into eslint task.
+	 * Merge a task step into the active lint task.
 	 * @param step Task step to merge.
 	 */
-	updateEslintTask(step: TaskStep): this {
-		replaceTask(this.project, 'eslint', [step])
+	updateLintTask(step: TaskStep): this {
+		this.linter.updateLintTask(step)
 		return this
 	}
 
 	/**
-	 * Replace eslint executable command.
+	 * Merge a task step into the eslint task (compat shim).
+	 * Use {@link updateLintTask} for backend-neutral code.
+	 */
+	updateEslintTask(step: TaskStep): this {
+		return this.updateLintTask(step)
+	}
+
+	/**
+	 * Replace the lint task executable command.
 	 * @param exec Replacement value.
 	 * @param replace Existing value to replace. Defaults to 'eslint'.
 	 */
+	setLintExec(exec: string, replace: string = 'eslint'): this {
+		this.linter.setLintExec(exec, replace)
+		return this
+	}
+
+	/**
+	 * Compat shim for eslint-only callers. Use {@link setLintExec}.
+	 */
 	setEslintExec(exec: string, replace: string = 'eslint'): this {
-		const eslintTask = this.project.tasks.tryFind('eslint')!
-		const eslintCmd = eslintTask.steps[0].exec!.replace(replace, exec)
-		return this.updateEslintTask({
-			exec: eslintCmd,
-		})
+		return this.setLintExec(exec, replace)
 	}
 
 	/**
@@ -244,11 +431,11 @@ export class LintConfig extends Component {
 	 * @param request format request.
 	 */
 	enqueueFormatRequest(request: FormatRequest): this {
+		const linter = request.linter ?? this.linter
+		const cmd = linter.formatFileCommand(request.filePath)
 		void this.#formatQueue.add(async () => {
-			const cmd =
-				`eslint --no-ignore --fix ` + shellquote.quote([request.filePath])
 			this.project.logger.debug(
-				`formatting typescript source file: ${request.filePath} (from: ${request.workingDirectory})`,
+				`formatting source file: ${request.filePath} (from: ${request.workingDirectory})`,
 			)
 			return new Promise<void>((resolve) =>
 				child_process.exec(
@@ -277,15 +464,71 @@ export class LintConfig extends Component {
 		return LintConfig.of(root)!.enqueueFormatRequest({
 			filePath,
 			workingDirectory: this.project.outdir,
+			linter: this.linter,
 		})
+	}
+
+	/**
+	 * Emit a root biome.jsonc when any subproject opts into the biome backend.
+	 * Only runs when this LintConfig is attached to a project with children.
+	 * @protected
+	 */
+	protected maybeEmitRootBiomeConfig(): void {
+		if (this.project.subprojects.length === 0) return
+		if (Biome.of(this.project)) return
+
+		const biomeChildren = this.project.subprojects.filter((p) => {
+			const lc = LintConfig.of(p)
+			return lc?.backend === 'biome'
+		})
+		if (biomeChildren.length === 0) return
+
+		const rootBiomeProject = this.project as NodeProject
+		const rootBiome = new Biome(rootBiomeProject, {
+			biomeConfig: {
+				formatter: {
+					indentStyle: 'tab' as never,
+					indentWidth: 2,
+					lineWidth: 80,
+				},
+				javascript: {
+					formatter: {
+						quoteStyle: 'single' as never,
+						semicolons: 'asNeeded' as never,
+					},
+				},
+			},
+		})
+
+		// Scope root biome to opted-in package directories. Running biome from a
+		// leaf uses that leaf's config (which extends this root for rules) and
+		// the leaf injects its own `**` include so paths match correctly.
+		for (const child of biomeChildren) {
+			const relPath = path.relative(this.project.outdir, child.outdir)
+			rootBiome.addFilePattern(`${relPath}/**`)
+		}
+		rootBiome.addFilePattern('!**/node_modules/**')
+		rootBiome.addFilePattern('!**/dist/**')
+		rootBiome.addFilePattern('!**/dist-types/**')
+
+		rootBiome.expandLinterRules({
+			style: {
+				useConsistentTypeDefinitions: {
+					level: 'error',
+					options: { style: 'interface' },
+				},
+			},
+		})
+		removeBiomeFromTestTask(rootBiomeProject, rootBiome)
 	}
 
 	/**
 	 * @inheritDoc
 	 */
 	preSynthesize() {
-		this.ignoreReadOnlyFiles()
-		this.applyResolvableExtensions()
+		this.linter.ignoreReadOnlyFiles()
+		this.linter.applyResolvableExtensions(Array.from(this.#extensions))
+		this.maybeEmitRootBiomeConfig()
 		super.preSynthesize()
 	}
 

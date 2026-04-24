@@ -210,6 +210,7 @@ class BiomeBackend extends LintBackend {
 		// inherited rules aren't shadowed by locally re-emitted defaults.
 		const userOptions = options.biomeOptions ?? {}
 		const root = findRootProject(project)
+		const isRoot = root === project
 		const rootRelative = path.relative(project.outdir, root.outdir) || '.'
 		const extendsPath = `${rootRelative}/biome.jsonc`
 		const leafOptions: BiomeOptions = {
@@ -220,8 +221,7 @@ class BiomeBackend extends LintBackend {
 			mergeArraysInConfiguration: userOptions.mergeArraysInConfiguration,
 			ignoreGeneratedFiles: userOptions.ignoreGeneratedFiles,
 			biomeConfig: {
-				extends: [extendsPath],
-				root: false,
+				...(isRoot ? {} : { extends: [extendsPath], root: false }),
 				...(userOptions.biomeConfig ?? {}),
 			},
 		}

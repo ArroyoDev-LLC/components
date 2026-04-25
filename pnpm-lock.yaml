@@ -12667,7 +12667,7 @@ snapshots:
       '@one-ini/wasm': 0.1.1
       commander: 10.0.1
       minimatch: 9.0.1
-      semver: 7.6.2
+      semver: 7.7.4
 
   ee-first@1.1.1: {}
 

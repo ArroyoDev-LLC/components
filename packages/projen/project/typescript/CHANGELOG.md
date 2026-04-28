@@ -38,6 +38,12 @@
   * dependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.28
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.project.nx-monorepo bumped to 0.1.31
+
 ## [0.1.34](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.typescript-v0.1.33...@arroyodev-llc/projen.project.typescript-v0.1.34) (2026-04-22)
 
 

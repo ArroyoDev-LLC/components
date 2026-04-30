@@ -45,6 +45,15 @@ export interface LintConfigOptions {
 	 * Options passed to Projen's Biome component when `backend: 'biome'`.
 	 */
 	readonly biomeOptions?: BiomeOptions
+	/**
+	 * Strip Projen's default Biome spawn from the project's `testTask`.
+	 * Enable this when biome runs as a dedicated task target (e.g. an Nx
+	 * target) and you don't want `pnpm test` to write formatter fixes as a
+	 * side effect. Standalone consumers should leave this off so biome stays
+	 * in `pnpm test`.
+	 * @default false
+	 */
+	readonly removeBiomeFromTestTask?: boolean
 }
 
 export interface FormatRequest {
@@ -64,8 +73,9 @@ export interface FormatRequest {
 
 /**
  * Projen's `Biome` constructor unconditionally spawns its task into the project's
- * `testTask`. For this repo we run biome as a dedicated Nx target, so undo that
- * spawn so `pnpm test` doesn't write formatter fixes as a side effect.
+ * `testTask`. Callers that run biome as a dedicated task target (e.g. an Nx
+ * target) can use this to undo that spawn so `pnpm test` doesn't write
+ * formatter fixes as a side effect.
  */
 function removeBiomeFromTestTask(project: NodeProject, biome: Biome): void {
 	const testTask = project.testTask
@@ -74,6 +84,26 @@ function removeBiomeFromTestTask(project: NodeProject, biome: Biome): void {
 		if (steps[i].spawn === biome.task.name) {
 			testTask.removeStep(i)
 		}
+	}
+}
+
+/**
+ * Repo-wide formatting defaults shared between the root biome.jsonc and any
+ * standalone/root BiomeBackend so leaves and root agree on style.
+ */
+function repoBiomeFormattingDefaults(): BiomeOptions['biomeConfig'] {
+	return {
+		formatter: {
+			indentStyle: 'tab' as never,
+			indentWidth: 2,
+			lineWidth: 80,
+		},
+		javascript: {
+			formatter: {
+				quoteStyle: 'single' as never,
+				semicolons: 'asNeeded' as never,
+			},
+		},
 	}
 }
 
@@ -221,7 +251,9 @@ class BiomeBackend extends LintBackend {
 			mergeArraysInConfiguration: userOptions.mergeArraysInConfiguration,
 			ignoreGeneratedFiles: userOptions.ignoreGeneratedFiles,
 			biomeConfig: {
-				...(isRoot ? {} : { extends: [extendsPath], root: false }),
+				...(isRoot
+					? repoBiomeFormattingDefaults()
+					: { extends: [extendsPath], root: false }),
 				...(userOptions.biomeConfig ?? {}),
 			},
 		}
@@ -230,7 +262,9 @@ class BiomeBackend extends LintBackend {
 		// the inherited all-negative includes list causes every file to be treated
 		// as excluded. Prepend `**` so the package's own files match.
 		this.biome.addFilePattern('**')
-		removeBiomeFromTestTask(project, this.biome)
+		if (options.removeBiomeFromTestTask) {
+			removeBiomeFromTestTask(project, this.biome)
+		}
 
 		if (this.project instanceof typescript.TypeScriptProject) {
 			this.biome.addOverride({
@@ -485,19 +519,7 @@ export class LintConfig extends Component {
 
 		const rootBiomeProject = this.project as NodeProject
 		const rootBiome = new Biome(rootBiomeProject, {
-			biomeConfig: {
-				formatter: {
-					indentStyle: 'tab' as never,
-					indentWidth: 2,
-					lineWidth: 80,
-				},
-				javascript: {
-					formatter: {
-						quoteStyle: 'single' as never,
-						semicolons: 'asNeeded' as never,
-					},
-				},
-			},
+			biomeConfig: repoBiomeFormattingDefaults(),
 		})
 
 		// Scope root biome to opted-in package directories. Running biome from a

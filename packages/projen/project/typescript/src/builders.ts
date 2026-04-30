@@ -314,6 +314,7 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 					...this.options,
 					backend: 'biome',
 					biomeOptions: this.biomeOptions,
+					removeBiomeFromTestTask: true,
 				})
 			: new LintConfig(project, this.options)
 		return {

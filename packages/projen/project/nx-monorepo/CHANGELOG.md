@@ -8,6 +8,15 @@
     * @arroyodev-llc/projen.component.pnpm-workspace bumped to 0.1.11
     * @arroyodev-llc/utils.projen bumped to 0.1.10
 
+## [0.1.31](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.30...@arroyodev-llc/projen.project.nx-monorepo-v0.1.31) (2026-05-06)
+
+
+### Features
+
+* **projen.project.nx-monorepo:** Add compile full task, fix root ts paths ([e281a35](https://github.com/ArroyoDev-LLC/components/commit/e281a35167f1a3b1fca3be8c23c561ce550b7852))
+* **projen.project.nx-monorepo:** Lift nx cache/daemon/plugin/affected defaults ([1833ab5](https://github.com/ArroyoDev-LLC/components/commit/1833ab52c0622559c31c25504dbf67303f558e3d))
+* **projen.project.nx-monorepo:** Migrate base tsconfig moduleResolution to bundler ([789939a](https://github.com/ArroyoDev-LLC/components/commit/789939a33c07f4c32f0024881ba229b77823790d))
+
 ## [0.1.30](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.nx-monorepo-v0.1.29...@arroyodev-llc/projen.project.nx-monorepo-v0.1.30) (2026-04-22)
 
 

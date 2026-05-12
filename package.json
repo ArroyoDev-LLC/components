@@ -84,15 +84,15 @@
     "typescript": "~5.8",
     "unbuild": "3.6.1",
     "vite": "6.4.1",
-    "vitest": "4.1.5"
+    "vitest": "4.1.6"
   },
   "peerDependencies": {
     "nx": "^19"
   },
   "dependencies": {
     "@aws-cdk/aws-cognito-identitypool-alpha": "latest",
-    "aws-cdk-lib": "2.253.1",
-    "cdk-nag": "2.38.2"
+    "aws-cdk-lib": "2.244.0",
+    "cdk-nag": "2.37.55"
   },
   "pnpm": {
     "overrides": {

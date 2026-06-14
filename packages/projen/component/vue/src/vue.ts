@@ -71,6 +71,7 @@ export class Vue extends Component {
 
 	applyLintConfig(component?: LintConfig): this {
 		if (!component) return this
+		if (!component.eslint || !component.eslintFile) return this
 		this.project.addDevDeps('eslint-plugin-vue')
 		component.eslint.addPlugins('eslint-plugin-vue')
 		component.eslint.addExtends('plugin:vue/vue3-recommended')

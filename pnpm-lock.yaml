@@ -130,10 +130,10 @@ importers:
         version: 2.32.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.8.3))(eslint-import-resolver-typescript@3.10.1)(eslint@8.57.1)
       eslint-plugin-prettier:
         specifier: 5.5.6
-        version: 5.5.6(eslint-config-prettier@9.1.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.1)
+        version: 5.5.6(eslint-config-prettier@9.1.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.3)
       fs-extra:
-        specifier: 11.3.5
-        version: 11.3.5
+        specifier: 11.3.6
+        version: 11.3.6
       lint-staged:
         specifier: 15.5.2
         version: 15.5.2
@@ -147,8 +147,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2
       prettier:
-        specifier: 3.9.1
-        version: 3.9.1
+        specifier: 3.9.3
+        version: 3.9.3
       projen:
         specifier: 0.99.23
         version: 0.99.23(constructs@10.6.0)
@@ -5750,8 +5750,8 @@ packages:
     resolution: {integrity: sha512-CTXd6rk/M3/ULNQj8FBqBWHYBVYybQ3VPBw0xGKFe3tuH7ytT6ACnvzpIQ3UZtB8yvUKC2cXn1a+x+5EVQLovA==}
     engines: {node: '>=14.14'}
 
-  fs-extra@11.3.5:
-    resolution: {integrity: sha512-eKpRKAovdpZtR1WopLHxlBWvAgPny3c4gX1G5Jhwmmw4XJj0ifSD5qB5TOo8hmA0wlRKDAOAhEE1yVPgs6Fgcg==}
+  fs-extra@11.3.6:
+    resolution: {integrity: sha512-w8ZNZr2mKIc7qeNaQ9AVPT1+iFaI+Avd4xudVOvdDJ8VytREi1Ft5Ih7hd9jjehod8vAM5GMsfQ/TpPf4EyoEA==}
     engines: {node: '>=14.14'}
 
   fs-extra@7.0.1:
@@ -7595,8 +7595,8 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  prettier@3.9.1:
-    resolution: {integrity: sha512-ppiDo2CSwexck1eyZUwJHg/N3nf1+6IRCv7W/VJ5vaLnVCmB7+3CdRfMwoCHBBX6xTrREDTksZ4OZl5SSf4zXA==}
+  prettier@3.9.3:
+    resolution: {integrity: sha512-HWmu+K+zvHNpaMfSnYeqdqrDbR16cuIXaPx8WoHaviQkDJh1/0BNtOZmHVQI5jc3wXv0H1yXc9wjvFdXh+n3hQ==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -10923,7 +10923,7 @@ snapshots:
 
   '@types/prettier@3.0.0':
     dependencies:
-      prettier: 3.9.1
+      prettier: 3.9.3
 
   '@types/qs@6.9.11': {}
 
@@ -13147,10 +13147,10 @@ snapshots:
     optionalDependencies:
       eslint-config-prettier: 9.1.2(eslint@8.57.1)
 
-  eslint-plugin-prettier@5.5.6(eslint-config-prettier@9.1.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.1):
+  eslint-plugin-prettier@5.5.6(eslint-config-prettier@9.1.2(eslint@8.57.1))(eslint@8.57.1)(prettier@3.9.3):
     dependencies:
       eslint: 8.57.1
-      prettier: 3.9.1
+      prettier: 3.9.3
       prettier-linter-helpers: 1.0.1
       synckit: 0.11.13
     optionalDependencies:
@@ -13516,7 +13516,7 @@ snapshots:
       jsonfile: 6.1.0
       universalify: 2.0.0
 
-  fs-extra@11.3.5:
+  fs-extra@11.3.6:
     dependencies:
       graceful-fs: 4.2.11
       jsonfile: 6.1.0
@@ -15528,7 +15528,7 @@ snapshots:
 
   prettier@3.8.3: {}
 
-  prettier@3.9.1: {}
+  prettier@3.9.3: {}
 
   pretty-bytes@7.1.0: {}
 

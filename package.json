@@ -66,12 +66,12 @@
     "eslint-import-resolver-typescript": "3.10.1",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-prettier": "5.5.6",
-    "fs-extra": "11.3.5",
+    "fs-extra": "11.3.6",
     "lint-staged": "15.5.2",
     "npm-check-updates": "16.14.20",
     "nx": "19.0.0",
     "pathe": "1.1.2",
-    "prettier": "3.9.1",
+    "prettier": "3.9.3",
     "projen": "0.99.23",
     "rimraf": "5.0.10",
     "rollup-plugin-vue": "6.0.0",
@@ -91,8 +91,8 @@
   },
   "dependencies": {
     "@aws-cdk/aws-cognito-identitypool-alpha": "latest",
-    "aws-cdk-lib": "2.244.0",
-    "cdk-nag": "2.37.55"
+    "aws-cdk-lib": "2.260.0",
+    "cdk-nag": "2.38.2"
   },
   "pnpm": {
     "overrides": {

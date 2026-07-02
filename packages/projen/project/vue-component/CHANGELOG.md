@@ -103,6 +103,12 @@
   * peerDependencies
     * @arroyodev-llc/projen.component.unbuild bumped to 0.1.28
 
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @arroyodev-llc/projen.project.typescript bumped to 0.1.35
+
 ## [0.1.37](https://github.com/ArroyoDev-LLC/components/compare/@arroyodev-llc/projen.project.vue-component-v0.1.36...@arroyodev-llc/projen.project.vue-component-v0.1.37) (2026-04-22)
 
 

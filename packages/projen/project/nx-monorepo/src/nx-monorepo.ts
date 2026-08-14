@@ -402,6 +402,23 @@ export class MonorepoProject extends NxMonorepoProject {
 			nxJson.addOverride('useDaemonProcess', this.options.nxUseDaemon ?? true)
 			nxJson.addOverride('analytics', false)
 		}
+		// add target for biome
+		this.applyPreSynth(() => {
+			const hasBiome = this.sortedSubProjects.find((p) =>
+				findComponent(p, javascript.Biome),
+			)
+			if (hasBiome) {
+				this.nx.setTargetDefault('biome', {
+					cache: true,
+					inputs: [
+						'default',
+						'{workspaceRoot}/biome.jsonc',
+						// @ts-expect-error outdated type
+						{ externalDependencies: ['@biomejs/biome'] },
+					],
+				})
+			}
+		})
 		return this.applyNxCloudAccessToken()
 			.applyNxCacheDefaults()
 			.applyNxJsPlugin()

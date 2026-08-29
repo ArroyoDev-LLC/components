@@ -75,7 +75,7 @@
     "projen": "0.99.23",
     "rimraf": "5.0.10",
     "rollup-plugin-vue": "6.0.0",
-    "simple-git-hooks": "2.13.1",
+    "simple-git-hooks": "2.14.0",
     "syncpack": "^13",
     "ts-morph": "26.0.0",
     "ts-node": "10.9.2",
@@ -91,8 +91,8 @@
   },
   "dependencies": {
     "@aws-cdk/aws-cognito-identitypool-alpha": "latest",
-    "aws-cdk-lib": "2.244.0",
-    "cdk-nag": "2.37.55"
+    "aws-cdk-lib": "2.267.0",
+    "cdk-nag": "2.38.2"
   },
   "pnpm": {
     "overrides": {

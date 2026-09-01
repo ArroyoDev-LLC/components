@@ -270,8 +270,37 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 	object,
 	{ readonly lintConfig: LintConfig }
 > {
+	private useBiome = false
+	private biomeOptions: javascript.BiomeOptions | undefined
+
 	constructor(readonly options?: LintConfigOptions) {
 		super()
+	}
+
+	applyOptions(
+		options: ProjectOptions & this['_outputOptions'],
+	): ProjectOptions & this['_outputOptions'] {
+		const typed = options as ProjectOptions &
+			this['_outputOptions'] & {
+				biome?: boolean
+				biomeOptions?: javascript.BiomeOptions
+				eslint?: boolean
+				prettier?: boolean
+			}
+		// Always reset instance state — this builder is shared across projects.
+		this.useBiome = !!typed.biome
+		this.biomeOptions = typed.biomeOptions
+		if (this.useBiome) {
+			// Take over linting: skip Projen's native biome/eslint/prettier wiring
+			// so LintConfig can manage a single tool end-to-end.
+			return {
+				...options,
+				biome: false,
+				eslint: false,
+				prettier: false,
+			}
+		}
+		return options
 	}
 
 	applyProject(
@@ -280,7 +309,14 @@ export class TypescriptLintingBuilder extends BaseBuildStep<
 		if (!isNodeProject(project)) {
 			throw new TypeError('Project must be a NodeProject')
 		}
-		const lintConfig = new LintConfig(project, this.options)
+		const lintConfig = this.useBiome
+			? new LintConfig(project, {
+					...this.options,
+					backend: 'biome',
+					biomeOptions: this.biomeOptions,
+					removeBiomeFromTestTask: true,
+				})
+			: new LintConfig(project, this.options)
 		return {
 			lintConfig: { writable: false, value: lintConfig },
 		} as TypedPropertyDescriptorMap<BuildOutput<this>>
@@ -315,18 +351,29 @@ export class TypescriptReleasePleaseBuilder extends BaseBuildStep {
  */
 export class TypescriptLintStagedHooksBuilder extends BaseBuildStep {
 	private readonly eslintCmd: string
+	private readonly biomeCmd: string
 	private readonly prettierCmd: string
-	constructor(options?: { eslintCmd?: string; prettierCmd?: string }) {
+	constructor(options?: {
+		eslintCmd?: string
+		biomeCmd?: string
+		prettierCmd?: string
+	}) {
 		super()
 		const {
 			eslintCmd = 'eslint --fix --no-error-on-unmatched-pattern',
+			biomeCmd = 'biome check --files-ignore-unknown=true --no-errors-on-unmatched --write',
 			prettierCmd = 'prettier --write',
 		} = options ?? {}
 		this.eslintCmd = eslintCmd
+		this.biomeCmd = biomeCmd
 		this.prettierCmd = prettierCmd
 	}
 
 	protected applyLintStaged(project: javascript.NodeProject) {
+		const lintConfig = LintConfig.of(project)
+		const useBiome = lintConfig?.backend === 'biome'
+		const tsCmd = useBiome ? this.biomeCmd : this.eslintCmd
+		const yamlCmd = useBiome ? this.biomeCmd : this.prettierCmd
 		return new LintStaged(project, {
 			entries: [
 				{
@@ -334,7 +381,7 @@ export class TypescriptLintStagedHooksBuilder extends BaseBuildStep {
 					commands: [
 						NodePackageUtils.command.exec(
 							project.package.packageManager,
-							this.eslintCmd,
+							tsCmd,
 						),
 					],
 				},
@@ -343,7 +390,7 @@ export class TypescriptLintStagedHooksBuilder extends BaseBuildStep {
 					commands: [
 						NodePackageUtils.command.exec(
 							project.package.packageManager,
-							this.prettierCmd,
+							yamlCmd,
 						),
 					],
 				},

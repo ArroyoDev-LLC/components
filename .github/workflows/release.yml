@@ -40,7 +40,7 @@ jobs:
         if: ${{ steps.release-please.outputs.releases_created }}
         uses: actions/setup-node@v4
         with:
-          node-version: 24.14.1
+          node-version: 24.20.0
           cache: pnpm
       - name: Install Dependencies
         if: ${{ steps.release-please.outputs.releases_created }}

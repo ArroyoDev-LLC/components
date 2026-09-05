@@ -47,7 +47,7 @@
   "dependencies": {
     "@arroyodev-llc/utils.projen": "workspace:*",
     "p-queue": "7.4.1",
-    "shell-quote": "1.8.3"
+    "shell-quote": "1.9.0"
   },
   "main": "dist/index.mjs",
   "license": "Apache-2.0",

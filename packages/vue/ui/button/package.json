@@ -38,7 +38,7 @@
     "eslint-plugin-vue": "9.33.0",
     "faker": "6.6.6",
     "happy-dom": "10.11.2",
-    "lint-staged": "15.5.2",
+    "lint-staged": "17.4.1",
     "prettier": "3.8.3",
     "typescript": "~5.8",
     "unplugin-vue-macros": "2.14.5",

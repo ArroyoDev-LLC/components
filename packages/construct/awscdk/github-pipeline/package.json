@@ -47,7 +47,7 @@
   },
   "peerDependencies": {
     "aws-cdk-lib": "2.250.0",
-    "cdk-pipelines-github": "0.4.135",
+    "cdk-pipelines-github": "0.4.139",
     "constructs": "10.6.0"
   },
   "dependencies": {
@@ -82,7 +82,7 @@
       "pnpm exec prettier --write"
     ]
   },
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@10.34.5",
   "engines": {
     "pnpm": "^10.33.0"
   },

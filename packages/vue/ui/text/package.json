@@ -49,8 +49,8 @@
     "vue-tsc": "^2"
   },
   "dependencies": {
-    "@vue/runtime-dom": "3.5.32",
-    "vue": "3.5.32"
+    "@vue/runtime-dom": "3.5.42",
+    "vue": "3.5.42"
   },
   "main": "dist/index.cjs",
   "license": "Apache-2.0",

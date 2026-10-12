@@ -1946,6 +1946,7 @@ packages:
 
   '@aws/pdk@0.26.15':
     resolution: {integrity: sha512-kxYdrzENRtzSbJeXT6jhjRp41BUHVBAM+kQmAc+ea9Ku7IiPFi/Z/Vo608x15qa1pEpyYPo/P32Frp/zReHaCQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
     hasBin: true
     peerDependencies:
       '@aws-cdk/aws-cognito-identitypool-alpha': 2.186.0-alpha.0

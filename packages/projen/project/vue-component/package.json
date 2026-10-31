@@ -34,7 +34,7 @@
     "commit-and-tag-version": "^12",
     "eslint": "^9",
     "eslint-config-prettier": "9.1.2",
-    "eslint-import-resolver-typescript": "3.10.1",
+    "eslint-import-resolver-typescript": "4.4.5",
     "eslint-plugin-import": "2.32.0",
     "eslint-plugin-prettier": "5.5.5",
     "lint-staged": "15.5.2",

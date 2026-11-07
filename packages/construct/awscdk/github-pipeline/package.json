@@ -32,7 +32,7 @@
     "@typescript-eslint/parser": "^8",
     "aws-cdk-lib": "2.250.0",
     "cdk-pipelines-github": "0.4.135",
-    "commit-and-tag-version": "^12",
+    "commit-and-tag-version": "^13.0.0",
     "constructs": "10.6.0",
     "eslint": "^9",
     "eslint-config-prettier": "9.1.2",

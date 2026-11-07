@@ -29,7 +29,7 @@
     "@vitejs/plugin-vue": "6.0.6",
     "@vitejs/plugin-vue-jsx": "5.1.5",
     "@vue/test-utils": "2.4.6",
-    "commit-and-tag-version": "^12",
+    "commit-and-tag-version": "^13.0.0",
     "eslint": "^9",
     "eslint-config-prettier": "9.1.2",
     "eslint-import-resolver-typescript": "3.10.1",
